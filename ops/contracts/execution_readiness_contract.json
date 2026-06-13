@@ -1,0 +1,24 @@
+{
+  "strategy_id": "string",
+  "strategy_version": "string",
+  "environment": "paper | live_supervised | live_limited_auto",
+  "broker_adapter": "string | null",
+  "readiness": "not_ready | blocked | ready_for_paper | ready_for_supervised_live | ready_for_limited_live",
+  "checks": {
+    "broker_connection_tested": "boolean",
+    "idempotency_tested": "boolean",
+    "partial_fill_handling_tested": "boolean",
+    "rejected_order_handling_tested": "boolean",
+    "stale_data_guard_tested": "boolean",
+    "kill_switch_tested": "boolean",
+    "alerting_tested": "boolean",
+    "secrets_reviewed": "boolean"
+  },
+  "approvals": {
+    "pm": "boolean",
+    "quant": "boolean",
+    "risk": "boolean",
+    "qa_security": "boolean",
+    "human_operator": "boolean"
+  }
+}

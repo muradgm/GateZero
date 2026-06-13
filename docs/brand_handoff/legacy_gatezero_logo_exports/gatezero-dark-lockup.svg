@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 320" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero dark-background lockup</title>
+  <desc id="desc">Horizontal GateZero lockup optimized for a deep navy background.</desc>
+  <defs>
+    <mask id="falcon-cut">
+      <rect width="512" height="512" fill="white"/>
+      <path d="M292 141H405L363 174L404 190L315 207L284 248L266 184Z" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="1180" height="320" fill="#081934"/>
+  <g transform="translate(42 34) scale(.49)">
+    <path d="M398 118A190 190 0 1 1 124 111" fill="none" stroke="#008980" stroke-width="24" stroke-linecap="round"/>
+    <path d="M400 118A190 190 0 0 1 421 163" fill="none" stroke="#E76F0E" stroke-width="14" stroke-linecap="round"/>
+    <g mask="url(#falcon-cut)">
+      <path d="M102 116H404L385 178H296V406H220V178H102Z" fill="#FFFFFF"/>
+      <path d="M296 218H405L388 276H296Z" fill="#FFFFFF"/>
+    </g>
+    <path d="M355 173L382 184L331 194Z" fill="#008980"/>
+    <path d="M329 169H344L336 178Z" fill="#E76F0E"/>
+  </g>
+  <text x="332" y="166" fill="#FFFFFF" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="78" font-weight="700" letter-spacing="5">GATEZERO</text>
+  <text x="336" y="219" fill="#B5BFCC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="4">RESEARCH FIRST. RISK ALWAYS.</text>
+  <rect x="336" y="236" width="294" height="8" fill="#008980"/>
+  <rect x="644" y="236" width="58" height="8" fill="#E76F0E"/>
+</svg>

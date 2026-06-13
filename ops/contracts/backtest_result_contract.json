@@ -1,0 +1,37 @@
+{
+  "backtest_run_id": "string",
+  "strategy_id": "string",
+  "strategy_version": "string",
+  "symbol": "string",
+  "timeframe": "string",
+  "start_date": "YYYY-MM-DD",
+  "end_date": "YYYY-MM-DD",
+  "initial_capital": "number",
+  "fee_model": {
+    "type": "fixed | percentage | broker_simulated",
+    "value": "number"
+  },
+  "slippage_model": {
+    "type": "fixed_bps | spread_based | custom",
+    "value": "number"
+  },
+  "metrics": {
+    "total_return_pct": "number",
+    "max_drawdown_pct": "number",
+    "win_rate_pct": "number",
+    "profit_factor": "number",
+    "sharpe_ratio": "number | null",
+    "sortino_ratio": "number | null",
+    "average_win": "number",
+    "average_loss": "number",
+    "exposure_time_pct": "number",
+    "trade_count": "number"
+  },
+  "bias_checks": {
+    "lookahead_bias_check": "pass | fail | not_checked",
+    "survivorship_bias_note": "string",
+    "data_quality_note": "string"
+  },
+  "verdict": "reject | inconclusive | research_only | paper_candidate",
+  "created_at": "ISO-8601"
+}

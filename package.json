@@ -1,0 +1,39 @@
+{
+  "name": "gatezero",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Gate 0 Research-Only foundation for GateZero.",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \"apps/**/*.{md,json,ts,js}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\"",
+    "check:gate0-evidence-index": "tsx scripts/check-gate0-evidence-index-drift.ts",
+    "check:gate1-contracts": "tsx scripts/check-gate1-contracts.ts",
+    "check:gate0-name": "tsx scripts/check-gate0-project-name.ts",
+    "check:gate0-docs-coverage": "tsx scripts/check-gate0-docs-coverage.ts",
+    "check:gate0-snapshot": "tsx scripts/check-gate0-progress-snapshot-freshness.ts",
+    "check:gate0-tracklist": "tsx scripts/check-gate0-tracklist-consistency.ts",
+    "check:gate0-reviews": "tsx scripts/check-gate0-review-coverage.ts",
+    "check:gate0": "pnpm snapshot:gate0-progress && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
+    "lint": "eslint .",
+    "snapshot:gate0-progress": "tsx scripts/generate-gate0-progress-snapshot.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.base.json --noEmit",
+    "validate:gate0": "tsx scripts/validate-gate0.ts",
+    "verify:gate0": "pnpm check:gate0 && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.2",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "agent": "EXECUTION",
+  "reference_policy": "official/primary sources first; stricter risk interpretation wins",
+  "references": [
+    {
+      "title": "GateZero Project Truth",
+      "url": "../../truth/PROJECT_TRUTH.md",
+      "type": "internal",
+      "why": "Defines what the product is and is not; prevents bot/profit hype drift."
+    },
+    {
+      "title": "GateZero Product Wedge",
+      "url": "../../truth/PRODUCT_WEDGE.md",
+      "type": "internal",
+      "why": "Locks the product promise: no trade without evidence, no execution without risk approval."
+    },
+    {
+      "title": "GateZero Risk Rules",
+      "url": "../../truth/RISK_RULES.md",
+      "type": "internal",
+      "why": "Hard safety constraints that outrank feature appetite."
+    },
+    {
+      "title": "Financial Risk Gates",
+      "url": "../../governance/FINANCIAL_RISK_GATES.md",
+      "type": "internal",
+      "why": "Defines the allowed autonomy level and promotion/rollback path."
+    },
+    {
+      "title": "Alpaca Trading API Docs",
+      "url": "https://docs.alpaca.markets/us/docs/trading-api",
+      "type": "broker-api",
+      "why": "Account, order, position, and trading API reference."
+    },
+    {
+      "title": "Alpaca Paper Trading Docs",
+      "url": "https://docs.alpaca.markets/us/docs/paper-trading",
+      "type": "paper-trading",
+      "why": "Paper-only testing before live trading; supports safe execution rehearsal."
+    },
+    {
+      "title": "Interactive Brokers API Home",
+      "url": "https://www.interactivebrokers.com/campus/ibkr-api-page/ibkr-api-home/",
+      "type": "broker-api",
+      "why": "Professional broker API reference for order/account/market-data access."
+    },
+    {
+      "title": "IBKR API Order Types",
+      "url": "https://www.interactivebrokers.com/campus/ibkr-api-page/order-types/",
+      "type": "execution",
+      "why": "Order behavior, limitations, and required fields for execution planning."
+    },
+    {
+      "title": "IBKR TWS Basic Orders",
+      "url": "https://interactivebrokers.github.io/tws-api/basic_orders.html",
+      "type": "execution-legacy-docs",
+      "why": "Concrete examples of market/limit/stop order behavior and risk tradeoffs."
+    }
+  ]
+}

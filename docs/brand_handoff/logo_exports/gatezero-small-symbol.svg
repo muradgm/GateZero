@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero small-size symbol</title>
+  <desc id="desc">Simplified angular GateZero G mark for 16px to 64px uses.</desc>
+  <path d="M29 43L64 22V42L46 53V79L64 89V109L29 89Z" fill="#1A1028"/>
+  <path d="M64 22L110 49L88 63L64 42Z" fill="#7C5CFF"/>
+  <path d="M55 67L64 62L73 67V109L64 115L55 109Z" fill="#1A1028"/>
+  <path d="M73 67H108V91L85 105V86L96 80V76H73Z" fill="#7C5CFF"/>
+</svg>

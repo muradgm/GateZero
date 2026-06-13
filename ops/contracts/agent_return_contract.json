@@ -1,0 +1,13 @@
+{
+  "task_id": "string",
+  "agent": "string",
+  "summary": "string",
+  "files_changed": ["string"],
+  "truth_files_read": ["string"],
+  "validation_performed": ["string"],
+  "benchmarks_used": ["string"],
+  "risk_notes": ["string"],
+  "open_questions": ["string"],
+  "blocked_by": ["string"],
+  "recommended_next_step": "string"
+}

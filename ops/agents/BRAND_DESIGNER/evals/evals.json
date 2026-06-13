@@ -1,0 +1,60 @@
+{
+  "agent": "BRAND_DESIGNER",
+  "version": "1.0.0",
+  "purpose": "Evaluate GateZero logo and identity outputs.",
+  "scoring_scale": {
+    "0": "missing",
+    "1": "weak",
+    "2": "acceptable",
+    "3": "strong",
+    "4": "excellent"
+  },
+  "evals": [
+    {
+      "id": "brand_truth_alignment",
+      "criterion": "Communicates research, risk control, disciplined execution, and operator judgment without implying profit.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "monochrome_strength",
+      "criterion": "Works clearly in one color on light and dark backgrounds.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "small_size_legibility",
+      "criterion": "Readable at 16, 24, 32, and 64px.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "geometry_precision",
+      "criterion": "Curves, alignment, stroke rhythm, negative space, and proportions are intentional.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "wordmark_quality",
+      "criterion": "Wordmark has optical spacing, custom feel, and appropriate fintech personality.",
+      "blocking_if_below": 2
+    },
+    {
+      "id": "app_icon_readiness",
+      "criterion": "App icon is distinct, balanced, and usable in product contexts.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "identity_system_completeness",
+      "criterion": "Includes symbol, lockups, app icon, monochrome, reversed, small-size, and usage notes.",
+      "blocking_if_below": 3
+    },
+    {
+      "id": "anti_hype_filter",
+      "criterion": "Avoids casino, crypto-hype, get-rich-quick, excessive arrows, mascot aggression, and generic AI tropes.",
+      "blocking_if_below": 4
+    },
+    {
+      "id": "handoff_quality",
+      "criterion": "Usable by a designer/developer in Figma, SVG, app, and web production contexts.",
+      "blocking_if_below": 3
+    }
+  ],
+  "acceptance_rule": "All blocking criteria must meet threshold."
+}

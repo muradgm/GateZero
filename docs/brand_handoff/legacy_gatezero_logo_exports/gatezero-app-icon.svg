@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero app icon</title>
+  <desc id="desc">Deep navy app icon with a white TF falcon mark and restrained control accents.</desc>
+  <defs>
+    <mask id="falcon-cut">
+      <rect width="512" height="512" fill="white"/>
+      <path d="M292 141H405L363 174L404 190L315 207L284 248L266 184Z" fill="black"/>
+    </mask>
+  </defs>
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="#081934"/>
+  <path d="M390 127A174 174 0 1 1 130 122" fill="none" stroke="#008980" stroke-width="22" stroke-linecap="round"/>
+  <path d="M390 127A174 174 0 0 1 412 171" fill="none" stroke="#E76F0E" stroke-width="14" stroke-linecap="round"/>
+  <g mask="url(#falcon-cut)">
+    <path d="M108 122H404L386 181H296V400H220V181H108Z" fill="#FFFFFF"/>
+    <path d="M296 220H398L382 274H296Z" fill="#FFFFFF"/>
+  </g>
+  <path d="M354 174L379 184L331 194Z" fill="#008980"/>
+  <path d="M329 169H343L336 178Z" fill="#E76F0E"/>
+</svg>

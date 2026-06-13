@@ -1,0 +1,46 @@
+{
+  "agent": "BRAND_DESIGNER",
+  "project": "GateZero",
+  "sources": [
+    {
+      "title": "GateZero Project Truth",
+      "type": "internal",
+      "path": "../../truth/PROJECT_TRUTH.md"
+    },
+    {
+      "title": "GateZero Product Wedge",
+      "type": "internal",
+      "path": "../../truth/PRODUCT_WEDGE.md"
+    },
+    {
+      "title": "GateZero Risk Rules",
+      "type": "internal",
+      "path": "../../truth/RISK_RULES.md"
+    },
+    {
+      "title": "Financial Risk Gates",
+      "type": "internal",
+      "path": "../../governance/FINANCIAL_RISK_GATES.md"
+    },
+    {
+      "title": "Brand Brief",
+      "type": "internal",
+      "path": "../../../docs/brand_handoff/BRAND_BRIEF.md"
+    },
+    {
+      "title": "Brand Identity System",
+      "type": "internal",
+      "path": "../../../docs/brand_handoff/BRAND_IDENTITY_SYSTEM.md"
+    },
+    {
+      "title": "Logo Production Requirements",
+      "type": "internal",
+      "path": "../../../docs/brand_handoff/LOGO_PRODUCTION_REQUIREMENTS.md"
+    },
+    {
+      "title": "Figma Handoff Checklist",
+      "type": "internal",
+      "path": "../../../docs/brand_handoff/FIGMA_HANDOFF_CHECKLIST.md"
+    }
+  ]
+}

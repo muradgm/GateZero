@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 140" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero wordmark</title>
+  <desc id="desc">GateZero geometric wordmark draft.</desc>
+  <rect width="760" height="140" fill="none"/>
+  <text x="24" y="94" fill="#081934" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="82" font-weight="700" letter-spacing="5">GATEZERO</text>
+  <rect x="519" y="106" width="164" height="8" fill="#008980"/>
+  <rect x="690" y="106" width="38" height="8" fill="#E76F0E"/>
+</svg>

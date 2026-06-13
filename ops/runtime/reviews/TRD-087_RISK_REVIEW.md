@@ -1,0 +1,21 @@
+# TRD-087 RISK Review
+
+## Verdict
+
+`pass`
+
+TRD-087 preserves Gate 0 Research Only operation while bounding a future evidence index assignment.
+
+## Risk Findings
+
+No blocking findings. Financial gate remains `G0_RESEARCH`, scope remains `research_only`, and no
+approval, readiness, profitability, performance, execution, broker, autonomy, or risk-gate loosening
+semantics are introduced.
+
+## Residual Risk
+
+This packet defines a future assignment only and does not implement the evidence index.
+
+## Recommended Next Agent
+
+`ORCHESTRATOR`

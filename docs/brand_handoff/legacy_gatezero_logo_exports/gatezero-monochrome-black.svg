@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero monochrome black symbol</title>
+  <desc id="desc">One-color black GateZero TF falcon symbol.</desc>
+  <defs>
+    <mask id="falcon-cut">
+      <rect width="512" height="512" fill="white"/>
+      <path d="M292 141H405L363 174L404 190L315 207L284 248L266 184Z" fill="black"/>
+    </mask>
+  </defs>
+  <path d="M398 118A190 190 0 1 1 124 111" fill="none" stroke="#000000" stroke-width="24" stroke-linecap="round"/>
+  <g mask="url(#falcon-cut)">
+    <path d="M102 116H404L385 178H296V406H220V178H102Z" fill="#000000"/>
+    <path d="M296 218H405L388 276H296Z" fill="#000000"/>
+  </g>
+</svg>

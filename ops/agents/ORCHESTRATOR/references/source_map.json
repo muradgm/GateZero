@@ -1,0 +1,54 @@
+{
+  "agent": "ORCHESTRATOR",
+  "reference_policy": "official/primary sources first; stricter risk interpretation wins",
+  "references": [
+    {
+      "title": "GateZero Project Truth",
+      "url": "../../truth/PROJECT_TRUTH.md",
+      "type": "internal",
+      "why": "Defines what the product is and is not; prevents bot/profit hype drift."
+    },
+    {
+      "title": "GateZero Product Wedge",
+      "url": "../../truth/PRODUCT_WEDGE.md",
+      "type": "internal",
+      "why": "Locks the product promise: no trade without evidence, no execution without risk approval."
+    },
+    {
+      "title": "GateZero Risk Rules",
+      "url": "../../truth/RISK_RULES.md",
+      "type": "internal",
+      "why": "Hard safety constraints that outrank feature appetite."
+    },
+    {
+      "title": "Financial Risk Gates",
+      "url": "../../governance/FINANCIAL_RISK_GATES.md",
+      "type": "internal",
+      "why": "Defines the allowed autonomy level and promotion/rollback path."
+    },
+    {
+      "title": "NIST AI Risk Management Framework 1.0",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "type": "standard",
+      "why": "Govern-map-measure-manage framing for AI-assisted, high-consequence workflows."
+    },
+    {
+      "title": "NIST Cybersecurity Framework 2.0",
+      "url": "https://www.nist.gov/cyberframework",
+      "type": "standard",
+      "why": "Security governance model for systems handling broker keys, account data, and sensitive logs."
+    },
+    {
+      "title": "Google SRE Book - Monitoring Distributed Systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "type": "sre",
+      "why": "Incident visibility, alerting philosophy, and interruption-worthy signals."
+    },
+    {
+      "title": "QuantConnect LEAN Engine Docs",
+      "url": "https://www.quantconnect.com/docs/v2/lean-engine/getting-started",
+      "type": "trading-engine",
+      "why": "Reference architecture for research, backtesting, and live-trading separation."
+    }
+  ]
+}

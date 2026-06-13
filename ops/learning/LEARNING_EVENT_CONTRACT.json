@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "required_fields": [
+    "id",
+    "date",
+    "source",
+    "gate",
+    "event_type",
+    "summary",
+    "severity",
+    "root_cause",
+    "proposed_action",
+    "requires_rule_update",
+    "requires_eval_update",
+    "reviewers"
+  ],
+  "event_types": [
+    "bad_backtest_assumption",
+    "data_quality_failure",
+    "execution_state_error",
+    "risk_limit_gap",
+    "strategy_overfit",
+    "operator_override",
+    "agent_misrouting",
+    "missed_test",
+    "unclear_ui_warning",
+    "incident_or_near_miss"
+  ],
+  "forbidden_auto_effects": [
+    "increase_risk_limit",
+    "increase_position_size",
+    "enable_live_trading",
+    "promote_strategy_maturity",
+    "remove_human_approval"
+  ]
+}

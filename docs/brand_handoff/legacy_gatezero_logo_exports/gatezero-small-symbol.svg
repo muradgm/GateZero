@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero small-size symbol</title>
+  <desc id="desc">Simplified small-size symbol for 16px to 64px uses.</desc>
+  <path d="M101 30A45 45 0 1 1 30 28" fill="none" stroke="#008980" stroke-width="9" stroke-linecap="round"/>
+  <path d="M25 28H104L99 45H75V104H53V45H25Z" fill="#081934"/>
+  <path d="M75 55H103L99 72H75Z" fill="#081934"/>
+  <path d="M77 33H105L92 44L106 49L81 55L72 67L68 45Z" fill="#FFFFFF"/>
+  <path d="M91 44L101 48L82 53Z" fill="#008980"/>
+</svg>

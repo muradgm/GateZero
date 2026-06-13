@@ -1,0 +1,15 @@
+{
+  "strategy_id": "string",
+  "strategy_version": "string",
+  "maturity_level": "L0_IDEA | L1_IMPLEMENTED | L2_BACKTESTED | L3_RISK_REVIEWED | L4_PAPER_CANDIDATE | L5_SUPERVISED_LIVE_CANDIDATE | L6_LIMITED_LIVE_AUTOMATION",
+  "hypothesis": "string",
+  "asset_universe": ["string"],
+  "timeframes": ["string"],
+  "entry_rules": ["string"],
+  "exit_rules": ["string"],
+  "risk_rules": ["string"],
+  "known_failure_modes": ["string"],
+  "promotion_recommendation": "reject | research_more | backtest | risk_review | paper_trade_candidate",
+  "reviewer": "string",
+  "reviewed_at": "ISO-8601"
+}

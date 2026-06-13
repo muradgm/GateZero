@@ -1,0 +1,33 @@
+{
+  "project": "GateZero",
+  "version": "2.0.0",
+  "wedge": "No trade without evidence. No execution without risk approval.",
+  "default_gate": "Gate 0 - Research Only",
+  "agents": [
+    "ORCHESTRATOR",
+    "PM",
+    "QUANT",
+    "RISK",
+    "MARKET_DATA",
+    "EXECUTION",
+    "BACKEND",
+    "FRONTEND",
+    "BRAND_DESIGNER",
+    "QA_SECURITY",
+    "DEVOPS",
+    "LEARNING"
+  ],
+  "required_per_agent": [
+    "SKILL.md",
+    "evals/evals.json",
+    "references/README.md",
+    "references/required_refs.md"
+  ],
+  "learning_enabled": true,
+  "learning_constraints": [
+    "no automatic risk increase",
+    "no automatic autonomy increase",
+    "no automatic live promotion",
+    "PM + Risk + QA review required"
+  ]
+}

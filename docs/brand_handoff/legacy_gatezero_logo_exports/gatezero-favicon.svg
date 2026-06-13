@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">GateZero favicon</title>
+  <desc id="desc">Simplified TF mark for small browser icon use.</desc>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#081934"/>
+  <path d="M49 16A22 22 0 1 1 16 15" fill="none" stroke="#008980" stroke-width="4" stroke-linecap="round"/>
+  <path d="M13 15H51L48 23H37V51H27V23H13Z" fill="#FFFFFF"/>
+  <path d="M37 28H50L47 36H37Z" fill="#FFFFFF"/>
+  <path d="M38 18H51L45 23L52 25L40 28L36 33L34 23Z" fill="#081934"/>
+  <path d="M43 23L48 25L40 27Z" fill="#008980"/>
+</svg>

@@ -1,0 +1,60 @@
+{
+  "agent": "RISK",
+  "reference_policy": "official/primary sources first; stricter risk interpretation wins",
+  "references": [
+    {
+      "title": "GateZero Project Truth",
+      "url": "../../truth/PROJECT_TRUTH.md",
+      "type": "internal",
+      "why": "Defines what the product is and is not; prevents bot/profit hype drift."
+    },
+    {
+      "title": "GateZero Product Wedge",
+      "url": "../../truth/PRODUCT_WEDGE.md",
+      "type": "internal",
+      "why": "Locks the product promise: no trade without evidence, no execution without risk approval."
+    },
+    {
+      "title": "GateZero Risk Rules",
+      "url": "../../truth/RISK_RULES.md",
+      "type": "internal",
+      "why": "Hard safety constraints that outrank feature appetite."
+    },
+    {
+      "title": "Financial Risk Gates",
+      "url": "../../governance/FINANCIAL_RISK_GATES.md",
+      "type": "internal",
+      "why": "Defines the allowed autonomy level and promotion/rollback path."
+    },
+    {
+      "title": "ISO 31000:2018 Risk Management Guidelines",
+      "url": "https://www.iso.org/standard/65694.html",
+      "type": "standard",
+      "why": "Risk identification, analysis, treatment, monitoring, and communication principles."
+    },
+    {
+      "title": "NIST AI Risk Management Framework 1.0",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "type": "standard",
+      "why": "Risk lifecycle framing for AI-assisted decision support."
+    },
+    {
+      "title": "CFTC AI Trading Bots Advisory",
+      "url": "https://www.cftc.gov/LearnAndProtect/AdvisoriesAndArticles/AITradingBots.html",
+      "type": "regulatory-warning",
+      "why": "Reminds Risk Agent that AI cannot predict sudden market changes and high-return claims are suspicious."
+    },
+    {
+      "title": "IBKR Order Types / Notes & Limitations",
+      "url": "https://www.interactivebrokers.com/campus/ibkr-api-page/order-types/",
+      "type": "broker-execution",
+      "why": "Order-type constraints and execution caveats must feed risk review."
+    },
+    {
+      "title": "Google SRE Book - Embracing Risk",
+      "url": "https://sre.google/sre-book/embracing-risk/",
+      "type": "sre",
+      "why": "Useful for explicit risk budgets, although financial risk remains stricter than service-risk tolerance."
+    }
+  ]
+}
