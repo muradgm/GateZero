@@ -179,10 +179,20 @@ deployment approval, or future-phase eligibility.
 | `TRD-169` | Gate 1 guard schema validation hardening | `docs/operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING.md`     | Records parsed schema and fixture validation in the guard.       |
 | `TRD-170` | Paper candidate semantic block           | `docs/operations/GATE0_PAPER_CANDIDATE_SEMANTIC_BLOCK.md`                 | Blocks active paper-candidate validation states in Phase 0.      |
 | `TRD-171` | Canonical repo hygiene and agent align   | `docs/operations/GATE0_CANONICAL_REPO_HYGIENE_AND_AGENT_ALIGNMENT.md`     | Records git hygiene and agent manifest alignment.                |
+| `TRD-172` | GitHub CI verification workflow          | `.github/workflows/gate0-verify.yml`                                      | Runs Gate 0 verification in private GitHub CI.                   |
+| `TRD-172` | GitHub CI workflow docs                  | `docs/operations/GATE0_GITHUB_CI_VERIFICATION_WORKFLOW.md`                | Documents the CI boundary and command.                           |
+| `TRD-173` | GitHub repo handoff runbook              | `docs/operations/GATE0_GITHUB_REPO_HANDOFF_AND_CLONE_RUNBOOK.md`          | Documents clone, install, verify, and triage steps.              |
+| `TRD-174` | Agent manifest drift guard               | `scripts/check-gate0-agent-manifest.ts`                                   | Checks local agent manifest and reference alignment.             |
+| `TRD-174` | Agent manifest drift guard tests         | `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`              | Tests pass and bounded failure paths for the guard.              |
+| `TRD-174` | Agent manifest drift guard docs          | `docs/operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`                     | Documents the local agent guard.                                 |
+| `TRD-175` | Repo hygiene guard                       | `scripts/check-repo-hygiene.ts`                                           | Checks `.gitignore` and tracked-file hygiene.                    |
+| `TRD-175` | Repo hygiene guard tests                 | `packages/fixtures/tests/repo-hygiene-check.test.ts`                      | Tests pass and bounded failure paths for the guard.              |
+| `TRD-175` | Repo hygiene guard docs                  | `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`                             | Documents the local repo hygiene guard.                          |
+| `TRD-176` | GitHub baseline release note             | `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`                   | Records the private GitHub baseline boundary.                    |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-171` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-176` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

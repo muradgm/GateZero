@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-13                                                     |
-| Latest accepted packet     | `TRD-171`                                                      |
-| Latest accepted validation | 56 test files, 292 tests passed                                |
+| Latest accepted packet     | `TRD-176`                                                      |
+| Latest accepted validation | 58 test files, 298 tests passed                                |
 
 ## Boundary
 
@@ -43,6 +43,8 @@ pnpm inspect:gate0-dry-run -- --scenario friction
 pnpm inspect:gate0-dry-run -- --scenario other
 pnpm snapshot:gate0-progress
 pnpm check:gate0-evidence-index
+pnpm check:gate0-agents
+pnpm check:repo-hygiene
 pnpm check:gate1-contracts
 pnpm check:gate0-name
 pnpm check:gate0-docs-coverage
@@ -68,6 +70,8 @@ Latest accepted result:
   text and no stack trace.
 - `pnpm snapshot:gate0-progress`: passed.
 - `pnpm check:gate0-evidence-index`: passed.
+- `pnpm check:gate0-agents`: passed.
+- `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
 - `pnpm check:gate0-name`: passed.
 - `pnpm check:gate0-docs-coverage`: passed.
@@ -79,7 +83,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 56 test files passed, 292 tests passed.
+- `pnpm test`: 58 test files passed, 298 tests passed.
 - `pnpm validate:gate0`: passed.
 
 ## Phase Map
@@ -123,7 +127,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-171`
+- Accepted packets: `TRD-044` to `TRD-176`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -429,6 +433,11 @@ Latest accepted result:
 | `TRD-169` | accepted | Validation      | Hardened Gate 1 guard with schema and fixture parsing. |
 | `TRD-170` | accepted | Risk            | Blocked active paper-candidate Phase 0 semantics.      |
 | `TRD-171` | accepted | Foundation      | Added canonical repo hygiene and agent alignment.      |
+| `TRD-172` | accepted | Validation      | Added GitHub Gate 0 CI verification workflow.          |
+| `TRD-173` | accepted | Foundation      | Added GitHub repo handoff and clone runbook.           |
+| `TRD-174` | accepted | Validation      | Added agent manifest drift guard.                      |
+| `TRD-175` | accepted | Validation      | Added repository hygiene guard.                        |
+| `TRD-176` | accepted | Release         | Added GitHub baseline release note.                    |
 
 ## Current Operator Commands
 
@@ -447,6 +456,8 @@ Latest accepted result:
 | `pnpm check:gate0-snapshot`                         | Check generated progress snapshot freshness.            | Local freshness check passes.                                  |
 | `pnpm check:gate0-tracklist`                        | Check accepted packet ledger alignment.                 | Local consistency check passes.                                |
 | `pnpm check:gate0-reviews`                          | Check assignment and review-record coverage.            | Local review coverage check passes.                            |
+| `pnpm check:gate0-agents`                           | Check agent manifest and reference drift.               | Local agent manifest guard passes.                             |
+| `pnpm check:repo-hygiene`                           | Check repository hygiene drift.                         | Local repository hygiene guard passes.                         |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -646,6 +657,17 @@ Do not mark a packet accepted until:
 - Paper candidate semantic block: `docs/operations/GATE0_PAPER_CANDIDATE_SEMANTIC_BLOCK.md`
 - Canonical repo hygiene and agent alignment:
   `docs/operations/GATE0_CANONICAL_REPO_HYGIENE_AND_AGENT_ALIGNMENT.md`
+- GitHub CI verification workflow: `docs/operations/GATE0_GITHUB_CI_VERIFICATION_WORKFLOW.md`
+- GitHub repo handoff and clone runbook:
+  `docs/operations/GATE0_GITHUB_REPO_HANDOFF_AND_CLONE_RUNBOOK.md`
+- Agent manifest drift guard: `docs/operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`
+- Repo hygiene guard: `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`
+- GitHub baseline release note: `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`
+- GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
+- Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
+- Agent manifest drift guard tests: `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`
+- Repo hygiene guard script: `scripts/check-repo-hygiene.ts`
+- Repo hygiene guard tests: `packages/fixtures/tests/repo-hygiene-check.test.ts`
 - Gate 1 historical backtest contract source:
   `packages/contracts/src/gate1-historical-backtest-contracts.ts`
 - Gate 1 historical backtest contract tests:
