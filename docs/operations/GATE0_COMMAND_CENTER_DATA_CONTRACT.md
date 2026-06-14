@@ -19,7 +19,7 @@ apps/web/src/command-center-data.js
 - `scope`: current operating scope.
 - `latestPacket`: latest accepted packet shown in the UI.
 - `localVerification`: latest local verification summary.
-- `ciRun`: latest visible remote CI run.
+- `ciRun`: latest recorded visible remote CI run.
 - `ciState`: latest visible remote CI state.
 - `navItems`: local navigation labels.
 - `healthCards`: top-level operating health cards.

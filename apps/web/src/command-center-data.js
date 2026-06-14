@@ -6,7 +6,7 @@ export const commandCenterData = {
   scope: "research_only",
   latestPacket: "TRD-192",
   localVerification: "60 files / 305 tests",
-  ciRun: "27491732789",
+  ciRun: "27501521488",
   ciState: "success",
   navItems: ["Overview", "Evidence", "Agents", "Risk", "CI", "Docs"],
   healthCards: [
@@ -62,7 +62,7 @@ export const commandCenterData = {
     },
     {
       area: "Remote CI",
-      signal: "Run 27491732789",
+      signal: "Run 27501521488",
       state: "Passing",
       reference: "Commit 459d37c"
     },
