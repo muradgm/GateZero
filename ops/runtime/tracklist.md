@@ -9,8 +9,8 @@
 | Operating scope            | `research_only`                                                |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-13                                                     |
-| Latest accepted packet     | `TRD-176`                                                      |
+| Last updated               | 2026-06-14                                                     |
+| Latest accepted packet     | `TRD-177`                                                      |
 | Latest accepted validation | 58 test files, 298 tests passed                                |
 
 ## Boundary
@@ -127,7 +127,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-176`
+- Accepted packets: `TRD-044` to `TRD-177`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -438,6 +438,7 @@ Latest accepted result:
 | `TRD-174` | accepted | Validation      | Added agent manifest drift guard.                      |
 | `TRD-175` | accepted | Validation      | Added repository hygiene guard.                        |
 | `TRD-176` | accepted | Release         | Added GitHub baseline release note.                    |
+| `TRD-177` | accepted | Validation      | Recorded successful pushed GitHub CI run evidence.     |
 
 ## Current Operator Commands
 
@@ -663,6 +664,7 @@ Do not mark a packet accepted until:
 - Agent manifest drift guard: `docs/operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`
 - Repo hygiene guard: `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`
 - GitHub baseline release note: `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`
+- GitHub CI post-push evidence: `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
 - Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Agent manifest drift guard tests: `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`

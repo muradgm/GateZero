@@ -124,6 +124,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`
 - `operations/GATE0_REPO_HYGIENE_GUARD.md`
 - `operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`
+- `operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
 - `operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`

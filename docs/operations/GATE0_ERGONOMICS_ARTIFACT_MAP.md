@@ -189,10 +189,11 @@ deployment approval, or future-phase eligibility.
 | `TRD-175` | Repo hygiene guard tests                 | `packages/fixtures/tests/repo-hygiene-check.test.ts`                      | Tests pass and bounded failure paths for the guard.              |
 | `TRD-175` | Repo hygiene guard docs                  | `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`                             | Documents the local repo hygiene guard.                          |
 | `TRD-176` | GitHub baseline release note             | `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`                   | Records the private GitHub baseline boundary.                    |
+| `TRD-177` | GitHub CI post-push evidence             | `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`                   | Records the first successful pushed CI run.                      |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-176` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-177` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
