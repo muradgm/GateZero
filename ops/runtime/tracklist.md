@@ -127,7 +127,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-179` and `TRD-181` to `TRD-182`
+- Accepted packets: `TRD-044` to `TRD-182`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -444,6 +444,7 @@ Latest accepted result:
 | `TRD-177` | accepted | Validation      | Recorded successful pushed GitHub CI run evidence.     |
 | `TRD-178` | accepted | Validation      | Reviewed GitHub Actions Node runtime deprecation.      |
 | `TRD-179` | accepted | Validation      | Hardened GitHub CI action runtime setting.             |
+| `TRD-180` | accepted | Validation      | Recorded post-hardening GitHub CI evidence.            |
 | `TRD-181` | accepted | Operations      | Added remote verification runbook.                     |
 | `TRD-182` | accepted | Operations      | Added CI failure triage guardrail.                     |
 
@@ -472,9 +473,9 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet  | Status | Goal                                      | Acceptance focus              |
-| ---- | ------- | ------ | ----------------------------------------- | ----------------------------- |
-| 1    | TRD-180 | queued | Record post-hardening GitHub CI evidence. | Confirm pushed CI run passes. |
+| Rank | Packet | Status | Goal                                        | Acceptance focus              |
+| ---- | ------ | ------ | ------------------------------------------- | ----------------------------- |
+| 1    | None   | paused | Wait for a concrete Gate 0 maintenance gap. | Do not queue broad expansion. |
 
 ## Rejected For Now
 
@@ -676,6 +677,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_GITHUB_ACTIONS_NODE_RUNTIME_DEPRECATION_REVIEW.md`
 - GitHub CI workflow runtime hardening:
   `docs/operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`
+- GitHub CI evidence refresh after runtime hardening:
+  `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md`
 - Remote verification runbook: `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
 - CI failure triage guardrail: `docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`

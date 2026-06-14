@@ -127,6 +127,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`
 - `operations/GATE0_GITHUB_ACTIONS_NODE_RUNTIME_DEPRECATION_REVIEW.md`
 - `operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`
+- `operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md`
 - `operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
 - `operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
