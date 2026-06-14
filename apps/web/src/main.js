@@ -18,7 +18,7 @@ app.innerHTML = `
           <div class="brand-subtitle">Command Center</div>
         </div>
       </div>
-      <nav class="nav-list">
+      <nav class="nav-list" aria-label="Primary sections">
         ${commandCenterData.navItems
           .map(
             (item, index) =>
@@ -32,7 +32,7 @@ app.innerHTML = `
       </div>
     </aside>
 
-    <main class="workspace">
+    <main class="workspace" id="main" tabindex="-1">
       <header class="topbar">
         <div>
           <h1>${commandCenterData.title}</h1>
@@ -44,7 +44,8 @@ app.innerHTML = `
         </div>
       </header>
 
-      <section class="health-grid" id="overview" aria-label="Gate 0 health">
+      <section class="health-grid" id="overview" aria-labelledby="overview-title">
+        <h2 class="section-title" id="overview-title">Gate 0 Health</h2>
         ${commandCenterData.healthCards
           .map(
             (card) => `
@@ -59,10 +60,10 @@ app.innerHTML = `
       </section>
 
       <section class="dashboard-grid">
-        <article class="panel loop-panel" id="evidence">
+        <article class="panel loop-panel" id="loop" aria-labelledby="loop-title">
           <div class="panel-heading">
             <div>
-              <h2>Protected Loop</h2>
+              <h2 id="loop-title">Protected Loop</h2>
               <p>Every step remains evidence-first and risk-gated.</p>
             </div>
             <span class="panel-chip">read-only</span>
@@ -82,10 +83,10 @@ app.innerHTML = `
           </ol>
         </article>
 
-        <article class="panel boundary-panel" id="risk">
+        <article class="panel boundary-panel" id="risk" aria-labelledby="risk-title">
           <div class="panel-heading">
             <div>
-              <h2>Risk Boundary</h2>
+              <h2 id="risk-title">Risk Boundary</h2>
               <p>No product breadth beyond trust in the loop.</p>
             </div>
           </div>
@@ -98,16 +99,19 @@ app.innerHTML = `
       </section>
 
       <section class="lower-grid">
-        <article class="panel evidence-panel" id="ci">
+        <article class="panel evidence-panel" id="evidence" aria-labelledby="evidence-title">
           <div class="panel-heading">
             <div>
-              <h2>Evidence Freshness</h2>
+              <h2 id="evidence-title">Evidence Freshness</h2>
               <p>Latest local and remote operating signals.</p>
             </div>
             <span class="panel-chip">latest ${commandCenterData.latestPacket}</span>
           </div>
           <div class="table-wrap">
             <table>
+              <caption>
+                Gate 0 evidence signals shown by the local command center.
+              </caption>
               <thead>
                 <tr>
                   <th>Area</th>
@@ -134,16 +138,25 @@ app.innerHTML = `
           </div>
         </article>
 
-        <article class="panel action-panel" id="docs">
+        <article class="panel action-panel" id="actions" aria-labelledby="actions-title">
           <div class="panel-heading">
             <div>
-              <h2>Next Action</h2>
+              <h2 id="actions-title">Next Action</h2>
               <p>Maintenance posture and source links.</p>
             </div>
           </div>
           <ul class="action-list">
             ${commandCenterData.nextActions.map((item) => `<li>${item}</li>`).join("")}
           </ul>
+        </article>
+
+        <article class="panel docs-panel" id="docs" aria-labelledby="docs-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="docs-title">Source Links</h2>
+              <p>Local artifacts behind this read-only surface.</p>
+            </div>
+          </div>
           <div class="doc-stack">
             ${commandCenterData.docs.map((doc) => `<code>${doc}</code>`).join("")}
           </div>

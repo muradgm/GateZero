@@ -35,6 +35,32 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #2dd4bf;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  color: var(--accent-strong);
+  font-weight: 800;
+  left: 16px;
+  padding: 10px 12px;
+  position: fixed;
+  top: 12px;
+  transform: translateY(-160%);
+  z-index: 20;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .shell {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -120,6 +146,7 @@ a {
   padding: 30px;
   display: grid;
   gap: 24px;
+  min-width: 0;
 }
 
 .topbar {
@@ -186,12 +213,20 @@ h2 {
   gap: 14px;
 }
 
+.section-title {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .health-card,
 .panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
+  min-width: 0;
 }
 
 .health-card {
@@ -316,6 +351,7 @@ h2 {
 }
 
 .table-wrap {
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -323,6 +359,14 @@ table {
   width: 100%;
   border-collapse: collapse;
   min-width: 680px;
+}
+
+caption {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
 }
 
 th,
@@ -363,6 +407,8 @@ th {
 .doc-stack {
   display: grid;
   gap: 8px;
+  max-height: 330px;
+  overflow: auto;
 }
 
 code {

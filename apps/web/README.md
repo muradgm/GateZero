@@ -14,3 +14,11 @@ Open locally:
 ```text
 apps/web/index.html
 ```
+
+Preview locally:
+
+```powershell
+pnpm preview:web
+```
+
+Use `pnpm preview:web -- --port 4175` when the default local port is already in use.

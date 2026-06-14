@@ -4,11 +4,11 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-192",
-  localVerification: "60 files / 305 tests",
+  latestPacket: "TRD-197",
+  localVerification: "61 files / 308 tests",
   ciRun: "27501521488",
   ciState: "success",
-  navItems: ["Overview", "Evidence", "Agents", "Risk", "CI", "Docs"],
+  navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
     {
       label: "Gate Status",
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 60 files, 305 tests.",
+      detail: "Latest suite: 61 files, 308 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "192 / 192",
+      value: "197 / 197",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,13 +58,13 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "60 files / 305 tests"
+      reference: "61 files / 308 tests"
     },
     {
       area: "Remote CI",
       signal: "Run 27501521488",
       state: "Passing",
-      reference: "Commit 459d37c"
+      reference: "Recorded passing run"
     },
     {
       area: "CI evidence",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "192 accepted records"
+      reference: "197 accepted records"
     }
   ],
   nextActions: [
@@ -92,8 +92,12 @@ export const commandCenterData = {
   ],
   docs: [
     "ops/runtime/tracklist.md",
+    "docs/operations/GATE0_COMMAND_CENTER_VISUAL_QA_PASS.md",
+    "docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_BASELINE.md",
+    "docs/operations/GATE0_COMMAND_CENTER_RUNTIME_DATA_SOURCE_PLAN.md",
+    "docs/operations/GATE0_COMMAND_CENTER_LOCAL_PREVIEW_SCRIPT.md",
+    "docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md",
     "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
-    "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md",
-    "docs/operations/GATE0_MAINTENANCE_PAUSE_RECONFIRMATION.md"
+    "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
   ]
 };

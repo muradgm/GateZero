@@ -212,10 +212,18 @@ deployment approval, or future-phase eligibility.
 | `TRD-191` | Command center guardrail tests           | `packages/fixtures/tests/gate0-command-center-data.test.ts`                   | Tests Gate 0 scope and blocked app-data language.                |
 | `TRD-191` | Command center guardrail docs            | `docs/operations/GATE0_COMMAND_CENTER_NO_EXECUTION_GUARDRAILS.md`             | Documents no-execution command center guardrails.                |
 | `TRD-192` | Command center QA/RISK acceptance        | `docs/operations/GATE0_COMMAND_CENTER_QA_RISK_ACCEPTANCE.md`                  | Accepts the command center as control-plane only.                |
+| `TRD-193` | Command center visual QA pass            | `docs/operations/GATE0_COMMAND_CENTER_VISUAL_QA_PASS.md`                      | Records restrained operational visual QA.                        |
+| `TRD-194` | Command center accessibility baseline    | `docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_BASELINE.md`              | Records keyboard and semantic baseline controls.                 |
+| `TRD-195` | Command center data source plan          | `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_DATA_SOURCE_PLAN.md`            | Plans future local-only artifact inputs.                         |
+| `TRD-196` | Command center local preview script      | `scripts/preview-web.ts`                                                      | Serves the static command center on local host only.             |
+| `TRD-196` | Command center local preview docs        | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_PREVIEW_SCRIPT.md`                | Documents `pnpm preview:web`.                                    |
+| `TRD-197` | Command center freshness guard           | `scripts/check-gate0-command-center-freshness.ts`                             | Checks static dashboard evidence against local records.          |
+| `TRD-197` | Command center freshness guard tests     | `packages/fixtures/tests/gate0-command-center-freshness-check.test.ts`        | Tests pass and stale-evidence failure paths.                     |
+| `TRD-197` | Command center freshness guard docs      | `docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md`            | Documents `pnpm check:gate0-command-center`.                     |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-192` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-197` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
