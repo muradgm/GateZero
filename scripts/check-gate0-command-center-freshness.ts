@@ -4,6 +4,7 @@ import { pathToFileURL } from "node:url";
 
 export interface Gate0CommandCenterFreshnessInput {
   readonly commandCenterData: string;
+  readonly remoteEvidenceIndex: string;
   readonly tracklist: string;
   readonly acceptedIds: readonly string[];
 }
@@ -17,6 +18,8 @@ export interface Gate0CommandCenterFreshnessResult {
   readonly commandCenterValidationSummary: string;
   readonly acceptedCount: number;
   readonly commandCenterAcceptedCount: number;
+  readonly latestCiRunId: string;
+  readonly commandCenterCiRunId: string;
 }
 
 const acceptanceSuffix = "_ORCHESTRATOR_ACCEPTANCE.md";
@@ -28,6 +31,10 @@ export async function loadGate0CommandCenterFreshnessInput(
   return {
     commandCenterData: await readFile(
       path.join(rootDir, "apps", "web", "src", "command-center-data.js"),
+      "utf8"
+    ),
+    remoteEvidenceIndex: await readFile(
+      path.join(rootDir, "docs", "operations", "GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md"),
       "utf8"
     ),
     tracklist: await readFile(path.join(rootDir, "ops", "runtime", "tracklist.md"), "utf8"),
@@ -49,6 +56,8 @@ export function checkGate0CommandCenterFreshness(
     "localVerification"
   );
   const commandCenterAcceptedCount = readAcceptedRecordCount(input.commandCenterData);
+  const latestCiRunId = readLatestCiRunId(input.remoteEvidenceIndex);
+  const commandCenterCiRunId = readJsStringValue(input.commandCenterData, "ciRun");
   const findings: string[] = [];
 
   if (commandCenterLatestPacket !== latestPacket) {
@@ -69,6 +78,12 @@ export function checkGate0CommandCenterFreshness(
     );
   }
 
+  if (commandCenterCiRunId !== latestCiRunId) {
+    findings.push(
+      `Command center CI run mismatch: app=${commandCenterCiRunId}, evidence=${latestCiRunId}`
+    );
+  }
+
   return {
     ok: findings.length === 0,
     findings,
@@ -77,7 +92,9 @@ export function checkGate0CommandCenterFreshness(
     validationSummary,
     commandCenterValidationSummary,
     acceptedCount,
-    commandCenterAcceptedCount
+    commandCenterAcceptedCount,
+    latestCiRunId,
+    commandCenterCiRunId
   };
 }
 
@@ -89,7 +106,8 @@ export function renderGate0CommandCenterFreshnessResult(
       "Gate 0 command center freshness passed.",
       `Latest packet: ${result.latestPacket}`,
       `Validation summary: ${result.validationSummary}`,
-      `Accepted records: ${result.acceptedCount}`
+      `Accepted records: ${result.acceptedCount}`,
+      `CI run: ${result.latestCiRunId}`
     ].join("\n");
   }
 
@@ -153,6 +171,20 @@ function readAcceptedRecordCount(source: string): number {
   }
 
   return value;
+}
+
+function readLatestCiRunId(source: string): string {
+  const runIds = [...source.matchAll(/\|\s+`TRD-\d+`\s+\|[^|]+\|\s+`(\d+)`\s+\|/g)].map(
+    (match) => match[1]!
+  );
+
+  const latestRunId = runIds.at(-1);
+
+  if (!latestRunId) {
+    throw new Error("Missing remote CI evidence run id.");
+  }
+
+  return latestRunId;
 }
 
 function readTableValue(markdown: string, field: string): string {

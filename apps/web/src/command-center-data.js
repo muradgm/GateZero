@@ -4,9 +4,9 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-197",
-  localVerification: "61 files / 308 tests",
-  ciRun: "27501521488",
+  latestPacket: "TRD-202",
+  localVerification: "62 files / 316 tests",
+  ciRun: "27502152482",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 61 files, 308 tests.",
+      detail: "Latest suite: 62 files, 316 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "197 / 197",
+      value: "202 / 202",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,11 +58,11 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "61 files / 308 tests"
+      reference: "62 files / 316 tests"
     },
     {
       area: "Remote CI",
-      signal: "Run 27501521488",
+      signal: "Run 27502152482",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "197 accepted records"
+      reference: "202 accepted records"
     }
   ],
   nextActions: [
@@ -97,6 +97,11 @@ export const commandCenterData = {
     "docs/operations/GATE0_COMMAND_CENTER_RUNTIME_DATA_SOURCE_PLAN.md",
     "docs/operations/GATE0_COMMAND_CENTER_LOCAL_PREVIEW_SCRIPT.md",
     "docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md",
+    "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md",
+    "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_FRESHNESS_GUARD.md",
+    "docs/operations/GATE0_COMMAND_CENTER_NAVIGATION_CONTRACT_CHECK.md",
+    "docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md",
+    "docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md",
     "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
     "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
   ]

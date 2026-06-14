@@ -220,10 +220,16 @@ deployment approval, or future-phase eligibility.
 | `TRD-197` | Command center freshness guard           | `scripts/check-gate0-command-center-freshness.ts`                             | Checks static dashboard evidence against local records.          |
 | `TRD-197` | Command center freshness guard tests     | `packages/fixtures/tests/gate0-command-center-freshness-check.test.ts`        | Tests pass and stale-evidence failure paths.                     |
 | `TRD-197` | Command center freshness guard docs      | `docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md`            | Documents `pnpm check:gate0-command-center`.                     |
+| `TRD-198` | Command center CI evidence refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md`                 | Records latest pushed command-center CI evidence.                |
+| `TRD-199` | Command center CI run freshness guard    | `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_FRESHNESS_GUARD.md`              | Documents CI run display freshness checks.                       |
+| `TRD-200` | Command center navigation contract check | `docs/operations/GATE0_COMMAND_CENTER_NAVIGATION_CONTRACT_CHECK.md`           | Documents navigation-to-section contract coverage.               |
+| `TRD-201` | Command center accessibility check       | `docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md`        | Documents accessibility baseline contract coverage.              |
+| `TRD-202` | Command center preview contract check    | `docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md`       | Documents preview script contract coverage.                      |
+| `TRD-202` | Command center preview tests             | `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`         | Tests local preview host, ports, paths, and traversal blocking.  |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-197` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-202` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

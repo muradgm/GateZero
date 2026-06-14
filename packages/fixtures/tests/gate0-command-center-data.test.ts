@@ -5,6 +5,8 @@ import { describe, expect, it } from "vitest";
 const rootDir = process.cwd();
 const dataPath = path.join(rootDir, "apps", "web", "src", "command-center-data.js");
 const indexPath = path.join(rootDir, "apps", "web", "index.html");
+const mainPath = path.join(rootDir, "apps", "web", "src", "main.js");
+const stylePath = path.join(rootDir, "apps", "web", "src", "styles.css");
 
 describe("Gate 0 command center surface", () => {
   it("keeps the static command center tied to Gate 0 research scope", () => {
@@ -12,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-197");
+    expect(data).toContain("TRD-202");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -37,5 +39,29 @@ describe("Gate 0 command center surface", () => {
     expect(index).toContain('<div id="app"></div>');
     expect(index).toContain("./src/main.js");
     expect(index).toContain("./src/styles.css");
+  });
+
+  it("keeps navigation targets aligned to rendered section ids", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    for (const item of ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"]) {
+      const id = item.toLowerCase();
+
+      expect(data).toContain(`"${item}"`);
+      expect(main).toContain(`id="${id}"`);
+    }
+  });
+
+  it("keeps the accessibility baseline present in the static surface", () => {
+    const index = readFileSync(indexPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(index).toContain('class="skip-link"');
+    expect(index).toContain('href="#main"');
+    expect(main).toContain('main class="workspace" id="main" tabindex="-1"');
+    expect(main).toContain("<caption>");
+    expect(styles).toContain(":focus-visible");
   });
 });

@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-14                                                     |
-| Latest accepted packet     | `TRD-197`                                                      |
-| Latest accepted validation | 61 test files, 308 tests passed                                |
+| Latest accepted packet     | `TRD-202`                                                      |
+| Latest accepted validation | 62 test files, 316 tests passed                                |
 
 ## Boundary
 
@@ -88,7 +88,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 61 test files passed, 308 tests passed.
+- `pnpm test`: 62 test files passed, 316 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -133,7 +133,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-197`
+- Accepted packets: `TRD-044` to `TRD-202`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -270,6 +270,8 @@ Latest accepted result:
     acceptance.
   - Command center visual QA, accessibility baseline, local-only data-source plan, preview command,
     and evidence freshness guard.
+  - Command center CI evidence refresh, CI-run freshness check, navigation contract coverage,
+    accessibility contract coverage, and preview-script contract coverage.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
@@ -474,6 +476,11 @@ Latest accepted result:
 | `TRD-195` | accepted | UI data plan    | Planned local-only command center data sources.        |
 | `TRD-196` | accepted | UI preview      | Added local host command center preview command.       |
 | `TRD-197` | accepted | UI guard        | Added command center evidence freshness guard.         |
+| `TRD-198` | accepted | UI evidence     | Refreshed command center CI evidence.                  |
+| `TRD-199` | accepted | UI guard        | Added command center CI-run freshness guard.           |
+| `TRD-200` | accepted | UI contract     | Added command center navigation contract checks.       |
+| `TRD-201` | accepted | UI access       | Added command center accessibility contract checks.    |
+| `TRD-202` | accepted | UI preview      | Added command center preview script contract checks.   |
 
 ## Current Operator Commands
 
@@ -735,10 +742,21 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_LOCAL_PREVIEW_SCRIPT.md`
 - Command center evidence freshness guard:
   `docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md`
+- Command center CI evidence refresh: `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md`
+- Command center CI run freshness guard:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_FRESHNESS_GUARD.md`
+- Command center navigation contract check:
+  `docs/operations/GATE0_COMMAND_CENTER_NAVIGATION_CONTRACT_CHECK.md`
+- Command center accessibility contract check:
+  `docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md`
+- Command center preview script contract check:
+  `docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
 - Command center preview script: `scripts/preview-web.ts`
+- Command center preview script tests:
+  `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`
 - Command center freshness guard script: `scripts/check-gate0-command-center-freshness.ts`
 - Command center freshness guard tests:
   `packages/fixtures/tests/gate0-command-center-freshness-check.test.ts`
