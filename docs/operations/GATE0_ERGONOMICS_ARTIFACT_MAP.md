@@ -202,10 +202,20 @@ deployment approval, or future-phase eligibility.
 | `TRD-185` | CI evidence freshness docs               | `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`         | Documents the standalone freshness guard.                        |
 | `TRD-186` | Remote verification evidence index       | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                 | Indexes remote CI evidence records.                              |
 | `TRD-187` | Maintenance pause reconfirmation         | `docs/operations/GATE0_MAINTENANCE_PAUSE_RECONFIRMATION.md`                   | Reconfirms broad Gate 0 expansion is paused.                     |
+| `TRD-188` | Command center scope and boundary        | `docs/operations/GATE0_COMMAND_CENTER_SCOPE_AND_BOUNDARY.md`                  | Defines the read-only command center boundary.                   |
+| `TRD-189` | Command center data contract             | `docs/operations/GATE0_COMMAND_CENTER_DATA_CONTRACT.md`                       | Defines the static local display data shape.                     |
+| `TRD-189` | Command center data source               | `apps/web/src/command-center-data.js`                                         | Provides local display-only command center data.                 |
+| `TRD-190` | Static command center prototype          | `apps/web/index.html`                                                         | Mounts the local static command center.                          |
+| `TRD-190` | Command center renderer                  | `apps/web/src/main.js`                                                        | Renders the static command center UI.                            |
+| `TRD-190` | Command center styles                    | `apps/web/src/styles.css`                                                     | Styles the local command center surface.                         |
+| `TRD-190` | Command center prototype docs            | `docs/operations/GATE0_STATIC_LOCAL_COMMAND_CENTER_PROTOTYPE.md`              | Documents the static local prototype.                            |
+| `TRD-191` | Command center guardrail tests           | `packages/fixtures/tests/gate0-command-center-data.test.ts`                   | Tests Gate 0 scope and blocked app-data language.                |
+| `TRD-191` | Command center guardrail docs            | `docs/operations/GATE0_COMMAND_CENTER_NO_EXECUTION_GUARDRAILS.md`             | Documents no-execution command center guardrails.                |
+| `TRD-192` | Command center QA/RISK acceptance        | `docs/operations/GATE0_COMMAND_CENTER_QA_RISK_ACCEPTANCE.md`                  | Accepts the command center as control-plane only.                |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-187` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-192` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

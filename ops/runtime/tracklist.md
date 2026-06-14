@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-14                                                     |
-| Latest accepted packet     | `TRD-187`                                                      |
-| Latest accepted validation | 59 test files, 302 tests passed                                |
+| Latest accepted packet     | `TRD-192`                                                      |
+| Latest accepted validation | 60 test files, 305 tests passed                                |
 
 ## Boundary
 
@@ -85,7 +85,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 59 test files passed, 302 tests passed.
+- `pnpm test`: 60 test files passed, 305 tests passed.
 - `pnpm validate:gate0`: passed.
 
 ## Phase Map
@@ -129,7 +129,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-187`
+- Accepted packets: `TRD-044` to `TRD-192`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -262,6 +262,8 @@ Latest accepted result:
     guardrail.
   - GitHub Actions annotation watch, CI evidence freshness proposal and guard, remote verification
     evidence index, and maintenance pause reconfirmation.
+  - Read-only Gate 0 command center scope, data contract, static prototype, guardrails, and QA/RISK
+    acceptance.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
@@ -456,6 +458,11 @@ Latest accepted result:
 | `TRD-185` | accepted | Validation      | Added standalone CI evidence freshness guard.          |
 | `TRD-186` | accepted | Operations      | Added remote verification evidence index.              |
 | `TRD-187` | accepted | Operations      | Reconfirmed Gate 0 maintenance pause posture.          |
+| `TRD-188` | accepted | UI boundary     | Defined Gate 0 command center scope and boundary.      |
+| `TRD-189` | accepted | UI contract     | Added command center static data contract.             |
+| `TRD-190` | accepted | UI prototype    | Added static local Gate 0 command center prototype.    |
+| `TRD-191` | accepted | UI guardrails   | Added command center no-execution guardrails.          |
+| `TRD-192` | accepted | UI acceptance   | Accepted command center as control-plane only.         |
 
 ## Current Operator Commands
 
@@ -699,6 +706,16 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
 - Remote verification evidence index: `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`
 - Maintenance pause reconfirmation: `docs/operations/GATE0_MAINTENANCE_PAUSE_RECONFIRMATION.md`
+- Command center scope and boundary: `docs/operations/GATE0_COMMAND_CENTER_SCOPE_AND_BOUNDARY.md`
+- Command center data contract: `docs/operations/GATE0_COMMAND_CENTER_DATA_CONTRACT.md`
+- Static local command center prototype:
+  `docs/operations/GATE0_STATIC_LOCAL_COMMAND_CENTER_PROTOTYPE.md`
+- Command center no-execution guardrails:
+  `docs/operations/GATE0_COMMAND_CENTER_NO_EXECUTION_GUARDRAILS.md`
+- Command center QA/RISK acceptance: `docs/operations/GATE0_COMMAND_CENTER_QA_RISK_ACCEPTANCE.md`
+- Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
+  `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
+- Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
 - CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
 - CI evidence freshness guard tests:
   `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`
