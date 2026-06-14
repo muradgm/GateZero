@@ -43,6 +43,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 | `pnpm check:gate0-reviews`                          | `scripts/check-gate0-review-coverage.ts`             | Assignment and review-record coverage alignment. | Pass   |
 | `pnpm check:gate0-agents`                           | `scripts/check-gate0-agent-manifest.ts`              | Agent manifest, required files, and refs align.  | Pass   |
 | `pnpm check:repo-hygiene`                           | `scripts/check-repo-hygiene.ts`                      | `.gitignore` and tracked-file hygiene.           | Pass   |
+| `pnpm check:gate0-ci-evidence`                      | `scripts/check-gate0-ci-evidence-freshness.ts`       | Manual remote CI evidence freshness check.       | Pass   |
 | `pnpm check:gate1-contracts`                        | `scripts/check-gate1-contracts.ts`                   | Gate 1 contract control-record guard.            | Pass   |
 | `pnpm check:gate0`                                  | `package.json`                                       | Snapshot refresh plus local Gate 0 guard suite.  | Pass   |
 | `pnpm verify:gate0`                                 | `package.json`                                       | Gate 0 guard suite plus quality checks.          | Pass   |
@@ -57,12 +58,12 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 - Inspect commands cover help, default clear, friction, and invalid-input paths.
 - Operating record commands cover progress snapshot generation, evidence-index drift, docs coverage
   drift, snapshot freshness, project-name consistency, tracklist consistency, review coverage, agent
-  manifest drift, repository hygiene, and the Gate 1 contract guard, and the consolidated Gate 0
-  guard suite.
+  manifest drift, repository hygiene, manual CI evidence freshness, and the Gate 1 contract guard,
+  and the consolidated Gate 0 guard suite.
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 58 test files and 298 tests passing.
+- The accepted latest suite result is 59 test files and 302 tests passing.
 
 ## Locality Notes
 
@@ -98,6 +99,7 @@ product launch, or later-phase operation.
 - Review coverage drift guard: `docs/operations/GATE0_REVIEW_COVERAGE_DRIFT_GUARD.md`
 - Agent manifest drift guard: `docs/operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`
 - Repo hygiene guard: `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`
+- CI evidence freshness guard: `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
 - Guard suite command consolidation: `docs/operations/GATE0_GUARD_SUITE_COMMAND_CONSOLIDATION.md`
 - Name check coverage audit: `docs/operations/GATE0_NAME_CHECK_COVERAGE_AUDIT.md`
 - Gate 1 contract guard: `docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

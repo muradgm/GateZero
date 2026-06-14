@@ -8,6 +8,7 @@
   "scripts": {
     "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\"",
     "check:gate0-evidence-index": "tsx scripts/check-gate0-evidence-index-drift.ts",
+    "check:gate0-ci-evidence": "tsx scripts/check-gate0-ci-evidence-freshness.ts",
     "check:gate0-agents": "tsx scripts/check-gate0-agent-manifest.ts",
     "check:repo-hygiene": "tsx scripts/check-repo-hygiene.ts",
     "check:gate1-contracts": "tsx scripts/check-gate1-contracts.ts",

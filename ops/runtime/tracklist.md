@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-14                                                     |
-| Latest accepted packet     | `TRD-182`                                                      |
-| Latest accepted validation | 58 test files, 298 tests passed                                |
+| Latest accepted packet     | `TRD-187`                                                      |
+| Latest accepted validation | 59 test files, 302 tests passed                                |
 
 ## Boundary
 
@@ -43,6 +43,7 @@ pnpm inspect:gate0-dry-run -- --scenario friction
 pnpm inspect:gate0-dry-run -- --scenario other
 pnpm snapshot:gate0-progress
 pnpm check:gate0-evidence-index
+pnpm check:gate0-ci-evidence
 pnpm check:gate0-agents
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
@@ -70,6 +71,7 @@ Latest accepted result:
   text and no stack trace.
 - `pnpm snapshot:gate0-progress`: passed.
 - `pnpm check:gate0-evidence-index`: passed.
+- `pnpm check:gate0-ci-evidence`: passed.
 - `pnpm check:gate0-agents`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
@@ -83,7 +85,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 58 test files passed, 298 tests passed.
+- `pnpm test`: 59 test files passed, 302 tests passed.
 - `pnpm validate:gate0`: passed.
 
 ## Phase Map
@@ -127,7 +129,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-182`
+- Accepted packets: `TRD-044` to `TRD-187`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -258,6 +260,8 @@ Latest accepted result:
   - GitHub CI workflow, private repo handoff, agent manifest guard, repo hygiene guard, CI evidence,
     action runtime review, runtime hardening, remote verification runbook, and CI failure triage
     guardrail.
+  - GitHub Actions annotation watch, CI evidence freshness proposal and guard, remote verification
+    evidence index, and maintenance pause reconfirmation.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
@@ -447,6 +451,11 @@ Latest accepted result:
 | `TRD-180` | accepted | Validation      | Recorded post-hardening GitHub CI evidence.            |
 | `TRD-181` | accepted | Operations      | Added remote verification runbook.                     |
 | `TRD-182` | accepted | Operations      | Added CI failure triage guardrail.                     |
+| `TRD-183` | accepted | Validation      | Added GitHub Actions annotation follow-up watch.       |
+| `TRD-184` | accepted | Validation      | Proposed CI evidence freshness guard rules.            |
+| `TRD-185` | accepted | Validation      | Added standalone CI evidence freshness guard.          |
+| `TRD-186` | accepted | Operations      | Added remote verification evidence index.              |
+| `TRD-187` | accepted | Operations      | Reconfirmed Gate 0 maintenance pause posture.          |
 
 ## Current Operator Commands
 
@@ -467,6 +476,7 @@ Latest accepted result:
 | `pnpm check:gate0-reviews`                          | Check assignment and review-record coverage.            | Local review coverage check passes.                            |
 | `pnpm check:gate0-agents`                           | Check agent manifest and reference drift.               | Local agent manifest guard passes.                             |
 | `pnpm check:repo-hygiene`                           | Check repository hygiene drift.                         | Local repository hygiene guard passes.                         |
+| `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -681,6 +691,17 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md`
 - Remote verification runbook: `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
 - CI failure triage guardrail: `docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`
+- GitHub Actions annotation follow-up watch:
+  `docs/operations/GATE0_GITHUB_ACTIONS_ANNOTATION_FOLLOW_UP_WATCH.md`
+- CI evidence freshness guard proposal:
+  `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_PROPOSAL.md`
+- CI evidence freshness guard implementation:
+  `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
+- Remote verification evidence index: `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`
+- Maintenance pause reconfirmation: `docs/operations/GATE0_MAINTENANCE_PAUSE_RECONFIRMATION.md`
+- CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
+- CI evidence freshness guard tests:
+  `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
 - Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Agent manifest drift guard tests: `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`

@@ -1,0 +1,35 @@
+# Gate 0 Remote Verification Evidence Index
+
+## Purpose
+
+This index lists Gate 0 remote verification evidence records.
+
+These records are repository-quality evidence only. They are not deployment approval, strategy
+approval, risk approval, execution readiness, profitability evidence, or gate advancement.
+
+## Evidence Records
+
+| Packet    | Evidence record                                                               | Run id        | Commit    | Result    |
+| --------- | ----------------------------------------------------------------------------- | ------------- | --------- | --------- |
+| `TRD-177` | `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`                       | `27475618829` | `af8e0f0` | `success` |
+| `TRD-180` | `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md` | `27491437300` | `9f50e2d` | `success` |
+
+## Supporting Records
+
+- Remote verification runbook: `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
+- Runtime hardening record: `docs/operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`
+- Freshness guard implementation:
+  `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
+
+## Boundary
+
+Do not use this index to authorize deployment, broker access, execution, AI prediction, strategy
+readiness, profitability claims, public release claims, or risk-gate movement.
+
+## Source Links
+
+- Source packet: `ops/assignments/TRD-186_REMOTE_VERIFICATION_EVIDENCE_INDEXING.md`
+- Reviews: `ops/runtime/reviews/TRD-186_QA_SECURITY_REVIEW.md`,
+  `ops/runtime/reviews/TRD-186_RISK_REVIEW.md`,
+  `ops/runtime/reviews/TRD-186_ORCHESTRATOR_ACCEPTANCE.md`
+- Tracker: `ops/runtime/tracklist.md`

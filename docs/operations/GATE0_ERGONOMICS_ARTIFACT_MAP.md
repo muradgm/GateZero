@@ -195,10 +195,17 @@ deployment approval, or future-phase eligibility.
 | `TRD-180` | GitHub CI evidence refresh               | `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md` | Records the passing post-hardening CI run.                       |
 | `TRD-181` | Remote verification runbook              | `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`                        | Documents read-only GitHub Actions inspection commands.          |
 | `TRD-182` | CI failure triage guardrail              | `docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`                        | Documents bounded CI failure triage rules.                       |
+| `TRD-183` | GitHub Actions annotation watch          | `docs/operations/GATE0_GITHUB_ACTIONS_ANNOTATION_FOLLOW_UP_WATCH.md`          | Records the current action runtime annotation posture.           |
+| `TRD-184` | CI evidence freshness proposal           | `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_PROPOSAL.md`               | Defines standalone CI evidence freshness rules.                  |
+| `TRD-185` | CI evidence freshness guard              | `scripts/check-gate0-ci-evidence-freshness.ts`                                | Checks remote CI evidence freshness manually.                    |
+| `TRD-185` | CI evidence freshness tests              | `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`           | Tests pass and bounded failure paths for the guard.              |
+| `TRD-185` | CI evidence freshness docs               | `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`         | Documents the standalone freshness guard.                        |
+| `TRD-186` | Remote verification evidence index       | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                 | Indexes remote CI evidence records.                              |
+| `TRD-187` | Maintenance pause reconfirmation         | `docs/operations/GATE0_MAINTENANCE_PAUSE_RECONFIRMATION.md`                   | Reconfirms broad Gate 0 expansion is paused.                     |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-182` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-187` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

@@ -48,6 +48,7 @@ eligibility.
 | `pnpm check:gate0-reviews`        | Check assignment and review-record coverage. | Assignment and review record counts align.        |
 | `pnpm check:gate0-agents`         | Check agent manifest and reference drift.    | Local agent manifest guard passes.                |
 | `pnpm check:repo-hygiene`         | Check repository hygiene drift.              | Local repository hygiene guard passes.            |
+| `pnpm check:gate0-ci-evidence`    | Check remote CI evidence freshness.          | Manual CI evidence freshness guard passes.        |
 | `pnpm check:gate1-contracts`      | Check Gate 1 contract control records.       | Local Gate 1 contract guard passes.               |
 | `pnpm check:gate0`                | Run the local Gate 0 guard suite.            | Gate 0 guard suite passes.                        |
 | `pnpm verify:gate0`               | Run Gate 0 guards and quality checks.        | Full local verification passes.                   |
@@ -96,6 +97,7 @@ gate movement, risk limit changes, strategy state changes, or later-phase eligib
   `scripts/check-gate0-progress-snapshot-freshness.ts`,
   `scripts/check-gate0-tracklist-consistency.ts`, `scripts/check-gate0-review-coverage.ts`,
   `scripts/check-gate0-agent-manifest.ts`, `scripts/check-repo-hygiene.ts`,
-  `scripts/check-gate1-contracts.ts`, `scripts/validate-gate0.ts`
+  `scripts/check-gate0-ci-evidence-freshness.ts`, `scripts/check-gate1-contracts.ts`,
+  `scripts/validate-gate0.ts`
 - Validation command audit: `docs/operations/GATE0_VALIDATION_COMMAND_AUDIT.md`
 - Command index coverage check: `docs/operations/GATE0_COMMAND_INDEX_COVERAGE_CHECK.md`
