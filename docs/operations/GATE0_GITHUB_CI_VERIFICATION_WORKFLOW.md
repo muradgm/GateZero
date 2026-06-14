@@ -18,7 +18,8 @@ increase autonomy.
 - File: `.github/workflows/gate0-verify.yml`
 - Trigger: `push` and `pull_request` for `main`
 - Permissions: read-only repository contents
-- Runtime: Node.js 22 with pnpm
+- Project runtime: Node.js 22 with pnpm
+- GitHub JavaScript action runtime: opted into Node.js 24 with `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`
 - Verification: `pnpm install --frozen-lockfile`, then `pnpm verify:gate0`
 
 ## Boundary

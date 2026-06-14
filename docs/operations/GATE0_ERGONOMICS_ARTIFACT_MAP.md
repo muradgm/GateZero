@@ -190,10 +190,15 @@ deployment approval, or future-phase eligibility.
 | `TRD-175` | Repo hygiene guard docs                  | `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`                             | Documents the local repo hygiene guard.                          |
 | `TRD-176` | GitHub baseline release note             | `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`                   | Records the private GitHub baseline boundary.                    |
 | `TRD-177` | GitHub CI post-push evidence             | `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`                   | Records the first successful pushed CI run.                      |
+| `TRD-178` | GitHub Actions runtime review            | `docs/operations/GATE0_GITHUB_ACTIONS_NODE_RUNTIME_DEPRECATION_REVIEW.md` | Records the Node runtime deprecation warning.                    |
+| `TRD-179` | GitHub CI runtime hardening              | `docs/operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`           | Records the workflow runtime mitigation.                         |
+| `TRD-181` | Remote verification runbook              | `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`                    | Documents read-only GitHub Actions inspection commands.          |
+| `TRD-182` | CI failure triage guardrail              | `docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`                    | Documents bounded CI failure triage rules.                       |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-177` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-179` and `TRD-181` through
+`TRD-182` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-14                                                     |
-| Latest accepted packet     | `TRD-177`                                                      |
+| Latest accepted packet     | `TRD-182`                                                      |
 | Latest accepted validation | 58 test files, 298 tests passed                                |
 
 ## Boundary
@@ -127,7 +127,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-177`
+- Accepted packets: `TRD-044` to `TRD-179` and `TRD-181` to `TRD-182`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -255,6 +255,9 @@ Latest accepted result:
     records without implementation authority.
   - Schema-only Gate 1 historical backtest contracts with synthetic tests and no execution path.
   - Gate 1 contract validation guard for local docs, source, test, fixture, and tracker alignment.
+  - GitHub CI workflow, private repo handoff, agent manifest guard, repo hygiene guard, CI evidence,
+    action runtime review, runtime hardening, remote verification runbook, and CI failure triage
+    guardrail.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
@@ -439,6 +442,10 @@ Latest accepted result:
 | `TRD-175` | accepted | Validation      | Added repository hygiene guard.                        |
 | `TRD-176` | accepted | Release         | Added GitHub baseline release note.                    |
 | `TRD-177` | accepted | Validation      | Recorded successful pushed GitHub CI run evidence.     |
+| `TRD-178` | accepted | Validation      | Reviewed GitHub Actions Node runtime deprecation.      |
+| `TRD-179` | accepted | Validation      | Hardened GitHub CI action runtime setting.             |
+| `TRD-181` | accepted | Operations      | Added remote verification runbook.                     |
+| `TRD-182` | accepted | Operations      | Added CI failure triage guardrail.                     |
 
 ## Current Operator Commands
 
@@ -465,9 +472,9 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet | Status | Goal                                        | Acceptance focus              |
-| ---- | ------ | ------ | ------------------------------------------- | ----------------------------- |
-| 1    | None   | paused | Wait for a concrete Gate 0 maintenance gap. | Do not queue broad expansion. |
+| Rank | Packet  | Status | Goal                                      | Acceptance focus              |
+| ---- | ------- | ------ | ----------------------------------------- | ----------------------------- |
+| 1    | TRD-180 | queued | Record post-hardening GitHub CI evidence. | Confirm pushed CI run passes. |
 
 ## Rejected For Now
 
@@ -665,6 +672,12 @@ Do not mark a packet accepted until:
 - Repo hygiene guard: `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`
 - GitHub baseline release note: `docs/operations/GATE0_GITHUB_BASELINE_RELEASE_NOTE.md`
 - GitHub CI post-push evidence: `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`
+- GitHub Actions Node runtime deprecation review:
+  `docs/operations/GATE0_GITHUB_ACTIONS_NODE_RUNTIME_DEPRECATION_REVIEW.md`
+- GitHub CI workflow runtime hardening:
+  `docs/operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`
+- Remote verification runbook: `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
+- CI failure triage guardrail: `docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
 - Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Agent manifest drift guard tests: `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`
