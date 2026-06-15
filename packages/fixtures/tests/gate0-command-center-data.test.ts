@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-202");
+    expect(data).toContain("TRD-207");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -62,6 +62,23 @@ describe("Gate 0 command center surface", () => {
     expect(index).toContain('href="#main"');
     expect(main).toContain('main class="workspace" id="main" tabindex="-1"');
     expect(main).toContain("<caption>");
+    expect(main).toContain('data-label="Area"');
+    expect(main).toContain('data-label="Reference"');
     expect(styles).toContain(":focus-visible");
+    expect(styles).toContain("td::before");
+  });
+
+  it("groups source links by operating purpose", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    for (const group of ["Tracker", "Command Center", "Evidence", "Guards", "Preview"]) {
+      expect(data).toContain(`label: "${group}"`);
+    }
+
+    expect(main).toContain("commandCenterData.docGroups");
+    expect(main).toContain('class="doc-group"');
+    expect(styles).toContain(".doc-group");
   });
 });

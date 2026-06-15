@@ -125,10 +125,10 @@ app.innerHTML = `
                   .map(
                     (row) => `
                       <tr>
-                        <td>${row.area}</td>
-                        <td>${row.signal}</td>
-                        <td><span class="state-pill">${row.state}</span></td>
-                        <td>${row.reference}</td>
+                        <td data-label="Area">${row.area}</td>
+                        <td data-label="Signal">${row.signal}</td>
+                        <td data-label="State"><span class="state-pill">${row.state}</span></td>
+                        <td data-label="Reference">${row.reference}</td>
                       </tr>
                     `
                   )
@@ -158,7 +158,16 @@ app.innerHTML = `
             </div>
           </div>
           <div class="doc-stack">
-            ${commandCenterData.docs.map((doc) => `<code>${doc}</code>`).join("")}
+            ${commandCenterData.docGroups
+              .map(
+                (group) => `
+                  <section class="doc-group" aria-label="${group.label} source links">
+                    <h3>${group.label}</h3>
+                    ${group.items.map((doc) => `<code>${doc}</code>`).join("")}
+                  </section>
+                `
+              )
+              .join("")}
           </div>
         </article>
       </section>

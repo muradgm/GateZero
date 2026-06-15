@@ -4,9 +4,9 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-202",
-  localVerification: "62 files / 316 tests",
-  ciRun: "27502152482",
+  latestPacket: "TRD-207",
+  localVerification: "63 files / 321 tests",
+  ciRun: "27502500171",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 62 files, 316 tests.",
+      detail: "Latest suite: 63 files, 321 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "202 / 202",
+      value: "207 / 207",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,11 +58,11 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "62 files / 316 tests"
+      reference: "63 files / 321 tests"
     },
     {
       area: "Remote CI",
-      signal: "Run 27502152482",
+      signal: "Run 27502500171",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "202 accepted records"
+      reference: "207 accepted records"
     }
   ],
   nextActions: [
@@ -90,19 +90,39 @@ export const commandCenterData = {
     "Refresh CI evidence after future pushed maintenance changes.",
     "Use the command center for operating health, not strategy selection."
   ],
-  docs: [
-    "ops/runtime/tracklist.md",
-    "docs/operations/GATE0_COMMAND_CENTER_VISUAL_QA_PASS.md",
-    "docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_BASELINE.md",
-    "docs/operations/GATE0_COMMAND_CENTER_RUNTIME_DATA_SOURCE_PLAN.md",
-    "docs/operations/GATE0_COMMAND_CENTER_LOCAL_PREVIEW_SCRIPT.md",
-    "docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md",
-    "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md",
-    "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_FRESHNESS_GUARD.md",
-    "docs/operations/GATE0_COMMAND_CENTER_NAVIGATION_CONTRACT_CHECK.md",
-    "docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md",
-    "docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md",
-    "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
-    "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
+  docGroups: [
+    {
+      label: "Tracker",
+      items: ["ops/runtime/tracklist.md", "ops/runtime/progress/GATE0_PROGRESS_SNAPSHOT.md"]
+    },
+    {
+      label: "Command Center",
+      items: [
+        "docs/operations/GATE0_COMMAND_CENTER_VISUAL_QA_PASS.md",
+        "docs/operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md",
+        "docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md",
+        "docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md"
+      ]
+    },
+    {
+      label: "Evidence",
+      items: [
+        "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md",
+        "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
+        "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
+      ]
+    },
+    {
+      label: "Guards",
+      items: [
+        "scripts/check-gate0-command-center-freshness.ts",
+        "scripts/check-gate0-command-center-render-contract.ts",
+        "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
+      ]
+    },
+    {
+      label: "Preview",
+      items: ["scripts/preview-web.ts", "apps/web/README.md"]
+    }
   ]
 };

@@ -9,9 +9,9 @@
 | Operating scope            | `research_only`                                                |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-14                                                     |
-| Latest accepted packet     | `TRD-202`                                                      |
-| Latest accepted validation | 62 test files, 316 tests passed                                |
+| Last updated               | 2026-06-15                                                     |
+| Latest accepted packet     | `TRD-207`                                                      |
+| Latest accepted validation | 63 test files, 321 tests passed                                |
 
 ## Boundary
 
@@ -45,6 +45,7 @@ pnpm snapshot:gate0-progress
 pnpm check:gate0-evidence-index
 pnpm check:gate0-ci-evidence
 pnpm check:gate0-command-center
+pnpm check:gate0-command-center-render
 pnpm check:gate0-agents
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
@@ -75,6 +76,7 @@ Latest accepted result:
 - `pnpm check:gate0-evidence-index`: passed.
 - `pnpm check:gate0-ci-evidence`: passed.
 - `pnpm check:gate0-command-center`: passed.
+- `pnpm check:gate0-command-center-render`: passed.
 - `pnpm check:gate0-agents`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
@@ -88,7 +90,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 62 test files passed, 316 tests passed.
+- `pnpm test`: 63 test files passed, 321 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -133,7 +135,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-202`
+- Accepted packets: `TRD-044` to `TRD-207`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -272,6 +274,8 @@ Latest accepted result:
     and evidence freshness guard.
   - Command center CI evidence refresh, CI-run freshness check, navigation contract coverage,
     accessibility contract coverage, and preview-script contract coverage.
+  - Command center post-guard CI evidence refresh, rendered-evidence contract coverage, mobile
+    evidence table UX, source-link grouping, and operator handoff notes.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
@@ -481,6 +485,11 @@ Latest accepted result:
 | `TRD-200` | accepted | UI contract     | Added command center navigation contract checks.       |
 | `TRD-201` | accepted | UI access       | Added command center accessibility contract checks.    |
 | `TRD-202` | accepted | UI preview      | Added command center preview script contract checks.   |
+| `TRD-203` | accepted | UI evidence     | Refreshed post-guard command center CI evidence.       |
+| `TRD-204` | accepted | UI contract     | Added command center rendered evidence contract.       |
+| `TRD-205` | accepted | UI access       | Added mobile evidence table labels and behavior.       |
+| `TRD-206` | accepted | UI source links | Grouped command center source links by purpose.        |
+| `TRD-207` | accepted | UI handoff      | Added command center operator handoff note.            |
 
 ## Current Operator Commands
 
@@ -503,6 +512,7 @@ Latest accepted result:
 | `pnpm check:repo-hygiene`                           | Check repository hygiene drift.                         | Local repository hygiene guard passes.                         |
 | `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
 | `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
+| `pnpm check:gate0-command-center-render`            | Check command center static render contract.            | Local command center render contract passes.                   |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -751,6 +761,16 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md`
 - Command center preview script contract check:
   `docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md`
+- Command center CI evidence post-guard refresh:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md`
+- Command center rendered evidence contract:
+  `docs/operations/GATE0_COMMAND_CENTER_RENDERED_EVIDENCE_CONTRACT.md`
+- Command center mobile evidence table UX:
+  `docs/operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md`
+- Command center source link grouping:
+  `docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md`
+- Command center operator handoff note:
+  `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -760,6 +780,9 @@ Do not mark a packet accepted until:
 - Command center freshness guard script: `scripts/check-gate0-command-center-freshness.ts`
 - Command center freshness guard tests:
   `packages/fixtures/tests/gate0-command-center-freshness-check.test.ts`
+- Command center render contract script: `scripts/check-gate0-command-center-render-contract.ts`
+- Command center render contract tests:
+  `packages/fixtures/tests/gate0-command-center-render-contract.test.ts`
 - CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
 - CI evidence freshness guard tests:
   `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`

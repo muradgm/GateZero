@@ -158,6 +158,7 @@ button:focus-visible,
 
 h1,
 h2,
+h3,
 p {
   margin: 0;
 }
@@ -172,6 +173,13 @@ h2 {
   font-size: 18px;
   line-height: 1.2;
   letter-spacing: 0;
+}
+
+h3 {
+  color: var(--accent-strong);
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .topbar p,
@@ -406,9 +414,14 @@ th {
 
 .doc-stack {
   display: grid;
-  gap: 8px;
+  gap: 16px;
   max-height: 330px;
   overflow: auto;
+}
+
+.doc-group {
+  display: grid;
+  gap: 8px;
 }
 
 code {
@@ -458,5 +471,54 @@ code {
 
   h1 {
     font-size: 27px;
+  }
+
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+  }
+
+  table {
+    min-width: 0;
+  }
+
+  thead {
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+  }
+
+  tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  tr {
+    border: 1px solid var(--subtle);
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  td {
+    border-bottom: 0;
+    display: flex;
+    gap: 14px;
+    justify-content: space-between;
+    padding: 8px 0;
+  }
+
+  td::before {
+    color: var(--muted);
+    content: attr(data-label);
+    flex: 0 0 88px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
   }
 }

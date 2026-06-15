@@ -226,10 +226,17 @@ deployment approval, or future-phase eligibility.
 | `TRD-201` | Command center accessibility check       | `docs/operations/GATE0_COMMAND_CENTER_ACCESSIBILITY_CONTRACT_CHECK.md`        | Documents accessibility baseline contract coverage.              |
 | `TRD-202` | Command center preview contract check    | `docs/operations/GATE0_COMMAND_CENTER_PREVIEW_SCRIPT_CONTRACT_CHECK.md`       | Documents preview script contract coverage.                      |
 | `TRD-202` | Command center preview tests             | `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`         | Tests local preview host, ports, paths, and traversal blocking.  |
+| `TRD-203` | Command center CI evidence refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md`      | Records latest post-guard pushed CI evidence.                    |
+| `TRD-204` | Command center render contract check     | `docs/operations/GATE0_COMMAND_CENTER_RENDERED_EVIDENCE_CONTRACT.md`          | Documents static render contract coverage.                       |
+| `TRD-204` | Command center render contract script    | `scripts/check-gate0-command-center-render-contract.ts`                       | Checks static render, grouped links, labels, and blocked copy.   |
+| `TRD-204` | Command center render contract tests     | `packages/fixtures/tests/gate0-command-center-render-contract.test.ts`        | Tests pass and bounded failure paths for the render contract.    |
+| `TRD-205` | Command center mobile evidence UX        | `docs/operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md`            | Documents small-screen evidence table behavior.                  |
+| `TRD-206` | Command center source link grouping      | `docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md`                | Documents grouped source-link structure.                         |
+| `TRD-207` | Command center operator handoff note     | `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`               | Documents bounded local command-center handoff use.              |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-202` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-207` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

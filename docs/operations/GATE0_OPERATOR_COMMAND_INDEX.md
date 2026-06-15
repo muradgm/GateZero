@@ -37,21 +37,23 @@ eligibility.
 
 ## Operating Record Commands
 
-| Command                           | Purpose                                      | Expected local result                             |
-| --------------------------------- | -------------------------------------------- | ------------------------------------------------- |
-| `pnpm snapshot:gate0-progress`    | Write the local progress snapshot.           | Markdown snapshot under `ops/runtime/progress/`.  |
-| `pnpm check:gate0-evidence-index` | Check evidence-index drift.                  | Local evidence-index drift check passes.          |
-| `pnpm check:gate0-name`           | Check GateZero project-name consistency.     | Local project-name check passes.                  |
-| `pnpm check:gate0-docs-coverage`  | Check operator docs coverage drift.          | Local docs coverage check passes.                 |
-| `pnpm check:gate0-snapshot`       | Check generated progress snapshot freshness. | Snapshot latest packet and record counts align.   |
-| `pnpm check:gate0-tracklist`      | Check accepted packet ledger alignment.      | Accepted records and tracklist ledger rows align. |
-| `pnpm check:gate0-reviews`        | Check assignment and review-record coverage. | Assignment and review record counts align.        |
-| `pnpm check:gate0-agents`         | Check agent manifest and reference drift.    | Local agent manifest guard passes.                |
-| `pnpm check:repo-hygiene`         | Check repository hygiene drift.              | Local repository hygiene guard passes.            |
-| `pnpm check:gate0-ci-evidence`    | Check remote CI evidence freshness.          | Manual CI evidence freshness guard passes.        |
-| `pnpm check:gate1-contracts`      | Check Gate 1 contract control records.       | Local Gate 1 contract guard passes.               |
-| `pnpm check:gate0`                | Run the local Gate 0 guard suite.            | Gate 0 guard suite passes.                        |
-| `pnpm verify:gate0`               | Run Gate 0 guards and quality checks.        | Full local verification passes.                   |
+| Command                                  | Purpose                                      | Expected local result                             |
+| ---------------------------------------- | -------------------------------------------- | ------------------------------------------------- |
+| `pnpm snapshot:gate0-progress`           | Write the local progress snapshot.           | Markdown snapshot under `ops/runtime/progress/`.  |
+| `pnpm check:gate0-evidence-index`        | Check evidence-index drift.                  | Local evidence-index drift check passes.          |
+| `pnpm check:gate0-name`                  | Check GateZero project-name consistency.     | Local project-name check passes.                  |
+| `pnpm check:gate0-docs-coverage`         | Check operator docs coverage drift.          | Local docs coverage check passes.                 |
+| `pnpm check:gate0-snapshot`              | Check generated progress snapshot freshness. | Snapshot latest packet and record counts align.   |
+| `pnpm check:gate0-tracklist`             | Check accepted packet ledger alignment.      | Accepted records and tracklist ledger rows align. |
+| `pnpm check:gate0-reviews`               | Check assignment and review-record coverage. | Assignment and review record counts align.        |
+| `pnpm check:gate0-agents`                | Check agent manifest and reference drift.    | Local agent manifest guard passes.                |
+| `pnpm check:repo-hygiene`                | Check repository hygiene drift.              | Local repository hygiene guard passes.            |
+| `pnpm check:gate0-ci-evidence`           | Check remote CI evidence freshness.          | Manual CI evidence freshness guard passes.        |
+| `pnpm check:gate0-command-center`        | Check command center evidence freshness.     | Local command center freshness guard passes.      |
+| `pnpm check:gate0-command-center-render` | Check command center render contract.        | Local render contract check passes.               |
+| `pnpm check:gate1-contracts`             | Check Gate 1 contract control records.       | Local Gate 1 contract guard passes.               |
+| `pnpm check:gate0`                       | Run the local Gate 0 guard suite.            | Gate 0 guard suite passes.                        |
+| `pnpm verify:gate0`                      | Run Gate 0 guards and quality checks.        | Full local verification passes.                   |
 
 ## Quality Commands
 
@@ -97,7 +99,8 @@ gate movement, risk limit changes, strategy state changes, or later-phase eligib
   `scripts/check-gate0-progress-snapshot-freshness.ts`,
   `scripts/check-gate0-tracklist-consistency.ts`, `scripts/check-gate0-review-coverage.ts`,
   `scripts/check-gate0-agent-manifest.ts`, `scripts/check-repo-hygiene.ts`,
-  `scripts/check-gate0-ci-evidence-freshness.ts`, `scripts/check-gate1-contracts.ts`,
+  `scripts/check-gate0-ci-evidence-freshness.ts`, `scripts/check-gate0-command-center-freshness.ts`,
+  `scripts/check-gate0-command-center-render-contract.ts`, `scripts/check-gate1-contracts.ts`,
   `scripts/validate-gate0.ts`
 - Validation command audit: `docs/operations/GATE0_VALIDATION_COMMAND_AUDIT.md`
 - Command index coverage check: `docs/operations/GATE0_COMMAND_INDEX_COVERAGE_CHECK.md`
