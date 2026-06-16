@@ -4,9 +4,9 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-209",
+  latestPacket: "TRD-211",
   localVerification: "64 files / 325 tests",
-  ciRun: "27502500171",
+  ciRun: "27646334295",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "209 / 209",
+      value: "211 / 211",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -62,7 +62,7 @@ export const commandCenterData = {
     },
     {
       area: "Remote CI",
-      signal: "Run 27502500171",
+      signal: "Run 27646334295",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "209 accepted records"
+      reference: "211 accepted records"
     }
   ],
   nextActions: [
@@ -108,6 +108,8 @@ export const commandCenterData = {
       label: "Evidence",
       items: [
         "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md",
+        "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md",
+        "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_INTAKE.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
         "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
       ]

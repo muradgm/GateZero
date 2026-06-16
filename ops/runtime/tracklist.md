@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-16                                                     |
-| Latest accepted packet     | `TRD-209`                                                      |
+| Latest accepted packet     | `TRD-211`                                                      |
 | Latest accepted validation | 64 test files, 325 tests passed                                |
 
 ## Boundary
@@ -137,7 +137,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-209`
+- Accepted packets: `TRD-044` to `TRD-211`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -181,6 +181,7 @@ Latest accepted result:
     validation guard, and guard indexing.
   - Phase-aware project skill governance, explicit invocation metadata, and governed skill library
     intake policy.
+  - Remote CI evidence refresh and command-center CI run display alignment after skill intake.
 
 ## Workstream Summary
 
@@ -498,6 +499,8 @@ Latest accepted result:
 | `TRD-207` | accepted | UI handoff       | Added command center operator handoff note.            |
 | `TRD-208` | accepted | Skill governance | Added phase-aware project skill governance.            |
 | `TRD-209` | accepted | Skill governance | Added governed skill library intake policy.            |
+| `TRD-210` | accepted | CI evidence      | Refreshed remote CI evidence after skill intake.       |
+| `TRD-211` | accepted | UI evidence      | Refreshed command center CI run display.               |
 
 ## Current Operator Commands
 
@@ -782,6 +785,10 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
 - Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
+- Remote CI evidence refresh after skill intake:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`
+- Command center CI run record refresh after skill intake:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_INTAKE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

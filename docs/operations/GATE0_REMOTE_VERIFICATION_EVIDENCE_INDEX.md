@@ -15,6 +15,7 @@ approval, risk approval, execution readiness, profitability evidence, or gate ad
 | `TRD-180` | `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md` | `27491437300` | `9f50e2d` | `success` |
 | `TRD-198` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md`                 | `27502152482` | `c4504b3` | `success` |
 | `TRD-203` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md`      | `27502500171` | `9faf766` | `success` |
+| `TRD-210` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`      | `27646334295` | `70a5160` | `success` |
 
 ## Supporting Records
 
