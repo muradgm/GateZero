@@ -66,6 +66,7 @@ explicitly allowlisted governance, docs, test, validation, or ops records.
 - Reviews: `ops/runtime/reviews/TRD-208_QA_SECURITY_REVIEW.md`,
   `ops/runtime/reviews/TRD-208_RISK_REVIEW.md`,
   `ops/runtime/reviews/TRD-208_ORCHESTRATOR_ACCEPTANCE.md`
+- Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - Skill guard script: `scripts/check-gate0-skill-governance.ts`
 - Skill guard tests: `packages/fixtures/tests/gate0-skill-governance.test.ts`
 - Forbidden-pattern scanner: `packages/validation/src/forbidden-patterns.ts`

@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-16                                                     |
-| Latest accepted packet     | `TRD-208`                                                      |
-| Latest accepted validation | 64 test files, 324 tests passed                                |
+| Latest accepted packet     | `TRD-209`                                                      |
+| Latest accepted validation | 64 test files, 325 tests passed                                |
 
 ## Boundary
 
@@ -92,7 +92,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 64 test files passed, 324 tests passed.
+- `pnpm test`: 64 test files passed, 325 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -137,7 +137,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-208`
+- Accepted packets: `TRD-044` to `TRD-209`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -179,6 +179,8 @@ Latest accepted result:
     version contract, fees and slippage assumption contract, and immutable backtest record contract.
   - Gate 1 backtest result contract, reproducibility check contract, synthetic fixtures, contract
     validation guard, and guard indexing.
+  - Phase-aware project skill governance, explicit invocation metadata, and governed skill library
+    intake policy.
 
 ## Workstream Summary
 
@@ -495,6 +497,7 @@ Latest accepted result:
 | `TRD-206` | accepted | UI source links  | Grouped command center source links by purpose.        |
 | `TRD-207` | accepted | UI handoff       | Added command center operator handoff note.            |
 | `TRD-208` | accepted | Skill governance | Added phase-aware project skill governance.            |
+| `TRD-209` | accepted | Skill governance | Added governed skill library intake policy.            |
 
 ## Current Operator Commands
 
@@ -518,7 +521,7 @@ Latest accepted result:
 | `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
 | `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
 | `pnpm check:gate0-command-center-render`            | Check command center static render contract.            | Local command center render contract passes.                   |
-| `pnpm check:gate0-skills`                           | Check project skill governance.                         | Local skill governance guard passes.                           |
+| `pnpm check:gate0-skills`                           | Check project skill governance and intake.              | Local skill governance guard passes.                           |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -778,6 +781,7 @@ Do not mark a packet accepted until:
 - Command center operator handoff note:
   `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
 - Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
+- Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

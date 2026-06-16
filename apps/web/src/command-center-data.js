@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-208",
-  localVerification: "64 files / 324 tests",
+  latestPacket: "TRD-209",
+  localVerification: "64 files / 325 tests",
   ciRun: "27502500171",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 64 files, 324 tests.",
+      detail: "Latest suite: 64 files, 325 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "208 / 208",
+      value: "209 / 209",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,7 +58,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "64 files / 324 tests"
+      reference: "64 files / 325 tests"
     },
     {
       area: "Remote CI",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "208 accepted records"
+      reference: "209 accepted records"
     }
   ],
   nextActions: [
@@ -126,7 +126,8 @@ export const commandCenterData = {
       items: [
         "skills/trader-product-reviewer/SKILL.md",
         "skills/trading-forex-domain-expert/SKILL.md",
-        "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md"
+        "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md",
+        "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md"
       ]
     },
     {

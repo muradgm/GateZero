@@ -236,10 +236,13 @@ deployment approval, or future-phase eligibility.
 | `TRD-208` | Skill governance review                  | `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`                            | Documents phase-aware project skill adoption.                    |
 | `TRD-208` | Skill governance guard                   | `scripts/check-gate0-skill-governance.ts`                                     | Checks project skill boundary and metadata controls.             |
 | `TRD-208` | Skill governance tests                   | `packages/fixtures/tests/gate0-skill-governance.test.ts`                      | Tests pass and bounded failure paths for project skills.         |
+| `TRD-209` | Skill library intake policy              | `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`                               | Defines governed future project skill intake rules.              |
+| `TRD-209` | Skill governance guard update            | `scripts/check-gate0-skill-governance.ts`                                     | Checks the project skill intake policy exists and stays bounded. |
+| `TRD-209` | Skill intake guard tests                 | `packages/fixtures/tests/gate0-skill-governance.test.ts`                      | Tests missing-policy failure coverage for project skill intake.  |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-208` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-209` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

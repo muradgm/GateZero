@@ -56,6 +56,20 @@ const completeInput: Gate0SkillGovernanceInput = {
         "policy:",
         "  allow_implicit_invocation: false"
       ].join("\n")
+    },
+    {
+      relativePath: "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
+      content: [
+        "# Gate 0 Skill Library Intake",
+        "## No bulk skill dump",
+        "G0_RESEARCH",
+        "research_only",
+        "allow_implicit_invocation: false",
+        "candidate intake backlog",
+        "blocked skill types",
+        "gatezero-orchestrator-reviewer",
+        "gatezero-risk-governance-reviewer"
+      ].join("\n")
     }
   ]
 };
@@ -67,7 +81,8 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 2
+      checkedSkillCount: 2,
+      checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(
       "Gate 0 skill governance check passed."
@@ -101,6 +116,19 @@ describe("Gate 0 skill governance check", () => {
     expect(result.ok).toBe(false);
     expect(result.findings).toContain(
       "Project skill must require explicit invocation: skills/trading-forex-domain-expert/agents/openai.yaml"
+    );
+  });
+
+  it("rejects a missing skill library intake policy", () => {
+    const result = checkGate0SkillGovernance({
+      files: completeInput.files.filter(
+        (file) => file.relativePath !== "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md"
+      )
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain(
+      "Missing skill library intake policy: docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md"
     );
   });
 });
