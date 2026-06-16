@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-16                                                     |
-| Latest accepted packet     | `TRD-211`                                                      |
+| Latest accepted packet     | `TRD-212`                                                      |
 | Latest accepted validation | 64 test files, 325 tests passed                                |
 
 ## Boundary
@@ -137,7 +137,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-211`
+- Accepted packets: `TRD-044` to `TRD-212`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -182,6 +182,7 @@ Latest accepted result:
   - Phase-aware project skill governance, explicit invocation metadata, and governed skill library
     intake policy.
   - Remote CI evidence refresh and command-center CI run display alignment after skill intake.
+  - Orchestrator reviewer skill intake for assignment sequencing and acceptance review.
 
 ## Workstream Summary
 
@@ -501,6 +502,7 @@ Latest accepted result:
 | `TRD-209` | accepted | Skill governance | Added governed skill library intake policy.            |
 | `TRD-210` | accepted | CI evidence      | Refreshed remote CI evidence after skill intake.       |
 | `TRD-211` | accepted | UI evidence      | Refreshed command center CI run display.               |
+| `TRD-212` | accepted | Skill governance | Added orchestrator reviewer skill intake.              |
 
 ## Current Operator Commands
 
@@ -785,6 +787,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
 - Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
+- Orchestrator reviewer skill intake: `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
+- Orchestrator reviewer skill: `skills/gatezero-orchestrator-reviewer/SKILL.md`
 - Remote CI evidence refresh after skill intake:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`
 - Command center CI run record refresh after skill intake:

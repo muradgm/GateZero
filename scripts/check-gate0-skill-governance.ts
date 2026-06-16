@@ -18,7 +18,11 @@ export interface Gate0SkillGovernanceResult {
   readonly checkedPolicyCount: number;
 }
 
-const expectedSkills = ["trader-product-reviewer", "trading-forex-domain-expert"] as const;
+const expectedSkills = [
+  "gatezero-orchestrator-reviewer",
+  "trader-product-reviewer",
+  "trading-forex-domain-expert"
+] as const;
 const requiredSkillSnippets = [
   "G0_RESEARCH",
   "research_only",

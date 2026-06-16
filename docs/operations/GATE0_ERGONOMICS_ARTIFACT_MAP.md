@@ -243,10 +243,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-210` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                      | Indexes the latest passing CI evidence record.                   |
 | `TRD-211` | Command center CI run refresh            | `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_INTAKE.md` | Records command-center CI run display alignment.                 |
 | `TRD-211` | Command center data update               | `apps/web/src/command-center-data.js`                                              | Points the static dashboard at the latest CI evidence.           |
+| `TRD-212` | Orchestrator reviewer skill              | `skills/gatezero-orchestrator-reviewer/SKILL.md`                                   | Adds assignment sequencing and acceptance review lens.           |
+| `TRD-212` | Orchestrator reviewer metadata           | `skills/gatezero-orchestrator-reviewer/agents/openai.yaml`                         | Requires explicit invocation for the project skill.              |
+| `TRD-212` | Orchestrator reviewer evals              | `skills/gatezero-orchestrator-reviewer/evals/evals.json`                           | Captures phase-aware orchestration behavior examples.            |
+| `TRD-212` | Orchestrator reviewer intake record      | `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`                      | Documents governed intake of the orchestrator skill.             |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-211` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-212` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

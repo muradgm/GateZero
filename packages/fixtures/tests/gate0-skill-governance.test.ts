@@ -8,6 +8,31 @@ import {
 const completeInput: Gate0SkillGovernanceInput = {
   files: [
     {
+      relativePath: "skills/gatezero-orchestrator-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-orchestrator-reviewer",
+        "description: GateZero-aware orchestration review.",
+        "---",
+        "# GateZero Orchestrator Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-orchestrator-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-orchestrator-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "skills/trader-product-reviewer/SKILL.md",
       content: [
         "---",
@@ -81,7 +106,7 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 2,
+      checkedSkillCount: 3,
       checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(

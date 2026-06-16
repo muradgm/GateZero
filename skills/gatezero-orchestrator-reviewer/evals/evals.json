@@ -1,0 +1,44 @@
+{
+  "skill_name": "gatezero-orchestrator-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review a GateZero packet that adds a new command-center data field but has no QA_SECURITY review, no RISK review, and no tracker update.",
+      "expected_output": "Should block acceptance because required QA_SECURITY, RISK, and tracker records are missing. Should keep the recommendation local and require review records plus validation before ORCHESTRATOR acceptance.",
+      "assertions": [
+        "Flags missing QA_SECURITY review",
+        "Flags missing RISK review",
+        "Flags missing tracker update",
+        "Rejects acceptance before review coverage",
+        "Mentions Gate 0 or research-only boundary"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "The next packet proposes adding a strategy readiness badge because all local tests pass.",
+      "expected_output": "Should reject readiness semantics at Gate 0. Should explain that test success is repository verification only, not strategy approval or future-phase eligibility. Should recommend evidence freshness or blocker language instead.",
+      "assertions": [
+        "Rejects readiness semantics",
+        "States tests are not strategy approval",
+        "Mentions G0_RESEARCH or research_only",
+        "Recommends bounded evidence or blocker language",
+        "Does not endorse product scope expansion"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "A completed skill-intake packet added a new project-local skill, but did not update the skill governance guard or tests.",
+      "expected_output": "Should classify the missing guard/test update as a blocker or high issue. Should require the skill to be listed in the guard, covered by tests, explicitly invoked, and accepted only after validation.",
+      "assertions": [
+        "Flags missing guard update",
+        "Flags missing test coverage",
+        "Mentions explicit invocation",
+        "Requires validation",
+        "Keeps the skill as a reviewer lens only"
+      ],
+      "files": []
+    }
+  ]
+}
