@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-207");
+    expect(data).toContain("TRD-208");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -73,7 +73,7 @@ describe("Gate 0 command center surface", () => {
     const main = readFileSync(mainPath, "utf8");
     const styles = readFileSync(stylePath, "utf8");
 
-    for (const group of ["Tracker", "Command Center", "Evidence", "Guards", "Preview"]) {
+    for (const group of ["Tracker", "Command Center", "Evidence", "Guards", "Skills", "Preview"]) {
       expect(data).toContain(`label: "${group}"`);
     }
 

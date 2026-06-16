@@ -233,10 +233,13 @@ deployment approval, or future-phase eligibility.
 | `TRD-205` | Command center mobile evidence UX        | `docs/operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md`            | Documents small-screen evidence table behavior.                  |
 | `TRD-206` | Command center source link grouping      | `docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md`                | Documents grouped source-link structure.                         |
 | `TRD-207` | Command center operator handoff note     | `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`               | Documents bounded local command-center handoff use.              |
+| `TRD-208` | Skill governance review                  | `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`                            | Documents phase-aware project skill adoption.                    |
+| `TRD-208` | Skill governance guard                   | `scripts/check-gate0-skill-governance.ts`                                     | Checks project skill boundary and metadata controls.             |
+| `TRD-208` | Skill governance tests                   | `packages/fixtures/tests/gate0-skill-governance.test.ts`                      | Tests pass and bounded failure paths for project skills.         |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-207` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-208` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

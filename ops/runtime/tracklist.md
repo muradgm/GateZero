@@ -9,9 +9,9 @@
 | Operating scope            | `research_only`                                                |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-15                                                     |
-| Latest accepted packet     | `TRD-207`                                                      |
-| Latest accepted validation | 63 test files, 321 tests passed                                |
+| Last updated               | 2026-06-16                                                     |
+| Latest accepted packet     | `TRD-208`                                                      |
+| Latest accepted validation | 64 test files, 324 tests passed                                |
 
 ## Boundary
 
@@ -46,6 +46,7 @@ pnpm check:gate0-evidence-index
 pnpm check:gate0-ci-evidence
 pnpm check:gate0-command-center
 pnpm check:gate0-command-center-render
+pnpm check:gate0-skills
 pnpm check:gate0-agents
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
@@ -77,6 +78,7 @@ Latest accepted result:
 - `pnpm check:gate0-ci-evidence`: passed.
 - `pnpm check:gate0-command-center`: passed.
 - `pnpm check:gate0-command-center-render`: passed.
+- `pnpm check:gate0-skills`: passed.
 - `pnpm check:gate0-agents`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
@@ -90,7 +92,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 63 test files passed, 321 tests passed.
+- `pnpm test`: 64 test files passed, 324 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -135,7 +137,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-207`
+- Accepted packets: `TRD-044` to `TRD-208`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -276,220 +278,223 @@ Latest accepted result:
     accessibility contract coverage, and preview-script contract coverage.
   - Command center post-guard CI evidence refresh, rendered-evidence contract coverage, mobile
     evidence table UX, source-link grouping, and operator handoff notes.
+  - Phase-aware project skill governance, explicit skill invocation metadata, and local skill
+    boundary guard coverage.
 - Next useful hardening: stop broad foundation expansion and proceed only for concrete Gate 0
   maintenance gaps.
 
 ## Accepted Packet Ledger
 
-| Packet    | Status   | Workstream      | Primary outcome                                        |
-| --------- | -------- | --------------- | ------------------------------------------------------ |
-| `TRD-001` | accepted | Foundation      | Initialized Gate 0 Research monorepo.                  |
-| `TRD-002` | accepted | Governance      | Tightened Gate 0 scanner allowlist.                    |
-| `TRD-003` | accepted | Trace integrity | Added immutable strategy decision trace.               |
-| `TRD-004` | accepted | Trace integrity | Added canonical trace hashing.                         |
-| `TRD-005` | accepted | Audit           | Added local audit log storage.                         |
-| `TRD-006` | accepted | Audit           | Hardened audit-log safety behavior.                    |
-| `TRD-007` | accepted | Fixtures        | Added benchmark fixtures.                              |
-| `TRD-008` | accepted | Metrics         | Added deterministic metric utilities.                  |
-| `TRD-009` | accepted | Metrics         | Added backtest result consistency checks.              |
-| `TRD-010` | accepted | Data quality    | Added data snapshot quality checks.                    |
-| `TRD-011` | accepted | Data quality    | Expanded data snapshot metadata.                       |
-| `TRD-012` | accepted | Review bundle   | Added strategy review bundle assembly.                 |
-| `TRD-013` | accepted | Review bundle   | Added persisted local review bundle storage.           |
-| `TRD-014` | accepted | Review bundle   | Added local review bundle query utilities.             |
-| `TRD-015` | accepted | Review bundle   | Added local review bundle summaries.                   |
-| `TRD-016` | accepted | Redaction       | Added local summary redaction policy checks.           |
-| `TRD-017` | accepted | Redaction       | Verified redacted summary shape.                       |
-| `TRD-018` | accepted | Operator review | Added local operator review checklist.                 |
-| `TRD-019` | accepted | Operator review | Added checklist completeness scoring.                  |
-| `TRD-020` | accepted | Operator review | Added local review artifact inventory.                 |
-| `TRD-021` | accepted | Diagnostics     | Added local protected-loop diagnostics.                |
-| `TRD-022` | accepted | Diagnostics     | Added local diagnostic aggregation.                    |
-| `TRD-023` | accepted | Review state    | Added local Gate 0 review-state snapshot.              |
-| `TRD-024` | accepted | Review state    | Added local snapshot change comparison.                |
-| `TRD-025` | accepted | Thresholds      | Added local evidence completeness thresholds.          |
-| `TRD-026` | accepted | Thresholds      | Added threshold result comparison.                     |
-| `TRD-027` | accepted | Issue register  | Added local protected-loop issue register.             |
-| `TRD-028` | accepted | Issue register  | Added local issue register comparison.                 |
-| `TRD-029` | accepted | State package   | Added local Gate 0 review-state assembly.              |
-| `TRD-030` | accepted | State package   | Added local Gate 0 assembly summary.                   |
-| `TRD-031` | accepted | State package   | Added assembly summary comparison.                     |
-| `TRD-032` | accepted | Integrity       | Added local Gate 0 state package integrity checks.     |
-| `TRD-033` | accepted | Integrity       | Added package integrity history aggregate.             |
-| `TRD-034` | accepted | Lifecycle       | Added state package lifecycle manifest.                |
-| `TRD-035` | accepted | Lifecycle       | Added lifecycle manifest comparison.                   |
-| `TRD-036` | accepted | Audit           | Added Gate 0 Research completion audit.                |
-| `TRD-037` | accepted | Dry-run chain   | Added Gate 0 dry-run scenario fixture.                 |
-| `TRD-038` | accepted | Dry-run chain   | Added Gate 0 dry-run operator checklist.               |
-| `TRD-039` | accepted | Dry-run chain   | Added dry-run checklist summary.                       |
-| `TRD-040` | accepted | Dry-run chain   | Added dry-run friction report.                         |
-| `TRD-041` | accepted | Dry-run chain   | Added dry-run iteration recommendation.                |
-| `TRD-042` | accepted | Audit           | Added dry-run chain completion audit.                  |
-| `TRD-043` | accepted | Baseline        | Added Gate 0 baseline release note.                    |
-| `TRD-044` | accepted | Ergonomics      | Added operator ergonomics brief.                       |
-| `TRD-045` | accepted | Ergonomics      | Added local dry-run inspect command.                   |
-| `TRD-046` | accepted | Ergonomics      | Added dry-run walkthrough.                             |
-| `TRD-047` | accepted | Ergonomics      | Added blocked-friction dry-run scenario.               |
-| `TRD-048` | accepted | Ergonomics      | Added dry-run inspect scenario selector.               |
-| `TRD-049` | accepted | Ergonomics      | Added bounded invalid scenario handling.               |
-| `TRD-050` | accepted | Ergonomics      | Added local inspect command help text.                 |
-| `TRD-051` | accepted | Ergonomics      | Added inspect output shape tests.                      |
-| `TRD-052` | accepted | Ergonomics      | Added Gate 0 operator review runbook.                  |
-| `TRD-053` | accepted | Ergonomics      | Added local progress snapshot generator.               |
-| `TRD-054` | accepted | Ergonomics      | Added local tracklist consistency check.               |
-| `TRD-055` | accepted | Ergonomics      | Added local inspect command contract notes.            |
-| `TRD-056` | accepted | Audit           | Added operator ergonomics completion audit.            |
-| `TRD-057` | accepted | Ergonomics      | Added local operator checklist.                        |
-| `TRD-058` | accepted | Ergonomics      | Added local progress snapshot freshness check.         |
-| `TRD-059` | accepted | Ergonomics      | Renamed app identity to GateZero and added name check. |
-| `TRD-060` | accepted | Ergonomics      | Added local operator command index.                    |
-| `TRD-061` | accepted | Ergonomics      | Added local ergonomics artifact map.                   |
-| `TRD-062` | accepted | Ergonomics      | Added local documentation cross-link audit.            |
-| `TRD-063` | accepted | Ergonomics      | Added local validation command audit.                  |
-| `TRD-064` | accepted | Ergonomics      | Added local name-check coverage audit.                 |
-| `TRD-065` | accepted | Ergonomics      | Added local command-index coverage check.              |
-| `TRD-066` | accepted | Ergonomics      | Added local artifact-map coverage check.               |
-| `TRD-067` | accepted | Ergonomics      | Added local cross-link coverage check.                 |
-| `TRD-068` | accepted | Ergonomics      | Added local validation-audit coverage check.           |
-| `TRD-069` | accepted | Ergonomics      | Added local name-check coverage check.                 |
-| `TRD-070` | accepted | Ergonomics      | Added local command-index coverage recheck.            |
-| `TRD-071` | accepted | Ergonomics      | Added local artifact-map coverage recheck.             |
-| `TRD-072` | accepted | Ergonomics      | Added local cross-link coverage recheck.               |
-| `TRD-073` | accepted | Ergonomics      | Added local operator docs index coverage check.        |
-| `TRD-074` | accepted | Ergonomics      | Added local review-record naming check.                |
-| `TRD-075` | accepted | Ergonomics      | Added local source-link coverage check.                |
-| `TRD-076` | accepted | Ergonomics      | Added local coverage-chain completion audit.           |
-| `TRD-077` | accepted | Ergonomics      | Added local coverage drift guard proposal.             |
-| `TRD-078` | accepted | Ergonomics      | Added local docs coverage drift guard.                 |
-| `TRD-079` | accepted | Ergonomics      | Added docs coverage drift guard tests.                 |
-| `TRD-080` | accepted | Ergonomics      | Indexed docs coverage drift guard references.          |
-| `TRD-081` | accepted | Ergonomics      | Added coverage guard completion audit.                 |
-| `TRD-082` | accepted | Ergonomics      | Added operator ergonomics freeze note.                 |
-| `TRD-083` | accepted | Ergonomics      | Added ergonomics freeze compliance check.              |
-| `TRD-084` | accepted | Ergonomics      | Added validation command coverage recheck.             |
-| `TRD-085` | accepted | Ergonomics      | Added operator boundary review.                        |
-| `TRD-086` | accepted | Ergonomics      | Added research loop evidence index proposal.           |
-| `TRD-087` | accepted | Ergonomics      | Added research loop evidence index assignment note.    |
-| `TRD-088` | accepted | Ergonomics      | Added evidence-index source-link check.                |
-| `TRD-089` | accepted | Ergonomics      | Added evidence-index implementation packet.            |
-| `TRD-090` | accepted | Ergonomics      | Added local evidence-index schema.                     |
-| `TRD-091` | accepted | Ergonomics      | Added synthetic evidence-index fixture.                |
-| `TRD-092` | accepted | Ergonomics      | Added evidence-index tests.                            |
-| `TRD-093` | accepted | Ergonomics      | Added evidence-index documentation.                    |
-| `TRD-094` | accepted | Ergonomics      | Added evidence-index coverage check.                   |
-| `TRD-095` | accepted | Ergonomics      | Added evidence-index validation recheck.               |
-| `TRD-096` | accepted | Ergonomics      | Added evidence-index completion audit.                 |
-| `TRD-097` | accepted | Ergonomics      | Added evidence-index freeze note.                      |
-| `TRD-098` | accepted | Ergonomics      | Added evidence-index drift guard proposal.             |
-| `TRD-099` | accepted | Ergonomics      | Added evidence-index drift guard assignment.           |
-| `TRD-100` | accepted | Ergonomics      | Added local evidence-index drift guard.                |
-| `TRD-101` | accepted | Ergonomics      | Added evidence-index drift guard tests.                |
-| `TRD-102` | accepted | Ergonomics      | Indexed evidence-index drift guard records.            |
-| `TRD-103` | accepted | Ergonomics      | Added evidence-index drift guard completion audit.     |
-| `TRD-104` | accepted | Ergonomics      | Added evidence-index guard validation recheck.         |
-| `TRD-105` | accepted | Ergonomics      | Added evidence-index guard freeze compliance check.    |
-| `TRD-106` | accepted | Ergonomics      | Added evidence-index guard source-link recheck.        |
-| `TRD-107` | accepted | Ergonomics      | Added evidence-index guard boundary review.            |
-| `TRD-108` | accepted | Ergonomics      | Added evidence-index guard chain freeze note.          |
-| `TRD-109` | accepted | Foundation      | Added research foundation boundary review.             |
-| `TRD-110` | accepted | Ergonomics      | Finalized project tracklist structure.                 |
-| `TRD-111` | accepted | Foundation      | Added foundation freeze note.                          |
-| `TRD-112` | accepted | Foundation      | Added next-phase blocker audit.                        |
-| `TRD-113` | accepted | Foundation      | Added foundation closeout packet.                      |
-| `TRD-114` | accepted | Foundation      | Added closeout validation recheck.                     |
-| `TRD-115` | accepted | Foundation      | Added closeout source-link recheck.                    |
-| `TRD-116` | accepted | Foundation      | Added closeout freeze compliance check.                |
-| `TRD-117` | accepted | Foundation      | Added post-closeout change-control rule.               |
-| `TRD-118` | accepted | Foundation      | Added operator handoff packet.                         |
-| `TRD-119` | accepted | Foundation      | Added final tracklist line-width audit.                |
-| `TRD-120` | accepted | Foundation      | Added final documentation index audit.                 |
-| `TRD-121` | accepted | Foundation      | Added final review-record audit.                       |
-| `TRD-122` | accepted | Foundation      | Added final maintenance boundary note.                 |
-| `TRD-123` | accepted | Foundation      | Added final operator status snapshot.                  |
-| `TRD-124` | accepted | Foundation      | Added final validation recheck.                        |
-| `TRD-125` | accepted | Foundation      | Added final source-link drift recheck.                 |
-| `TRD-126` | accepted | Foundation      | Added final progress snapshot recheck.                 |
-| `TRD-127` | accepted | Foundation      | Added final change-control compliance check.           |
-| `TRD-128` | accepted | Foundation      | Added final operator closure note.                     |
-| `TRD-129` | accepted | Foundation      | Added maintenance gap intake review.                   |
-| `TRD-130` | accepted | Foundation      | Added archive readiness blocker note.                  |
-| `TRD-131` | accepted | Foundation      | Added final no-expansion recheck.                      |
-| `TRD-132` | accepted | Foundation      | Added maintenance backlog cleanup.                     |
-| `TRD-133` | accepted | Foundation      | Added operator pause recommendation.                   |
-| `TRD-134` | accepted | Foundation      | Added review coverage drift guard.                     |
-| `TRD-135` | accepted | Foundation      | Added guard suite command consolidation.               |
-| `TRD-136` | accepted | Foundation      | Added quality suite command consolidation.             |
-| `TRD-137` | accepted | Foundation      | Added final operator verification runbook.             |
-| `TRD-138` | accepted | Foundation      | Added verification failure triage template.            |
-| `TRD-139` | accepted | Foundation      | Added maintenance intake checklist.                    |
-| `TRD-140` | accepted | Foundation      | Added operator pause confirmation note.                |
-| `TRD-141` | accepted | Foundation      | Added control plane index final recheck.               |
-| `TRD-142` | accepted | Foundation      | Added final maintenance handoff snapshot.              |
-| `TRD-143` | accepted | Foundation      | Added Gate 0 baseline freeze confirmation.             |
-| `TRD-144` | accepted | Planning        | Added Gate 1 entry criteria definition.                |
-| `TRD-145` | accepted | Planning        | Added Gate 1 planning packet draft.                    |
-| `TRD-146` | accepted | Planning        | Added historical backtest contract assignment packet.  |
-| `TRD-147` | accepted | Planning        | Added historical data snapshot contract plan.          |
-| `TRD-148` | accepted | Planning        | Added strategy version contract plan.                  |
-| `TRD-149` | accepted | Planning        | Added fees and slippage assumption plan.               |
-| `TRD-150` | accepted | Planning        | Added immutable backtest record plan.                  |
-| `TRD-151` | accepted | Planning        | Added backtest result schema plan.                     |
-| `TRD-152` | accepted | Planning        | Added reproducibility check plan.                      |
-| `TRD-153` | accepted | Planning        | Added fixture boundary plan.                           |
-| `TRD-154` | accepted | Planning        | Added contract validation guard plan.                  |
-| `TRD-155` | accepted | Planning        | Added implementation readiness blocker audit.          |
-| `TRD-156` | accepted | Planning        | Added contract-only implementation assignment packet.  |
-| `TRD-157` | accepted | Contracts       | Added historical data snapshot contract.               |
-| `TRD-158` | accepted | Contracts       | Added strategy version contract.                       |
-| `TRD-159` | accepted | Contracts       | Added fees and slippage assumption contract.           |
-| `TRD-160` | accepted | Contracts       | Added immutable backtest record contract.              |
-| `TRD-161` | accepted | Contracts       | Added backtest result contract.                        |
-| `TRD-162` | accepted | Contracts       | Added reproducibility check contract.                  |
-| `TRD-163` | accepted | Fixtures        | Added synthetic Gate 1 historical backtest fixtures.   |
-| `TRD-164` | accepted | Validation      | Added Gate 1 contract validation guard.                |
-| `TRD-165` | accepted | Validation      | Indexed Gate 1 contract validation guard.              |
-| `TRD-166` | accepted | Validation      | Aligned Gate 1 guard command docs.                     |
-| `TRD-167` | accepted | Validation      | Added docs and ops to format check coverage.           |
-| `TRD-168` | accepted | Foundation      | Added progress snapshot generated-date policy.         |
-| `TRD-169` | accepted | Validation      | Hardened Gate 1 guard with schema and fixture parsing. |
-| `TRD-170` | accepted | Risk            | Blocked active paper-candidate Phase 0 semantics.      |
-| `TRD-171` | accepted | Foundation      | Added canonical repo hygiene and agent alignment.      |
-| `TRD-172` | accepted | Validation      | Added GitHub Gate 0 CI verification workflow.          |
-| `TRD-173` | accepted | Foundation      | Added GitHub repo handoff and clone runbook.           |
-| `TRD-174` | accepted | Validation      | Added agent manifest drift guard.                      |
-| `TRD-175` | accepted | Validation      | Added repository hygiene guard.                        |
-| `TRD-176` | accepted | Release         | Added GitHub baseline release note.                    |
-| `TRD-177` | accepted | Validation      | Recorded successful pushed GitHub CI run evidence.     |
-| `TRD-178` | accepted | Validation      | Reviewed GitHub Actions Node runtime deprecation.      |
-| `TRD-179` | accepted | Validation      | Hardened GitHub CI action runtime setting.             |
-| `TRD-180` | accepted | Validation      | Recorded post-hardening GitHub CI evidence.            |
-| `TRD-181` | accepted | Operations      | Added remote verification runbook.                     |
-| `TRD-182` | accepted | Operations      | Added CI failure triage guardrail.                     |
-| `TRD-183` | accepted | Validation      | Added GitHub Actions annotation follow-up watch.       |
-| `TRD-184` | accepted | Validation      | Proposed CI evidence freshness guard rules.            |
-| `TRD-185` | accepted | Validation      | Added standalone CI evidence freshness guard.          |
-| `TRD-186` | accepted | Operations      | Added remote verification evidence index.              |
-| `TRD-187` | accepted | Operations      | Reconfirmed Gate 0 maintenance pause posture.          |
-| `TRD-188` | accepted | UI boundary     | Defined Gate 0 command center scope and boundary.      |
-| `TRD-189` | accepted | UI contract     | Added command center static data contract.             |
-| `TRD-190` | accepted | UI prototype    | Added static local Gate 0 command center prototype.    |
-| `TRD-191` | accepted | UI guardrails   | Added command center no-execution guardrails.          |
-| `TRD-192` | accepted | UI acceptance   | Accepted command center as control-plane only.         |
-| `TRD-193` | accepted | UI QA           | Recorded command center visual QA pass.                |
-| `TRD-194` | accepted | UI access       | Added command center accessibility baseline.           |
-| `TRD-195` | accepted | UI data plan    | Planned local-only command center data sources.        |
-| `TRD-196` | accepted | UI preview      | Added local host command center preview command.       |
-| `TRD-197` | accepted | UI guard        | Added command center evidence freshness guard.         |
-| `TRD-198` | accepted | UI evidence     | Refreshed command center CI evidence.                  |
-| `TRD-199` | accepted | UI guard        | Added command center CI-run freshness guard.           |
-| `TRD-200` | accepted | UI contract     | Added command center navigation contract checks.       |
-| `TRD-201` | accepted | UI access       | Added command center accessibility contract checks.    |
-| `TRD-202` | accepted | UI preview      | Added command center preview script contract checks.   |
-| `TRD-203` | accepted | UI evidence     | Refreshed post-guard command center CI evidence.       |
-| `TRD-204` | accepted | UI contract     | Added command center rendered evidence contract.       |
-| `TRD-205` | accepted | UI access       | Added mobile evidence table labels and behavior.       |
-| `TRD-206` | accepted | UI source links | Grouped command center source links by purpose.        |
-| `TRD-207` | accepted | UI handoff      | Added command center operator handoff note.            |
+| Packet    | Status   | Workstream       | Primary outcome                                        |
+| --------- | -------- | ---------------- | ------------------------------------------------------ |
+| `TRD-001` | accepted | Foundation       | Initialized Gate 0 Research monorepo.                  |
+| `TRD-002` | accepted | Governance       | Tightened Gate 0 scanner allowlist.                    |
+| `TRD-003` | accepted | Trace integrity  | Added immutable strategy decision trace.               |
+| `TRD-004` | accepted | Trace integrity  | Added canonical trace hashing.                         |
+| `TRD-005` | accepted | Audit            | Added local audit log storage.                         |
+| `TRD-006` | accepted | Audit            | Hardened audit-log safety behavior.                    |
+| `TRD-007` | accepted | Fixtures         | Added benchmark fixtures.                              |
+| `TRD-008` | accepted | Metrics          | Added deterministic metric utilities.                  |
+| `TRD-009` | accepted | Metrics          | Added backtest result consistency checks.              |
+| `TRD-010` | accepted | Data quality     | Added data snapshot quality checks.                    |
+| `TRD-011` | accepted | Data quality     | Expanded data snapshot metadata.                       |
+| `TRD-012` | accepted | Review bundle    | Added strategy review bundle assembly.                 |
+| `TRD-013` | accepted | Review bundle    | Added persisted local review bundle storage.           |
+| `TRD-014` | accepted | Review bundle    | Added local review bundle query utilities.             |
+| `TRD-015` | accepted | Review bundle    | Added local review bundle summaries.                   |
+| `TRD-016` | accepted | Redaction        | Added local summary redaction policy checks.           |
+| `TRD-017` | accepted | Redaction        | Verified redacted summary shape.                       |
+| `TRD-018` | accepted | Operator review  | Added local operator review checklist.                 |
+| `TRD-019` | accepted | Operator review  | Added checklist completeness scoring.                  |
+| `TRD-020` | accepted | Operator review  | Added local review artifact inventory.                 |
+| `TRD-021` | accepted | Diagnostics      | Added local protected-loop diagnostics.                |
+| `TRD-022` | accepted | Diagnostics      | Added local diagnostic aggregation.                    |
+| `TRD-023` | accepted | Review state     | Added local Gate 0 review-state snapshot.              |
+| `TRD-024` | accepted | Review state     | Added local snapshot change comparison.                |
+| `TRD-025` | accepted | Thresholds       | Added local evidence completeness thresholds.          |
+| `TRD-026` | accepted | Thresholds       | Added threshold result comparison.                     |
+| `TRD-027` | accepted | Issue register   | Added local protected-loop issue register.             |
+| `TRD-028` | accepted | Issue register   | Added local issue register comparison.                 |
+| `TRD-029` | accepted | State package    | Added local Gate 0 review-state assembly.              |
+| `TRD-030` | accepted | State package    | Added local Gate 0 assembly summary.                   |
+| `TRD-031` | accepted | State package    | Added assembly summary comparison.                     |
+| `TRD-032` | accepted | Integrity        | Added local Gate 0 state package integrity checks.     |
+| `TRD-033` | accepted | Integrity        | Added package integrity history aggregate.             |
+| `TRD-034` | accepted | Lifecycle        | Added state package lifecycle manifest.                |
+| `TRD-035` | accepted | Lifecycle        | Added lifecycle manifest comparison.                   |
+| `TRD-036` | accepted | Audit            | Added Gate 0 Research completion audit.                |
+| `TRD-037` | accepted | Dry-run chain    | Added Gate 0 dry-run scenario fixture.                 |
+| `TRD-038` | accepted | Dry-run chain    | Added Gate 0 dry-run operator checklist.               |
+| `TRD-039` | accepted | Dry-run chain    | Added dry-run checklist summary.                       |
+| `TRD-040` | accepted | Dry-run chain    | Added dry-run friction report.                         |
+| `TRD-041` | accepted | Dry-run chain    | Added dry-run iteration recommendation.                |
+| `TRD-042` | accepted | Audit            | Added dry-run chain completion audit.                  |
+| `TRD-043` | accepted | Baseline         | Added Gate 0 baseline release note.                    |
+| `TRD-044` | accepted | Ergonomics       | Added operator ergonomics brief.                       |
+| `TRD-045` | accepted | Ergonomics       | Added local dry-run inspect command.                   |
+| `TRD-046` | accepted | Ergonomics       | Added dry-run walkthrough.                             |
+| `TRD-047` | accepted | Ergonomics       | Added blocked-friction dry-run scenario.               |
+| `TRD-048` | accepted | Ergonomics       | Added dry-run inspect scenario selector.               |
+| `TRD-049` | accepted | Ergonomics       | Added bounded invalid scenario handling.               |
+| `TRD-050` | accepted | Ergonomics       | Added local inspect command help text.                 |
+| `TRD-051` | accepted | Ergonomics       | Added inspect output shape tests.                      |
+| `TRD-052` | accepted | Ergonomics       | Added Gate 0 operator review runbook.                  |
+| `TRD-053` | accepted | Ergonomics       | Added local progress snapshot generator.               |
+| `TRD-054` | accepted | Ergonomics       | Added local tracklist consistency check.               |
+| `TRD-055` | accepted | Ergonomics       | Added local inspect command contract notes.            |
+| `TRD-056` | accepted | Audit            | Added operator ergonomics completion audit.            |
+| `TRD-057` | accepted | Ergonomics       | Added local operator checklist.                        |
+| `TRD-058` | accepted | Ergonomics       | Added local progress snapshot freshness check.         |
+| `TRD-059` | accepted | Ergonomics       | Renamed app identity to GateZero and added name check. |
+| `TRD-060` | accepted | Ergonomics       | Added local operator command index.                    |
+| `TRD-061` | accepted | Ergonomics       | Added local ergonomics artifact map.                   |
+| `TRD-062` | accepted | Ergonomics       | Added local documentation cross-link audit.            |
+| `TRD-063` | accepted | Ergonomics       | Added local validation command audit.                  |
+| `TRD-064` | accepted | Ergonomics       | Added local name-check coverage audit.                 |
+| `TRD-065` | accepted | Ergonomics       | Added local command-index coverage check.              |
+| `TRD-066` | accepted | Ergonomics       | Added local artifact-map coverage check.               |
+| `TRD-067` | accepted | Ergonomics       | Added local cross-link coverage check.                 |
+| `TRD-068` | accepted | Ergonomics       | Added local validation-audit coverage check.           |
+| `TRD-069` | accepted | Ergonomics       | Added local name-check coverage check.                 |
+| `TRD-070` | accepted | Ergonomics       | Added local command-index coverage recheck.            |
+| `TRD-071` | accepted | Ergonomics       | Added local artifact-map coverage recheck.             |
+| `TRD-072` | accepted | Ergonomics       | Added local cross-link coverage recheck.               |
+| `TRD-073` | accepted | Ergonomics       | Added local operator docs index coverage check.        |
+| `TRD-074` | accepted | Ergonomics       | Added local review-record naming check.                |
+| `TRD-075` | accepted | Ergonomics       | Added local source-link coverage check.                |
+| `TRD-076` | accepted | Ergonomics       | Added local coverage-chain completion audit.           |
+| `TRD-077` | accepted | Ergonomics       | Added local coverage drift guard proposal.             |
+| `TRD-078` | accepted | Ergonomics       | Added local docs coverage drift guard.                 |
+| `TRD-079` | accepted | Ergonomics       | Added docs coverage drift guard tests.                 |
+| `TRD-080` | accepted | Ergonomics       | Indexed docs coverage drift guard references.          |
+| `TRD-081` | accepted | Ergonomics       | Added coverage guard completion audit.                 |
+| `TRD-082` | accepted | Ergonomics       | Added operator ergonomics freeze note.                 |
+| `TRD-083` | accepted | Ergonomics       | Added ergonomics freeze compliance check.              |
+| `TRD-084` | accepted | Ergonomics       | Added validation command coverage recheck.             |
+| `TRD-085` | accepted | Ergonomics       | Added operator boundary review.                        |
+| `TRD-086` | accepted | Ergonomics       | Added research loop evidence index proposal.           |
+| `TRD-087` | accepted | Ergonomics       | Added research loop evidence index assignment note.    |
+| `TRD-088` | accepted | Ergonomics       | Added evidence-index source-link check.                |
+| `TRD-089` | accepted | Ergonomics       | Added evidence-index implementation packet.            |
+| `TRD-090` | accepted | Ergonomics       | Added local evidence-index schema.                     |
+| `TRD-091` | accepted | Ergonomics       | Added synthetic evidence-index fixture.                |
+| `TRD-092` | accepted | Ergonomics       | Added evidence-index tests.                            |
+| `TRD-093` | accepted | Ergonomics       | Added evidence-index documentation.                    |
+| `TRD-094` | accepted | Ergonomics       | Added evidence-index coverage check.                   |
+| `TRD-095` | accepted | Ergonomics       | Added evidence-index validation recheck.               |
+| `TRD-096` | accepted | Ergonomics       | Added evidence-index completion audit.                 |
+| `TRD-097` | accepted | Ergonomics       | Added evidence-index freeze note.                      |
+| `TRD-098` | accepted | Ergonomics       | Added evidence-index drift guard proposal.             |
+| `TRD-099` | accepted | Ergonomics       | Added evidence-index drift guard assignment.           |
+| `TRD-100` | accepted | Ergonomics       | Added local evidence-index drift guard.                |
+| `TRD-101` | accepted | Ergonomics       | Added evidence-index drift guard tests.                |
+| `TRD-102` | accepted | Ergonomics       | Indexed evidence-index drift guard records.            |
+| `TRD-103` | accepted | Ergonomics       | Added evidence-index drift guard completion audit.     |
+| `TRD-104` | accepted | Ergonomics       | Added evidence-index guard validation recheck.         |
+| `TRD-105` | accepted | Ergonomics       | Added evidence-index guard freeze compliance check.    |
+| `TRD-106` | accepted | Ergonomics       | Added evidence-index guard source-link recheck.        |
+| `TRD-107` | accepted | Ergonomics       | Added evidence-index guard boundary review.            |
+| `TRD-108` | accepted | Ergonomics       | Added evidence-index guard chain freeze note.          |
+| `TRD-109` | accepted | Foundation       | Added research foundation boundary review.             |
+| `TRD-110` | accepted | Ergonomics       | Finalized project tracklist structure.                 |
+| `TRD-111` | accepted | Foundation       | Added foundation freeze note.                          |
+| `TRD-112` | accepted | Foundation       | Added next-phase blocker audit.                        |
+| `TRD-113` | accepted | Foundation       | Added foundation closeout packet.                      |
+| `TRD-114` | accepted | Foundation       | Added closeout validation recheck.                     |
+| `TRD-115` | accepted | Foundation       | Added closeout source-link recheck.                    |
+| `TRD-116` | accepted | Foundation       | Added closeout freeze compliance check.                |
+| `TRD-117` | accepted | Foundation       | Added post-closeout change-control rule.               |
+| `TRD-118` | accepted | Foundation       | Added operator handoff packet.                         |
+| `TRD-119` | accepted | Foundation       | Added final tracklist line-width audit.                |
+| `TRD-120` | accepted | Foundation       | Added final documentation index audit.                 |
+| `TRD-121` | accepted | Foundation       | Added final review-record audit.                       |
+| `TRD-122` | accepted | Foundation       | Added final maintenance boundary note.                 |
+| `TRD-123` | accepted | Foundation       | Added final operator status snapshot.                  |
+| `TRD-124` | accepted | Foundation       | Added final validation recheck.                        |
+| `TRD-125` | accepted | Foundation       | Added final source-link drift recheck.                 |
+| `TRD-126` | accepted | Foundation       | Added final progress snapshot recheck.                 |
+| `TRD-127` | accepted | Foundation       | Added final change-control compliance check.           |
+| `TRD-128` | accepted | Foundation       | Added final operator closure note.                     |
+| `TRD-129` | accepted | Foundation       | Added maintenance gap intake review.                   |
+| `TRD-130` | accepted | Foundation       | Added archive readiness blocker note.                  |
+| `TRD-131` | accepted | Foundation       | Added final no-expansion recheck.                      |
+| `TRD-132` | accepted | Foundation       | Added maintenance backlog cleanup.                     |
+| `TRD-133` | accepted | Foundation       | Added operator pause recommendation.                   |
+| `TRD-134` | accepted | Foundation       | Added review coverage drift guard.                     |
+| `TRD-135` | accepted | Foundation       | Added guard suite command consolidation.               |
+| `TRD-136` | accepted | Foundation       | Added quality suite command consolidation.             |
+| `TRD-137` | accepted | Foundation       | Added final operator verification runbook.             |
+| `TRD-138` | accepted | Foundation       | Added verification failure triage template.            |
+| `TRD-139` | accepted | Foundation       | Added maintenance intake checklist.                    |
+| `TRD-140` | accepted | Foundation       | Added operator pause confirmation note.                |
+| `TRD-141` | accepted | Foundation       | Added control plane index final recheck.               |
+| `TRD-142` | accepted | Foundation       | Added final maintenance handoff snapshot.              |
+| `TRD-143` | accepted | Foundation       | Added Gate 0 baseline freeze confirmation.             |
+| `TRD-144` | accepted | Planning         | Added Gate 1 entry criteria definition.                |
+| `TRD-145` | accepted | Planning         | Added Gate 1 planning packet draft.                    |
+| `TRD-146` | accepted | Planning         | Added historical backtest contract assignment packet.  |
+| `TRD-147` | accepted | Planning         | Added historical data snapshot contract plan.          |
+| `TRD-148` | accepted | Planning         | Added strategy version contract plan.                  |
+| `TRD-149` | accepted | Planning         | Added fees and slippage assumption plan.               |
+| `TRD-150` | accepted | Planning         | Added immutable backtest record plan.                  |
+| `TRD-151` | accepted | Planning         | Added backtest result schema plan.                     |
+| `TRD-152` | accepted | Planning         | Added reproducibility check plan.                      |
+| `TRD-153` | accepted | Planning         | Added fixture boundary plan.                           |
+| `TRD-154` | accepted | Planning         | Added contract validation guard plan.                  |
+| `TRD-155` | accepted | Planning         | Added implementation readiness blocker audit.          |
+| `TRD-156` | accepted | Planning         | Added contract-only implementation assignment packet.  |
+| `TRD-157` | accepted | Contracts        | Added historical data snapshot contract.               |
+| `TRD-158` | accepted | Contracts        | Added strategy version contract.                       |
+| `TRD-159` | accepted | Contracts        | Added fees and slippage assumption contract.           |
+| `TRD-160` | accepted | Contracts        | Added immutable backtest record contract.              |
+| `TRD-161` | accepted | Contracts        | Added backtest result contract.                        |
+| `TRD-162` | accepted | Contracts        | Added reproducibility check contract.                  |
+| `TRD-163` | accepted | Fixtures         | Added synthetic Gate 1 historical backtest fixtures.   |
+| `TRD-164` | accepted | Validation       | Added Gate 1 contract validation guard.                |
+| `TRD-165` | accepted | Validation       | Indexed Gate 1 contract validation guard.              |
+| `TRD-166` | accepted | Validation       | Aligned Gate 1 guard command docs.                     |
+| `TRD-167` | accepted | Validation       | Added docs and ops to format check coverage.           |
+| `TRD-168` | accepted | Foundation       | Added progress snapshot generated-date policy.         |
+| `TRD-169` | accepted | Validation       | Hardened Gate 1 guard with schema and fixture parsing. |
+| `TRD-170` | accepted | Risk             | Blocked active paper-candidate Phase 0 semantics.      |
+| `TRD-171` | accepted | Foundation       | Added canonical repo hygiene and agent alignment.      |
+| `TRD-172` | accepted | Validation       | Added GitHub Gate 0 CI verification workflow.          |
+| `TRD-173` | accepted | Foundation       | Added GitHub repo handoff and clone runbook.           |
+| `TRD-174` | accepted | Validation       | Added agent manifest drift guard.                      |
+| `TRD-175` | accepted | Validation       | Added repository hygiene guard.                        |
+| `TRD-176` | accepted | Release          | Added GitHub baseline release note.                    |
+| `TRD-177` | accepted | Validation       | Recorded successful pushed GitHub CI run evidence.     |
+| `TRD-178` | accepted | Validation       | Reviewed GitHub Actions Node runtime deprecation.      |
+| `TRD-179` | accepted | Validation       | Hardened GitHub CI action runtime setting.             |
+| `TRD-180` | accepted | Validation       | Recorded post-hardening GitHub CI evidence.            |
+| `TRD-181` | accepted | Operations       | Added remote verification runbook.                     |
+| `TRD-182` | accepted | Operations       | Added CI failure triage guardrail.                     |
+| `TRD-183` | accepted | Validation       | Added GitHub Actions annotation follow-up watch.       |
+| `TRD-184` | accepted | Validation       | Proposed CI evidence freshness guard rules.            |
+| `TRD-185` | accepted | Validation       | Added standalone CI evidence freshness guard.          |
+| `TRD-186` | accepted | Operations       | Added remote verification evidence index.              |
+| `TRD-187` | accepted | Operations       | Reconfirmed Gate 0 maintenance pause posture.          |
+| `TRD-188` | accepted | UI boundary      | Defined Gate 0 command center scope and boundary.      |
+| `TRD-189` | accepted | UI contract      | Added command center static data contract.             |
+| `TRD-190` | accepted | UI prototype     | Added static local Gate 0 command center prototype.    |
+| `TRD-191` | accepted | UI guardrails    | Added command center no-execution guardrails.          |
+| `TRD-192` | accepted | UI acceptance    | Accepted command center as control-plane only.         |
+| `TRD-193` | accepted | UI QA            | Recorded command center visual QA pass.                |
+| `TRD-194` | accepted | UI access        | Added command center accessibility baseline.           |
+| `TRD-195` | accepted | UI data plan     | Planned local-only command center data sources.        |
+| `TRD-196` | accepted | UI preview       | Added local host command center preview command.       |
+| `TRD-197` | accepted | UI guard         | Added command center evidence freshness guard.         |
+| `TRD-198` | accepted | UI evidence      | Refreshed command center CI evidence.                  |
+| `TRD-199` | accepted | UI guard         | Added command center CI-run freshness guard.           |
+| `TRD-200` | accepted | UI contract      | Added command center navigation contract checks.       |
+| `TRD-201` | accepted | UI access        | Added command center accessibility contract checks.    |
+| `TRD-202` | accepted | UI preview       | Added command center preview script contract checks.   |
+| `TRD-203` | accepted | UI evidence      | Refreshed post-guard command center CI evidence.       |
+| `TRD-204` | accepted | UI contract      | Added command center rendered evidence contract.       |
+| `TRD-205` | accepted | UI access        | Added mobile evidence table labels and behavior.       |
+| `TRD-206` | accepted | UI source links  | Grouped command center source links by purpose.        |
+| `TRD-207` | accepted | UI handoff       | Added command center operator handoff note.            |
+| `TRD-208` | accepted | Skill governance | Added phase-aware project skill governance.            |
 
 ## Current Operator Commands
 
@@ -513,6 +518,7 @@ Latest accepted result:
 | `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
 | `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
 | `pnpm check:gate0-command-center-render`            | Check command center static render contract.            | Local command center render contract passes.                   |
+| `pnpm check:gate0-skills`                           | Check project skill governance.                         | Local skill governance guard passes.                           |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -771,6 +777,7 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md`
 - Command center operator handoff note:
   `docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
+- Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -783,6 +790,10 @@ Do not mark a packet accepted until:
 - Command center render contract script: `scripts/check-gate0-command-center-render-contract.ts`
 - Command center render contract tests:
   `packages/fixtures/tests/gate0-command-center-render-contract.test.ts`
+- Skill governance guard script: `scripts/check-gate0-skill-governance.ts`
+- Skill governance guard tests: `packages/fixtures/tests/gate0-skill-governance.test.ts`
+- Trader product reviewer skill: `skills/trader-product-reviewer/SKILL.md`
+- Trading forex domain expert skill: `skills/trading-forex-domain-expert/SKILL.md`
 - CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
 - CI evidence freshness guard tests:
   `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`

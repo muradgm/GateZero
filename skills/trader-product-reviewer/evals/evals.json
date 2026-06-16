@@ -1,0 +1,113 @@
+{
+  "skill_name": "trader-product-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review our trading dashboard. It has a beautiful watchlist and P/L cards, but prices have no timestamps and live, demo, and backtest modes look identical.",
+      "expected_output": "Should identify missing timestamps and indistinguishable modes as high trust issues. Should explain that traders need to know whether data is live, delayed, demo, simulated, or historical before acting. Should recommend visible data source, quote freshness, mode badge, connection state, and stale-data warnings.",
+      "assertions": [
+        "Flags missing price timestamps",
+        "Flags identical live/demo/backtest treatment",
+        "Mentions data freshness",
+        "Mentions source or connection status",
+        "Explains trader trust impact",
+        "Recommends visible mode separation"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "The order ticket shows symbol, buy/sell, lot size, and estimated profit. Stop-loss is optional and risk in dollars is shown only after opening an advanced panel.",
+      "expected_output": "Should flag hidden risk visibility as a high or critical product issue depending on live trading scope. Should recommend showing stop distance, money risk, risk percent, margin impact, spread/costs, and worst-case assumptions directly in the ticket. Should state that reward should not be more prominent than risk.",
+      "assertions": [
+        "Flags hidden risk",
+        "Mentions stop distance and money risk",
+        "Mentions risk percent or account impact",
+        "Mentions margin or costs",
+        "Says reward should not dominate risk",
+        "Recommends pre-submit visibility"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Our mobile layout hides open positions below the chart. The user must scroll past news and indicators before seeing stop-loss and open risk.",
+      "expected_output": "Should identify a mobile workflow and risk visibility problem. Should explain that open risk and stop state must remain visible during monitoring and modification. Should recommend sticky position/risk summary, prioritizing active risk above supporting analysis, and testing under mobile viewport constraints.",
+      "assertions": [
+        "Flags mobile risk visibility issue",
+        "Prioritizes open positions and stop state",
+        "Mentions active risk",
+        "Recommends sticky or prominent summary",
+        "Suggests mobile validation"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "The app sends alerts for every indicator crossover, every watchlist move, every signal update, and every order status change using the same notification style.",
+      "expected_output": "Should flag alert fatigue and poor severity differentiation. Should recommend separating price, risk, execution, connection, and signal alerts; making critical alerts distinct; and ensuring alerts are actionable and reviewable.",
+      "assertions": [
+        "Flags alert fatigue",
+        "Mentions severity differentiation",
+        "Separates execution or risk alerts from ordinary alerts",
+        "Recommends actionable alerts",
+        "Mentions reviewable alert history"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Our journal records entry, exit, and P/L automatically. It does not capture the trade plan, reason for entry, stop rationale, screenshots, or rule adherence.",
+      "expected_output": "Should state that the journal is outcome-heavy and weak for trader improvement. Should recommend planned vs. actual capture, rationale, screenshots, setup, invalidation, rule adherence, mistake tags, and process metrics that separate good decisions from lucky outcomes.",
+      "assertions": [
+        "Flags outcome-only journaling",
+        "Mentions trade plan and rationale",
+        "Mentions screenshots or chart context",
+        "Mentions rule adherence",
+        "Separates process quality from outcome",
+        "Recommends mistake tags or review analytics"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Users can click Buy multiple times quickly. The UI optimistically shows the trade as opened before the broker confirms it.",
+      "expected_output": "Should identify duplicate order and false state risk as critical for live trading. Should recommend disabling or debouncing submission, idempotency, pending state, broker-confirmed states, rejection handling, and clear recovery messaging.",
+      "assertions": [
+        "Flags duplicate order risk",
+        "Flags optimistic opened state",
+        "Mentions pending state",
+        "Mentions broker confirmation",
+        "Mentions idempotency or disabling repeated clicks",
+        "Mentions rejection handling"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Review GateZero's Gate 0 command center. It shows latest packet, validation count, CI run, evidence links, and source docs. The team wants to add a strategy readiness badge.",
+      "expected_output": "Should treat GateZero as G0_RESEARCH and reject readiness semantics. Should recommend evidence freshness, source links, validation state, risk boundary copy, and operator handoff clarity instead of readiness or approval labels.",
+      "assertions": [
+        "Mentions G0_RESEARCH or research-only scope",
+        "Rejects readiness or approval semantics",
+        "Prioritizes evidence freshness",
+        "Mentions source links or validation state",
+        "Keeps recommendation local and non-execution"
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "The backtest report page has a large win-rate card, small drawdown text, no trade count near the headline, and no visible data-source timestamp.",
+      "expected_output": "Should flag trust and risk hierarchy issues. Should recommend showing drawdown, trade count, date range, data source, timestamp, assumptions, and failure conditions at least as prominently as win rate.",
+      "assertions": [
+        "Flags win-rate dominance",
+        "Mentions drawdown and trade count",
+        "Mentions date range or data source",
+        "Mentions timestamp or freshness",
+        "Recommends risk-first hierarchy"
+      ],
+      "files": []
+    }
+  ]
+}

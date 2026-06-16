@@ -1,0 +1,116 @@
+{
+  "skill_name": "trading-forex-domain-expert",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review our forex app. It calculates stop-loss and take-profit from TradingView-style candle data using the candle close as current price. We do not store bid/ask separately yet.",
+      "expected_output": "Should identify bid/ask absence as a high or critical correctness issue for broker-connected trading. Should explain that longs open at ask and close at bid, shorts open at bid and close at ask, and stops/targets must trigger from the correct side of the quote. Should distinguish analytics-only charting from execution/risk logic. Should recommend storing bid, ask, spread, quote timestamps, and modeling spread in P/L, risk/reward, and backtests.",
+      "assertions": [
+        "Flags missing bid/ask handling",
+        "Explains long and short execution side differences",
+        "Separates charting needs from execution needs",
+        "Mentions spread impact on P/L and risk/reward",
+        "Recommends quote timestamp and freshness handling",
+        "Provides verification steps"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "The app has a position-size calculator for all forex pairs. It assumes 1 pip is 0.0001, 1 lot is 100,000 units, and pip value is always $10 per lot.",
+      "expected_output": "Should flag this as unsafe and incorrect outside a narrow EURUSD-like USD-account case. Should mention JPY pairs, cross-currency pairs, account currency conversion, broker contract size, tick size, tick value, min lot, max lot, and lot step. Should recommend using broker symbol metadata and conversion rates instead of hard-coded universal pip values.",
+      "assertions": [
+        "Rejects universal pip assumptions",
+        "Mentions JPY decimal differences",
+        "Mentions cross-currency conversion",
+        "Mentions broker symbol metadata",
+        "Mentions lot step and rounding",
+        "Recommends tests for non-USD and JPY pairs"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Our backtest enters at candle close and if the next candle high hits TP and low hits SL, we count TP first because it is more optimistic. We ignore spread and commission for now.",
+      "expected_output": "Should classify the backtest as invalid or highly misleading. Should identify intrabar sequencing bias, optimistic fill ordering, ignored spread and commission, and likely overstated performance. Should recommend conservative fill rules, lower-timeframe or tick data, explicit spread and slippage models, and reporting assumptions with results.",
+      "assertions": [
+        "Flags intrabar sequencing bias",
+        "Flags optimistic TP-before-SL assumption",
+        "Flags missing spread and commission",
+        "Recommends conservative or data-driven fill model",
+        "Mentions slippage",
+        "Recommends documenting assumptions"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "We show account balance, open P/L, and leverage, but we do not currently show equity, used margin, free margin, or margin level.",
+      "expected_output": "Should flag missing equity and margin state as a major risk visibility and correctness gap. Should explain balance vs equity vs floating P/L, used margin, free margin, margin level, leverage, margin call, and stop-out risk. Should recommend using broker margin calculations or symbol-specific margin metadata and adding tests for margin changes as price moves.",
+      "assertions": [
+        "Explains balance vs equity",
+        "Mentions used margin and free margin",
+        "Mentions margin level",
+        "Mentions margin call or stop-out risk",
+        "Warns against global leverage-only margin calculations",
+        "Provides verification cases"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "The strategy uses a 1-hour trend filter on a 5-minute entry chart. It reads the current 1-hour candle high and close while that candle is still forming.",
+      "expected_output": "Should identify multi-timeframe lookahead or live-candle ambiguity. Should explain that higher-timeframe candle values are not final until close and can repaint. Should recommend using only the last closed higher-timeframe candle for backtests, or explicitly labeling and testing live partial-candle behavior.",
+      "assertions": [
+        "Flags multi-timeframe synchronization risk",
+        "Mentions lookahead bias or repainting",
+        "Distinguishes closed candle from live partial candle",
+        "Recommends last closed higher-timeframe candle for backtests",
+        "Suggests tests for signal timing"
+      ],
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "We persist order requests locally and mark them filled immediately after clicking Buy. Broker confirmation comes later through a websocket.",
+      "expected_output": "Should flag optimistic local fill state as dangerous for broker-connected trading. Should recommend explicit order states, broker confirmation, rejection handling, partial-fill handling, duplicate-order prevention, and reconnect reconciliation. Should mention audit logs and idempotency.",
+      "assertions": [
+        "Flags optimistic fill state",
+        "Recommends explicit lifecycle states",
+        "Mentions broker confirmation",
+        "Mentions rejection and partial fills",
+        "Mentions duplicate-order prevention or idempotency",
+        "Mentions reconnect reconciliation"
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "GateZero is still G0_RESEARCH. A proposed historical backtest contract stores candle close, trade direction, gross P/L, and win rate, but not spread, commission, slippage, data timezone, or trade count.",
+      "expected_output": "Should keep the recommendation inside Gate 0 or Gate 1 contract work. Should flag missing friction, timezone, and sample-size fields as backtest-validity gaps without recommending broker integration or live execution.",
+      "assertions": [
+        "Mentions Gate 0 or Gate 1 boundary",
+        "Flags missing spread or commission",
+        "Flags missing slippage",
+        "Mentions timezone",
+        "Mentions trade count or sample size",
+        "Does not recommend execution implementation"
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "A GateZero fixture uses one EURUSD-like symbol and assumes pip value is fixed in USD for every future forex pair.",
+      "expected_output": "Should flag the fixture as too narrow and warn against universal pip assumptions. Should recommend JPY, cross-currency, account-currency conversion, tick size/value, lot step, and explicit symbol metadata fixtures.",
+      "assertions": [
+        "Rejects universal pip assumptions",
+        "Mentions JPY pair coverage",
+        "Mentions cross-currency conversion",
+        "Mentions tick size or tick value",
+        "Mentions lot step",
+        "Recommends explicit metadata fixtures"
+      ],
+      "files": []
+    }
+  ]
+}

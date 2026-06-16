@@ -46,6 +46,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 | `pnpm check:gate0-ci-evidence`                      | `scripts/check-gate0-ci-evidence-freshness.ts`          | Manual remote CI evidence freshness check.       | Pass   |
 | `pnpm check:gate0-command-center`                   | `scripts/check-gate0-command-center-freshness.ts`       | Local command center evidence freshness check.   | Pass   |
 | `pnpm check:gate0-command-center-render`            | `scripts/check-gate0-command-center-render-contract.ts` | Local command center render contract check.      | Pass   |
+| `pnpm check:gate0-skills`                           | `scripts/check-gate0-skill-governance.ts`               | Local project skill governance check.            | Pass   |
 | `pnpm check:gate1-contracts`                        | `scripts/check-gate1-contracts.ts`                      | Gate 1 contract control-record guard.            | Pass   |
 | `pnpm preview:web`                                  | `scripts/preview-web.ts`                                | Local host static command center preview.        | Pass   |
 | `pnpm check:gate0`                                  | `package.json`                                          | Snapshot refresh plus local Gate 0 guard suite.  | Pass   |
@@ -62,12 +63,12 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 - Operating record commands cover progress snapshot generation, evidence-index drift, docs coverage
   drift, snapshot freshness, project-name consistency, tracklist consistency, review coverage, agent
   manifest drift, repository hygiene, manual CI evidence freshness, command center evidence
-  freshness, command center render-contract coverage, the Gate 1 contract guard, and the
-  consolidated Gate 0 guard suite.
+  freshness, command center render-contract coverage, project skill governance, the Gate 1 contract
+  guard, and the consolidated Gate 0 guard suite.
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 63 test files and 321 tests passing.
+- The accepted latest suite result is 64 test files and 324 tests passing.
 
 ## Locality Notes
 
@@ -108,6 +109,7 @@ product launch, or later-phase operation.
   `docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md`
 - Command center rendered evidence contract:
   `docs/operations/GATE0_COMMAND_CENTER_RENDERED_EVIDENCE_CONTRACT.md`
+- Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - Guard suite command consolidation: `docs/operations/GATE0_GUARD_SUITE_COMMAND_CONSOLIDATION.md`
 - Name check coverage audit: `docs/operations/GATE0_NAME_CHECK_COVERAGE_AUDIT.md`
 - Gate 1 contract guard: `docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

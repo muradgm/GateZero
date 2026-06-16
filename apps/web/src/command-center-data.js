@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-207",
-  localVerification: "63 files / 321 tests",
+  latestPacket: "TRD-208",
+  localVerification: "64 files / 324 tests",
   ciRun: "27502500171",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 63 files, 321 tests.",
+      detail: "Latest suite: 64 files, 324 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "207 / 207",
+      value: "208 / 208",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,7 +58,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "63 files / 321 tests"
+      reference: "64 files / 324 tests"
     },
     {
       area: "Remote CI",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "207 accepted records"
+      reference: "208 accepted records"
     }
   ],
   nextActions: [
@@ -117,7 +117,16 @@ export const commandCenterData = {
       items: [
         "scripts/check-gate0-command-center-freshness.ts",
         "scripts/check-gate0-command-center-render-contract.ts",
+        "scripts/check-gate0-skill-governance.ts",
         "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
+      ]
+    },
+    {
+      label: "Skills",
+      items: [
+        "skills/trader-product-reviewer/SKILL.md",
+        "skills/trading-forex-domain-expert/SKILL.md",
+        "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md"
       ]
     },
     {

@@ -155,6 +155,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md`
 - `operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md`
 - `operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
+- `operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
 - `operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`

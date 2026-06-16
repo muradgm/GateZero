@@ -49,6 +49,7 @@ const DEFAULT_ALLOWLISTED_PATH_PATTERNS: readonly RegExp[] = [
   /^ops\/validation\//,
   /^packages\/.*\/tests\//,
   /^packages\/validation\/src\//,
+  /^skills\//,
   /^scripts\/validate-gate0\.ts$/,
   /(^|\/)README\.md$/
 ];
