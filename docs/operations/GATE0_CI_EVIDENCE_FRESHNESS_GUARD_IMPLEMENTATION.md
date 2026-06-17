@@ -12,7 +12,7 @@ pnpm check:gate0-ci-evidence
 
 ## Checks
 
-- Finds Gate 0 GitHub CI evidence documents.
+- Finds Gate 0 GitHub CI and remote CI evidence documents.
 - Parses the latest evidence record by `Updated` timestamp.
 - Requires `Gate 0 Verification`, `push`, `completed`, and `success`.
 - Requires the run URL to include the recorded run id.
@@ -25,6 +25,12 @@ This command is intentionally standalone and is not part of `pnpm verify:gate0`.
 
 It does not authorize deployment, broker access, execution, AI prediction, strategy approval,
 readiness claims, profitability claims, or gate advancement.
+
+## Filename Coverage
+
+The guard includes both historical `GATE0_GITHUB_CI_*EVIDENCE*.md` records and newer
+`GATE0_REMOTE_CI_*EVIDENCE*.md` records so the latest remote verification refresh is checked by the
+same freshness policy.
 
 ## Source Links
 

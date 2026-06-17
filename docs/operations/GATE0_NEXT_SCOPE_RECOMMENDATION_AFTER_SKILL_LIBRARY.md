@@ -30,7 +30,7 @@ justifies the next packet.
 
 The current control plane has:
 
-- A green local verification suite: `66 files / 334 tests`.
+- A green local verification suite: `66 files / 335 tests`.
 - Review coverage aligned through `TRD-225`.
 - Governed project-local skills with explicit invocation.
 - A routing matrix and guard for important decision lenses.

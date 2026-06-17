@@ -281,10 +281,16 @@ deployment approval, or future-phase eligibility.
 | `TRD-229` | GitHub Actions runtime guard             | `scripts/check-gate0-github-actions-runtime.ts`                                              | Guards action majors and project runtime posture.                |
 | `TRD-229` | GitHub Actions runtime guard tests       | `packages/fixtures/tests/gate0-github-actions-runtime.test.ts`                               | Tests pass and bounded failure paths for workflow posture.       |
 | `TRD-229` | GitHub Actions runtime upgrade record    | `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`                              | Documents the bounded CI action-major upgrade.                   |
+| `TRD-230` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`            | Records latest passing CI evidence after action upgrade.         |
+| `TRD-230` | CI evidence freshness guard coverage     | `scripts/check-gate0-ci-evidence-freshness.ts`                                               | Includes remote CI evidence refresh records in freshness checks. |
+| `TRD-230` | Agent manifest guard reliability         | `scripts/check-gate0-agent-manifest.ts`                                                      | Avoids repeated support-doc scans during recursive traversal.    |
+| `TRD-230` | Command center CI run refresh            | `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`  | Records command-center CI run display alignment.                 |
+| `TRD-230` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static dashboard at the latest CI evidence.           |
+| `TRD-230` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-229` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-230` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

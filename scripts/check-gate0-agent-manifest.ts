@@ -199,21 +199,7 @@ async function listAgentDirectoryNames(agentsDir: string): Promise<readonly stri
 }
 
 async function listAgentFiles(rootDir: string, dir: string): Promise<readonly string[]> {
-  const entries = await readdir(dir, { withFileTypes: true });
-  const files: string[] = [];
-
-  for (const entry of entries) {
-    const absolutePath = path.join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      files.push(...(await listAgentFiles(rootDir, absolutePath)));
-      continue;
-    }
-
-    if (entry.isFile()) {
-      files.push(absolutePath);
-    }
-  }
+  const files = [...(await listFilesRecursive(dir))];
 
   for (const supportDir of [
     "ops/truth",
@@ -227,6 +213,26 @@ async function listAgentFiles(rootDir: string, dir: string): Promise<readonly st
 
   const docsDir = path.join(rootDir, "docs");
   files.push(...(await listMarkdownAndJsonFiles(docsDir)));
+
+  return files.sort();
+}
+
+async function listFilesRecursive(dir: string): Promise<readonly string[]> {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files: string[] = [];
+
+  for (const entry of entries) {
+    const absolutePath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await listFilesRecursive(absolutePath)));
+      continue;
+    }
+
+    if (entry.isFile()) {
+      files.push(absolutePath);
+    }
+  }
 
   return files.sort();
 }

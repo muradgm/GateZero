@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-229`                                                      |
-| Latest accepted validation | 66 test files, 334 tests passed                                |
+| Latest accepted packet     | `TRD-230`                                                      |
+| Latest accepted validation | 66 test files, 335 tests passed                                |
 
 ## Boundary
 
@@ -96,7 +96,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 66 test files passed, 334 tests passed.
+- `pnpm test`: 66 test files passed, 335 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -141,7 +141,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-229`
+- Accepted packets: `TRD-044` to `TRD-230`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -194,6 +194,8 @@ Latest accepted result:
   - Docs control-plane, product strategy, UI command-center, and quant backtest reviewer skills.
   - Skill routing matrix and guard for matching important decisions to the right skill lens.
   - GitHub Actions Node 24-compatible action upgrade and local runtime posture guard.
+  - Remote CI evidence freshness coverage, agent-manifest guard reliability, evidence refresh, and
+    command-center CI run display alignment after the action upgrade.
 
 ## Workstream Summary
 
@@ -531,6 +533,7 @@ Latest accepted result:
 | `TRD-227` | accepted | UI evidence      | Refreshed command center CI run after skill closeout.  |
 | `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.      |
 | `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors.  |
+| `TRD-230` | accepted | CI evidence      | Refreshed CI evidence after action runtime upgrade.    |
 
 ## Current Operator Commands
 
@@ -853,6 +856,12 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md`
 - GitHub Actions Node 24 action upgrade:
   `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
+- Remote CI evidence after Node 24 action upgrade:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`
+- CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
+- Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
+- Command center CI run refresh after Node 24 action upgrade:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

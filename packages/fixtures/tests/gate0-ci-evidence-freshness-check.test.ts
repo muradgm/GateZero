@@ -5,6 +5,19 @@ import {
   type Gate0CiEvidenceFreshnessInput
 } from "../../../scripts/check-gate0-ci-evidence-freshness.js";
 
+const baseEvidenceContent = [
+  "| Field | Value |",
+  "| --- | --- |",
+  "| Workflow | `Gate 0 Verification` |",
+  "| Run id | `1` |",
+  "| Event | `push` |",
+  "| Status | `completed` |",
+  "| Conclusion | `success` |",
+  "| Commit | `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` |",
+  "| Updated | `2026-06-14T07:00:00Z` |",
+  "| URL | `https://github.com/muradgm/GateZero/actions/runs/1` |"
+].join("\n");
+
 const completeInput: Gate0CiEvidenceFreshnessInput = {
   currentHeadSha: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
   knownCommitShas: [
@@ -16,18 +29,7 @@ const completeInput: Gate0CiEvidenceFreshnessInput = {
   evidenceFiles: [
     {
       relativePath: "docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md",
-      content: [
-        "| Field | Value |",
-        "| --- | --- |",
-        "| Workflow | `Gate 0 Verification` |",
-        "| Run id | `1` |",
-        "| Event | `push` |",
-        "| Status | `completed` |",
-        "| Conclusion | `success` |",
-        "| Commit | `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` |",
-        "| Updated | `2026-06-14T07:00:00Z` |",
-        "| URL | `https://github.com/muradgm/GateZero/actions/runs/1` |"
-      ].join("\n")
+      content: baseEvidenceContent
     }
   ]
 };
@@ -82,5 +84,25 @@ describe("Gate 0 CI evidence freshness check", () => {
 
     expect(result.ok).toBe(false);
     expect(result.findings).toContain("Latest CI evidence is stale: 31 days old, max 14 days");
+  });
+
+  it("accepts remote CI evidence refresh records", () => {
+    const result = checkGate0CiEvidenceFreshness({
+      ...completeInput,
+      evidenceFiles: [
+        {
+          relativePath:
+            "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md",
+          content: baseEvidenceContent
+            .replace("| Run id | `1` |", "| Run id | `2` |")
+            .replace("actions/runs/1", "actions/runs/2")
+        }
+      ]
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.latestEvidencePath).toBe(
+      "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md"
+    );
   });
 });

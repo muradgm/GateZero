@@ -25,6 +25,12 @@ pnpm check:gate0-agents
 The guard checks local operating records only. It does not create agents, dispatch work, increase
 autonomy, approve strategies, or authorize execution.
 
+## Reliability Note
+
+TRD-230 keeps support-document discovery top-level only, rather than repeating the same support
+document scan during every recursive agent-directory traversal. This preserves the same coverage
+while avoiding excessive concurrent file opens during full Gate 0 verification.
+
 ## Source Links
 
 - Source packet: `ops/assignments/TRD-174_AGENT_MANIFEST_DRIFT_GUARD.md`

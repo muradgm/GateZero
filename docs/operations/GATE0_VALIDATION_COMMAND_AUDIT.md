@@ -70,7 +70,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 66 test files and 334 tests passing.
+- The accepted latest suite result is 66 test files and 335 tests passing.
 
 ## Locality Notes
 

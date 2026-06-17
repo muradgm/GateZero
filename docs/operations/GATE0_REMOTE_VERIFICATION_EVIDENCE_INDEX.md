@@ -18,11 +18,13 @@ approval, risk approval, execution readiness, profitability evidence, or gate ad
 | `TRD-210` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`           | `27646334295` | `70a5160` | `success` |
 | `TRD-221` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_ROUTING.md`          | `27712864576` | `9010e15` | `success` |
 | `TRD-226` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md` | `27713436709` | `4f732fa` | `success` |
+| `TRD-230` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`  | `27716026760` | `1eebadb` | `success` |
 
 ## Supporting Records
 
 - Remote verification runbook: `docs/operations/GATE0_REMOTE_VERIFICATION_RUNBOOK.md`
 - Runtime hardening record: `docs/operations/GATE0_GITHUB_CI_WORKFLOW_RUNTIME_HARDENING.md`
+- Node 24 action upgrade: `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Freshness guard implementation:
   `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
 
