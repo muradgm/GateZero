@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-230`                                                      |
+| Latest accepted packet     | `TRD-231`                                                      |
 | Latest accepted validation | 66 test files, 335 tests passed                                |
 
 ## Boundary
@@ -141,7 +141,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-230`
+- Accepted packets: `TRD-044` to `TRD-231`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -196,6 +196,8 @@ Latest accepted result:
   - GitHub Actions Node 24-compatible action upgrade and local runtime posture guard.
   - Remote CI evidence freshness coverage, agent-manifest guard reliability, evidence refresh, and
     command-center CI run display alignment after the action upgrade.
+  - Command-center CI evidence refresh after the TRD-230 pushed verification run.
+  - CI evidence freshness coverage for command-center CI evidence records.
 
 ## Workstream Summary
 
@@ -534,6 +536,7 @@ Latest accepted result:
 | `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.      |
 | `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors.  |
 | `TRD-230` | accepted | CI evidence      | Refreshed CI evidence after action runtime upgrade.    |
+| `TRD-231` | accepted | UI evidence      | Refreshed command center CI run after TRD-230 push.    |
 
 ## Current Operator Commands
 
@@ -862,6 +865,8 @@ Do not mark a packet accepted until:
 - Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Command center CI run refresh after Node 24 action upgrade:
   `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`
+- Command center CI evidence refresh after TRD-230 push:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

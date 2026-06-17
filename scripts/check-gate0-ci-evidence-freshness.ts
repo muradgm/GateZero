@@ -37,7 +37,7 @@ interface ParsedEvidence {
   readonly url: string;
 }
 
-const evidenceFilePattern = /^GATE0_(?:GITHUB_CI|REMOTE_CI)_.*EVIDENCE.*\.md$/;
+const evidenceFilePattern = /^GATE0_(?:GITHUB_CI|REMOTE_CI|COMMAND_CENTER_CI)_.*EVIDENCE.*\.md$/;
 
 export async function loadGate0CiEvidenceFreshnessInput(
   rootDir: string
