@@ -21,6 +21,7 @@ approval, risk approval, execution readiness, profitability evidence, or gate ad
 | `TRD-230` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`  | `27716026760` | `1eebadb` | `success` |
 | `TRD-231` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md`    | `27716601329` | `5ab9bab` | `success` |
 | `TRD-241` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md`            | `27717942810` | `53d0264` | `success` |
+| `TRD-243` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD242_PUSH.md`            | `27718333544` | `a5d50b1` | `success` |
 
 ## Supporting Records
 

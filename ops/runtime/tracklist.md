@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-242`                                                      |
+| Latest accepted packet     | `TRD-244`                                                      |
 | Latest accepted validation | 68 test files, 341 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-242`
+- Accepted packets: `TRD-044` to `TRD-244`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -206,6 +206,8 @@ Latest accepted result:
     verified commit, source-link duplicate guard, tracklist section length guard, source-link index
     cleanup, command-center visual recheck, maintenance backlog re-rank, and Gate 1 blocker recheck.
   - Remote CI evidence refresh after the TRD-240 push and static command-center CI metadata
+    alignment to that evidence.
+  - Remote CI evidence refresh after the TRD-242 push and static command-center CI metadata
     alignment to that evidence.
 
 ## Workstream Summary
@@ -557,6 +559,8 @@ Latest accepted result:
 | `TRD-240` | accepted | Planning         | Rechecked Gate 1 blockers.                             |
 | `TRD-241` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-240 push.       |
 | `TRD-242` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-241.    |
+| `TRD-243` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-242 push.       |
+| `TRD-244` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-243.    |
 
 ## Current Operator Commands
 
@@ -904,6 +908,10 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md`
 - Command center CI metadata refresh after TRD-241:
   `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD241.md`
+- Remote CI evidence refresh after TRD-242 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD242_PUSH.md`
+- Command center CI metadata refresh after TRD-243:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD243.md`
 
 ## Source Of Truth Links Continued
 
