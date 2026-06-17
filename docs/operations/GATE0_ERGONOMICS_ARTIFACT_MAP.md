@@ -277,10 +277,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-228` | Command center hash navigation state     | `apps/web/src/main.js`                                                                       | Aligns active sidebar state with direct hash navigation.         |
 | `TRD-228` | Hash navigation render contract          | `scripts/check-gate0-command-center-render-contract.ts`                                      | Guards hash-aware navigation markers and updater logic.          |
 | `TRD-228` | Hash navigation state record             | `docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md`                              | Documents the local UI orientation fix.                          |
+| `TRD-229` | GitHub Actions Node 24 action upgrade    | `.github/workflows/gate0-verify.yml`                                                         | Uses Node 24-compatible official action majors.                  |
+| `TRD-229` | GitHub Actions runtime guard             | `scripts/check-gate0-github-actions-runtime.ts`                                              | Guards action majors and project runtime posture.                |
+| `TRD-229` | GitHub Actions runtime guard tests       | `packages/fixtures/tests/gate0-github-actions-runtime.test.ts`                               | Tests pass and bounded failure paths for workflow posture.       |
+| `TRD-229` | GitHub Actions runtime upgrade record    | `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`                              | Documents the bounded CI action-major upgrade.                   |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-228` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-229` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

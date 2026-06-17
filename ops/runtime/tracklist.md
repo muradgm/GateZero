@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-228`                                                      |
-| Latest accepted validation | 65 test files, 330 tests passed                                |
+| Latest accepted packet     | `TRD-229`                                                      |
+| Latest accepted validation | 66 test files, 334 tests passed                                |
 
 ## Boundary
 
@@ -49,6 +49,7 @@ pnpm check:gate0-command-center-render
 pnpm check:gate0-skills
 pnpm check:gate0-skill-routing
 pnpm check:gate0-agents
+pnpm check:gate0-actions-runtime
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
 pnpm check:gate0-name
@@ -82,6 +83,7 @@ Latest accepted result:
 - `pnpm check:gate0-skills`: passed.
 - `pnpm check:gate0-skill-routing`: passed.
 - `pnpm check:gate0-agents`: passed.
+- `pnpm check:gate0-actions-runtime`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
 - `pnpm check:gate0-name`: passed.
@@ -94,7 +96,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 65 test files passed, 330 tests passed.
+- `pnpm test`: 66 test files passed, 334 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -139,7 +141,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-228`
+- Accepted packets: `TRD-044` to `TRD-229`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -191,6 +193,7 @@ Latest accepted result:
     posture.
   - Docs control-plane, product strategy, UI command-center, and quant backtest reviewer skills.
   - Skill routing matrix and guard for matching important decisions to the right skill lens.
+  - GitHub Actions Node 24-compatible action upgrade and local runtime posture guard.
 
 ## Workstream Summary
 
@@ -527,6 +530,7 @@ Latest accepted result:
 | `TRD-226` | accepted | CI evidence      | Refreshed remote CI evidence after skill closeout.     |
 | `TRD-227` | accepted | UI evidence      | Refreshed command center CI run after skill closeout.  |
 | `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.      |
+| `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors.  |
 
 ## Current Operator Commands
 
@@ -847,6 +851,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md`
 - Command center hash navigation state:
   `docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md`
+- GitHub Actions Node 24 action upgrade:
+  `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -867,6 +873,8 @@ Do not mark a packet accepted until:
 - CI evidence freshness guard tests:
   `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
+- GitHub Actions runtime guard script: `scripts/check-gate0-github-actions-runtime.ts`
+- GitHub Actions runtime guard tests: `packages/fixtures/tests/gate0-github-actions-runtime.test.ts`
 - Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Agent manifest drift guard tests: `packages/fixtures/tests/gate0-agent-manifest-check.test.ts`
 - Repo hygiene guard script: `scripts/check-repo-hygiene.ts`

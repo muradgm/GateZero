@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-228",
-  localVerification: "65 files / 330 tests",
+  latestPacket: "TRD-229",
+  localVerification: "66 files / 334 tests",
   ciRun: "27713436709",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 65 files, 330 tests.",
+      detail: "Latest suite: 66 files, 334 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "228 / 228",
+      value: "229 / 229",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,7 +58,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "65 files / 330 tests"
+      reference: "66 files / 334 tests"
     },
     {
       area: "Remote CI",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "228 accepted records"
+      reference: "229 accepted records"
     }
   ],
   nextActions: [
@@ -116,7 +116,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
-        "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
+        "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md",
+        "docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md"
       ]
     },
     {
@@ -126,7 +127,9 @@ export const commandCenterData = {
         "scripts/check-gate0-command-center-render-contract.ts",
         "scripts/check-gate0-skill-governance.ts",
         "scripts/check-gate0-skill-routing.ts",
+        "scripts/check-gate0-github-actions-runtime.ts",
         "packages/fixtures/tests/gate0-skill-routing.test.ts",
+        "packages/fixtures/tests/gate0-github-actions-runtime.test.ts",
         "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
       ]
     },

@@ -19,7 +19,7 @@ increase autonomy.
 - Trigger: `push` and `pull_request` for `main`
 - Permissions: read-only repository contents
 - Project runtime: Node.js 22 with pnpm
-- GitHub JavaScript action runtime: opted into Node.js 24 with `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`
+- GitHub JavaScript action runtime: Node.js 24-compatible official action majors
 - Verification: `pnpm install --frozen-lockfile`, then `pnpm verify:gate0`
 
 ## Boundary
@@ -34,4 +34,5 @@ approval, execution readiness, profitability evidence, or gate advancement.
   `ops/runtime/reviews/TRD-172_RISK_REVIEW.md`,
   `ops/runtime/reviews/TRD-172_ORCHESTRATOR_ACCEPTANCE.md`
 - Command source: `package.json`
+- Runtime action upgrade: `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Tracker: `ops/runtime/tracklist.md`

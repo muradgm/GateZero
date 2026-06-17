@@ -17,6 +17,11 @@ env:
 This opts GitHub JavaScript actions into Node.js 24 action runtime. It does not change GateZero's
 project runtime, which remains Node.js 22 in the workflow.
 
+## Superseding Follow-Up
+
+TRD-229 later upgraded the workflow to Node 24-compatible official action majors and removed the
+temporary override. This record remains historical evidence for the earlier mitigation.
+
 ## Expected Verification
 
 The workflow continues to run:
@@ -38,4 +43,5 @@ prediction features, strategy claims, or risk-gate changes.
   `ops/runtime/reviews/TRD-179_ORCHESTRATOR_ACCEPTANCE.md`
 - CI workflow: `.github/workflows/gate0-verify.yml`
 - Deprecation review: `docs/operations/GATE0_GITHUB_ACTIONS_NODE_RUNTIME_DEPRECATION_REVIEW.md`
+- Superseding upgrade: `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Tracker: `ops/runtime/tracklist.md`

@@ -49,6 +49,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 | `pnpm check:gate0-skills`                           | `scripts/check-gate0-skill-governance.ts`               | Local project skill and intake governance check. | Pass   |
 | `pnpm check:gate0-skill-routing`                    | `scripts/check-gate0-skill-routing.ts`                  | Local project skill routing matrix check.        | Pass   |
 | `pnpm check:gate1-contracts`                        | `scripts/check-gate1-contracts.ts`                      | Gate 1 contract control-record guard.            | Pass   |
+| `pnpm check:gate0-actions-runtime`                  | `scripts/check-gate0-github-actions-runtime.ts`         | GitHub Actions runtime posture check.            | Pass   |
 | `pnpm preview:web`                                  | `scripts/preview-web.ts`                                | Local host static command center preview.        | Pass   |
 | `pnpm check:gate0`                                  | `package.json`                                          | Snapshot refresh plus local Gate 0 guard suite.  | Pass   |
 | `pnpm verify:gate0`                                 | `package.json`                                          | Gate 0 guard suite plus quality checks.          | Pass   |
@@ -64,12 +65,12 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 - Operating record commands cover progress snapshot generation, evidence-index drift, docs coverage
   drift, snapshot freshness, project-name consistency, tracklist consistency, review coverage, agent
   manifest drift, repository hygiene, manual CI evidence freshness, command center evidence
-  freshness, command center render-contract coverage, project skill and intake governance, the Gate
-  1 contract guard, and the consolidated Gate 0 guard suite.
+  freshness, command center render-contract coverage, project skill and intake governance, GitHub
+  Actions runtime posture, the Gate 1 contract guard, and the consolidated Gate 0 guard suite.
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 65 test files and 330 tests passing.
+- The accepted latest suite result is 66 test files and 334 tests passing.
 
 ## Locality Notes
 
@@ -114,6 +115,7 @@ product launch, or later-phase operation.
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - Skill routing matrix: `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`
 - Skill routing guard: `docs/operations/GATE0_SKILL_ROUTING_GUARD.md`
+- GitHub Actions runtime upgrade: `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Guard suite command consolidation: `docs/operations/GATE0_GUARD_SUITE_COMMAND_CONSOLIDATION.md`
 - Name check coverage audit: `docs/operations/GATE0_NAME_CHECK_COVERAGE_AUDIT.md`
 - Gate 1 contract guard: `docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md`
