@@ -1,0 +1,44 @@
+{
+  "skill_name": "gatezero-risk-governance-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review a GateZero packet that renames a validation pass to 'strategy approved' because all local tests passed.",
+      "expected_output": "Should classify approval language as a critical or high risk issue. Should state that tests are repository verification only, not strategy approval or readiness evidence, and require replacement with evidence or validation language.",
+      "assertions": [
+        "Rejects strategy approval language",
+        "States tests are repository verification only",
+        "Mentions G0_RESEARCH or research_only",
+        "Requires safer evidence or validation wording",
+        "Does not endorse gate movement"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "A future dashboard proposal adds a paper execution simulator and says no broker is connected yet.",
+      "expected_output": "Should flag paper execution mechanics as out of scope at Gate 0. Should require future-phase blocker language and separate authorization before any implementation.",
+      "assertions": [
+        "Flags paper execution as out of scope",
+        "Mentions Gate 0 boundary",
+        "Requires future-phase blocker language",
+        "Does not approve implementation",
+        "Mentions autonomy or execution risk"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "A command-center card says 'Ready for Gate 1' after all review records exist.",
+      "expected_output": "Should reject readiness semantics and recommend neutral wording such as evidence complete, records aligned, or blockers identified. Should preserve gate status and avoid future-phase eligibility claims.",
+      "assertions": [
+        "Rejects readiness semantics",
+        "Recommends neutral evidence wording",
+        "Preserves current gate",
+        "Avoids future-phase eligibility claims",
+        "Mentions review records are not approval"
+      ],
+      "files": []
+    }
+  ]
+}

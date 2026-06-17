@@ -247,10 +247,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-212` | Orchestrator reviewer metadata           | `skills/gatezero-orchestrator-reviewer/agents/openai.yaml`                         | Requires explicit invocation for the project skill.              |
 | `TRD-212` | Orchestrator reviewer evals              | `skills/gatezero-orchestrator-reviewer/evals/evals.json`                           | Captures phase-aware orchestration behavior examples.            |
 | `TRD-212` | Orchestrator reviewer intake record      | `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`                      | Documents governed intake of the orchestrator skill.             |
+| `TRD-213` | Risk governance reviewer skill           | `skills/gatezero-risk-governance-reviewer/SKILL.md`                                | Adds risk and autonomy gate review lens.                         |
+| `TRD-213` | Risk governance reviewer metadata        | `skills/gatezero-risk-governance-reviewer/agents/openai.yaml`                      | Requires explicit invocation for the project skill.              |
+| `TRD-213` | Risk governance reviewer evals           | `skills/gatezero-risk-governance-reviewer/evals/evals.json`                        | Captures phase-aware risk governance behavior examples.          |
+| `TRD-213` | Risk governance reviewer intake record   | `docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`                   | Documents governed intake of the risk governance skill.          |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-212` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-213` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

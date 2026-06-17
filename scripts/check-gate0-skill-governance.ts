@@ -20,6 +20,7 @@ export interface Gate0SkillGovernanceResult {
 
 const expectedSkills = [
   "gatezero-orchestrator-reviewer",
+  "gatezero-risk-governance-reviewer",
   "trader-product-reviewer",
   "trading-forex-domain-expert"
 ] as const;

@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-212",
+  latestPacket: "TRD-213",
   localVerification: "64 files / 325 tests",
   ciRun: "27646334295",
   ciState: "success",
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "212 / 212",
+      value: "213 / 213",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "212 accepted records"
+      reference: "213 accepted records"
     }
   ],
   nextActions: [
@@ -127,11 +127,13 @@ export const commandCenterData = {
       label: "Skills",
       items: [
         "skills/gatezero-orchestrator-reviewer/SKILL.md",
+        "skills/gatezero-risk-governance-reviewer/SKILL.md",
         "skills/trader-product-reviewer/SKILL.md",
         "skills/trading-forex-domain-expert/SKILL.md",
         "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md",
         "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
-        "docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md"
+        "docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md",
+        "docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md"
       ]
     },
     {

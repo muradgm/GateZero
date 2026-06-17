@@ -5,6 +5,7 @@
 This review records the controlled adoption of local GateZero project skills:
 
 - `skills/gatezero-orchestrator-reviewer/`
+- `skills/gatezero-risk-governance-reviewer/`
 - `skills/trader-product-reviewer/`
 - `skills/trading-forex-domain-expert/`
 
@@ -69,6 +70,8 @@ explicitly allowlisted governance, docs, test, validation, or ops records.
   `ops/runtime/reviews/TRD-208_ORCHESTRATOR_ACCEPTANCE.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - Orchestrator reviewer skill intake: `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
+- Risk governance reviewer skill intake:
+  `docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`
 - Skill guard script: `scripts/check-gate0-skill-governance.ts`
 - Skill guard tests: `packages/fixtures/tests/gate0-skill-governance.test.ts`
 - Forbidden-pattern scanner: `packages/validation/src/forbidden-patterns.ts`
