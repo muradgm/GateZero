@@ -291,10 +291,23 @@ deployment approval, or future-phase eligibility.
 | `TRD-231` | CI evidence freshness guard coverage     | `scripts/check-gate0-ci-evidence-freshness.ts`                                               | Includes command-center CI evidence records in freshness checks. |
 | `TRD-231` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static dashboard at the latest pushed CI evidence.    |
 | `TRD-231` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
+| `TRD-232` | Latest-push evidence confirmation        | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX_LATEST_PUSH_CONFIRMATION.md`       | Confirms the evidence index remains aligned to latest push.      |
+| `TRD-233` | CI evidence count expectation            | `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md`                          | Documents CI evidence record-family count coverage.              |
+| `TRD-233` | CI evidence freshness tests              | `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`                          | Adds three-record-family focused coverage.                       |
+| `TRD-234` | Command center verified commit           | `docs/operations/GATE0_COMMAND_CENTER_LAST_VERIFIED_COMMIT.md`                               | Documents the static last verified commit field.                 |
+| `TRD-234` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Displays last verified commit as repository evidence.            |
+| `TRD-235` | Source-link duplicate guard              | `scripts/check-gate0-source-link-duplicates.ts`                                              | Checks duplicate tracklist source links.                         |
+| `TRD-235` | Source-link duplicate guard tests        | `packages/fixtures/tests/gate0-source-link-duplicates.test.ts`                               | Tests pass and duplicate failure paths.                          |
+| `TRD-236` | Tracklist section length guard           | `scripts/check-gate0-tracklist-section-length.ts`                                            | Checks tracklist section sizes.                                  |
+| `TRD-236` | Tracklist section length tests           | `packages/fixtures/tests/gate0-tracklist-section-length.test.ts`                             | Tests pass and oversized-section failure paths.                  |
+| `TRD-237` | Tracklist source-link index cleanup      | `docs/operations/GATE0_TRACKLIST_SOURCE_LINK_INDEX.md`                                       | Documents source-link dedupe and split-index posture.            |
+| `TRD-238` | Command center visual recheck            | `docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md`                        | Records bounded static command-center visual recheck.            |
+| `TRD-239` | Maintenance backlog re-rank              | `docs/operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`                                        | Keeps the next queue maintenance-first.                          |
+| `TRD-240` | Gate 1 blocker recheck                   | `docs/operations/GATE1_READINESS_BLOCKER_RECHECK.md`                                         | Confirms future Gate 1 remains blocked.                          |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-231` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-240` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

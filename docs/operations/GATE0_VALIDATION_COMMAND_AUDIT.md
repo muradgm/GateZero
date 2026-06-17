@@ -50,6 +50,8 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 | `pnpm check:gate0-skill-routing`                    | `scripts/check-gate0-skill-routing.ts`                  | Local project skill routing matrix check.        | Pass   |
 | `pnpm check:gate1-contracts`                        | `scripts/check-gate1-contracts.ts`                      | Gate 1 contract control-record guard.            | Pass   |
 | `pnpm check:gate0-actions-runtime`                  | `scripts/check-gate0-github-actions-runtime.ts`         | GitHub Actions runtime posture check.            | Pass   |
+| `pnpm check:gate0-source-links`                     | `scripts/check-gate0-source-link-duplicates.ts`         | Tracklist duplicate source-link check.           | Pass   |
+| `pnpm check:gate0-tracklist-sections`               | `scripts/check-gate0-tracklist-section-length.ts`       | Tracklist section length check.                  | Pass   |
 | `pnpm preview:web`                                  | `scripts/preview-web.ts`                                | Local host static command center preview.        | Pass   |
 | `pnpm check:gate0`                                  | `package.json`                                          | Snapshot refresh plus local Gate 0 guard suite.  | Pass   |
 | `pnpm verify:gate0`                                 | `package.json`                                          | Gate 0 guard suite plus quality checks.          | Pass   |
@@ -66,11 +68,12 @@ performance evidence, profitability evidence, deployment approval, or future-pha
   drift, snapshot freshness, project-name consistency, tracklist consistency, review coverage, agent
   manifest drift, repository hygiene, manual CI evidence freshness, command center evidence
   freshness, command center render-contract coverage, project skill and intake governance, GitHub
-  Actions runtime posture, the Gate 1 contract guard, and the consolidated Gate 0 guard suite.
+  Actions runtime posture, duplicate source-link coverage, tracklist section length coverage, the
+  Gate 1 contract guard, and the consolidated Gate 0 guard suite.
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 66 test files and 335 tests passing.
+- The accepted latest suite result is 68 test files and 341 tests passing.
 
 ## Locality Notes
 
@@ -107,6 +110,8 @@ product launch, or later-phase operation.
 - Agent manifest drift guard: `docs/operations/GATE0_AGENT_MANIFEST_DRIFT_GUARD.md`
 - Repo hygiene guard: `docs/operations/GATE0_REPO_HYGIENE_GUARD.md`
 - CI evidence freshness guard: `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_GUARD_IMPLEMENTATION.md`
+- CI evidence count expectations:
+  `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md`
 - Command center evidence freshness guard:
   `docs/operations/GATE0_COMMAND_CENTER_EVIDENCE_FRESHNESS_GUARD.md`
 - Command center rendered evidence contract:
@@ -116,6 +121,8 @@ product launch, or later-phase operation.
 - Skill routing matrix: `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`
 - Skill routing guard: `docs/operations/GATE0_SKILL_ROUTING_GUARD.md`
 - GitHub Actions runtime upgrade: `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
+- Source-link duplicate check: `docs/operations/GATE0_SOURCE_LINK_DUPLICATE_CHECK.md`
+- Tracklist section length guard: `docs/operations/GATE0_TRACKLIST_SECTION_LENGTH_GUARD.md`
 - Guard suite command consolidation: `docs/operations/GATE0_GUARD_SUITE_COMMAND_CONSOLIDATION.md`
 - Name check coverage audit: `docs/operations/GATE0_NAME_CHECK_COVERAGE_AUDIT.md`
 - Gate 1 contract guard: `docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

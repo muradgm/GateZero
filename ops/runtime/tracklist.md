@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-231`                                                      |
-| Latest accepted validation | 66 test files, 335 tests passed                                |
+| Latest accepted packet     | `TRD-240`                                                      |
+| Latest accepted validation | 68 test files, 341 tests passed                                |
 
 ## Boundary
 
@@ -50,6 +50,8 @@ pnpm check:gate0-skills
 pnpm check:gate0-skill-routing
 pnpm check:gate0-agents
 pnpm check:gate0-actions-runtime
+pnpm check:gate0-source-links
+pnpm check:gate0-tracklist-sections
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
 pnpm check:gate0-name
@@ -84,6 +86,8 @@ Latest accepted result:
 - `pnpm check:gate0-skill-routing`: passed.
 - `pnpm check:gate0-agents`: passed.
 - `pnpm check:gate0-actions-runtime`: passed.
+- `pnpm check:gate0-source-links`: passed.
+- `pnpm check:gate0-tracklist-sections`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
 - `pnpm check:gate0-name`: passed.
@@ -96,7 +100,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 66 test files passed, 335 tests passed.
+- `pnpm test`: 68 test files passed, 341 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -141,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-231`
+- Accepted packets: `TRD-044` to `TRD-240`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -198,6 +202,9 @@ Latest accepted result:
     command-center CI run display alignment after the action upgrade.
   - Command-center CI evidence refresh after the TRD-230 pushed verification run.
   - CI evidence freshness coverage for command-center CI evidence records.
+  - Latest push evidence-index confirmation, CI evidence count expectations, command-center last
+    verified commit, source-link duplicate guard, tracklist section length guard, source-link index
+    cleanup, command-center visual recheck, maintenance backlog re-rank, and Gate 1 blocker recheck.
 
 ## Workstream Summary
 
@@ -537,6 +544,15 @@ Latest accepted result:
 | `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors.  |
 | `TRD-230` | accepted | CI evidence      | Refreshed CI evidence after action runtime upgrade.    |
 | `TRD-231` | accepted | UI evidence      | Refreshed command center CI run after TRD-230 push.    |
+| `TRD-232` | accepted | CI evidence      | Confirmed latest-push evidence index alignment.        |
+| `TRD-233` | accepted | Validation       | Added CI evidence count expectation coverage.          |
+| `TRD-234` | accepted | UI evidence      | Added command center last verified commit field.       |
+| `TRD-235` | accepted | Validation       | Added source-link duplicate guard.                     |
+| `TRD-236` | accepted | Validation       | Added tracklist section length guard.                  |
+| `TRD-237` | accepted | Control plane    | Cleaned tracklist source-link index.                   |
+| `TRD-238` | accepted | UI QA            | Added command center visual recheck after TRD-231.     |
+| `TRD-239` | accepted | Foundation       | Re-ranked maintenance backlog.                         |
+| `TRD-240` | accepted | Planning         | Rechecked Gate 1 blockers.                             |
 
 ## Current Operator Commands
 
@@ -556,6 +572,8 @@ Latest accepted result:
 | `pnpm check:gate0-tracklist`                        | Check accepted packet ledger alignment.                 | Local consistency check passes.                                |
 | `pnpm check:gate0-reviews`                          | Check assignment and review-record coverage.            | Local review coverage check passes.                            |
 | `pnpm check:gate0-agents`                           | Check agent manifest and reference drift.               | Local agent manifest guard passes.                             |
+| `pnpm check:gate0-source-links`                     | Check duplicate tracklist source links.                 | Local source-link duplicate guard passes.                      |
+| `pnpm check:gate0-tracklist-sections`               | Check tracklist section sizes.                          | Local tracklist section length guard passes.                   |
 | `pnpm check:repo-hygiene`                           | Check repository hygiene drift.                         | Local repository hygiene guard passes.                         |
 | `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
 | `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
@@ -569,9 +587,11 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet | Status | Goal                                        | Acceptance focus              |
-| ---- | ------ | ------ | ------------------------------------------- | ----------------------------- |
-| 1    | None   | paused | Wait for a concrete Gate 0 maintenance gap. | Do not queue broad expansion. |
+| Rank | Packet  | Status | Goal                                         | Acceptance focus              |
+| ---- | ------- | ------ | -------------------------------------------- | ----------------------------- |
+| 1    | TRD-241 | queued | Refresh remote CI evidence after this push.  | Evidence record only.         |
+| 2    | TRD-242 | queued | Refresh command-center CI metadata after CI. | Static metadata only.         |
+| 3    | None    | paused | Wait for a concrete Gate 0 maintenance gap.  | Do not queue broad expansion. |
 
 ## Rejected For Now
 
@@ -861,12 +881,26 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_GITHUB_ACTIONS_NODE24_ACTION_UPGRADE.md`
 - Remote CI evidence after Node 24 action upgrade:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`
-- CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
-- Agent manifest drift guard script: `scripts/check-gate0-agent-manifest.ts`
 - Command center CI run refresh after Node 24 action upgrade:
   `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md`
 - Command center CI evidence refresh after TRD-230 push:
   `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md`
+- Latest-push evidence index confirmation:
+  `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX_LATEST_PUSH_CONFIRMATION.md`
+- CI evidence count expectations:
+  `docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md`
+- Command center last verified commit:
+  `docs/operations/GATE0_COMMAND_CENTER_LAST_VERIFIED_COMMIT.md`
+- Source-link duplicate check: `docs/operations/GATE0_SOURCE_LINK_DUPLICATE_CHECK.md`
+- Tracklist section length guard: `docs/operations/GATE0_TRACKLIST_SECTION_LENGTH_GUARD.md`
+- Tracklist source-link index: `docs/operations/GATE0_TRACKLIST_SOURCE_LINK_INDEX.md`
+- Command center visual recheck after TRD-231:
+  `docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md`
+- Maintenance backlog re-rank: `docs/operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`
+- Gate 1 blocker recheck: `docs/operations/GATE1_READINESS_BLOCKER_RECHECK.md`
+
+## Source Of Truth Links Continued
+
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -886,6 +920,11 @@ Do not mark a packet accepted until:
 - CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
 - CI evidence freshness guard tests:
   `packages/fixtures/tests/gate0-ci-evidence-freshness-check.test.ts`
+- Source-link duplicate guard script: `scripts/check-gate0-source-link-duplicates.ts`
+- Source-link duplicate guard tests: `packages/fixtures/tests/gate0-source-link-duplicates.test.ts`
+- Tracklist section length guard script: `scripts/check-gate0-tracklist-section-length.ts`
+- Tracklist section length guard tests:
+  `packages/fixtures/tests/gate0-tracklist-section-length.test.ts`
 - GitHub CI workflow source: `.github/workflows/gate0-verify.yml`
 - GitHub Actions runtime guard script: `scripts/check-gate0-github-actions-runtime.ts`
 - GitHub Actions runtime guard tests: `packages/fixtures/tests/gate0-github-actions-runtime.test.ts`
@@ -915,8 +954,7 @@ Do not mark a packet accepted until:
 - Review coverage drift guard script: `scripts/check-gate0-review-coverage.ts`
 - Review coverage drift guard test source:
   `packages/fixtures/tests/gate0-review-coverage-check.test.ts`
-- Guard suite command source: `package.json`
-- Quality suite command source: `package.json`
+- Guard and quality suite command source: `package.json`
 - Inspect command contract: `docs/operations/GATE0_INSPECT_COMMAND_CONTRACT.md`
 - Docs coverage drift guard script: `scripts/check-gate0-docs-coverage.ts`
 - Gate scanner: `scripts/validate-gate0.ts`

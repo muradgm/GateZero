@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-231");
+    expect(data).toContain("TRD-240");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -31,6 +31,14 @@ describe("Gate 0 command center surface", () => {
     ]) {
       expect(data).not.toContain(blockedCopy);
     }
+  });
+
+  it("records the latest verified commit without promotion semantics", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain('lastVerifiedCommit: "5ab9bab"');
+    expect(data).toContain('area: "Verified commit"');
+    expect(data).toContain('reference: "Run 27716601329"');
   });
 
   it("mounts as a static local command center", () => {

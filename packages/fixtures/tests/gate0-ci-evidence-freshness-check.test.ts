@@ -105,4 +105,38 @@ describe("Gate 0 CI evidence freshness check", () => {
       "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md"
     );
   });
+
+  it("counts GitHub, remote, and command-center CI evidence records", () => {
+    const result = checkGate0CiEvidenceFreshness({
+      ...completeInput,
+      evidenceFiles: [
+        {
+          relativePath: "docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md",
+          content: baseEvidenceContent
+        },
+        {
+          relativePath:
+            "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md",
+          content: baseEvidenceContent
+            .replace("| Run id | `1` |", "| Run id | `2` |")
+            .replace("| Updated | `2026-06-14T07:00:00Z` |", "| Updated | `2026-06-14T07:01:00Z` |")
+            .replace("actions/runs/1", "actions/runs/2")
+        },
+        {
+          relativePath:
+            "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md",
+          content: baseEvidenceContent
+            .replace("| Run id | `1` |", "| Run id | `3` |")
+            .replace("| Updated | `2026-06-14T07:00:00Z` |", "| Updated | `2026-06-14T07:02:00Z` |")
+            .replace("actions/runs/1", "actions/runs/3")
+        }
+      ]
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.evidenceCount).toBe(3);
+    expect(result.latestEvidencePath).toBe(
+      "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md"
+    );
+  });
 });
