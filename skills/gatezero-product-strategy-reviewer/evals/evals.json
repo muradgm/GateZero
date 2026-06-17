@@ -1,0 +1,18 @@
+{
+  "skill_name": "gatezero-product-strategy-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A roadmap proposes alerts, social sharing, broker setup, and a readiness badge before the backtest review loop is reproducible.",
+      "expected_output": "Should reject breadth ahead of trust and recommend strengthening the protected decision loop instead.",
+      "assertions": [
+        "Rejects product breadth",
+        "Mentions protected decision loop",
+        "Rejects readiness badge",
+        "Keeps Gate 0 scope",
+        "Recommends evidence or risk review work"
+      ],
+      "files": []
+    }
+  ]
+}

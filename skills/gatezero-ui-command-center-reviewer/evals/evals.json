@@ -1,0 +1,18 @@
+{
+  "skill_name": "gatezero-ui-command-center-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A command-center design adds a prominent strategy readiness badge and hides evidence source links below the fold.",
+      "expected_output": "Should reject readiness semantics and require source links and evidence freshness to remain prominent.",
+      "assertions": [
+        "Rejects readiness semantics",
+        "Requires source links",
+        "Mentions evidence freshness",
+        "Keeps read-only scope",
+        "Mentions Gate 0 boundary"
+      ],
+      "files": []
+    }
+  ]
+}

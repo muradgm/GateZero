@@ -47,6 +47,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 | `pnpm check:gate0-command-center`                   | `scripts/check-gate0-command-center-freshness.ts`       | Local command center evidence freshness check.   | Pass   |
 | `pnpm check:gate0-command-center-render`            | `scripts/check-gate0-command-center-render-contract.ts` | Local command center render contract check.      | Pass   |
 | `pnpm check:gate0-skills`                           | `scripts/check-gate0-skill-governance.ts`               | Local project skill and intake governance check. | Pass   |
+| `pnpm check:gate0-skill-routing`                    | `scripts/check-gate0-skill-routing.ts`                  | Local project skill routing matrix check.        | Pass   |
 | `pnpm check:gate1-contracts`                        | `scripts/check-gate1-contracts.ts`                      | Gate 1 contract control-record guard.            | Pass   |
 | `pnpm preview:web`                                  | `scripts/preview-web.ts`                                | Local host static command center preview.        | Pass   |
 | `pnpm check:gate0`                                  | `package.json`                                          | Snapshot refresh plus local Gate 0 guard suite.  | Pass   |
@@ -68,7 +69,7 @@ performance evidence, profitability evidence, deployment approval, or future-pha
 - The verification command covers the Gate 0 guard suite plus lint, formatting, type checking, and
   tests.
 - Quality commands cover lint, formatting, type checking, tests, and Gate 0 boundary scanning.
-- The accepted latest suite result is 64 test files and 325 tests passing.
+- The accepted latest suite result is 65 test files and 328 tests passing.
 
 ## Locality Notes
 
@@ -111,6 +112,8 @@ product launch, or later-phase operation.
   `docs/operations/GATE0_COMMAND_CENTER_RENDERED_EVIDENCE_CONTRACT.md`
 - Skill governance review: `docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
+- Skill routing matrix: `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`
+- Skill routing guard: `docs/operations/GATE0_SKILL_ROUTING_GUARD.md`
 - Guard suite command consolidation: `docs/operations/GATE0_GUARD_SUITE_COMMAND_CONSOLIDATION.md`
 - Name check coverage audit: `docs/operations/GATE0_NAME_CHECK_COVERAGE_AUDIT.md`
 - Gate 1 contract guard: `docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

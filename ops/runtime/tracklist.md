@@ -9,9 +9,9 @@
 | Operating scope            | `research_only`                                                |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-16                                                     |
-| Latest accepted packet     | `TRD-214`                                                      |
-| Latest accepted validation | 64 test files, 325 tests passed                                |
+| Last updated               | 2026-06-17                                                     |
+| Latest accepted packet     | `TRD-220`                                                      |
+| Latest accepted validation | 65 test files, 328 tests passed                                |
 
 ## Boundary
 
@@ -47,6 +47,7 @@ pnpm check:gate0-ci-evidence
 pnpm check:gate0-command-center
 pnpm check:gate0-command-center-render
 pnpm check:gate0-skills
+pnpm check:gate0-skill-routing
 pnpm check:gate0-agents
 pnpm check:repo-hygiene
 pnpm check:gate1-contracts
@@ -79,6 +80,7 @@ Latest accepted result:
 - `pnpm check:gate0-command-center`: passed.
 - `pnpm check:gate0-command-center-render`: passed.
 - `pnpm check:gate0-skills`: passed.
+- `pnpm check:gate0-skill-routing`: passed.
 - `pnpm check:gate0-agents`: passed.
 - `pnpm check:repo-hygiene`: passed.
 - `pnpm check:gate1-contracts`: passed.
@@ -92,7 +94,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 64 test files passed, 325 tests passed.
+- `pnpm test`: 65 test files passed, 328 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -137,7 +139,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-214`
+- Accepted packets: `TRD-044` to `TRD-220`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -187,6 +189,8 @@ Latest accepted result:
     blockers.
   - QA/security reviewer skill intake for validation integrity, scanner coverage, and secrets
     posture.
+  - Docs control-plane, product strategy, UI command-center, and quant backtest reviewer skills.
+  - Skill routing matrix and guard for matching important decisions to the right skill lens.
 
 ## Workstream Summary
 
@@ -509,6 +513,12 @@ Latest accepted result:
 | `TRD-212` | accepted | Skill governance | Added orchestrator reviewer skill intake.              |
 | `TRD-213` | accepted | Skill governance | Added risk governance reviewer skill intake.           |
 | `TRD-214` | accepted | Skill governance | Added QA security reviewer skill intake.               |
+| `TRD-215` | accepted | Skill governance | Added docs control-plane reviewer skill intake.        |
+| `TRD-216` | accepted | Skill governance | Added product strategy reviewer skill intake.          |
+| `TRD-217` | accepted | Skill governance | Added UI command-center reviewer skill intake.         |
+| `TRD-218` | accepted | Skill governance | Added quant backtest reviewer skill intake.            |
+| `TRD-219` | accepted | Skill governance | Added Gate 0 skill routing matrix.                     |
+| `TRD-220` | accepted | Skill governance | Added Gate 0 skill routing guard.                      |
 
 ## Current Operator Commands
 
@@ -533,6 +543,7 @@ Latest accepted result:
 | `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
 | `pnpm check:gate0-command-center-render`            | Check command center static render contract.            | Local command center render contract passes.                   |
 | `pnpm check:gate0-skills`                           | Check project skill governance and intake.              | Local skill governance guard passes.                           |
+| `pnpm check:gate0-skill-routing`                    | Check project skill routing matrix.                     | Local skill routing guard passes.                              |
 | `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
 | `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
 | `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
@@ -797,6 +808,16 @@ Do not mark a packet accepted until:
 - Orchestrator reviewer skill: `skills/gatezero-orchestrator-reviewer/SKILL.md`
 - QA security reviewer skill intake: `docs/operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`
 - QA security reviewer skill: `skills/gatezero-qa-security-reviewer/SKILL.md`
+- Docs control-plane reviewer skill intake:
+  `docs/operations/GATE0_DOCS_CONTROL_PLANE_REVIEWER_SKILL_INTAKE.md`
+- Product strategy reviewer skill intake:
+  `docs/operations/GATE0_PRODUCT_STRATEGY_REVIEWER_SKILL_INTAKE.md`
+- UI command-center reviewer skill intake:
+  `docs/operations/GATE0_UI_COMMAND_CENTER_REVIEWER_SKILL_INTAKE.md`
+- Quant backtest reviewer skill intake:
+  `docs/operations/GATE0_QUANT_BACKTEST_REVIEWER_SKILL_INTAKE.md`
+- Skill routing matrix: `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`
+- Skill routing guard: `docs/operations/GATE0_SKILL_ROUTING_GUARD.md`
 - Risk governance reviewer skill intake:
   `docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`
 - Risk governance reviewer skill: `skills/gatezero-risk-governance-reviewer/SKILL.md`

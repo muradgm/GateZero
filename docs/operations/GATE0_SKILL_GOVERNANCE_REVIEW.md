@@ -4,9 +4,13 @@
 
 This review records the controlled adoption of local GateZero project skills:
 
+- `skills/gatezero-docs-control-plane-reviewer/`
 - `skills/gatezero-orchestrator-reviewer/`
+- `skills/gatezero-product-strategy-reviewer/`
 - `skills/gatezero-qa-security-reviewer/`
+- `skills/gatezero-quant-backtest-reviewer/`
 - `skills/gatezero-risk-governance-reviewer/`
+- `skills/gatezero-ui-command-center-reviewer/`
 - `skills/trader-product-reviewer/`
 - `skills/trading-forex-domain-expert/`
 
@@ -70,6 +74,7 @@ explicitly allowlisted governance, docs, test, validation, or ops records.
   `ops/runtime/reviews/TRD-208_RISK_REVIEW.md`,
   `ops/runtime/reviews/TRD-208_ORCHESTRATOR_ACCEPTANCE.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
+- Skill routing matrix: `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`
 - Orchestrator reviewer skill intake: `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
 - QA security reviewer skill intake: `docs/operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`
 - Risk governance reviewer skill intake:

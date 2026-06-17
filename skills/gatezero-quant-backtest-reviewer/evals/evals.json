@@ -1,0 +1,18 @@
+{
+  "skill_name": "gatezero-quant-backtest-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A backtest summary says a strategy is profitable and ready because win rate is high, but it omits slippage, fees, sample size, and data source.",
+      "expected_output": "Should reject profitability/readiness claims and require assumptions, costs, sample size, and data provenance.",
+      "assertions": [
+        "Rejects profitability claim",
+        "Rejects readiness claim",
+        "Requires fees or slippage",
+        "Requires sample size",
+        "Requires data source"
+      ],
+      "files": []
+    }
+  ]
+}

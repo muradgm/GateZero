@@ -52,6 +52,7 @@ eligibility.
 | `pnpm check:gate0-command-center`        | Check command center evidence freshness.     | Local command center freshness guard passes.      |
 | `pnpm check:gate0-command-center-render` | Check command center render contract.        | Local render contract check passes.               |
 | `pnpm check:gate0-skills`                | Check project skill governance and intake.   | Local skill governance guard passes.              |
+| `pnpm check:gate0-skill-routing`         | Check project skill routing matrix.          | Local skill routing guard passes.                 |
 | `pnpm check:gate1-contracts`             | Check Gate 1 contract control records.       | Local Gate 1 contract guard passes.               |
 | `pnpm check:gate0`                       | Run the local Gate 0 guard suite.            | Gate 0 guard suite passes.                        |
 | `pnpm verify:gate0`                      | Run Gate 0 guards and quality checks.        | Full local verification passes.                   |
@@ -102,7 +103,8 @@ gate movement, risk limit changes, strategy state changes, or later-phase eligib
   `scripts/check-gate0-agent-manifest.ts`, `scripts/check-repo-hygiene.ts`,
   `scripts/check-gate0-ci-evidence-freshness.ts`, `scripts/check-gate0-command-center-freshness.ts`,
   `scripts/check-gate0-command-center-render-contract.ts`, `scripts/check-gate1-contracts.ts`,
-  `scripts/check-gate0-skill-governance.ts`, `scripts/validate-gate0.ts`
+  `scripts/check-gate0-skill-governance.ts`, `scripts/check-gate0-skill-routing.ts`,
+  `scripts/validate-gate0.ts`
 - Validation command audit: `docs/operations/GATE0_VALIDATION_COMMAND_AUDIT.md`
 - Command index coverage check: `docs/operations/GATE0_COMMAND_INDEX_COVERAGE_CHECK.md`
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`

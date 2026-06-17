@@ -8,6 +8,31 @@ import {
 const completeInput: Gate0SkillGovernanceInput = {
   files: [
     {
+      relativePath: "skills/gatezero-docs-control-plane-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-docs-control-plane-reviewer",
+        "description: GateZero-aware docs control-plane review.",
+        "---",
+        "# GateZero Docs Control Plane Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-docs-control-plane-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-docs-control-plane-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "skills/gatezero-orchestrator-reviewer/SKILL.md",
       content: [
         "---",
@@ -28,6 +53,31 @@ const completeInput: Gate0SkillGovernanceInput = {
       content: [
         "interface:",
         '  default_prompt: "Use $gatezero-orchestrator-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-product-strategy-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-product-strategy-reviewer",
+        "description: GateZero-aware product strategy review.",
+        "---",
+        "# GateZero Product Strategy Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-product-strategy-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-product-strategy-reviewer."',
         "policy:",
         "  allow_implicit_invocation: false"
       ].join("\n")
@@ -58,6 +108,31 @@ const completeInput: Gate0SkillGovernanceInput = {
       ].join("\n")
     },
     {
+      relativePath: "skills/gatezero-quant-backtest-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-quant-backtest-reviewer",
+        "description: GateZero-aware quant backtest review.",
+        "---",
+        "# GateZero Quant Backtest Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-quant-backtest-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-quant-backtest-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "skills/gatezero-risk-governance-reviewer/SKILL.md",
       content: [
         "---",
@@ -78,6 +153,31 @@ const completeInput: Gate0SkillGovernanceInput = {
       content: [
         "interface:",
         '  default_prompt: "Use $gatezero-risk-governance-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-ui-command-center-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-ui-command-center-reviewer",
+        "description: GateZero-aware UI command center review.",
+        "---",
+        "# GateZero UI Command Center Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-ui-command-center-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-ui-command-center-reviewer."',
         "policy:",
         "  allow_implicit_invocation: false"
       ].join("\n")
@@ -156,7 +256,7 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 5,
+      checkedSkillCount: 9,
       checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(

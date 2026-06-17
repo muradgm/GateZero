@@ -255,10 +255,18 @@ deployment approval, or future-phase eligibility.
 | `TRD-214` | QA security reviewer metadata            | `skills/gatezero-qa-security-reviewer/agents/openai.yaml`                          | Requires explicit invocation for the project skill.              |
 | `TRD-214` | QA security reviewer evals               | `skills/gatezero-qa-security-reviewer/evals/evals.json`                            | Captures phase-aware QA/security behavior examples.              |
 | `TRD-214` | QA security reviewer intake record       | `docs/operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`                       | Documents governed intake of the QA/security skill.              |
+| `TRD-215` | Docs control-plane reviewer skill        | `skills/gatezero-docs-control-plane-reviewer/SKILL.md`                             | Adds docs, tracker, source-link, and handoff review lens.        |
+| `TRD-216` | Product strategy reviewer skill          | `skills/gatezero-product-strategy-reviewer/SKILL.md`                               | Adds wedge, scope, and trust-before-breadth review lens.         |
+| `TRD-217` | UI command-center reviewer skill         | `skills/gatezero-ui-command-center-reviewer/SKILL.md`                              | Adds static command-center UI review lens.                       |
+| `TRD-218` | Quant backtest reviewer skill            | `skills/gatezero-quant-backtest-reviewer/SKILL.md`                                 | Adds backtest contract and metric claim-safety review lens.      |
+| `TRD-219` | Skill routing matrix                     | `docs/operations/GATE0_SKILL_ROUTING_MATRIX.md`                                    | Routes important decisions to the right skill lens.              |
+| `TRD-220` | Skill routing guard                      | `scripts/check-gate0-skill-routing.ts`                                             | Checks the skill routing matrix stays complete.                  |
+| `TRD-220` | Skill routing guard tests                | `packages/fixtures/tests/gate0-skill-routing.test.ts`                              | Tests pass and missing-route failure paths.                      |
+| `TRD-220` | Skill routing guard record               | `docs/operations/GATE0_SKILL_ROUTING_GUARD.md`                                     | Documents the local routing guard.                               |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-214` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-220` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

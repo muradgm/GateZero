@@ -1,0 +1,18 @@
+{
+  "skill_name": "gatezero-docs-control-plane-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "A packet adds a new operator doc but does not update docs/README.md, the artifact map, or source links.",
+      "expected_output": "Should flag documentation control-plane drift and require docs index, artifact map, and source-link updates before acceptance.",
+      "assertions": [
+        "Flags docs index drift",
+        "Flags artifact map gap",
+        "Mentions source links",
+        "Requires acceptance records",
+        "Preserves Gate 0 boundary"
+      ],
+      "files": []
+    }
+  ]
+}

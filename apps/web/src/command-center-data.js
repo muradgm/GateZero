@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-214",
-  localVerification: "64 files / 325 tests",
+  latestPacket: "TRD-220",
+  localVerification: "65 files / 328 tests",
   ciRun: "27646334295",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 64 files, 325 tests.",
+      detail: "Latest suite: 65 files, 328 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "214 / 214",
+      value: "220 / 220",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,7 +58,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "64 files / 325 tests"
+      reference: "65 files / 328 tests"
     },
     {
       area: "Remote CI",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "214 accepted records"
+      reference: "220 accepted records"
     }
   ],
   nextActions: [
@@ -120,21 +120,31 @@ export const commandCenterData = {
         "scripts/check-gate0-command-center-freshness.ts",
         "scripts/check-gate0-command-center-render-contract.ts",
         "scripts/check-gate0-skill-governance.ts",
+        "scripts/check-gate0-skill-routing.ts",
+        "packages/fixtures/tests/gate0-skill-routing.test.ts",
         "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
       ]
     },
     {
       label: "Skills",
       items: [
+        "skills/gatezero-docs-control-plane-reviewer/SKILL.md",
         "skills/gatezero-orchestrator-reviewer/SKILL.md",
+        "skills/gatezero-product-strategy-reviewer/SKILL.md",
         "skills/gatezero-qa-security-reviewer/SKILL.md",
+        "skills/gatezero-quant-backtest-reviewer/SKILL.md",
         "skills/gatezero-risk-governance-reviewer/SKILL.md",
+        "skills/gatezero-ui-command-center-reviewer/SKILL.md",
         "skills/trader-product-reviewer/SKILL.md",
         "skills/trading-forex-domain-expert/SKILL.md",
+        "docs/operations/GATE0_SKILL_ROUTING_MATRIX.md",
         "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md",
         "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
+        "docs/operations/GATE0_DOCS_CONTROL_PLANE_REVIEWER_SKILL_INTAKE.md",
         "docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md",
+        "docs/operations/GATE0_PRODUCT_STRATEGY_REVIEWER_SKILL_INTAKE.md",
         "docs/operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md",
+        "docs/operations/GATE0_QUANT_BACKTEST_REVIEWER_SKILL_INTAKE.md",
         "docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md"
       ]
     },

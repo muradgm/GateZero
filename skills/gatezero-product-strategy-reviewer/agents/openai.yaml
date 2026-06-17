@@ -1,0 +1,9 @@
+interface:
+  display_name: "GateZero Product Strategy Reviewer"
+  short_description: "GateZero wedge and scope review"
+  default_prompt:
+    "Use $gatezero-product-strategy-reviewer to review GateZero product scope, wedge fit,
+    trust-before-breadth sequencing, and phase-safe product decisions."
+
+policy:
+  allow_implicit_invocation: false

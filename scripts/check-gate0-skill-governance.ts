@@ -19,9 +19,13 @@ export interface Gate0SkillGovernanceResult {
 }
 
 const expectedSkills = [
+  "gatezero-docs-control-plane-reviewer",
   "gatezero-orchestrator-reviewer",
+  "gatezero-product-strategy-reviewer",
   "gatezero-qa-security-reviewer",
+  "gatezero-quant-backtest-reviewer",
   "gatezero-risk-governance-reviewer",
+  "gatezero-ui-command-center-reviewer",
   "trader-product-reviewer",
   "trading-forex-domain-expert"
 ] as const;
