@@ -267,10 +267,13 @@ deployment approval, or future-phase eligibility.
 | `TRD-221` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                       | Indexes the latest passing CI evidence record.                   |
 | `TRD-222` | Command center CI run refresh            | `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_ROUTING.md` | Records command-center CI run display alignment.                 |
 | `TRD-222` | Command center data update               | `apps/web/src/command-center-data.js`                                               | Points the static dashboard at the latest CI evidence.           |
+| `TRD-223` | Skill library closeout review            | `docs/operations/GATE0_SKILL_LIBRARY_CLOSEOUT_REVIEW.md`                            | Closes out the accepted Gate 0 reviewer skill library.           |
+| `TRD-224` | Skill usage handoff note                 | `docs/operations/GATE0_SKILL_USAGE_HANDOFF_NOTE.md`                                 | Gives future operators skill-lens selection guidance.            |
+| `TRD-225` | Next scope recommendation                | `docs/operations/GATE0_NEXT_SCOPE_RECOMMENDATION_AFTER_SKILL_LIBRARY.md`            | Recommends selective maintenance over product breadth.           |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-222` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-225` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

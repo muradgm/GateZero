@@ -161,6 +161,9 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md`
 - `operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - `operations/GATE0_SKILL_LIBRARY_INTAKE.md`
+- `operations/GATE0_SKILL_LIBRARY_CLOSEOUT_REVIEW.md`
+- `operations/GATE0_SKILL_USAGE_HANDOFF_NOTE.md`
+- `operations/GATE0_NEXT_SCOPE_RECOMMENDATION_AFTER_SKILL_LIBRARY.md`
 - `operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
 - `operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`
 - `operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`
