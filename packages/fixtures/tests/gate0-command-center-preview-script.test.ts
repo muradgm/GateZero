@@ -4,7 +4,8 @@ import {
   defaultPreviewPort,
   previewHost,
   readPort,
-  resolvePreviewFile
+  resolvePreviewFile,
+  runtimeCommandCenterDataPath
 } from "../../../scripts/preview-web.js";
 
 const rootDir = process.cwd();
@@ -14,6 +15,7 @@ describe("Gate 0 command center preview script", () => {
   it("keeps the preview host local and default port stable", () => {
     expect(previewHost).toBe("127.0.0.1");
     expect(defaultPreviewPort).toBe(4173);
+    expect(runtimeCommandCenterDataPath).toBe("/runtime/command-center-data.json");
     expect(readPort(["node", "preview-web.ts"], {})).toBe(4173);
   });
 

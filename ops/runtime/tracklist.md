@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-244`                                                      |
-| Latest accepted validation | 68 test files, 341 tests passed                                |
+| Latest accepted packet     | `TRD-246`                                                      |
+| Latest accepted validation | 69 test files, 343 tests passed                                |
 
 ## Boundary
 
@@ -100,7 +100,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 68 test files passed, 341 tests passed.
+- `pnpm test`: 69 test files passed, 343 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-244`
+- Accepted packets: `TRD-044` to `TRD-246`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -209,6 +209,7 @@ Latest accepted result:
     alignment to that evidence.
   - Remote CI evidence refresh after the TRD-242 push and static command-center CI metadata
     alignment to that evidence.
+  - Local command-center runtime snapshot endpoint and same-origin browser auto-refresh.
 
 ## Workstream Summary
 
@@ -561,6 +562,8 @@ Latest accepted result:
 | `TRD-242` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-241.    |
 | `TRD-243` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-242 push.       |
 | `TRD-244` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-243.    |
+| `TRD-245` | accepted | UI runtime       | Added local command-center runtime snapshot endpoint.  |
+| `TRD-246` | accepted | UI runtime       | Added local command-center auto-refresh.               |
 
 ## Current Operator Commands
 
@@ -912,6 +915,9 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD242_PUSH.md`
 - Command center CI metadata refresh after TRD-243:
   `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD243.md`
+- Command center local runtime snapshot:
+  `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md`
+- Command center local auto-refresh: `docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`
 
 ## Source Of Truth Links Continued
 
@@ -919,8 +925,11 @@ Do not mark a packet accepted until:
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
 - Command center preview script: `scripts/preview-web.ts`
+- Command center runtime data builder: `scripts/build-command-center-runtime-data.ts`
 - Command center preview script tests:
   `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`
+- Command center runtime data tests:
+  `packages/fixtures/tests/gate0-command-center-runtime-data.test.ts`
 - Command center freshness guard script: `scripts/check-gate0-command-center-freshness.ts`
 - Command center freshness guard tests:
   `packages/fixtures/tests/gate0-command-center-freshness-check.test.ts`

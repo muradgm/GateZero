@@ -9,12 +9,12 @@ const mainPath = path.join(rootDir, "apps", "web", "src", "main.js");
 const stylePath = path.join(rootDir, "apps", "web", "src", "styles.css");
 
 describe("Gate 0 command center surface", () => {
-  it("keeps the static command center tied to Gate 0 research scope", () => {
+  it("keeps the command center tied to Gate 0 research scope", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-244");
+    expect(data).toContain("TRD-246");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -41,7 +41,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain('reference: "Run 27718333544"');
   });
 
-  it("mounts as a static local command center", () => {
+  it("mounts as a local command center", () => {
     const index = readFileSync(indexPath, "utf8");
 
     expect(index).toContain('<div id="app"></div>');
@@ -73,6 +73,15 @@ describe("Gate 0 command center surface", () => {
     );
   });
 
+  it("refreshes from the local runtime endpoint without external services", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain('"/runtime/command-center-data.json"');
+    expect(main).toContain("refreshRuntimeData()");
+    expect(main).toContain("setInterval");
+    expect(main).toContain('fetch(runtimeDataUrl, { cache: "no-store" })');
+  });
+
   it("keeps the accessibility baseline present in the static surface", () => {
     const index = readFileSync(indexPath, "utf8");
     const main = readFileSync(mainPath, "utf8");
@@ -97,7 +106,7 @@ describe("Gate 0 command center surface", () => {
       expect(data).toContain(`label: "${group}"`);
     }
 
-    expect(main).toContain("commandCenterData.docGroups");
+    expect(main).toContain("data.docGroups");
     expect(main).toContain('class="doc-group"');
     expect(styles).toContain(".doc-group");
   });

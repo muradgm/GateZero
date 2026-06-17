@@ -312,10 +312,16 @@ deployment approval, or future-phase eligibility.
 | `TRD-243` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
 | `TRD-244` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD243.md`                   | Records command-center static metadata alignment.                |
 | `TRD-244` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static dashboard at the latest CI evidence.           |
+| `TRD-245` | Command center runtime snapshot builder  | `scripts/build-command-center-runtime-data.ts`                                               | Builds local command-center runtime data from repo records.      |
+| `TRD-245` | Command center runtime snapshot tests    | `packages/fixtures/tests/gate0-command-center-runtime-data.test.ts`                          | Tests local runtime snapshot values.                             |
+| `TRD-245` | Command center runtime snapshot record   | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md`                             | Documents the local runtime endpoint boundary.                   |
+| `TRD-246` | Command center local auto-refresh        | `apps/web/src/main.js`                                                                       | Fetches same-origin local runtime data and re-renders.           |
+| `TRD-246` | Command center local auto-refresh record | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`                                 | Documents local browser refresh behavior.                        |
+| `TRD-246` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Preserves static fallback metadata.                              |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-244` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-246` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

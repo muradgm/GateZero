@@ -3,14 +3,17 @@ import { stat } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { buildCommandCenterRuntimeData } from "./build-command-center-runtime-data.js";
 
 export const previewHost = "127.0.0.1";
 export const defaultPreviewPort = 4173;
+export const runtimeCommandCenterDataPath = "/runtime/command-center-data.json";
 const webRoot = path.join(process.cwd(), "apps", "web");
 
 const contentTypes: Readonly<Record<string, string>> = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
   ".js": "text/javascript; charset=utf-8"
 };
 
@@ -27,6 +30,12 @@ export async function servePreviewRequest(
 ): Promise<void> {
   const requestPath = new URL(request.url ?? "/", `http://${previewHost}:${defaultPreviewPort}`)
     .pathname;
+
+  if (requestPath === runtimeCommandCenterDataPath) {
+    await serveRuntimeCommandCenterData(response);
+    return;
+  }
+
   const resolvedFile = resolvePreviewFile(rootDir, requestPath);
 
   if (!resolvedFile) {
@@ -52,6 +61,24 @@ export async function servePreviewRequest(
   } catch {
     response.writeHead(404);
     response.end("Not found");
+  }
+}
+
+async function serveRuntimeCommandCenterData(response: ServerResponse): Promise<void> {
+  try {
+    const runtimeData = await buildCommandCenterRuntimeData();
+
+    response.writeHead(200, {
+      "Cache-Control": "no-store",
+      "Content-Type": contentTypes[".json"] ?? "application/json; charset=utf-8"
+    });
+    response.end(JSON.stringify(runtimeData));
+  } catch {
+    response.writeHead(500, {
+      "Cache-Control": "no-store",
+      "Content-Type": "application/json; charset=utf-8"
+    });
+    response.end(JSON.stringify({ error: "runtime_data_unavailable" }));
   }
 }
 

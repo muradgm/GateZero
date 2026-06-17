@@ -1,25 +1,34 @@
 import { commandCenterData } from "./command-center-data.js";
 
-/* global document, window */
+/* global document, fetch, setInterval, window */
 
 const app = document.querySelector("#app");
+const runtimeDataUrl = "/runtime/command-center-data.json";
+const runtimeRefreshMs = 15_000;
 
 if (!app) {
   throw new Error("Missing command center mount node.");
 }
 
-app.innerHTML = `
+renderCommandCenter(commandCenterData);
+void refreshRuntimeData();
+setInterval(() => {
+  void refreshRuntimeData();
+}, runtimeRefreshMs);
+
+function renderCommandCenter(data) {
+  app.innerHTML = `
   <div class="shell">
     <aside class="sidebar" aria-label="Command center navigation">
       <div class="brand">
         <div class="brand-mark">GZ</div>
         <div>
-          <div class="brand-name">${commandCenterData.project}</div>
+          <div class="brand-name">${data.project}</div>
           <div class="brand-subtitle">Command Center</div>
         </div>
       </div>
       <nav class="nav-list" aria-label="Primary sections">
-        ${commandCenterData.navItems
+        ${data.navItems
           .map(
             (item, index) =>
               `<a class="${index === 0 ? "active" : ""}" href="#${slug(item)}" data-section="${slug(
@@ -30,25 +39,25 @@ app.innerHTML = `
       </nav>
       <div class="rail-note">
         <span class="note-label">Operating scope</span>
-        <strong>${commandCenterData.scope}</strong>
+        <strong>${data.scope}</strong>
       </div>
     </aside>
 
     <main class="workspace" id="main" tabindex="-1">
       <header class="topbar">
         <div>
-          <h1>${commandCenterData.title}</h1>
-          <p>${commandCenterData.subtitle}</p>
+          <h1>${data.title}</h1>
+          <p>${data.subtitle}</p>
         </div>
         <div class="status-lockup" aria-label="Current gate">
-          <span>${commandCenterData.gate}</span>
-          <strong>${commandCenterData.scope}</strong>
+          <span>${data.gate}</span>
+          <strong>${data.scope}</strong>
         </div>
       </header>
 
       <section class="health-grid" id="overview" aria-labelledby="overview-title">
         <h2 class="section-title" id="overview-title">Gate 0 Health</h2>
-        ${commandCenterData.healthCards
+        ${data.healthCards
           .map(
             (card) => `
               <article class="health-card ${card.tone}">
@@ -71,7 +80,7 @@ app.innerHTML = `
             <span class="panel-chip">read-only</span>
           </div>
           <ol class="loop-list">
-            ${commandCenterData.loopSteps
+            ${data.loopSteps
               .map(
                 (step, index) => `
                   <li>
@@ -93,7 +102,7 @@ app.innerHTML = `
             </div>
           </div>
           <ul class="boundary-list">
-            ${commandCenterData.boundaryItems
+            ${data.boundaryItems
               .map((item) => `<li><span aria-hidden="true"></span>${item}</li>`)
               .join("")}
           </ul>
@@ -107,7 +116,7 @@ app.innerHTML = `
               <h2 id="evidence-title">Evidence Freshness</h2>
               <p>Latest local and remote operating signals.</p>
             </div>
-            <span class="panel-chip">latest ${commandCenterData.latestPacket}</span>
+            <span class="panel-chip">latest ${data.latestPacket}</span>
           </div>
           <div class="table-wrap">
             <table>
@@ -123,7 +132,7 @@ app.innerHTML = `
                 </tr>
               </thead>
               <tbody>
-                ${commandCenterData.evidenceRows
+                ${data.evidenceRows
                   .map(
                     (row) => `
                       <tr>
@@ -148,7 +157,7 @@ app.innerHTML = `
             </div>
           </div>
           <ul class="action-list">
-            ${commandCenterData.nextActions.map((item) => `<li>${item}</li>`).join("")}
+            ${data.nextActions.map((item) => `<li>${item}</li>`).join("")}
           </ul>
         </article>
 
@@ -160,7 +169,7 @@ app.innerHTML = `
             </div>
           </div>
           <div class="doc-stack">
-            ${commandCenterData.docGroups
+            ${data.docGroups
               .map(
                 (group) => `
                   <section class="doc-group" aria-label="${group.label} source links">
@@ -177,9 +186,56 @@ app.innerHTML = `
   </div>
 `;
 
-const navLinks = [...document.querySelectorAll(".nav-list a[data-section]")];
+  updateActiveNavigation();
+}
 
-updateActiveNavigation();
+async function refreshRuntimeData() {
+  try {
+    const response = await fetch(runtimeDataUrl, { cache: "no-store" });
+
+    if (!response.ok) {
+      return;
+    }
+
+    renderCommandCenter(mergeRuntimeData(commandCenterData, await response.json()));
+  } catch {
+    // Static file usage keeps the checked-in command center data.
+  }
+}
+
+function mergeRuntimeData(baseData, runtimeData) {
+  const mergedData = window.structuredClone
+    ? window.structuredClone(baseData)
+    : JSON.parse(JSON.stringify(baseData));
+  const acceptedRecords = Number(runtimeData.acceptedRecords);
+  const evidenceRecords = Number(runtimeData.evidenceRecords);
+
+  mergedData.latestPacket = runtimeData.latestPacket;
+  mergedData.localVerification = runtimeData.localVerification;
+  mergedData.ciRun = runtimeData.ciRun;
+  mergedData.ciState = runtimeData.ciState;
+  mergedData.lastVerifiedCommit = runtimeData.lastVerifiedCommit;
+
+  updateHealthCard(
+    mergedData,
+    "Local Verification",
+    `Latest suite: ${runtimeData.localVerification}.`
+  );
+  updateHealthCard(mergedData, "Review Coverage", `${acceptedRecords} / ${acceptedRecords}`);
+  updateEvidenceRow(mergedData, "Local verification", runtimeData.localVerification);
+  updateEvidenceRow(
+    mergedData,
+    "Verified commit",
+    `Run ${runtimeData.ciRun}`,
+    runtimeData.lastVerifiedCommit
+  );
+  updateEvidenceRow(mergedData, "Remote CI", "Recorded passing run", `Run ${runtimeData.ciRun}`);
+  updateEvidenceRow(mergedData, "CI evidence", `${evidenceRecords} evidence records`);
+  updateEvidenceRow(mergedData, "Review coverage", `${acceptedRecords} accepted records`);
+
+  return mergedData;
+}
+
 window.addEventListener("hashchange", updateActiveNavigation);
 
 function slug(value) {
@@ -187,9 +243,39 @@ function slug(value) {
 }
 
 function updateActiveNavigation() {
+  const navLinks = [...document.querySelectorAll(".nav-list a[data-section]")];
   const currentSection = window.location.hash.replace("#", "") || "overview";
 
   for (const link of navLinks) {
     link.classList.toggle("active", link.dataset.section === currentSection);
   }
+}
+
+function updateHealthCard(data, label, value) {
+  const card = data.healthCards.find((candidate) => candidate.label === label);
+
+  if (!card) {
+    return;
+  }
+
+  if (label === "Review Coverage") {
+    card.value = value;
+    return;
+  }
+
+  card.detail = value;
+}
+
+function updateEvidenceRow(data, area, reference, signal) {
+  const row = data.evidenceRows.find((candidate) => candidate.area === area);
+
+  if (!row) {
+    return;
+  }
+
+  if (signal) {
+    row.signal = signal;
+  }
+
+  row.reference = reference;
 }

@@ -44,12 +44,7 @@ export function checkGate0CommandCenterRenderContract(
     "Missing active navigation updater."
   );
   requireIncludes(findings, input.main, 'data-label="Area"', "Missing mobile table labels.");
-  requireIncludes(
-    findings,
-    input.main,
-    "commandCenterData.docGroups",
-    "Missing grouped source links."
-  );
+  requireIncludes(findings, input.main, "data.docGroups", "Missing grouped source links.");
   requireIncludes(findings, input.styles, "td::before", "Missing mobile evidence label styling.");
   requireIncludes(findings, input.styles, ".doc-group", "Missing grouped source link styling.");
   requireIncludes(findings, input.data, "G0_RESEARCH", "Missing Gate 0 status.");

@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-244",
-  localVerification: "68 files / 341 tests",
+  latestPacket: "TRD-246",
+  localVerification: "69 files / 343 tests",
   ciRun: "27718333544",
   ciState: "success",
   lastVerifiedCommit: "a5d50b1",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 68 files, 341 tests.",
+      detail: "Latest suite: 69 files, 343 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "244 / 244",
+      value: "246 / 246",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "68 files / 341 tests"
+      reference: "69 files / 343 tests"
     },
     {
       area: "Verified commit",
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "244 accepted records"
+      reference: "246 accepted records"
     }
   ],
   nextActions: [
@@ -111,7 +111,9 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md",
         "docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md",
         "docs/operations/GATE0_COMMAND_CENTER_LAST_VERIFIED_COMMIT.md",
-        "docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md"
+        "docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md",
+        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md",
+        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md"
       ]
     },
     {
@@ -148,10 +150,12 @@ export const commandCenterData = {
         "scripts/check-gate0-github-actions-runtime.ts",
         "scripts/check-gate0-source-link-duplicates.ts",
         "scripts/check-gate0-tracklist-section-length.ts",
+        "scripts/build-command-center-runtime-data.ts",
         "packages/fixtures/tests/gate0-skill-routing.test.ts",
         "packages/fixtures/tests/gate0-github-actions-runtime.test.ts",
         "packages/fixtures/tests/gate0-source-link-duplicates.test.ts",
         "packages/fixtures/tests/gate0-tracklist-section-length.test.ts",
+        "packages/fixtures/tests/gate0-command-center-runtime-data.test.ts",
         "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
       ]
     },
