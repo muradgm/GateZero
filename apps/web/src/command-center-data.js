@@ -4,9 +4,9 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-225",
+  latestPacket: "TRD-227",
   localVerification: "65 files / 328 tests",
-  ciRun: "27712864576",
+  ciRun: "27713436709",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "225 / 225",
+      value: "227 / 227",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -62,7 +62,7 @@ export const commandCenterData = {
     },
     {
       area: "Remote CI",
-      signal: "Run 27712864576",
+      signal: "Run 27713436709",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -70,7 +70,7 @@ export const commandCenterData = {
       area: "CI evidence",
       signal: "Freshness guard",
       state: "Passing",
-      reference: "2 evidence records"
+      reference: "3 evidence records"
     },
     {
       area: "Agent registry",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "225 accepted records"
+      reference: "227 accepted records"
     }
   ],
   nextActions: [
@@ -112,6 +112,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_INTAKE.md",
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_ROUTING.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_ROUTING.md",
+        "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md",
+        "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
         "docs/operations/GATE0_CI_FAILURE_TRIAGE_GUARDRAIL.md"
       ]

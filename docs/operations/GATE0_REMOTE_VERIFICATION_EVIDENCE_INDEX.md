@@ -9,14 +9,15 @@ approval, risk approval, execution readiness, profitability evidence, or gate ad
 
 ## Evidence Records
 
-| Packet    | Evidence record                                                               | Run id        | Commit    | Result    |
-| --------- | ----------------------------------------------------------------------------- | ------------- | --------- | --------- |
-| `TRD-177` | `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`                       | `27475618829` | `af8e0f0` | `success` |
-| `TRD-180` | `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md` | `27491437300` | `9f50e2d` | `success` |
-| `TRD-198` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md`                 | `27502152482` | `c4504b3` | `success` |
-| `TRD-203` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md`      | `27502500171` | `9faf766` | `success` |
-| `TRD-210` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`      | `27646334295` | `70a5160` | `success` |
-| `TRD-221` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_ROUTING.md`     | `27712864576` | `9010e15` | `success` |
+| Packet    | Evidence record                                                                    | Run id        | Commit    | Result    |
+| --------- | ---------------------------------------------------------------------------------- | ------------- | --------- | --------- |
+| `TRD-177` | `docs/operations/GATE0_GITHUB_CI_POST_PUSH_EVIDENCE.md`                            | `27475618829` | `af8e0f0` | `success` |
+| `TRD-180` | `docs/operations/GATE0_GITHUB_CI_EVIDENCE_REFRESH_AFTER_RUNTIME_HARDENING.md`      | `27491437300` | `9f50e2d` | `success` |
+| `TRD-198` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH.md`                      | `27502152482` | `c4504b3` | `success` |
+| `TRD-203` | `docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_POST_GUARD_REFRESH.md`           | `27502500171` | `9faf766` | `success` |
+| `TRD-210` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_INTAKE.md`           | `27646334295` | `70a5160` | `success` |
+| `TRD-221` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_ROUTING.md`          | `27712864576` | `9010e15` | `success` |
+| `TRD-226` | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md` | `27713436709` | `4f732fa` | `success` |
 
 ## Supporting Records
 
