@@ -161,6 +161,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - `operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
 - `operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`
+- `operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
 - `operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-16                                                     |
-| Latest accepted packet     | `TRD-213`                                                      |
+| Latest accepted packet     | `TRD-214`                                                      |
 | Latest accepted validation | 64 test files, 325 tests passed                                |
 
 ## Boundary
@@ -137,7 +137,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-213`
+- Accepted packets: `TRD-044` to `TRD-214`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -185,6 +185,8 @@ Latest accepted result:
   - Orchestrator reviewer skill intake for assignment sequencing and acceptance review.
   - Risk governance reviewer skill intake for risk gates, autonomy gates, and approval-language
     blockers.
+  - QA/security reviewer skill intake for validation integrity, scanner coverage, and secrets
+    posture.
 
 ## Workstream Summary
 
@@ -506,6 +508,7 @@ Latest accepted result:
 | `TRD-211` | accepted | UI evidence      | Refreshed command center CI run display.               |
 | `TRD-212` | accepted | Skill governance | Added orchestrator reviewer skill intake.              |
 | `TRD-213` | accepted | Skill governance | Added risk governance reviewer skill intake.           |
+| `TRD-214` | accepted | Skill governance | Added QA security reviewer skill intake.               |
 
 ## Current Operator Commands
 
@@ -792,6 +795,8 @@ Do not mark a packet accepted until:
 - Skill library intake policy: `docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - Orchestrator reviewer skill intake: `docs/operations/GATE0_ORCHESTRATOR_REVIEWER_SKILL_INTAKE.md`
 - Orchestrator reviewer skill: `skills/gatezero-orchestrator-reviewer/SKILL.md`
+- QA security reviewer skill intake: `docs/operations/GATE0_QA_SECURITY_REVIEWER_SKILL_INTAKE.md`
+- QA security reviewer skill: `skills/gatezero-qa-security-reviewer/SKILL.md`
 - Risk governance reviewer skill intake:
   `docs/operations/GATE0_RISK_GOVERNANCE_REVIEWER_SKILL_INTAKE.md`
 - Risk governance reviewer skill: `skills/gatezero-risk-governance-reviewer/SKILL.md`

@@ -5,10 +5,10 @@
 | Field                      | Value                           |
 | -------------------------- | ------------------------------- |
 | Generated at               | 2026-06-17                      |
-| Latest accepted packet     | `TRD-213`                       |
+| Latest accepted packet     | `TRD-214`                       |
 | Latest accepted validation | 64 test files, 325 tests passed |
-| Assignment count           | 213                             |
-| Accepted count             | 213                             |
+| Assignment count           | 214                             |
+| Accepted count             | 214                             |
 | Open count                 | 0                               |
 
 ## Boundary
@@ -236,6 +236,7 @@
 | `TRD-211` | `accepted` |
 | `TRD-212` | `accepted` |
 | `TRD-213` | `accepted` |
+| `TRD-214` | `accepted` |
 
 ## Notes
 

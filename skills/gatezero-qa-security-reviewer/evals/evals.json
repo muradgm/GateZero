@@ -1,0 +1,44 @@
+{
+  "skill_name": "gatezero-qa-security-reviewer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Review a GateZero packet that changes a validation script but only includes docs updates and no focused test output.",
+      "expected_output": "Should block or flag acceptance because executable behavior changed without focused validation. Should require targeted tests, full Gate 0 verification, and updated review records before acceptance.",
+      "assertions": [
+        "Flags missing focused validation",
+        "Requires full Gate 0 verification",
+        "Mentions executable behavior changed",
+        "Requires review records",
+        "Keeps recommendation local"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "A new skill adds references to broker credentials and suggests storing API keys later in an env file.",
+      "expected_output": "Should flag credential handling as blocked at Gate 0. Should require removing or reframing the credential guidance as a future-phase blocker and checking scanner coverage.",
+      "assertions": [
+        "Flags credential handling",
+        "Mentions Gate 0 boundary",
+        "Requires future-phase blocker language",
+        "Mentions scanner coverage",
+        "Does not approve implementation"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "The command center was updated to a new latest packet, but the progress snapshot and review coverage checks were not run.",
+      "expected_output": "Should flag stale evidence risk and require command-center freshness, progress snapshot freshness, review coverage, and full verification before acceptance.",
+      "assertions": [
+        "Flags stale evidence risk",
+        "Requires command-center freshness check",
+        "Requires progress snapshot freshness",
+        "Requires review coverage",
+        "Requires full verification"
+      ],
+      "files": []
+    }
+  ]
+}

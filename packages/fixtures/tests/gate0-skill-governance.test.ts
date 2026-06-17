@@ -33,6 +33,31 @@ const completeInput: Gate0SkillGovernanceInput = {
       ].join("\n")
     },
     {
+      relativePath: "skills/gatezero-qa-security-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: gatezero-qa-security-reviewer",
+        "description: GateZero-aware QA security review.",
+        "---",
+        "# GateZero QA Security Reviewer",
+        "## GateZero Boundary First",
+        "G0_RESEARCH",
+        "research_only",
+        "At Gate 0",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/gatezero-qa-security-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $gatezero-qa-security-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "skills/gatezero-risk-governance-reviewer/SKILL.md",
       content: [
         "---",
@@ -131,7 +156,7 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 4,
+      checkedSkillCount: 5,
       checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(
