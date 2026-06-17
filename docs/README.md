@@ -174,6 +174,8 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_TRACKLIST_SOURCE_LINK_INDEX.md`
 - `operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md`
 - `operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`
+- `operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md`
+- `operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD241.md`
 - `operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
 - `operations/GATE0_SKILL_LIBRARY_INTAKE.md`
 - `operations/GATE0_SKILL_LIBRARY_CLOSEOUT_REVIEW.md`

@@ -304,10 +304,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-238` | Command center visual recheck            | `docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md`                        | Records bounded static command-center visual recheck.            |
 | `TRD-239` | Maintenance backlog re-rank              | `docs/operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`                                        | Keeps the next queue maintenance-first.                          |
 | `TRD-240` | Gate 1 blocker recheck                   | `docs/operations/GATE1_READINESS_BLOCKER_RECHECK.md`                                         | Confirms future Gate 1 remains blocked.                          |
+| `TRD-241` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md`                      | Records latest passing CI evidence after TRD-240 push.           |
+| `TRD-241` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
+| `TRD-242` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD241.md`                   | Records command-center static metadata alignment.                |
+| `TRD-242` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static dashboard at the latest CI evidence.           |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-240` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-242` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

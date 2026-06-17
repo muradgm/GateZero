@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-240`                                                      |
+| Latest accepted packet     | `TRD-242`                                                      |
 | Latest accepted validation | 68 test files, 341 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-240`
+- Accepted packets: `TRD-044` to `TRD-242`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -205,6 +205,8 @@ Latest accepted result:
   - Latest push evidence-index confirmation, CI evidence count expectations, command-center last
     verified commit, source-link duplicate guard, tracklist section length guard, source-link index
     cleanup, command-center visual recheck, maintenance backlog re-rank, and Gate 1 blocker recheck.
+  - Remote CI evidence refresh after the TRD-240 push and static command-center CI metadata
+    alignment to that evidence.
 
 ## Workstream Summary
 
@@ -553,6 +555,8 @@ Latest accepted result:
 | `TRD-238` | accepted | UI QA            | Added command center visual recheck after TRD-231.     |
 | `TRD-239` | accepted | Foundation       | Re-ranked maintenance backlog.                         |
 | `TRD-240` | accepted | Planning         | Rechecked Gate 1 blockers.                             |
+| `TRD-241` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-240 push.       |
+| `TRD-242` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-241.    |
 
 ## Current Operator Commands
 
@@ -587,11 +591,9 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet  | Status | Goal                                         | Acceptance focus              |
-| ---- | ------- | ------ | -------------------------------------------- | ----------------------------- |
-| 1    | TRD-241 | queued | Refresh remote CI evidence after this push.  | Evidence record only.         |
-| 2    | TRD-242 | queued | Refresh command-center CI metadata after CI. | Static metadata only.         |
-| 3    | None    | paused | Wait for a concrete Gate 0 maintenance gap.  | Do not queue broad expansion. |
+| Rank | Packet | Status | Goal                                        | Acceptance focus              |
+| ---- | ------ | ------ | ------------------------------------------- | ----------------------------- |
+| 1    | None   | paused | Wait for a concrete Gate 0 maintenance gap. | Do not queue broad expansion. |
 
 ## Rejected For Now
 
@@ -898,6 +900,10 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md`
 - Maintenance backlog re-rank: `docs/operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`
 - Gate 1 blocker recheck: `docs/operations/GATE1_READINESS_BLOCKER_RECHECK.md`
+- Remote CI evidence refresh after TRD-240 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md`
+- Command center CI metadata refresh after TRD-241:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD241.md`
 
 ## Source Of Truth Links Continued
 

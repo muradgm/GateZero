@@ -4,11 +4,11 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-240",
+  latestPacket: "TRD-242",
   localVerification: "68 files / 341 tests",
-  ciRun: "27716601329",
+  ciRun: "27717942810",
   ciState: "success",
-  lastVerifiedCommit: "5ab9bab",
+  lastVerifiedCommit: "53d0264",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "240 / 240",
+      value: "242 / 242",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -63,13 +63,13 @@ export const commandCenterData = {
     },
     {
       area: "Verified commit",
-      signal: "5ab9bab",
+      signal: "53d0264",
       state: "Recorded",
-      reference: "Run 27716601329"
+      reference: "Run 27717942810"
     },
     {
       area: "Remote CI",
-      signal: "Run 27716601329",
+      signal: "Run 27717942810",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -77,7 +77,7 @@ export const commandCenterData = {
       area: "CI evidence",
       signal: "Freshness guard",
       state: "Passing",
-      reference: "3 evidence records"
+      reference: "10 evidence records"
     },
     {
       area: "Agent registry",
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "240 accepted records"
+      reference: "242 accepted records"
     }
   ],
   nextActions: [
@@ -127,6 +127,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_NODE24_ACTION_UPGRADE.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_EVIDENCE_REFRESH_AFTER_TRD230_PUSH.md",
+        "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD240_PUSH.md",
+        "docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD241.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX_LATEST_PUSH_CONFIRMATION.md",
         "docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md",
