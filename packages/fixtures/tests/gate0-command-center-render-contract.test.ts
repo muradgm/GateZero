@@ -7,7 +7,7 @@ import {
 const baseInput = {
   data: 'gate: "G0_RESEARCH", scope: "research_only", docGroups: []',
   html: '<a class="skip-link" href="#main">Skip</a><div id="app"></div>',
-  main: 'main class="workspace" id="main" data-label="Area" commandCenterData.docGroups',
+  main: 'main class="workspace" id="main" data-section updateActiveNavigation data-label="Area" commandCenterData.docGroups',
   styles: "td::before { content: attr(data-label); } .doc-group { display: grid; }"
 };
 
@@ -39,6 +39,17 @@ describe("Gate 0 command center render contract", () => {
 
     expect(result.ok).toBe(false);
     expect(result.findings).toContain("Missing grouped source links.");
+  });
+
+  it("rejects missing hash-aware navigation state", () => {
+    const result = checkGate0CommandCenterRenderContract({
+      ...baseInput,
+      main: baseInput.main.replace("data-section updateActiveNavigation", "")
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain("Missing hash-aware navigation markers.");
+    expect(result.findings).toContain("Missing active navigation updater.");
   });
 
   it("rejects blocked command-center action copy", () => {

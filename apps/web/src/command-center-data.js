@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-227",
-  localVerification: "65 files / 328 tests",
+  latestPacket: "TRD-228",
+  localVerification: "65 files / 330 tests",
   ciRun: "27713436709",
   ciState: "success",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
@@ -19,7 +19,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 65 files, 328 tests.",
+      detail: "Latest suite: 65 files, 330 tests.",
       tone: "good"
     },
     {
@@ -30,7 +30,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "227 / 227",
+      value: "228 / 228",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -58,7 +58,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "65 files / 328 tests"
+      reference: "65 files / 330 tests"
     },
     {
       area: "Remote CI",
@@ -82,7 +82,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "227 accepted records"
+      reference: "228 accepted records"
     }
   ],
   nextActions: [
@@ -101,7 +101,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_VISUAL_QA_PASS.md",
         "docs/operations/GATE0_COMMAND_CENTER_MOBILE_EVIDENCE_TABLE_UX.md",
         "docs/operations/GATE0_COMMAND_CENTER_SOURCE_LINK_GROUPING.md",
-        "docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md"
+        "docs/operations/GATE0_COMMAND_CENTER_OPERATOR_HANDOFF_NOTE.md",
+        "docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md"
       ]
     },
     {

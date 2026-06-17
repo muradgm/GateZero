@@ -274,10 +274,13 @@ deployment approval, or future-phase eligibility.
 | `TRD-226` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
 | `TRD-227` | Command center CI run refresh            | `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md` | Records command-center CI run display alignment.                 |
 | `TRD-227` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static dashboard at the latest CI evidence.           |
+| `TRD-228` | Command center hash navigation state     | `apps/web/src/main.js`                                                                       | Aligns active sidebar state with direct hash navigation.         |
+| `TRD-228` | Hash navigation render contract          | `scripts/check-gate0-command-center-render-contract.ts`                                      | Guards hash-aware navigation markers and updater logic.          |
+| `TRD-228` | Hash navigation state record             | `docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md`                              | Documents the local UI orientation fix.                          |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-227` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-228` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

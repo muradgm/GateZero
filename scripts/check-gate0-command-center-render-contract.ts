@@ -36,6 +36,13 @@ export function checkGate0CommandCenterRenderContract(
   requireIncludes(findings, input.html, '<div id="app"></div>', "Missing static app mount.");
   requireIncludes(findings, input.html, 'class="skip-link"', "Missing skip link.");
   requireIncludes(findings, input.main, 'id="main"', "Missing main landmark target.");
+  requireIncludes(findings, input.main, "data-section", "Missing hash-aware navigation markers.");
+  requireIncludes(
+    findings,
+    input.main,
+    "updateActiveNavigation",
+    "Missing active navigation updater."
+  );
   requireIncludes(findings, input.main, 'data-label="Area"', "Missing mobile table labels.");
   requireIncludes(
     findings,

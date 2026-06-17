@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-227`                                                      |
-| Latest accepted validation | 65 test files, 328 tests passed                                |
+| Latest accepted packet     | `TRD-228`                                                      |
+| Latest accepted validation | 65 test files, 330 tests passed                                |
 
 ## Boundary
 
@@ -94,7 +94,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 65 test files passed, 328 tests passed.
+- `pnpm test`: 65 test files passed, 330 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -139,7 +139,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-227`
+- Accepted packets: `TRD-044` to `TRD-228`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -526,6 +526,7 @@ Latest accepted result:
 | `TRD-225` | accepted | Scope control    | Added next scope recommendation after skill library.   |
 | `TRD-226` | accepted | CI evidence      | Refreshed remote CI evidence after skill closeout.     |
 | `TRD-227` | accepted | UI evidence      | Refreshed command center CI run after skill closeout.  |
+| `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.      |
 
 ## Current Operator Commands
 
@@ -844,6 +845,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md`
 - Command center CI run record refresh after skill library closeout:
   `docs/operations/GATE0_COMMAND_CENTER_CI_RUN_RECORD_REFRESH_AFTER_SKILL_LIBRARY_CLOSEOUT.md`
+- Command center hash navigation state:
+  `docs/operations/GATE0_COMMAND_CENTER_HASH_NAVIGATION_STATE.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

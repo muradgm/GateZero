@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G0_RESEARCH");
     expect(data).toContain("research_only");
-    expect(data).toContain("TRD-227");
+    expect(data).toContain("TRD-228");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -51,6 +51,18 @@ describe("Gate 0 command center surface", () => {
       expect(data).toContain(`"${item}"`);
       expect(main).toContain(`id="${id}"`);
     }
+  });
+
+  it("updates active navigation from the current hash", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain("data-section");
+    expect(main).toContain("updateActiveNavigation()");
+    expect(main).toContain('window.addEventListener("hashchange", updateActiveNavigation)');
+    expect(main).toContain('window.location.hash.replace("#", "") || "overview"');
+    expect(main).toContain(
+      'link.classList.toggle("active", link.dataset.section === currentSection)'
+    );
   });
 
   it("keeps the accessibility baseline present in the static surface", () => {

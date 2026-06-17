@@ -1,6 +1,6 @@
 import { commandCenterData } from "./command-center-data.js";
 
-/* global document */
+/* global document, window */
 
 const app = document.querySelector("#app");
 
@@ -22,7 +22,9 @@ app.innerHTML = `
         ${commandCenterData.navItems
           .map(
             (item, index) =>
-              `<a class="${index === 0 ? "active" : ""}" href="#${slug(item)}">${item}</a>`
+              `<a class="${index === 0 ? "active" : ""}" href="#${slug(item)}" data-section="${slug(
+                item
+              )}">${item}</a>`
           )
           .join("")}
       </nav>
@@ -175,6 +177,19 @@ app.innerHTML = `
   </div>
 `;
 
+const navLinks = [...document.querySelectorAll(".nav-list a[data-section]")];
+
+updateActiveNavigation();
+window.addEventListener("hashchange", updateActiveNavigation);
+
 function slug(value) {
   return value.toLowerCase().replaceAll(" ", "-");
+}
+
+function updateActiveNavigation() {
+  const currentSection = window.location.hash.replace("#", "") || "overview";
+
+  for (const link of navLinks) {
+    link.classList.toggle("active", link.dataset.section === currentSection);
+  }
 }
