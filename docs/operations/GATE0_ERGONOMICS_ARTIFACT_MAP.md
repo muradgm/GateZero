@@ -341,10 +341,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-256` | Runtime endpoint response contract       | `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`                        | Tests local endpoint response status, headers, and schema.       |
 | `TRD-256` | Runtime endpoint response record         | `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_ENDPOINT_RESPONSE_CONTRACT.md`                 | Documents local endpoint response contract coverage.             |
 | `TRD-257` | Runtime endpoint security boundary       | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`                    | Documents the local-only runtime endpoint security boundary.     |
+| `TRD-258` | CI evidence refresh helper               | `scripts/refresh-gate0-ci-evidence.ts`                                                       | Refreshes local CI evidence records from an explicit run id.     |
+| `TRD-258` | CI evidence refresh helper tests         | `packages/fixtures/tests/gate0-ci-evidence-refresh.test.ts`                                  | Tests accepted and blocked helper behavior.                      |
+| `TRD-258` | CI evidence refresh helper record        | `docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`                                        | Documents helper usage and boundaries.                           |
+| `TRD-258` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`                      | Records latest passing CI evidence after TRD-257 push.           |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-257` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-258` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

@@ -28,6 +28,7 @@
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "lint": "eslint .",
     "preview:web": "tsx scripts/preview-web.ts",
+    "refresh:gate0-ci-evidence": "tsx scripts/refresh-gate0-ci-evidence.ts",
     "snapshot:gate0-progress": "tsx scripts/generate-gate0-progress-snapshot.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",

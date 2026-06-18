@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-257`                                                      |
-| Latest accepted validation | 70 test files, 348 tests passed                                |
+| Latest accepted packet     | `TRD-258`                                                      |
+| Latest accepted validation | 71 test files, 355 tests passed                                |
 
 ## Boundary
 
@@ -100,7 +100,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 70 test files passed, 348 tests passed.
+- `pnpm test`: 71 test files passed, 355 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-257`
+- Accepted packets: `TRD-044` to `TRD-258`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -585,37 +585,39 @@ Latest accepted result:
 | `TRD-255` | accepted | UI runtime       | Added command-center runtime schema contract.          |
 | `TRD-256` | accepted | UI runtime       | Added runtime endpoint response contract.              |
 | `TRD-257` | accepted | UI runtime       | Added runtime endpoint local security boundary.        |
+| `TRD-258` | accepted | CI evidence      | Added local CI evidence refresh helper and record.     |
 
 ## Current Operator Commands
 
-| Command                                             | Purpose                                                 | Expected Gate 0 result                                         |
-| --------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------- |
-| `pnpm inspect:gate0-dry-run`                        | Inspect default clear dry-run scenario.                 | Redacted JSON with `inspect_status: clear`.                    |
-| `pnpm inspect:gate0-dry-run -- --help`              | Print local inspect command help.                       | Usage text with static scenario keys and Gate 0 boundary.      |
-| `pnpm inspect:gate0-dry-run -- -h`                  | Print local inspect command help.                       | Usage text with static scenario keys and Gate 0 boundary.      |
-| `pnpm inspect:gate0-dry-run -- --scenario friction` | Inspect blocked-friction dry-run scenario.              | Redacted JSON with `inspect_status: friction_found`.           |
-| `pnpm inspect:gate0-dry-run -- --scenario other`    | Verify invalid scenario handling.                       | Nonzero exit with bounded local usage text and no stack trace. |
-| `pnpm snapshot:gate0-progress`                      | Write local progress snapshot.                          | Markdown snapshot under `ops/runtime/progress/`.               |
-| `pnpm check:gate0-evidence-index`                   | Check evidence-index drift.                             | Local evidence-index drift check passes.                       |
-| `pnpm check:gate1-contracts`                        | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                            |
-| `pnpm check:gate0-name`                             | Check GateZero project-name consistency.                | Local project-name check passes.                               |
-| `pnpm check:gate0-docs-coverage`                    | Check operator docs coverage drift.                     | Local docs coverage check passes.                              |
-| `pnpm check:gate0-snapshot`                         | Check generated progress snapshot freshness.            | Local freshness check passes.                                  |
-| `pnpm check:gate0-tracklist`                        | Check accepted packet ledger alignment.                 | Local consistency check passes.                                |
-| `pnpm check:gate0-reviews`                          | Check assignment and review-record coverage.            | Local review coverage check passes.                            |
-| `pnpm check:gate0-agents`                           | Check agent manifest and reference drift.               | Local agent manifest guard passes.                             |
-| `pnpm check:gate0-source-links`                     | Check duplicate tracklist source links.                 | Local source-link duplicate guard passes.                      |
-| `pnpm check:gate0-tracklist-sections`               | Check tracklist section sizes.                          | Local tracklist section length guard passes.                   |
-| `pnpm check:repo-hygiene`                           | Check repository hygiene drift.                         | Local repository hygiene guard passes.                         |
-| `pnpm check:gate0-ci-evidence`                      | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                     |
-| `pnpm check:gate0-command-center`                   | Check command center evidence freshness.                | Local command center freshness guard passes.                   |
-| `pnpm check:gate0-command-center-render`            | Check command center static render contract.            | Local command center render contract passes.                   |
-| `pnpm check:gate0-skills`                           | Check project skill governance and intake.              | Local skill governance guard passes.                           |
-| `pnpm check:gate0-skill-routing`                    | Check project skill routing matrix.                     | Local skill routing guard passes.                              |
-| `pnpm check:gate0`                                  | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                      |
-| `pnpm verify:gate0`                                 | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                |
-| `pnpm validate:gate0`                               | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                    |
-| `pnpm preview:web`                                  | Serve the static command center locally.                | Local host preview serves `apps/web`.                          |
+| Command                                                                                           | Purpose                                                 | Expected Gate 0 result                                           |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------- |
+| `pnpm inspect:gate0-dry-run`                                                                      | Inspect default clear dry-run scenario.                 | Redacted JSON with `inspect_status: clear`.                      |
+| `pnpm inspect:gate0-dry-run -- --help`                                                            | Print local inspect command help.                       | Usage text with static scenario keys and Gate 0 boundary.        |
+| `pnpm inspect:gate0-dry-run -- -h`                                                                | Print local inspect command help.                       | Usage text with static scenario keys and Gate 0 boundary.        |
+| `pnpm inspect:gate0-dry-run -- --scenario friction`                                               | Inspect blocked-friction dry-run scenario.              | Redacted JSON with `inspect_status: friction_found`.             |
+| `pnpm inspect:gate0-dry-run -- --scenario other`                                                  | Verify invalid scenario handling.                       | Nonzero exit with bounded local usage text and no stack trace.   |
+| `pnpm snapshot:gate0-progress`                                                                    | Write local progress snapshot.                          | Markdown snapshot under `ops/runtime/progress/`.                 |
+| `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
+| `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
+| `pnpm check:gate0-name`                                                                           | Check GateZero project-name consistency.                | Local project-name check passes.                                 |
+| `pnpm check:gate0-docs-coverage`                                                                  | Check operator docs coverage drift.                     | Local docs coverage check passes.                                |
+| `pnpm check:gate0-snapshot`                                                                       | Check generated progress snapshot freshness.            | Local freshness check passes.                                    |
+| `pnpm check:gate0-tracklist`                                                                      | Check accepted packet ledger alignment.                 | Local consistency check passes.                                  |
+| `pnpm check:gate0-reviews`                                                                        | Check assignment and review-record coverage.            | Local review coverage check passes.                              |
+| `pnpm check:gate0-agents`                                                                         | Check agent manifest and reference drift.               | Local agent manifest guard passes.                               |
+| `pnpm check:gate0-source-links`                                                                   | Check duplicate tracklist source links.                 | Local source-link duplicate guard passes.                        |
+| `pnpm check:gate0-tracklist-sections`                                                             | Check tracklist section sizes.                          | Local tracklist section length guard passes.                     |
+| `pnpm check:repo-hygiene`                                                                         | Check repository hygiene drift.                         | Local repository hygiene guard passes.                           |
+| `pnpm check:gate0-ci-evidence`                                                                    | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                       |
+| `pnpm check:gate0-command-center`                                                                 | Check command center evidence freshness.                | Local command center freshness guard passes.                     |
+| `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
+| `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
+| `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
+| `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
+| `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
+| `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
+| `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
+| `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
@@ -961,6 +963,9 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_ENDPOINT_RESPONSE_CONTRACT.md`
 - Command center local runtime security boundary:
   `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`
+- Gate 0 CI evidence refresh helper: `docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`
+- Remote CI evidence refresh after TRD-257 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`
 
 ## Source Of Truth Links Continued
 

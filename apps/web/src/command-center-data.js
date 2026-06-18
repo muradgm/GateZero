@@ -4,11 +4,11 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-257",
-  localVerification: "70 files / 348 tests",
-  ciRun: "27737830833",
+  latestPacket: "TRD-258",
+  localVerification: "71 files / 355 tests",
+  ciRun: "27785795555",
   ciState: "success",
-  lastVerifiedCommit: "44121b7",
+  lastVerifiedCommit: "b18752c",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
     {
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 70 files, 348 tests.",
+      detail: "Latest suite: 71 files, 355 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "257 / 257",
+      value: "258 / 258",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -63,13 +63,13 @@ export const commandCenterData = {
     },
     {
       area: "Verified commit",
-      signal: "44121b7",
+      signal: "b18752c",
       state: "Recorded",
-      reference: "Run 27737830833"
+      reference: "Run 27785795555"
     },
     {
       area: "Remote CI",
-      signal: "Run 27737830833",
+      signal: "Run 27785795555",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "257 accepted records"
+      reference: "258 accepted records"
     }
   ],
   nextActions: [
@@ -114,7 +114,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md",
         "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md",
         "docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md",
-        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md"
+        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md",
+        "docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md"
       ]
     },
     {
@@ -141,6 +142,7 @@ export const commandCenterData = {
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD250_PUSH.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD251.md",
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD252_PUSH.md",
+        "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD253.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX_LATEST_PUSH_CONFIRMATION.md",
         "docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md",
@@ -160,12 +162,14 @@ export const commandCenterData = {
         "scripts/check-gate0-source-link-duplicates.ts",
         "scripts/check-gate0-tracklist-section-length.ts",
         "scripts/build-command-center-runtime-data.ts",
+        "scripts/refresh-gate0-ci-evidence.ts",
         "packages/fixtures/tests/gate0-skill-routing.test.ts",
         "packages/fixtures/tests/gate0-github-actions-runtime.test.ts",
         "packages/fixtures/tests/gate0-source-link-duplicates.test.ts",
         "packages/fixtures/tests/gate0-tracklist-section-length.test.ts",
         "packages/fixtures/tests/gate0-command-center-runtime-data.test.ts",
-        "packages/fixtures/tests/gate0-command-center-render-contract.test.ts"
+        "packages/fixtures/tests/gate0-command-center-render-contract.test.ts",
+        "packages/fixtures/tests/gate0-ci-evidence-refresh.test.ts"
       ]
     },
     {
