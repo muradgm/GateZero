@@ -334,10 +334,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-253` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
 | `TRD-254` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD253.md`                   | Records command-center metadata alignment.                       |
 | `TRD-254` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static fallback at the latest CI evidence.            |
+| `TRD-255` | Command center runtime schema            | `packages/contracts/src/command-center-runtime-data.ts`                                      | Validates local runtime data shape.                              |
+| `TRD-255` | Runtime schema contract tests            | `packages/contracts/tests/command-center-runtime-data.test.ts`                               | Tests pass and bounded failure paths for runtime data.           |
+| `TRD-255` | Runtime builder schema integration       | `scripts/build-command-center-runtime-data.ts`                                               | Parses generated runtime data before serving it locally.         |
+| `TRD-255` | Runtime schema contract record           | `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_SCHEMA_CONTRACT.md`                            | Documents the local runtime schema boundary.                     |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-254` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-255` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

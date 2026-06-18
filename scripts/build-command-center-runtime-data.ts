@@ -1,16 +1,10 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-
-export interface CommandCenterRuntimeData {
-  readonly latestPacket: string;
-  readonly localVerification: string;
-  readonly ciRun: string;
-  readonly ciState: "success";
-  readonly lastVerifiedCommit: string;
-  readonly acceptedRecords: number;
-  readonly evidenceRecords: number;
-}
+import {
+  CommandCenterRuntimeDataSchema,
+  type CommandCenterRuntimeData
+} from "../packages/contracts/src/index.js";
 
 const acceptanceSuffix = "_ORCHESTRATOR_ACCEPTANCE.md";
 
@@ -27,7 +21,7 @@ export async function buildCommandCenterRuntimeData(
   ]);
   const latestEvidence = readLatestEvidenceRecord(evidenceIndex);
 
-  return {
+  return CommandCenterRuntimeDataSchema.parse({
     latestPacket: readTracklistValue(tracklist, "Latest accepted packet"),
     localVerification: normalizeValidationSummary(
       readTracklistValue(tracklist, "Latest accepted validation")
@@ -37,7 +31,7 @@ export async function buildCommandCenterRuntimeData(
     lastVerifiedCommit: latestEvidence.commit,
     acceptedRecords,
     evidenceRecords: countEvidenceRecords(evidenceIndex)
-  };
+  });
 }
 
 async function countAcceptedRecords(reviewDir: string): Promise<number> {

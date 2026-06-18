@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-254`                                                      |
-| Latest accepted validation | 69 test files, 343 tests passed                                |
+| Latest accepted packet     | `TRD-255`                                                      |
+| Latest accepted validation | 70 test files, 347 tests passed                                |
 
 ## Boundary
 
@@ -100,7 +100,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 69 test files passed, 343 tests passed.
+- `pnpm test`: 70 test files passed, 347 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-254`
+- Accepted packets: `TRD-044` to `TRD-255`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -218,6 +218,7 @@ Latest accepted result:
     evidence.
   - Remote CI evidence refresh after the TRD-252 push and command-center metadata alignment to that
     evidence.
+  - Command-center runtime schema contract and builder validation.
 
 ## Workstream Summary
 
@@ -580,6 +581,7 @@ Latest accepted result:
 | `TRD-252` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-251.    |
 | `TRD-253` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-252 push.       |
 | `TRD-254` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-253.    |
+| `TRD-255` | accepted | UI runtime       | Added command-center runtime schema contract.          |
 
 ## Current Operator Commands
 
@@ -950,6 +952,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD252_PUSH.md`
 - Command center CI metadata refresh after TRD-253:
   `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD253.md`
+- Command center runtime schema contract:
+  `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_SCHEMA_CONTRACT.md`
 
 ## Source Of Truth Links Continued
 

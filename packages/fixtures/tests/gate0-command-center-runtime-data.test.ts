@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { CommandCenterRuntimeDataSchema } from "../../../packages/contracts/src/index.js";
 import { buildCommandCenterRuntimeData } from "../../../scripts/build-command-center-runtime-data.js";
 
 describe("Gate 0 command center runtime data", () => {
@@ -6,13 +7,14 @@ describe("Gate 0 command center runtime data", () => {
     const result = await buildCommandCenterRuntimeData();
 
     expect(result).toEqual({
-      latestPacket: "TRD-254",
-      localVerification: "69 files / 343 tests",
+      latestPacket: "TRD-255",
+      localVerification: "70 files / 347 tests",
       ciRun: "27737830833",
       ciState: "success",
       lastVerifiedCommit: "44121b7",
-      acceptedRecords: 254,
+      acceptedRecords: 255,
       evidenceRecords: 15
     });
+    expect(CommandCenterRuntimeDataSchema.parse(result)).toEqual(result);
   });
 });
