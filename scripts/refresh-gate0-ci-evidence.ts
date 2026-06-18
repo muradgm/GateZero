@@ -19,6 +19,7 @@ export interface Gate0CiRunMetadata {
 
 export interface Gate0CiEvidenceRefreshOptions {
   readonly afterPacketId: string;
+  readonly assignmentPath: string;
   readonly packetId: string;
   readonly recordPath: string;
 }
@@ -119,7 +120,7 @@ export function renderGate0CiEvidenceRecord(
     "",
     "## Source Links",
     "",
-    `- Source packet: \`ops/assignments/${options.packetId}_GATE0_CI_EVIDENCE_REFRESH_AUTOMATION.md\``,
+    `- Source packet: \`${options.assignmentPath}\``,
     `- Reviews: \`ops/runtime/reviews/${options.packetId}_QA_SECURITY_REVIEW.md\`,`,
     `  \`ops/runtime/reviews/${options.packetId}_RISK_REVIEW.md\`,`,
     `  \`ops/runtime/reviews/${options.packetId}_ORCHESTRATOR_ACCEPTANCE.md\``,
@@ -170,6 +171,7 @@ export function updateCommandCenterCiMetadata(
     .replace(/ciRun: "\d+"/, `ciRun: "${metadata.databaseId}"`)
     .replace(/lastVerifiedCommit: "[a-f0-9]+"/, `lastVerifiedCommit: "${shortCommit(metadata)}"`)
     .replace(/value: "\d+ \/ \d+"/, `value: "${acceptedRecords} / ${acceptedRecords}"`)
+    .replace(/signal: "[a-f0-9]{7}"/, `signal: "${shortCommit(metadata)}"`)
     .replace(
       /reference: "\d+ accepted records"/,
       `reference: "${acceptedRecords} accepted records"`
@@ -308,6 +310,9 @@ function parseArgs(args: readonly string[]): {
   const packetId = readArg(args, "--packet");
   const afterPacketId = readArg(args, "--after") ?? packetId;
   const recordPath = readArg(args, "--record");
+  const assignmentPath =
+    readArg(args, "--assignment") ??
+    `ops/assignments/${packetId}_GATE0_CI_EVIDENCE_REFRESH_AUTOMATION.md`;
   const repo = readArg(args, "--repo") ?? "muradgm/GateZero";
 
   if (!runId || !packetId || !afterPacketId || !recordPath) {
@@ -328,11 +333,18 @@ function parseArgs(args: readonly string[]): {
     throw new Error(`Record path must be under docs/operations and end with .md: ${recordPath}`);
   }
 
+  if (!assignmentPath.startsWith("ops/assignments/") || !assignmentPath.endsWith(".md")) {
+    throw new Error(
+      `Assignment path must be under ops/assignments and end with .md: ${assignmentPath}`
+    );
+  }
+
   return {
     runId,
     repo,
     options: {
       afterPacketId,
+      assignmentPath,
       packetId,
       recordPath
     }

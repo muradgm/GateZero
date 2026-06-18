@@ -10,7 +10,7 @@ The helper reduces manual markdown edits while keeping the evidence refresh expl
 ## Command
 
 ```bash
-pnpm refresh:gate0-ci-evidence -- --run 27785795555 --packet TRD-258 --after TRD-257 --record docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md
+pnpm refresh:gate0-ci-evidence -- --run 27785795555 --packet TRD-258 --after TRD-257 --record docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md --assignment ops/assignments/TRD-258_GATE0_CI_EVIDENCE_REFRESH_AUTOMATION.md
 ```
 
 ## Behavior
@@ -26,6 +26,7 @@ pnpm refresh:gate0-ci-evidence -- --run 27785795555 --packet TRD-258 --after TRD
 | Index      | Upserts the row in `GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`.        |
 | Dashboard  | Refreshes static command-center fallback metadata from the accepted run. |
 | Duplicates | Blocks recording the same run id under a different packet.               |
+| Assignment | Supports an explicit source-packet path with `--assignment`.             |
 
 ## Boundary
 

@@ -23,6 +23,7 @@ const successfulRun: Gate0CiRunMetadata = {
 
 const options = {
   afterPacketId: "TRD-257",
+  assignmentPath: "ops/assignments/TRD-258_GATE0_CI_EVIDENCE_REFRESH_AUTOMATION.md",
   packetId: "TRD-258",
   recordPath: "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md"
 };
@@ -47,6 +48,9 @@ describe("Gate 0 CI evidence refresh helper", () => {
 
     expect(record).toContain("# Gate 0 Remote CI Evidence Refresh After TRD-257 Push");
     expect(record).toContain("| Run id     | `27785795555`");
+    expect(record).toContain(
+      "Source packet: `ops/assignments/TRD-258_GATE0_CI_EVIDENCE_REFRESH_AUTOMATION.md`"
+    );
     expect(record).toContain("repository-quality evidence only");
     expect(record).toContain("does not approve deployment");
   });
@@ -83,6 +87,7 @@ describe("Gate 0 CI evidence refresh helper", () => {
       'ciRun: "27737830833",',
       'lastVerifiedCommit: "44121b7",',
       'value: "257 / 257",',
+      'signal: "44121b7",',
       'signal: "Run 27737830833",',
       'reference: "Run 27737830833",',
       'reference: "257 accepted records"'
@@ -94,6 +99,7 @@ describe("Gate 0 CI evidence refresh helper", () => {
         'ciRun: "27785795555",',
         'lastVerifiedCommit: "b18752c",',
         'value: "258 / 258",',
+        'signal: "b18752c",',
         'signal: "Run 27785795555",',
         'reference: "Run 27785795555",',
         'reference: "258 accepted records"'

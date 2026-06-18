@@ -345,10 +345,11 @@ deployment approval, or future-phase eligibility.
 | `TRD-258` | CI evidence refresh helper tests         | `packages/fixtures/tests/gate0-ci-evidence-refresh.test.ts`                                  | Tests accepted and blocked helper behavior.                      |
 | `TRD-258` | CI evidence refresh helper record        | `docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`                                        | Documents helper usage and boundaries.                           |
 | `TRD-258` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`                      | Records latest passing CI evidence after TRD-257 push.           |
+| `TRD-259` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD258_PUSH.md`                      | Records latest passing CI evidence after TRD-258 push.           |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-258` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-259` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
