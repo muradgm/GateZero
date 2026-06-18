@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-256",
+  latestPacket: "TRD-257",
   localVerification: "70 files / 348 tests",
   ciRun: "27737830833",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "256 / 256",
+      value: "257 / 257",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "256 accepted records"
+      reference: "257 accepted records"
     }
   ],
   nextActions: [
@@ -113,7 +113,8 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_LAST_VERIFIED_COMMIT.md",
         "docs/operations/GATE0_COMMAND_CENTER_VISUAL_RECHECK_AFTER_TRD231.md",
         "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md",
-        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md"
+        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md",
+        "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md"
       ]
     },
     {

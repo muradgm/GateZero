@@ -340,10 +340,11 @@ deployment approval, or future-phase eligibility.
 | `TRD-255` | Runtime schema contract record           | `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_SCHEMA_CONTRACT.md`                            | Documents the local runtime schema boundary.                     |
 | `TRD-256` | Runtime endpoint response contract       | `packages/fixtures/tests/gate0-command-center-preview-script.test.ts`                        | Tests local endpoint response status, headers, and schema.       |
 | `TRD-256` | Runtime endpoint response record         | `docs/operations/GATE0_COMMAND_CENTER_RUNTIME_ENDPOINT_RESPONSE_CONTRACT.md`                 | Documents local endpoint response contract coverage.             |
+| `TRD-257` | Runtime endpoint security boundary       | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`                    | Documents the local-only runtime endpoint security boundary.     |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-256` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-257` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
