@@ -9,8 +9,8 @@
 | Operating scope            | `research_only`                                                |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-17                                                     |
-| Latest accepted packet     | `TRD-246`                                                      |
+| Last updated               | 2026-06-18                                                     |
+| Latest accepted packet     | `TRD-248`                                                      |
 | Latest accepted validation | 69 test files, 343 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-246`
+- Accepted packets: `TRD-044` to `TRD-248`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -210,6 +210,8 @@ Latest accepted result:
   - Remote CI evidence refresh after the TRD-242 push and static command-center CI metadata
     alignment to that evidence.
   - Local command-center runtime snapshot endpoint and same-origin browser auto-refresh.
+  - Remote CI evidence refresh after the TRD-246 push and command-center metadata alignment to that
+    evidence.
 
 ## Workstream Summary
 
@@ -564,6 +566,8 @@ Latest accepted result:
 | `TRD-244` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-243.    |
 | `TRD-245` | accepted | UI runtime       | Added local command-center runtime snapshot endpoint.  |
 | `TRD-246` | accepted | UI runtime       | Added local command-center auto-refresh.               |
+| `TRD-247` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-246 push.       |
+| `TRD-248` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-247.    |
 
 ## Current Operator Commands
 
@@ -918,6 +922,10 @@ Do not mark a packet accepted until:
 - Command center local runtime snapshot:
   `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md`
 - Command center local auto-refresh: `docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`
+- Remote CI evidence refresh after TRD-246 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD246_PUSH.md`
+- Command center CI metadata refresh after TRD-247:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD247.md`
 
 ## Source Of Truth Links Continued
 

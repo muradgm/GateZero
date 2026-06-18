@@ -318,10 +318,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-246` | Command center local auto-refresh        | `apps/web/src/main.js`                                                                       | Fetches same-origin local runtime data and re-renders.           |
 | `TRD-246` | Command center local auto-refresh record | `docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`                                 | Documents local browser refresh behavior.                        |
 | `TRD-246` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Preserves static fallback metadata.                              |
+| `TRD-247` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD246_PUSH.md`                      | Records latest passing CI evidence after TRD-246 push.           |
+| `TRD-247` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
+| `TRD-248` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD247.md`                   | Records command-center metadata alignment.                       |
+| `TRD-248` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static fallback at the latest CI evidence.            |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-246` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-248` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
