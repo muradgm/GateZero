@@ -1,6 +1,8 @@
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { CommandCenterRuntimeDataSchema } from "../../../packages/contracts/src/index.js";
 import {
+  createPreviewServer,
   defaultPreviewPort,
   previewHost,
   readPort,
@@ -42,5 +44,41 @@ describe("Gate 0 command center preview script", () => {
 
   it("blocks traversal outside the static web root", () => {
     expect(resolvePreviewFile(webRoot, "/../package.json")).toBeUndefined();
+  });
+
+  it("serves schema-valid local runtime command-center data", async () => {
+    const server = createPreviewServer(webRoot);
+    await new Promise<void>((resolve) => {
+      server.listen(0, previewHost, resolve);
+    });
+
+    try {
+      const address = server.address();
+
+      if (address === null || typeof address === "string") {
+        throw new Error("Expected local preview server address.");
+      }
+
+      const response = await fetch(
+        `http://${previewHost}:${address.port}${runtimeCommandCenterDataPath}`
+      );
+      const payload = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("cache-control")).toBe("no-store");
+      expect(response.headers.get("content-type")).toBe("application/json; charset=utf-8");
+      expect(CommandCenterRuntimeDataSchema.parse(payload)).toEqual(payload);
+    } finally {
+      await new Promise<void>((resolve, reject) => {
+        server.close((error) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          resolve();
+        });
+      });
+    }
   });
 });

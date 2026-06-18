@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-255",
-  localVerification: "70 files / 347 tests",
+  latestPacket: "TRD-256",
+  localVerification: "70 files / 348 tests",
   ciRun: "27737830833",
   ciState: "success",
   lastVerifiedCommit: "44121b7",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 70 files, 347 tests.",
+      detail: "Latest suite: 70 files, 348 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "255 / 255",
+      value: "256 / 256",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "70 files / 347 tests"
+      reference: "70 files / 348 tests"
     },
     {
       area: "Verified commit",
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "255 accepted records"
+      reference: "256 accepted records"
     }
   ],
   nextActions: [
