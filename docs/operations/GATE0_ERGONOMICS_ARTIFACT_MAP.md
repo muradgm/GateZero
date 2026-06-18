@@ -322,10 +322,14 @@ deployment approval, or future-phase eligibility.
 | `TRD-247` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
 | `TRD-248` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD247.md`                   | Records command-center metadata alignment.                       |
 | `TRD-248` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static fallback at the latest CI evidence.            |
+| `TRD-249` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD248_PUSH.md`                      | Records latest passing CI evidence after TRD-248 push.           |
+| `TRD-249` | Remote evidence index update             | `docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX.md`                                | Indexes the latest passing CI evidence record.                   |
+| `TRD-250` | Command center CI metadata refresh       | `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD249.md`                   | Records command-center metadata alignment.                       |
+| `TRD-250` | Command center data update               | `apps/web/src/command-center-data.js`                                                        | Points the static fallback at the latest CI evidence.            |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-248` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-250` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
