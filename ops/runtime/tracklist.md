@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-250`                                                      |
+| Latest accepted packet     | `TRD-252`                                                      |
 | Latest accepted validation | 69 test files, 343 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-250`
+- Accepted packets: `TRD-044` to `TRD-252`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -213,6 +213,8 @@ Latest accepted result:
   - Remote CI evidence refresh after the TRD-246 push and command-center metadata alignment to that
     evidence.
   - Remote CI evidence refresh after the TRD-248 push and command-center metadata alignment to that
+    evidence.
+  - Remote CI evidence refresh after the TRD-250 push and command-center metadata alignment to that
     evidence.
 
 ## Workstream Summary
@@ -572,6 +574,8 @@ Latest accepted result:
 | `TRD-248` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-247.    |
 | `TRD-249` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-248 push.       |
 | `TRD-250` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-249.    |
+| `TRD-251` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-250 push.       |
+| `TRD-252` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-251.    |
 
 ## Current Operator Commands
 
@@ -934,6 +938,10 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD248_PUSH.md`
 - Command center CI metadata refresh after TRD-249:
   `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD249.md`
+- Remote CI evidence refresh after TRD-250 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD250_PUSH.md`
+- Command center CI metadata refresh after TRD-251:
+  `docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD251.md`
 
 ## Source Of Truth Links Continued
 
