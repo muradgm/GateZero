@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-259`                                                      |
+| Latest accepted packet     | `TRD-260`                                                      |
 | Latest accepted validation | 71 test files, 355 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-259`
+- Accepted packets: `TRD-044` to `TRD-260`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -587,6 +587,7 @@ Latest accepted result:
 | `TRD-257` | accepted | UI runtime       | Added runtime endpoint local security boundary.        |
 | `TRD-258` | accepted | CI evidence      | Added local CI evidence refresh helper and record.     |
 | `TRD-259` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-258 push.       |
+| `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.       |
 
 ## Current Operator Commands
 
@@ -969,6 +970,8 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`
 - Remote CI evidence refresh after TRD-258 push:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD258_PUSH.md`
+- Remote CI evidence refresh after TRD-259 push:
+  `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD259_PUSH.md`
 
 ## Source Of Truth Links Continued
 

@@ -4,11 +4,11 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-259",
+  latestPacket: "TRD-260",
   localVerification: "71 files / 355 tests",
-  ciRun: "27786633422",
+  ciRun: "27787807220",
   ciState: "success",
-  lastVerifiedCommit: "2b967ae",
+  lastVerifiedCommit: "6e6f513",
   navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
   healthCards: [
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "259 / 259",
+      value: "260 / 260",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -63,13 +63,13 @@ export const commandCenterData = {
     },
     {
       area: "Verified commit",
-      signal: "2b967ae",
+      signal: "6e6f513",
       state: "Recorded",
-      reference: "Run 27786633422"
+      reference: "Run 27787807220"
     },
     {
       area: "Remote CI",
-      signal: "Run 27786633422",
+      signal: "Run 27787807220",
       state: "Passing",
       reference: "Recorded passing run"
     },
@@ -89,7 +89,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "259 accepted records"
+      reference: "260 accepted records"
     }
   ],
   nextActions: [
@@ -144,6 +144,7 @@ export const commandCenterData = {
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD252_PUSH.md",
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md",
         "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD258_PUSH.md",
+        "docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD259_PUSH.md",
         "docs/operations/GATE0_COMMAND_CENTER_CI_METADATA_REFRESH_AFTER_TRD253.md",
         "docs/operations/GATE0_REMOTE_VERIFICATION_EVIDENCE_INDEX_LATEST_PUSH_CONFIRMATION.md",
         "docs/operations/GATE0_CI_EVIDENCE_FRESHNESS_COUNT_EXPECTATIONS.md",

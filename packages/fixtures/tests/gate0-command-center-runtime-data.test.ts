@@ -7,13 +7,13 @@ describe("Gate 0 command center runtime data", () => {
     const result = await buildCommandCenterRuntimeData();
 
     expect(result).toEqual({
-      latestPacket: "TRD-259",
+      latestPacket: "TRD-260",
       localVerification: "71 files / 355 tests",
-      ciRun: "27786633422",
+      ciRun: "27787807220",
       ciState: "success",
-      lastVerifiedCommit: "2b967ae",
-      acceptedRecords: 259,
-      evidenceRecords: 17
+      lastVerifiedCommit: "6e6f513",
+      acceptedRecords: 260,
+      evidenceRecords: 18
     });
     expect(CommandCenterRuntimeDataSchema.parse(result)).toEqual(result);
   });
