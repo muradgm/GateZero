@@ -193,6 +193,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_COMMAND_CENTER_RUNTIME_ENDPOINT_RESPONSE_CONTRACT.md`
 - `operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`
 - `operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`
+- `operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`
 - `operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md`
 - `operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`
 - `operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`

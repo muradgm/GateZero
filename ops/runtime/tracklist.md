@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-260`                                                      |
+| Latest accepted packet     | `TRD-261`                                                      |
 | Latest accepted validation | 71 test files, 355 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-260`
+- Accepted packets: `TRD-044` to `TRD-261`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -220,6 +220,7 @@ Latest accepted result:
     evidence.
   - Command-center runtime schema contract and builder validation.
   - Command-center runtime endpoint response contract.
+  - CI evidence refresh helper and refresh-loop pause control.
 
 ## Workstream Summary
 
@@ -588,6 +589,7 @@ Latest accepted result:
 | `TRD-258` | accepted | CI evidence      | Added local CI evidence refresh helper and record.     |
 | `TRD-259` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-258 push.       |
 | `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.       |
+| `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.          |
 
 ## Current Operator Commands
 
@@ -966,6 +968,7 @@ Do not mark a packet accepted until:
 - Command center local runtime security boundary:
   `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`
 - Gate 0 CI evidence refresh helper: `docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`
+- Gate 0 CI evidence refresh loop pause: `docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`
 - Remote CI evidence refresh after TRD-257 push:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`
 - Remote CI evidence refresh after TRD-258 push:

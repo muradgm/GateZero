@@ -347,10 +347,11 @@ deployment approval, or future-phase eligibility.
 | `TRD-258` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`                      | Records latest passing CI evidence after TRD-257 push.           |
 | `TRD-259` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD258_PUSH.md`                      | Records latest passing CI evidence after TRD-258 push.           |
 | `TRD-260` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD259_PUSH.md`                      | Records latest passing CI evidence after TRD-259 push.           |
+| `TRD-261` | CI evidence refresh loop pause           | `docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`                                    | Prevents evidence-only CI refresh churn.                         |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-260` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-261` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.
