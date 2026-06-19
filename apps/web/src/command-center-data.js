@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-300",
-  localVerification: "71 files / 392 tests",
+  latestPacket: "TRD-311",
+  localVerification: "71 files / 398 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 392 tests.",
+      detail: "Latest suite: 71 files, 398 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "300 / 300",
+      value: "311 / 311",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 392 tests"
+      reference: "71 files / 398 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "300 accepted records"
+      reference: "311 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-301 Gate 1 source link and guard coverage recheck.",
+    "Proceed to TRD-312 backtest run assembly guard indexing recheck.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -132,7 +132,18 @@ export const commandCenterData = {
         "docs/operations/GATE1_REPRODUCIBILITY_COMPARISON_HARDENING.md",
         "docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md",
         "docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md",
-        "docs/operations/GATE2_BLOCKER_AUDIT.md"
+        "docs/operations/GATE2_BLOCKER_AUDIT.md",
+        "docs/operations/GATE1_SOURCE_LINK_AND_GUARD_COVERAGE_RECHECK.md",
+        "docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_NEGATIVE_CASES.md",
+        "docs/operations/GATE1_METRIC_REPORT_EVIDENCE_NEGATIVE_CASES.md",
+        "docs/operations/GATE1_OPERATOR_DECISION_EVENT_NEGATIVE_CASES.md",
+        "docs/operations/GATE1_COMPLETION_CRITERIA_SOURCE_LINK_HARDENING.md",
+        "docs/operations/GATE2_BLOCKER_GUARD_COVERAGE.md",
+        "docs/operations/GATE1_MISSING_CANDLE_BAD_DATA_FIXTURE_PLAN.md",
+        "docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT_PLAN.md",
+        "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md",
+        "docs/operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md",
+        "docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md"
       ]
     },
     {

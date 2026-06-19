@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-300`                                                      |
-| Latest accepted validation | 71 test files, 392 tests passed                                |
+| Latest accepted packet     | `TRD-311`                                                      |
+| Latest accepted validation | 71 test files, 398 tests passed                                |
 
 ## Boundary
 
@@ -101,7 +101,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 71 test files passed, 392 tests passed.
+- `pnpm test:ci`: 71 test files passed, 398 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-300`
+- Accepted packets: `TRD-044` to `TRD-311`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -237,7 +237,10 @@ Latest accepted result:
     lookahead blocker, same-candle ambiguity, assumption risk register, risk-register negative
     cases, risk-register guard indexing hardening, bad-assumption fixtures, backtest run assembly,
     metric report evidence, reproducibility hardening, operator decision event, Gate 1 completion
-    criteria draft, and Gate 2 blocker audit.
+    criteria draft, Gate 2 blocker audit, source-link/guard coverage recheck, negative cases for
+    assemblies, metric reports, and operator decisions, completion/source-link hardening, Gate 2
+    blocker guard coverage, and planning records for missing candles, stale data, duplicate signals,
+    parameter immutability, and evidence-bundle assembly review.
 
 ## Workstream Summary
 
@@ -646,6 +649,17 @@ Latest accepted result:
 | `TRD-298` | accepted | Contracts        | Added operator decision event contract.                |
 | `TRD-299` | accepted | Planning         | Drafted Gate 1 completion criteria.                    |
 | `TRD-300` | accepted | Risk             | Recorded Gate 2 blocker audit.                         |
+| `TRD-301` | accepted | Validation       | Rechecked Gate 1 source links and guard coverage.      |
+| `TRD-302` | accepted | Validation       | Added backtest run assembly negative cases.            |
+| `TRD-303` | accepted | Validation       | Added metric report evidence negative cases.           |
+| `TRD-304` | accepted | Validation       | Added operator decision event negative cases.          |
+| `TRD-305` | accepted | Documentation    | Hardened Gate 1 completion criteria source links.      |
+| `TRD-306` | accepted | Risk             | Hardened Gate 2 blocker guard coverage.                |
+| `TRD-307` | accepted | Planning         | Planned missing-candle bad data fixtures.              |
+| `TRD-308` | accepted | Planning         | Planned stale-data blocker contract.                   |
+| `TRD-309` | accepted | Planning         | Recorded duplicate-signal blocker planning.            |
+| `TRD-310` | accepted | Planning         | Planned strategy parameter immutability guard.         |
+| `TRD-311` | accepted | Review           | Reviewed Gate 1 evidence bundle assembly.              |
 
 ## Current Operator Commands
 
@@ -675,16 +689,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 392 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 398 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                            | Acceptance focus                                                   |
-| ---- | --------- | ------ | ----------------------------------------------- | ------------------------------------------------------------------ |
-| 1    | `TRD-301` | queued | Recheck Gate 1 source links and guard coverage. | Verify new Gate 1 docs, contracts, and fixtures are fully indexed. |
+| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                  |
+| ---- | --------- | ------ | -------------------------------------------- | ----------------------------------------------------------------- |
+| 1    | `TRD-312` | queued | Recheck backtest assembly guard indexing.    | Verify assembly schemas, tests, and docs remain indexed.          |
+| 2    | `TRD-313` | queued | Recheck metric report guard indexing.        | Verify metric report schemas, tests, and docs remain indexed.     |
+| 3    | `TRD-314` | queued | Recheck operator decision guard indexing.    | Verify operator decision schemas, tests, and docs remain indexed. |
+| 4    | `TRD-315` | queued | Add missing-candle fixture contract.         | Verify missing historical candles fail closed.                    |
+| 5    | `TRD-316` | queued | Add stale-data blocker contract.             | Verify stale data cannot become evidence usable.                  |
+| 6    | `TRD-317` | queued | Add duplicate-signal blocker contract.       | Verify duplicate signals remain blocked evidence.                 |
+| 7    | `TRD-318` | queued | Add parameter immutability guard contract.   | Verify parameter drift blocks evidence use.                       |
+| 8    | `TRD-319` | queued | Add Gate 1 evidence bundle summary contract. | Verify assembled evidence remains no-claim and no-execution.      |
+| 9    | `TRD-320` | queued | Add Gate 1 completion blocker recheck.       | Verify Gate 2 remains blocked after evidence-bundle hardening.    |
+| 10   | `TRD-321` | queued | Add Gate 1 control-plane checkpoint.         | Verify tracker, docs, guard, and command center agree.            |
 
 ## Rejected For Now
 
@@ -1092,6 +1115,26 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md`
 - Gate 1 completion criteria draft: `docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md`
 - Gate 2 blocker audit: `docs/operations/GATE2_BLOCKER_AUDIT.md`
+- Gate 1 source link and guard coverage recheck:
+  `docs/operations/GATE1_SOURCE_LINK_AND_GUARD_COVERAGE_RECHECK.md`
+- Gate 1 backtest run assembly negative cases:
+  `docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_NEGATIVE_CASES.md`
+- Gate 1 metric report evidence negative cases:
+  `docs/operations/GATE1_METRIC_REPORT_EVIDENCE_NEGATIVE_CASES.md`
+- Gate 1 operator decision event negative cases:
+  `docs/operations/GATE1_OPERATOR_DECISION_EVENT_NEGATIVE_CASES.md`
+- Gate 1 completion criteria source-link hardening:
+  `docs/operations/GATE1_COMPLETION_CRITERIA_SOURCE_LINK_HARDENING.md`
+- Gate 2 blocker guard coverage: `docs/operations/GATE2_BLOCKER_GUARD_COVERAGE.md`
+- Gate 1 missing-candle bad data fixture plan:
+  `docs/operations/GATE1_MISSING_CANDLE_BAD_DATA_FIXTURE_PLAN.md`
+- Gate 1 stale data blocker contract plan:
+  `docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT_PLAN.md`
+- Gate 1 duplicate signal blocker planning:
+  `docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md`
+- Gate 1 strategy parameter immutability guard plan:
+  `docs/operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md`
+- Gate 1 evidence bundle assembly review: `docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

@@ -4,6 +4,9 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 
 ## Product
 
+- `brand_handoff/BRAND_SYSTEM.md`
+- `brand_handoff/LOGO_CREATIVE_DIRECTION.md`
+- `brand_handoff/LOGO_PRODUCTION_REQUIREMENTS.md`
 - `product/POSITIONING.md`
 - `product/OFFER.md`
 - `product/APP_ROADMAP.md`
@@ -266,6 +269,17 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md`
 - `operations/GATE1_COMPLETION_CRITERIA_DRAFT.md`
 - `operations/GATE2_BLOCKER_AUDIT.md`
+- `operations/GATE1_SOURCE_LINK_AND_GUARD_COVERAGE_RECHECK.md`
+- `operations/GATE1_BACKTEST_RUN_ASSEMBLY_NEGATIVE_CASES.md`
+- `operations/GATE1_METRIC_REPORT_EVIDENCE_NEGATIVE_CASES.md`
+- `operations/GATE1_OPERATOR_DECISION_EVENT_NEGATIVE_CASES.md`
+- `operations/GATE1_COMPLETION_CRITERIA_SOURCE_LINK_HARDENING.md`
+- `operations/GATE2_BLOCKER_GUARD_COVERAGE.md`
+- `operations/GATE1_MISSING_CANDLE_BAD_DATA_FIXTURE_PLAN.md`
+- `operations/GATE1_STALE_DATA_BLOCKER_CONTRACT_PLAN.md`
+- `operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md`
+- `operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md`
+- `operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md`
 - `operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md`
 - `operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

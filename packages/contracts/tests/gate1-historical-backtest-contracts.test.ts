@@ -958,6 +958,31 @@ describe("Gate 1 historical backtest contracts", () => {
     ).toThrow();
   });
 
+  it("rejects backtest run assemblies with performance claims or wrong scope", () => {
+    expect(() =>
+      Gate1BacktestRunAssemblyContractSchema.parse({
+        ...createBacktestRunAssembly(),
+        performance_claim: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestRunAssemblyContractSchema.parse({
+        ...createBacktestRunAssembly(),
+        scope: "paper_trading"
+      })
+    ).toThrow();
+  });
+
+  it("rejects backtest run assemblies with missing evidence references", () => {
+    expect(() =>
+      Gate1BacktestRunAssemblyContractSchema.parse({
+        ...createBacktestRunAssembly(),
+        reproducibility_check_id: ""
+      })
+    ).toThrow();
+  });
+
   it("validates evidence-only Gate 1 metric reports", () => {
     const report = Gate1MetricReportEvidenceContractSchema.parse(createMetricReportEvidence());
 
@@ -979,6 +1004,31 @@ describe("Gate 1 historical backtest contracts", () => {
       Gate1MetricReportEvidenceContractSchema.parse({
         ...createMetricReportEvidence(),
         performance_claim: true
+      })
+    ).toThrow();
+  });
+
+  it("rejects Gate 1 metric reports without limitation notes or sample size", () => {
+    expect(() =>
+      Gate1MetricReportEvidenceContractSchema.parse({
+        ...createMetricReportEvidence(),
+        limitation_notes: []
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1MetricReportEvidenceContractSchema.parse({
+        ...createMetricReportEvidence(),
+        sample_size: 0
+      })
+    ).toThrow();
+  });
+
+  it("rejects Gate 1 metric reports that imply approval", () => {
+    expect(() =>
+      Gate1MetricReportEvidenceContractSchema.parse({
+        ...createMetricReportEvidence(),
+        approval_claim: true
       })
     ).toThrow();
   });
@@ -1005,6 +1055,31 @@ describe("Gate 1 historical backtest contracts", () => {
       Gate1BacktestOperatorDecisionEventContractSchema.parse({
         ...createOperatorDecisionEvent(),
         execution_path: true
+      })
+    ).toThrow();
+  });
+
+  it("rejects Gate 1 operator decisions that remove operator authority", () => {
+    expect(() =>
+      Gate1BacktestOperatorDecisionEventContractSchema.parse({
+        ...createOperatorDecisionEvent(),
+        operator_retains_authority: false
+      })
+    ).toThrow();
+  });
+
+  it("rejects Gate 1 operator decisions that imply paper promotion or approval", () => {
+    expect(() =>
+      Gate1BacktestOperatorDecisionEventContractSchema.parse({
+        ...createOperatorDecisionEvent(),
+        decision: "paper_candidate"
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestOperatorDecisionEventContractSchema.parse({
+        ...createOperatorDecisionEvent(),
+        approval_claim: true
       })
     ).toThrow();
   });
