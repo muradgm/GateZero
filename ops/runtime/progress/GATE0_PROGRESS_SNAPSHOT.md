@@ -5,10 +5,10 @@
 | Field                      | Value                           |
 | -------------------------- | ------------------------------- |
 | Generated at               | 2026-06-19                      |
-| Latest accepted packet     | `TRD-291`                       |
-| Latest accepted validation | 71 test files, 379 tests passed |
-| Assignment count           | 291                             |
-| Accepted count             | 291                             |
+| Latest accepted packet     | `TRD-300`                       |
+| Latest accepted validation | 71 test files, 392 tests passed |
+| Assignment count           | 300                             |
+| Accepted count             | 300                             |
 | Open count                 | 0                               |
 
 ## Boundary
@@ -314,6 +314,15 @@
 | `TRD-289` | `accepted` |
 | `TRD-290` | `accepted` |
 | `TRD-291` | `accepted` |
+| `TRD-292` | `accepted` |
+| `TRD-293` | `accepted` |
+| `TRD-294` | `accepted` |
+| `TRD-295` | `accepted` |
+| `TRD-296` | `accepted` |
+| `TRD-297` | `accepted` |
+| `TRD-298` | `accepted` |
+| `TRD-299` | `accepted` |
+| `TRD-300` | `accepted` |
 
 ## Notes
 

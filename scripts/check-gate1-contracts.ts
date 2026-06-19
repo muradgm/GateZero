@@ -5,12 +5,15 @@ import type { ZodType } from "zod";
 import {
   Gate1BacktestResultContractSchema,
   Gate1BacktestAssumptionRiskRegisterContractSchema,
+  Gate1BacktestOperatorDecisionEventContractSchema,
+  Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
+  Gate1MetricReportEvidenceContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
@@ -20,7 +23,10 @@ import {
 } from "../packages/contracts/src/index.js";
 import {
   gate1BacktestAssumptionRiskRegisterFixture,
+  gate1BacktestOperatorDecisionEventFixture,
+  gate1BacktestRunAssemblyFixture,
   gate1BacktestResultFixture,
+  gate1BadAssumptionRiskRegisterFixture,
   gate1BidAskHistoricalDataSnapshotFixture,
   gate1CandleTimingIntegrityFixture,
   gate1CrossCurrencyDirectionalPnlFixture,
@@ -29,6 +35,7 @@ import {
   gate1ImmutableBacktestRecordFixture,
   gate1JpyPrecisionDirectionalPnlFixture,
   gate1LookaheadBiasBlockerFixture,
+  gate1MetricReportEvidenceFixture,
   gate1LongDirectionalPnlFixture,
   gate1PnlEvidenceBundleFixture,
   gate1PnlEvidenceReferenceFixture,
@@ -78,6 +85,10 @@ export interface Gate1ContractFixtureSet {
   readonly lookaheadBiasBlocker: unknown;
   readonly sameCandleAmbiguity: unknown;
   readonly backtestAssumptionRiskRegister: unknown;
+  readonly badAssumptionRiskRegister: unknown;
+  readonly backtestRunAssembly: unknown;
+  readonly metricReportEvidence: unknown;
+  readonly backtestOperatorDecisionEvent: unknown;
   readonly reproducibilityCheck: unknown;
   readonly reproducibilityMismatch: unknown;
 }
@@ -91,6 +102,16 @@ const requiredDocPaths = [
   "docs/operations/GATE1_BACKTEST_RESULT_CONTRACT.md",
   "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md",
   "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
+  "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md",
+  "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER_NEGATIVE_CASES.md",
+  "docs/operations/GATE1_RISK_REGISTER_GUARD_INDEXING_HARDENING.md",
+  "docs/operations/GATE1_BAD_ASSUMPTION_FIXTURE_CASES.md",
+  "docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_CONTRACT.md",
+  "docs/operations/GATE1_METRIC_REPORT_EVIDENCE_ONLY_CONTRACT.md",
+  "docs/operations/GATE1_REPRODUCIBILITY_COMPARISON_HARDENING.md",
+  "docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md",
+  "docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md",
+  "docs/operations/GATE2_BLOCKER_AUDIT.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -120,6 +141,9 @@ const requiredSchemaNames = [
   "Gate1LookaheadBiasBlockerContractSchema",
   "Gate1SameCandleAmbiguityContractSchema",
   "Gate1BacktestAssumptionRiskRegisterContractSchema",
+  "Gate1BacktestRunAssemblyContractSchema",
+  "Gate1MetricReportEvidenceContractSchema",
+  "Gate1BacktestOperatorDecisionEventContractSchema",
   "Gate1ReproducibilityCheckContractSchema"
 ] as const;
 
@@ -141,8 +165,19 @@ const requiredFixtureNames = [
   "gate1LookaheadBiasBlockerFixture",
   "gate1SameCandleAmbiguityFixture",
   "gate1BacktestAssumptionRiskRegisterFixture",
+  "gate1BadAssumptionRiskRegisterFixture",
+  "gate1BacktestRunAssemblyFixture",
+  "gate1MetricReportEvidenceFixture",
+  "gate1BacktestOperatorDecisionEventFixture",
   "gate1ReproducibilityCheckFixture",
   "gate1ReproducibilityMismatchFixture"
+] as const;
+
+const requiredRiskRegisterNegativeTestSnippets = [
+  "rejects backtest assumption risk registers without risk entries",
+  "rejects backtest assumption risk registers with invalid severity or disposition",
+  "rejects backtest assumption risk registers that leave Gate 1 historical scope",
+  "keeps backtest assumption risk registers evidence-only without execution or claims"
 ] as const;
 
 const guardCommand = "pnpm check:gate1-contracts";
@@ -178,6 +213,9 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
   );
   const fixtureSource = filesByPath.get(
     "packages/fixtures/src/gate1-historical-backtest-fixtures.ts"
+  );
+  const contractTestSource = filesByPath.get(
+    "packages/contracts/tests/gate1-historical-backtest-contracts.test.ts"
   );
 
   for (const docPath of requiredDocPaths) {
@@ -271,6 +309,14 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
     }
   }
 
+  if (contractTestSource) {
+    for (const snippet of requiredRiskRegisterNegativeTestSnippets) {
+      if (!contractTestSource.includes(snippet)) {
+        findings.push(`Missing risk-register negative contract test: ${snippet}`);
+      }
+    }
+  }
+
   findings.push(
     ...validateGate1ContractFixtureSet(input.fixtureSet ?? createDefaultGate1ContractFixtureSet())
   );
@@ -301,6 +347,10 @@ export function createDefaultGate1ContractFixtureSet(): Gate1ContractFixtureSet 
     lookaheadBiasBlocker: gate1LookaheadBiasBlockerFixture,
     sameCandleAmbiguity: gate1SameCandleAmbiguityFixture,
     backtestAssumptionRiskRegister: gate1BacktestAssumptionRiskRegisterFixture,
+    badAssumptionRiskRegister: gate1BadAssumptionRiskRegisterFixture,
+    backtestRunAssembly: gate1BacktestRunAssemblyFixture,
+    metricReportEvidence: gate1MetricReportEvidenceFixture,
+    backtestOperatorDecisionEvent: gate1BacktestOperatorDecisionEventFixture,
     reproducibilityCheck: gate1ReproducibilityCheckFixture,
     reproducibilityMismatch: gate1ReproducibilityMismatchFixture
   };
@@ -412,6 +462,30 @@ export function validateGate1ContractFixtureSet(
     "gate1BacktestAssumptionRiskRegisterFixture",
     Gate1BacktestAssumptionRiskRegisterContractSchema,
     fixtureSet.backtestAssumptionRiskRegister
+  );
+  validateFixture(
+    findings,
+    "gate1BadAssumptionRiskRegisterFixture",
+    Gate1BacktestAssumptionRiskRegisterContractSchema,
+    fixtureSet.badAssumptionRiskRegister
+  );
+  validateFixture(
+    findings,
+    "gate1BacktestRunAssemblyFixture",
+    Gate1BacktestRunAssemblyContractSchema,
+    fixtureSet.backtestRunAssembly
+  );
+  validateFixture(
+    findings,
+    "gate1MetricReportEvidenceFixture",
+    Gate1MetricReportEvidenceContractSchema,
+    fixtureSet.metricReportEvidence
+  );
+  validateFixture(
+    findings,
+    "gate1BacktestOperatorDecisionEventFixture",
+    Gate1BacktestOperatorDecisionEventContractSchema,
+    fixtureSet.backtestOperatorDecisionEvent
   );
   validateFixture(
     findings,

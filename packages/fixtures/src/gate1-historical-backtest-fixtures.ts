@@ -1,12 +1,15 @@
 import {
   Gate1BacktestResultContractSchema,
   Gate1BacktestAssumptionRiskRegisterContractSchema,
+  Gate1BacktestOperatorDecisionEventContractSchema,
+  Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
+  Gate1MetricReportEvidenceContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
@@ -14,6 +17,8 @@ import {
   Gate1SpreadBidAskAlignmentContractSchema,
   Gate1StrategyVersionContractSchema,
   type Gate1BacktestAssumptionRiskRegisterContract,
+  type Gate1BacktestOperatorDecisionEventContract,
+  type Gate1BacktestRunAssemblyContract,
   type Gate1BacktestResultContract,
   type Gate1CandleTimingIntegrityContract,
   type Gate1DirectionalPnlContract,
@@ -21,6 +26,7 @@ import {
   type Gate1HistoricalDataSnapshotContract,
   type Gate1ImmutableBacktestRecordContract,
   type Gate1LookaheadBiasBlockerContract,
+  type Gate1MetricReportEvidenceContract,
   type Gate1PnlEvidenceBundleContract,
   type Gate1PnlEvidenceReferenceContract,
   type Gate1ReproducibilityCheckContract,
@@ -414,6 +420,30 @@ export const gate1BacktestAssumptionRiskRegisterFixture: Gate1BacktestAssumption
     created_at: fixtureTimestamp
   });
 
+export const gate1BadAssumptionRiskRegisterFixture: Gate1BacktestAssumptionRiskRegisterContract =
+  Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+    ...gate1BacktestAssumptionRiskRegisterFixture,
+    backtest_assumption_risk_register_id: "gate1-bad-assumption-risk-register-fixture-001",
+    risks: [
+      {
+        risk_id: "gate1-risk-mid-price-fixture-001",
+        area: "mid-price fill assumption",
+        severity: "critical",
+        description: "Using mid-price fills can materially overstate backtest evidence quality.",
+        mitigation: "Require bid/ask fill checks before evidence use.",
+        disposition: "open"
+      },
+      {
+        risk_id: "gate1-risk-cost-omission-fixture-001",
+        area: "cost omission",
+        severity: "high",
+        description: "Ignoring spread, commission, or slippage can misstate net evidence.",
+        mitigation: "Block evidence until declared costs are checked.",
+        disposition: "open"
+      }
+    ]
+  });
+
 export const gate1ReproducibilityCheckFixture: Gate1ReproducibilityCheckContract =
   Gate1ReproducibilityCheckContractSchema.parse({
     reproducibility_check_id: "gate1-repro-check-fixture-001",
@@ -443,4 +473,72 @@ export const gate1ReproducibilityMismatchFixture: Gate1ReproducibilityCheckContr
     rerun_output_hash: "sha256:gate1-mismatched-output-fixture-001",
     reproducibility_status: "mismatch",
     evidence_usable: false
+  });
+
+export const gate1BacktestRunAssemblyFixture: Gate1BacktestRunAssemblyContract =
+  Gate1BacktestRunAssemblyContractSchema.parse({
+    backtest_run_assembly_id: "gate1-backtest-run-assembly-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: gate1StrategyVersionFixture.strategy_version_id,
+    historical_data_snapshot_id:
+      gate1BidAskHistoricalDataSnapshotFixture.historical_data_snapshot_id,
+    fees_and_slippage_assumption_id:
+      gate1FeesAndSlippageAssumptionFixture.fees_and_slippage_assumption_id,
+    immutable_backtest_record_id: gate1ImmutableBacktestRecordFixture.immutable_backtest_record_id,
+    backtest_result_id: gate1BacktestResultFixture.backtest_result_id,
+    pnl_evidence_bundle_id: gate1PnlEvidenceBundleFixture.pnl_evidence_bundle_id,
+    backtest_assumption_risk_register_id:
+      gate1BacktestAssumptionRiskRegisterFixture.backtest_assumption_risk_register_id,
+    reproducibility_check_id: gate1ReproducibilityCheckFixture.reproducibility_check_id,
+    assembly_status: "checked",
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: fixtureTimestamp
+  });
+
+export const gate1MetricReportEvidenceFixture: Gate1MetricReportEvidenceContract =
+  Gate1MetricReportEvidenceContractSchema.parse({
+    metric_report_evidence_id: "gate1-metric-report-evidence-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_result_id: gate1BacktestResultFixture.backtest_result_id,
+    backtest_run_assembly_id: gate1BacktestRunAssemblyFixture.backtest_run_assembly_id,
+    metric_schema_version: "metrics-v1",
+    metric_names: ["trade_count", "net_return_after_declared_costs_pct", "maximum_drawdown_pct"],
+    sample_size: gate1BacktestResultFixture.observation_count,
+    limitation_notes: [
+      "Synthetic evidence-only report; metrics are not approval or performance claims."
+    ],
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: fixtureTimestamp
+  });
+
+export const gate1BacktestOperatorDecisionEventFixture: Gate1BacktestOperatorDecisionEventContract =
+  Gate1BacktestOperatorDecisionEventContractSchema.parse({
+    operator_decision_event_id: "gate1-operator-decision-event-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_run_assembly_id: gate1BacktestRunAssemblyFixture.backtest_run_assembly_id,
+    metric_report_evidence_id: gate1MetricReportEvidenceFixture.metric_report_evidence_id,
+    decision: "keep_as_research_evidence",
+    decision_rationale: "Synthetic evidence retained for review traceability only.",
+    risk_review_required: true,
+    operator_retains_authority: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    decided_at: fixtureTimestamp
   });

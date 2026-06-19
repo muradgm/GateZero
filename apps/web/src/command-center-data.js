@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-291",
-  localVerification: "71 files / 379 tests",
+  latestPacket: "TRD-300",
+  localVerification: "71 files / 392 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 379 tests.",
+      detail: "Latest suite: 71 files, 392 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "291 / 291",
+      value: "300 / 300",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 379 tests"
+      reference: "71 files / 392 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "291 accepted records"
+      reference: "300 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-292 backtest assumption risk register negative cases.",
+    "Proceed to TRD-301 Gate 1 source link and guard coverage recheck.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -123,7 +123,16 @@ export const commandCenterData = {
         "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
         "docs/operations/GATE1_DIRECTIONAL_PNL_FIXTURES.md",
         "docs/operations/GATE1_BACKTEST_EVIDENCE_INTEGRITY_REVIEW.md",
-        "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md"
+        "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md",
+        "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER_NEGATIVE_CASES.md",
+        "docs/operations/GATE1_RISK_REGISTER_GUARD_INDEXING_HARDENING.md",
+        "docs/operations/GATE1_BAD_ASSUMPTION_FIXTURE_CASES.md",
+        "docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_CONTRACT.md",
+        "docs/operations/GATE1_METRIC_REPORT_EVIDENCE_ONLY_CONTRACT.md",
+        "docs/operations/GATE1_REPRODUCIBILITY_COMPARISON_HARDENING.md",
+        "docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md",
+        "docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md",
+        "docs/operations/GATE2_BLOCKER_AUDIT.md"
       ]
     },
     {

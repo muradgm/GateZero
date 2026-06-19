@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-291`                                                      |
-| Latest accepted validation | 71 test files, 379 tests passed                                |
+| Latest accepted packet     | `TRD-300`                                                      |
+| Latest accepted validation | 71 test files, 392 tests passed                                |
 
 ## Boundary
 
@@ -27,8 +27,8 @@ publishing, external execution paths, or risk-gate loosening.
 | Status             | Meaning                                                                              |
 | ------------------ | ------------------------------------------------------------------------------------ |
 | `accepted`         | Packet completed, reviewed, and accepted by ORCHESTRATOR after QA/RISK review.       |
-| `complete`         | Workstream has enough accepted packets to satisfy its current Gate 0 purpose.        |
-| `active`           | Workstream is still useful for further bounded Gate 0 hardening.                     |
+| `complete`         | Workstream has enough accepted packets to satisfy its current gate purpose.          |
+| `active`           | Workstream is still useful for further bounded gate hardening.                       |
 | `queued`           | Packet is identified as a good next task but not implemented.                        |
 | `blocked`          | Packet cannot proceed under current gates or requires a future authorization packet. |
 | `rejected_for_now` | Explicitly out of scope while Gate 0 remains Research Only.                          |
@@ -101,7 +101,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 71 test files passed, 356 tests passed.
+- `pnpm test:ci`: 71 test files passed, 392 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-291`
+- Accepted packets: `TRD-044` to `TRD-300`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -234,7 +234,10 @@ Latest accepted result:
   - Directional PnL negative cases, guard indexing hardening, cross-currency and JPY precision
     fixtures, cost consistency, PnL evidence references, bundle fixtures, and integrity review.
   - PnL bundle negative cases, bid/ask historical data fixture, spread alignment, timing integrity,
-    lookahead blocker, same-candle ambiguity, and assumption risk register.
+    lookahead blocker, same-candle ambiguity, assumption risk register, risk-register negative
+    cases, risk-register guard indexing hardening, bad-assumption fixtures, backtest run assembly,
+    metric report evidence, reproducibility hardening, operator decision event, Gate 1 completion
+    criteria draft, and Gate 2 blocker audit.
 
 ## Workstream Summary
 
@@ -634,10 +637,19 @@ Latest accepted result:
 | `TRD-289` | accepted | Validation       | Added lookahead-bias blocker contract.                 |
 | `TRD-290` | accepted | Planning         | Added same-candle stop/target ambiguity plan.          |
 | `TRD-291` | accepted | Risk             | Added backtest assumption risk register.               |
+| `TRD-292` | accepted | Validation       | Added assumption risk register negative cases.         |
+| `TRD-293` | accepted | Validation       | Hardened risk-register guard indexing.                 |
+| `TRD-294` | accepted | Fixtures         | Added bad-assumption fixture cases.                    |
+| `TRD-295` | accepted | Contracts        | Added backtest run assembly contract.                  |
+| `TRD-296` | accepted | Contracts        | Added metric report evidence-only contract.            |
+| `TRD-297` | accepted | Validation       | Hardened reproducibility comparison failures.          |
+| `TRD-298` | accepted | Contracts        | Added operator decision event contract.                |
+| `TRD-299` | accepted | Planning         | Drafted Gate 1 completion criteria.                    |
+| `TRD-300` | accepted | Risk             | Recorded Gate 2 blocker audit.                         |
 
 ## Current Operator Commands
 
-| Command                                                                                           | Purpose                                                 | Expected Gate 0 result                                           |
+| Command                                                                                           | Purpose                                                 | Expected local result                                            |
 | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------- |
 | `pnpm inspect:gate0-dry-run`                                                                      | Inspect default clear dry-run scenario.                 | Redacted JSON with `inspect_status: clear`.                      |
 | `pnpm inspect:gate0-dry-run -- --help`                                                            | Print local inspect command help.                       | Usage text with static scenario keys and Gate 0 boundary.        |
@@ -663,16 +675,16 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 356 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 392 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                              | Acceptance focus                                  |
-| ---- | --------- | ------ | --------------------------------- | ------------------------------------------------- |
-| 1    | `TRD-292` | queued | Add risk-register negative cases. | Verify invalid assumption risk register failures. |
+| Rank | Packet    | Status | Goal                                            | Acceptance focus                                                   |
+| ---- | --------- | ------ | ----------------------------------------------- | ------------------------------------------------------------------ |
+| 1    | `TRD-301` | queued | Recheck Gate 1 source links and guard coverage. | Verify new Gate 1 docs, contracts, and fixtures are fully indexed. |
 
 ## Rejected For Now
 
@@ -709,7 +721,7 @@ Do not mark a packet accepted until:
 - RISK review exists.
 - ORCHESTRATOR acceptance exists.
 - Required validation commands pass.
-- Gate remains `G0_RESEARCH`.
+- Gate remains `G1_BACKTESTING`.
 - Scope remains `research_only`.
 
 ## Source Of Truth Links
@@ -1066,6 +1078,20 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_SAME_CANDLE_STOP_TARGET_AMBIGUITY_PLAN.md`
 - Gate 1 backtest assumption risk register:
   `docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md`
+- Gate 1 backtest assumption risk register negative cases:
+  `docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER_NEGATIVE_CASES.md`
+- Gate 1 risk register guard indexing:
+  `docs/operations/GATE1_RISK_REGISTER_GUARD_INDEXING_HARDENING.md`
+- Gate 1 bad-assumption fixture cases: `docs/operations/GATE1_BAD_ASSUMPTION_FIXTURE_CASES.md`
+- Gate 1 backtest run assembly contract: `docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_CONTRACT.md`
+- Gate 1 metric report evidence-only contract:
+  `docs/operations/GATE1_METRIC_REPORT_EVIDENCE_ONLY_CONTRACT.md`
+- Gate 1 reproducibility comparison hardening:
+  `docs/operations/GATE1_REPRODUCIBILITY_COMPARISON_HARDENING.md`
+- Gate 1 operator decision event contract:
+  `docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md`
+- Gate 1 completion criteria draft: `docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md`
+- Gate 2 blocker audit: `docs/operations/GATE2_BLOCKER_AUDIT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

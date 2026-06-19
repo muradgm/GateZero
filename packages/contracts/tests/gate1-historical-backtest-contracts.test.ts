@@ -4,10 +4,13 @@ import {
   Gate1DirectionalPnlContractSchema,
   Gate1BacktestResultContractSchema,
   Gate1BacktestAssumptionRiskRegisterContractSchema,
+  Gate1BacktestOperatorDecisionEventContractSchema,
+  Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
+  Gate1MetricReportEvidenceContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
@@ -15,6 +18,8 @@ import {
   Gate1SpreadBidAskAlignmentContractSchema,
   Gate1StrategyVersionContractSchema,
   type Gate1BacktestAssumptionRiskRegisterContract,
+  type Gate1BacktestOperatorDecisionEventContract,
+  type Gate1BacktestRunAssemblyContract,
   type Gate1BacktestResultContract,
   type Gate1CandleTimingIntegrityContract,
   type Gate1DirectionalPnlContract,
@@ -22,6 +27,7 @@ import {
   type Gate1HistoricalDataSnapshotContract,
   type Gate1ImmutableBacktestRecordContract,
   type Gate1LookaheadBiasBlockerContract,
+  type Gate1MetricReportEvidenceContract,
   type Gate1PnlEvidenceBundleContract,
   type Gate1PnlEvidenceReferenceContract,
   type Gate1ReproducibilityCheckContract,
@@ -424,6 +430,81 @@ function createReproducibilityCheck(
   };
 }
 
+function createBacktestRunAssembly(
+  overrides: Partial<Gate1BacktestRunAssemblyContract> = {}
+): Gate1BacktestRunAssemblyContract {
+  return {
+    backtest_run_assembly_id: "backtest-run-assembly-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: "strategy-version-001",
+    historical_data_snapshot_id: "hist-data-001",
+    fees_and_slippage_assumption_id: "cost-assumption-001",
+    immutable_backtest_record_id: "immutable-backtest-001",
+    backtest_result_id: "backtest-result-001",
+    pnl_evidence_bundle_id: "pnl-bundle-001",
+    backtest_assumption_risk_register_id: "assumption-risk-register-001",
+    reproducibility_check_id: "repro-check-001",
+    assembly_status: "checked",
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createMetricReportEvidence(
+  overrides: Partial<Gate1MetricReportEvidenceContract> = {}
+): Gate1MetricReportEvidenceContract {
+  return {
+    metric_report_evidence_id: "metric-report-evidence-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_result_id: "backtest-result-001",
+    backtest_run_assembly_id: "backtest-run-assembly-001",
+    metric_schema_version: "metrics-v1",
+    metric_names: ["trade_count", "net_return_after_declared_costs_pct", "maximum_drawdown_pct"],
+    sample_size: 23,
+    limitation_notes: ["Metrics are evidence-only and cannot approve strategy quality."],
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createOperatorDecisionEvent(
+  overrides: Partial<Gate1BacktestOperatorDecisionEventContract> = {}
+): Gate1BacktestOperatorDecisionEventContract {
+  return {
+    operator_decision_event_id: "operator-decision-event-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_run_assembly_id: "backtest-run-assembly-001",
+    metric_report_evidence_id: "metric-report-evidence-001",
+    decision: "keep_as_research_evidence",
+    decision_rationale: "Operator retains evidence for local review traceability only.",
+    risk_review_required: true,
+    operator_retains_authority: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    decided_at: createdAt,
+    ...overrides
+  };
+}
+
 describe("Gate 1 historical backtest contracts", () => {
   it("validates a historical data snapshot contract without external access", () => {
     const snapshot = Gate1HistoricalDataSnapshotContractSchema.parse(
@@ -774,6 +855,160 @@ describe("Gate 1 historical backtest contracts", () => {
     expect(riskRegister.performance_claim).toBe(false);
   });
 
+  it("rejects backtest assumption risk registers without risk entries", () => {
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        risks: []
+      })
+    ).toThrow();
+  });
+
+  it("rejects backtest assumption risk registers with invalid severity or disposition", () => {
+    const [firstRisk, ...remainingRisks] = createBacktestAssumptionRiskRegister().risks;
+
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        risks: [
+          {
+            ...firstRisk,
+            severity: "severe"
+          },
+          ...remainingRisks
+        ]
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        risks: [
+          {
+            ...firstRisk,
+            disposition: "approved"
+          },
+          ...remainingRisks
+        ]
+      })
+    ).toThrow();
+  });
+
+  it("rejects backtest assumption risk registers that leave Gate 1 historical scope", () => {
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        financial_gate: "G0_RESEARCH"
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        scope: "research_only"
+      })
+    ).toThrow();
+  });
+
+  it("keeps backtest assumption risk registers evidence-only without execution or claims", () => {
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        evidence_only: false
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        approval_claim: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse({
+        ...createBacktestAssumptionRiskRegister(),
+        execution_path: true
+      })
+    ).toThrow();
+  });
+
+  it("validates a checked Gate 1 backtest run assembly", () => {
+    const assembly = Gate1BacktestRunAssemblyContractSchema.parse(createBacktestRunAssembly());
+
+    expect(assembly.assembly_status).toBe("checked");
+    expect(assembly.backtest_assumption_risk_register_id).toBe("assumption-risk-register-001");
+    expect(assembly.execution_path).toBe(false);
+  });
+
+  it("rejects unchecked backtest run assemblies or strategy approval claims", () => {
+    expect(() =>
+      Gate1BacktestRunAssemblyContractSchema.parse(
+        createBacktestRunAssembly({
+          assembly_status: "not_checked"
+        })
+      )
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestRunAssemblyContractSchema.parse({
+        ...createBacktestRunAssembly(),
+        approval_claim: true
+      })
+    ).toThrow();
+  });
+
+  it("validates evidence-only Gate 1 metric reports", () => {
+    const report = Gate1MetricReportEvidenceContractSchema.parse(createMetricReportEvidence());
+
+    expect(report.metric_names).toContain("maximum_drawdown_pct");
+    expect(report.sample_size).toBe(23);
+    expect(report.performance_claim).toBe(false);
+  });
+
+  it("rejects Gate 1 metric reports that imply profitability or performance claims", () => {
+    expect(() =>
+      Gate1MetricReportEvidenceContractSchema.parse(
+        createMetricReportEvidence({
+          metric_names: ["profitability_score"]
+        })
+      )
+    ).toThrow();
+
+    expect(() =>
+      Gate1MetricReportEvidenceContractSchema.parse({
+        ...createMetricReportEvidence(),
+        performance_claim: true
+      })
+    ).toThrow();
+  });
+
+  it("validates Gate 1 operator decisions as evidence routing only", () => {
+    const event = Gate1BacktestOperatorDecisionEventContractSchema.parse(
+      createOperatorDecisionEvent()
+    );
+
+    expect(event.decision).toBe("keep_as_research_evidence");
+    expect(event.risk_review_required).toBe(true);
+    expect(event.operator_retains_authority).toBe(true);
+  });
+
+  it("rejects Gate 1 operator decisions that bypass risk review or imply execution", () => {
+    expect(() =>
+      Gate1BacktestOperatorDecisionEventContractSchema.parse({
+        ...createOperatorDecisionEvent(),
+        risk_review_required: false
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1BacktestOperatorDecisionEventContractSchema.parse({
+        ...createOperatorDecisionEvent(),
+        execution_path: true
+      })
+    ).toThrow();
+  });
+
   it("validates a reproduced reproducibility check", () => {
     const check = Gate1ReproducibilityCheckContractSchema.parse(createReproducibilityCheck());
 
@@ -798,6 +1033,17 @@ describe("Gate 1 historical backtest contracts", () => {
         createReproducibilityCheck({
           rerun_output_hash: "sha256:different-output",
           reproducibility_status: "mismatch",
+          evidence_usable: true
+        })
+      )
+    ).toThrow();
+  });
+
+  it("rejects blocked reproducibility checks that try to become evidence usable", () => {
+    expect(() =>
+      Gate1ReproducibilityCheckContractSchema.parse(
+        createReproducibilityCheck({
+          reproducibility_status: "blocked",
           evidence_usable: true
         })
       )

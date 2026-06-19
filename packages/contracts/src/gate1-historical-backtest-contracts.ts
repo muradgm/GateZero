@@ -274,6 +274,11 @@ export const Gate1CostConsistencyStatusSchema = z.enum(["not_checked", "checked"
 export const Gate1AssumptionCheckStatusSchema = z.enum(["not_checked", "checked", "blocked"]);
 export const Gate1RiskSeveritySchema = z.enum(["low", "medium", "high", "critical"]);
 export const Gate1RiskDispositionSchema = z.enum(["open", "mitigated", "accepted_as_limitation"]);
+export const Gate1OperatorDecisionSchema = z.enum([
+  "reject",
+  "revise",
+  "keep_as_research_evidence"
+]);
 
 export const Gate1PnlEvidenceBundleContractSchema = z
   .object({
@@ -450,6 +455,90 @@ export const Gate1BacktestAssumptionRiskRegisterContractSchema = z
   })
   .strict();
 
+export const Gate1BacktestRunAssemblyContractSchema = z
+  .object({
+    backtest_run_assembly_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    strategy_version_id: IdentifierSchema,
+    historical_data_snapshot_id: IdentifierSchema,
+    fees_and_slippage_assumption_id: IdentifierSchema,
+    immutable_backtest_record_id: IdentifierSchema,
+    backtest_result_id: IdentifierSchema,
+    pnl_evidence_bundle_id: IdentifierSchema,
+    backtest_assumption_risk_register_id: IdentifierSchema,
+    reproducibility_check_id: IdentifierSchema,
+    assembly_status: Gate1AssumptionCheckStatusSchema,
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    created_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((assembly, context) => {
+    if (assembly.assembly_status !== "checked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "backtest run assemblies require checked assembly status",
+        path: ["assembly_status"]
+      });
+    }
+  });
+
+export const Gate1MetricReportEvidenceContractSchema = z
+  .object({
+    metric_report_evidence_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    backtest_result_id: IdentifierSchema,
+    backtest_run_assembly_id: IdentifierSchema,
+    metric_schema_version: NonEmptyStringSchema,
+    metric_names: z.array(NonEmptyStringSchema).min(1),
+    sample_size: z.number().int().positive(),
+    limitation_notes: z.array(NonEmptyStringSchema).min(1),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    created_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((report, context) => {
+    if (report.metric_names.some((name) => name.toLowerCase().includes("profitability"))) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "metric reports cannot include profitability claim labels",
+        path: ["metric_names"]
+      });
+    }
+  });
+
+export const Gate1BacktestOperatorDecisionEventContractSchema = z
+  .object({
+    operator_decision_event_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    backtest_run_assembly_id: IdentifierSchema,
+    metric_report_evidence_id: IdentifierSchema,
+    decision: Gate1OperatorDecisionSchema,
+    decision_rationale: NonEmptyStringSchema,
+    risk_review_required: z.literal(true),
+    operator_retains_authority: z.literal(true),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    decided_at: IsoDateTimeSchema
+  })
+  .strict();
+
 export const Gate1ReproducibilityCheckContractSchema = z
   .object({
     reproducibility_check_id: IdentifierSchema,
@@ -571,6 +660,16 @@ export type Gate1SameCandleAmbiguityContract = z.infer<
 export type Gate1BacktestAssumptionRisk = z.infer<typeof Gate1BacktestAssumptionRiskSchema>;
 export type Gate1BacktestAssumptionRiskRegisterContract = z.infer<
   typeof Gate1BacktestAssumptionRiskRegisterContractSchema
+>;
+export type Gate1BacktestRunAssemblyContract = z.infer<
+  typeof Gate1BacktestRunAssemblyContractSchema
+>;
+export type Gate1MetricReportEvidenceContract = z.infer<
+  typeof Gate1MetricReportEvidenceContractSchema
+>;
+export type Gate1OperatorDecision = z.infer<typeof Gate1OperatorDecisionSchema>;
+export type Gate1BacktestOperatorDecisionEventContract = z.infer<
+  typeof Gate1BacktestOperatorDecisionEventContractSchema
 >;
 export type Gate1ReproducibilityCheckContract = z.infer<
   typeof Gate1ReproducibilityCheckContractSchema

@@ -16,6 +16,16 @@ const requiredDocPaths = [
   "docs/operations/GATE1_BACKTEST_RESULT_CONTRACT.md",
   "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md",
   "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
+  "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md",
+  "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER_NEGATIVE_CASES.md",
+  "docs/operations/GATE1_RISK_REGISTER_GUARD_INDEXING_HARDENING.md",
+  "docs/operations/GATE1_BAD_ASSUMPTION_FIXTURE_CASES.md",
+  "docs/operations/GATE1_BACKTEST_RUN_ASSEMBLY_CONTRACT.md",
+  "docs/operations/GATE1_METRIC_REPORT_EVIDENCE_ONLY_CONTRACT.md",
+  "docs/operations/GATE1_REPRODUCIBILITY_COMPARISON_HARDENING.md",
+  "docs/operations/GATE1_OPERATOR_DECISION_EVENT_CONTRACT.md",
+  "docs/operations/GATE1_COMPLETION_CRITERIA_DRAFT.md",
+  "docs/operations/GATE2_BLOCKER_AUDIT.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -45,11 +55,21 @@ const contractSource = [
   "Gate1LookaheadBiasBlockerContractSchema",
   "Gate1SameCandleAmbiguityContractSchema",
   "Gate1BacktestAssumptionRiskRegisterContractSchema",
+  "Gate1BacktestRunAssemblyContractSchema",
+  "Gate1MetricReportEvidenceContractSchema",
+  "Gate1BacktestOperatorDecisionEventContractSchema",
   "Gate1ReproducibilityCheckContractSchema",
   'financial_gate: z.literal("G1_BACKTESTING")',
   "scope: Gate1ContractScopeSchema",
   "external_access: z.literal(false)",
   "execution_path: z.literal(false)"
+].join("\n");
+
+const contractTestSource = [
+  "rejects backtest assumption risk registers without risk entries",
+  "rejects backtest assumption risk registers with invalid severity or disposition",
+  "rejects backtest assumption risk registers that leave Gate 1 historical scope",
+  "keeps backtest assumption risk registers evidence-only without execution or claims"
 ].join("\n");
 
 const fixtureSource = [
@@ -70,6 +90,10 @@ const fixtureSource = [
   "gate1LookaheadBiasBlockerFixture",
   "gate1SameCandleAmbiguityFixture",
   "gate1BacktestAssumptionRiskRegisterFixture",
+  "gate1BadAssumptionRiskRegisterFixture",
+  "gate1BacktestRunAssemblyFixture",
+  "gate1MetricReportEvidenceFixture",
+  "gate1BacktestOperatorDecisionEventFixture",
   "gate1ReproducibilityCheckFixture",
   "gate1ReproducibilityMismatchFixture",
   'financial_gate: "G1_BACKTESTING"',
@@ -102,9 +126,11 @@ const completeInput: Gate1ContractGuardInput = {
       content:
         relativePath === "packages/contracts/src/gate1-historical-backtest-contracts.ts"
           ? contractSource
-          : relativePath === "packages/fixtures/src/gate1-historical-backtest-fixtures.ts"
-            ? fixtureSource
-            : "local source"
+          : relativePath === "packages/contracts/tests/gate1-historical-backtest-contracts.test.ts"
+            ? contractTestSource
+            : relativePath === "packages/fixtures/src/gate1-historical-backtest-fixtures.ts"
+              ? fixtureSource
+              : "local source"
     }))
   ]
 };
@@ -116,7 +142,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 18
+      checkedArtifactCount: 28
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
@@ -165,6 +191,28 @@ describe("Gate 1 contract guard", () => {
     expect(result.ok).toBe(false);
     expect(result.findings).toContain(
       "Missing review reference: docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md -> ops/runtime/reviews/TRD-164_RISK_REVIEW.md"
+    );
+  });
+
+  it("fails when risk-register negative contract tests are not indexed", () => {
+    const result = checkGate1Contracts({
+      ...completeInput,
+      files: completeInput.files.map((file) =>
+        file.relativePath === "packages/contracts/tests/gate1-historical-backtest-contracts.test.ts"
+          ? {
+              ...file,
+              content: contractTestSource.replace(
+                "rejects backtest assumption risk registers without risk entries",
+                ""
+              )
+            }
+          : file
+      )
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain(
+      "Missing risk-register negative contract test: rejects backtest assumption risk registers without risk entries"
     );
   });
 

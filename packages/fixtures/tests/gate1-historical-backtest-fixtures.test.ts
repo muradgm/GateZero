@@ -2,12 +2,15 @@ import { describe, expect, it } from "vitest";
 import {
   Gate1BacktestResultContractSchema,
   Gate1BacktestAssumptionRiskRegisterContractSchema,
+  Gate1BacktestOperatorDecisionEventContractSchema,
+  Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
+  Gate1MetricReportEvidenceContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
@@ -17,7 +20,10 @@ import {
 } from "../../contracts/src/index.js";
 import {
   gate1BacktestAssumptionRiskRegisterFixture,
+  gate1BacktestOperatorDecisionEventFixture,
+  gate1BacktestRunAssemblyFixture,
   gate1BacktestResultFixture,
+  gate1BadAssumptionRiskRegisterFixture,
   gate1BidAskHistoricalDataSnapshotFixture,
   gate1CandleTimingIntegrityFixture,
   gate1CrossCurrencyDirectionalPnlFixture,
@@ -27,6 +33,7 @@ import {
   gate1JpyPrecisionDirectionalPnlFixture,
   gate1LookaheadBiasBlockerFixture,
   gate1LongDirectionalPnlFixture,
+  gate1MetricReportEvidenceFixture,
   gate1PnlEvidenceBundleFixture,
   gate1PnlEvidenceReferenceFixture,
   gate1ReproducibilityCheckFixture,
@@ -57,8 +64,12 @@ describe("Gate 1 historical backtest fixtures", () => {
       gate1LookaheadBiasBlockerFixture,
       gate1SameCandleAmbiguityFixture,
       gate1BacktestAssumptionRiskRegisterFixture,
+      gate1BadAssumptionRiskRegisterFixture,
       gate1ReproducibilityCheckFixture,
-      gate1ReproducibilityMismatchFixture
+      gate1ReproducibilityMismatchFixture,
+      gate1BacktestRunAssemblyFixture,
+      gate1MetricReportEvidenceFixture,
+      gate1BacktestOperatorDecisionEventFixture
     ];
 
     for (const fixture of fixtures) {
@@ -125,8 +136,22 @@ describe("Gate 1 historical backtest fixtures", () => {
       )
     ).toStrictEqual(gate1BacktestAssumptionRiskRegisterFixture);
     expect(
+      Gate1BacktestAssumptionRiskRegisterContractSchema.parse(gate1BadAssumptionRiskRegisterFixture)
+    ).toStrictEqual(gate1BadAssumptionRiskRegisterFixture);
+    expect(
       Gate1ReproducibilityCheckContractSchema.parse(gate1ReproducibilityCheckFixture)
     ).toStrictEqual(gate1ReproducibilityCheckFixture);
+    expect(
+      Gate1BacktestRunAssemblyContractSchema.parse(gate1BacktestRunAssemblyFixture)
+    ).toStrictEqual(gate1BacktestRunAssemblyFixture);
+    expect(
+      Gate1MetricReportEvidenceContractSchema.parse(gate1MetricReportEvidenceFixture)
+    ).toStrictEqual(gate1MetricReportEvidenceFixture);
+    expect(
+      Gate1BacktestOperatorDecisionEventContractSchema.parse(
+        gate1BacktestOperatorDecisionEventFixture
+      )
+    ).toStrictEqual(gate1BacktestOperatorDecisionEventFixture);
   });
 
   it("keeps directional PnL fixtures explicit about long and short bid/ask sides", () => {
@@ -163,6 +188,16 @@ describe("Gate 1 historical backtest fixtures", () => {
     expect(gate1LookaheadBiasBlockerFixture.uses_only_closed_candles).toBe(true);
     expect(gate1SameCandleAmbiguityFixture.ambiguity_status).toBe("checked");
     expect(gate1BacktestAssumptionRiskRegisterFixture.risks.length).toBeGreaterThanOrEqual(2);
+    expect(
+      gate1BadAssumptionRiskRegisterFixture.risks.every((risk) => risk.disposition === "open")
+    ).toBe(true);
+  });
+
+  it("keeps run assembly, metric report, and operator decision evidence-only", () => {
+    expect(gate1BacktestRunAssemblyFixture.assembly_status).toBe("checked");
+    expect(gate1MetricReportEvidenceFixture.performance_claim).toBe(false);
+    expect(gate1BacktestOperatorDecisionEventFixture.decision).toBe("keep_as_research_evidence");
+    expect(gate1BacktestOperatorDecisionEventFixture.risk_review_required).toBe(true);
   });
 
   it("keeps the PnL evidence bundle evidence-only with checked declared costs", () => {
