@@ -95,7 +95,7 @@ async function main(): Promise<void> {
 }
 
 function extractAcceptedLedgerIds(tracklist: string): readonly string[] {
-  const ledgerSection = readSection(tracklist, "## Accepted Packet Ledger");
+  const ledgerSection = readSectionsWithPrefix(tracklist, "Accepted Packet Ledger").join("\n");
   const ledgerIds: string[] = [];
 
   for (const line of ledgerSection.split("\n")) {
@@ -149,18 +149,48 @@ function readTracklistValue(tracklist: string, field: string): string {
   return value.replaceAll("`", "");
 }
 
-function readSection(markdown: string, heading: string): string {
-  const startIndex = markdown.indexOf(heading);
+function readSectionsWithPrefix(markdown: string, headingPrefix: string): readonly string[] {
+  const sections = splitTopLevelSections(markdown).filter((section) =>
+    section.heading.startsWith(headingPrefix)
+  );
 
-  if (startIndex === -1) {
-    throw new Error(`Missing tracklist section: ${heading}`);
+  if (sections.length === 0) {
+    throw new Error(`Missing tracklist section: ## ${headingPrefix}`);
   }
 
-  const nextHeadingIndex = markdown.indexOf("\n## ", startIndex + heading.length);
+  return sections.map((section) => section.content);
+}
 
-  return nextHeadingIndex === -1
-    ? markdown.slice(startIndex)
-    : markdown.slice(startIndex, nextHeadingIndex);
+function splitTopLevelSections(
+  markdown: string
+): readonly { readonly heading: string; readonly content: string }[] {
+  const lines = markdown.split("\n");
+  const sections: { heading: string; contentLines: string[] }[] = [];
+  let current: { heading: string; contentLines: string[] } | undefined;
+
+  for (const line of lines) {
+    const heading = line.match(/^##\s+(.+)$/)?.[1];
+
+    if (heading) {
+      if (current) {
+        sections.push(current);
+      }
+
+      current = { heading, contentLines: [line] };
+      continue;
+    }
+
+    current?.contentLines.push(line);
+  }
+
+  if (current) {
+    sections.push(current);
+  }
+
+  return sections.map((section) => ({
+    heading: section.heading,
+    content: section.contentLines.join("\n")
+  }));
 }
 
 function comparePacketIds(left: string, right: string): number {

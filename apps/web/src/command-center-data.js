@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-311",
-  localVerification: "71 files / 398 tests",
+  latestPacket: "TRD-321",
+  localVerification: "71 files / 411 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 398 tests.",
+      detail: "Latest suite: 71 files, 411 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "311 / 311",
+      value: "321 / 321",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 398 tests"
+      reference: "71 files / 411 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "311 accepted records"
+      reference: "321 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-312 backtest run assembly guard indexing recheck.",
+    "Proceed to TRD-322 Gate 1 skill default gate alignment review.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -143,7 +143,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT_PLAN.md",
         "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md",
         "docs/operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md",
-        "docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md"
+        "docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md",
+        "docs/operations/GATE1_BACKTEST_ASSEMBLY_GUARD_INDEX_RECHECK.md",
+        "docs/operations/GATE1_METRIC_REPORT_GUARD_INDEX_RECHECK.md",
+        "docs/operations/GATE1_OPERATOR_DECISION_GUARD_INDEX_RECHECK.md",
+        "docs/operations/GATE1_MISSING_CANDLE_FIXTURE_CONTRACT.md",
+        "docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT.md",
+        "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_CONTRACT.md",
+        "docs/operations/GATE1_PARAMETER_IMMUTABILITY_GUARD_CONTRACT.md",
+        "docs/operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md",
+        "docs/operations/GATE1_COMPLETION_BLOCKER_RECHECK.md",
+        "docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md"
       ]
     },
     {

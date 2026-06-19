@@ -11,11 +11,16 @@ import {
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
   Gate1MetricReportEvidenceContractSchema,
+  Gate1DuplicateSignalBlockerContractSchema,
+  Gate1EvidenceBundleSummaryContractSchema,
+  Gate1MissingCandleBadDataFixtureContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
   Gate1SameCandleAmbiguityContractSchema,
   Gate1SpreadBidAskAlignmentContractSchema,
+  Gate1StaleDataBlockerContractSchema,
+  Gate1StrategyParameterImmutabilityGuardContractSchema,
   Gate1StrategyVersionContractSchema,
   type Gate1BacktestAssumptionRiskRegisterContract,
   type Gate1BacktestOperatorDecisionEventContract,
@@ -28,11 +33,16 @@ import {
   type Gate1ImmutableBacktestRecordContract,
   type Gate1LookaheadBiasBlockerContract,
   type Gate1MetricReportEvidenceContract,
+  type Gate1DuplicateSignalBlockerContract,
+  type Gate1EvidenceBundleSummaryContract,
+  type Gate1MissingCandleBadDataFixtureContract,
   type Gate1PnlEvidenceBundleContract,
   type Gate1PnlEvidenceReferenceContract,
   type Gate1ReproducibilityCheckContract,
   type Gate1SameCandleAmbiguityContract,
   type Gate1SpreadBidAskAlignmentContract,
+  type Gate1StaleDataBlockerContract,
+  type Gate1StrategyParameterImmutabilityGuardContract,
   type Gate1StrategyVersionContract
 } from "../src/index.js";
 
@@ -501,6 +511,133 @@ function createOperatorDecisionEvent(
     external_access: false,
     execution_path: false,
     decided_at: createdAt,
+    ...overrides
+  };
+}
+
+function createMissingCandleBadDataFixture(
+  overrides: Partial<Gate1MissingCandleBadDataFixtureContract> = {}
+): Gate1MissingCandleBadDataFixtureContract {
+  return {
+    missing_candle_bad_data_fixture_id: "missing-candle-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    historical_data_snapshot_id: "hist-data-001",
+    affected_instrument: "EURUSD",
+    expected_candle_timestamp: "2025-01-15T00:00:00.000Z",
+    missing_data_policy: "Missing required candles block evidence use.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createStaleDataBlocker(
+  overrides: Partial<Gate1StaleDataBlockerContract> = {}
+): Gate1StaleDataBlockerContract {
+  return {
+    stale_data_blocker_id: "stale-data-blocker-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    historical_data_snapshot_id: "hist-data-001",
+    snapshot_generated_at: "2025-02-15T00:00:00.000Z",
+    max_age_policy: "Historical snapshot freshness must be reviewed before evidence use.",
+    stale_reason: "Fixture snapshot is stale for blocked-evidence validation.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: createdAt,
+    ...overrides
+  };
+}
+
+function createDuplicateSignalBlocker(
+  overrides: Partial<Gate1DuplicateSignalBlockerContract> = {}
+): Gate1DuplicateSignalBlockerContract {
+  return {
+    duplicate_signal_blocker_id: "duplicate-signal-blocker-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: "strategy-version-001",
+    signal_fingerprint: "sha256:duplicate-signal-001",
+    duplicate_signal_ids: ["signal-001", "signal-002"],
+    duplicate_policy: "Duplicate signal fingerprints block evidence use until deduplicated.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: createdAt,
+    ...overrides
+  };
+}
+
+function createParameterImmutabilityGuard(
+  overrides: Partial<Gate1StrategyParameterImmutabilityGuardContract> = {}
+): Gate1StrategyParameterImmutabilityGuardContract {
+  return {
+    parameter_immutability_guard_id: "parameter-immutability-guard-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: "strategy-version-001",
+    parameter_schema_version: "params-v1",
+    expected_parameter_hash: "sha256:params-expected-001",
+    observed_parameter_hash: "sha256:params-observed-001",
+    parameter_drift_detected: true,
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: createdAt,
+    ...overrides
+  };
+}
+
+function createEvidenceBundleSummary(
+  overrides: Partial<Gate1EvidenceBundleSummaryContract> = {}
+): Gate1EvidenceBundleSummaryContract {
+  return {
+    evidence_bundle_summary_id: "evidence-bundle-summary-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_run_assembly_id: "backtest-run-assembly-001",
+    metric_report_evidence_id: "metric-report-evidence-001",
+    operator_decision_event_id: "operator-decision-event-001",
+    blocker_reference_ids: [
+      "missing-candle-fixture-001",
+      "stale-data-blocker-001",
+      "duplicate-signal-blocker-001",
+      "parameter-immutability-guard-001"
+    ],
+    completeness_status: "blocked",
+    risk_review_required: true,
+    operator_retains_authority: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: createdAt,
     ...overrides
   };
 }
@@ -1122,6 +1259,125 @@ describe("Gate 1 historical backtest contracts", () => {
           evidence_usable: true
         })
       )
+    ).toThrow();
+  });
+
+  it("validates missing-candle bad data fixtures as blocked evidence", () => {
+    const fixture = Gate1MissingCandleBadDataFixtureContractSchema.parse(
+      createMissingCandleBadDataFixture()
+    );
+
+    expect(fixture.blocker_status).toBe("blocked");
+    expect(fixture.evidence_usable).toBe(false);
+  });
+
+  it("rejects missing-candle fixtures that try to become evidence usable", () => {
+    expect(() =>
+      Gate1MissingCandleBadDataFixtureContractSchema.parse({
+        ...createMissingCandleBadDataFixture(),
+        evidence_usable: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1MissingCandleBadDataFixtureContractSchema.parse({
+        ...createMissingCandleBadDataFixture(),
+        blocker_status: "not_applicable"
+      })
+    ).toThrow();
+  });
+
+  it("validates stale-data blockers as blocked evidence", () => {
+    const blocker = Gate1StaleDataBlockerContractSchema.parse(createStaleDataBlocker());
+
+    expect(blocker.blocker_status).toBe("blocked");
+    expect(blocker.evidence_usable).toBe(false);
+  });
+
+  it("rejects stale-data blockers that imply usable evidence", () => {
+    expect(() =>
+      Gate1StaleDataBlockerContractSchema.parse({
+        ...createStaleDataBlocker(),
+        evidence_usable: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1StaleDataBlockerContractSchema.parse({
+        ...createStaleDataBlocker(),
+        blocker_status: "not_applicable"
+      })
+    ).toThrow();
+  });
+
+  it("validates duplicate-signal blockers with duplicate references", () => {
+    const blocker = Gate1DuplicateSignalBlockerContractSchema.parse(createDuplicateSignalBlocker());
+
+    expect(blocker.duplicate_signal_ids).toHaveLength(2);
+    expect(blocker.evidence_usable).toBe(false);
+  });
+
+  it("rejects duplicate-signal blockers without duplicate evidence or blocked status", () => {
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...createDuplicateSignalBlocker(),
+        duplicate_signal_ids: ["signal-001"]
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...createDuplicateSignalBlocker(),
+        blocker_status: "not_applicable"
+      })
+    ).toThrow();
+  });
+
+  it("validates strategy parameter immutability guards for drift blockers", () => {
+    const guard = Gate1StrategyParameterImmutabilityGuardContractSchema.parse(
+      createParameterImmutabilityGuard()
+    );
+
+    expect(guard.parameter_drift_detected).toBe(true);
+    expect(guard.evidence_usable).toBe(false);
+  });
+
+  it("rejects parameter immutability guards with inconsistent drift state", () => {
+    expect(() =>
+      Gate1StrategyParameterImmutabilityGuardContractSchema.parse({
+        ...createParameterImmutabilityGuard(),
+        parameter_drift_detected: false
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1StrategyParameterImmutabilityGuardContractSchema.parse({
+        ...createParameterImmutabilityGuard(),
+        observed_parameter_hash: "sha256:params-expected-001"
+      })
+    ).toThrow();
+  });
+
+  it("validates Gate 1 evidence bundle summaries as blocked evidence reviews", () => {
+    const summary = Gate1EvidenceBundleSummaryContractSchema.parse(createEvidenceBundleSummary());
+
+    expect(summary.completeness_status).toBe("blocked");
+    expect(summary.operator_retains_authority).toBe(true);
+  });
+
+  it("rejects Gate 1 evidence bundle summaries that imply completion or approval", () => {
+    expect(() =>
+      Gate1EvidenceBundleSummaryContractSchema.parse({
+        ...createEvidenceBundleSummary(),
+        completeness_status: "complete"
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1EvidenceBundleSummaryContractSchema.parse({
+        ...createEvidenceBundleSummary(),
+        approval_claim: true
+      })
     ).toThrow();
   });
 });

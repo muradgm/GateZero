@@ -6,16 +6,21 @@ import {
   Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
+  Gate1DuplicateSignalBlockerContractSchema,
+  Gate1EvidenceBundleSummaryContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
   Gate1MetricReportEvidenceContractSchema,
+  Gate1MissingCandleBadDataFixtureContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
   Gate1SameCandleAmbiguityContractSchema,
   Gate1SpreadBidAskAlignmentContractSchema,
+  Gate1StaleDataBlockerContractSchema,
+  Gate1StrategyParameterImmutabilityGuardContractSchema,
   Gate1StrategyVersionContractSchema
 } from "../../contracts/src/index.js";
 import {
@@ -27,6 +32,8 @@ import {
   gate1BidAskHistoricalDataSnapshotFixture,
   gate1CandleTimingIntegrityFixture,
   gate1CrossCurrencyDirectionalPnlFixture,
+  gate1DuplicateSignalBlockerFixture,
+  gate1EvidenceBundleSummaryFixture,
   gate1FeesAndSlippageAssumptionFixture,
   gate1HistoricalDataSnapshotFixture,
   gate1ImmutableBacktestRecordFixture,
@@ -34,6 +41,7 @@ import {
   gate1LookaheadBiasBlockerFixture,
   gate1LongDirectionalPnlFixture,
   gate1MetricReportEvidenceFixture,
+  gate1MissingCandleBadDataFixture,
   gate1PnlEvidenceBundleFixture,
   gate1PnlEvidenceReferenceFixture,
   gate1ReproducibilityCheckFixture,
@@ -41,6 +49,8 @@ import {
   gate1SameCandleAmbiguityFixture,
   gate1ShortDirectionalPnlFixture,
   gate1SpreadBidAskAlignmentFixture,
+  gate1StaleDataBlockerFixture,
+  gate1StrategyParameterImmutabilityGuardFixture,
   gate1StrategyVersionFixture
 } from "../src/index.js";
 
@@ -69,7 +79,12 @@ describe("Gate 1 historical backtest fixtures", () => {
       gate1ReproducibilityMismatchFixture,
       gate1BacktestRunAssemblyFixture,
       gate1MetricReportEvidenceFixture,
-      gate1BacktestOperatorDecisionEventFixture
+      gate1BacktestOperatorDecisionEventFixture,
+      gate1MissingCandleBadDataFixture,
+      gate1StaleDataBlockerFixture,
+      gate1DuplicateSignalBlockerFixture,
+      gate1StrategyParameterImmutabilityGuardFixture,
+      gate1EvidenceBundleSummaryFixture
     ];
 
     for (const fixture of fixtures) {
@@ -152,6 +167,23 @@ describe("Gate 1 historical backtest fixtures", () => {
         gate1BacktestOperatorDecisionEventFixture
       )
     ).toStrictEqual(gate1BacktestOperatorDecisionEventFixture);
+    expect(
+      Gate1MissingCandleBadDataFixtureContractSchema.parse(gate1MissingCandleBadDataFixture)
+    ).toStrictEqual(gate1MissingCandleBadDataFixture);
+    expect(Gate1StaleDataBlockerContractSchema.parse(gate1StaleDataBlockerFixture)).toStrictEqual(
+      gate1StaleDataBlockerFixture
+    );
+    expect(
+      Gate1DuplicateSignalBlockerContractSchema.parse(gate1DuplicateSignalBlockerFixture)
+    ).toStrictEqual(gate1DuplicateSignalBlockerFixture);
+    expect(
+      Gate1StrategyParameterImmutabilityGuardContractSchema.parse(
+        gate1StrategyParameterImmutabilityGuardFixture
+      )
+    ).toStrictEqual(gate1StrategyParameterImmutabilityGuardFixture);
+    expect(
+      Gate1EvidenceBundleSummaryContractSchema.parse(gate1EvidenceBundleSummaryFixture)
+    ).toStrictEqual(gate1EvidenceBundleSummaryFixture);
   });
 
   it("keeps directional PnL fixtures explicit about long and short bid/ask sides", () => {
@@ -212,5 +244,26 @@ describe("Gate 1 historical backtest fixtures", () => {
   it("keeps mismatch fixtures unavailable for evidence use", () => {
     expect(gate1ReproducibilityMismatchFixture.reproducibility_status).toBe("mismatch");
     expect(gate1ReproducibilityMismatchFixture.evidence_usable).toBe(false);
+  });
+
+  it("keeps bad-data and drift blocker fixtures unavailable for evidence use", () => {
+    expect(gate1MissingCandleBadDataFixture.blocker_status).toBe("blocked");
+    expect(gate1StaleDataBlockerFixture.blocker_status).toBe("blocked");
+    expect(gate1DuplicateSignalBlockerFixture.duplicate_signal_ids).toHaveLength(2);
+    expect(gate1StrategyParameterImmutabilityGuardFixture.parameter_drift_detected).toBe(true);
+
+    expect(gate1MissingCandleBadDataFixture.evidence_usable).toBe(false);
+    expect(gate1StaleDataBlockerFixture.evidence_usable).toBe(false);
+    expect(gate1DuplicateSignalBlockerFixture.evidence_usable).toBe(false);
+    expect(gate1StrategyParameterImmutabilityGuardFixture.evidence_usable).toBe(false);
+  });
+
+  it("keeps the Gate 1 evidence bundle summary blocked and no-claim", () => {
+    expect(gate1EvidenceBundleSummaryFixture.completeness_status).toBe("blocked");
+    expect(gate1EvidenceBundleSummaryFixture.blocker_reference_ids).toHaveLength(4);
+    expect(gate1EvidenceBundleSummaryFixture.risk_review_required).toBe(true);
+    expect(gate1EvidenceBundleSummaryFixture.operator_retains_authority).toBe(true);
+    expect(gate1EvidenceBundleSummaryFixture.approval_claim).toBe(false);
+    expect(gate1EvidenceBundleSummaryFixture.performance_claim).toBe(false);
   });
 });

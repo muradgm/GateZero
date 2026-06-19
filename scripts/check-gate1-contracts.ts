@@ -9,16 +9,21 @@ import {
   Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
+  Gate1DuplicateSignalBlockerContractSchema,
+  Gate1EvidenceBundleSummaryContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
   Gate1MetricReportEvidenceContractSchema,
+  Gate1MissingCandleBadDataFixtureContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
   Gate1SameCandleAmbiguityContractSchema,
   Gate1SpreadBidAskAlignmentContractSchema,
+  Gate1StaleDataBlockerContractSchema,
+  Gate1StrategyParameterImmutabilityGuardContractSchema,
   Gate1StrategyVersionContractSchema
 } from "../packages/contracts/src/index.js";
 import {
@@ -30,6 +35,8 @@ import {
   gate1BidAskHistoricalDataSnapshotFixture,
   gate1CandleTimingIntegrityFixture,
   gate1CrossCurrencyDirectionalPnlFixture,
+  gate1DuplicateSignalBlockerFixture,
+  gate1EvidenceBundleSummaryFixture,
   gate1FeesAndSlippageAssumptionFixture,
   gate1HistoricalDataSnapshotFixture,
   gate1ImmutableBacktestRecordFixture,
@@ -37,6 +44,7 @@ import {
   gate1LookaheadBiasBlockerFixture,
   gate1MetricReportEvidenceFixture,
   gate1LongDirectionalPnlFixture,
+  gate1MissingCandleBadDataFixture,
   gate1PnlEvidenceBundleFixture,
   gate1PnlEvidenceReferenceFixture,
   gate1ReproducibilityCheckFixture,
@@ -44,6 +52,8 @@ import {
   gate1SameCandleAmbiguityFixture,
   gate1ShortDirectionalPnlFixture,
   gate1SpreadBidAskAlignmentFixture,
+  gate1StaleDataBlockerFixture,
+  gate1StrategyParameterImmutabilityGuardFixture,
   gate1StrategyVersionFixture
 } from "../packages/fixtures/src/index.js";
 
@@ -91,6 +101,11 @@ export interface Gate1ContractFixtureSet {
   readonly backtestOperatorDecisionEvent: unknown;
   readonly reproducibilityCheck: unknown;
   readonly reproducibilityMismatch: unknown;
+  readonly missingCandleBadData: unknown;
+  readonly staleDataBlocker: unknown;
+  readonly duplicateSignalBlocker: unknown;
+  readonly strategyParameterImmutabilityGuard: unknown;
+  readonly evidenceBundleSummary: unknown;
 }
 
 const requiredDocPaths = [
@@ -123,6 +138,16 @@ const requiredDocPaths = [
   "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md",
   "docs/operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md",
   "docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md",
+  "docs/operations/GATE1_BACKTEST_ASSEMBLY_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_METRIC_REPORT_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_OPERATOR_DECISION_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_MISSING_CANDLE_FIXTURE_CONTRACT.md",
+  "docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT.md",
+  "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_CONTRACT.md",
+  "docs/operations/GATE1_PARAMETER_IMMUTABILITY_GUARD_CONTRACT.md",
+  "docs/operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md",
+  "docs/operations/GATE1_COMPLETION_BLOCKER_RECHECK.md",
+  "docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -155,7 +180,12 @@ const requiredSchemaNames = [
   "Gate1BacktestRunAssemblyContractSchema",
   "Gate1MetricReportEvidenceContractSchema",
   "Gate1BacktestOperatorDecisionEventContractSchema",
-  "Gate1ReproducibilityCheckContractSchema"
+  "Gate1ReproducibilityCheckContractSchema",
+  "Gate1MissingCandleBadDataFixtureContractSchema",
+  "Gate1StaleDataBlockerContractSchema",
+  "Gate1DuplicateSignalBlockerContractSchema",
+  "Gate1StrategyParameterImmutabilityGuardContractSchema",
+  "Gate1EvidenceBundleSummaryContractSchema"
 ] as const;
 
 const requiredFixtureNames = [
@@ -181,7 +211,12 @@ const requiredFixtureNames = [
   "gate1MetricReportEvidenceFixture",
   "gate1BacktestOperatorDecisionEventFixture",
   "gate1ReproducibilityCheckFixture",
-  "gate1ReproducibilityMismatchFixture"
+  "gate1ReproducibilityMismatchFixture",
+  "gate1MissingCandleBadDataFixture",
+  "gate1StaleDataBlockerFixture",
+  "gate1DuplicateSignalBlockerFixture",
+  "gate1StrategyParameterImmutabilityGuardFixture",
+  "gate1EvidenceBundleSummaryFixture"
 ] as const;
 
 const requiredRiskRegisterNegativeTestSnippets = [
@@ -189,6 +224,14 @@ const requiredRiskRegisterNegativeTestSnippets = [
   "rejects backtest assumption risk registers with invalid severity or disposition",
   "rejects backtest assumption risk registers that leave Gate 1 historical scope",
   "keeps backtest assumption risk registers evidence-only without execution or claims"
+] as const;
+
+const requiredGate1BlockerTestSnippets = [
+  "rejects missing-candle fixtures that try to become evidence usable",
+  "rejects stale-data blockers that imply usable evidence",
+  "rejects duplicate-signal blockers without duplicate evidence or blocked status",
+  "rejects parameter immutability guards with inconsistent drift state",
+  "rejects Gate 1 evidence bundle summaries that imply completion or approval"
 ] as const;
 
 const guardCommand = "pnpm check:gate1-contracts";
@@ -326,6 +369,12 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
         findings.push(`Missing risk-register negative contract test: ${snippet}`);
       }
     }
+
+    for (const snippet of requiredGate1BlockerTestSnippets) {
+      if (!contractTestSource.includes(snippet)) {
+        findings.push(`Missing Gate 1 blocker contract test: ${snippet}`);
+      }
+    }
   }
 
   findings.push(
@@ -363,7 +412,12 @@ export function createDefaultGate1ContractFixtureSet(): Gate1ContractFixtureSet 
     metricReportEvidence: gate1MetricReportEvidenceFixture,
     backtestOperatorDecisionEvent: gate1BacktestOperatorDecisionEventFixture,
     reproducibilityCheck: gate1ReproducibilityCheckFixture,
-    reproducibilityMismatch: gate1ReproducibilityMismatchFixture
+    reproducibilityMismatch: gate1ReproducibilityMismatchFixture,
+    missingCandleBadData: gate1MissingCandleBadDataFixture,
+    staleDataBlocker: gate1StaleDataBlockerFixture,
+    duplicateSignalBlocker: gate1DuplicateSignalBlockerFixture,
+    strategyParameterImmutabilityGuard: gate1StrategyParameterImmutabilityGuardFixture,
+    evidenceBundleSummary: gate1EvidenceBundleSummaryFixture
   };
 }
 
@@ -509,6 +563,36 @@ export function validateGate1ContractFixtureSet(
     "gate1ReproducibilityMismatchFixture",
     Gate1ReproducibilityCheckContractSchema,
     fixtureSet.reproducibilityMismatch
+  );
+  validateFixture(
+    findings,
+    "gate1MissingCandleBadDataFixture",
+    Gate1MissingCandleBadDataFixtureContractSchema,
+    fixtureSet.missingCandleBadData
+  );
+  validateFixture(
+    findings,
+    "gate1StaleDataBlockerFixture",
+    Gate1StaleDataBlockerContractSchema,
+    fixtureSet.staleDataBlocker
+  );
+  validateFixture(
+    findings,
+    "gate1DuplicateSignalBlockerFixture",
+    Gate1DuplicateSignalBlockerContractSchema,
+    fixtureSet.duplicateSignalBlocker
+  );
+  validateFixture(
+    findings,
+    "gate1StrategyParameterImmutabilityGuardFixture",
+    Gate1StrategyParameterImmutabilityGuardContractSchema,
+    fixtureSet.strategyParameterImmutabilityGuard
+  );
+  validateFixture(
+    findings,
+    "gate1EvidenceBundleSummaryFixture",
+    Gate1EvidenceBundleSummaryContractSchema,
+    fixtureSet.evidenceBundleSummary
   );
 
   const mismatch = Gate1ReproducibilityCheckContractSchema.safeParse(

@@ -37,6 +37,16 @@ const requiredDocPaths = [
   "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_PLANNING_RECORD.md",
   "docs/operations/GATE1_STRATEGY_PARAMETER_IMMUTABILITY_GUARD_PLAN.md",
   "docs/operations/GATE1_EVIDENCE_BUNDLE_ASSEMBLY_REVIEW.md",
+  "docs/operations/GATE1_BACKTEST_ASSEMBLY_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_METRIC_REPORT_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_OPERATOR_DECISION_GUARD_INDEX_RECHECK.md",
+  "docs/operations/GATE1_MISSING_CANDLE_FIXTURE_CONTRACT.md",
+  "docs/operations/GATE1_STALE_DATA_BLOCKER_CONTRACT.md",
+  "docs/operations/GATE1_DUPLICATE_SIGNAL_BLOCKER_CONTRACT.md",
+  "docs/operations/GATE1_PARAMETER_IMMUTABILITY_GUARD_CONTRACT.md",
+  "docs/operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md",
+  "docs/operations/GATE1_COMPLETION_BLOCKER_RECHECK.md",
+  "docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -70,6 +80,11 @@ const contractSource = [
   "Gate1MetricReportEvidenceContractSchema",
   "Gate1BacktestOperatorDecisionEventContractSchema",
   "Gate1ReproducibilityCheckContractSchema",
+  "Gate1MissingCandleBadDataFixtureContractSchema",
+  "Gate1StaleDataBlockerContractSchema",
+  "Gate1DuplicateSignalBlockerContractSchema",
+  "Gate1StrategyParameterImmutabilityGuardContractSchema",
+  "Gate1EvidenceBundleSummaryContractSchema",
   'financial_gate: z.literal("G1_BACKTESTING")',
   "scope: Gate1ContractScopeSchema",
   "external_access: z.literal(false)",
@@ -80,7 +95,12 @@ const contractTestSource = [
   "rejects backtest assumption risk registers without risk entries",
   "rejects backtest assumption risk registers with invalid severity or disposition",
   "rejects backtest assumption risk registers that leave Gate 1 historical scope",
-  "keeps backtest assumption risk registers evidence-only without execution or claims"
+  "keeps backtest assumption risk registers evidence-only without execution or claims",
+  "rejects missing-candle fixtures that try to become evidence usable",
+  "rejects stale-data blockers that imply usable evidence",
+  "rejects duplicate-signal blockers without duplicate evidence or blocked status",
+  "rejects parameter immutability guards with inconsistent drift state",
+  "rejects Gate 1 evidence bundle summaries that imply completion or approval"
 ].join("\n");
 
 const fixtureSource = [
@@ -107,6 +127,11 @@ const fixtureSource = [
   "gate1BacktestOperatorDecisionEventFixture",
   "gate1ReproducibilityCheckFixture",
   "gate1ReproducibilityMismatchFixture",
+  "gate1MissingCandleBadDataFixture",
+  "gate1StaleDataBlockerFixture",
+  "gate1DuplicateSignalBlockerFixture",
+  "gate1StrategyParameterImmutabilityGuardFixture",
+  "gate1EvidenceBundleSummaryFixture",
   'financial_gate: "G1_BACKTESTING"',
   'scope: "historical_backtesting_only"'
 ].join("\n");
@@ -153,7 +178,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 39
+      checkedArtifactCount: 49
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

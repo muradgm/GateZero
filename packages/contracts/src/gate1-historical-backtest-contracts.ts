@@ -279,6 +279,8 @@ export const Gate1OperatorDecisionSchema = z.enum([
   "revise",
   "keep_as_research_evidence"
 ]);
+export const Gate1EvidenceBlockerStatusSchema = z.enum(["blocked", "not_applicable"]);
+export const Gate1BundleCompletenessStatusSchema = z.enum(["complete", "blocked"]);
 
 export const Gate1PnlEvidenceBundleContractSchema = z
   .object({
@@ -588,6 +590,176 @@ export const Gate1ReproducibilityCheckContractSchema = z
     }
   });
 
+export const Gate1MissingCandleBadDataFixtureContractSchema = z
+  .object({
+    missing_candle_bad_data_fixture_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    historical_data_snapshot_id: IdentifierSchema,
+    affected_instrument: NonEmptyStringSchema,
+    expected_candle_timestamp: IsoDateTimeSchema,
+    missing_data_policy: NonEmptyStringSchema,
+    blocker_status: Gate1EvidenceBlockerStatusSchema,
+    evidence_usable: z.literal(false),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    created_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((fixture, context) => {
+    if (fixture.blocker_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "missing candle fixtures must block evidence use",
+        path: ["blocker_status"]
+      });
+    }
+  });
+
+export const Gate1StaleDataBlockerContractSchema = z
+  .object({
+    stale_data_blocker_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    historical_data_snapshot_id: IdentifierSchema,
+    snapshot_generated_at: IsoDateTimeSchema,
+    max_age_policy: NonEmptyStringSchema,
+    stale_reason: NonEmptyStringSchema,
+    blocker_status: Gate1EvidenceBlockerStatusSchema,
+    evidence_usable: z.literal(false),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    checked_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((blocker, context) => {
+    if (blocker.blocker_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "stale data blockers must block evidence use",
+        path: ["blocker_status"]
+      });
+    }
+  });
+
+export const Gate1DuplicateSignalBlockerContractSchema = z
+  .object({
+    duplicate_signal_blocker_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    strategy_version_id: IdentifierSchema,
+    signal_fingerprint: NonEmptyStringSchema,
+    duplicate_signal_ids: z.array(IdentifierSchema).min(2),
+    duplicate_policy: NonEmptyStringSchema,
+    blocker_status: Gate1EvidenceBlockerStatusSchema,
+    evidence_usable: z.literal(false),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    checked_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((blocker, context) => {
+    if (blocker.blocker_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "duplicate signals must block evidence use until deduplicated",
+        path: ["blocker_status"]
+      });
+    }
+  });
+
+export const Gate1StrategyParameterImmutabilityGuardContractSchema = z
+  .object({
+    parameter_immutability_guard_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    strategy_version_id: IdentifierSchema,
+    parameter_schema_version: NonEmptyStringSchema,
+    expected_parameter_hash: NonEmptyStringSchema,
+    observed_parameter_hash: NonEmptyStringSchema,
+    parameter_drift_detected: z.boolean(),
+    blocker_status: Gate1EvidenceBlockerStatusSchema,
+    evidence_usable: z.literal(false),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    checked_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((guard, context) => {
+    const hashesDiffer = guard.expected_parameter_hash !== guard.observed_parameter_hash;
+
+    if (hashesDiffer !== guard.parameter_drift_detected) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "parameter drift flag must match parameter hash comparison",
+        path: ["parameter_drift_detected"]
+      });
+    }
+
+    if (!hashesDiffer) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "immutability guard fixture must represent blocked parameter drift",
+        path: ["observed_parameter_hash"]
+      });
+    }
+
+    if (guard.blocker_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "parameter drift must block evidence use",
+        path: ["blocker_status"]
+      });
+    }
+  });
+
+export const Gate1EvidenceBundleSummaryContractSchema = z
+  .object({
+    evidence_bundle_summary_id: IdentifierSchema,
+    financial_gate: z.literal("G1_BACKTESTING"),
+    scope: Gate1ContractScopeSchema,
+    contract_authority: Gate1ContractAuthoritySchema,
+    backtest_run_assembly_id: IdentifierSchema,
+    metric_report_evidence_id: IdentifierSchema,
+    operator_decision_event_id: IdentifierSchema,
+    blocker_reference_ids: z.array(IdentifierSchema).min(1),
+    completeness_status: Gate1BundleCompletenessStatusSchema,
+    risk_review_required: z.literal(true),
+    operator_retains_authority: z.literal(true),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    created_at: IsoDateTimeSchema
+  })
+  .strict()
+  .superRefine((summary, context) => {
+    if (summary.completeness_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Gate 1 evidence bundle summaries stay blocked until blocker review is clear",
+        path: ["completeness_status"]
+      });
+    }
+  });
+
 export const Gate1ImmutableBacktestRecordContractSchema = z
   .object({
     immutable_backtest_record_id: IdentifierSchema,
@@ -668,11 +840,26 @@ export type Gate1MetricReportEvidenceContract = z.infer<
   typeof Gate1MetricReportEvidenceContractSchema
 >;
 export type Gate1OperatorDecision = z.infer<typeof Gate1OperatorDecisionSchema>;
+export type Gate1EvidenceBlockerStatus = z.infer<typeof Gate1EvidenceBlockerStatusSchema>;
+export type Gate1BundleCompletenessStatus = z.infer<typeof Gate1BundleCompletenessStatusSchema>;
 export type Gate1BacktestOperatorDecisionEventContract = z.infer<
   typeof Gate1BacktestOperatorDecisionEventContractSchema
 >;
 export type Gate1ReproducibilityCheckContract = z.infer<
   typeof Gate1ReproducibilityCheckContractSchema
+>;
+export type Gate1MissingCandleBadDataFixtureContract = z.infer<
+  typeof Gate1MissingCandleBadDataFixtureContractSchema
+>;
+export type Gate1StaleDataBlockerContract = z.infer<typeof Gate1StaleDataBlockerContractSchema>;
+export type Gate1DuplicateSignalBlockerContract = z.infer<
+  typeof Gate1DuplicateSignalBlockerContractSchema
+>;
+export type Gate1StrategyParameterImmutabilityGuardContract = z.infer<
+  typeof Gate1StrategyParameterImmutabilityGuardContractSchema
+>;
+export type Gate1EvidenceBundleSummaryContract = z.infer<
+  typeof Gate1EvidenceBundleSummaryContractSchema
 >;
 export type Gate1ImmutableBacktestRecordContract = z.infer<
   typeof Gate1ImmutableBacktestRecordContractSchema

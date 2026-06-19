@@ -54,6 +54,41 @@ describe("Gate 0 tracklist consistency check", () => {
     );
   });
 
+  it("passes when accepted ledger rows are split into continued sections", () => {
+    const splitTracklist = [
+      "# GateZero Project Tracklist",
+      "",
+      "| Field | Value |",
+      "| --- | --- |",
+      "| Latest accepted packet | `TRD-004` |",
+      "",
+      "## Accepted Packet Ledger",
+      "",
+      "| Packet | Status | Workstream | Primary outcome |",
+      "| --- | --- | --- | --- |",
+      "| `TRD-001` | accepted | Foundation | One. |",
+      "| `TRD-002` | accepted | Foundation | Two. |",
+      "",
+      "## Accepted Packet Ledger Continued",
+      "",
+      "| Packet | Status | Workstream | Primary outcome |",
+      "| --- | --- | --- | --- |",
+      "| `TRD-003` | accepted | Foundation | Three. |",
+      "| `TRD-004` | accepted | Foundation | Four. |",
+      "",
+      "## Next Queue",
+      ""
+    ].join("\n");
+
+    const result = checkGate0TracklistConsistency({
+      acceptedIds: ["TRD-001", "TRD-002", "TRD-003", "TRD-004"],
+      tracklist: splitTracklist
+    });
+
+    expect(result.ok).toBe(true);
+    expect(result.ledgerCount).toBe(4);
+  });
+
   it("fails when ledger rows are missing or unexpected", () => {
     const result = checkGate0TracklistConsistency({
       acceptedIds: ["TRD-001", "TRD-002"],

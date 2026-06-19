@@ -5,16 +5,21 @@ import {
   Gate1BacktestRunAssemblyContractSchema,
   Gate1CandleTimingIntegrityContractSchema,
   Gate1DirectionalPnlContractSchema,
+  Gate1DuplicateSignalBlockerContractSchema,
+  Gate1EvidenceBundleSummaryContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
   Gate1LookaheadBiasBlockerContractSchema,
   Gate1MetricReportEvidenceContractSchema,
+  Gate1MissingCandleBadDataFixtureContractSchema,
   Gate1PnlEvidenceBundleContractSchema,
   Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
   Gate1SameCandleAmbiguityContractSchema,
   Gate1SpreadBidAskAlignmentContractSchema,
+  Gate1StaleDataBlockerContractSchema,
+  Gate1StrategyParameterImmutabilityGuardContractSchema,
   Gate1StrategyVersionContractSchema,
   type Gate1BacktestAssumptionRiskRegisterContract,
   type Gate1BacktestOperatorDecisionEventContract,
@@ -22,16 +27,21 @@ import {
   type Gate1BacktestResultContract,
   type Gate1CandleTimingIntegrityContract,
   type Gate1DirectionalPnlContract,
+  type Gate1DuplicateSignalBlockerContract,
+  type Gate1EvidenceBundleSummaryContract,
   type Gate1FeesAndSlippageAssumptionContract,
   type Gate1HistoricalDataSnapshotContract,
   type Gate1ImmutableBacktestRecordContract,
   type Gate1LookaheadBiasBlockerContract,
   type Gate1MetricReportEvidenceContract,
+  type Gate1MissingCandleBadDataFixtureContract,
   type Gate1PnlEvidenceBundleContract,
   type Gate1PnlEvidenceReferenceContract,
   type Gate1ReproducibilityCheckContract,
   type Gate1SameCandleAmbiguityContract,
   type Gate1SpreadBidAskAlignmentContract,
+  type Gate1StaleDataBlockerContract,
+  type Gate1StrategyParameterImmutabilityGuardContract,
   type Gate1StrategyVersionContract
 } from "../../contracts/src/index.js";
 
@@ -541,4 +551,114 @@ export const gate1BacktestOperatorDecisionEventFixture: Gate1BacktestOperatorDec
     external_access: false,
     execution_path: false,
     decided_at: fixtureTimestamp
+  });
+
+export const gate1MissingCandleBadDataFixture: Gate1MissingCandleBadDataFixtureContract =
+  Gate1MissingCandleBadDataFixtureContractSchema.parse({
+    missing_candle_bad_data_fixture_id: "gate1-missing-candle-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    historical_data_snapshot_id:
+      gate1BidAskHistoricalDataSnapshotFixture.historical_data_snapshot_id,
+    affected_instrument: "EURUSD",
+    expected_candle_timestamp: "2025-01-15T00:00:00.000Z",
+    missing_data_policy: "Missing required candles block evidence use.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: fixtureTimestamp
+  });
+
+export const gate1StaleDataBlockerFixture: Gate1StaleDataBlockerContract =
+  Gate1StaleDataBlockerContractSchema.parse({
+    stale_data_blocker_id: "gate1-stale-data-blocker-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    historical_data_snapshot_id:
+      gate1BidAskHistoricalDataSnapshotFixture.historical_data_snapshot_id,
+    snapshot_generated_at: "2025-02-15T00:00:00.000Z",
+    max_age_policy: "Historical snapshot freshness must be reviewed before evidence use.",
+    stale_reason: "Synthetic stale snapshot fixture for blocked-evidence validation.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: fixtureTimestamp
+  });
+
+export const gate1DuplicateSignalBlockerFixture: Gate1DuplicateSignalBlockerContract =
+  Gate1DuplicateSignalBlockerContractSchema.parse({
+    duplicate_signal_blocker_id: "gate1-duplicate-signal-blocker-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: gate1StrategyVersionFixture.strategy_version_id,
+    signal_fingerprint: "sha256:gate1-duplicate-signal-fixture-001",
+    duplicate_signal_ids: ["gate1-signal-fixture-001", "gate1-signal-fixture-002"],
+    duplicate_policy: "Duplicate signal fingerprints block evidence use until deduplicated.",
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: fixtureTimestamp
+  });
+
+export const gate1StrategyParameterImmutabilityGuardFixture: Gate1StrategyParameterImmutabilityGuardContract =
+  Gate1StrategyParameterImmutabilityGuardContractSchema.parse({
+    parameter_immutability_guard_id: "gate1-parameter-immutability-guard-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    strategy_version_id: gate1StrategyVersionFixture.strategy_version_id,
+    parameter_schema_version: gate1StrategyVersionFixture.parameter_schema_version,
+    expected_parameter_hash: "sha256:gate1-params-expected-fixture-001",
+    observed_parameter_hash: "sha256:gate1-params-observed-fixture-001",
+    parameter_drift_detected: true,
+    blocker_status: "blocked",
+    evidence_usable: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    checked_at: fixtureTimestamp
+  });
+
+export const gate1EvidenceBundleSummaryFixture: Gate1EvidenceBundleSummaryContract =
+  Gate1EvidenceBundleSummaryContractSchema.parse({
+    evidence_bundle_summary_id: "gate1-evidence-bundle-summary-fixture-001",
+    financial_gate: "G1_BACKTESTING",
+    scope: "historical_backtesting_only",
+    contract_authority: "schema_only",
+    backtest_run_assembly_id: gate1BacktestRunAssemblyFixture.backtest_run_assembly_id,
+    metric_report_evidence_id: gate1MetricReportEvidenceFixture.metric_report_evidence_id,
+    operator_decision_event_id:
+      gate1BacktestOperatorDecisionEventFixture.operator_decision_event_id,
+    blocker_reference_ids: [
+      gate1MissingCandleBadDataFixture.missing_candle_bad_data_fixture_id,
+      gate1StaleDataBlockerFixture.stale_data_blocker_id,
+      gate1DuplicateSignalBlockerFixture.duplicate_signal_blocker_id,
+      gate1StrategyParameterImmutabilityGuardFixture.parameter_immutability_guard_id
+    ],
+    completeness_status: "blocked",
+    risk_review_required: true,
+    operator_retains_authority: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: fixtureTimestamp
   });
