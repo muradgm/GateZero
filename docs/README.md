@@ -1,6 +1,6 @@
-# GateZero Documentation Index
+# TraderFrame Documentation Index
 
-This documentation set is adapted from the uploaded SignalScout docs and rewritten for GateZero.
+This documentation set is adapted from the uploaded SignalScout docs and rewritten for TraderFrame.
 
 ## Product
 
@@ -194,6 +194,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`
 - `operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`
 - `operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`
+- `operations/GATE0_TRADERFRAME_BRAND_ALIGNMENT.md`
 - `operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SNAPSHOT.md`
 - `operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md`
 - `operations/GATE0_SKILL_GOVERNANCE_REVIEW.md`
@@ -212,6 +213,10 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_SKILL_ROUTING_GUARD.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
 - `operations/GATE1_TRANSITION_AUTHORIZATION.md`
+- `operations/GATE1_OPERATING_GATE_MODEL_ACTIVATION.md`
+- `operations/GATE1_STABLE_CI_TEST_COMMAND.md`
+- `operations/GATE1_DEPENDENCY_AUDIT_AND_UPGRADE_PLAN.md`
+- `operations/GATE1_DEPENDENCY_UPGRADE_EXECUTION.md`
 - `operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`
 - `operations/GATE1_HISTORICAL_DATA_SNAPSHOT_CONTRACT_PLAN.md`
@@ -229,6 +234,29 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE1_FEES_AND_SLIPPAGE_ASSUMPTION_CONTRACT.md`
 - `operations/GATE1_IMMUTABLE_BACKTEST_RECORD_CONTRACT.md`
 - `operations/GATE1_BACKTEST_RESULT_CONTRACT.md`
+- `operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md`
+- `operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md`
+- `operations/GATE1_DIRECTIONAL_PNL_FIXTURES.md`
+- `operations/GATE1_DIRECTIONAL_PNL_FIXTURE_NEGATIVE_CASES.md`
+- `operations/GATE1_DIRECTIONAL_PNL_GUARD_INDEXING_HARDENING.md`
+- `operations/GATE1_CROSS_CURRENCY_PNL_CONTRACT_PLAN.md`
+- `operations/GATE1_CROSS_CURRENCY_CONVERSION_FIXTURE_CONTRACT.md`
+- `operations/GATE1_JPY_PAIR_PRECISION_FIXTURE_CONTRACT.md`
+- `operations/GATE1_PNL_COST_MODEL_CONSISTENCY_GUARD.md`
+- `operations/GATE1_BACKTEST_RESULT_TO_PNL_EVIDENCE_REFERENCE_CONTRACT.md`
+- `operations/GATE1_PNL_EVIDENCE_BUNDLE_SCHEMA_PLAN.md`
+- `operations/GATE1_PNL_EVIDENCE_BUNDLE_FIXTURES.md`
+- `operations/GATE1_BACKTEST_EVIDENCE_INTEGRITY_REVIEW.md`
+- `operations/GATE1_PNL_EVIDENCE_BUNDLE_NEGATIVE_CASES.md`
+- `operations/GATE1_PNL_BUNDLE_GUARD_INDEXING_HARDENING.md`
+- `operations/GATE1_PNL_BUNDLE_DOCS_SOURCE_LINK_COVERAGE.md`
+- `operations/GATE1_HISTORICAL_DATA_OHLC_BID_ASK_COLUMN_PLAN.md`
+- `operations/GATE1_HISTORICAL_DATA_BID_ASK_FIXTURE_CONTRACT.md`
+- `operations/GATE1_SPREAD_ASSUMPTION_TO_BID_ASK_EVIDENCE_ALIGNMENT.md`
+- `operations/GATE1_CANDLE_TIMING_AND_TIMEZONE_INTEGRITY_PLAN.md`
+- `operations/GATE1_LOOKAHEAD_BIAS_BLOCKER_CONTRACT.md`
+- `operations/GATE1_SAME_CANDLE_STOP_TARGET_AMBIGUITY_PLAN.md`
+- `operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md`
 - `operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md`
 - `operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

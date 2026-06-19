@@ -58,7 +58,7 @@ hide the phase movement inside unrelated code changes.
 Recommended next packet:
 
 ```text
-TRD-264 Gate 1 Operating Gate Model Activation
+TRD-265 Gate 1 Operating Gate Model Activation
 ```
 
 Required scope:

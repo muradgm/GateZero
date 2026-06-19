@@ -5,19 +5,19 @@
 | Field                      | Value                           |
 | -------------------------- | ------------------------------- |
 | Generated at               | 2026-06-19                      |
-| Latest accepted packet     | `TRD-263`                       |
-| Latest accepted validation | 71 test files, 355 tests passed |
-| Assignment count           | 263                             |
-| Accepted count             | 263                             |
+| Latest accepted packet     | `TRD-291`                       |
+| Latest accepted validation | 71 test files, 379 tests passed |
+| Assignment count           | 291                             |
+| Accepted count             | 291                             |
 | Open count                 | 0                               |
 
 ## Boundary
 
-| Field          | Value             |
-| -------------- | ----------------- |
-| Financial gate | `G0_RESEARCH`     |
-| Scope          | `research_only`   |
-| Source         | Local ops records |
+| Field          | Value                         |
+| -------------- | ----------------------------- |
+| Financial gate | `G1_BACKTESTING`              |
+| Scope          | `historical_backtesting_only` |
+| Source         | Local ops records             |
 
 ## Packet Status
 
@@ -286,6 +286,34 @@
 | `TRD-261` | `accepted` |
 | `TRD-262` | `accepted` |
 | `TRD-263` | `accepted` |
+| `TRD-264` | `accepted` |
+| `TRD-265` | `accepted` |
+| `TRD-266` | `accepted` |
+| `TRD-267` | `accepted` |
+| `TRD-268` | `accepted` |
+| `TRD-269` | `accepted` |
+| `TRD-270` | `accepted` |
+| `TRD-271` | `accepted` |
+| `TRD-272` | `accepted` |
+| `TRD-273` | `accepted` |
+| `TRD-274` | `accepted` |
+| `TRD-275` | `accepted` |
+| `TRD-276` | `accepted` |
+| `TRD-277` | `accepted` |
+| `TRD-278` | `accepted` |
+| `TRD-279` | `accepted` |
+| `TRD-280` | `accepted` |
+| `TRD-281` | `accepted` |
+| `TRD-282` | `accepted` |
+| `TRD-283` | `accepted` |
+| `TRD-284` | `accepted` |
+| `TRD-285` | `accepted` |
+| `TRD-286` | `accepted` |
+| `TRD-287` | `accepted` |
+| `TRD-288` | `accepted` |
+| `TRD-289` | `accepted` |
+| `TRD-290` | `accepted` |
+| `TRD-291` | `accepted` |
 
 ## Notes
 

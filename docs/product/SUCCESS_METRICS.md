@@ -1,10 +1,10 @@
-# GateZero Success Metrics
+# TraderFrame Success Metrics
 
 ## Purpose
 
 This document defines the success metrics that matter at the current stage.
 
-GateZero should not measure success by vanity profit screenshots, strategy count, or automation
+TraderFrame should not measure success by vanity profit screenshots, strategy count, or automation
 breadth.
 
 It should measure whether the operator becomes more disciplined, more informed, and less exposed to
@@ -12,7 +12,7 @@ avoidable trading mistakes.
 
 ## Stage Definition
 
-GateZero is currently a:
+TraderFrame is currently a:
 
 > Gate 0 research-only trading operating system.
 
@@ -119,7 +119,8 @@ Do not let these drive decisions too early:
 
 ## Best Current Success Question
 
-> Does GateZero help the operator reject weak or unsafe trading ideas before they become real risk?
+> Does TraderFrame help the operator reject weak or unsafe trading ideas before they become real
+> risk?
 
 If the answer becomes reliably yes, the product becomes much stronger.
 

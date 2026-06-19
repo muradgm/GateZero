@@ -21,7 +21,7 @@ function renderCommandCenter(data) {
   <div class="shell">
     <aside class="sidebar" aria-label="Command center navigation">
       <div class="brand">
-        <div class="brand-mark">GZ</div>
+        <div class="brand-mark">TF</div>
         <div>
           <div class="brand-name">${data.project}</div>
           <div class="brand-subtitle">Command Center</div>
@@ -56,7 +56,7 @@ function renderCommandCenter(data) {
       </header>
 
       <section class="health-grid" id="overview" aria-labelledby="overview-title">
-        <h2 class="section-title" id="overview-title">Gate 0 Health</h2>
+        <h2 class="section-title" id="overview-title">Gate 1 Health</h2>
         ${data.healthCards
           .map(
             (card) => `
@@ -121,7 +121,7 @@ function renderCommandCenter(data) {
           <div class="table-wrap">
             <table>
               <caption>
-                Gate 0 evidence signals shown by the local command center.
+                Gate 1 operating signals shown by the local command center.
               </caption>
               <thead>
                 <tr>

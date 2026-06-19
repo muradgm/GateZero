@@ -1,20 +1,20 @@
-# GateZero Offer
+# TraderFrame Offer
 
 ## Purpose
 
-This document defines the honest current offer for GateZero.
+This document defines the honest current offer for TraderFrame.
 
 It keeps the product from drifting into bot hype, trading guru language, or public SaaS claims
 before the system earns that right.
 
 ## Best Current Offer
 
-> Give GateZero a strategy idea and a market dataset, and it will help you test the strategy, expose
-> the risks, review the evidence, and decide whether it deserves paper trading.
+> Give TraderFrame a strategy idea and a market dataset, and it will help you test the strategy,
+> expose the risks, review the evidence, and decide whether it deserves paper trading.
 
 ## What We Are Selling Internally
 
-At the current stage, GateZero sells discipline to the operator.
+At the current stage, TraderFrame sells discipline to the operator.
 
 It helps answer:
 
@@ -28,7 +28,7 @@ It helps answer:
 
 ## What We Are Not Selling
 
-GateZero does not sell:
+TraderFrame does not sell:
 
 - guaranteed profit
 - AI buy/sell calls

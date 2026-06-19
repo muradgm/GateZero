@@ -16,8 +16,8 @@ movement.
 
 ## Boundary Fields
 
-- `financial_gate`: `G0_RESEARCH`
-- `scope`: `research_only`
+- `financial_gate`: `G1_BACKTESTING`
+- `scope`: `historical_backtesting_only`
 - `contract_authority`: `schema_only`
 - `external_access`: `false`
 - `execution_path`: `false`

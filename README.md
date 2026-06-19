@@ -1,7 +1,7 @@
-# GateZero
+# TraderFrame
 
-GateZero is a Gate 0 Research-Only workspace for strategy research, reproducible backtest evidence,
-risk review, operator decisions, and learning events.
+TraderFrame is a GateZero-controlled Research-Only workspace for strategy research, reproducible
+backtest evidence, risk review, operator decisions, and learning events.
 
 Core wedge:
 
@@ -37,6 +37,6 @@ Run:
 pnpm lint
 pnpm format:check
 pnpm typecheck
-pnpm test
+pnpm test:ci
 pnpm validate:gate0
 ```

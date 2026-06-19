@@ -17,8 +17,9 @@ export interface Gate0ProjectNameCheckResult {
   readonly checkedFileCount: number;
 }
 
-const displayName = "GateZero";
-const packageName = "gatezero";
+const displayName = "TraderFrame";
+const internalGateName = "GateZero";
+const packageName = "traderframe";
 const previousDisplayName = ["Trade", "Frame"].join("");
 const previousPackageName = ["trade", "frame"].join("");
 const ignoredDirectories = new Set(["node_modules", "dist", ".git"]);
@@ -65,7 +66,7 @@ export function checkGate0ProjectName(
       findings.push(`Previous display name found in file: ${file.relativePath}`);
     }
 
-    if (file.content.includes(previousPackageName)) {
+    if (file.content.includes(previousPackageName) && !file.relativePath.includes("gatezero")) {
       findings.push(`Previous package name found in file: ${file.relativePath}`);
     }
   }
@@ -76,6 +77,10 @@ export function checkGate0ProjectName(
 
   if (!packageJson?.content.includes(displayName)) {
     findings.push(`package.json description must include ${displayName}`);
+  }
+
+  if (!packageJson?.content.includes(internalGateName)) {
+    findings.push(`package.json description must include internal gate name ${internalGateName}`);
   }
 
   if (!tracklist?.content.includes(`| Project                    | ${displayName}`)) {
@@ -98,6 +103,7 @@ export function renderGate0ProjectNameCheckResult(result: Gate0ProjectNameCheckR
     return [
       "Gate 0 project name check passed.",
       `Display name: ${displayName}`,
+      `Internal gate name: ${internalGateName}`,
       `Package name: ${packageName}`,
       `Checked files: ${result.checkedFileCount}`
     ].join("\n");

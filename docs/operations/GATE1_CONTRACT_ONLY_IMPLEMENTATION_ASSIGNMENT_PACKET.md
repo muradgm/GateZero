@@ -5,8 +5,9 @@
 This packet authorizes a bounded local schema-only implementation pass for future Gate 1 historical
 backtest contracts.
 
-It does not move GateZero out of `G0_RESEARCH`, run backtests, add external access, add execution
-paths, publish reports, approve strategies, or make performance claims.
+It preserves the activated `G1_BACKTESTING` historical-backtesting-only boundary and does not run
+backtests, add external access, add execution paths, publish reports, approve strategies, or make
+performance claims.
 
 ## Authorized Packets
 
@@ -24,8 +25,8 @@ paths, publish reports, approve strategies, or make performance claims.
 
 ## Required Boundaries
 
-- `financial_gate` must remain `G0_RESEARCH`.
-- `scope` must remain `research_only`.
+- `financial_gate` must be `G1_BACKTESTING`.
+- `scope` must be `historical_backtesting_only`.
 - `contract_authority` must remain `schema_only`.
 - `external_access` must be `false`.
 - `execution_path` must be `false`.

@@ -1,26 +1,26 @@
-# GateZero Project Tracklist
+# TraderFrame Project Tracklist
 
 ## Control Header
 
 | Field                      | Value                                                          |
 | -------------------------- | -------------------------------------------------------------- |
-| Project                    | GateZero                                                       |
-| Operating gate             | `G0_RESEARCH`                                                  |
-| Operating scope            | `research_only`                                                |
+| Project                    | TraderFrame                                                    |
+| Operating gate             | `G1_BACKTESTING`                                               |
+| Operating scope            | `historical_backtesting_only`                                  |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-263`                                                      |
-| Latest accepted validation | 71 test files, 355 tests passed                                |
+| Latest accepted packet     | `TRD-291`                                                      |
+| Latest accepted validation | 71 test files, 379 tests passed                                |
 
 ## Boundary
 
-GateZero is currently a local research, evidence, risk-control, and execution-support foundation.
+TraderFrame is currently a local research, evidence, risk-control, and execution-support foundation.
 
-The project remains at Gate 0. The system must not add live trading, broker integration, autonomous
-execution, AI buy/sell prediction, real or paper order placement, broker API key handling, strategy
-profitability claims, readiness claims, approval scoring, report publishing, external execution
-paths, or risk-gate loosening.
+The project is now at Gate 1 historical backtesting only. The system must not add live trading,
+broker integration, autonomous execution, AI buy/sell prediction, real or paper order placement,
+broker API key handling, strategy profitability claims, readiness claims, approval scoring, report
+publishing, external execution paths, or risk-gate loosening.
 
 ## Status Legend
 
@@ -65,6 +65,7 @@ pnpm lint
 pnpm format:check
 pnpm typecheck
 pnpm test
+pnpm test:ci
 pnpm validate:gate0
 pnpm preview:web
 ```
@@ -100,7 +101,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test`: 71 test files passed, 355 tests passed.
+- `pnpm test:ci`: 71 test files passed, 356 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -145,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-263`
+- Accepted packets: `TRD-044` to `TRD-291`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -223,6 +224,17 @@ Latest accepted result:
   - CI evidence refresh helper and refresh-loop pause control.
   - Maintenance backlog alignment with the CI evidence refresh pause.
   - Gate 1 transition authorization for historical-data backtesting only.
+  - TraderFrame brand alignment with GateZero retained as the internal gate/control-plane name.
+  - Gate 1 operating gate model activation for historical-data backtesting only.
+  - Stable single-worker CI test command for deterministic verification.
+  - Dependency audit and upgrade plan for vulnerable test tooling.
+  - Dependency upgrade execution for patched test tooling and clean audit posture.
+  - Directional PnL schema-only contract and focused contract tests.
+  - Reusable synthetic long and short directional PnL fixtures.
+  - Directional PnL negative cases, guard indexing hardening, cross-currency and JPY precision
+    fixtures, cost consistency, PnL evidence references, bundle fixtures, and integrity review.
+  - PnL bundle negative cases, bid/ask historical data fixture, spread alignment, timing integrity,
+    lookahead blocker, same-candle ambiguity, and assumption risk register.
 
 ## Workstream Summary
 
@@ -594,6 +606,34 @@ Latest accepted result:
 | `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.          |
 | `TRD-262` | accepted | Operations       | Aligned maintenance backlog with CI refresh pause.     |
 | `TRD-263` | accepted | Planning         | Authorized Gate 1 historical backtesting transition.   |
+| `TRD-264` | accepted | Brand alignment  | Aligned product name to TraderFrame.                   |
+| `TRD-265` | accepted | Gate activation  | Activated Gate 1 historical-backtesting-only state.    |
+| `TRD-266` | accepted | Validation       | Added stable CI test command.                          |
+| `TRD-267` | accepted | Security         | Recorded dependency audit and upgrade plan.            |
+| `TRD-268` | accepted | Security         | Upgraded test tooling and cleared dependency audit.    |
+| `TRD-269` | accepted | Contracts        | Added directional PnL correctness contract.            |
+| `TRD-270` | accepted | Validation       | Added directional PnL contract tests.                  |
+| `TRD-271` | accepted | Fixtures         | Added directional PnL long and short fixtures.         |
+| `TRD-272` | accepted | Validation       | Added directional PnL negative cases.                  |
+| `TRD-273` | accepted | Validation       | Hardened directional PnL guard indexing.               |
+| `TRD-274` | accepted | Planning         | Planned cross-currency PnL evidence contract.          |
+| `TRD-275` | accepted | Fixtures         | Added cross-currency PnL conversion fixture.           |
+| `TRD-276` | accepted | Fixtures         | Added JPY-pair precision PnL fixture.                  |
+| `TRD-277` | accepted | Validation       | Added PnL declared-cost consistency guard coverage.    |
+| `TRD-278` | accepted | Contracts        | Added backtest-result to PnL evidence reference.       |
+| `TRD-279` | accepted | Planning         | Planned PnL evidence bundle schema.                    |
+| `TRD-280` | accepted | Fixtures         | Added PnL evidence reference and bundle fixtures.      |
+| `TRD-281` | accepted | Review           | Reviewed Gate 1 backtest evidence integrity.           |
+| `TRD-282` | accepted | Validation       | Added PnL evidence bundle negative cases.              |
+| `TRD-283` | accepted | Validation       | Hardened PnL bundle guard indexing.                    |
+| `TRD-284` | accepted | Documentation    | Added PnL bundle docs/source-link coverage.            |
+| `TRD-285` | accepted | Planning         | Planned OHLC bid/ask historical data columns.          |
+| `TRD-286` | accepted | Fixtures         | Added bid/ask historical data snapshot fixture.        |
+| `TRD-287` | accepted | Validation       | Added spread assumption to bid/ask alignment.          |
+| `TRD-288` | accepted | Planning         | Added candle timing and timezone integrity contract.   |
+| `TRD-289` | accepted | Validation       | Added lookahead-bias blocker contract.                 |
+| `TRD-290` | accepted | Planning         | Added same-candle stop/target ambiguity plan.          |
+| `TRD-291` | accepted | Risk             | Added backtest assumption risk register.               |
 
 ## Current Operator Commands
 
@@ -607,7 +647,7 @@ Latest accepted result:
 | `pnpm snapshot:gate0-progress`                                                                    | Write local progress snapshot.                          | Markdown snapshot under `ops/runtime/progress/`.                 |
 | `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
 | `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
-| `pnpm check:gate0-name`                                                                           | Check GateZero project-name consistency.                | Local project-name check passes.                                 |
+| `pnpm check:gate0-name`                                                                           | Check TraderFrame product-name consistency.             | Local project-name check passes.                                 |
 | `pnpm check:gate0-docs-coverage`                                                                  | Check operator docs coverage drift.                     | Local docs coverage check passes.                                |
 | `pnpm check:gate0-snapshot`                                                                       | Check generated progress snapshot freshness.            | Local freshness check passes.                                    |
 | `pnpm check:gate0-tracklist`                                                                      | Check accepted packet ledger alignment.                 | Local consistency check passes.                                  |
@@ -623,15 +663,16 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 356 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                  | Acceptance focus                        |
-| ---- | --------- | ------ | ------------------------------------- | --------------------------------------- |
-| 1    | `TRD-264` | queued | Activate Gate 1 operating gate model. | Keep scope historical-backtesting-only. |
+| Rank | Packet    | Status | Goal                              | Acceptance focus                                  |
+| ---- | --------- | ------ | --------------------------------- | ------------------------------------------------- |
+| 1    | `TRD-292` | queued | Add risk-register negative cases. | Verify invalid assumption risk register failures. |
 
 ## Rejected For Now
 
@@ -783,6 +824,11 @@ Do not mark a packet accepted until:
 - Gate 0 baseline freeze confirmation: `docs/operations/GATE0_BASELINE_FREEZE_CONFIRMATION.md`
 - Gate 1 entry criteria definition: `docs/operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
 - Gate 1 transition authorization: `docs/operations/GATE1_TRANSITION_AUTHORIZATION.md`
+- Gate 1 operating gate model activation: `docs/operations/GATE1_OPERATING_GATE_MODEL_ACTIVATION.md`
+- Gate 1 stable CI test command: `docs/operations/GATE1_STABLE_CI_TEST_COMMAND.md`
+- Gate 1 dependency audit and upgrade plan:
+  `docs/operations/GATE1_DEPENDENCY_AUDIT_AND_UPGRADE_PLAN.md`
+- Gate 1 dependency upgrade execution: `docs/operations/GATE1_DEPENDENCY_UPGRADE_EXECUTION.md`
 - Gate 1 planning packet draft: `docs/operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - Gate 1 historical backtest contract assignment packet:
   `docs/operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`
@@ -974,6 +1020,7 @@ Do not mark a packet accepted until:
   `docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md`
 - Gate 0 CI evidence refresh helper: `docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md`
 - Gate 0 CI evidence refresh loop pause: `docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`
+- TraderFrame brand alignment: `docs/operations/GATE0_TRADERFRAME_BRAND_ALIGNMENT.md`
 - Remote CI evidence refresh after TRD-257 push:
   `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD257_PUSH.md`
 - Remote CI evidence refresh after TRD-258 push:
@@ -983,6 +1030,42 @@ Do not mark a packet accepted until:
 
 ## Source Of Truth Links Continued
 
+- Gate 1 directional PnL contract: `docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md`
+- Gate 1 directional PnL contract tests: `docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md`
+- Gate 1 directional PnL fixtures: `docs/operations/GATE1_DIRECTIONAL_PNL_FIXTURES.md`
+- Gate 1 directional PnL negative cases:
+  `docs/operations/GATE1_DIRECTIONAL_PNL_FIXTURE_NEGATIVE_CASES.md`
+- Gate 1 directional PnL guard indexing:
+  `docs/operations/GATE1_DIRECTIONAL_PNL_GUARD_INDEXING_HARDENING.md`
+- Gate 1 cross-currency PnL plan: `docs/operations/GATE1_CROSS_CURRENCY_PNL_CONTRACT_PLAN.md`
+- Gate 1 cross-currency fixture:
+  `docs/operations/GATE1_CROSS_CURRENCY_CONVERSION_FIXTURE_CONTRACT.md`
+- Gate 1 JPY precision fixture: `docs/operations/GATE1_JPY_PAIR_PRECISION_FIXTURE_CONTRACT.md`
+- Gate 1 PnL cost consistency guard: `docs/operations/GATE1_PNL_COST_MODEL_CONSISTENCY_GUARD.md`
+- Gate 1 backtest result to PnL evidence reference:
+  `docs/operations/GATE1_BACKTEST_RESULT_TO_PNL_EVIDENCE_REFERENCE_CONTRACT.md`
+- Gate 1 PnL evidence bundle schema plan: `docs/operations/GATE1_PNL_EVIDENCE_BUNDLE_SCHEMA_PLAN.md`
+- Gate 1 PnL evidence bundle fixtures: `docs/operations/GATE1_PNL_EVIDENCE_BUNDLE_FIXTURES.md`
+- Gate 1 backtest evidence integrity review:
+  `docs/operations/GATE1_BACKTEST_EVIDENCE_INTEGRITY_REVIEW.md`
+- Gate 1 PnL evidence bundle negative cases:
+  `docs/operations/GATE1_PNL_EVIDENCE_BUNDLE_NEGATIVE_CASES.md`
+- Gate 1 PnL bundle guard indexing: `docs/operations/GATE1_PNL_BUNDLE_GUARD_INDEXING_HARDENING.md`
+- Gate 1 PnL bundle docs/source links:
+  `docs/operations/GATE1_PNL_BUNDLE_DOCS_SOURCE_LINK_COVERAGE.md`
+- Gate 1 historical data OHLC bid/ask column plan:
+  `docs/operations/GATE1_HISTORICAL_DATA_OHLC_BID_ASK_COLUMN_PLAN.md`
+- Gate 1 historical data bid/ask fixture:
+  `docs/operations/GATE1_HISTORICAL_DATA_BID_ASK_FIXTURE_CONTRACT.md`
+- Gate 1 spread assumption to bid/ask alignment:
+  `docs/operations/GATE1_SPREAD_ASSUMPTION_TO_BID_ASK_EVIDENCE_ALIGNMENT.md`
+- Gate 1 candle timing and timezone integrity:
+  `docs/operations/GATE1_CANDLE_TIMING_AND_TIMEZONE_INTEGRITY_PLAN.md`
+- Gate 1 lookahead-bias blocker: `docs/operations/GATE1_LOOKAHEAD_BIAS_BLOCKER_CONTRACT.md`
+- Gate 1 same-candle stop/target ambiguity:
+  `docs/operations/GATE1_SAME_CANDLE_STOP_TARGET_AMBIGUITY_PLAN.md`
+- Gate 1 backtest assumption risk register:
+  `docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -1042,4 +1125,5 @@ Do not mark a packet accepted until:
 - Guard and quality suite command source: `package.json`
 - Inspect command contract: `docs/operations/GATE0_INSPECT_COMMAND_CONTRACT.md`
 - Docs coverage drift guard script: `scripts/check-gate0-docs-coverage.ts`
+- Project-name guard: `scripts/check-gate0-project-name.ts`
 - Gate scanner: `scripts/validate-gate0.ts`

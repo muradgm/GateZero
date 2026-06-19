@@ -132,10 +132,10 @@ describe("trace hashing", () => {
     expect(() => assertCanonicalStrategyDecisionTraceHashes(mutableTrace)).toThrow();
   });
 
-  it("rejects non-Gate-0 trace drafts", () => {
+  it("rejects unsupported future trace drafts", () => {
     const draft = {
       ...createDraft(),
-      financial_gate: "G1_BACKTESTING"
+      financial_gate: "G2_EXECUTION"
     };
 
     expect(() =>

@@ -1,15 +1,15 @@
-# GateZero App UI Direction
+# TraderFrame App UI Direction
 
 ## Purpose
 
-This document defines the product UI direction for GateZero.
+This document defines the product UI direction for TraderFrame.
 
 The UI should make risk, evidence, and operator decisions clearer. It should not make trading feel
 like a game.
 
 ## Product Feel
 
-GateZero should feel:
+TraderFrame should feel:
 
 - calm
 - serious

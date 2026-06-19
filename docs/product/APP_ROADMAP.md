@@ -1,8 +1,8 @@
-# GateZero App Roadmap
+# TraderFrame App Roadmap
 
 ## Purpose
 
-This roadmap defines the app-focused sequence for GateZero while keeping the protected
+This roadmap defines the app-focused sequence for TraderFrame while keeping the protected
 strategy-review loop ahead of product breadth.
 
 Two truths must stay visible at the same time:

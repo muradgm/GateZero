@@ -5,7 +5,7 @@ import {
 } from "../../../scripts/check-gate0-command-center-render-contract.js";
 
 const baseInput = {
-  data: 'gate: "G0_RESEARCH", scope: "research_only", docGroups: []',
+  data: 'gate: "G1_BACKTESTING", scope: "historical_backtesting_only", docGroups: []',
   html: '<a class="skip-link" href="#main">Skip</a><div id="app"></div>',
   main: 'main class="workspace" id="main" data-section updateActiveNavigation data-label="Area" data.docGroups',
   styles: "td::before { content: attr(data-label); } .doc-group { display: grid; }"

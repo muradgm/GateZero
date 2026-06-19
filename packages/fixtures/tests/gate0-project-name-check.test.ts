@@ -7,27 +7,31 @@ import {
 const packageJson = {
   relativePath: "package.json",
   content: JSON.stringify({
-    name: "gatezero",
-    description: "Gate 0 Research-Only foundation for GateZero."
+    name: "traderframe",
+    description: "GateZero-controlled research foundation for TraderFrame."
   })
 };
 
 const tracklist = {
   relativePath: "ops/runtime/tracklist.md",
   content: [
-    "# GateZero Project Tracklist",
+    "# TraderFrame Project Tracklist",
     "",
     "| Field                      | Value |",
     "| -------------------------- | ----- |",
-    "| Project                    | GateZero |",
+    "| Project                    | TraderFrame |",
     ""
   ].join("\n")
 };
 
 describe("Gate 0 project name check", () => {
-  it("passes when app-name surfaces use GateZero", () => {
+  it("passes when product-name surfaces use TraderFrame and keep GateZero internal", () => {
     const result = checkGate0ProjectName({
-      files: [packageJson, tracklist, { relativePath: "README.md", content: "# GateZero" }]
+      files: [
+        packageJson,
+        tracklist,
+        { relativePath: "README.md", content: "# TraderFrame\n\nInternal gate: GateZero" }
+      ]
     });
 
     expect(result).toEqual({
@@ -58,7 +62,7 @@ describe("Gate 0 project name check", () => {
       files: [
         packageJson,
         tracklist,
-        { relativePath: `docs/${["trade", "frame"].join("")}.md`, content: "# GateZero" }
+        { relativePath: `docs/${["trade", "frame"].join("")}.md`, content: "# TraderFrame" }
       ]
     });
 
@@ -66,5 +70,20 @@ describe("Gate 0 project name check", () => {
     expect(result.findings).toContain(
       `Previous package name found in path: docs/${["trade", "frame"].join("")}.md`
     );
+  });
+
+  it("allows GateZero as internal gate vocabulary", () => {
+    const result = checkGate0ProjectName({
+      files: [
+        packageJson,
+        tracklist,
+        {
+          relativePath: "docs/operations/GATE0_INTERNAL_GATE_NAME.md",
+          content: "GateZero remains the internal gate/control-plane name."
+        }
+      ]
+    });
+
+    expect(result.ok).toBe(true);
   });
 });

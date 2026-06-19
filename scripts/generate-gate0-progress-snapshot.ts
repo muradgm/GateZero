@@ -8,6 +8,8 @@ export interface Gate0ProgressSnapshotInput {
   readonly generatedAt: string;
   readonly latestAcceptedPacket: string;
   readonly latestAcceptedValidation: string;
+  readonly operatingGate: string;
+  readonly operatingScope: string;
 }
 
 export interface Gate0ProgressSnapshotRecord {
@@ -19,6 +21,8 @@ export interface Gate0ProgressSnapshot {
   readonly generatedAt: string;
   readonly latestAcceptedPacket: string;
   readonly latestAcceptedValidation: string;
+  readonly operatingGate: string;
+  readonly operatingScope: string;
   readonly assignmentCount: number;
   readonly acceptedCount: number;
   readonly openCount: number;
@@ -40,7 +44,9 @@ export async function loadGate0ProgressSnapshotInput(
     acceptedIds,
     generatedAt: readGeneratedDate(),
     latestAcceptedPacket: readTracklistValue(tracklist, "Latest accepted packet"),
-    latestAcceptedValidation: readTracklistValue(tracklist, "Latest accepted validation")
+    latestAcceptedValidation: readTracklistValue(tracklist, "Latest accepted validation"),
+    operatingGate: readTracklistValue(tracklist, "Operating gate"),
+    operatingScope: readTracklistValue(tracklist, "Operating scope")
   };
 }
 
@@ -57,6 +63,8 @@ export function createGate0ProgressSnapshot(
     generatedAt: input.generatedAt,
     latestAcceptedPacket: input.latestAcceptedPacket,
     latestAcceptedValidation: input.latestAcceptedValidation,
+    operatingGate: input.operatingGate,
+    operatingScope: input.operatingScope,
     assignmentCount: input.assignmentIds.length,
     acceptedCount: records.filter((record) => record.status === "accepted").length,
     openCount: records.filter((record) => record.status !== "accepted").length,
@@ -99,8 +107,8 @@ export function renderGate0ProgressSnapshot(snapshot: Gate0ProgressSnapshot): st
     ...renderMarkdownTable(
       ["Field", "Value"],
       [
-        ["Financial gate", "`G0_RESEARCH`"],
-        ["Scope", "`research_only`"],
+        ["Financial gate", `\`${snapshot.operatingGate}\``],
+        ["Scope", `\`${snapshot.operatingScope}\``],
         ["Source", "Local ops records"]
       ]
     ),

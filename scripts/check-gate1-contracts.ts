@@ -4,19 +4,39 @@ import { pathToFileURL } from "node:url";
 import type { ZodType } from "zod";
 import {
   Gate1BacktestResultContractSchema,
+  Gate1BacktestAssumptionRiskRegisterContractSchema,
+  Gate1CandleTimingIntegrityContractSchema,
+  Gate1DirectionalPnlContractSchema,
   Gate1FeesAndSlippageAssumptionContractSchema,
   Gate1HistoricalDataSnapshotContractSchema,
   Gate1ImmutableBacktestRecordContractSchema,
+  Gate1LookaheadBiasBlockerContractSchema,
+  Gate1PnlEvidenceBundleContractSchema,
+  Gate1PnlEvidenceReferenceContractSchema,
   Gate1ReproducibilityCheckContractSchema,
+  Gate1SameCandleAmbiguityContractSchema,
+  Gate1SpreadBidAskAlignmentContractSchema,
   Gate1StrategyVersionContractSchema
 } from "../packages/contracts/src/index.js";
 import {
+  gate1BacktestAssumptionRiskRegisterFixture,
   gate1BacktestResultFixture,
+  gate1BidAskHistoricalDataSnapshotFixture,
+  gate1CandleTimingIntegrityFixture,
+  gate1CrossCurrencyDirectionalPnlFixture,
   gate1FeesAndSlippageAssumptionFixture,
   gate1HistoricalDataSnapshotFixture,
   gate1ImmutableBacktestRecordFixture,
+  gate1JpyPrecisionDirectionalPnlFixture,
+  gate1LookaheadBiasBlockerFixture,
+  gate1LongDirectionalPnlFixture,
+  gate1PnlEvidenceBundleFixture,
+  gate1PnlEvidenceReferenceFixture,
   gate1ReproducibilityCheckFixture,
   gate1ReproducibilityMismatchFixture,
+  gate1SameCandleAmbiguityFixture,
+  gate1ShortDirectionalPnlFixture,
+  gate1SpreadBidAskAlignmentFixture,
   gate1StrategyVersionFixture
 } from "../packages/fixtures/src/index.js";
 
@@ -42,10 +62,22 @@ export interface Gate1ContractGuardResult {
 
 export interface Gate1ContractFixtureSet {
   readonly historicalDataSnapshot: unknown;
+  readonly bidAskHistoricalDataSnapshot: unknown;
   readonly strategyVersion: unknown;
   readonly feesAndSlippageAssumption: unknown;
   readonly immutableBacktestRecord: unknown;
   readonly backtestResult: unknown;
+  readonly longDirectionalPnl: unknown;
+  readonly shortDirectionalPnl: unknown;
+  readonly crossCurrencyDirectionalPnl: unknown;
+  readonly jpyPrecisionDirectionalPnl: unknown;
+  readonly pnlEvidenceReference: unknown;
+  readonly pnlEvidenceBundle: unknown;
+  readonly spreadBidAskAlignment: unknown;
+  readonly candleTimingIntegrity: unknown;
+  readonly lookaheadBiasBlocker: unknown;
+  readonly sameCandleAmbiguity: unknown;
+  readonly backtestAssumptionRiskRegister: unknown;
   readonly reproducibilityCheck: unknown;
   readonly reproducibilityMismatch: unknown;
 }
@@ -57,6 +89,8 @@ const requiredDocPaths = [
   "docs/operations/GATE1_FEES_AND_SLIPPAGE_ASSUMPTION_CONTRACT.md",
   "docs/operations/GATE1_IMMUTABLE_BACKTEST_RECORD_CONTRACT.md",
   "docs/operations/GATE1_BACKTEST_RESULT_CONTRACT.md",
+  "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md",
+  "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -78,15 +112,35 @@ const requiredSchemaNames = [
   "Gate1FeesAndSlippageAssumptionContractSchema",
   "Gate1ImmutableBacktestRecordContractSchema",
   "Gate1BacktestResultContractSchema",
+  "Gate1DirectionalPnlContractSchema",
+  "Gate1PnlEvidenceReferenceContractSchema",
+  "Gate1PnlEvidenceBundleContractSchema",
+  "Gate1SpreadBidAskAlignmentContractSchema",
+  "Gate1CandleTimingIntegrityContractSchema",
+  "Gate1LookaheadBiasBlockerContractSchema",
+  "Gate1SameCandleAmbiguityContractSchema",
+  "Gate1BacktestAssumptionRiskRegisterContractSchema",
   "Gate1ReproducibilityCheckContractSchema"
 ] as const;
 
 const requiredFixtureNames = [
   "gate1HistoricalDataSnapshotFixture",
+  "gate1BidAskHistoricalDataSnapshotFixture",
   "gate1StrategyVersionFixture",
   "gate1FeesAndSlippageAssumptionFixture",
   "gate1ImmutableBacktestRecordFixture",
   "gate1BacktestResultFixture",
+  "gate1LongDirectionalPnlFixture",
+  "gate1ShortDirectionalPnlFixture",
+  "gate1CrossCurrencyDirectionalPnlFixture",
+  "gate1JpyPrecisionDirectionalPnlFixture",
+  "gate1PnlEvidenceReferenceFixture",
+  "gate1PnlEvidenceBundleFixture",
+  "gate1SpreadBidAskAlignmentFixture",
+  "gate1CandleTimingIntegrityFixture",
+  "gate1LookaheadBiasBlockerFixture",
+  "gate1SameCandleAmbiguityFixture",
+  "gate1BacktestAssumptionRiskRegisterFixture",
   "gate1ReproducibilityCheckFixture",
   "gate1ReproducibilityMismatchFixture"
 ] as const;
@@ -190,7 +244,7 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
     }
 
     for (const requiredLiteral of [
-      'financial_gate: z.literal("G0_RESEARCH")',
+      'financial_gate: z.literal("G1_BACKTESTING")',
       "scope: Gate1ContractScopeSchema",
       "external_access: z.literal(false)",
       "execution_path: z.literal(false)"
@@ -208,12 +262,12 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
       }
     }
 
-    if (!fixtureSource.includes('financial_gate: "G0_RESEARCH"')) {
-      findings.push("Gate 1 fixtures must remain tied to G0_RESEARCH");
+    if (!fixtureSource.includes('financial_gate: "G1_BACKTESTING"')) {
+      findings.push("Gate 1 fixtures must remain tied to G1_BACKTESTING");
     }
 
-    if (!fixtureSource.includes('scope: "research_only"')) {
-      findings.push("Gate 1 fixtures must remain research_only");
+    if (!fixtureSource.includes('scope: "historical_backtesting_only"')) {
+      findings.push("Gate 1 fixtures must remain historical_backtesting_only");
     }
   }
 
@@ -231,10 +285,22 @@ export function checkGate1Contracts(input: Gate1ContractGuardInput): Gate1Contra
 export function createDefaultGate1ContractFixtureSet(): Gate1ContractFixtureSet {
   return {
     historicalDataSnapshot: gate1HistoricalDataSnapshotFixture,
+    bidAskHistoricalDataSnapshot: gate1BidAskHistoricalDataSnapshotFixture,
     strategyVersion: gate1StrategyVersionFixture,
     feesAndSlippageAssumption: gate1FeesAndSlippageAssumptionFixture,
     immutableBacktestRecord: gate1ImmutableBacktestRecordFixture,
     backtestResult: gate1BacktestResultFixture,
+    longDirectionalPnl: gate1LongDirectionalPnlFixture,
+    shortDirectionalPnl: gate1ShortDirectionalPnlFixture,
+    crossCurrencyDirectionalPnl: gate1CrossCurrencyDirectionalPnlFixture,
+    jpyPrecisionDirectionalPnl: gate1JpyPrecisionDirectionalPnlFixture,
+    pnlEvidenceReference: gate1PnlEvidenceReferenceFixture,
+    pnlEvidenceBundle: gate1PnlEvidenceBundleFixture,
+    spreadBidAskAlignment: gate1SpreadBidAskAlignmentFixture,
+    candleTimingIntegrity: gate1CandleTimingIntegrityFixture,
+    lookaheadBiasBlocker: gate1LookaheadBiasBlockerFixture,
+    sameCandleAmbiguity: gate1SameCandleAmbiguityFixture,
+    backtestAssumptionRiskRegister: gate1BacktestAssumptionRiskRegisterFixture,
     reproducibilityCheck: gate1ReproducibilityCheckFixture,
     reproducibilityMismatch: gate1ReproducibilityMismatchFixture
   };
@@ -250,6 +316,12 @@ export function validateGate1ContractFixtureSet(
     "gate1HistoricalDataSnapshotFixture",
     Gate1HistoricalDataSnapshotContractSchema,
     fixtureSet.historicalDataSnapshot
+  );
+  validateFixture(
+    findings,
+    "gate1BidAskHistoricalDataSnapshotFixture",
+    Gate1HistoricalDataSnapshotContractSchema,
+    fixtureSet.bidAskHistoricalDataSnapshot
   );
   validateFixture(
     findings,
@@ -274,6 +346,72 @@ export function validateGate1ContractFixtureSet(
     "gate1BacktestResultFixture",
     Gate1BacktestResultContractSchema,
     fixtureSet.backtestResult
+  );
+  validateFixture(
+    findings,
+    "gate1LongDirectionalPnlFixture",
+    Gate1DirectionalPnlContractSchema,
+    fixtureSet.longDirectionalPnl
+  );
+  validateFixture(
+    findings,
+    "gate1ShortDirectionalPnlFixture",
+    Gate1DirectionalPnlContractSchema,
+    fixtureSet.shortDirectionalPnl
+  );
+  validateFixture(
+    findings,
+    "gate1CrossCurrencyDirectionalPnlFixture",
+    Gate1DirectionalPnlContractSchema,
+    fixtureSet.crossCurrencyDirectionalPnl
+  );
+  validateFixture(
+    findings,
+    "gate1JpyPrecisionDirectionalPnlFixture",
+    Gate1DirectionalPnlContractSchema,
+    fixtureSet.jpyPrecisionDirectionalPnl
+  );
+  validateFixture(
+    findings,
+    "gate1PnlEvidenceReferenceFixture",
+    Gate1PnlEvidenceReferenceContractSchema,
+    fixtureSet.pnlEvidenceReference
+  );
+  validateFixture(
+    findings,
+    "gate1PnlEvidenceBundleFixture",
+    Gate1PnlEvidenceBundleContractSchema,
+    fixtureSet.pnlEvidenceBundle
+  );
+  validateFixture(
+    findings,
+    "gate1SpreadBidAskAlignmentFixture",
+    Gate1SpreadBidAskAlignmentContractSchema,
+    fixtureSet.spreadBidAskAlignment
+  );
+  validateFixture(
+    findings,
+    "gate1CandleTimingIntegrityFixture",
+    Gate1CandleTimingIntegrityContractSchema,
+    fixtureSet.candleTimingIntegrity
+  );
+  validateFixture(
+    findings,
+    "gate1LookaheadBiasBlockerFixture",
+    Gate1LookaheadBiasBlockerContractSchema,
+    fixtureSet.lookaheadBiasBlocker
+  );
+  validateFixture(
+    findings,
+    "gate1SameCandleAmbiguityFixture",
+    Gate1SameCandleAmbiguityContractSchema,
+    fixtureSet.sameCandleAmbiguity
+  );
+  validateFixture(
+    findings,
+    "gate1BacktestAssumptionRiskRegisterFixture",
+    Gate1BacktestAssumptionRiskRegisterContractSchema,
+    fixtureSet.backtestAssumptionRiskRegister
   );
   validateFixture(
     findings,

@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   BacktestResultSchema,
+  CURRENT_FINANCIAL_GATE,
+  CURRENT_OPERATING_SCOPE,
+  CurrentOperatingScopeSchema,
   DataSnapshotSchema,
   FinancialGateSchema,
   LearningEventSchema,
@@ -92,9 +95,14 @@ const dataSnapshot = {
 };
 
 describe("Gate 0 contracts", () => {
-  it("allows only the Gate 0 financial gate", () => {
+  it("allows known financial gates and exposes the current Gate 1 operating state", () => {
     expect(FinancialGateSchema.parse("G0_RESEARCH")).toBe("G0_RESEARCH");
-    expect(() => FinancialGateSchema.parse("G1_BACKTESTING")).toThrow();
+    expect(FinancialGateSchema.parse("G1_BACKTESTING")).toBe("G1_BACKTESTING");
+    expect(() => FinancialGateSchema.parse("G2_EXECUTION")).toThrow();
+    expect(CURRENT_FINANCIAL_GATE).toBe("G1_BACKTESTING");
+    expect(CurrentOperatingScopeSchema.parse(CURRENT_OPERATING_SCOPE)).toBe(
+      "historical_backtesting_only"
+    );
   });
 
   it("validates a reproducible backtest result with drawdown context", () => {

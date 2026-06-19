@@ -1,4 +1,4 @@
-# GateZero Web
+# TraderFrame Web
 
 This folder contains the static Gate 0 command center prototype.
 

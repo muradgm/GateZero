@@ -14,6 +14,8 @@ const requiredDocPaths = [
   "docs/operations/GATE1_FEES_AND_SLIPPAGE_ASSUMPTION_CONTRACT.md",
   "docs/operations/GATE1_IMMUTABLE_BACKTEST_RECORD_CONTRACT.md",
   "docs/operations/GATE1_BACKTEST_RESULT_CONTRACT.md",
+  "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md",
+  "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
@@ -35,8 +37,16 @@ const contractSource = [
   "Gate1FeesAndSlippageAssumptionContractSchema",
   "Gate1ImmutableBacktestRecordContractSchema",
   "Gate1BacktestResultContractSchema",
+  "Gate1DirectionalPnlContractSchema",
+  "Gate1PnlEvidenceReferenceContractSchema",
+  "Gate1PnlEvidenceBundleContractSchema",
+  "Gate1SpreadBidAskAlignmentContractSchema",
+  "Gate1CandleTimingIntegrityContractSchema",
+  "Gate1LookaheadBiasBlockerContractSchema",
+  "Gate1SameCandleAmbiguityContractSchema",
+  "Gate1BacktestAssumptionRiskRegisterContractSchema",
   "Gate1ReproducibilityCheckContractSchema",
-  'financial_gate: z.literal("G0_RESEARCH")',
+  'financial_gate: z.literal("G1_BACKTESTING")',
   "scope: Gate1ContractScopeSchema",
   "external_access: z.literal(false)",
   "execution_path: z.literal(false)"
@@ -44,14 +54,26 @@ const contractSource = [
 
 const fixtureSource = [
   "gate1HistoricalDataSnapshotFixture",
+  "gate1BidAskHistoricalDataSnapshotFixture",
   "gate1StrategyVersionFixture",
   "gate1FeesAndSlippageAssumptionFixture",
   "gate1ImmutableBacktestRecordFixture",
   "gate1BacktestResultFixture",
+  "gate1LongDirectionalPnlFixture",
+  "gate1ShortDirectionalPnlFixture",
+  "gate1CrossCurrencyDirectionalPnlFixture",
+  "gate1JpyPrecisionDirectionalPnlFixture",
+  "gate1PnlEvidenceReferenceFixture",
+  "gate1PnlEvidenceBundleFixture",
+  "gate1SpreadBidAskAlignmentFixture",
+  "gate1CandleTimingIntegrityFixture",
+  "gate1LookaheadBiasBlockerFixture",
+  "gate1SameCandleAmbiguityFixture",
+  "gate1BacktestAssumptionRiskRegisterFixture",
   "gate1ReproducibilityCheckFixture",
   "gate1ReproducibilityMismatchFixture",
-  'financial_gate: "G0_RESEARCH"',
-  'scope: "research_only"'
+  'financial_gate: "G1_BACKTESTING"',
+  'scope: "historical_backtesting_only"'
 ].join("\n");
 
 const completeInput: Gate1ContractGuardInput = {
@@ -94,7 +116,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 16
+      checkedArtifactCount: 18
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
@@ -154,7 +176,7 @@ describe("Gate 1 contract guard", () => {
         ...fixtureSet,
         historicalDataSnapshot: {
           ...asRecord(fixtureSet.historicalDataSnapshot),
-          financial_gate: "G1_BACKTESTING"
+          financial_gate: "G0_RESEARCH"
         },
         reproducibilityMismatch: {
           ...asRecord(fixtureSet.reproducibilityMismatch),

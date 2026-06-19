@@ -11,7 +11,9 @@ describe("Gate 0 progress snapshot generator", () => {
     acceptedIds: ["TRD-001", "TRD-003"],
     generatedAt: "2026-06-13",
     latestAcceptedPacket: "TRD-003",
-    latestAcceptedValidation: "2 test files, 9 tests passed"
+    latestAcceptedValidation: "2 test files, 9 tests passed",
+    operatingGate: "G1_BACKTESTING",
+    operatingScope: "historical_backtesting_only"
   };
 
   it("creates a deterministic local progress snapshot", () => {
@@ -21,6 +23,8 @@ describe("Gate 0 progress snapshot generator", () => {
       generatedAt: "2026-06-13",
       latestAcceptedPacket: "TRD-003",
       latestAcceptedValidation: "2 test files, 9 tests passed",
+      operatingGate: "G1_BACKTESTING",
+      operatingScope: "historical_backtesting_only",
       assignmentCount: 3,
       acceptedCount: 2,
       openCount: 1,
@@ -39,8 +43,8 @@ describe("Gate 0 progress snapshot generator", () => {
     expect(rendered).toMatch(/\| Latest accepted packet\s+\| `TRD-003`\s+\|/);
     expect(rendered).toMatch(/\| Accepted count\s+\| 2\s+\|/);
     expect(rendered).toMatch(/\| `TRD-002`\s+\| `not_accepted`\s+\|/);
-    expect(rendered).toMatch(/\| Financial gate\s+\| `G0_RESEARCH`\s+\|/);
-    expect(rendered).toMatch(/\| Scope\s+\| `research_only`\s+\|/);
+    expect(rendered).toMatch(/\| Financial gate\s+\| `G1_BACKTESTING`\s+\|/);
+    expect(rendered).toMatch(/\| Scope\s+\| `historical_backtesting_only`\s+\|/);
   });
 
   it("keeps the rendered snapshot free of raw review payload wording", () => {

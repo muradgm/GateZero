@@ -5,8 +5,8 @@
 This document records indexing for the local Gate 1 contract guard and the current schema-only
 contract chain.
 
-It does not move GateZero out of `G0_RESEARCH`, run backtests, add external access, publish reports,
-approve strategies, or make performance claims.
+It preserves the activated `G1_BACKTESTING` historical-backtesting-only boundary and does not run
+backtests, add external access, publish reports, approve strategies, or make performance claims.
 
 ## Indexed Command
 

@@ -107,10 +107,10 @@ describe("StrategyDecisionTraceSchema", () => {
     expect(() => StrategyDecisionTraceSchema.parse(trace)).toThrow();
   });
 
-  it("rejects non-Gate-0 financial gates", () => {
+  it("rejects unsupported future financial gates", () => {
     const trace = {
       ...createTrace(),
-      financial_gate: "G1_BACKTESTING"
+      financial_gate: "G2_EXECUTION"
     };
 
     expect(() => StrategyDecisionTraceSchema.parse(trace)).toThrow();

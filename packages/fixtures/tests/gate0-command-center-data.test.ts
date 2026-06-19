@@ -12,9 +12,9 @@ describe("Gate 0 command center surface", () => {
   it("keeps the command center tied to Gate 0 research scope", () => {
     const data = readFileSync(dataPath, "utf8");
 
-    expect(data).toContain("G0_RESEARCH");
-    expect(data).toContain("research_only");
-    expect(data).toContain("TRD-263");
+    expect(data).toContain("G1_BACKTESTING");
+    expect(data).toContain("historical_backtesting_only");
+    expect(data).toContain("TRD-291");
   });
 
   it("does not expose trading action language in app data", () => {

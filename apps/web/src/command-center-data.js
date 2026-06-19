@@ -1,11 +1,11 @@
 export const commandCenterData = {
-  project: "GateZero",
-  title: "GateZero Command Center",
+  project: "TraderFrame",
+  title: "TraderFrame Command Center",
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
-  gate: "G0_RESEARCH",
-  scope: "research_only",
-  latestPacket: "TRD-263",
-  localVerification: "71 files / 355 tests",
+  gate: "G1_BACKTESTING",
+  scope: "historical_backtesting_only",
+  latestPacket: "TRD-291",
+  localVerification: "71 files / 379 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -13,14 +13,14 @@ export const commandCenterData = {
   healthCards: [
     {
       label: "Gate Status",
-      value: "G0_RESEARCH",
-      detail: "Control plane remains research-only.",
+      value: "G1_BACKTESTING",
+      detail: "Control plane is historical-backtesting-only.",
       tone: "steady"
     },
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 355 tests.",
+      detail: "Latest suite: 71 files, 379 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "263 / 263",
+      value: "291 / 291",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 355 tests"
+      reference: "71 files / 379 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "263 accepted records"
+      reference: "291 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-264 Gate 1 operating gate model activation.",
+    "Proceed to TRD-292 backtest assumption risk register negative cases.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -116,7 +116,14 @@ export const commandCenterData = {
         "docs/operations/GATE0_COMMAND_CENTER_LOCAL_AUTO_REFRESH.md",
         "docs/operations/GATE0_COMMAND_CENTER_LOCAL_RUNTIME_SECURITY_BOUNDARY.md",
         "docs/operations/GATE0_CI_EVIDENCE_REFRESH_HELPER.md",
-        "docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md"
+        "docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md",
+        "docs/operations/GATE0_TRADERFRAME_BRAND_ALIGNMENT.md",
+        "docs/operations/GATE1_DEPENDENCY_UPGRADE_EXECUTION.md",
+        "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT.md",
+        "docs/operations/GATE1_DIRECTIONAL_PNL_CONTRACT_TESTS.md",
+        "docs/operations/GATE1_DIRECTIONAL_PNL_FIXTURES.md",
+        "docs/operations/GATE1_BACKTEST_EVIDENCE_INTEGRITY_REVIEW.md",
+        "docs/operations/GATE1_BACKTEST_ASSUMPTION_RISK_REGISTER.md"
       ]
     },
     {

@@ -16,8 +16,8 @@ performance claims.
 
 ## Boundary Fields
 
-- `financial_gate`: `G0_RESEARCH`
-- `scope`: `research_only`
+- `financial_gate`: `G1_BACKTESTING`
+- `scope`: `historical_backtesting_only`
 - `contract_authority`: `schema_only`
 - `produces_action_recommendation`: `false`
 - `external_access`: `false`

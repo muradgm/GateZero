@@ -47,8 +47,13 @@ export function checkGate0CommandCenterRenderContract(
   requireIncludes(findings, input.main, "data.docGroups", "Missing grouped source links.");
   requireIncludes(findings, input.styles, "td::before", "Missing mobile evidence label styling.");
   requireIncludes(findings, input.styles, ".doc-group", "Missing grouped source link styling.");
-  requireIncludes(findings, input.data, "G0_RESEARCH", "Missing Gate 0 status.");
-  requireIncludes(findings, input.data, "research_only", "Missing research-only scope.");
+  requireIncludes(findings, input.data, "G1_BACKTESTING", "Missing Gate 1 status.");
+  requireIncludes(
+    findings,
+    input.data,
+    "historical_backtesting_only",
+    "Missing historical-backtesting-only scope."
+  );
 
   const blockedCopies = [
     ["connect", "bro", "ker"],

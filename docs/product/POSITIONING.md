@@ -1,4 +1,4 @@
-# GateZero Positioning
+# TraderFrame Positioning
 
 ## Purpose
 
@@ -16,7 +16,7 @@ This is not a marketing-hype document. It is a positioning guardrail.
 
 ## Current Product Truth
 
-GateZero is:
+TraderFrame is:
 
 > a personal trading research, risk-control, and execution-support system for one serious operator.
 
@@ -29,7 +29,7 @@ The strongest current product truth is:
 - risk approval before autonomy
 - learning from decisions and mistakes without loosening risk controls
 
-GateZero is not yet:
+TraderFrame is not yet:
 
 - an autonomous trading bot
 - an AI money machine
@@ -40,7 +40,7 @@ GateZero is not yet:
 
 ## Category
 
-GateZero should be positioned as:
+TraderFrame should be positioned as:
 
 > a personal trading operating system for research, risk review, and execution support.
 
@@ -62,7 +62,7 @@ Avoid broader or misleading language like:
 
 ## Core Positioning Statement
 
-GateZero helps one operator research strategies, test them honestly, review risk, paper trade
+TraderFrame helps one operator research strategies, test them honestly, review risk, paper trade
 safely, and only move toward execution when the evidence and risk gates are strong enough.
 
 ## Short Version
