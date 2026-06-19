@@ -349,10 +349,11 @@ deployment approval, or future-phase eligibility.
 | `TRD-260` | Remote CI evidence refresh               | `docs/operations/GATE0_REMOTE_CI_EVIDENCE_REFRESH_AFTER_TRD259_PUSH.md`                      | Records latest passing CI evidence after TRD-259 push.           |
 | `TRD-261` | CI evidence refresh loop pause           | `docs/operations/GATE0_CI_EVIDENCE_REFRESH_LOOP_PAUSE.md`                                    | Prevents evidence-only CI refresh churn.                         |
 | `TRD-262` | Maintenance backlog pause alignment      | `docs/operations/GATE0_MAINTENANCE_BACKLOG_RERANK.md`                                        | Aligns backlog queue with the CI refresh pause.                  |
+| `TRD-263` | Gate 1 transition authorization          | `docs/operations/GATE1_TRANSITION_AUTHORIZATION.md`                                          | Authorizes the Gate 1 historical-backtesting transition.         |
 
 ## Review Records
 
-Each ergonomics or foundation-control packet from `TRD-044` through `TRD-262` has:
+Each ergonomics or foundation-control packet from `TRD-044` through `TRD-263` has:
 
 - An assignment packet under `ops/assignments/`.
 - A QA_SECURITY review under `ops/runtime/reviews/`.

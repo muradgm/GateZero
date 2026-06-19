@@ -211,6 +211,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE0_SKILL_ROUTING_MATRIX.md`
 - `operations/GATE0_SKILL_ROUTING_GUARD.md`
 - `operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
+- `operations/GATE1_TRANSITION_AUTHORIZATION.md`
 - `operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`
 - `operations/GATE1_HISTORICAL_DATA_SNAPSHOT_CONTRACT_PLAN.md`

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-262`                                                      |
+| Latest accepted packet     | `TRD-263`                                                      |
 | Latest accepted validation | 71 test files, 355 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-262`
+- Accepted packets: `TRD-044` to `TRD-263`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -222,6 +222,7 @@ Latest accepted result:
   - Command-center runtime endpoint response contract.
   - CI evidence refresh helper and refresh-loop pause control.
   - Maintenance backlog alignment with the CI evidence refresh pause.
+  - Gate 1 transition authorization for historical-data backtesting only.
 
 ## Workstream Summary
 
@@ -592,6 +593,7 @@ Latest accepted result:
 | `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.       |
 | `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.          |
 | `TRD-262` | accepted | Operations       | Aligned maintenance backlog with CI refresh pause.     |
+| `TRD-263` | accepted | Planning         | Authorized Gate 1 historical backtesting transition.   |
 
 ## Current Operator Commands
 
@@ -627,9 +629,9 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet | Status | Goal                                        | Acceptance focus              |
-| ---- | ------ | ------ | ------------------------------------------- | ----------------------------- |
-| 1    | None   | paused | Wait for a concrete Gate 0 maintenance gap. | Do not queue broad expansion. |
+| Rank | Packet    | Status | Goal                                  | Acceptance focus                        |
+| ---- | --------- | ------ | ------------------------------------- | --------------------------------------- |
+| 1    | `TRD-264` | queued | Activate Gate 1 operating gate model. | Keep scope historical-backtesting-only. |
 
 ## Rejected For Now
 
@@ -780,6 +782,7 @@ Do not mark a packet accepted until:
 - Final maintenance handoff snapshot: `docs/operations/GATE0_FINAL_MAINTENANCE_HANDOFF_SNAPSHOT.md`
 - Gate 0 baseline freeze confirmation: `docs/operations/GATE0_BASELINE_FREEZE_CONFIRMATION.md`
 - Gate 1 entry criteria definition: `docs/operations/GATE1_ENTRY_CRITERIA_DEFINITION.md`
+- Gate 1 transition authorization: `docs/operations/GATE1_TRANSITION_AUTHORIZATION.md`
 - Gate 1 planning packet draft: `docs/operations/GATE1_PLANNING_PACKET_DRAFT.md`
 - Gate 1 historical backtest contract assignment packet:
   `docs/operations/GATE1_HISTORICAL_BACKTEST_CONTRACT_ASSIGNMENT_PACKET.md`
