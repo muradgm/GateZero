@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-261`                                                      |
+| Latest accepted packet     | `TRD-262`                                                      |
 | Latest accepted validation | 71 test files, 355 tests passed                                |
 
 ## Boundary
@@ -145,7 +145,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-261`
+- Accepted packets: `TRD-044` to `TRD-262`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -221,6 +221,7 @@ Latest accepted result:
   - Command-center runtime schema contract and builder validation.
   - Command-center runtime endpoint response contract.
   - CI evidence refresh helper and refresh-loop pause control.
+  - Maintenance backlog alignment with the CI evidence refresh pause.
 
 ## Workstream Summary
 
@@ -590,6 +591,7 @@ Latest accepted result:
 | `TRD-259` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-258 push.       |
 | `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.       |
 | `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.          |
+| `TRD-262` | accepted | Operations       | Aligned maintenance backlog with CI refresh pause.     |
 
 ## Current Operator Commands
 

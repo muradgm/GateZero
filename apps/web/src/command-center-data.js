@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G0_RESEARCH",
   scope: "research_only",
-  latestPacket: "TRD-261",
+  latestPacket: "TRD-262",
   localVerification: "71 files / 355 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "261 / 261",
+      value: "262 / 262",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,12 +89,12 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "261 accepted records"
+      reference: "262 accepted records"
     }
   ],
   nextActions: [
     "Keep the next queue paused until a real control gap appears.",
-    "Refresh CI evidence after future pushed maintenance changes.",
+    "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
   docGroups: [
