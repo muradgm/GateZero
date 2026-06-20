@@ -233,6 +233,17 @@ const completeInput: Gate0SkillGovernanceInput = {
       ].join("\n")
     },
     {
+      relativePath: "skills/trader-product-reviewer/evals/evals.json",
+      content: JSON.stringify({
+        cases: [
+          {
+            input: "Review a TraderFrame Gate 1 decision.",
+            expected: "Use G1_BACKTESTING and historical_backtesting_only boundaries."
+          }
+        ]
+      })
+    },
+    {
       relativePath: "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
       content: [
         "# Gate 1 Skill Library Intake",
@@ -304,6 +315,21 @@ describe("Gate 0 skill governance check", () => {
     expect(result.ok).toBe(false);
     expect(result.findings).toContain(
       "Missing skill library intake policy: docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md"
+    );
+  });
+
+  it("rejects stale Gate 0 phase language in skill eval fixtures", () => {
+    const result = checkGate0SkillGovernance({
+      files: completeInput.files.map((file) =>
+        file.relativePath === "skills/trader-product-reviewer/evals/evals.json"
+          ? { ...file, content: file.content.replace("G1_BACKTESTING", "G0_RESEARCH") }
+          : file
+      )
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain(
+      "Stale Gate 0 eval phase snippet: skills/trader-product-reviewer/evals/evals.json -> G0_RESEARCH"
     );
   });
 });

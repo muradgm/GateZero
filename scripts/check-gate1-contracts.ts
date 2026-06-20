@@ -151,7 +151,17 @@ const requiredDocPaths = [
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
-  "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD_INDEXING.md"
+  "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD_INDEXING.md",
+  "docs/operations/GATE1_COMMAND_NAMING_MIGRATION_PLAN.md",
+  "docs/operations/GATE1_BLOCKED_EVIDENCE_DOCS_COVERAGE_RECHECK.md",
+  "docs/operations/GATE1_EVIDENCE_BLOCKER_AGGREGATE_GUARD.md",
+  "docs/operations/GATE1_FIXTURE_MUTATION_NEGATIVE_CASES.md",
+  "docs/operations/GATE1_SNAPSHOT_COLUMN_COMPLETENESS_GUARD.md",
+  "docs/operations/GATE1_STALE_DATA_THRESHOLD_POLICY.md",
+  "docs/operations/GATE1_PARAMETER_HASH_PROVENANCE_RECORD.md",
+  "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_CONTRACT.md",
+  "docs/operations/GATE1_REAL_HISTORICAL_DATA_ADAPTER_BLOCKERS.md",
+  "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md"
 ] as const;
 
 const requiredSourcePaths = [
@@ -231,7 +241,10 @@ const requiredGate1BlockerTestSnippets = [
   "rejects stale-data blockers that imply usable evidence",
   "rejects duplicate-signal blockers without duplicate evidence or blocked status",
   "rejects parameter immutability guards with inconsistent drift state",
-  "rejects Gate 1 evidence bundle summaries that imply completion or approval"
+  "rejects Gate 1 evidence bundle summaries that imply completion or approval",
+  "keeps the Gate 1 blocker aggregate complete and referenced",
+  "rejects boundary mutations on blocked evidence fixtures",
+  "keeps bid/ask snapshot columns complete for OHLC evidence"
 ] as const;
 
 const guardCommand = "pnpm check:gate1-contracts";
@@ -603,7 +616,111 @@ export function validateGate1ContractFixtureSet(
     findings.push("Gate 1 reproducibility mismatch fixture must not be evidence usable");
   }
 
+  validateGate1BlockerAggregate(findings, fixtureSet);
+  validateGate1SnapshotColumnCompleteness(findings, fixtureSet);
+
   return findings;
+}
+
+function validateGate1BlockerAggregate(
+  findings: string[],
+  fixtureSet: Gate1ContractFixtureSet
+): void {
+  const missingCandle = Gate1MissingCandleBadDataFixtureContractSchema.safeParse(
+    fixtureSet.missingCandleBadData
+  );
+  const staleData = Gate1StaleDataBlockerContractSchema.safeParse(fixtureSet.staleDataBlocker);
+  const duplicateSignal = Gate1DuplicateSignalBlockerContractSchema.safeParse(
+    fixtureSet.duplicateSignalBlocker
+  );
+  const parameterGuard = Gate1StrategyParameterImmutabilityGuardContractSchema.safeParse(
+    fixtureSet.strategyParameterImmutabilityGuard
+  );
+  const summary = Gate1EvidenceBundleSummaryContractSchema.safeParse(
+    fixtureSet.evidenceBundleSummary
+  );
+
+  if (
+    !missingCandle.success ||
+    !staleData.success ||
+    !duplicateSignal.success ||
+    !parameterGuard.success ||
+    !summary.success
+  ) {
+    return;
+  }
+
+  const blockerReferences = [
+    missingCandle.data.missing_candle_bad_data_fixture_id,
+    staleData.data.stale_data_blocker_id,
+    duplicateSignal.data.duplicate_signal_blocker_id,
+    parameterGuard.data.parameter_immutability_guard_id
+  ];
+
+  for (const blockerReference of blockerReferences) {
+    if (!summary.data.blocker_reference_ids.includes(blockerReference)) {
+      findings.push(
+        `Gate 1 evidence blocker aggregate is missing blocker reference: ${blockerReference}`
+      );
+    }
+  }
+
+  if (
+    missingCandle.data.evidence_usable ||
+    staleData.data.evidence_usable ||
+    duplicateSignal.data.evidence_usable ||
+    parameterGuard.data.evidence_usable
+  ) {
+    findings.push("Gate 1 blocker aggregate must keep all blockers evidence unusable");
+  }
+
+  if (
+    summary.data.completeness_status !== "blocked" ||
+    summary.data.approval_claim ||
+    summary.data.performance_claim ||
+    summary.data.execution_path
+  ) {
+    findings.push("Gate 1 evidence blocker summary must remain blocked and no-claim");
+  }
+}
+
+function validateGate1SnapshotColumnCompleteness(
+  findings: string[],
+  fixtureSet: Gate1ContractFixtureSet
+): void {
+  const snapshot = Gate1HistoricalDataSnapshotContractSchema.safeParse(
+    fixtureSet.bidAskHistoricalDataSnapshot
+  );
+
+  if (!snapshot.success) {
+    return;
+  }
+
+  const requiredColumns = [
+    "timestamp",
+    "open_bid",
+    "open_ask",
+    "high_bid",
+    "high_ask",
+    "low_bid",
+    "low_ask",
+    "close_bid",
+    "close_ask"
+  ];
+  const columnsByName = new Map(snapshot.data.column_schema.map((column) => [column.name, column]));
+
+  for (const columnName of requiredColumns) {
+    const column = columnsByName.get(columnName);
+
+    if (!column) {
+      findings.push(`Gate 1 bid/ask snapshot missing required column: ${columnName}`);
+      continue;
+    }
+
+    if (!column.required) {
+      findings.push(`Gate 1 bid/ask snapshot column must be required: ${columnName}`);
+    }
+  }
 }
 
 function validateFixture(

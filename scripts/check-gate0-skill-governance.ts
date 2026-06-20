@@ -48,6 +48,14 @@ const requiredPolicySnippets = [
   "gatezero-orchestrator-reviewer",
   "gatezero-risk-governance-reviewer"
 ] as const;
+const staleGate0EvalSnippets = [
+  "G0_RESEARCH",
+  "research_only",
+  "Gate 0 boundary",
+  "Gate 0 boundaries",
+  "Gate 0 scope",
+  "research-only scope"
+] as const;
 
 export async function loadGate0SkillGovernanceInput(
   rootDir: string
@@ -140,6 +148,17 @@ export function checkGate0SkillGovernance(
     for (const snippet of requiredPolicySnippets) {
       if (!policyFile.content.includes(snippet)) {
         findings.push(`Missing skill library intake snippet: ${requiredPolicyPath} -> ${snippet}`);
+      }
+    }
+  }
+
+  for (const evalFile of input.files.filter(
+    (file) =>
+      file.relativePath.startsWith("skills/") && file.relativePath.endsWith("/evals/evals.json")
+  )) {
+    for (const snippet of staleGate0EvalSnippets) {
+      if (evalFile.content.includes(snippet)) {
+        findings.push(`Stale Gate 0 eval phase snippet: ${evalFile.relativePath} -> ${snippet}`);
       }
     }
   }

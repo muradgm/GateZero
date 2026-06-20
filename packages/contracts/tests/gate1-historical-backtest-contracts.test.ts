@@ -1380,4 +1380,63 @@ describe("Gate 1 historical backtest contracts", () => {
       })
     ).toThrow();
   });
+
+  it("keeps the Gate 1 blocker aggregate complete and referenced", () => {
+    const summary = Gate1EvidenceBundleSummaryContractSchema.parse(createEvidenceBundleSummary());
+    const blockerIds = [
+      createMissingCandleBadDataFixture().missing_candle_bad_data_fixture_id,
+      createStaleDataBlocker().stale_data_blocker_id,
+      createDuplicateSignalBlocker().duplicate_signal_blocker_id,
+      createParameterImmutabilityGuard().parameter_immutability_guard_id
+    ];
+
+    for (const blockerId of blockerIds) {
+      expect(summary.blocker_reference_ids).toContain(blockerId);
+    }
+  });
+
+  it("rejects boundary mutations on blocked evidence fixtures", () => {
+    expect(() =>
+      Gate1MissingCandleBadDataFixtureContractSchema.parse({
+        ...createMissingCandleBadDataFixture(),
+        evidence_usable: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1StaleDataBlockerContractSchema.parse({
+        ...createStaleDataBlocker(),
+        approval_claim: true
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...createDuplicateSignalBlocker(),
+        execution_path: true
+      })
+    ).toThrow();
+  });
+
+  it("keeps bid/ask snapshot columns complete for OHLC evidence", () => {
+    const snapshot = Gate1HistoricalDataSnapshotContractSchema.parse(
+      createHistoricalDataSnapshot({
+        historical_data_snapshot_id: "hist-data-bid-ask-001",
+        column_schema: [
+          { name: "timestamp", type: "datetime", required: true },
+          { name: "open_bid", type: "number", required: true },
+          { name: "open_ask", type: "number", required: true },
+          { name: "high_bid", type: "number", required: true },
+          { name: "high_ask", type: "number", required: true },
+          { name: "low_bid", type: "number", required: true },
+          { name: "low_ask", type: "number", required: true },
+          { name: "close_bid", type: "number", required: true },
+          { name: "close_ask", type: "number", required: true }
+        ]
+      })
+    );
+    const requiredColumns = snapshot.column_schema.filter((column) => column.required);
+
+    expect(requiredColumns).toHaveLength(9);
+  });
 });

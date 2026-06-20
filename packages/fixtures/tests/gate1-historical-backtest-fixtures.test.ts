@@ -266,4 +266,75 @@ describe("Gate 1 historical backtest fixtures", () => {
     expect(gate1EvidenceBundleSummaryFixture.approval_claim).toBe(false);
     expect(gate1EvidenceBundleSummaryFixture.performance_claim).toBe(false);
   });
+
+  it("keeps the Gate 1 blocker aggregate complete and referenced", () => {
+    const expectedBlockerIds = [
+      gate1MissingCandleBadDataFixture.missing_candle_bad_data_fixture_id,
+      gate1StaleDataBlockerFixture.stale_data_blocker_id,
+      gate1DuplicateSignalBlockerFixture.duplicate_signal_blocker_id,
+      gate1StrategyParameterImmutabilityGuardFixture.parameter_immutability_guard_id
+    ];
+
+    for (const blockerId of expectedBlockerIds) {
+      expect(gate1EvidenceBundleSummaryFixture.blocker_reference_ids).toContain(blockerId);
+    }
+
+    expect(gate1MissingCandleBadDataFixture.evidence_usable).toBe(false);
+    expect(gate1StaleDataBlockerFixture.evidence_usable).toBe(false);
+    expect(gate1DuplicateSignalBlockerFixture.evidence_usable).toBe(false);
+    expect(gate1StrategyParameterImmutabilityGuardFixture.evidence_usable).toBe(false);
+  });
+
+  it("rejects boundary mutations on blocked evidence fixtures", () => {
+    expect(() =>
+      Gate1MissingCandleBadDataFixtureContractSchema.parse({
+        ...gate1MissingCandleBadDataFixture,
+        evidence_usable: true
+      })
+    ).toThrow();
+    expect(() =>
+      Gate1StaleDataBlockerContractSchema.parse({
+        ...gate1StaleDataBlockerFixture,
+        approval_claim: true
+      })
+    ).toThrow();
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...gate1DuplicateSignalBlockerFixture,
+        execution_path: true
+      })
+    ).toThrow();
+    expect(() =>
+      Gate1StrategyParameterImmutabilityGuardContractSchema.parse({
+        ...gate1StrategyParameterImmutabilityGuardFixture,
+        financial_gate: "G0_RESEARCH"
+      })
+    ).toThrow();
+    expect(() =>
+      Gate1EvidenceBundleSummaryContractSchema.parse({
+        ...gate1EvidenceBundleSummaryFixture,
+        scope: "research_only"
+      })
+    ).toThrow();
+  });
+
+  it("keeps bid/ask snapshot columns complete for OHLC evidence", () => {
+    const columnsByName = new Map(
+      gate1BidAskHistoricalDataSnapshotFixture.column_schema.map((column) => [column.name, column])
+    );
+
+    for (const columnName of [
+      "timestamp",
+      "open_bid",
+      "open_ask",
+      "high_bid",
+      "high_ask",
+      "low_bid",
+      "low_ask",
+      "close_bid",
+      "close_ask"
+    ]) {
+      expect(columnsByName.get(columnName)?.required).toBe(true);
+    }
+  });
 });

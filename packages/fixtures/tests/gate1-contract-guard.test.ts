@@ -50,7 +50,17 @@ const requiredDocPaths = [
   "docs/operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md",
   "docs/operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md",
   "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD.md",
-  "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD_INDEXING.md"
+  "docs/operations/GATE1_CONTRACT_VALIDATION_GUARD_INDEXING.md",
+  "docs/operations/GATE1_COMMAND_NAMING_MIGRATION_PLAN.md",
+  "docs/operations/GATE1_BLOCKED_EVIDENCE_DOCS_COVERAGE_RECHECK.md",
+  "docs/operations/GATE1_EVIDENCE_BLOCKER_AGGREGATE_GUARD.md",
+  "docs/operations/GATE1_FIXTURE_MUTATION_NEGATIVE_CASES.md",
+  "docs/operations/GATE1_SNAPSHOT_COLUMN_COMPLETENESS_GUARD.md",
+  "docs/operations/GATE1_STALE_DATA_THRESHOLD_POLICY.md",
+  "docs/operations/GATE1_PARAMETER_HASH_PROVENANCE_RECORD.md",
+  "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_CONTRACT.md",
+  "docs/operations/GATE1_REAL_HISTORICAL_DATA_ADAPTER_BLOCKERS.md",
+  "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md"
 ];
 
 const requiredSourcePaths = [
@@ -100,7 +110,10 @@ const contractTestSource = [
   "rejects stale-data blockers that imply usable evidence",
   "rejects duplicate-signal blockers without duplicate evidence or blocked status",
   "rejects parameter immutability guards with inconsistent drift state",
-  "rejects Gate 1 evidence bundle summaries that imply completion or approval"
+  "rejects Gate 1 evidence bundle summaries that imply completion or approval",
+  "keeps the Gate 1 blocker aggregate complete and referenced",
+  "rejects boundary mutations on blocked evidence fixtures",
+  "keeps bid/ask snapshot columns complete for OHLC evidence"
 ].join("\n");
 
 const fixtureSource = [
@@ -178,7 +191,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 49
+      checkedArtifactCount: 59
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
@@ -280,6 +293,40 @@ describe("Gate 1 contract guard", () => {
 
   it("validates the default parsed Gate 1 fixture set", () => {
     expect(validateGate1ContractFixtureSet(createDefaultGate1ContractFixtureSet())).toEqual([]);
+  });
+
+  it("fails when the Gate 1 blocker aggregate drops a required blocker reference", () => {
+    const fixtureSet = createDefaultGate1ContractFixtureSet();
+    const summary = asRecord(fixtureSet.evidenceBundleSummary);
+
+    expect(
+      validateGate1ContractFixtureSet({
+        ...fixtureSet,
+        evidenceBundleSummary: {
+          ...summary,
+          blocker_reference_ids: (summary.blocker_reference_ids as string[]).slice(1)
+        }
+      })
+    ).toContain(
+      "Gate 1 evidence blocker aggregate is missing blocker reference: gate1-missing-candle-fixture-001"
+    );
+  });
+
+  it("fails when the Gate 1 bid/ask snapshot omits a required OHLC column", () => {
+    const fixtureSet = createDefaultGate1ContractFixtureSet();
+    const snapshot = asRecord(fixtureSet.bidAskHistoricalDataSnapshot);
+
+    expect(
+      validateGate1ContractFixtureSet({
+        ...fixtureSet,
+        bidAskHistoricalDataSnapshot: {
+          ...snapshot,
+          column_schema: (snapshot.column_schema as Record<string, unknown>[]).filter(
+            (column) => column.name !== "open_bid"
+          )
+        }
+      })
+    ).toContain("Gate 1 bid/ask snapshot missing required column: open_bid");
   });
 });
 
