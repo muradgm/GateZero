@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-332`                                                      |
-| Latest accepted validation | 71 test files, 420 tests passed                                |
+| Latest accepted packet     | `TRD-342`                                                      |
+| Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
 
@@ -101,7 +101,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 71 test files passed, 420 tests passed.
+- `pnpm test:ci`: 71 test files passed, 424 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-332`
+- Accepted packets: `TRD-044` to `TRD-342`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -250,6 +250,10 @@ Latest accepted result:
     aggregate guard, fixture mutation negative cases, snapshot column completeness guard, stale-data
     threshold policy, parameter hash provenance record, duplicate signal fingerprint contract, real
     historical data adapter blocker recheck, and skill eval phase alignment guard.
+  - Gate command alias compatibility plan, skill guard naming recheck, blocker aggregate negative
+    fixture set, OHLC mid-price limitation record, historical data adapter boundary, data-provider
+    provenance fields, stale-data source-link recheck, parameter hash canonicalization plan,
+    duplicate signal fingerprint negative cases, and blocker expansion checkpoint.
 
 ## Workstream Summary
 
@@ -695,6 +699,16 @@ Latest accepted result:
 | `TRD-330` | accepted | Contracts        | Drafted duplicate signal fingerprint contract.        |
 | `TRD-331` | accepted | Risk             | Rechecked real historical data adapter blockers.      |
 | `TRD-332` | accepted | Skills           | Rechecked skill eval fixture phase alignment.         |
+| `TRD-333` | accepted | Planning         | Planned Gate command alias compatibility.             |
+| `TRD-334` | accepted | Skills           | Rechecked Gate 1 skill guard naming.                  |
+| `TRD-335` | accepted | Validation       | Added blocker aggregate negative fixture set.         |
+| `TRD-336` | accepted | Data             | Recorded OHLC mid-price limitation.                   |
+| `TRD-337` | accepted | Planning         | Drafted historical data adapter boundary.             |
+| `TRD-338` | accepted | Data             | Drafted data-provider provenance fields.              |
+| `TRD-339` | accepted | Documentation    | Rechecked stale-data policy source links.             |
+| `TRD-340` | accepted | Provenance       | Planned parameter hash canonicalization.              |
+| `TRD-341` | accepted | Validation       | Added duplicate signal fingerprint negative cases.    |
+| `TRD-342` | accepted | Checkpoint       | Checkpointed Gate 1 blocker expansion.                |
 
 ## Current Operator Commands
 
@@ -724,25 +738,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 420 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 424 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                  |
-| ---- | --------- | ------ | -------------------------------------------- | ----------------------------------------------------------------- |
-| 1    | `TRD-333` | queued | Draft Gate command alias compatibility plan. | Plan aliases before any command rename or deprecation.            |
-| 2    | `TRD-334` | queued | Recheck Gate 1 skill guard naming.           | Verify skill docs, metadata, and evals use current phase wording. |
-| 3    | `TRD-335` | queued | Add blocker aggregate negative fixture set.  | Expand aggregate failures beyond missing reference drift.         |
-| 4    | `TRD-336` | queued | Record OHLC mid-price limitation.            | Keep bid/ask requirements explicit before any data adapter work.  |
-| 5    | `TRD-337` | queued | Draft historical data adapter boundary.      | Define adapter prerequisites without implementation authority.    |
-| 6    | `TRD-338` | queued | Draft data-provider provenance fields.       | Prepare source and license fields for future adapter review.      |
-| 7    | `TRD-339` | queued | Recheck stale-data policy source links.      | Verify stale-data docs remain indexed and guarded.                |
-| 8    | `TRD-340` | queued | Add parameter hash canonicalization plan.    | Define deterministic hash inputs before implementation.           |
-| 9    | `TRD-341` | queued | Add duplicate signal fingerprint negatives.  | Test fingerprint blockers against weak duplicate evidence.        |
-| 10   | `TRD-342` | queued | Gate 1 blocker expansion checkpoint.         | Reconcile docs, guards, tests, reviews, and tracker state.        |
+| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                |
+| ---- | --------- | ------ | -------------------------------------------- | --------------------------------------------------------------- |
+| 1    | `TRD-343` | queued | Inventory adapter authorization blockers.    | List every missing approval before real data adapter work.      |
+| 2    | `TRD-344` | queued | Draft adapter fixture import contract plan.  | Plan import contracts without provider connectivity.            |
+| 3    | `TRD-345` | queued | Recheck duplicate signal source links.       | Verify fingerprint docs, tests, and guards stay indexed.        |
+| 4    | `TRD-346` | queued | Add parameter hash negative cases plan.      | Plan canonicalization failure tests before implementation.      |
+| 5    | `TRD-347` | queued | Draft provider license review checklist.     | Define license review fields without external provider use.     |
+| 6    | `TRD-348` | queued | Recheck command alias docs coverage.         | Keep legacy command compatibility docs source-linked.           |
+| 7    | `TRD-349` | queued | Add skill metadata guard index record.       | Ensure skill metadata guard changes remain documented.          |
+| 8    | `TRD-350` | queued | Draft imported snapshot quarantine policy.   | Define blocked state for imported snapshots before adapters.    |
+| 9    | `TRD-351` | queued | Recheck Gate 1 blocker checkpoint coverage.  | Verify checkpoint docs, reviews, and guard links are complete.  |
+| 10   | `TRD-352` | queued | Gate 1 adapter-readiness blocker checkpoint. | Keep adapter work blocked until all prerequisites are accepted. |
 
 ## Rejected For Now
 
@@ -1204,6 +1218,23 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_REAL_HISTORICAL_DATA_ADAPTER_BLOCKERS.md`
 - Gate 1 skill eval phase alignment recheck:
   `docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md`
+- Gate 1 command alias compatibility plan:
+  `docs/operations/GATE1_COMMAND_ALIAS_COMPATIBILITY_PLAN.md`
+- Gate 1 skill guard naming recheck: `docs/operations/GATE1_SKILL_GUARD_NAMING_RECHECK.md`
+- Gate 1 blocker aggregate negative fixture set:
+  `docs/operations/GATE1_BLOCKER_AGGREGATE_NEGATIVE_FIXTURE_SET.md`
+- Gate 1 OHLC mid-price limitation record:
+  `docs/operations/GATE1_OHLC_MID_PRICE_LIMITATION_RECORD.md`
+- Gate 1 historical data adapter boundary:
+  `docs/operations/GATE1_HISTORICAL_DATA_ADAPTER_BOUNDARY.md`
+- Gate 1 data-provider provenance fields: `docs/operations/GATE1_DATA_PROVIDER_PROVENANCE_FIELDS.md`
+- Gate 1 stale-data policy source-link recheck:
+  `docs/operations/GATE1_STALE_DATA_POLICY_SOURCE_LINK_RECHECK.md`
+- Gate 1 parameter hash canonicalization plan:
+  `docs/operations/GATE1_PARAMETER_HASH_CANONICALIZATION_PLAN.md`
+- Gate 1 duplicate signal fingerprint negative cases:
+  `docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_NEGATIVE_CASES.md`
+- Gate 1 blocker expansion checkpoint: `docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

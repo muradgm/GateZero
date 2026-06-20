@@ -1333,6 +1333,22 @@ describe("Gate 1 historical backtest contracts", () => {
     ).toThrow();
   });
 
+  it("rejects duplicate signal fingerprint blockers with weak duplicate evidence", () => {
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...createDuplicateSignalBlocker(),
+        duplicate_signal_ids: ["signal-001", "signal-001"]
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate1DuplicateSignalBlockerContractSchema.parse({
+        ...createDuplicateSignalBlocker(),
+        signal_fingerprint: ""
+      })
+    ).toThrow();
+  });
+
   it("validates strategy parameter immutability guards for drift blockers", () => {
     const guard = Gate1StrategyParameterImmutabilityGuardContractSchema.parse(
       createParameterImmutabilityGuard()

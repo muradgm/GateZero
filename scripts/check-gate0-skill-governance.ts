@@ -56,6 +56,7 @@ const staleGate0EvalSnippets = [
   "Gate 0 scope",
   "research-only scope"
 ] as const;
+const staleGate0MetadataSnippets = ["G0_RESEARCH", "research_only", "Gate 0 scope"] as const;
 
 export async function loadGate0SkillGovernanceInput(
   rootDir: string
@@ -137,6 +138,12 @@ export function checkGate0SkillGovernance(
 
     if (!metadataFile.content.includes(`$${skillName}`)) {
       findings.push(`Project skill metadata default prompt must reference skill: ${metadataPath}`);
+    }
+
+    for (const snippet of staleGate0MetadataSnippets) {
+      if (metadataFile.content.includes(snippet)) {
+        findings.push(`Stale Gate 0 skill metadata snippet: ${metadataPath} -> ${snippet}`);
+      }
     }
   }
 

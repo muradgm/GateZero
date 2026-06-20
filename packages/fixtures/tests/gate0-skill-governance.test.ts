@@ -332,4 +332,19 @@ describe("Gate 0 skill governance check", () => {
       "Stale Gate 0 eval phase snippet: skills/trader-product-reviewer/evals/evals.json -> G0_RESEARCH"
     );
   });
+
+  it("rejects stale Gate 0 phase language in skill metadata", () => {
+    const result = checkGate0SkillGovernance({
+      files: completeInput.files.map((file) =>
+        file.relativePath === "skills/trading-forex-domain-expert/agents/openai.yaml"
+          ? { ...file, content: `${file.content}\nnotes: G0_RESEARCH` }
+          : file
+      )
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain(
+      "Stale Gate 0 skill metadata snippet: skills/trading-forex-domain-expert/agents/openai.yaml -> G0_RESEARCH"
+    );
+  });
 });

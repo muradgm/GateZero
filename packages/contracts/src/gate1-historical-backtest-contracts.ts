@@ -678,6 +678,14 @@ export const Gate1DuplicateSignalBlockerContractSchema = z
         path: ["blocker_status"]
       });
     }
+
+    if (new Set(blocker.duplicate_signal_ids).size !== blocker.duplicate_signal_ids.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "duplicate signal evidence must reference distinct signal ids",
+        path: ["duplicate_signal_ids"]
+      });
+    }
   });
 
 export const Gate1StrategyParameterImmutabilityGuardContractSchema = z

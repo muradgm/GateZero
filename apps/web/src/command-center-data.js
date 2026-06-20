@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-332",
-  localVerification: "71 files / 420 tests",
+  latestPacket: "TRD-342",
+  localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 420 tests.",
+      detail: "Latest suite: 71 files, 424 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "332 / 332",
+      value: "342 / 342",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 420 tests"
+      reference: "71 files / 424 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "332 accepted records"
+      reference: "342 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-333 Gate command alias compatibility plan.",
+    "Proceed to TRD-343 adapter authorization blocker inventory.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -164,7 +164,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_PARAMETER_HASH_PROVENANCE_RECORD.md",
         "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_CONTRACT.md",
         "docs/operations/GATE1_REAL_HISTORICAL_DATA_ADAPTER_BLOCKERS.md",
-        "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md"
+        "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md",
+        "docs/operations/GATE1_COMMAND_ALIAS_COMPATIBILITY_PLAN.md",
+        "docs/operations/GATE1_SKILL_GUARD_NAMING_RECHECK.md",
+        "docs/operations/GATE1_BLOCKER_AGGREGATE_NEGATIVE_FIXTURE_SET.md",
+        "docs/operations/GATE1_OHLC_MID_PRICE_LIMITATION_RECORD.md",
+        "docs/operations/GATE1_HISTORICAL_DATA_ADAPTER_BOUNDARY.md",
+        "docs/operations/GATE1_DATA_PROVIDER_PROVENANCE_FIELDS.md",
+        "docs/operations/GATE1_STALE_DATA_POLICY_SOURCE_LINK_RECHECK.md",
+        "docs/operations/GATE1_PARAMETER_HASH_CANONICALIZATION_PLAN.md",
+        "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_NEGATIVE_CASES.md",
+        "docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md"
       ]
     },
     {

@@ -161,7 +161,17 @@ const requiredDocPaths = [
   "docs/operations/GATE1_PARAMETER_HASH_PROVENANCE_RECORD.md",
   "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_CONTRACT.md",
   "docs/operations/GATE1_REAL_HISTORICAL_DATA_ADAPTER_BLOCKERS.md",
-  "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md"
+  "docs/operations/GATE1_SKILL_EVAL_PHASE_ALIGNMENT_RECHECK.md",
+  "docs/operations/GATE1_COMMAND_ALIAS_COMPATIBILITY_PLAN.md",
+  "docs/operations/GATE1_SKILL_GUARD_NAMING_RECHECK.md",
+  "docs/operations/GATE1_BLOCKER_AGGREGATE_NEGATIVE_FIXTURE_SET.md",
+  "docs/operations/GATE1_OHLC_MID_PRICE_LIMITATION_RECORD.md",
+  "docs/operations/GATE1_HISTORICAL_DATA_ADAPTER_BOUNDARY.md",
+  "docs/operations/GATE1_DATA_PROVIDER_PROVENANCE_FIELDS.md",
+  "docs/operations/GATE1_STALE_DATA_POLICY_SOURCE_LINK_RECHECK.md",
+  "docs/operations/GATE1_PARAMETER_HASH_CANONICALIZATION_PLAN.md",
+  "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_NEGATIVE_CASES.md",
+  "docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md"
 ] as const;
 
 const requiredSourcePaths = [
@@ -244,7 +254,8 @@ const requiredGate1BlockerTestSnippets = [
   "rejects Gate 1 evidence bundle summaries that imply completion or approval",
   "keeps the Gate 1 blocker aggregate complete and referenced",
   "rejects boundary mutations on blocked evidence fixtures",
-  "keeps bid/ask snapshot columns complete for OHLC evidence"
+  "keeps bid/ask snapshot columns complete for OHLC evidence",
+  "rejects duplicate signal fingerprint blockers with weak duplicate evidence"
 ] as const;
 
 const guardCommand = "pnpm check:gate1-contracts";
@@ -666,6 +677,16 @@ function validateGate1BlockerAggregate(
   }
 
   if (
+    new Set(summary.data.blocker_reference_ids).size !== summary.data.blocker_reference_ids.length
+  ) {
+    findings.push("Gate 1 evidence blocker aggregate must not duplicate blocker references");
+  }
+
+  if (summary.data.blocker_reference_ids.length !== blockerReferences.length) {
+    findings.push("Gate 1 evidence blocker aggregate must reference exactly the required blockers");
+  }
+
+  if (
     missingCandle.data.evidence_usable ||
     staleData.data.evidence_usable ||
     duplicateSignal.data.evidence_usable ||
@@ -719,6 +740,14 @@ function validateGate1SnapshotColumnCompleteness(
 
     if (!column.required) {
       findings.push(`Gate 1 bid/ask snapshot column must be required: ${columnName}`);
+    }
+  }
+
+  for (const midPriceColumn of ["open", "high", "low", "close"]) {
+    if (columnsByName.has(midPriceColumn)) {
+      findings.push(
+        `Gate 1 bid/ask snapshot must not include mid-price OHLC column: ${midPriceColumn}`
+      );
     }
   }
 }
