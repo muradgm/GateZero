@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-321`                                                      |
+| Latest accepted packet     | `TRD-322`                                                      |
 | Latest accepted validation | 71 test files, 411 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-321`
+- Accepted packets: `TRD-044` to `TRD-322`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -244,6 +244,8 @@ Latest accepted result:
   - Gate 1 assembly, metric report, and operator decision guard-index rechecks; missing-candle,
     stale-data, duplicate-signal, parameter-immutability, and evidence-bundle summary contracts;
     completion blocker recheck; and control-plane checkpoint.
+  - Project-local skill default gate alignment with the current Gate 1 historical-backtesting-only
+    operating state.
 
 ## Workstream Summary
 
@@ -678,6 +680,7 @@ Latest accepted result:
 | `TRD-319` | accepted | Contracts        | Added Gate 1 evidence bundle summary contract.        |
 | `TRD-320` | accepted | Risk             | Rechecked Gate 1 completion blockers.                 |
 | `TRD-321` | accepted | Checkpoint       | Checkpointed Gate 1 control-plane alignment.          |
+| `TRD-322` | accepted | Skills           | Aligned skill defaults to Gate 1 current state.       |
 
 ## Current Operator Commands
 
@@ -714,26 +717,26 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                           | Acceptance focus                                                 |
-| ---- | --------- | ------ | ---------------------------------------------- | ---------------------------------------------------------------- |
-| 1    | `TRD-322` | queued | Align project skill default gate wording.      | Verify local skills reflect Gate 1 while preserving boundaries.  |
-| 2    | `TRD-323` | queued | Plan Gate command naming migration.            | Separate legacy `gate0` command names from Gate 1 semantics.     |
-| 3    | `TRD-324` | queued | Recheck blocked-evidence docs coverage.        | Verify new blocker docs remain indexed and source-linked.        |
-| 4    | `TRD-325` | queued | Add evidence blocker aggregate guard.          | Verify blocker fixtures are indexed as a required group.         |
-| 5    | `TRD-326` | queued | Add fixture mutation negative cases.           | Verify blocker fixtures reject boundary mutations.               |
-| 6    | `TRD-327` | queued | Add snapshot column completeness guard.        | Verify required OHLC/bid/ask columns stay explicit.              |
-| 7    | `TRD-328` | queued | Draft stale-data threshold policy.             | Define local historical snapshot age policy without live access. |
-| 8    | `TRD-329` | queued | Draft parameter hash provenance record.        | Explain parameter hash evidence without approval semantics.      |
-| 9    | `TRD-330` | queued | Draft duplicate signal fingerprint contract.   | Define fingerprint provenance before any deduplication logic.    |
-| 10   | `TRD-331` | queued | Recheck real historical data adapter blockers. | Keep external data adapters blocked until separately authorized. |
+| Rank | Packet    | Status | Goal                                           | Acceptance focus                                                  |
+| ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------------------------------- |
+| 1    | `TRD-323` | queued | Plan Gate command naming migration.            | Separate legacy `gate0` command names from Gate 1 semantics.      |
+| 2    | `TRD-324` | queued | Recheck blocked-evidence docs coverage.        | Verify new blocker docs remain indexed and source-linked.         |
+| 3    | `TRD-325` | queued | Add evidence blocker aggregate guard.          | Verify blocker fixtures are indexed as a required group.          |
+| 4    | `TRD-326` | queued | Add fixture mutation negative cases.           | Verify blocker fixtures reject boundary mutations.                |
+| 5    | `TRD-327` | queued | Add snapshot column completeness guard.        | Verify required OHLC/bid/ask columns stay explicit.               |
+| 6    | `TRD-328` | queued | Draft stale-data threshold policy.             | Define local historical snapshot age policy without live access.  |
+| 7    | `TRD-329` | queued | Draft parameter hash provenance record.        | Explain parameter hash evidence without approval semantics.       |
+| 8    | `TRD-330` | queued | Draft duplicate signal fingerprint contract.   | Define fingerprint provenance before any deduplication logic.     |
+| 9    | `TRD-331` | queued | Recheck real historical data adapter blockers. | Keep external data adapters blocked until separately authorized.  |
+| 10   | `TRD-332` | queued | Recheck skill eval fixture phase alignment.    | Verify skill evals keep Gate 1 wording and blocked-scope posture. |
 
 ## Rejected For Now
 
 | Area                                | Status           | Reason                                                                             |
 | ----------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
 | UI expansion                        | rejected_for_now | Product breadth must not outrun trust in the core decision loop.                   |
-| Broker integration                  | rejected_for_now | Gate 0 is Research Only.                                                           |
-| Live execution                      | rejected_for_now | No execution path is allowed at Gate 0.                                            |
+| Broker integration                  | rejected_for_now | Gate 1 is historical backtesting only.                                             |
+| Live execution                      | rejected_for_now | No execution path is allowed at Gate 1.                                            |
 | Paper execution mechanics           | rejected_for_now | Still an execution-support expansion beyond current local review trust.            |
 | AI buy/sell prediction              | rejected_for_now | The system validates evidence and risk review; it does not make prediction claims. |
 | Report export or publishing         | rejected_for_now | Current artifacts remain local and operational.                                    |
@@ -1169,6 +1172,7 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md`
 - Gate 1 completion blocker recheck: `docs/operations/GATE1_COMPLETION_BLOCKER_RECHECK.md`
 - Gate 1 control-plane checkpoint: `docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md`
+- Gate 1 skill default gate alignment: `docs/operations/GATE1_SKILL_DEFAULT_GATE_ALIGNMENT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

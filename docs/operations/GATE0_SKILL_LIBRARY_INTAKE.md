@@ -1,4 +1,4 @@
-# Gate 0 Skill Library Intake
+# Gate 1 Skill Library Intake
 
 ## Purpose
 
@@ -13,16 +13,16 @@ operator decisions, execution capability, external integrations, or gate movemen
 Current financial gate:
 
 ```text
-G0_RESEARCH
+G1_BACKTESTING
 ```
 
 Current operating scope:
 
 ```text
-research_only
+historical_backtesting_only
 ```
 
-At Gate 0, project-local skills may improve review judgment, planning quality, and blocker
+At Gate 1, project-local skills may improve review judgment, planning quality, and blocker
 identification. They must not authorize strategy promotion, readiness labels, paper trading, live
 trading, broker integration, autonomous execution, AI buy/sell prediction, strategy performance
 claims, marketing claims, or risk-gate loosening.
@@ -30,9 +30,9 @@ claims, marketing claims, or risk-gate loosening.
 ## No bulk skill dump
 
 Do not bulk-copy skills into this repository. Every new skill must have a named purpose, a bounded
-review surface, a Gate 0 boundary section, and accepted QA_SECURITY plus RISK review records.
+review surface, a Gate 1 boundary section, and accepted QA_SECURITY plus RISK review records.
 
-A skill is eligible only when it improves one of these Gate 0 activities:
+A skill is eligible only when it improves one of these Gate 1 activities:
 
 - Reviewing evidence quality.
 - Finding gaps in the protected decision loop.
@@ -47,9 +47,9 @@ Every accepted project-local skill must include:
 
 - `SKILL.md` with skill frontmatter.
 - `## GateZero Boundary First`.
-- `G0_RESEARCH`.
-- `research_only`.
-- `At Gate 0`.
+- `G1_BACKTESTING`.
+- `historical_backtesting_only`.
+- `At Gate 1`.
 - `future-phase`.
 - `blockers`.
 - `agents/openai.yaml`.
@@ -65,7 +65,7 @@ This section is the candidate intake backlog.
 These are candidate reviewer skills only. They are not approved additions until each receives its
 own assignment, review, guard update, and passing validation:
 
-| Candidate skill                        | Intended Gate 0 use                                                |
+| Candidate skill                        | Intended Gate 1 use                                                |
 | -------------------------------------- | ------------------------------------------------------------------ |
 | `gatezero-orchestrator-reviewer`       | Check assignment packets, sequencing, scope, and acceptance logic. |
 | `gatezero-risk-governance-reviewer`    | Review risk gates, autonomy gates, and approval-language blockers. |
@@ -95,7 +95,7 @@ Do not add skills that build, instruct, or normalize:
 
 1. Name the candidate skill and its intended reviewer lane.
 2. Confirm it does not duplicate an existing agent, skill, or source-of-truth document.
-3. Write the Gate 0 boundary first, before task instructions.
+3. Write the Gate 1 boundary first, before task instructions.
 4. Add explicit invocation metadata with `allow_implicit_invocation: false`.
 5. Add eval fixtures when the skill has meaningful pass/fail behavior.
 6. Update `scripts/check-gate0-skill-governance.ts` to include the new accepted skill.
@@ -110,7 +110,7 @@ QA_SECURITY must verify:
 - No executable trading, broker, order, credential, external account, or external service path is
   added.
 - The skill requires explicit invocation.
-- The skill contains Gate 0 boundary language.
+- The skill contains Gate 1 boundary language.
 - The skill is covered by the local skill governance guard.
 - Any scanner allowlist expansion is justified by review-only content.
 
@@ -118,8 +118,8 @@ QA_SECURITY must verify:
 
 RISK must verify:
 
-- Gate remains `G0_RESEARCH`.
-- Scope remains `research_only`.
+- Gate remains `G1_BACKTESTING`.
+- Scope remains `historical_backtesting_only`.
 - The skill does not imply approval, readiness, performance, profitability, paper execution, live
   execution, strategy promotion, autonomy increase, or risk-gate movement.
 - Any later-phase references are written as blockers or review questions.

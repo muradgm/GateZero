@@ -19,11 +19,11 @@ without treating results as strategy approval.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, backtest work is local, synthetic, contract-focused, or planning-only. Do not recommend
+At Gate 1, backtest work is local, synthetic, contract-focused, or planning-only. Do not recommend
 live data execution, broker integration, paper order mechanics, autonomous execution, AI buy/sell
 prediction, strategy approval, readiness semantics, profitability claims, marketing claims, or
 risk-gate loosening.

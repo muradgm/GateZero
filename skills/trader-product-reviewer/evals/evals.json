@@ -85,10 +85,10 @@
     },
     {
       "id": 7,
-      "prompt": "Review GateZero's Gate 0 command center. It shows latest packet, validation count, CI run, evidence links, and source docs. The team wants to add a strategy readiness badge.",
-      "expected_output": "Should treat GateZero as G0_RESEARCH and reject readiness semantics. Should recommend evidence freshness, source links, validation state, risk boundary copy, and operator handoff clarity instead of readiness or approval labels.",
+      "prompt": "Review GateZero's Gate 1 command center. It shows latest packet, validation count, CI run, evidence links, and source docs. The team wants to add a strategy readiness badge.",
+      "expected_output": "Should treat GateZero as G1_BACKTESTING and reject readiness semantics. Should recommend evidence freshness, source links, validation state, risk boundary copy, and operator handoff clarity instead of readiness or approval labels.",
       "assertions": [
-        "Mentions G0_RESEARCH or research-only scope",
+        "Mentions G1_BACKTESTING or historical-backtesting-only scope",
         "Rejects readiness or approval semantics",
         "Prioritizes evidence freshness",
         "Mentions source links or validation state",

@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-321",
+  latestPacket: "TRD-322",
   localVerification: "71 files / 411 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "321 / 321",
+      value: "322 / 322",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "321 accepted records"
+      reference: "322 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-322 Gate 1 skill default gate alignment review.",
+    "Proceed to TRD-323 Gate command naming migration plan.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -153,7 +153,8 @@ export const commandCenterData = {
         "docs/operations/GATE1_PARAMETER_IMMUTABILITY_GUARD_CONTRACT.md",
         "docs/operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md",
         "docs/operations/GATE1_COMPLETION_BLOCKER_RECHECK.md",
-        "docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md"
+        "docs/operations/GATE1_CONTROL_PLANE_CHECKPOINT.md",
+        "docs/operations/GATE1_SKILL_DEFAULT_GATE_ALIGNMENT.md"
       ]
     },
     {

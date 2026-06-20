@@ -5,8 +5,8 @@ description:
   lens. Use when evaluating whether a trading research app, strategy engine, dashboard, simulator,
   contract, fixture, or market-analysis feature is financially accurate, market-mechanically
   realistic, and safe from domain errors such as incorrect pip math, bid/ask handling, leverage,
-  margin, spread, timezone, candle, fill, or P/L assumptions while preserving Gate 0 research-only
-  boundaries.
+  margin, spread, timezone, candle, fill, or P/L assumptions while preserving Gate 1
+  historical-backtesting-only boundaries.
 ---
 
 # Trading Forex Domain Expert
@@ -24,11 +24,11 @@ Before reviewing domain correctness, identify the current financial gate.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, use this skill for research contracts, historical data assumptions, synthetic fixtures,
+At Gate 1, use this skill for research contracts, historical data assumptions, synthetic fixtures,
 backtest validity, market-data provenance, risk math, and blocker discovery. Do not recommend
 building broker integrations, paper/live order mechanics, autonomous execution, AI buy/sell
 prediction, strategy approval, readiness claims, profitability claims, or risk-gate loosening.
@@ -72,7 +72,7 @@ not trading-ready.
 ### 2. Bid And Ask Matter
 
 Do not accept mid-price-only logic for P/L, stops, targets, or future execution assumptions unless
-the product is explicitly analytics-only. At Gate 0, missing bid/ask data should become a backtest
+the product is explicitly analytics-only. At Gate 1, missing bid/ask data should become a backtest
 or contract limitation, not an excuse to add broker connectivity.
 
 ### 3. Broker Metadata Is Source Of Truth
@@ -112,14 +112,14 @@ Load the relevant reference file when the review touches that area:
   state, read [references/forex-market-mechanics.md](references/forex-market-mechanics.md).
 - For order lifecycle, broker integration, market data quality, backtesting, simulation, and
   strategy validity, read
-  [references/execution-risk-backtesting.md](references/execution-risk-backtesting.md). At Gate 0,
+  [references/execution-risk-backtesting.md](references/execution-risk-backtesting.md). At Gate 1,
   use execution content only to identify blockers, contracts, and tests.
 
 ## Severity Model
 
 - **Critical**: Can materially misstate P/L, risk, execution, or backtest performance; can imply
   forbidden execution capability; can cause unintended live trades or major financial loss.
-- **High**: Can mislead user decisions, produce invalid strategy results, blur Gate 0 boundaries, or
+- **High**: Can mislead user decisions, produce invalid strategy results, blur Gate 1 boundaries, or
   fail under common market conditions.
 - **Medium**: Correctness issue with limited scope, confusing assumption, missing edge case, or weak
   verification.

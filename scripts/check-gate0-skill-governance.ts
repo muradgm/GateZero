@@ -30,18 +30,18 @@ const expectedSkills = [
   "trading-forex-domain-expert"
 ] as const;
 const requiredSkillSnippets = [
-  "G0_RESEARCH",
-  "research_only",
+  "G1_BACKTESTING",
+  "historical_backtesting_only",
   "GateZero Boundary First",
-  "At Gate 0",
+  "At Gate 1",
   "future-phase",
   "blockers"
 ] as const;
 const requiredPolicyPath = "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md";
 const requiredPolicySnippets = [
   "No bulk skill dump",
-  "G0_RESEARCH",
-  "research_only",
+  "G1_BACKTESTING",
+  "historical_backtesting_only",
   "allow_implicit_invocation: false",
   "candidate intake backlog",
   "blocked skill types",
@@ -114,7 +114,7 @@ export function checkGate0SkillGovernance(
 
     for (const snippet of requiredSkillSnippets) {
       if (!skillFile.content.includes(snippet)) {
-        findings.push(`Missing Gate 0 skill boundary snippet: ${skillFilePath} -> ${snippet}`);
+        findings.push(`Missing Gate 1 skill boundary snippet: ${skillFilePath} -> ${snippet}`);
       }
     }
 

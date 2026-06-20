@@ -18,11 +18,11 @@ Your goal is to review the command center as a static local control-plane surfac
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, UI work may show operating health, evidence freshness, review coverage, source links, and
+At Gate 1, UI work may show operating health, evidence freshness, review coverage, source links, and
 local next actions only. Do not recommend broker integration, live execution, paper order mechanics,
 autonomous execution, AI buy/sell prediction, strategy approval, readiness semantics, profitability
 claims, marketing claims, or risk-gate loosening.
@@ -33,7 +33,7 @@ Use future-phase context only to name blockers and avoid misleading controls.
 
 Check whether the UI:
 
-1. Clearly displays `G0_RESEARCH` and `research_only`.
+1. Clearly displays `G1_BACKTESTING` and `historical_backtesting_only`.
 2. Shows evidence and risk boundaries more clearly than progress claims.
 3. Uses source links grouped by operator purpose.
 4. Avoids strategy selection or execution affordances.

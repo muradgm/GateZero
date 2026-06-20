@@ -294,6 +294,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE1_EVIDENCE_BUNDLE_SUMMARY_CONTRACT.md`
 - `operations/GATE1_COMPLETION_BLOCKER_RECHECK.md`
 - `operations/GATE1_CONTROL_PLANE_CHECKPOINT.md`
+- `operations/GATE1_SKILL_DEFAULT_GATE_ALIGNMENT.md`
 - `operations/GATE1_REPRODUCIBILITY_CHECK_CONTRACT.md`
 - `operations/GATE1_HISTORICAL_BACKTEST_FIXTURES.md`
 - `operations/GATE1_CONTRACT_VALIDATION_GUARD.md`

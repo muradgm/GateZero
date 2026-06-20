@@ -16,9 +16,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero Docs Control Plane Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -41,9 +41,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero Orchestrator Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -66,9 +66,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero Product Strategy Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -91,9 +91,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero QA Security Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -116,9 +116,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero Quant Backtest Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -141,9 +141,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero Risk Governance Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -166,9 +166,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# GateZero UI Command Center Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -191,9 +191,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# Trader Product Reviewer",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -216,9 +216,9 @@ const completeInput: Gate0SkillGovernanceInput = {
         "---",
         "# Trading Forex Domain Expert",
         "## GateZero Boundary First",
-        "G0_RESEARCH",
-        "research_only",
-        "At Gate 0",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
         "future-phase",
         "blockers"
       ].join("\n")
@@ -235,10 +235,10 @@ const completeInput: Gate0SkillGovernanceInput = {
     {
       relativePath: "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
       content: [
-        "# Gate 0 Skill Library Intake",
+        "# Gate 1 Skill Library Intake",
         "## No bulk skill dump",
-        "G0_RESEARCH",
-        "research_only",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
         "allow_implicit_invocation: false",
         "candidate intake backlog",
         "blocked skill types",
@@ -264,18 +264,18 @@ describe("Gate 0 skill governance check", () => {
     );
   });
 
-  it("rejects missing Gate 0 boundary text", () => {
+  it("rejects missing Gate 1 boundary text", () => {
     const result = checkGate0SkillGovernance({
       files: completeInput.files.map((file) =>
         file.relativePath === "skills/trader-product-reviewer/SKILL.md"
-          ? { ...file, content: file.content.replace("G0_RESEARCH", "later") }
+          ? { ...file, content: file.content.replace("G1_BACKTESTING", "later") }
           : file
       )
     });
 
     expect(result.ok).toBe(false);
     expect(result.findings).toContain(
-      "Missing Gate 0 skill boundary snippet: skills/trader-product-reviewer/SKILL.md -> G0_RESEARCH"
+      "Missing Gate 1 skill boundary snippet: skills/trader-product-reviewer/SKILL.md -> G1_BACKTESTING"
     );
   });
 

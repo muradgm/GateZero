@@ -10,7 +10,7 @@
         "Flags artifact map gap",
         "Mentions source links",
         "Requires acceptance records",
-        "Preserves Gate 0 boundary"
+        "Preserves Gate 1 boundary"
       ],
       "files": []
     }

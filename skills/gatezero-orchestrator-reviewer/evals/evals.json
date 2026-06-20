@@ -10,18 +10,18 @@
         "Flags missing RISK review",
         "Flags missing tracker update",
         "Rejects acceptance before review coverage",
-        "Mentions Gate 0 or research-only boundary"
+        "Mentions Gate 1 or historical-backtesting-only boundary"
       ],
       "files": []
     },
     {
       "id": 2,
       "prompt": "The next packet proposes adding a strategy readiness badge because all local tests pass.",
-      "expected_output": "Should reject readiness semantics at Gate 0. Should explain that test success is repository verification only, not strategy approval or future-phase eligibility. Should recommend evidence freshness or blocker language instead.",
+      "expected_output": "Should reject readiness semantics at Gate 1. Should explain that test success is repository verification only, not strategy approval or future-phase eligibility. Should recommend evidence freshness or blocker language instead.",
       "assertions": [
         "Rejects readiness semantics",
         "States tests are not strategy approval",
-        "Mentions G0_RESEARCH or research_only",
+        "Mentions G1_BACKTESTING or historical_backtesting_only",
         "Recommends bounded evidence or blocker language",
         "Does not endorse product scope expansion"
       ],

@@ -5,7 +5,7 @@ description:
   blocked-scope detection, secrets and credential exposure, local-only command behavior, review
   evidence quality, artifact freshness, and regression coverage. Use when reviewing whether GateZero
   changes are testable, locally verifiable, free of credential or execution paths, and protected by
-  the correct Gate 0 guards.
+  the correct Gate 1 guards.
 ---
 
 # GateZero QA Security Reviewer
@@ -22,11 +22,11 @@ Before reviewing QA or security quality, identify the current gate and scope.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, review only local research, evidence, validation, documentation, reviewer-skill, and
+At Gate 1, review only local research, evidence, validation, documentation, reviewer-skill, and
 command-center control-plane work.
 
 Do not approve or recommend broker integration, live execution, paper order mechanics, autonomous

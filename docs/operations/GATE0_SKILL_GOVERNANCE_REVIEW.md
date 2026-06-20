@@ -1,4 +1,4 @@
-# Gate 0 Skill Governance Review
+# Gate 1 Skill Governance Review
 
 ## Purpose
 
@@ -22,13 +22,13 @@ promote gate state, approve strategies, or authorize execution.
 Current financial gate:
 
 ```text
-G0_RESEARCH
+G1_BACKTESTING
 ```
 
 Current operating scope:
 
 ```text
-research_only
+historical_backtesting_only
 ```
 
 At this gate, these skills may be used to improve judgment, critique research and backtest surfaces,
@@ -49,8 +49,8 @@ They must not be used to justify:
 ## Adopted Skill Controls
 
 - Each skill has a `GateZero Boundary First` section.
-- Each skill names `G0_RESEARCH` and `research_only`.
-- Each skill routes Gate 0 recommendations toward local docs, contracts, fixtures, tests, and
+- Each skill names `G1_BACKTESTING` and `historical_backtesting_only`.
+- Each skill routes Gate 1 recommendations toward local docs, contracts, fixtures, tests, and
   blockers.
 - Each skill includes `agents/openai.yaml` with `allow_implicit_invocation: false`.
 - The project skill governance guard checks these controls with:

@@ -37,7 +37,11 @@ const requiredDecisionTypes = [
   "Forex mechanics and domain review"
 ] as const;
 
-const requiredSnippets = ["G0_RESEARCH", "research_only", "Selection Rules"] as const;
+const requiredSnippets = [
+  "G1_BACKTESTING",
+  "historical_backtesting_only",
+  "Selection Rules"
+] as const;
 
 export async function loadGate0SkillRoutingInput(rootDir: string): Promise<Gate0SkillRoutingInput> {
   return {

@@ -3,9 +3,9 @@ name: gatezero-orchestrator-reviewer
 description:
   GateZero-aware orchestration review lens for assignment packets, task sequencing, agent handoffs,
   acceptance criteria, scope boundaries, tracker updates, and operating-record consistency. Use when
-  reviewing whether GateZero work is properly bounded to Gate 0 research-only operations, has the
-  right QA/RISK participation, preserves source-of-truth alignment, and defines the correct next
-  agent or next packet without expanding trading autonomy.
+  reviewing whether GateZero work is properly bounded to Gate 1 historical-backtesting-only
+  operations, has the right QA/RISK participation, preserves source-of-truth alignment, and defines
+  the correct next agent or next packet without expanding trading autonomy.
 ---
 
 # GateZero Orchestrator Reviewer
@@ -22,11 +22,11 @@ Before reviewing orchestration quality, identify the current gate and scope.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, orchestrate only local research, evidence, risk-control, validation, documentation,
+At Gate 1, orchestrate only local research, evidence, risk-control, validation, documentation,
 reviewer-skill, and command-center control-plane work.
 
 Do not recommend work that adds broker integration, live execution, paper order mechanics,
@@ -80,14 +80,14 @@ Check every packet for:
 - Run QA/RISK review before ORCHESTRATOR acceptance.
 - Update command-center records only after the source evidence exists.
 - Update guards and tests in the same packet when adding a governed skill or operating command.
-- Keep broad product expansion paused unless a concrete Gate 0 maintenance gap exists.
+- Keep broad product expansion paused unless a concrete Gate 1 maintenance gap exists.
 
 ## Acceptance Review
 
 For an acceptance review, verify:
 
-- Gate remains `G0_RESEARCH`.
-- Scope remains `research_only`.
+- Gate remains `G1_BACKTESTING`.
+- Scope remains `historical_backtesting_only`.
 - All required review records exist.
 - Tracker latest packet, validation summary, ledger rows, and source links are current.
 - New files are listed in the right index or map.
@@ -102,7 +102,7 @@ For an acceptance review, verify:
   next-agent routing.
 - **Medium**: Packet is reviewable but has weak sequencing, incomplete source links, or ambiguous
   done definition.
-- **Low**: Minor wording or indexing issue that does not affect Gate 0 control integrity.
+- **Low**: Minor wording or indexing issue that does not affect Gate 1 control integrity.
 
 ## Output Format
 

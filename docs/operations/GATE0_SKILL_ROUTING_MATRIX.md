@@ -1,4 +1,4 @@
-# Gate 0 Skill Routing Matrix
+# Gate 1 Skill Routing Matrix
 
 ## Purpose
 
@@ -12,13 +12,13 @@ execution capability, external integrations, or gate movement.
 Current financial gate:
 
 ```text
-G0_RESEARCH
+G1_BACKTESTING
 ```
 
 Current operating scope:
 
 ```text
-research_only
+historical_backtesting_only
 ```
 
 Use these skills to improve review judgment, not to authorize broker integration, live trading,

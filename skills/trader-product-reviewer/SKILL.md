@@ -4,9 +4,9 @@ description:
   GateZero-aware product and UX review lens for trading research, evidence dashboards, strategy
   tools, journals, screeners, backtesting products, signal systems, and future trading interfaces.
   Use when evaluating whether a serious operator would understand, trust, and efficiently use the
-  app, especially for Gate 0 research-only command centers, evidence clarity, risk visibility,
-  decision-loop honesty, chart ergonomics, alerts, journaling, operator handoff, and future-phase
-  safety blockers.
+  app, especially for Gate 1 historical-backtesting-only command centers, evidence clarity, risk
+  visibility, decision-loop honesty, chart ergonomics, alerts, journaling, operator handoff, and
+  future-phase safety blockers.
 ---
 
 # Trader Product Reviewer
@@ -24,11 +24,11 @@ Before reviewing product quality, identify the current gate and scope.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, treat the app as a local research and evidence-control surface only. Do not recommend
+At Gate 1, treat the app as a local research and evidence-control surface only. Do not recommend
 building broker integrations, live execution, paper order mechanics, autonomous execution, AI
 buy/sell prediction, approval scoring, readiness claims, profitability claims, or public marketing
 claims.
@@ -69,7 +69,7 @@ miss than potential profit.
 ### 3. Speed Matters Under Pressure
 
 Operator workflows should minimize hesitation, hunting, duplicate actions, and unclear states. In
-Gate 0, speed means finding evidence, risk context, source links, review status, and next local
+Gate 1, speed means finding evidence, risk context, source links, review status, and next local
 validation commands quickly, not faster trading.
 
 ### 4. The UI Must Reduce Trading Mistakes
@@ -86,7 +86,7 @@ annotations should be readable without visual noise.
 ## Review Workflow
 
 1. Identify the current gate, primary workflow, and user type.
-2. If the gate is `G0_RESEARCH`, reject recommendations that expand trading autonomy.
+2. If the gate is `G1_BACKTESTING`, reject recommendations that expand trading autonomy.
 3. Walk through the workflow as an operator trying to answer one research question quickly.
 4. Check trust signals: source, timestamps, historical/simulated/live mode, quote freshness, and
    state provenance.
@@ -113,7 +113,7 @@ Load the relevant reference file when the review touches that area:
 
 - **Critical**: Could create execution capability, imply approval/readiness, or cause a trader to
   place, size, modify, or exit trades incorrectly.
-- **High**: Could materially reduce trust, hide risk, mislead decision-making, or blur Gate 0
+- **High**: Could materially reduce trust, hide risk, mislead decision-making, or blur Gate 1
   boundaries.
 - **Medium**: Creates friction, confusion, or inefficient workflows during normal trading use.
 - **Low**: Polish issue that does not materially affect trading confidence or safety.

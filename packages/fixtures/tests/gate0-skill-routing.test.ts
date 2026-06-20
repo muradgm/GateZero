@@ -7,8 +7,8 @@ import {
 
 const completeInput: Gate0SkillRoutingInput = {
   matrix: [
-    "G0_RESEARCH",
-    "research_only",
+    "G1_BACKTESTING",
+    "historical_backtesting_only",
     "Selection Rules",
     "Assignment sequencing and handoff",
     "Risk gate and autonomy boundary review",

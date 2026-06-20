@@ -3,9 +3,9 @@ name: gatezero-risk-governance-reviewer
 description:
   GateZero-aware risk governance review lens for financial risk gates, autonomy gates, approval
   language, readiness semantics, risk-control documentation, blocked-scope reviews, and later-phase
-  blocker framing. Use when reviewing whether GateZero work preserves Gate 0 research-only
-  boundaries, avoids trading autonomy, keeps risk gates tight, and prevents validation or dashboard
-  language from becoming strategy approval.
+  blocker framing. Use when reviewing whether GateZero work preserves Gate 1
+  historical-backtesting-only boundaries, avoids trading autonomy, keeps risk gates tight, and
+  prevents validation or dashboard language from becoming strategy approval.
 ---
 
 # GateZero Risk Governance Reviewer
@@ -22,11 +22,11 @@ Before reviewing risk quality, identify the current gate and scope.
 Default current state:
 
 ```text
-G0_RESEARCH
-research_only
+G1_BACKTESTING
+historical_backtesting_only
 ```
 
-At Gate 0, review work as local research, evidence, validation, documentation, reviewer-skill, and
+At Gate 1, review work as local research, evidence, validation, documentation, reviewer-skill, and
 command-center control-plane work only.
 
 Do not approve or recommend broker integration, live execution, paper order mechanics, autonomous
@@ -62,8 +62,8 @@ blocked.
 
 Check whether the change:
 
-1. Keeps gate status at `G0_RESEARCH`.
-2. Keeps scope at `research_only`.
+1. Keeps gate status at `G1_BACKTESTING`.
+2. Keeps scope at `historical_backtesting_only`.
 3. Avoids any current execution or account-connectivity path.
 4. Avoids language that implies approval, readiness, certification, promotion, profitability, or
    future-phase eligibility.

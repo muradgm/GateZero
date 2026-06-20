@@ -86,10 +86,10 @@
     },
     {
       "id": 7,
-      "prompt": "GateZero is still G0_RESEARCH. A proposed historical backtest contract stores candle close, trade direction, gross P/L, and win rate, but not spread, commission, slippage, data timezone, or trade count.",
-      "expected_output": "Should keep the recommendation inside Gate 0 or Gate 1 contract work. Should flag missing friction, timezone, and sample-size fields as backtest-validity gaps without recommending broker integration or live execution.",
+      "prompt": "GateZero is currently G1_BACKTESTING. A proposed historical backtest contract stores candle close, trade direction, gross P/L, and win rate, but not spread, commission, slippage, data timezone, or trade count.",
+      "expected_output": "Should keep the recommendation inside Gate 1 contract work. Should flag missing friction, timezone, and sample-size fields as backtest-validity gaps without recommending broker integration or live execution.",
       "assertions": [
-        "Mentions Gate 0 or Gate 1 boundary",
+        "Mentions Gate 1 boundary",
         "Flags missing spread or commission",
         "Flags missing slippage",
         "Mentions timezone",

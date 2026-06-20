@@ -4,10 +4,10 @@
     {
       "id": 1,
       "prompt": "Review a GateZero packet that changes a validation script but only includes docs updates and no focused test output.",
-      "expected_output": "Should block or flag acceptance because executable behavior changed without focused validation. Should require targeted tests, full Gate 0 verification, and updated review records before acceptance.",
+      "expected_output": "Should block or flag acceptance because executable behavior changed without focused validation. Should require targeted tests, full local verification, and updated review records before acceptance.",
       "assertions": [
         "Flags missing focused validation",
-        "Requires full Gate 0 verification",
+        "Requires full local verification",
         "Mentions executable behavior changed",
         "Requires review records",
         "Keeps recommendation local"
@@ -17,10 +17,10 @@
     {
       "id": 2,
       "prompt": "A new skill adds references to broker credentials and suggests storing API keys later in an env file.",
-      "expected_output": "Should flag credential handling as blocked at Gate 0. Should require removing or reframing the credential guidance as a future-phase blocker and checking scanner coverage.",
+      "expected_output": "Should flag credential handling as blocked at Gate 1. Should require removing or reframing the credential guidance as a future-phase blocker and checking scanner coverage.",
       "assertions": [
         "Flags credential handling",
-        "Mentions Gate 0 boundary",
+        "Mentions Gate 1 boundary",
         "Requires future-phase blocker language",
         "Mentions scanner coverage",
         "Does not approve implementation"
