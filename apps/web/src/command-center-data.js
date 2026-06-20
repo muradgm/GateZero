@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-342",
+  latestPacket: "TRD-352",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "342 / 342",
+      value: "352 / 352",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "342 accepted records"
+      reference: "352 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-343 adapter authorization blocker inventory.",
+    "Proceed to TRD-353 adapter blocker source-link recheck.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -174,7 +174,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_STALE_DATA_POLICY_SOURCE_LINK_RECHECK.md",
         "docs/operations/GATE1_PARAMETER_HASH_CANONICALIZATION_PLAN.md",
         "docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_NEGATIVE_CASES.md",
-        "docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md"
+        "docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md",
+        "docs/operations/GATE1_ADAPTER_AUTHORIZATION_BLOCKER_INVENTORY.md",
+        "docs/operations/GATE1_ADAPTER_FIXTURE_IMPORT_CONTRACT_PLAN.md",
+        "docs/operations/GATE1_DUPLICATE_SIGNAL_SOURCE_LINK_RECHECK.md",
+        "docs/operations/GATE1_PARAMETER_HASH_NEGATIVE_CASES_PLAN.md",
+        "docs/operations/GATE1_PROVIDER_LICENSE_REVIEW_CHECKLIST.md",
+        "docs/operations/GATE1_COMMAND_ALIAS_DOCS_COVERAGE_RECHECK.md",
+        "docs/operations/GATE1_SKILL_METADATA_GUARD_INDEX_RECORD.md",
+        "docs/operations/GATE1_IMPORTED_SNAPSHOT_QUARANTINE_POLICY.md",
+        "docs/operations/GATE1_BLOCKER_CHECKPOINT_COVERAGE_RECHECK.md",
+        "docs/operations/GATE1_ADAPTER_READINESS_BLOCKER_CHECKPOINT.md"
       ]
     },
     {

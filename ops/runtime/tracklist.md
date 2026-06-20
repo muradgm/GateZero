@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-342`                                                      |
+| Latest accepted packet     | `TRD-352`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-342`
+- Accepted packets: `TRD-044` to `TRD-352`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -254,6 +254,11 @@ Latest accepted result:
     fixture set, OHLC mid-price limitation record, historical data adapter boundary, data-provider
     provenance fields, stale-data source-link recheck, parameter hash canonicalization plan,
     duplicate signal fingerprint negative cases, and blocker expansion checkpoint.
+  - Adapter authorization blocker inventory, adapter fixture import contract plan, duplicate signal
+    source-link recheck, parameter hash negative cases plan, provider license review checklist,
+    command alias docs coverage recheck, skill metadata guard index record, imported snapshot
+    quarantine policy, blocker checkpoint coverage recheck, and adapter-readiness blocker
+    checkpoint.
 
 ## Workstream Summary
 
@@ -709,6 +714,16 @@ Latest accepted result:
 | `TRD-340` | accepted | Provenance       | Planned parameter hash canonicalization.              |
 | `TRD-341` | accepted | Validation       | Added duplicate signal fingerprint negative cases.    |
 | `TRD-342` | accepted | Checkpoint       | Checkpointed Gate 1 blocker expansion.                |
+| `TRD-343` | accepted | Risk             | Inventoried adapter authorization blockers.           |
+| `TRD-344` | accepted | Planning         | Planned adapter fixture import contract boundaries.   |
+| `TRD-345` | accepted | Documentation    | Rechecked duplicate signal source links.              |
+| `TRD-346` | accepted | Provenance       | Planned parameter hash negative cases.                |
+| `TRD-347` | accepted | Risk             | Drafted provider license review checklist.            |
+| `TRD-348` | accepted | Documentation    | Rechecked command alias docs coverage.                |
+| `TRD-349` | accepted | Skills           | Indexed skill metadata guard record.                  |
+| `TRD-350` | accepted | Policy           | Drafted imported snapshot quarantine policy.          |
+| `TRD-351` | accepted | Documentation    | Rechecked Gate 1 blocker checkpoint coverage.         |
+| `TRD-352` | accepted | Checkpoint       | Checkpointed Gate 1 adapter-readiness blockers.       |
 
 ## Current Operator Commands
 
@@ -745,18 +760,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                |
-| ---- | --------- | ------ | -------------------------------------------- | --------------------------------------------------------------- |
-| 1    | `TRD-343` | queued | Inventory adapter authorization blockers.    | List every missing approval before real data adapter work.      |
-| 2    | `TRD-344` | queued | Draft adapter fixture import contract plan.  | Plan import contracts without provider connectivity.            |
-| 3    | `TRD-345` | queued | Recheck duplicate signal source links.       | Verify fingerprint docs, tests, and guards stay indexed.        |
-| 4    | `TRD-346` | queued | Add parameter hash negative cases plan.      | Plan canonicalization failure tests before implementation.      |
-| 5    | `TRD-347` | queued | Draft provider license review checklist.     | Define license review fields without external provider use.     |
-| 6    | `TRD-348` | queued | Recheck command alias docs coverage.         | Keep legacy command compatibility docs source-linked.           |
-| 7    | `TRD-349` | queued | Add skill metadata guard index record.       | Ensure skill metadata guard changes remain documented.          |
-| 8    | `TRD-350` | queued | Draft imported snapshot quarantine policy.   | Define blocked state for imported snapshots before adapters.    |
-| 9    | `TRD-351` | queued | Recheck Gate 1 blocker checkpoint coverage.  | Verify checkpoint docs, reviews, and guard links are complete.  |
-| 10   | `TRD-352` | queued | Gate 1 adapter-readiness blocker checkpoint. | Keep adapter work blocked until all prerequisites are accepted. |
+| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                   |
+| ---- | --------- | ------ | -------------------------------------------- | ------------------------------------------------------------------ |
+| 1    | `TRD-353` | queued | Recheck adapter blocker source links.        | Verify adapter blocker docs remain indexed and guard-visible.      |
+| 2    | `TRD-354` | queued | Draft imported snapshot schema authority.    | Plan schema-only authority for future imported fixtures.           |
+| 3    | `TRD-355` | queued | Draft provider credential exclusion policy.  | Explicitly keep provider secrets outside current scope.            |
+| 4    | `TRD-356` | queued | Recheck quarantine policy coverage.          | Confirm imported snapshot quarantine docs and reviews align.       |
+| 5    | `TRD-357` | queued | Plan adapter fixture negative cases.         | Plan invalid imported snapshot cases without parser code.          |
+| 6    | `TRD-358` | queued | Draft data-retention limitation record.      | Record retention constraints before provider selection.            |
+| 7    | `TRD-359` | queued | Recheck provider license checklist coverage. | Keep license review requirements source-linked.                    |
+| 8    | `TRD-360` | queued | Draft adapter audit-log boundary.            | Plan future adapter audit fields without ingestion.                |
+| 9    | `TRD-361` | queued | Recheck Gate 1 adapter blocker checkpoint.   | Confirm blocker checkpoint remains no-implementation.              |
+| 10   | `TRD-362` | queued | Adapter planning freeze checkpoint.          | Decide whether to pause adapter planning or authorize next packet. |
 
 ## Rejected For Now
 
@@ -1235,6 +1250,26 @@ Do not mark a packet accepted until:
 - Gate 1 duplicate signal fingerprint negative cases:
   `docs/operations/GATE1_DUPLICATE_SIGNAL_FINGERPRINT_NEGATIVE_CASES.md`
 - Gate 1 blocker expansion checkpoint: `docs/operations/GATE1_BLOCKER_EXPANSION_CHECKPOINT.md`
+- Gate 1 adapter authorization blocker inventory:
+  `docs/operations/GATE1_ADAPTER_AUTHORIZATION_BLOCKER_INVENTORY.md`
+- Gate 1 adapter fixture import contract plan:
+  `docs/operations/GATE1_ADAPTER_FIXTURE_IMPORT_CONTRACT_PLAN.md`
+- Gate 1 duplicate signal source-link recheck:
+  `docs/operations/GATE1_DUPLICATE_SIGNAL_SOURCE_LINK_RECHECK.md`
+- Gate 1 parameter hash negative cases plan:
+  `docs/operations/GATE1_PARAMETER_HASH_NEGATIVE_CASES_PLAN.md`
+- Gate 1 provider license review checklist:
+  `docs/operations/GATE1_PROVIDER_LICENSE_REVIEW_CHECKLIST.md`
+- Gate 1 command alias docs coverage recheck:
+  `docs/operations/GATE1_COMMAND_ALIAS_DOCS_COVERAGE_RECHECK.md`
+- Gate 1 skill metadata guard index record:
+  `docs/operations/GATE1_SKILL_METADATA_GUARD_INDEX_RECORD.md`
+- Gate 1 imported snapshot quarantine policy:
+  `docs/operations/GATE1_IMPORTED_SNAPSHOT_QUARANTINE_POLICY.md`
+- Gate 1 blocker checkpoint coverage recheck:
+  `docs/operations/GATE1_BLOCKER_CHECKPOINT_COVERAGE_RECHECK.md`
+- Gate 1 adapter-readiness blocker checkpoint:
+  `docs/operations/GATE1_ADAPTER_READINESS_BLOCKER_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
