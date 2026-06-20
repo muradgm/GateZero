@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-352",
+  latestPacket: "TRD-362",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "352 / 352",
+      value: "362 / 362",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "352 accepted records"
+      reference: "362 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-353 adapter blocker source-link recheck.",
+    "Proceed to TRD-363 post-adapter-planning freeze lane selection.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -184,7 +184,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_SKILL_METADATA_GUARD_INDEX_RECORD.md",
         "docs/operations/GATE1_IMPORTED_SNAPSHOT_QUARANTINE_POLICY.md",
         "docs/operations/GATE1_BLOCKER_CHECKPOINT_COVERAGE_RECHECK.md",
-        "docs/operations/GATE1_ADAPTER_READINESS_BLOCKER_CHECKPOINT.md"
+        "docs/operations/GATE1_ADAPTER_READINESS_BLOCKER_CHECKPOINT.md",
+        "docs/operations/GATE1_ADAPTER_BLOCKER_SOURCE_LINK_RECHECK.md",
+        "docs/operations/GATE1_IMPORTED_SNAPSHOT_SCHEMA_AUTHORITY.md",
+        "docs/operations/GATE1_PROVIDER_CREDENTIAL_EXCLUSION_POLICY.md",
+        "docs/operations/GATE1_QUARANTINE_POLICY_COVERAGE_RECHECK.md",
+        "docs/operations/GATE1_ADAPTER_FIXTURE_NEGATIVE_CASES_PLAN.md",
+        "docs/operations/GATE1_DATA_RETENTION_LIMITATION_RECORD.md",
+        "docs/operations/GATE1_PROVIDER_LICENSE_CHECKLIST_COVERAGE_RECHECK.md",
+        "docs/operations/GATE1_ADAPTER_AUDIT_LOG_BOUNDARY.md",
+        "docs/operations/GATE1_ADAPTER_BLOCKER_CHECKPOINT_RECHECK.md",
+        "docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md"
       ]
     },
     {

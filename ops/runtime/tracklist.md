@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-352`                                                      |
+| Latest accepted packet     | `TRD-362`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-352`
+- Accepted packets: `TRD-044` to `TRD-362`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -259,6 +259,10 @@ Latest accepted result:
     command alias docs coverage recheck, skill metadata guard index record, imported snapshot
     quarantine policy, blocker checkpoint coverage recheck, and adapter-readiness blocker
     checkpoint.
+  - Adapter blocker source-link recheck, imported snapshot schema authority, provider credential
+    exclusion policy, quarantine policy coverage recheck, adapter fixture negative cases plan, data
+    retention limitation record, provider license checklist coverage recheck, adapter audit-log
+    boundary, adapter blocker checkpoint recheck, and adapter planning freeze checkpoint.
 
 ## Workstream Summary
 
@@ -724,6 +728,16 @@ Latest accepted result:
 | `TRD-350` | accepted | Policy           | Drafted imported snapshot quarantine policy.          |
 | `TRD-351` | accepted | Documentation    | Rechecked Gate 1 blocker checkpoint coverage.         |
 | `TRD-352` | accepted | Checkpoint       | Checkpointed Gate 1 adapter-readiness blockers.       |
+| `TRD-353` | accepted | Documentation    | Rechecked adapter blocker source links.               |
+| `TRD-354` | accepted | Governance       | Drafted imported snapshot schema authority.           |
+| `TRD-355` | accepted | Security         | Documented provider credential exclusion.             |
+| `TRD-356` | accepted | Documentation    | Rechecked quarantine policy coverage.                 |
+| `TRD-357` | accepted | Planning         | Planned adapter fixture negative cases.               |
+| `TRD-358` | accepted | Policy           | Recorded data-retention limitations.                  |
+| `TRD-359` | accepted | Documentation    | Rechecked provider license checklist coverage.        |
+| `TRD-360` | accepted | Security         | Drafted adapter audit-log boundary.                   |
+| `TRD-361` | accepted | Checkpoint       | Rechecked Gate 1 adapter blocker checkpoint.          |
+| `TRD-362` | accepted | Checkpoint       | Froze adapter planning pending concrete gap.          |
 
 ## Current Operator Commands
 
@@ -760,18 +774,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                         | Acceptance focus                                                   |
-| ---- | --------- | ------ | -------------------------------------------- | ------------------------------------------------------------------ |
-| 1    | `TRD-353` | queued | Recheck adapter blocker source links.        | Verify adapter blocker docs remain indexed and guard-visible.      |
-| 2    | `TRD-354` | queued | Draft imported snapshot schema authority.    | Plan schema-only authority for future imported fixtures.           |
-| 3    | `TRD-355` | queued | Draft provider credential exclusion policy.  | Explicitly keep provider secrets outside current scope.            |
-| 4    | `TRD-356` | queued | Recheck quarantine policy coverage.          | Confirm imported snapshot quarantine docs and reviews align.       |
-| 5    | `TRD-357` | queued | Plan adapter fixture negative cases.         | Plan invalid imported snapshot cases without parser code.          |
-| 6    | `TRD-358` | queued | Draft data-retention limitation record.      | Record retention constraints before provider selection.            |
-| 7    | `TRD-359` | queued | Recheck provider license checklist coverage. | Keep license review requirements source-linked.                    |
-| 8    | `TRD-360` | queued | Draft adapter audit-log boundary.            | Plan future adapter audit fields without ingestion.                |
-| 9    | `TRD-361` | queued | Recheck Gate 1 adapter blocker checkpoint.   | Confirm blocker checkpoint remains no-implementation.              |
-| 10   | `TRD-362` | queued | Adapter planning freeze checkpoint.          | Decide whether to pause adapter planning or authorize next packet. |
+| Rank | Packet    | Status | Goal                                        | Acceptance focus                                                   |
+| ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------------------------------ |
+| 1    | `TRD-363` | queued | Post-adapter freeze lane selection.         | Choose the next bounded Gate 1 lane without adapter creep.         |
+| 2    | `TRD-364` | queued | Guard command docs alignment.               | Recheck command docs against current validation commands.          |
+| 3    | `TRD-365` | queued | Contract guard schema validation hardening. | Plan tighter schema guard expectations without new capability.     |
+| 4    | `TRD-366` | queued | Readiness blocker language recheck.         | Remove or constrain any ambiguous readiness semantics.             |
+| 5    | `TRD-367` | queued | Command-center Gate 1 wording audit.        | Confirm dashboard wording stays evidence-only and no-approval.     |
+| 6    | `TRD-368` | queued | Review artifact aging policy draft.         | Define when old reviews need refresh without churning records.     |
+| 7    | `TRD-369` | queued | Source-link map consistency recheck.        | Recheck docs, tracklist, artifact map, and command center indexes. |
+| 8    | `TRD-370` | queued | Gate 1 blocked-scope scanner review.        | Recheck forbidden pattern coverage for current Gate 1 scope.       |
+| 9    | `TRD-371` | queued | Operator handoff freshness review.          | Verify handoff guidance matches latest gate and brand language.    |
+| 10   | `TRD-372` | queued | Gate 1 maintenance checkpoint.              | Decide whether to continue maintenance or pause until a real gap.  |
 
 ## Rejected For Now
 
@@ -1270,6 +1284,25 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_BLOCKER_CHECKPOINT_COVERAGE_RECHECK.md`
 - Gate 1 adapter-readiness blocker checkpoint:
   `docs/operations/GATE1_ADAPTER_READINESS_BLOCKER_CHECKPOINT.md`
+- Gate 1 adapter blocker source-link recheck:
+  `docs/operations/GATE1_ADAPTER_BLOCKER_SOURCE_LINK_RECHECK.md`
+- Gate 1 imported snapshot schema authority:
+  `docs/operations/GATE1_IMPORTED_SNAPSHOT_SCHEMA_AUTHORITY.md`
+- Gate 1 provider credential exclusion policy:
+  `docs/operations/GATE1_PROVIDER_CREDENTIAL_EXCLUSION_POLICY.md`
+- Gate 1 quarantine policy coverage recheck:
+  `docs/operations/GATE1_QUARANTINE_POLICY_COVERAGE_RECHECK.md`
+- Gate 1 adapter fixture negative cases plan:
+  `docs/operations/GATE1_ADAPTER_FIXTURE_NEGATIVE_CASES_PLAN.md`
+- Gate 1 data-retention limitation record:
+  `docs/operations/GATE1_DATA_RETENTION_LIMITATION_RECORD.md`
+- Gate 1 provider license checklist coverage recheck:
+  `docs/operations/GATE1_PROVIDER_LICENSE_CHECKLIST_COVERAGE_RECHECK.md`
+- Gate 1 adapter audit-log boundary: `docs/operations/GATE1_ADAPTER_AUDIT_LOG_BOUNDARY.md`
+- Gate 1 adapter blocker checkpoint recheck:
+  `docs/operations/GATE1_ADAPTER_BLOCKER_CHECKPOINT_RECHECK.md`
+- Gate 1 adapter planning freeze checkpoint:
+  `docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

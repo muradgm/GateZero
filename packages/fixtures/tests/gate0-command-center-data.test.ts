@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G1_BACKTESTING");
     expect(data).toContain("historical_backtesting_only");
-    expect(data).toContain("TRD-352");
+    expect(data).toContain("TRD-362");
   });
 
   it("does not expose trading action language in app data", () => {
