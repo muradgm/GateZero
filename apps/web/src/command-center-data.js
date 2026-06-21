@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-412",
+  latestPacket: "TRD-422",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "412 / 412",
+      value: "422 / 422",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "412 accepted records"
+      reference: "422 accepted records"
     }
   ],
   nextActions: [
-    "Gate 2 planning is operator-approved; implementation still requires a separate contract-first packet.",
+    "Gate 2 planning is contract-ready; the next lane must draft schemas, fixtures, and guards before mechanics.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -244,7 +244,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_MOVEMENT_DRY_RUN_CHECKLIST.md",
         "docs/operations/GATE2_PLANNING_HOLD_NOTE.md",
         "docs/operations/GATE2_COMMAND_CENTER_PLANNING_SYNC.md",
-        "docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md"
+        "docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md",
+        "docs/operations/GATE2_SIMULATED_ORDER_RECORD_PLAN.md",
+        "docs/operations/GATE2_SIMULATION_STATE_BOUNDARY_PLAN.md",
+        "docs/operations/GATE2_NO_EXTERNAL_ACCOUNT_GUARD_PLAN.md",
+        "docs/operations/GATE2_CREDENTIAL_EXCLUSION_GUARD_PLAN.md",
+        "docs/operations/GATE2_SIMULATED_FILL_ASSUMPTION_PLAN.md",
+        "docs/operations/GATE2_RISK_REVIEW_EVENT_PLAN.md",
+        "docs/operations/GATE2_OPERATOR_ACTION_LOG_PLAN.md",
+        "docs/operations/GATE2_NEGATIVE_FIXTURE_PLAN.md",
+        "docs/operations/GATE2_COMMAND_CENTER_PLANNING_EXTENSION.md",
+        "docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md"
       ]
     },
     {

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-412`                                                      |
+| Latest accepted packet     | `TRD-422`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -283,6 +283,10 @@ Latest accepted result:
   - Operator-approved Gate 2 planning authorization, Gate 1 pause exit, material gap intake, brand
     handoff isolation, movement request intake, approval routing, dry-run checklist, planning hold,
     command-center sync, and next-decision checkpoint.
+  - Gate 2 simulated-order record planning, simulation state boundary planning, no-external-account
+    guard planning, credential exclusion guard planning, simulated-fill assumption planning, risk
+    review event planning, operator action log planning, negative fixture planning, command-center
+    planning extension, and implementation readiness review.
 
 ## Workstream Summary
 
@@ -808,6 +812,16 @@ Latest accepted result:
 | `TRD-410` | accepted | Planning hold    | Held Gate 2 to planning authorization only.           |
 | `TRD-411` | accepted | Command center   | Synced command center to Gate 2 planning.             |
 | `TRD-412` | accepted | Checkpoint       | Defined next Gate 2 planning decision.                |
+| `TRD-413` | accepted | Planning         | Planned Gate 2 simulated-order record shape.          |
+| `TRD-414` | accepted | Planning         | Planned Gate 2 simulation state boundaries.           |
+| `TRD-415` | accepted | Security         | Planned no-external-account guard coverage.           |
+| `TRD-416` | accepted | Security         | Planned credential exclusion guard coverage.          |
+| `TRD-417` | accepted | Risk             | Planned simulated-fill assumption records.            |
+| `TRD-418` | accepted | Risk             | Planned Gate 2 risk review event records.             |
+| `TRD-419` | accepted | Governance       | Planned operator action log records.                  |
+| `TRD-420` | accepted | Fixtures         | Planned Gate 2 negative fixture classes.              |
+| `TRD-421` | accepted | Command center   | Planned Gate 2 command-center extension.              |
+| `TRD-422` | accepted | Review           | Reviewed Gate 2 implementation readiness.             |
 
 ## Current Operator Commands
 
@@ -844,26 +858,26 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                      | Acceptance focus                                     |
-| ---- | --------- | ------ | ----------------------------------------- | ---------------------------------------------------- |
-| 1    | `TRD-413` | queued | Gate 2 simulated-order record plan.       | Contract shape only; no implementation.              |
-| 2    | `TRD-414` | queued | Gate 2 simulation state boundary plan.    | State model boundaries and rollback rules.           |
-| 3    | `TRD-415` | queued | No-external-account guard plan.           | Guard external account routes before coding.         |
-| 4    | `TRD-416` | queued | Credential exclusion guard plan.          | Keep provider and account secrets out of scope.      |
-| 5    | `TRD-417` | queued | Simulated fill assumption plan.           | Assumption record without performance claims.        |
-| 6    | `TRD-418` | queued | Gate 2 risk review event plan.            | Risk event contract before simulated mechanics.      |
-| 7    | `TRD-419` | queued | Operator action log plan.                 | Human decision trace before implementation.          |
-| 8    | `TRD-420` | queued | Gate 2 negative fixture plan.             | Failure cases for blocked execution boundaries.      |
-| 9    | `TRD-421` | queued | Command-center Gate 2 planning extension. | Planning posture only; no execution controls.        |
-| 10   | `TRD-422` | queued | Gate 2 implementation readiness review.   | Decide whether a contract-first packet can be built. |
+| Rank | Packet    | Status | Goal                                    | Acceptance focus                                   |
+| ---- | --------- | ------ | --------------------------------------- | -------------------------------------------------- |
+| 1    | `TRD-423` | queued | Gate 2 contract implementation packet.  | Schemas and tests only; no mechanics.              |
+| 2    | `TRD-424` | queued | Simulated-order record contract schema. | Local record schema with blocked execution fields. |
+| 3    | `TRD-425` | queued | Simulation state contract schema.       | State schema with disallowed transition coverage.  |
+| 4    | `TRD-426` | queued | Risk review event contract schema.      | Risk review schema before simulation mechanics.    |
+| 5    | `TRD-427` | queued | Operator action log contract schema.    | Human decision schema with redaction posture.      |
+| 6    | `TRD-428` | queued | Simulated fill assumption schema.       | Assumption schema with limitation fields.          |
+| 7    | `TRD-429` | queued | Gate 2 synthetic fixture set.           | Local synthetic fixtures only.                     |
+| 8    | `TRD-430` | queued | Gate 2 negative contract tests.         | Block external, credential, autonomy, and claims.  |
+| 9    | `TRD-431` | queued | Gate 2 guard indexing update.           | Index docs, contracts, fixtures, and tests.        |
+| 10   | `TRD-432` | queued | Gate 2 contract checkpoint.             | Decide if mechanics planning can be proposed.      |
 
 ## Rejected For Now
 
 | Area                                | Status           | Reason                                                                             |
 | ----------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
 | UI expansion                        | rejected_for_now | Product breadth must not outrun trust in the core decision loop.                   |
-| Broker integration                  | rejected_for_now | Gate 1 is historical backtesting only.                                             |
-| Live execution                      | rejected_for_now | No execution path is allowed at Gate 1.                                            |
+| Broker integration                  | rejected_for_now | External account connectivity remains blocked at Gate 2 planning.                  |
+| Live execution                      | rejected_for_now | No live execution path is allowed at Gate 2 planning.                              |
 | Simulated execution mechanics       | rejected_for_now | Requires a separate contract-first Gate 2 implementation packet.                   |
 | AI buy/sell prediction              | rejected_for_now | The system validates evidence and risk review; it does not make prediction claims. |
 | Report export or publishing         | rejected_for_now | Current artifacts remain local and operational.                                    |
@@ -1444,6 +1458,17 @@ Do not mark a packet accepted until:
 - Gate 2 command-center planning sync: `docs/operations/GATE2_COMMAND_CENTER_PLANNING_SYNC.md`
 - Gate 2 operator next-decision checkpoint:
   `docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md`
+- Gate 2 simulated-order record plan: `docs/operations/GATE2_SIMULATED_ORDER_RECORD_PLAN.md`
+- Gate 2 simulation state boundary plan: `docs/operations/GATE2_SIMULATION_STATE_BOUNDARY_PLAN.md`
+- Gate 2 no-external-account guard plan: `docs/operations/GATE2_NO_EXTERNAL_ACCOUNT_GUARD_PLAN.md`
+- Gate 2 credential exclusion guard plan: `docs/operations/GATE2_CREDENTIAL_EXCLUSION_GUARD_PLAN.md`
+- Gate 2 simulated fill assumption plan: `docs/operations/GATE2_SIMULATED_FILL_ASSUMPTION_PLAN.md`
+- Gate 2 risk review event plan: `docs/operations/GATE2_RISK_REVIEW_EVENT_PLAN.md`
+- Gate 2 operator action log plan: `docs/operations/GATE2_OPERATOR_ACTION_LOG_PLAN.md`
+- Gate 2 negative fixture plan: `docs/operations/GATE2_NEGATIVE_FIXTURE_PLAN.md`
+- Gate 2 command-center planning extension:
+  `docs/operations/GATE2_COMMAND_CENTER_PLANNING_EXTENSION.md`
+- Gate 2 implementation readiness review: `docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
