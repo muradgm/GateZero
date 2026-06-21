@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-382",
+  latestPacket: "TRD-392",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "382 / 382",
+      value: "392 / 392",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "382 accepted records"
+      reference: "392 accepted records"
     }
   ],
   nextActions: [
-    "Pause Gate 1 maintenance unless a material gap appears or a Gate 2 readiness assessment is requested.",
+    "Prepare formal Gate 1 closeout signoff only; Gate 2 remains inactive.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -214,7 +214,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_MAINTENANCE_STOP_CONDITION_CHECKPOINT.md",
         "docs/operations/GATE1_EVIDENCE_FRESHNESS_CHURN_GUARD_REVIEW.md",
         "docs/operations/GATE1_BRAND_HANDOFF_ISOLATION_REVIEW.md",
-        "docs/operations/GATE1_MAINTENANCE_CLOSEOUT_CHECKPOINT.md"
+        "docs/operations/GATE1_MAINTENANCE_CLOSEOUT_CHECKPOINT.md",
+        "docs/operations/GATE1_CLOSEOUT_EVIDENCE_REVIEW.md",
+        "docs/operations/GATE1_ACCEPTANCE_CRITERIA_AUDIT.md",
+        "docs/operations/GATE2_READINESS_ASSESSMENT_PACKET.md",
+        "docs/operations/GATE2_BLOCKER_INVENTORY.md",
+        "docs/operations/GATE2_AUTONOMY_GATE_DELTA_REVIEW.md",
+        "docs/operations/GATE2_FINANCIAL_RISK_GATE_DELTA_REVIEW.md",
+        "docs/operations/GATE2_CREDENTIAL_BOUNDARY_ASSESSMENT.md",
+        "docs/operations/GATE2_EXECUTION_SCOPE_PROHIBITION_REVIEW.md",
+        "docs/operations/GATE2_ASSESSMENT_QA_SECURITY_REVIEW.md",
+        "docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md"
       ]
     },
     {
