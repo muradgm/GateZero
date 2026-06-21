@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-362",
+  latestPacket: "TRD-372",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "362 / 362",
+      value: "372 / 372",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "362 accepted records"
+      reference: "372 accepted records"
     }
   ],
   nextActions: [
-    "Proceed to TRD-363 post-adapter-planning freeze lane selection.",
+    "Proceed only with concrete Gate 1 maintenance gaps after TRD-372.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -194,7 +194,17 @@ export const commandCenterData = {
         "docs/operations/GATE1_PROVIDER_LICENSE_CHECKLIST_COVERAGE_RECHECK.md",
         "docs/operations/GATE1_ADAPTER_AUDIT_LOG_BOUNDARY.md",
         "docs/operations/GATE1_ADAPTER_BLOCKER_CHECKPOINT_RECHECK.md",
-        "docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md"
+        "docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md",
+        "docs/operations/GATE1_POST_ADAPTER_FREEZE_LANE_SELECTION.md",
+        "docs/operations/GATE1_GUARD_COMMAND_DOC_ALIGNMENT_RECHECK.md",
+        "docs/operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING_RECHECK.md",
+        "docs/operations/GATE1_READINESS_BLOCKER_LANGUAGE_RECHECK.md",
+        "docs/operations/GATE1_COMMAND_CENTER_WORDING_AUDIT.md",
+        "docs/operations/GATE1_REVIEW_ARTIFACT_AGING_POLICY_DRAFT.md",
+        "docs/operations/GATE1_SOURCE_LINK_MAP_CONSISTENCY_RECHECK.md",
+        "docs/operations/GATE1_BLOCKED_SCOPE_SCANNER_REVIEW.md",
+        "docs/operations/GATE1_OPERATOR_HANDOFF_FRESHNESS_REVIEW.md",
+        "docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md"
       ]
     },
     {

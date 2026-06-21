@@ -90,7 +90,17 @@ const requiredDocPaths = [
   "docs/operations/GATE1_PROVIDER_LICENSE_CHECKLIST_COVERAGE_RECHECK.md",
   "docs/operations/GATE1_ADAPTER_AUDIT_LOG_BOUNDARY.md",
   "docs/operations/GATE1_ADAPTER_BLOCKER_CHECKPOINT_RECHECK.md",
-  "docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md"
+  "docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md",
+  "docs/operations/GATE1_POST_ADAPTER_FREEZE_LANE_SELECTION.md",
+  "docs/operations/GATE1_GUARD_COMMAND_DOC_ALIGNMENT_RECHECK.md",
+  "docs/operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING_RECHECK.md",
+  "docs/operations/GATE1_READINESS_BLOCKER_LANGUAGE_RECHECK.md",
+  "docs/operations/GATE1_COMMAND_CENTER_WORDING_AUDIT.md",
+  "docs/operations/GATE1_REVIEW_ARTIFACT_AGING_POLICY_DRAFT.md",
+  "docs/operations/GATE1_SOURCE_LINK_MAP_CONSISTENCY_RECHECK.md",
+  "docs/operations/GATE1_BLOCKED_SCOPE_SCANNER_REVIEW.md",
+  "docs/operations/GATE1_OPERATOR_HANDOFF_FRESHNESS_REVIEW.md",
+  "docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md"
 ];
 
 const requiredSourcePaths = [
@@ -222,7 +232,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 89
+      checkedArtifactCount: 99
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

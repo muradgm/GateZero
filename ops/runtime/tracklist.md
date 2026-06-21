@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-362`                                                      |
+| Latest accepted packet     | `TRD-372`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-362`
+- Accepted packets: `TRD-044` to `TRD-372`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -263,6 +263,10 @@ Latest accepted result:
     exclusion policy, quarantine policy coverage recheck, adapter fixture negative cases plan, data
     retention limitation record, provider license checklist coverage recheck, adapter audit-log
     boundary, adapter blocker checkpoint recheck, and adapter planning freeze checkpoint.
+  - Post-adapter-freeze lane selection, guard command doc alignment recheck, contract guard schema
+    validation hardening recheck, readiness blocker language recheck, command-center wording audit,
+    review artifact aging policy draft, source-link map consistency recheck, blocked-scope scanner
+    review, operator handoff freshness review, and Gate 1 maintenance checkpoint.
 
 ## Workstream Summary
 
@@ -738,6 +742,16 @@ Latest accepted result:
 | `TRD-360` | accepted | Security         | Drafted adapter audit-log boundary.                   |
 | `TRD-361` | accepted | Checkpoint       | Rechecked Gate 1 adapter blocker checkpoint.          |
 | `TRD-362` | accepted | Checkpoint       | Froze adapter planning pending concrete gap.          |
+| `TRD-363` | accepted | Planning         | Selected post-adapter-freeze maintenance lane.        |
+| `TRD-364` | accepted | Documentation    | Rechecked guard command docs alignment.               |
+| `TRD-365` | accepted | Validation       | Rechecked contract guard schema hardening.            |
+| `TRD-366` | accepted | Risk             | Rechecked readiness blocker language.                 |
+| `TRD-367` | accepted | Command center   | Audited Gate 1 command-center wording.                |
+| `TRD-368` | accepted | Policy           | Drafted review artifact aging policy.                 |
+| `TRD-369` | accepted | Documentation    | Rechecked source-link map consistency.                |
+| `TRD-370` | accepted | Security         | Reviewed Gate 1 blocked-scope scanner posture.        |
+| `TRD-371` | accepted | Handoff          | Reviewed operator handoff freshness.                  |
+| `TRD-372` | accepted | Checkpoint       | Checkpointed Gate 1 maintenance lane.                 |
 
 ## Current Operator Commands
 
@@ -774,18 +788,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                        | Acceptance focus                                                   |
-| ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------------------------------ |
-| 1    | `TRD-363` | queued | Post-adapter freeze lane selection.         | Choose the next bounded Gate 1 lane without adapter creep.         |
-| 2    | `TRD-364` | queued | Guard command docs alignment.               | Recheck command docs against current validation commands.          |
-| 3    | `TRD-365` | queued | Contract guard schema validation hardening. | Plan tighter schema guard expectations without new capability.     |
-| 4    | `TRD-366` | queued | Readiness blocker language recheck.         | Remove or constrain any ambiguous readiness semantics.             |
-| 5    | `TRD-367` | queued | Command-center Gate 1 wording audit.        | Confirm dashboard wording stays evidence-only and no-approval.     |
-| 6    | `TRD-368` | queued | Review artifact aging policy draft.         | Define when old reviews need refresh without churning records.     |
-| 7    | `TRD-369` | queued | Source-link map consistency recheck.        | Recheck docs, tracklist, artifact map, and command center indexes. |
-| 8    | `TRD-370` | queued | Gate 1 blocked-scope scanner review.        | Recheck forbidden pattern coverage for current Gate 1 scope.       |
-| 9    | `TRD-371` | queued | Operator handoff freshness review.          | Verify handoff guidance matches latest gate and brand language.    |
-| 10   | `TRD-372` | queued | Gate 1 maintenance checkpoint.              | Decide whether to continue maintenance or pause until a real gap.  |
+| Rank | Packet    | Status | Goal                                      | Acceptance focus                                               |
+| ---- | --------- | ------ | ----------------------------------------- | -------------------------------------------------------------- |
+| 1    | `TRD-373` | queued | Gate 1 maintenance gap intake.            | Identify whether any concrete maintenance gap remains.         |
+| 2    | `TRD-374` | queued | Tracklist queue discipline recheck.       | Keep next tasks bounded and avoid self-churn.                  |
+| 3    | `TRD-375` | queued | Command-center next-action pause wording. | Ensure dashboard tells operators to pause without real gaps.   |
+| 4    | `TRD-376` | queued | Review aging policy source-link recheck.  | Confirm review-aging policy remains indexed and non-automated. |
+| 5    | `TRD-377` | queued | Scanner blocked-term sample audit.        | Review examples without changing scanner behavior.             |
+| 6    | `TRD-378` | queued | Gate 1 docs stale-reference sweep.        | Find stale Gate 0 or readiness wording in current docs.        |
+| 7    | `TRD-379` | queued | Maintenance stop-condition checkpoint.    | Define when the queue should pause again.                      |
+| 8    | `TRD-380` | queued | Evidence freshness churn guard review.    | Recheck CI evidence refresh loop remains paused.               |
+| 9    | `TRD-381` | queued | Brand handoff isolation review.           | Keep brand assets separate from Gate 1 control-plane commits.  |
+| 10   | `TRD-382` | queued | Gate 1 maintenance closeout checkpoint.   | Decide whether to stop until a material gap appears.           |
 
 ## Rejected For Now
 
@@ -1303,6 +1317,23 @@ Do not mark a packet accepted until:
   `docs/operations/GATE1_ADAPTER_BLOCKER_CHECKPOINT_RECHECK.md`
 - Gate 1 adapter planning freeze checkpoint:
   `docs/operations/GATE1_ADAPTER_PLANNING_FREEZE_CHECKPOINT.md`
+- Gate 1 post-adapter freeze lane selection:
+  `docs/operations/GATE1_POST_ADAPTER_FREEZE_LANE_SELECTION.md`
+- Gate 1 guard command doc alignment recheck:
+  `docs/operations/GATE1_GUARD_COMMAND_DOC_ALIGNMENT_RECHECK.md`
+- Gate 1 contract guard schema validation hardening recheck:
+  `docs/operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING_RECHECK.md`
+- Gate 1 readiness blocker language recheck:
+  `docs/operations/GATE1_READINESS_BLOCKER_LANGUAGE_RECHECK.md`
+- Gate 1 command-center wording audit: `docs/operations/GATE1_COMMAND_CENTER_WORDING_AUDIT.md`
+- Gate 1 review artifact aging policy draft:
+  `docs/operations/GATE1_REVIEW_ARTIFACT_AGING_POLICY_DRAFT.md`
+- Gate 1 source-link map consistency recheck:
+  `docs/operations/GATE1_SOURCE_LINK_MAP_CONSISTENCY_RECHECK.md`
+- Gate 1 blocked-scope scanner review: `docs/operations/GATE1_BLOCKED_SCOPE_SCANNER_REVIEW.md`
+- Gate 1 operator handoff freshness review:
+  `docs/operations/GATE1_OPERATOR_HANDOFF_FRESHNESS_REVIEW.md`
+- Gate 1 maintenance checkpoint: `docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
