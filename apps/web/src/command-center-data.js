@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G1_BACKTESTING",
   scope: "historical_backtesting_only",
-  latestPacket: "TRD-392",
+  latestPacket: "TRD-402",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "392 / 392",
+      value: "402 / 402",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "392 accepted records"
+      reference: "402 accepted records"
     }
   ],
   nextActions: [
-    "Prepare formal Gate 1 closeout signoff only; Gate 2 remains inactive.",
+    "Gate 1 is ready for signoff review; Gate 2 remains inactive until a separate gate movement decision.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -224,7 +224,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_CREDENTIAL_BOUNDARY_ASSESSMENT.md",
         "docs/operations/GATE2_EXECUTION_SCOPE_PROHIBITION_REVIEW.md",
         "docs/operations/GATE2_ASSESSMENT_QA_SECURITY_REVIEW.md",
-        "docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md"
+        "docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md",
+        "docs/operations/GATE1_CLOSEOUT_SIGNOFF_PACKET.md",
+        "docs/operations/GATE2_AUTHORIZATION_CRITERIA_DRAFT.md",
+        "docs/operations/GATE2_RISK_OWNER_AUTHORIZATION_CHECKLIST.md",
+        "docs/operations/GATE2_AUTONOMY_OWNER_AUTHORIZATION_CHECKLIST.md",
+        "docs/operations/GATE2_QA_SECURITY_AUTHORIZATION_CHECKLIST.md",
+        "docs/operations/GATE2_IMPLEMENTATION_PROHIBITION_NOTE.md",
+        "docs/operations/GATE2_OPERATOR_DECISION_AUTHORITY_REVIEW.md",
+        "docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md",
+        "docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md",
+        "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md"
       ]
     },
     {

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-392`                                                      |
+| Latest accepted packet     | `TRD-402`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-392`
+- Accepted packets: `TRD-044` to `TRD-402`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -275,6 +275,10 @@ Latest accepted result:
     Gate 2 blocker inventory, autonomy gate delta review, financial risk gate delta review,
     credential boundary assessment, execution-scope prohibition review, Gate 2 assessment
     QA/security review, and Gate 1 closeout recommendation.
+  - Gate 1 closeout signoff packet, Gate 2 authorization criteria draft, risk-owner authorization
+    checklist, autonomy-owner authorization checklist, QA/security authorization checklist, Gate 2
+    implementation prohibition note, operator decision authority review, Gate 1 final verification
+    record, gate movement decision packet draft, and Gate 1 signoff recommendation.
 
 ## Workstream Summary
 
@@ -780,6 +784,16 @@ Latest accepted result:
 | `TRD-390` | accepted | Risk             | Reviewed execution-scope prohibition.                 |
 | `TRD-391` | accepted | Security         | Reviewed Gate 2 assessment QA/security posture.       |
 | `TRD-392` | accepted | Recommendation   | Recommended Gate 1 closeout signoff lane.             |
+| `TRD-393` | accepted | Signoff          | Prepared Gate 1 closeout signoff packet.              |
+| `TRD-394` | accepted | Planning         | Drafted Gate 2 authorization criteria.                |
+| `TRD-395` | accepted | Risk             | Drafted risk-owner authorization checklist.           |
+| `TRD-396` | accepted | Autonomy         | Drafted autonomy-owner authorization checklist.       |
+| `TRD-397` | accepted | Security         | Drafted QA/security authorization checklist.          |
+| `TRD-398` | accepted | Boundary         | Confirmed Gate 2 implementation prohibition.          |
+| `TRD-399` | accepted | Governance       | Reviewed operator decision authority.                 |
+| `TRD-400` | accepted | Verification     | Recorded Gate 1 final verification requirement.       |
+| `TRD-401` | accepted | Planning         | Drafted gate movement decision packet shape.          |
+| `TRD-402` | accepted | Recommendation   | Recommended Gate 1 signoff review and pause.          |
 
 ## Current Operator Commands
 
@@ -816,18 +830,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                    | Acceptance focus                                               |
-| ---- | --------- | ------ | --------------------------------------- | -------------------------------------------------------------- |
-| 1    | `TRD-393` | queued | Gate 1 closeout signoff packet.         | Prepare signoff criteria; do not move gates.                   |
-| 2    | `TRD-394` | queued | Gate 2 authorization criteria draft.    | Define future criteria without authorizing Gate 2.             |
-| 3    | `TRD-395` | queued | Risk owner authorization checklist.     | Draft required risk approvals for future gate movement.        |
-| 4    | `TRD-396` | queued | Autonomy owner authorization checklist. | Draft required autonomy approvals for future gate movement.    |
-| 5    | `TRD-397` | queued | QA/security authorization checklist.    | Draft scanner, secrets, and validation requirements.           |
-| 6    | `TRD-398` | queued | Gate 2 implementation prohibition note. | Confirm no implementation starts during authorization draft.   |
-| 7    | `TRD-399` | queued | Operator decision authority review.     | Confirm operator remains final authority.                      |
-| 8    | `TRD-400` | queued | Gate 1 final verification record.       | Record final local verification before signoff recommendation. |
-| 9    | `TRD-401` | queued | Gate movement decision packet draft.    | Draft the decision packet shape; no gate movement.             |
-| 10   | `TRD-402` | queued | Gate 1 signoff recommendation.          | Recommend signoff, pause, or more Gate 1 work.                 |
+| Rank | Packet    | Status | Goal                               | Acceptance focus                                               |
+| ---- | --------- | ------ | ---------------------------------- | -------------------------------------------------------------- |
+| 1    | `TRD-403` | queued | Operator gate decision intake.     | Ask whether to pause, maintain Gate 1, or draft gate movement. |
+| 2    | `TRD-404` | queued | Gate 1 pause packet.               | Prepare a pause record if no material gap exists.              |
+| 3    | `TRD-405` | queued | Material gap intake.               | Resume only if a concrete Gate 1 gap appears.                  |
+| 4    | `TRD-406` | queued | Brand handoff workstream decision. | Decide separately whether to stage brand handoff assets.       |
+| 5    | `TRD-407` | queued | Gate movement request intake.      | Intake a formal request without moving gates.                  |
+| 6    | `TRD-408` | queued | Gate movement approval routing.    | Route risk, autonomy, QA/security approvals.                   |
+| 7    | `TRD-409` | queued | Gate movement dry-run checklist.   | Draft checklist only; no implementation.                       |
+| 8    | `TRD-410` | queued | Gate 2 planning hold note.         | Confirm Gate 2 remains inactive.                               |
+| 9    | `TRD-411` | queued | Final command-center pause sync.   | Keep dashboard aligned with pause/signoff status.              |
+| 10   | `TRD-412` | queued | Operator next-decision checkpoint. | Wait for operator direction before more scope.                 |
 
 ## Rejected For Now
 
@@ -1390,6 +1404,20 @@ Do not mark a packet accepted until:
   `docs/operations/GATE2_EXECUTION_SCOPE_PROHIBITION_REVIEW.md`
 - Gate 2 assessment QA/security review: `docs/operations/GATE2_ASSESSMENT_QA_SECURITY_REVIEW.md`
 - Gate 1 closeout recommendation: `docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md`
+- Gate 1 closeout signoff packet: `docs/operations/GATE1_CLOSEOUT_SIGNOFF_PACKET.md`
+- Gate 2 authorization criteria draft: `docs/operations/GATE2_AUTHORIZATION_CRITERIA_DRAFT.md`
+- Gate 2 risk-owner authorization checklist:
+  `docs/operations/GATE2_RISK_OWNER_AUTHORIZATION_CHECKLIST.md`
+- Gate 2 autonomy-owner authorization checklist:
+  `docs/operations/GATE2_AUTONOMY_OWNER_AUTHORIZATION_CHECKLIST.md`
+- Gate 2 QA/security authorization checklist:
+  `docs/operations/GATE2_QA_SECURITY_AUTHORIZATION_CHECKLIST.md`
+- Gate 2 implementation prohibition note: `docs/operations/GATE2_IMPLEMENTATION_PROHIBITION_NOTE.md`
+- Gate 2 operator decision authority review:
+  `docs/operations/GATE2_OPERATOR_DECISION_AUTHORITY_REVIEW.md`
+- Gate 1 final verification record: `docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md`
+- Gate movement decision packet draft: `docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md`
+- Gate 1 signoff recommendation: `docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

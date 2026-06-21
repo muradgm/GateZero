@@ -120,7 +120,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_CREDENTIAL_BOUNDARY_ASSESSMENT.md",
   "docs/operations/GATE2_EXECUTION_SCOPE_PROHIBITION_REVIEW.md",
   "docs/operations/GATE2_ASSESSMENT_QA_SECURITY_REVIEW.md",
-  "docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md"
+  "docs/operations/GATE1_CLOSEOUT_RECOMMENDATION.md",
+  "docs/operations/GATE1_CLOSEOUT_SIGNOFF_PACKET.md",
+  "docs/operations/GATE2_AUTHORIZATION_CRITERIA_DRAFT.md",
+  "docs/operations/GATE2_RISK_OWNER_AUTHORIZATION_CHECKLIST.md",
+  "docs/operations/GATE2_AUTONOMY_OWNER_AUTHORIZATION_CHECKLIST.md",
+  "docs/operations/GATE2_QA_SECURITY_AUTHORIZATION_CHECKLIST.md",
+  "docs/operations/GATE2_IMPLEMENTATION_PROHIBITION_NOTE.md",
+  "docs/operations/GATE2_OPERATOR_DECISION_AUTHORITY_REVIEW.md",
+  "docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md",
+  "docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md",
+  "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md"
 ];
 
 const requiredSourcePaths = [
@@ -252,7 +262,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 119
+      checkedArtifactCount: 129
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
