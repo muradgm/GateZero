@@ -5,22 +5,23 @@
 | Field                      | Value                                                          |
 | -------------------------- | -------------------------------------------------------------- |
 | Project                    | TraderFrame                                                    |
-| Operating gate             | `G1_BACKTESTING`                                               |
-| Operating scope            | `historical_backtesting_only`                                  |
+| Operating gate             | `G2_PAPER_TRADING`                                             |
+| Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-402`                                                      |
+| Latest accepted packet     | `TRD-412`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
 
 TraderFrame is currently a local research, evidence, risk-control, and execution-support foundation.
 
-The project is now at Gate 1 historical backtesting only. The system must not add live trading,
-broker integration, autonomous execution, AI buy/sell prediction, real or paper order placement,
-broker API key handling, strategy profitability claims, readiness claims, approval scoring, report
-publishing, external execution paths, or risk-gate loosening.
+The project is now at Gate 2 planning authorization for paper simulation only. The system must not
+add live trading, external account connectivity, autonomous execution, AI buy/sell prediction, real
+order placement, provider credential handling, strategy profitability claims, readiness claims,
+approval scoring, report publishing, external execution paths, or risk-gate loosening. Simulated
+order mechanics remain blocked until a separate contract-first implementation packet is accepted.
 
 ## Status Legend
 
@@ -279,6 +280,9 @@ Latest accepted result:
     checklist, autonomy-owner authorization checklist, QA/security authorization checklist, Gate 2
     implementation prohibition note, operator decision authority review, Gate 1 final verification
     record, gate movement decision packet draft, and Gate 1 signoff recommendation.
+  - Operator-approved Gate 2 planning authorization, Gate 1 pause exit, material gap intake, brand
+    handoff isolation, movement request intake, approval routing, dry-run checklist, planning hold,
+    command-center sync, and next-decision checkpoint.
 
 ## Workstream Summary
 
@@ -794,6 +798,16 @@ Latest accepted result:
 | `TRD-400` | accepted | Verification     | Recorded Gate 1 final verification requirement.       |
 | `TRD-401` | accepted | Planning         | Drafted gate movement decision packet shape.          |
 | `TRD-402` | accepted | Recommendation   | Recommended Gate 1 signoff review and pause.          |
+| `TRD-403` | accepted | Gate decision    | Recorded operator approval for Gate 2 planning.       |
+| `TRD-404` | accepted | Gate transition  | Exited the Gate 1 signoff pause.                      |
+| `TRD-405` | accepted | Gap intake       | Recorded no open material Gate 1 gap.                 |
+| `TRD-406` | accepted | Handoff          | Kept brand handoff isolated from gate movement.       |
+| `TRD-407` | accepted | Gate request     | Intook formal Gate 2 movement request.                |
+| `TRD-408` | accepted | Approval routing | Routed Gate 2 movement approvals.                     |
+| `TRD-409` | accepted | Checklist        | Drafted Gate 2 movement dry-run checklist.            |
+| `TRD-410` | accepted | Planning hold    | Held Gate 2 to planning authorization only.           |
+| `TRD-411` | accepted | Command center   | Synced command center to Gate 2 planning.             |
+| `TRD-412` | accepted | Checkpoint       | Defined next Gate 2 planning decision.                |
 
 ## Current Operator Commands
 
@@ -830,18 +844,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                               | Acceptance focus                                               |
-| ---- | --------- | ------ | ---------------------------------- | -------------------------------------------------------------- |
-| 1    | `TRD-403` | queued | Operator gate decision intake.     | Ask whether to pause, maintain Gate 1, or draft gate movement. |
-| 2    | `TRD-404` | queued | Gate 1 pause packet.               | Prepare a pause record if no material gap exists.              |
-| 3    | `TRD-405` | queued | Material gap intake.               | Resume only if a concrete Gate 1 gap appears.                  |
-| 4    | `TRD-406` | queued | Brand handoff workstream decision. | Decide separately whether to stage brand handoff assets.       |
-| 5    | `TRD-407` | queued | Gate movement request intake.      | Intake a formal request without moving gates.                  |
-| 6    | `TRD-408` | queued | Gate movement approval routing.    | Route risk, autonomy, QA/security approvals.                   |
-| 7    | `TRD-409` | queued | Gate movement dry-run checklist.   | Draft checklist only; no implementation.                       |
-| 8    | `TRD-410` | queued | Gate 2 planning hold note.         | Confirm Gate 2 remains inactive.                               |
-| 9    | `TRD-411` | queued | Final command-center pause sync.   | Keep dashboard aligned with pause/signoff status.              |
-| 10   | `TRD-412` | queued | Operator next-decision checkpoint. | Wait for operator direction before more scope.                 |
+| Rank | Packet    | Status | Goal                                      | Acceptance focus                                     |
+| ---- | --------- | ------ | ----------------------------------------- | ---------------------------------------------------- |
+| 1    | `TRD-413` | queued | Gate 2 simulated-order record plan.       | Contract shape only; no implementation.              |
+| 2    | `TRD-414` | queued | Gate 2 simulation state boundary plan.    | State model boundaries and rollback rules.           |
+| 3    | `TRD-415` | queued | No-external-account guard plan.           | Guard external account routes before coding.         |
+| 4    | `TRD-416` | queued | Credential exclusion guard plan.          | Keep provider and account secrets out of scope.      |
+| 5    | `TRD-417` | queued | Simulated fill assumption plan.           | Assumption record without performance claims.        |
+| 6    | `TRD-418` | queued | Gate 2 risk review event plan.            | Risk event contract before simulated mechanics.      |
+| 7    | `TRD-419` | queued | Operator action log plan.                 | Human decision trace before implementation.          |
+| 8    | `TRD-420` | queued | Gate 2 negative fixture plan.             | Failure cases for blocked execution boundaries.      |
+| 9    | `TRD-421` | queued | Command-center Gate 2 planning extension. | Planning posture only; no execution controls.        |
+| 10   | `TRD-422` | queued | Gate 2 implementation readiness review.   | Decide whether a contract-first packet can be built. |
 
 ## Rejected For Now
 
@@ -850,12 +864,12 @@ Latest accepted result:
 | UI expansion                        | rejected_for_now | Product breadth must not outrun trust in the core decision loop.                   |
 | Broker integration                  | rejected_for_now | Gate 1 is historical backtesting only.                                             |
 | Live execution                      | rejected_for_now | No execution path is allowed at Gate 1.                                            |
-| Paper execution mechanics           | rejected_for_now | Still an execution-support expansion beyond current local review trust.            |
+| Simulated execution mechanics       | rejected_for_now | Requires a separate contract-first Gate 2 implementation packet.                   |
 | AI buy/sell prediction              | rejected_for_now | The system validates evidence and risk review; it does not make prediction claims. |
 | Report export or publishing         | rejected_for_now | Current artifacts remain local and operational.                                    |
 | Approval scoring                    | rejected_for_now | Local scores must not become approval semantics.                                   |
 | Readiness scoring                   | rejected_for_now | Readiness implies later-phase eligibility, which is not authorized.                |
-| Performance or profitability claims | rejected_for_now | Strategy claims are outside Gate 0 foundation work.                                |
+| Performance or profitability claims | rejected_for_now | Strategy claims remain outside the current control-plane scope.                    |
 | Risk-gate loosening                 | rejected_for_now | Risk gates can only be tightened or preserved under current scope.                 |
 
 ## Maintenance Rules
@@ -1418,6 +1432,18 @@ Do not mark a packet accepted until:
 - Gate 1 final verification record: `docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md`
 - Gate movement decision packet draft: `docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md`
 - Gate 1 signoff recommendation: `docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md`
+- Gate 2 operator gate decision intake: `docs/operations/GATE2_OPERATOR_GATE_DECISION_INTAKE.md`
+- Gate 1 pause exit packet: `docs/operations/GATE1_PAUSE_EXIT_PACKET.md`
+- Gate 1 material gap intake result: `docs/operations/GATE1_MATERIAL_GAP_INTAKE_RESULT.md`
+- Gate 2 brand handoff workstream decision:
+  `docs/operations/GATE2_BRAND_HANDOFF_WORKSTREAM_DECISION.md`
+- Gate 2 movement request intake: `docs/operations/GATE2_MOVEMENT_REQUEST_INTAKE.md`
+- Gate 2 movement approval routing: `docs/operations/GATE2_MOVEMENT_APPROVAL_ROUTING.md`
+- Gate 2 movement dry-run checklist: `docs/operations/GATE2_MOVEMENT_DRY_RUN_CHECKLIST.md`
+- Gate 2 planning hold note: `docs/operations/GATE2_PLANNING_HOLD_NOTE.md`
+- Gate 2 command-center planning sync: `docs/operations/GATE2_COMMAND_CENTER_PLANNING_SYNC.md`
+- Gate 2 operator next-decision checkpoint:
+  `docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`

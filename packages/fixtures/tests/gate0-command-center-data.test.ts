@@ -9,12 +9,12 @@ const mainPath = path.join(rootDir, "apps", "web", "src", "main.js");
 const stylePath = path.join(rootDir, "apps", "web", "src", "styles.css");
 
 describe("Gate 0 command center surface", () => {
-  it("keeps the command center tied to Gate 1 historical backtesting scope", () => {
+  it("keeps the command center tied to Gate 2 simulation-planning scope", () => {
     const data = readFileSync(dataPath, "utf8");
 
-    expect(data).toContain("G1_BACKTESTING");
-    expect(data).toContain("historical_backtesting_only");
-    expect(data).toContain("TRD-402");
+    expect(data).toContain("G2_PAPER_TRADING");
+    expect(data).toContain("paper_simulation_planning_only");
+    expect(data).toContain("TRD-412");
   });
 
   it("does not expose trading action language in app data", () => {

@@ -2,9 +2,9 @@ export const commandCenterData = {
   project: "TraderFrame",
   title: "TraderFrame Command Center",
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
-  gate: "G1_BACKTESTING",
-  scope: "historical_backtesting_only",
-  latestPacket: "TRD-402",
+  gate: "G2_PAPER_TRADING",
+  scope: "paper_simulation_planning_only",
+  latestPacket: "TRD-412",
   localVerification: "71 files / 424 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -13,8 +13,8 @@ export const commandCenterData = {
   healthCards: [
     {
       label: "Gate Status",
-      value: "G1_BACKTESTING",
-      detail: "Control plane is historical-backtesting-only.",
+      value: "G2_PAPER_TRADING",
+      detail: "Control plane is authorized for simulation planning only.",
       tone: "steady"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "402 / 402",
+      value: "412 / 412",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "402 accepted records"
+      reference: "412 accepted records"
     }
   ],
   nextActions: [
-    "Gate 1 is ready for signoff review; Gate 2 remains inactive until a separate gate movement decision.",
+    "Gate 2 planning is operator-approved; implementation still requires a separate contract-first packet.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -234,7 +234,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_OPERATOR_DECISION_AUTHORITY_REVIEW.md",
         "docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md",
         "docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md",
-        "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md"
+        "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md",
+        "docs/operations/GATE2_OPERATOR_GATE_DECISION_INTAKE.md",
+        "docs/operations/GATE1_PAUSE_EXIT_PACKET.md",
+        "docs/operations/GATE1_MATERIAL_GAP_INTAKE_RESULT.md",
+        "docs/operations/GATE2_BRAND_HANDOFF_WORKSTREAM_DECISION.md",
+        "docs/operations/GATE2_MOVEMENT_REQUEST_INTAKE.md",
+        "docs/operations/GATE2_MOVEMENT_APPROVAL_ROUTING.md",
+        "docs/operations/GATE2_MOVEMENT_DRY_RUN_CHECKLIST.md",
+        "docs/operations/GATE2_PLANNING_HOLD_NOTE.md",
+        "docs/operations/GATE2_COMMAND_CENTER_PLANNING_SYNC.md",
+        "docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md"
       ]
     },
     {

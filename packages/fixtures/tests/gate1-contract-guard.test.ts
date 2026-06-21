@@ -130,7 +130,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_OPERATOR_DECISION_AUTHORITY_REVIEW.md",
   "docs/operations/GATE1_FINAL_VERIFICATION_RECORD.md",
   "docs/operations/GATE_MOVEMENT_DECISION_PACKET_DRAFT.md",
-  "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md"
+  "docs/operations/GATE1_SIGNOFF_RECOMMENDATION.md",
+  "docs/operations/GATE2_OPERATOR_GATE_DECISION_INTAKE.md",
+  "docs/operations/GATE1_PAUSE_EXIT_PACKET.md",
+  "docs/operations/GATE1_MATERIAL_GAP_INTAKE_RESULT.md",
+  "docs/operations/GATE2_BRAND_HANDOFF_WORKSTREAM_DECISION.md",
+  "docs/operations/GATE2_MOVEMENT_REQUEST_INTAKE.md",
+  "docs/operations/GATE2_MOVEMENT_APPROVAL_ROUTING.md",
+  "docs/operations/GATE2_MOVEMENT_DRY_RUN_CHECKLIST.md",
+  "docs/operations/GATE2_PLANNING_HOLD_NOTE.md",
+  "docs/operations/GATE2_COMMAND_CENTER_PLANNING_SYNC.md",
+  "docs/operations/GATE2_OPERATOR_NEXT_DECISION_CHECKPOINT.md"
 ];
 
 const requiredSourcePaths = [
@@ -262,7 +272,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 129
+      checkedArtifactCount: 139
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

@@ -5,19 +5,19 @@
 | Field                      | Value                           |
 | -------------------------- | ------------------------------- |
 | Generated at               | 2026-06-21                      |
-| Latest accepted packet     | `TRD-402`                       |
+| Latest accepted packet     | `TRD-412`                       |
 | Latest accepted validation | 71 test files, 424 tests passed |
-| Assignment count           | 402                             |
-| Accepted count             | 402                             |
+| Assignment count           | 412                             |
+| Accepted count             | 412                             |
 | Open count                 | 0                               |
 
 ## Boundary
 
-| Field          | Value                         |
-| -------------- | ----------------------------- |
-| Financial gate | `G1_BACKTESTING`              |
-| Scope          | `historical_backtesting_only` |
-| Source         | Local ops records             |
+| Field          | Value                            |
+| -------------- | -------------------------------- |
+| Financial gate | `G2_PAPER_TRADING`               |
+| Scope          | `paper_simulation_planning_only` |
+| Source         | Local ops records                |
 
 ## Packet Status
 
@@ -425,6 +425,16 @@
 | `TRD-400` | `accepted` |
 | `TRD-401` | `accepted` |
 | `TRD-402` | `accepted` |
+| `TRD-403` | `accepted` |
+| `TRD-404` | `accepted` |
+| `TRD-405` | `accepted` |
+| `TRD-406` | `accepted` |
+| `TRD-407` | `accepted` |
+| `TRD-408` | `accepted` |
+| `TRD-409` | `accepted` |
+| `TRD-410` | `accepted` |
+| `TRD-411` | `accepted` |
+| `TRD-412` | `accepted` |
 
 ## Notes
 
