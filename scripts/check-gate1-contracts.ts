@@ -201,7 +201,17 @@ const requiredDocPaths = [
   "docs/operations/GATE1_SOURCE_LINK_MAP_CONSISTENCY_RECHECK.md",
   "docs/operations/GATE1_BLOCKED_SCOPE_SCANNER_REVIEW.md",
   "docs/operations/GATE1_OPERATOR_HANDOFF_FRESHNESS_REVIEW.md",
-  "docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md"
+  "docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md",
+  "docs/operations/GATE1_MAINTENANCE_GAP_INTAKE.md",
+  "docs/operations/GATE1_TRACKLIST_QUEUE_DISCIPLINE_RECHECK.md",
+  "docs/operations/GATE1_COMMAND_CENTER_NEXT_ACTION_PAUSE_WORDING.md",
+  "docs/operations/GATE1_REVIEW_AGING_POLICY_SOURCE_LINK_RECHECK.md",
+  "docs/operations/GATE1_SCANNER_BLOCKED_TERM_SAMPLE_AUDIT.md",
+  "docs/operations/GATE1_DOCS_STALE_REFERENCE_SWEEP.md",
+  "docs/operations/GATE1_MAINTENANCE_STOP_CONDITION_CHECKPOINT.md",
+  "docs/operations/GATE1_EVIDENCE_FRESHNESS_CHURN_GUARD_REVIEW.md",
+  "docs/operations/GATE1_BRAND_HANDOFF_ISOLATION_REVIEW.md",
+  "docs/operations/GATE1_MAINTENANCE_CLOSEOUT_CHECKPOINT.md"
 ] as const;
 
 const requiredSourcePaths = [

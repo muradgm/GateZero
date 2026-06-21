@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-372`                                                      |
+| Latest accepted packet     | `TRD-382`                                                      |
 | Latest accepted validation | 71 test files, 424 tests passed                                |
 
 ## Boundary
@@ -146,7 +146,7 @@ Latest accepted result:
 ### Phase 0 Operator Ergonomics And Foundation Closeout
 
 - Status: `complete`
-- Accepted packets: `TRD-044` to `TRD-372`
+- Accepted packets: `TRD-044` to `TRD-382`
 - Scope:
   - Inspect command, walkthrough, blocked fixture, selector, invalid input handling, help text,
     output tests, runbook, and checklist.
@@ -267,6 +267,10 @@ Latest accepted result:
     validation hardening recheck, readiness blocker language recheck, command-center wording audit,
     review artifact aging policy draft, source-link map consistency recheck, blocked-scope scanner
     review, operator handoff freshness review, and Gate 1 maintenance checkpoint.
+  - Maintenance gap intake, tracklist queue discipline recheck, command-center pause wording, review
+    aging source-link recheck, scanner blocked-term sample audit, stale-reference sweep, maintenance
+    stop-condition checkpoint, evidence freshness churn guard review, brand handoff isolation
+    review, and Gate 1 maintenance closeout checkpoint.
 
 ## Workstream Summary
 
@@ -752,6 +756,16 @@ Latest accepted result:
 | `TRD-370` | accepted | Security         | Reviewed Gate 1 blocked-scope scanner posture.        |
 | `TRD-371` | accepted | Handoff          | Reviewed operator handoff freshness.                  |
 | `TRD-372` | accepted | Checkpoint       | Checkpointed Gate 1 maintenance lane.                 |
+| `TRD-373` | accepted | Planning         | Intook remaining Gate 1 maintenance gaps.             |
+| `TRD-374` | accepted | Documentation    | Rechecked tracklist queue discipline.                 |
+| `TRD-375` | accepted | Command center   | Set command-center next-action pause wording.         |
+| `TRD-376` | accepted | Documentation    | Rechecked review aging policy source links.           |
+| `TRD-377` | accepted | Security         | Audited scanner blocked-term sample classes.          |
+| `TRD-378` | accepted | Documentation    | Swept Gate 1 docs stale-reference classes.            |
+| `TRD-379` | accepted | Checkpoint       | Defined Gate 1 maintenance stop conditions.           |
+| `TRD-380` | accepted | Evidence         | Reviewed evidence freshness churn guard.              |
+| `TRD-381` | accepted | Handoff          | Reviewed brand handoff isolation.                     |
+| `TRD-382` | accepted | Checkpoint       | Closed out Gate 1 maintenance lane.                   |
 
 ## Current Operator Commands
 
@@ -788,18 +802,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                      | Acceptance focus                                               |
-| ---- | --------- | ------ | ----------------------------------------- | -------------------------------------------------------------- |
-| 1    | `TRD-373` | queued | Gate 1 maintenance gap intake.            | Identify whether any concrete maintenance gap remains.         |
-| 2    | `TRD-374` | queued | Tracklist queue discipline recheck.       | Keep next tasks bounded and avoid self-churn.                  |
-| 3    | `TRD-375` | queued | Command-center next-action pause wording. | Ensure dashboard tells operators to pause without real gaps.   |
-| 4    | `TRD-376` | queued | Review aging policy source-link recheck.  | Confirm review-aging policy remains indexed and non-automated. |
-| 5    | `TRD-377` | queued | Scanner blocked-term sample audit.        | Review examples without changing scanner behavior.             |
-| 6    | `TRD-378` | queued | Gate 1 docs stale-reference sweep.        | Find stale Gate 0 or readiness wording in current docs.        |
-| 7    | `TRD-379` | queued | Maintenance stop-condition checkpoint.    | Define when the queue should pause again.                      |
-| 8    | `TRD-380` | queued | Evidence freshness churn guard review.    | Recheck CI evidence refresh loop remains paused.               |
-| 9    | `TRD-381` | queued | Brand handoff isolation review.           | Keep brand assets separate from Gate 1 control-plane commits.  |
-| 10   | `TRD-382` | queued | Gate 1 maintenance closeout checkpoint.   | Decide whether to stop until a material gap appears.           |
+| Rank | Packet    | Status | Goal                                  | Acceptance focus                                              |
+| ---- | --------- | ------ | ------------------------------------- | ------------------------------------------------------------- |
+| 1    | `TRD-383` | queued | Gate 1 closeout evidence review.      | Assess whether Gate 1 evidence is complete enough to close.   |
+| 2    | `TRD-384` | queued | Gate 1 acceptance criteria audit.     | Compare accepted work against Gate 1 completion expectations. |
+| 3    | `TRD-385` | queued | Gate 2 readiness assessment packet.   | Draft assessment-only packet; do not activate Gate 2.         |
+| 4    | `TRD-386` | queued | Gate 2 blocker inventory.             | List blockers before paper/simulated execution planning.      |
+| 5    | `TRD-387` | queued | Autonomy gate delta review.           | Identify autonomy changes required before any next phase.     |
+| 6    | `TRD-388` | queued | Financial risk gate delta review.     | Identify risk controls required before any next phase.        |
+| 7    | `TRD-389` | queued | Credential boundary assessment.       | Confirm credential handling remains blocked.                  |
+| 8    | `TRD-390` | queued | Execution-scope prohibition review.   | Confirm paper/live execution remains blocked.                 |
+| 9    | `TRD-391` | queued | Gate 2 assessment QA/security review. | Review assessment packet for scanner and secrets posture.     |
+| 10   | `TRD-392` | queued | Gate 1 closeout recommendation.       | Recommend pause, more Gate 1 work, or formal Gate 2 planning. |
 
 ## Rejected For Now
 
@@ -1334,6 +1348,22 @@ Do not mark a packet accepted until:
 - Gate 1 operator handoff freshness review:
   `docs/operations/GATE1_OPERATOR_HANDOFF_FRESHNESS_REVIEW.md`
 - Gate 1 maintenance checkpoint: `docs/operations/GATE1_MAINTENANCE_CHECKPOINT.md`
+- Gate 1 maintenance gap intake: `docs/operations/GATE1_MAINTENANCE_GAP_INTAKE.md`
+- Gate 1 tracklist queue discipline recheck:
+  `docs/operations/GATE1_TRACKLIST_QUEUE_DISCIPLINE_RECHECK.md`
+- Gate 1 command-center next-action pause wording:
+  `docs/operations/GATE1_COMMAND_CENTER_NEXT_ACTION_PAUSE_WORDING.md`
+- Gate 1 review aging policy source-link recheck:
+  `docs/operations/GATE1_REVIEW_AGING_POLICY_SOURCE_LINK_RECHECK.md`
+- Gate 1 scanner blocked-term sample audit:
+  `docs/operations/GATE1_SCANNER_BLOCKED_TERM_SAMPLE_AUDIT.md`
+- Gate 1 docs stale-reference sweep: `docs/operations/GATE1_DOCS_STALE_REFERENCE_SWEEP.md`
+- Gate 1 maintenance stop-condition checkpoint:
+  `docs/operations/GATE1_MAINTENANCE_STOP_CONDITION_CHECKPOINT.md`
+- Gate 1 evidence freshness churn guard review:
+  `docs/operations/GATE1_EVIDENCE_FRESHNESS_CHURN_GUARD_REVIEW.md`
+- Gate 1 brand handoff isolation review: `docs/operations/GATE1_BRAND_HANDOFF_ISOLATION_REVIEW.md`
+- Gate 1 maintenance closeout checkpoint: `docs/operations/GATE1_MAINTENANCE_CLOSEOUT_CHECKPOINT.md`
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
