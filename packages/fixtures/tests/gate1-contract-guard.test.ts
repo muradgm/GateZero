@@ -172,7 +172,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
   "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md",
   "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md",
-  "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_PURE_FUNCTION.md"
+  "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_PURE_FUNCTION.md",
+  "docs/operations/GATE2_SIMULATION_INPUT_ASSEMBLER.md",
+  "docs/operations/GATE2_SIMULATION_OUTPUT_ARTIFACT_BUILDER.md",
+  "docs/operations/GATE2_REPLAY_DETERMINISM_GUARD.md",
+  "docs/operations/GATE2_FAILURE_MODE_FIXTURES_AND_TESTS.md",
+  "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_EVIDENCE_VIEW.md",
+  "docs/operations/GATE2_MECHANICS_SCANNER_BOUNDARY_UPDATE.md",
+  "docs/operations/GATE2_MECHANICS_SOURCE_LINK_GUARD_RECHECK.md",
+  "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_CHECKPOINT.md",
+  "docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md",
+  "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md"
 ];
 
 const requiredSourcePaths = [
@@ -353,7 +363,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 177
+      checkedArtifactCount: 187
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

@@ -72,12 +72,166 @@ export type Gate2LocalSimulationEngineResult = z.infer<
   typeof Gate2LocalSimulationEngineResultSchema
 >;
 
+export const Gate2LocalSimulationInputAssemblySchema = z
+  .object({
+    local_simulation_input_assembly_id: z.string().trim().min(1),
+    financial_gate: z.literal("G2_PAPER_TRADING"),
+    scope: z.literal("paper_simulation_planning_only"),
+    simulated_order_record_id: z.string().trim().min(1),
+    simulation_state_record_id: z.string().trim().min(1),
+    risk_review_event_id: z.string().trim().min(1),
+    operator_action_log_id: z.string().trim().min(1),
+    simulated_fill_assumption_id: z.string().trim().min(1),
+    assembly_status: z.enum(["assembled", "assembled_with_blockers"]),
+    blocking_reasons: z.array(z.string().trim().min(1)),
+    evidence_only: z.literal(true),
+    simulation_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    credentials_required: z.literal(false),
+    live_route: z.literal(false),
+    automated_action: z.literal(false)
+  })
+  .strict();
+
+export const Gate2LocalSimulationOutputArtifactSchema = z
+  .object({
+    local_simulation_output_artifact_id: z.string().trim().min(1),
+    financial_gate: z.literal("G2_PAPER_TRADING"),
+    scope: z.literal("paper_simulation_planning_only"),
+    local_simulation_input_assembly_id: z.string().trim().min(1),
+    local_simulation_result_id: z.string().trim().min(1),
+    result_status: Gate2LocalSimulationStatusSchema,
+    result_state: z.string().trim().min(1),
+    deterministic_replay_key: z.string().trim().min(1),
+    blocking_reasons: z.array(z.string().trim().min(1)),
+    artifact_status: z.enum(["local_simulation_recorded", "local_simulation_blocked"]),
+    evidence_only: z.literal(true),
+    simulation_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    credentials_required: z.literal(false),
+    live_route: z.literal(false),
+    automated_action: z.literal(false)
+  })
+  .strict();
+
+export const Gate2LocalSimulationReplayCheckSchema = z
+  .object({
+    replay_check_id: z.string().trim().min(1),
+    financial_gate: z.literal("G2_PAPER_TRADING"),
+    scope: z.literal("paper_simulation_planning_only"),
+    replay_status: z.enum(["deterministic_match", "deterministic_mismatch"]),
+    first_result_id: z.string().trim().min(1),
+    second_result_id: z.string().trim().min(1),
+    first_replay_key: z.string().trim().min(1),
+    second_replay_key: z.string().trim().min(1),
+    mismatch_reasons: z.array(z.string().trim().min(1)),
+    evidence_only: z.literal(true),
+    approval_claim: z.literal(false),
+    performance_claim: z.literal(false),
+    external_access: z.literal(false),
+    execution_path: z.literal(false),
+    automated_action: z.literal(false)
+  })
+  .strict()
+  .superRefine((check, context) => {
+    if (check.replay_status === "deterministic_mismatch" && check.mismatch_reasons.length === 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "deterministic mismatches require mismatch reasons",
+        path: ["mismatch_reasons"]
+      });
+    }
+  });
+
+export type Gate2LocalSimulationInputAssembly = z.infer<
+  typeof Gate2LocalSimulationInputAssemblySchema
+>;
+export type Gate2LocalSimulationOutputArtifact = z.infer<
+  typeof Gate2LocalSimulationOutputArtifactSchema
+>;
+export type Gate2LocalSimulationReplayCheck = z.infer<typeof Gate2LocalSimulationReplayCheckSchema>;
+
 export interface Gate2LocalSimulationEngineInput {
   readonly simulatedOrderRecord: Gate2SimulatedOrderRecordContract;
   readonly simulationState: Gate2SimulationStateContract;
   readonly riskReviewEvent: Gate2RiskReviewEventContract;
   readonly operatorActionLog: Gate2OperatorActionLogContract;
   readonly simulatedFillAssumption: Gate2SimulatedFillAssumptionContract;
+}
+
+export interface Gate2LocalSimulationInputAssemblyResult {
+  readonly assembly: Gate2LocalSimulationInputAssembly;
+  readonly engineInput: Gate2LocalSimulationEngineInput;
+}
+
+export interface Gate2LocalSimulationOutputArtifactInput {
+  readonly assembly: Gate2LocalSimulationInputAssembly;
+  readonly result: Gate2LocalSimulationEngineResult;
+}
+
+export interface Gate2LocalSimulationReplayCheckInput {
+  readonly first: Gate2LocalSimulationEngineResult;
+  readonly second: Gate2LocalSimulationEngineResult;
+}
+
+export interface Gate2LocalSimulationFailureModeFixture {
+  readonly failure_mode_id: string;
+  readonly description: string;
+  readonly input: Gate2LocalSimulationEngineInput;
+  readonly expected_blocking_reasons: readonly string[];
+}
+
+export function assembleGate2LocalSimulationInput(
+  input: Gate2LocalSimulationEngineInput
+): Gate2LocalSimulationInputAssemblyResult {
+  const simulatedOrderRecord = Gate2SimulatedOrderRecordContractSchema.parse(
+    input.simulatedOrderRecord
+  );
+  const simulationState = Gate2SimulationStateContractSchema.parse(input.simulationState);
+  const riskReviewEvent = Gate2RiskReviewEventContractSchema.parse(input.riskReviewEvent);
+  const operatorActionLog = Gate2OperatorActionLogContractSchema.parse(input.operatorActionLog);
+  const simulatedFillAssumption = Gate2SimulatedFillAssumptionContractSchema.parse(
+    input.simulatedFillAssumption
+  );
+  const engineInput = {
+    simulatedOrderRecord,
+    simulationState,
+    riskReviewEvent,
+    operatorActionLog,
+    simulatedFillAssumption
+  };
+  const blockingReasons = collectGate2LocalSimulationBlockingReasons(engineInput);
+
+  return {
+    assembly: Gate2LocalSimulationInputAssemblySchema.parse({
+      local_simulation_input_assembly_id: `${simulatedOrderRecord.simulated_order_record_id}:local-simulation-input-assembly`,
+      financial_gate: "G2_PAPER_TRADING",
+      scope: "paper_simulation_planning_only",
+      simulated_order_record_id: simulatedOrderRecord.simulated_order_record_id,
+      simulation_state_record_id: simulationState.simulation_state_record_id,
+      risk_review_event_id: riskReviewEvent.risk_review_event_id,
+      operator_action_log_id: operatorActionLog.operator_action_log_id,
+      simulated_fill_assumption_id: simulatedFillAssumption.simulated_fill_assumption_id,
+      assembly_status: blockingReasons.length === 0 ? "assembled" : "assembled_with_blockers",
+      blocking_reasons: blockingReasons,
+      evidence_only: true,
+      simulation_only: true,
+      approval_claim: false,
+      performance_claim: false,
+      external_access: false,
+      execution_path: false,
+      credentials_required: false,
+      live_route: false,
+      automated_action: false
+    }),
+    engineInput
+  };
 }
 
 export function runGate2LocalSimulationEngine(
@@ -134,6 +288,116 @@ export function runGate2LocalSimulationEngine(
     live_route: false,
     automated_action: false
   });
+}
+
+export function buildGate2LocalSimulationOutputArtifact(
+  input: Gate2LocalSimulationOutputArtifactInput
+): Gate2LocalSimulationOutputArtifact {
+  return Gate2LocalSimulationOutputArtifactSchema.parse({
+    local_simulation_output_artifact_id: `${input.result.local_simulation_result_id}:artifact`,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    local_simulation_input_assembly_id: input.assembly.local_simulation_input_assembly_id,
+    local_simulation_result_id: input.result.local_simulation_result_id,
+    result_status: input.result.result_status,
+    result_state: input.result.result_state,
+    deterministic_replay_key: input.result.deterministic_replay_key,
+    blocking_reasons: input.result.blocking_reasons,
+    artifact_status:
+      input.result.result_status === "recorded_local_simulation"
+        ? "local_simulation_recorded"
+        : "local_simulation_blocked",
+    evidence_only: true,
+    simulation_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    credentials_required: false,
+    live_route: false,
+    automated_action: false
+  });
+}
+
+export function checkGate2LocalSimulationReplayDeterminism(
+  input: Gate2LocalSimulationReplayCheckInput
+): Gate2LocalSimulationReplayCheck {
+  const mismatchReasons: string[] = [];
+
+  if (input.first.deterministic_replay_key !== input.second.deterministic_replay_key) {
+    mismatchReasons.push("deterministic replay keys differ");
+  }
+
+  if (JSON.stringify(input.first) !== JSON.stringify(input.second)) {
+    mismatchReasons.push("local simulation result payloads differ");
+  }
+
+  return Gate2LocalSimulationReplayCheckSchema.parse({
+    replay_check_id: `${input.first.local_simulation_result_id}:replay-check`,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    replay_status: mismatchReasons.length === 0 ? "deterministic_match" : "deterministic_mismatch",
+    first_result_id: input.first.local_simulation_result_id,
+    second_result_id: input.second.local_simulation_result_id,
+    first_replay_key: input.first.deterministic_replay_key,
+    second_replay_key: input.second.deterministic_replay_key,
+    mismatch_reasons: mismatchReasons,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    automated_action: false
+  });
+}
+
+export function createGate2LocalSimulationFailureModeFixtures(
+  baseInput: Gate2LocalSimulationEngineInput
+): readonly Gate2LocalSimulationFailureModeFixture[] {
+  return [
+    {
+      failure_mode_id: "gate2-local-simulation-failure-risk-review",
+      description: "Risk review still blocks local simulation evidence.",
+      input: {
+        ...baseInput,
+        riskReviewEvent: {
+          ...baseInput.riskReviewEvent,
+          disposition: "blocked",
+          blocking_issues: ["Synthetic risk blocker."]
+        }
+      },
+      expected_blocking_reasons: [
+        "risk review has not accepted local simulation evidence",
+        "risk review still contains blocking issues"
+      ]
+    },
+    {
+      failure_mode_id: "gate2-local-simulation-failure-operator-decision",
+      description: "Operator chose revision instead of recording local simulation.",
+      input: {
+        ...baseInput,
+        operatorActionLog: {
+          ...baseInput.operatorActionLog,
+          decision: "revise"
+        }
+      },
+      expected_blocking_reasons: ["operator did not choose record_local_simulation"]
+    },
+    {
+      failure_mode_id: "gate2-local-simulation-failure-record-link",
+      description: "State record points to a different simulated order.",
+      input: {
+        ...baseInput,
+        simulationState: {
+          ...baseInput.simulationState,
+          simulated_order_record_id: "gate2-mismatched-sim-record"
+        }
+      },
+      expected_blocking_reasons: [
+        "simulation state is linked to a different simulated order record"
+      ]
+    }
+  ];
 }
 
 function collectGate2LocalSimulationBlockingReasons(

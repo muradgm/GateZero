@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-444",
-  localVerification: "74 files / 445 tests",
+  latestPacket: "TRD-454",
+  localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 445 tests.",
+      detail: "Latest suite: 74 files, 450 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "444 / 444",
+      value: "454 / 454",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 445 tests"
+      reference: "74 files / 450 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "444 accepted records"
+      reference: "454 accepted records"
     }
   ],
   nextActions: [
-    "TRD-444 added the local simulation engine; TRD-445 must assemble inputs without external access.",
+    "Gate 2 local mechanics are implemented, checkpointed, and bounded to evidence-only simulation.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -276,7 +276,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
         "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md",
         "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md",
-        "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_PURE_FUNCTION.md"
+        "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_PURE_FUNCTION.md",
+        "docs/operations/GATE2_SIMULATION_INPUT_ASSEMBLER.md",
+        "docs/operations/GATE2_SIMULATION_OUTPUT_ARTIFACT_BUILDER.md",
+        "docs/operations/GATE2_REPLAY_DETERMINISM_GUARD.md",
+        "docs/operations/GATE2_FAILURE_MODE_FIXTURES_AND_TESTS.md",
+        "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_EVIDENCE_VIEW.md",
+        "docs/operations/GATE2_MECHANICS_SCANNER_BOUNDARY_UPDATE.md",
+        "docs/operations/GATE2_MECHANICS_SOURCE_LINK_GUARD_RECHECK.md",
+        "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_CHECKPOINT.md",
+        "docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md",
+        "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md"
       ]
     },
     {
