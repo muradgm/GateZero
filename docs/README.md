@@ -432,6 +432,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md`
 - `operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md`
 - `operations/GATE2_MECHANICS_CLOSURE_AUDIT.md`
+- `operations/GATE2_NEXT_GAP_INTAKE.md`
 - `operations/GATE1_GUARD_COMMAND_DOC_ALIGNMENT.md`
 - `operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING.md`
 - `operations/GATE1_READINESS_BLOCKER_RECHECK.md`

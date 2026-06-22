@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-455",
+  latestPacket: "TRD-456",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "455 / 455",
+      value: "456 / 456",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "455 accepted records"
+      reference: "456 accepted records"
     }
   ],
   nextActions: [
-    "Gate 2 local mechanics are closed out; next work is gap intake and maintenance only.",
+    "TRD-456 identified local evidence gaps; next is command-center wording audit, not product expansion.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -287,7 +287,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_CHECKPOINT.md",
         "docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md",
         "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md",
-        "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md"
+        "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md",
+        "docs/operations/GATE2_NEXT_GAP_INTAKE.md"
       ]
     },
     {

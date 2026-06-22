@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-455`                                                      |
+| Latest accepted packet     | `TRD-456`                                                      |
 | Latest accepted validation | 74 test files, 450 tests passed                                |
 
 ## Boundary
@@ -20,8 +20,8 @@ TraderFrame is currently a local research, evidence, risk-control, and execution
 The project is now at Gate 2 planning authorization for paper simulation only. The system must not
 add live trading, external account connectivity, autonomous execution, AI buy/sell prediction, real
 order placement, provider credential handling, strategy profitability claims, readiness claims,
-approval scoring, report publishing, external execution paths, or risk-gate loosening. Simulated
-order mechanics remain blocked until a separate contract-first implementation packet is accepted.
+approval scoring, report publishing, external execution paths, or risk-gate loosening. Local
+simulation mechanics are bounded to deterministic paper-simulation evidence only.
 
 ## Status Legend
 
@@ -302,6 +302,8 @@ Latest accepted result:
     command-center evidence view, scanner boundary review, source-link recheck, implementation
     checkpoint, blocker review, and operator handoff.
   - Gate 2 mechanics closure audit confirming the local mechanics lane is complete and bounded.
+  - Gate 2 next gap intake recording that the frontend remains a command-center baseline, not a
+    complete read-only app shell.
 
 ## Workstream Summary
 
@@ -870,6 +872,7 @@ Latest accepted result:
 | `TRD-453` | accepted | Blockers         | Reviewed post-mechanics blockers.                     |
 | `TRD-454` | accepted | Handoff          | Added mechanics operator handoff note.                |
 | `TRD-455` | accepted | Audit            | Closed out Gate 2 mechanics lane.                     |
+| `TRD-456` | accepted | Gap intake       | Identified next Gate 2 local evidence gaps.           |
 
 ## Current Operator Commands
 
@@ -906,18 +909,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                         | Acceptance focus                                 |
-| ---- | --------- | ------ | -------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-456` | queued | Next Gate 2 gap intake.                      | Identify only concrete local evidence gaps.      |
-| 2    | `TRD-457` | queued | Command-center post-mechanics wording audit. | Keep read-only no-claim copy.                    |
-| 3    | `TRD-458` | queued | Mechanics docs stale-reference sweep.        | Remove stale planning-only wording.              |
-| 4    | `TRD-459` | queued | Mechanics guard aging review.                | Confirm guard coverage remains current.          |
-| 5    | `TRD-460` | queued | Paper simulation limitation register.        | Record limitations before product expansion.     |
-| 6    | `TRD-461` | queued | Operator workflow dry-run plan.              | Plan manual local workflow only.                 |
-| 7    | `TRD-462` | queued | Gate 2 no-expansion recheck.                 | Reconfirm no broker, live, AI, or autonomy path. |
-| 8    | `TRD-463` | queued | Brand handoff isolation recheck.             | Keep brand work separate from gate mechanics.    |
-| 9    | `TRD-464` | queued | Gate 2 maintenance checkpoint.               | Decide pause or next bounded lane.               |
-| 10   | `TRD-465` | queued | Gate 2 pause-or-proceed recommendation.      | Recommend maintenance pause or next bounded gap. |
+| Rank | Packet    | Status | Goal                                           | Acceptance focus                                 |
+| ---- | --------- | ------ | ---------------------------------------------- | ------------------------------------------------ |
+| 1    | `TRD-457` | queued | Command-center post-mechanics wording audit.   | Keep read-only no-claim copy.                    |
+| 2    | `TRD-458` | queued | Mechanics docs stale-reference sweep.          | Remove stale planning-only wording.              |
+| 3    | `TRD-459` | queued | Mechanics guard aging review.                  | Confirm guard coverage remains current.          |
+| 4    | `TRD-460` | queued | Paper simulation limitation register.          | Record limitations before product expansion.     |
+| 5    | `TRD-461` | queued | Operator workflow dry-run plan.                | Plan manual local workflow only.                 |
+| 6    | `TRD-462` | queued | Gate 2 no-expansion recheck.                   | Reconfirm no broker, live, AI, or autonomy path. |
+| 7    | `TRD-463` | queued | Brand handoff isolation recheck.               | Keep brand work separate from gate mechanics.    |
+| 8    | `TRD-464` | queued | Gate 2 maintenance checkpoint.                 | Decide pause or next bounded lane.               |
+| 9    | `TRD-465` | queued | Gate 2 pause-or-proceed recommendation.        | Recommend maintenance pause or next bounded gap. |
+| 10   | `TRD-466` | queued | Read-only frontend app-shell scope assessment. | Define UI scope without execution controls.      |
 
 ## Rejected For Now
 
@@ -1561,6 +1564,7 @@ Do not mark a packet accepted until:
 - Gate 2 post-mechanics blocker review: `docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md`
 - Gate 2 mechanics operator handoff note: `docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md`
 - Gate 2 mechanics closure audit: `docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md`
+- Gate 2 next gap intake: `docs/operations/GATE2_NEXT_GAP_INTAKE.md`
 
 ## Source Of Truth Links Continued 2
 
