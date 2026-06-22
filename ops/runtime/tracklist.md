@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-443`                                                      |
-| Latest accepted validation | 73 test files, 440 tests passed                                |
+| Latest accepted packet     | `TRD-444`                                                      |
+| Latest accepted validation | 74 test files, 445 tests passed                                |
 
 ## Boundary
 
@@ -102,7 +102,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 73 test files passed, 440 tests passed.
+- `pnpm test:ci`: 74 test files passed, 445 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -296,6 +296,8 @@ Latest accepted result:
     mechanics implementation blocker review, contract source-link recheck, and mechanics planning
     checkpoint.
   - Gate 2 mechanics implementation packet for future local deterministic simulation work.
+  - Gate 2 local simulation engine pure function with deterministic local output and blocked-state
+    handling.
 
 ## Workstream Summary
 
@@ -852,6 +854,7 @@ Latest accepted result:
 | `TRD-441` | accepted | Source links     | Rechecked Gate 2 contract source links.               |
 | `TRD-442` | accepted | Checkpoint       | Checkpointed Gate 2 mechanics planning lane.          |
 | `TRD-443` | accepted | Implementation   | Accepted local-only mechanics implementation packet.  |
+| `TRD-444` | accepted | Simulation       | Added local simulation engine pure function.          |
 
 ## Current Operator Commands
 
@@ -881,7 +884,7 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 73 files and 440 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 445 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
@@ -890,16 +893,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                        | Acceptance focus                                 |
 | ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-444` | queued | Local simulation engine pure function.      | No external access, no dispatch, deterministic.  |
-| 2    | `TRD-445` | queued | Simulation input assembler.                 | Evidence, risk, and operator inputs only.        |
-| 3    | `TRD-446` | queued | Simulation output artifact builder.         | Local artifacts only; no execution semantics.    |
-| 4    | `TRD-447` | queued | Replay determinism guard.                   | Same input produces same local output.           |
-| 5    | `TRD-448` | queued | Failure mode fixtures and tests.            | Blocked states remain explicit and local.        |
-| 6    | `TRD-449` | queued | Command-center mechanics evidence view.     | Read-only visibility; no controls.               |
-| 7    | `TRD-450` | queued | Mechanics scanner boundary update.          | No broker, credential, live, or autonomous path. |
-| 8    | `TRD-451` | queued | Mechanics source-link and guard recheck.    | Docs, tests, tracker, and guard alignment.       |
-| 9    | `TRD-452` | queued | Gate 2 mechanics implementation checkpoint. | Checkpoint before expanding scope.               |
-| 10   | `TRD-453` | queued | Post-mechanics blocker review.              | Confirm no autonomy, claims, or external route.  |
+| 1    | `TRD-445` | queued | Simulation input assembler.                 | Evidence, risk, and operator inputs only.        |
+| 2    | `TRD-446` | queued | Simulation output artifact builder.         | Local artifacts only; no execution semantics.    |
+| 3    | `TRD-447` | queued | Replay determinism guard.                   | Same input produces same local output.           |
+| 4    | `TRD-448` | queued | Failure mode fixtures and tests.            | Blocked states remain explicit and local.        |
+| 5    | `TRD-449` | queued | Command-center mechanics evidence view.     | Read-only visibility; no controls.               |
+| 6    | `TRD-450` | queued | Mechanics scanner boundary update.          | No broker, credential, live, or autonomous path. |
+| 7    | `TRD-451` | queued | Mechanics source-link and guard recheck.    | Docs, tests, tracker, and guard alignment.       |
+| 8    | `TRD-452` | queued | Gate 2 mechanics implementation checkpoint. | Checkpoint before expanding scope.               |
+| 9    | `TRD-453` | queued | Post-mechanics blocker review.              | Confirm no autonomy, claims, or external route.  |
+| 10   | `TRD-454` | queued | Mechanics operator handoff note.            | Explain local-only use without approval claims.  |
 
 ## Rejected For Now
 
@@ -1525,6 +1528,8 @@ Do not mark a packet accepted until:
 - Gate 2 contract source-link recheck: `docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md`
 - Gate 2 mechanics planning checkpoint: `docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md`
 - Gate 2 mechanics implementation packet: `docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md`
+- Gate 2 local simulation engine pure function:
+  `docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_PURE_FUNCTION.md`
 
 ## Source Of Truth Links Continued 2
 
@@ -1579,6 +1584,8 @@ Do not mark a packet accepted until:
 - Gate 2 paper simulation fixture source: `packages/fixtures/src/gate2-paper-simulation-fixtures.ts`
 - Gate 2 paper simulation fixture tests:
   `packages/fixtures/tests/gate2-paper-simulation-fixtures.test.ts`
+- Gate 2 local simulation engine source: `packages/core/src/gate2-local-simulation-engine.ts`
+- Gate 2 local simulation engine tests: `packages/core/tests/gate2-local-simulation-engine.test.ts`
 - Evidence index schema source: `packages/contracts/src/research-loop-evidence-index.ts`
 - Evidence index fixture source: `packages/fixtures/src/gate0-research-loop-evidence-index.ts`
 - Evidence index contract test source:
