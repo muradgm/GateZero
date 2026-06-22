@@ -5,10 +5,10 @@
 | Field                      | Value                           |
 | -------------------------- | ------------------------------- |
 | Generated at               | 2026-06-22                      |
-| Latest accepted packet     | `TRD-432`                       |
+| Latest accepted packet     | `TRD-442`                       |
 | Latest accepted validation | 73 test files, 440 tests passed |
-| Assignment count           | 432                             |
-| Accepted count             | 432                             |
+| Assignment count           | 442                             |
+| Accepted count             | 442                             |
 | Open count                 | 0                               |
 
 ## Boundary
@@ -455,6 +455,16 @@
 | `TRD-430` | `accepted` |
 | `TRD-431` | `accepted` |
 | `TRD-432` | `accepted` |
+| `TRD-433` | `accepted` |
+| `TRD-434` | `accepted` |
+| `TRD-435` | `accepted` |
+| `TRD-436` | `accepted` |
+| `TRD-437` | `accepted` |
+| `TRD-438` | `accepted` |
+| `TRD-439` | `accepted` |
+| `TRD-440` | `accepted` |
+| `TRD-441` | `accepted` |
+| `TRD-442` | `accepted` |
 
 ## Notes
 

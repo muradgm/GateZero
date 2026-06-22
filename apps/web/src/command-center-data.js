@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-432",
+  latestPacket: "TRD-442",
   localVerification: "73 files / 440 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "432 / 432",
+      value: "442 / 442",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "432 accepted records"
+      reference: "442 accepted records"
     }
   ],
   nextActions: [
-    "Gate 2 contract schemas and fixtures are indexed; mechanics still require a separate reviewed packet.",
+    "Gate 2 mechanics are planned only; implementation still requires a separate reviewed packet.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -264,7 +264,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_SYNTHETIC_FIXTURE_SET.md",
         "docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md",
         "docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md",
-        "docs/operations/GATE2_CONTRACT_CHECKPOINT.md"
+        "docs/operations/GATE2_CONTRACT_CHECKPOINT.md",
+        "docs/operations/GATE2_MECHANICS_PLANNING_PACKET.md",
+        "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_BOUNDARY_PLAN.md",
+        "docs/operations/GATE2_SIMULATION_INPUT_ASSEMBLY_PLAN.md",
+        "docs/operations/GATE2_SIMULATION_OUTPUT_ARTIFACT_PLAN.md",
+        "docs/operations/GATE2_SIMULATION_REPLAY_DETERMINISM_PLAN.md",
+        "docs/operations/GATE2_SIMULATION_FAILURE_MODE_PLAN.md",
+        "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md",
+        "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md",
+        "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
+        "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md"
       ]
     },
     {

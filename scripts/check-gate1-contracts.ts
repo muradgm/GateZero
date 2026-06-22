@@ -261,7 +261,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_SYNTHETIC_FIXTURE_SET.md",
   "docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md",
   "docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md",
-  "docs/operations/GATE2_CONTRACT_CHECKPOINT.md"
+  "docs/operations/GATE2_CONTRACT_CHECKPOINT.md",
+  "docs/operations/GATE2_MECHANICS_PLANNING_PACKET.md",
+  "docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_BOUNDARY_PLAN.md",
+  "docs/operations/GATE2_SIMULATION_INPUT_ASSEMBLY_PLAN.md",
+  "docs/operations/GATE2_SIMULATION_OUTPUT_ARTIFACT_PLAN.md",
+  "docs/operations/GATE2_SIMULATION_REPLAY_DETERMINISM_PLAN.md",
+  "docs/operations/GATE2_SIMULATION_FAILURE_MODE_PLAN.md",
+  "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md",
+  "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md",
+  "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
+  "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md"
 ] as const;
 
 const requiredSourcePaths = [

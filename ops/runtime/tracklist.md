@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-432`                                                      |
+| Latest accepted packet     | `TRD-442`                                                      |
 | Latest accepted validation | 73 test files, 440 tests passed                                |
 
 ## Boundary
@@ -290,6 +290,10 @@ Latest accepted result:
   - Gate 2 contract-only implementation packet, simulated-order record contract, simulation state
     contract, risk review event contract, operator action log contract, simulated fill assumption
     contract, synthetic fixture set, negative contract tests, contract guard indexing, and contract
+    checkpoint.
+  - Gate 2 mechanics planning packet, local simulation engine boundary, simulation input assembly,
+    simulation output artifacts, replay determinism, failure modes, command-center planning copy,
+    mechanics implementation blocker review, contract source-link recheck, and mechanics planning
     checkpoint.
 
 ## Workstream Summary
@@ -836,6 +840,16 @@ Latest accepted result:
 | `TRD-430` | accepted | Validation       | Added Gate 2 negative contract tests.                 |
 | `TRD-431` | accepted | Validation       | Indexed Gate 2 contract guard coverage.               |
 | `TRD-432` | accepted | Checkpoint       | Checkpointed Gate 2 contract-only lane.               |
+| `TRD-433` | accepted | Planning         | Planned Gate 2 mechanics lane boundaries.             |
+| `TRD-434` | accepted | Boundary         | Planned local simulation engine boundaries.           |
+| `TRD-435` | accepted | Planning         | Planned simulation input assembly.                    |
+| `TRD-436` | accepted | Planning         | Planned simulation output artifacts.                  |
+| `TRD-437` | accepted | Determinism      | Planned replay determinism requirements.              |
+| `TRD-438` | accepted | Failure modes    | Planned simulation failure modes.                     |
+| `TRD-439` | accepted | Command center   | Planned command-center mechanics copy.                |
+| `TRD-440` | accepted | Review           | Reviewed mechanics implementation blockers.           |
+| `TRD-441` | accepted | Source links     | Rechecked Gate 2 contract source links.               |
+| `TRD-442` | accepted | Checkpoint       | Checkpointed Gate 2 mechanics planning lane.          |
 
 ## Current Operator Commands
 
@@ -872,18 +886,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                     | Acceptance focus                                    |
-| ---- | --------- | ------ | ---------------------------------------- | --------------------------------------------------- |
-| 1    | `TRD-433` | queued | Gate 2 mechanics planning packet.        | Planning only; no mechanics implementation.         |
-| 2    | `TRD-434` | queued | Local simulation engine boundary plan.   | Define pure local boundaries before coding.         |
-| 3    | `TRD-435` | queued | Simulation input assembly plan.          | Evidence, risk, and operator inputs only.           |
-| 4    | `TRD-436` | queued | Simulation output artifact plan.         | Local artifact shape without execution dispatch.    |
-| 5    | `TRD-437` | queued | Simulation replay determinism plan.      | Reproducibility requirements before implementation. |
-| 6    | `TRD-438` | queued | Simulation failure mode plan.            | Blocked states and rollback behavior.               |
-| 7    | `TRD-439` | queued | Command-center mechanics-planning copy.  | Visibility only; no controls.                       |
-| 8    | `TRD-440` | queued | Mechanics implementation blocker review. | Decide if code implementation can be proposed.      |
-| 9    | `TRD-441` | queued | Gate 2 contract source-link recheck.     | Recheck docs/source/test indexing.                  |
-| 10   | `TRD-442` | queued | Gate 2 mechanics-planning checkpoint.    | Checkpoint before any implementation request.       |
+| Rank | Packet    | Status | Goal                                        | Acceptance focus                                 |
+| ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------------ |
+| 1    | `TRD-443` | queued | Gate 2 mechanics implementation packet.     | Contract-first local simulation only.            |
+| 2    | `TRD-444` | queued | Local simulation engine pure function.      | No external access, no dispatch, deterministic.  |
+| 3    | `TRD-445` | queued | Simulation input assembler.                 | Evidence, risk, and operator inputs only.        |
+| 4    | `TRD-446` | queued | Simulation output artifact builder.         | Local artifacts only; no execution semantics.    |
+| 5    | `TRD-447` | queued | Replay determinism guard.                   | Same input produces same local output.           |
+| 6    | `TRD-448` | queued | Failure mode fixtures and tests.            | Blocked states remain explicit and local.        |
+| 7    | `TRD-449` | queued | Command-center mechanics evidence view.     | Read-only visibility; no controls.               |
+| 8    | `TRD-450` | queued | Mechanics scanner boundary update.          | No broker, credential, live, or autonomous path. |
+| 9    | `TRD-451` | queued | Mechanics source-link and guard recheck.    | Docs, tests, tracker, and guard alignment.       |
+| 10   | `TRD-452` | queued | Gate 2 mechanics implementation checkpoint. | Checkpoint before expanding scope.               |
 
 ## Rejected For Now
 
@@ -1494,6 +1508,20 @@ Do not mark a packet accepted until:
 - Gate 2 negative contract tests: `docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md`
 - Gate 2 contract guard indexing update: `docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md`
 - Gate 2 contract checkpoint: `docs/operations/GATE2_CONTRACT_CHECKPOINT.md`
+- Gate 2 mechanics planning packet: `docs/operations/GATE2_MECHANICS_PLANNING_PACKET.md`
+- Gate 2 local simulation engine boundary plan:
+  `docs/operations/GATE2_LOCAL_SIMULATION_ENGINE_BOUNDARY_PLAN.md`
+- Gate 2 simulation input assembly plan: `docs/operations/GATE2_SIMULATION_INPUT_ASSEMBLY_PLAN.md`
+- Gate 2 simulation output artifact plan: `docs/operations/GATE2_SIMULATION_OUTPUT_ARTIFACT_PLAN.md`
+- Gate 2 simulation replay determinism plan:
+  `docs/operations/GATE2_SIMULATION_REPLAY_DETERMINISM_PLAN.md`
+- Gate 2 simulation failure mode plan: `docs/operations/GATE2_SIMULATION_FAILURE_MODE_PLAN.md`
+- Gate 2 command-center mechanics planning copy:
+  `docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md`
+- Gate 2 mechanics implementation blocker review:
+  `docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md`
+- Gate 2 contract source-link recheck: `docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md`
+- Gate 2 mechanics planning checkpoint: `docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 2
 
