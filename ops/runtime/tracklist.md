@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-422`                                                      |
-| Latest accepted validation | 71 test files, 424 tests passed                                |
+| Latest accepted packet     | `TRD-432`                                                      |
+| Latest accepted validation | 73 test files, 440 tests passed                                |
 
 ## Boundary
 
@@ -102,7 +102,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 71 test files passed, 424 tests passed.
+- `pnpm test:ci`: 73 test files passed, 440 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -287,6 +287,10 @@ Latest accepted result:
     guard planning, credential exclusion guard planning, simulated-fill assumption planning, risk
     review event planning, operator action log planning, negative fixture planning, command-center
     planning extension, and implementation readiness review.
+  - Gate 2 contract-only implementation packet, simulated-order record contract, simulation state
+    contract, risk review event contract, operator action log contract, simulated fill assumption
+    contract, synthetic fixture set, negative contract tests, contract guard indexing, and contract
+    checkpoint.
 
 ## Workstream Summary
 
@@ -822,6 +826,16 @@ Latest accepted result:
 | `TRD-420` | accepted | Fixtures         | Planned Gate 2 negative fixture classes.              |
 | `TRD-421` | accepted | Command center   | Planned Gate 2 command-center extension.              |
 | `TRD-422` | accepted | Review           | Reviewed Gate 2 implementation readiness.             |
+| `TRD-423` | accepted | Contracts        | Added Gate 2 contract implementation packet.          |
+| `TRD-424` | accepted | Contracts        | Added simulated-order record contract schema.         |
+| `TRD-425` | accepted | Contracts        | Added simulation state contract schema.               |
+| `TRD-426` | accepted | Contracts        | Added risk review event contract schema.              |
+| `TRD-427` | accepted | Contracts        | Added operator action log contract schema.            |
+| `TRD-428` | accepted | Contracts        | Added simulated fill assumption schema.               |
+| `TRD-429` | accepted | Fixtures         | Added Gate 2 synthetic fixture set.                   |
+| `TRD-430` | accepted | Validation       | Added Gate 2 negative contract tests.                 |
+| `TRD-431` | accepted | Validation       | Indexed Gate 2 contract guard coverage.               |
+| `TRD-432` | accepted | Checkpoint       | Checkpointed Gate 2 contract-only lane.               |
 
 ## Current Operator Commands
 
@@ -851,25 +865,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 71 files and 424 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 73 files and 440 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                    | Acceptance focus                                   |
-| ---- | --------- | ------ | --------------------------------------- | -------------------------------------------------- |
-| 1    | `TRD-423` | queued | Gate 2 contract implementation packet.  | Schemas and tests only; no mechanics.              |
-| 2    | `TRD-424` | queued | Simulated-order record contract schema. | Local record schema with blocked execution fields. |
-| 3    | `TRD-425` | queued | Simulation state contract schema.       | State schema with disallowed transition coverage.  |
-| 4    | `TRD-426` | queued | Risk review event contract schema.      | Risk review schema before simulation mechanics.    |
-| 5    | `TRD-427` | queued | Operator action log contract schema.    | Human decision schema with redaction posture.      |
-| 6    | `TRD-428` | queued | Simulated fill assumption schema.       | Assumption schema with limitation fields.          |
-| 7    | `TRD-429` | queued | Gate 2 synthetic fixture set.           | Local synthetic fixtures only.                     |
-| 8    | `TRD-430` | queued | Gate 2 negative contract tests.         | Block external, credential, autonomy, and claims.  |
-| 9    | `TRD-431` | queued | Gate 2 guard indexing update.           | Index docs, contracts, fixtures, and tests.        |
-| 10   | `TRD-432` | queued | Gate 2 contract checkpoint.             | Decide if mechanics planning can be proposed.      |
+| Rank | Packet    | Status | Goal                                     | Acceptance focus                                    |
+| ---- | --------- | ------ | ---------------------------------------- | --------------------------------------------------- |
+| 1    | `TRD-433` | queued | Gate 2 mechanics planning packet.        | Planning only; no mechanics implementation.         |
+| 2    | `TRD-434` | queued | Local simulation engine boundary plan.   | Define pure local boundaries before coding.         |
+| 3    | `TRD-435` | queued | Simulation input assembly plan.          | Evidence, risk, and operator inputs only.           |
+| 4    | `TRD-436` | queued | Simulation output artifact plan.         | Local artifact shape without execution dispatch.    |
+| 5    | `TRD-437` | queued | Simulation replay determinism plan.      | Reproducibility requirements before implementation. |
+| 6    | `TRD-438` | queued | Simulation failure mode plan.            | Blocked states and rollback behavior.               |
+| 7    | `TRD-439` | queued | Command-center mechanics-planning copy.  | Visibility only; no controls.                       |
+| 8    | `TRD-440` | queued | Mechanics implementation blocker review. | Decide if code implementation can be proposed.      |
+| 9    | `TRD-441` | queued | Gate 2 contract source-link recheck.     | Recheck docs/source/test indexing.                  |
+| 10   | `TRD-442` | queued | Gate 2 mechanics-planning checkpoint.    | Checkpoint before any implementation request.       |
 
 ## Rejected For Now
 
@@ -1469,6 +1483,20 @@ Do not mark a packet accepted until:
 - Gate 2 command-center planning extension:
   `docs/operations/GATE2_COMMAND_CENTER_PLANNING_EXTENSION.md`
 - Gate 2 implementation readiness review: `docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md`
+- Gate 2 contract implementation packet: `docs/operations/GATE2_CONTRACT_IMPLEMENTATION_PACKET.md`
+- Gate 2 simulated-order record contract: `docs/operations/GATE2_SIMULATED_ORDER_RECORD_CONTRACT.md`
+- Gate 2 simulation state contract: `docs/operations/GATE2_SIMULATION_STATE_CONTRACT.md`
+- Gate 2 risk review event contract: `docs/operations/GATE2_RISK_REVIEW_EVENT_CONTRACT.md`
+- Gate 2 operator action log contract: `docs/operations/GATE2_OPERATOR_ACTION_LOG_CONTRACT.md`
+- Gate 2 simulated fill assumption contract:
+  `docs/operations/GATE2_SIMULATED_FILL_ASSUMPTION_CONTRACT.md`
+- Gate 2 synthetic fixture set: `docs/operations/GATE2_SYNTHETIC_FIXTURE_SET.md`
+- Gate 2 negative contract tests: `docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md`
+- Gate 2 contract guard indexing update: `docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md`
+- Gate 2 contract checkpoint: `docs/operations/GATE2_CONTRACT_CHECKPOINT.md`
+
+## Source Of Truth Links Continued 2
+
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`
 - Command center guardrail tests: `packages/fixtures/tests/gate0-command-center-data.test.ts`
@@ -1513,6 +1541,13 @@ Do not mark a packet accepted until:
   `packages/fixtures/tests/gate1-historical-backtest-fixtures.test.ts`
 - Gate 1 contract guard script: `scripts/check-gate1-contracts.ts`
 - Gate 1 contract guard tests: `packages/fixtures/tests/gate1-contract-guard.test.ts`
+- Gate 2 paper simulation contract source:
+  `packages/contracts/src/gate2-paper-simulation-contracts.ts`
+- Gate 2 paper simulation contract tests:
+  `packages/contracts/tests/gate2-paper-simulation-contracts.test.ts`
+- Gate 2 paper simulation fixture source: `packages/fixtures/src/gate2-paper-simulation-fixtures.ts`
+- Gate 2 paper simulation fixture tests:
+  `packages/fixtures/tests/gate2-paper-simulation-fixtures.test.ts`
 - Evidence index schema source: `packages/contracts/src/research-loop-evidence-index.ts`
 - Evidence index fixture source: `packages/fixtures/src/gate0-research-loop-evidence-index.ts`
 - Evidence index contract test source:

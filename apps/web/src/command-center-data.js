@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-422",
-  localVerification: "71 files / 424 tests",
+  latestPacket: "TRD-432",
+  localVerification: "73 files / 440 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 71 files, 424 tests.",
+      detail: "Latest suite: 73 files, 440 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "422 / 422",
+      value: "432 / 432",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "71 files / 424 tests"
+      reference: "73 files / 440 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "422 accepted records"
+      reference: "432 accepted records"
     }
   ],
   nextActions: [
-    "Gate 2 planning is contract-ready; the next lane must draft schemas, fixtures, and guards before mechanics.",
+    "Gate 2 contract schemas and fixtures are indexed; mechanics still require a separate reviewed packet.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -254,7 +254,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_OPERATOR_ACTION_LOG_PLAN.md",
         "docs/operations/GATE2_NEGATIVE_FIXTURE_PLAN.md",
         "docs/operations/GATE2_COMMAND_CENTER_PLANNING_EXTENSION.md",
-        "docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md"
+        "docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md",
+        "docs/operations/GATE2_CONTRACT_IMPLEMENTATION_PACKET.md",
+        "docs/operations/GATE2_SIMULATED_ORDER_RECORD_CONTRACT.md",
+        "docs/operations/GATE2_SIMULATION_STATE_CONTRACT.md",
+        "docs/operations/GATE2_RISK_REVIEW_EVENT_CONTRACT.md",
+        "docs/operations/GATE2_OPERATOR_ACTION_LOG_CONTRACT.md",
+        "docs/operations/GATE2_SIMULATED_FILL_ASSUMPTION_CONTRACT.md",
+        "docs/operations/GATE2_SYNTHETIC_FIXTURE_SET.md",
+        "docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md",
+        "docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md",
+        "docs/operations/GATE2_CONTRACT_CHECKPOINT.md"
       ]
     },
     {

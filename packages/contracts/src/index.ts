@@ -4,6 +4,7 @@ export * from "./data-snapshot.js";
 export * from "./errors.js";
 export * from "./gate.js";
 export * from "./gate1-historical-backtest-contracts.js";
+export * from "./gate2-paper-simulation-contracts.js";
 export * from "./learning-event.js";
 export * from "./metric-report.js";
 export * from "./operator-decision.js";

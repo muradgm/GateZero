@@ -150,7 +150,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_OPERATOR_ACTION_LOG_PLAN.md",
   "docs/operations/GATE2_NEGATIVE_FIXTURE_PLAN.md",
   "docs/operations/GATE2_COMMAND_CENTER_PLANNING_EXTENSION.md",
-  "docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md"
+  "docs/operations/GATE2_IMPLEMENTATION_READINESS_REVIEW.md",
+  "docs/operations/GATE2_CONTRACT_IMPLEMENTATION_PACKET.md",
+  "docs/operations/GATE2_SIMULATED_ORDER_RECORD_CONTRACT.md",
+  "docs/operations/GATE2_SIMULATION_STATE_CONTRACT.md",
+  "docs/operations/GATE2_RISK_REVIEW_EVENT_CONTRACT.md",
+  "docs/operations/GATE2_OPERATOR_ACTION_LOG_CONTRACT.md",
+  "docs/operations/GATE2_SIMULATED_FILL_ASSUMPTION_CONTRACT.md",
+  "docs/operations/GATE2_SYNTHETIC_FIXTURE_SET.md",
+  "docs/operations/GATE2_NEGATIVE_CONTRACT_TESTS.md",
+  "docs/operations/GATE2_CONTRACT_GUARD_INDEXING_UPDATE.md",
+  "docs/operations/GATE2_CONTRACT_CHECKPOINT.md"
 ];
 
 const requiredSourcePaths = [
@@ -158,6 +168,10 @@ const requiredSourcePaths = [
   "packages/contracts/tests/gate1-historical-backtest-contracts.test.ts",
   "packages/fixtures/src/gate1-historical-backtest-fixtures.ts",
   "packages/fixtures/tests/gate1-historical-backtest-fixtures.test.ts",
+  "packages/contracts/src/gate2-paper-simulation-contracts.ts",
+  "packages/contracts/tests/gate2-paper-simulation-contracts.test.ts",
+  "packages/fixtures/src/gate2-paper-simulation-fixtures.ts",
+  "packages/fixtures/tests/gate2-paper-simulation-fixtures.test.ts",
   "scripts/check-gate1-contracts.ts",
   "packages/fixtures/tests/gate1-contract-guard.test.ts"
 ];
@@ -240,6 +254,42 @@ const fixtureSource = [
   'scope: "historical_backtesting_only"'
 ].join("\n");
 
+const gate2ContractSource = [
+  "Gate2SimulatedOrderRecordContractSchema",
+  "Gate2SimulationStateContractSchema",
+  "Gate2RiskReviewEventContractSchema",
+  "Gate2OperatorActionLogContractSchema",
+  "Gate2SimulatedFillAssumptionContractSchema",
+  "Gate2NegativeBoundaryFixtureContractSchema",
+  "financial_gate: Gate2FinancialGateSchema",
+  "scope: Gate2ContractScopeSchema",
+  "external_access: z.literal(false)",
+  "execution_path: z.literal(false)",
+  "credentials_required: z.literal(false)",
+  "live_route: z.literal(false)",
+  "automated_action: z.literal(false)"
+].join("\n");
+
+const gate2ContractTestSource = [
+  "rejects simulated-order records with external, credential, live, automated, or claim paths",
+  "rejects automated or incoherent state transitions",
+  "rejects blocked risk review events without blocking issues or with claims",
+  "rejects operator action logs with automation or sensitive payload storage",
+  "rejects fill assumptions without limitations or with performance claims",
+  "rejects negative fixtures with real account data, secrets, or non-blocked outcomes"
+].join("\n");
+
+const gate2FixtureSource = [
+  "gate2SimulatedOrderRecordFixture",
+  "gate2SimulationStateFixture",
+  "gate2RiskReviewEventFixture",
+  "gate2OperatorActionLogFixture",
+  "gate2SimulatedFillAssumptionFixture",
+  "gate2NegativeBoundaryFixtures",
+  'financial_gate: "G2_PAPER_TRADING"',
+  'scope: "paper_simulation_planning_only"'
+].join("\n");
+
 const completeInput: Gate1ContractGuardInput = {
   docsReadme: requiredDocPaths.map((path) => `- \`${path.replace("docs/", "")}\``).join("\n"),
   tracklist: [...requiredDocPaths, ...requiredSourcePaths, "pnpm check:gate1-contracts"].join("\n"),
@@ -270,7 +320,14 @@ const completeInput: Gate1ContractGuardInput = {
             ? contractTestSource
             : relativePath === "packages/fixtures/src/gate1-historical-backtest-fixtures.ts"
               ? fixtureSource
-              : "local source"
+              : relativePath === "packages/contracts/src/gate2-paper-simulation-contracts.ts"
+                ? gate2ContractSource
+                : relativePath ===
+                    "packages/contracts/tests/gate2-paper-simulation-contracts.test.ts"
+                  ? gate2ContractTestSource
+                  : relativePath === "packages/fixtures/src/gate2-paper-simulation-fixtures.ts"
+                    ? gate2FixtureSource
+                    : "local source"
     }))
   ]
 };
@@ -282,7 +339,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 149
+      checkedArtifactCount: 163
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
