@@ -419,6 +419,7 @@ This documentation set is adapted from the uploaded SignalScout docs and rewritt
 - `operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md`
 - `operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md`
 - `operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md`
+- `operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md`
 - `operations/GATE1_GUARD_COMMAND_DOC_ALIGNMENT.md`
 - `operations/GATE1_CONTRACT_GUARD_SCHEMA_VALIDATION_HARDENING.md`
 - `operations/GATE1_READINESS_BLOCKER_RECHECK.md`

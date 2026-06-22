@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-442`                                                      |
+| Latest accepted packet     | `TRD-443`                                                      |
 | Latest accepted validation | 73 test files, 440 tests passed                                |
 
 ## Boundary
@@ -295,6 +295,7 @@ Latest accepted result:
     simulation output artifacts, replay determinism, failure modes, command-center planning copy,
     mechanics implementation blocker review, contract source-link recheck, and mechanics planning
     checkpoint.
+  - Gate 2 mechanics implementation packet for future local deterministic simulation work.
 
 ## Workstream Summary
 
@@ -850,6 +851,7 @@ Latest accepted result:
 | `TRD-440` | accepted | Review           | Reviewed mechanics implementation blockers.           |
 | `TRD-441` | accepted | Source links     | Rechecked Gate 2 contract source links.               |
 | `TRD-442` | accepted | Checkpoint       | Checkpointed Gate 2 mechanics planning lane.          |
+| `TRD-443` | accepted | Implementation   | Accepted local-only mechanics implementation packet.  |
 
 ## Current Operator Commands
 
@@ -888,31 +890,31 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                        | Acceptance focus                                 |
 | ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-443` | queued | Gate 2 mechanics implementation packet.     | Contract-first local simulation only.            |
-| 2    | `TRD-444` | queued | Local simulation engine pure function.      | No external access, no dispatch, deterministic.  |
-| 3    | `TRD-445` | queued | Simulation input assembler.                 | Evidence, risk, and operator inputs only.        |
-| 4    | `TRD-446` | queued | Simulation output artifact builder.         | Local artifacts only; no execution semantics.    |
-| 5    | `TRD-447` | queued | Replay determinism guard.                   | Same input produces same local output.           |
-| 6    | `TRD-448` | queued | Failure mode fixtures and tests.            | Blocked states remain explicit and local.        |
-| 7    | `TRD-449` | queued | Command-center mechanics evidence view.     | Read-only visibility; no controls.               |
-| 8    | `TRD-450` | queued | Mechanics scanner boundary update.          | No broker, credential, live, or autonomous path. |
-| 9    | `TRD-451` | queued | Mechanics source-link and guard recheck.    | Docs, tests, tracker, and guard alignment.       |
-| 10   | `TRD-452` | queued | Gate 2 mechanics implementation checkpoint. | Checkpoint before expanding scope.               |
+| 1    | `TRD-444` | queued | Local simulation engine pure function.      | No external access, no dispatch, deterministic.  |
+| 2    | `TRD-445` | queued | Simulation input assembler.                 | Evidence, risk, and operator inputs only.        |
+| 3    | `TRD-446` | queued | Simulation output artifact builder.         | Local artifacts only; no execution semantics.    |
+| 4    | `TRD-447` | queued | Replay determinism guard.                   | Same input produces same local output.           |
+| 5    | `TRD-448` | queued | Failure mode fixtures and tests.            | Blocked states remain explicit and local.        |
+| 6    | `TRD-449` | queued | Command-center mechanics evidence view.     | Read-only visibility; no controls.               |
+| 7    | `TRD-450` | queued | Mechanics scanner boundary update.          | No broker, credential, live, or autonomous path. |
+| 8    | `TRD-451` | queued | Mechanics source-link and guard recheck.    | Docs, tests, tracker, and guard alignment.       |
+| 9    | `TRD-452` | queued | Gate 2 mechanics implementation checkpoint. | Checkpoint before expanding scope.               |
+| 10   | `TRD-453` | queued | Post-mechanics blocker review.              | Confirm no autonomy, claims, or external route.  |
 
 ## Rejected For Now
 
-| Area                                | Status           | Reason                                                                             |
-| ----------------------------------- | ---------------- | ---------------------------------------------------------------------------------- |
-| UI expansion                        | rejected_for_now | Product breadth must not outrun trust in the core decision loop.                   |
-| Broker integration                  | rejected_for_now | External account connectivity remains blocked at Gate 2 planning.                  |
-| Live execution                      | rejected_for_now | No live execution path is allowed at Gate 2 planning.                              |
-| Simulated execution mechanics       | rejected_for_now | Requires a separate contract-first Gate 2 implementation packet.                   |
-| AI buy/sell prediction              | rejected_for_now | The system validates evidence and risk review; it does not make prediction claims. |
-| Report export or publishing         | rejected_for_now | Current artifacts remain local and operational.                                    |
-| Approval scoring                    | rejected_for_now | Local scores must not become approval semantics.                                   |
-| Readiness scoring                   | rejected_for_now | Readiness implies later-phase eligibility, which is not authorized.                |
-| Performance or profitability claims | rejected_for_now | Strategy claims remain outside the current control-plane scope.                    |
-| Risk-gate loosening                 | rejected_for_now | Risk gates can only be tightened or preserved under current scope.                 |
+| Area                                    | Status           | Reason                                                                               |
+| --------------------------------------- | ---------------- | ------------------------------------------------------------------------------------ |
+| UI expansion                            | rejected_for_now | Product breadth must not outrun trust in the core decision loop.                     |
+| Broker integration                      | rejected_for_now | External account connectivity remains blocked at Gate 2 planning.                    |
+| Live execution                          | rejected_for_now | No live execution path is allowed at Gate 2 planning.                                |
+| External or account execution mechanics | rejected_for_now | Local deterministic simulation may proceed; broker/account dispatch remains blocked. |
+| AI buy/sell prediction                  | rejected_for_now | The system validates evidence and risk review; it does not make prediction claims.   |
+| Report export or publishing             | rejected_for_now | Current artifacts remain local and operational.                                      |
+| Approval scoring                        | rejected_for_now | Local scores must not become approval semantics.                                     |
+| Readiness scoring                       | rejected_for_now | Readiness implies later-phase eligibility, which is not authorized.                  |
+| Performance or profitability claims     | rejected_for_now | Strategy claims remain outside the current control-plane scope.                      |
+| Risk-gate loosening                     | rejected_for_now | Risk gates can only be tightened or preserved under current scope.                   |
 
 ## Maintenance Rules
 
@@ -1522,6 +1524,7 @@ Do not mark a packet accepted until:
   `docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md`
 - Gate 2 contract source-link recheck: `docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md`
 - Gate 2 mechanics planning checkpoint: `docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md`
+- Gate 2 mechanics implementation packet: `docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md`
 
 ## Source Of Truth Links Continued 2
 

@@ -271,7 +271,8 @@ const requiredDocPaths = [
   "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md",
   "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md",
   "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
-  "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md"
+  "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md",
+  "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md"
 ] as const;
 
 const requiredSourcePaths = [

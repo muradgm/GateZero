@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-442");
+    expect(data).toContain("TRD-443");
   });
 
   it("does not expose trading action language in app data", () => {

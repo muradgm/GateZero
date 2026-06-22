@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-442",
+  latestPacket: "TRD-443",
   localVerification: "73 files / 440 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "442 / 442",
+      value: "443 / 443",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "442 accepted records"
+      reference: "443 accepted records"
     }
   ],
   nextActions: [
-    "Gate 2 mechanics are planned only; implementation still requires a separate reviewed packet.",
+    "TRD-443 accepted the mechanics implementation packet; TRD-444 remains local-only and deterministic.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -274,7 +274,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md",
         "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md",
         "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
-        "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md"
+        "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md",
+        "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md"
       ]
     },
     {

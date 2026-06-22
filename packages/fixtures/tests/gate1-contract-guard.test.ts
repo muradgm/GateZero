@@ -170,7 +170,8 @@ const requiredDocPaths = [
   "docs/operations/GATE2_COMMAND_CENTER_MECHANICS_PLANNING_COPY.md",
   "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_BLOCKER_REVIEW.md",
   "docs/operations/GATE2_CONTRACT_SOURCE_LINK_RECHECK.md",
-  "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md"
+  "docs/operations/GATE2_MECHANICS_PLANNING_CHECKPOINT.md",
+  "docs/operations/GATE2_MECHANICS_IMPLEMENTATION_PACKET.md"
 ];
 
 const requiredSourcePaths = [
@@ -349,7 +350,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 173
+      checkedArtifactCount: 174
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });
