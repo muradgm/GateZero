@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-479",
+  latestPacket: "TRD-480",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "479 / 479",
+      value: "480 / 480",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "479 accepted records"
+      reference: "480 accepted records"
     }
   ],
   nextActions: [
-    "TRD-479 drafted the bounded read-only frontend implementation packet; next is no-action-control test planning.",
+    "TRD-480 planned no-action-control tests; next is the local frontend data adapter plan.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -311,7 +311,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
         "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
         "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md",
-        "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md"
+        "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md",
+        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_TEST_PLAN.md"
       ]
     },
     {

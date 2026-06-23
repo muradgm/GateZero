@@ -308,7 +308,8 @@ const requiredDocPaths = [
   "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
   "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
   "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md",
-  "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md"
+  "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md",
+  "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_TEST_PLAN.md"
 ] as const;
 
 const requiredSourcePaths = [
