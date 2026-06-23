@@ -184,7 +184,8 @@ const requiredDocPaths = [
   "docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md",
   "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md",
   "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md",
-  "docs/operations/GATE2_NEXT_GAP_INTAKE.md"
+  "docs/operations/GATE2_NEXT_GAP_INTAKE.md",
+  "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md"
 ];
 
 const requiredSourcePaths = [
@@ -365,7 +366,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 189
+      checkedArtifactCount: 190
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

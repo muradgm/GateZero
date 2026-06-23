@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-456",
+  latestPacket: "TRD-457",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -14,7 +14,7 @@ export const commandCenterData = {
     {
       label: "Gate Status",
       value: "G2_PAPER_TRADING",
-      detail: "Control plane is authorized for simulation planning only.",
+      detail: "Control plane is bounded to local paper-simulation evidence only.",
       tone: "steady"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "456 / 456",
+      value: "457 / 457",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "456 accepted records"
+      reference: "457 accepted records"
     }
   ],
   nextActions: [
-    "TRD-456 identified local evidence gaps; next is command-center wording audit, not product expansion.",
+    "TRD-457 cleaned post-mechanics command-center copy; next is mechanics docs stale-reference sweep.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -288,7 +288,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_POST_MECHANICS_BLOCKER_REVIEW.md",
         "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md",
         "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md",
-        "docs/operations/GATE2_NEXT_GAP_INTAKE.md"
+        "docs/operations/GATE2_NEXT_GAP_INTAKE.md",
+        "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md"
       ]
     },
     {
