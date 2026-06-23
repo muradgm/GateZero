@@ -286,7 +286,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md",
   "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md",
   "docs/operations/GATE2_NEXT_GAP_INTAKE.md",
-  "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md"
+  "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md",
+  "docs/operations/GATE2_MECHANICS_DOCS_STALE_REFERENCE_SWEEP.md",
+  "docs/operations/GATE2_MECHANICS_GUARD_AGING_REVIEW.md",
+  "docs/operations/GATE2_PAPER_SIMULATION_LIMITATION_REGISTER.md",
+  "docs/operations/GATE2_OPERATOR_WORKFLOW_DRY_RUN_PLAN.md",
+  "docs/operations/GATE2_NO_EXPANSION_RECHECK.md",
+  "docs/operations/GATE2_BRAND_HANDOFF_ISOLATION_RECHECK.md",
+  "docs/operations/GATE2_MAINTENANCE_CHECKPOINT.md",
+  "docs/operations/GATE2_PAUSE_OR_PROCEED_RECOMMENDATION.md",
+  "docs/operations/GATE2_READ_ONLY_FRONTEND_APP_SHELL_SCOPE_ASSESSMENT.md",
+  "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md"
 ] as const;
 
 const requiredSourcePaths = [

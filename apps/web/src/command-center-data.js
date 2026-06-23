@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-457",
+  latestPacket: "TRD-467",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "457 / 457",
+      value: "467 / 467",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "457 accepted records"
+      reference: "467 accepted records"
     }
   ],
   nextActions: [
-    "TRD-457 cleaned post-mechanics command-center copy; next is mechanics docs stale-reference sweep.",
+    "TRD-467 drafted read-only evidence panel requirements; next is bounded frontend information architecture.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -289,7 +289,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_MECHANICS_OPERATOR_HANDOFF_NOTE.md",
         "docs/operations/GATE2_MECHANICS_CLOSURE_AUDIT.md",
         "docs/operations/GATE2_NEXT_GAP_INTAKE.md",
-        "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md"
+        "docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md",
+        "docs/operations/GATE2_MECHANICS_DOCS_STALE_REFERENCE_SWEEP.md",
+        "docs/operations/GATE2_MECHANICS_GUARD_AGING_REVIEW.md",
+        "docs/operations/GATE2_PAPER_SIMULATION_LIMITATION_REGISTER.md",
+        "docs/operations/GATE2_OPERATOR_WORKFLOW_DRY_RUN_PLAN.md",
+        "docs/operations/GATE2_NO_EXPANSION_RECHECK.md",
+        "docs/operations/GATE2_BRAND_HANDOFF_ISOLATION_RECHECK.md",
+        "docs/operations/GATE2_MAINTENANCE_CHECKPOINT.md",
+        "docs/operations/GATE2_PAUSE_OR_PROCEED_RECOMMENDATION.md",
+        "docs/operations/GATE2_READ_ONLY_FRONTEND_APP_SHELL_SCOPE_ASSESSMENT.md",
+        "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md"
       ]
     },
     {

@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-457`                                                      |
+| Latest accepted packet     | `TRD-467`                                                      |
 | Latest accepted validation | 74 test files, 450 tests passed                                |
 
 ## Boundary
@@ -306,6 +306,9 @@ Latest accepted result:
     complete read-only app shell.
   - Gate 2 command-center post-mechanics wording audit aligning visible copy with local
     paper-simulation evidence boundaries.
+  - Gate 2 maintenance closeout records covering stale references, guard aging, limitations,
+    operator workflow, no-expansion, brand isolation, maintenance decision, and read-only frontend
+    planning requirements.
 
 ## Workstream Summary
 
@@ -617,265 +620,275 @@ Latest accepted result:
 
 ## Accepted Packet Ledger Continued
 
-| Packet    | Status   | Workstream       | Primary outcome                                       |
-| --------- | -------- | ---------------- | ----------------------------------------------------- |
-| `TRD-201` | accepted | UI access        | Added command center accessibility contract checks.   |
-| `TRD-202` | accepted | UI preview       | Added command center preview script contract checks.  |
-| `TRD-203` | accepted | UI evidence      | Refreshed post-guard command center CI evidence.      |
-| `TRD-204` | accepted | UI contract      | Added command center rendered evidence contract.      |
-| `TRD-205` | accepted | UI access        | Added mobile evidence table labels and behavior.      |
-| `TRD-206` | accepted | UI source links  | Grouped command center source links by purpose.       |
-| `TRD-207` | accepted | UI handoff       | Added command center operator handoff note.           |
-| `TRD-208` | accepted | Skill governance | Added phase-aware project skill governance.           |
-| `TRD-209` | accepted | Skill governance | Added governed skill library intake policy.           |
-| `TRD-210` | accepted | CI evidence      | Refreshed remote CI evidence after skill intake.      |
-| `TRD-211` | accepted | UI evidence      | Refreshed command center CI run display.              |
-| `TRD-212` | accepted | Skill governance | Added orchestrator reviewer skill intake.             |
-| `TRD-213` | accepted | Skill governance | Added risk governance reviewer skill intake.          |
-| `TRD-214` | accepted | Skill governance | Added QA security reviewer skill intake.              |
-| `TRD-215` | accepted | Skill governance | Added docs control-plane reviewer skill intake.       |
-| `TRD-216` | accepted | Skill governance | Added product strategy reviewer skill intake.         |
-| `TRD-217` | accepted | Skill governance | Added UI command-center reviewer skill intake.        |
-| `TRD-218` | accepted | Skill governance | Added quant backtest reviewer skill intake.           |
-| `TRD-219` | accepted | Skill governance | Added Gate 0 skill routing matrix.                    |
-| `TRD-220` | accepted | Skill governance | Added Gate 0 skill routing guard.                     |
-| `TRD-221` | accepted | CI evidence      | Refreshed remote CI evidence after skill routing.     |
-| `TRD-222` | accepted | UI evidence      | Refreshed command center CI run after skill routing.  |
-| `TRD-223` | accepted | Skill governance | Added Gate 0 skill library closeout review.           |
-| `TRD-224` | accepted | Skill governance | Added Gate 0 skill usage handoff note.                |
-| `TRD-225` | accepted | Scope control    | Added next scope recommendation after skill library.  |
-| `TRD-226` | accepted | CI evidence      | Refreshed remote CI evidence after skill closeout.    |
-| `TRD-227` | accepted | UI evidence      | Refreshed command center CI run after skill closeout. |
-| `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.     |
-| `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors. |
-| `TRD-230` | accepted | CI evidence      | Refreshed CI evidence after action runtime upgrade.   |
-| `TRD-231` | accepted | UI evidence      | Refreshed command center CI run after TRD-230 push.   |
-| `TRD-232` | accepted | CI evidence      | Confirmed latest-push evidence index alignment.       |
-| `TRD-233` | accepted | Validation       | Added CI evidence count expectation coverage.         |
-| `TRD-234` | accepted | UI evidence      | Added command center last verified commit field.      |
-| `TRD-235` | accepted | Validation       | Added source-link duplicate guard.                    |
-| `TRD-236` | accepted | Validation       | Added tracklist section length guard.                 |
-| `TRD-237` | accepted | Control plane    | Cleaned tracklist source-link index.                  |
-| `TRD-238` | accepted | UI QA            | Added command center visual recheck after TRD-231.    |
-| `TRD-239` | accepted | Foundation       | Re-ranked maintenance backlog.                        |
-| `TRD-240` | accepted | Planning         | Rechecked Gate 1 blockers.                            |
-| `TRD-241` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-240 push.      |
-| `TRD-242` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-241.   |
-| `TRD-243` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-242 push.      |
-| `TRD-244` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-243.   |
-| `TRD-245` | accepted | UI runtime       | Added local command-center runtime snapshot endpoint. |
-| `TRD-246` | accepted | UI runtime       | Added local command-center auto-refresh.              |
-| `TRD-247` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-246 push.      |
-| `TRD-248` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-247.   |
-| `TRD-249` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-248 push.      |
-| `TRD-250` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-249.   |
-| `TRD-251` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-250 push.      |
-| `TRD-252` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-251.   |
-| `TRD-253` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-252 push.      |
-| `TRD-254` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-253.   |
-| `TRD-255` | accepted | UI runtime       | Added command-center runtime schema contract.         |
-| `TRD-256` | accepted | UI runtime       | Added runtime endpoint response contract.             |
-| `TRD-257` | accepted | UI runtime       | Added runtime endpoint local security boundary.       |
-| `TRD-258` | accepted | CI evidence      | Added local CI evidence refresh helper and record.    |
-| `TRD-259` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-258 push.      |
-| `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.      |
-| `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.         |
-| `TRD-262` | accepted | Operations       | Aligned maintenance backlog with CI refresh pause.    |
-| `TRD-263` | accepted | Planning         | Authorized Gate 1 historical backtesting transition.  |
-| `TRD-264` | accepted | Brand alignment  | Aligned product name to TraderFrame.                  |
-| `TRD-265` | accepted | Gate activation  | Activated Gate 1 historical-backtesting-only state.   |
-| `TRD-266` | accepted | Validation       | Added stable CI test command.                         |
-| `TRD-267` | accepted | Security         | Recorded dependency audit and upgrade plan.           |
-| `TRD-268` | accepted | Security         | Upgraded test tooling and cleared dependency audit.   |
-| `TRD-269` | accepted | Contracts        | Added directional PnL correctness contract.           |
-| `TRD-270` | accepted | Validation       | Added directional PnL contract tests.                 |
-| `TRD-271` | accepted | Fixtures         | Added directional PnL long and short fixtures.        |
-| `TRD-272` | accepted | Validation       | Added directional PnL negative cases.                 |
-| `TRD-273` | accepted | Validation       | Hardened directional PnL guard indexing.              |
-| `TRD-274` | accepted | Planning         | Planned cross-currency PnL evidence contract.         |
-| `TRD-275` | accepted | Fixtures         | Added cross-currency PnL conversion fixture.          |
-| `TRD-276` | accepted | Fixtures         | Added JPY-pair precision PnL fixture.                 |
-| `TRD-277` | accepted | Validation       | Added PnL declared-cost consistency guard coverage.   |
-| `TRD-278` | accepted | Contracts        | Added backtest-result to PnL evidence reference.      |
-| `TRD-279` | accepted | Planning         | Planned PnL evidence bundle schema.                   |
-| `TRD-280` | accepted | Fixtures         | Added PnL evidence reference and bundle fixtures.     |
-| `TRD-281` | accepted | Review           | Reviewed Gate 1 backtest evidence integrity.          |
-| `TRD-282` | accepted | Validation       | Added PnL evidence bundle negative cases.             |
-| `TRD-283` | accepted | Validation       | Hardened PnL bundle guard indexing.                   |
-| `TRD-284` | accepted | Documentation    | Added PnL bundle docs/source-link coverage.           |
-| `TRD-285` | accepted | Planning         | Planned OHLC bid/ask historical data columns.         |
-| `TRD-286` | accepted | Fixtures         | Added bid/ask historical data snapshot fixture.       |
-| `TRD-287` | accepted | Validation       | Added spread assumption to bid/ask alignment.         |
-| `TRD-288` | accepted | Planning         | Added candle timing and timezone integrity contract.  |
-| `TRD-289` | accepted | Validation       | Added lookahead-bias blocker contract.                |
-| `TRD-290` | accepted | Planning         | Added same-candle stop/target ambiguity plan.         |
-| `TRD-291` | accepted | Risk             | Added backtest assumption risk register.              |
-| `TRD-292` | accepted | Validation       | Added assumption risk register negative cases.        |
-| `TRD-293` | accepted | Validation       | Hardened risk-register guard indexing.                |
-| `TRD-294` | accepted | Fixtures         | Added bad-assumption fixture cases.                   |
-| `TRD-295` | accepted | Contracts        | Added backtest run assembly contract.                 |
-| `TRD-296` | accepted | Contracts        | Added metric report evidence-only contract.           |
-| `TRD-297` | accepted | Validation       | Hardened reproducibility comparison failures.         |
-| `TRD-298` | accepted | Contracts        | Added operator decision event contract.               |
-| `TRD-299` | accepted | Planning         | Drafted Gate 1 completion criteria.                   |
-| `TRD-300` | accepted | Risk             | Recorded Gate 2 blocker audit.                        |
-| `TRD-301` | accepted | Validation       | Rechecked Gate 1 source links and guard coverage.     |
-| `TRD-302` | accepted | Validation       | Added backtest run assembly negative cases.           |
-| `TRD-303` | accepted | Validation       | Added metric report evidence negative cases.          |
-| `TRD-304` | accepted | Validation       | Added operator decision event negative cases.         |
-| `TRD-305` | accepted | Documentation    | Hardened Gate 1 completion criteria source links.     |
-| `TRD-306` | accepted | Risk             | Hardened Gate 2 blocker guard coverage.               |
-| `TRD-307` | accepted | Planning         | Planned missing-candle bad data fixtures.             |
-| `TRD-308` | accepted | Planning         | Planned stale-data blocker contract.                  |
-| `TRD-309` | accepted | Planning         | Recorded duplicate-signal blocker planning.           |
-| `TRD-310` | accepted | Planning         | Planned strategy parameter immutability guard.        |
-| `TRD-311` | accepted | Review           | Reviewed Gate 1 evidence bundle assembly.             |
-| `TRD-312` | accepted | Validation       | Rechecked backtest assembly guard indexing.           |
-| `TRD-313` | accepted | Validation       | Rechecked metric report guard indexing.               |
-| `TRD-314` | accepted | Validation       | Rechecked operator decision guard indexing.           |
-| `TRD-315` | accepted | Contracts        | Added missing-candle bad-data fixture contract.       |
-| `TRD-316` | accepted | Contracts        | Added stale-data blocker contract.                    |
-| `TRD-317` | accepted | Contracts        | Added duplicate-signal blocker contract.              |
-| `TRD-318` | accepted | Contracts        | Added parameter immutability guard contract.          |
-| `TRD-319` | accepted | Contracts        | Added Gate 1 evidence bundle summary contract.        |
-| `TRD-320` | accepted | Risk             | Rechecked Gate 1 completion blockers.                 |
-| `TRD-321` | accepted | Checkpoint       | Checkpointed Gate 1 control-plane alignment.          |
-| `TRD-322` | accepted | Skills           | Aligned skill defaults to Gate 1 current state.       |
-| `TRD-323` | accepted | Planning         | Planned Gate command naming migration.                |
-| `TRD-324` | accepted | Documentation    | Rechecked blocked-evidence docs coverage.             |
-| `TRD-325` | accepted | Validation       | Added evidence blocker aggregate guard.               |
-| `TRD-326` | accepted | Validation       | Added fixture mutation negative cases.                |
-| `TRD-327` | accepted | Validation       | Added snapshot column completeness guard.             |
-| `TRD-328` | accepted | Policy           | Drafted stale-data threshold policy.                  |
-| `TRD-329` | accepted | Provenance       | Recorded parameter hash provenance boundary.          |
-| `TRD-330` | accepted | Contracts        | Drafted duplicate signal fingerprint contract.        |
-| `TRD-331` | accepted | Risk             | Rechecked real historical data adapter blockers.      |
-| `TRD-332` | accepted | Skills           | Rechecked skill eval fixture phase alignment.         |
-| `TRD-333` | accepted | Planning         | Planned Gate command alias compatibility.             |
-| `TRD-334` | accepted | Skills           | Rechecked Gate 1 skill guard naming.                  |
-| `TRD-335` | accepted | Validation       | Added blocker aggregate negative fixture set.         |
-| `TRD-336` | accepted | Data             | Recorded OHLC mid-price limitation.                   |
-| `TRD-337` | accepted | Planning         | Drafted historical data adapter boundary.             |
-| `TRD-338` | accepted | Data             | Drafted data-provider provenance fields.              |
-| `TRD-339` | accepted | Documentation    | Rechecked stale-data policy source links.             |
-| `TRD-340` | accepted | Provenance       | Planned parameter hash canonicalization.              |
-| `TRD-341` | accepted | Validation       | Added duplicate signal fingerprint negative cases.    |
-| `TRD-342` | accepted | Checkpoint       | Checkpointed Gate 1 blocker expansion.                |
-| `TRD-343` | accepted | Risk             | Inventoried adapter authorization blockers.           |
-| `TRD-344` | accepted | Planning         | Planned adapter fixture import contract boundaries.   |
-| `TRD-345` | accepted | Documentation    | Rechecked duplicate signal source links.              |
-| `TRD-346` | accepted | Provenance       | Planned parameter hash negative cases.                |
-| `TRD-347` | accepted | Risk             | Drafted provider license review checklist.            |
-| `TRD-348` | accepted | Documentation    | Rechecked command alias docs coverage.                |
-| `TRD-349` | accepted | Skills           | Indexed skill metadata guard record.                  |
-| `TRD-350` | accepted | Policy           | Drafted imported snapshot quarantine policy.          |
-| `TRD-351` | accepted | Documentation    | Rechecked Gate 1 blocker checkpoint coverage.         |
-| `TRD-352` | accepted | Checkpoint       | Checkpointed Gate 1 adapter-readiness blockers.       |
-| `TRD-353` | accepted | Documentation    | Rechecked adapter blocker source links.               |
-| `TRD-354` | accepted | Governance       | Drafted imported snapshot schema authority.           |
-| `TRD-355` | accepted | Security         | Documented provider credential exclusion.             |
-| `TRD-356` | accepted | Documentation    | Rechecked quarantine policy coverage.                 |
-| `TRD-357` | accepted | Planning         | Planned adapter fixture negative cases.               |
-| `TRD-358` | accepted | Policy           | Recorded data-retention limitations.                  |
-| `TRD-359` | accepted | Documentation    | Rechecked provider license checklist coverage.        |
-| `TRD-360` | accepted | Security         | Drafted adapter audit-log boundary.                   |
-| `TRD-361` | accepted | Checkpoint       | Rechecked Gate 1 adapter blocker checkpoint.          |
-| `TRD-362` | accepted | Checkpoint       | Froze adapter planning pending concrete gap.          |
-| `TRD-363` | accepted | Planning         | Selected post-adapter-freeze maintenance lane.        |
-| `TRD-364` | accepted | Documentation    | Rechecked guard command docs alignment.               |
-| `TRD-365` | accepted | Validation       | Rechecked contract guard schema hardening.            |
-| `TRD-366` | accepted | Risk             | Rechecked readiness blocker language.                 |
-| `TRD-367` | accepted | Command center   | Audited Gate 1 command-center wording.                |
-| `TRD-368` | accepted | Policy           | Drafted review artifact aging policy.                 |
-| `TRD-369` | accepted | Documentation    | Rechecked source-link map consistency.                |
-| `TRD-370` | accepted | Security         | Reviewed Gate 1 blocked-scope scanner posture.        |
-| `TRD-371` | accepted | Handoff          | Reviewed operator handoff freshness.                  |
-| `TRD-372` | accepted | Checkpoint       | Checkpointed Gate 1 maintenance lane.                 |
-| `TRD-373` | accepted | Planning         | Intook remaining Gate 1 maintenance gaps.             |
-| `TRD-374` | accepted | Documentation    | Rechecked tracklist queue discipline.                 |
-| `TRD-375` | accepted | Command center   | Set command-center next-action pause wording.         |
-| `TRD-376` | accepted | Documentation    | Rechecked review aging policy source links.           |
-| `TRD-377` | accepted | Security         | Audited scanner blocked-term sample classes.          |
-| `TRD-378` | accepted | Documentation    | Swept Gate 1 docs stale-reference classes.            |
-| `TRD-379` | accepted | Checkpoint       | Defined Gate 1 maintenance stop conditions.           |
-| `TRD-380` | accepted | Evidence         | Reviewed evidence freshness churn guard.              |
-| `TRD-381` | accepted | Handoff          | Reviewed brand handoff isolation.                     |
-| `TRD-382` | accepted | Checkpoint       | Closed out Gate 1 maintenance lane.                   |
-| `TRD-383` | accepted | Evidence         | Reviewed Gate 1 closeout evidence.                    |
-| `TRD-384` | accepted | Audit            | Audited Gate 1 acceptance criteria.                   |
-| `TRD-385` | accepted | Assessment       | Drafted Gate 2 readiness assessment packet.           |
-| `TRD-386` | accepted | Blockers         | Inventoried Gate 2 blockers.                          |
-| `TRD-387` | accepted | Autonomy         | Reviewed autonomy gate deltas.                        |
-| `TRD-388` | accepted | Risk             | Reviewed financial risk gate deltas.                  |
-| `TRD-389` | accepted | Security         | Assessed credential boundary.                         |
-| `TRD-390` | accepted | Risk             | Reviewed execution-scope prohibition.                 |
-| `TRD-391` | accepted | Security         | Reviewed Gate 2 assessment QA/security posture.       |
-| `TRD-392` | accepted | Recommendation   | Recommended Gate 1 closeout signoff lane.             |
-| `TRD-393` | accepted | Signoff          | Prepared Gate 1 closeout signoff packet.              |
-| `TRD-394` | accepted | Planning         | Drafted Gate 2 authorization criteria.                |
-| `TRD-395` | accepted | Risk             | Drafted risk-owner authorization checklist.           |
-| `TRD-396` | accepted | Autonomy         | Drafted autonomy-owner authorization checklist.       |
-| `TRD-397` | accepted | Security         | Drafted QA/security authorization checklist.          |
-| `TRD-398` | accepted | Boundary         | Confirmed Gate 2 implementation prohibition.          |
-| `TRD-399` | accepted | Governance       | Reviewed operator decision authority.                 |
-| `TRD-400` | accepted | Verification     | Recorded Gate 1 final verification requirement.       |
-| `TRD-401` | accepted | Planning         | Drafted gate movement decision packet shape.          |
-| `TRD-402` | accepted | Recommendation   | Recommended Gate 1 signoff review and pause.          |
-| `TRD-403` | accepted | Gate decision    | Recorded operator approval for Gate 2 planning.       |
-| `TRD-404` | accepted | Gate transition  | Exited the Gate 1 signoff pause.                      |
-| `TRD-405` | accepted | Gap intake       | Recorded no open material Gate 1 gap.                 |
-| `TRD-406` | accepted | Handoff          | Kept brand handoff isolated from gate movement.       |
-| `TRD-407` | accepted | Gate request     | Intook formal Gate 2 movement request.                |
-| `TRD-408` | accepted | Approval routing | Routed Gate 2 movement approvals.                     |
-| `TRD-409` | accepted | Checklist        | Drafted Gate 2 movement dry-run checklist.            |
-| `TRD-410` | accepted | Planning hold    | Held Gate 2 to planning authorization only.           |
-| `TRD-411` | accepted | Command center   | Synced command center to Gate 2 planning.             |
-| `TRD-412` | accepted | Checkpoint       | Defined next Gate 2 planning decision.                |
-| `TRD-413` | accepted | Planning         | Planned Gate 2 simulated-order record shape.          |
-| `TRD-414` | accepted | Planning         | Planned Gate 2 simulation state boundaries.           |
-| `TRD-415` | accepted | Security         | Planned no-external-account guard coverage.           |
-| `TRD-416` | accepted | Security         | Planned credential exclusion guard coverage.          |
-| `TRD-417` | accepted | Risk             | Planned simulated-fill assumption records.            |
-| `TRD-418` | accepted | Risk             | Planned Gate 2 risk review event records.             |
-| `TRD-419` | accepted | Governance       | Planned operator action log records.                  |
-| `TRD-420` | accepted | Fixtures         | Planned Gate 2 negative fixture classes.              |
-| `TRD-421` | accepted | Command center   | Planned Gate 2 command-center extension.              |
-| `TRD-422` | accepted | Review           | Reviewed Gate 2 implementation readiness.             |
-| `TRD-423` | accepted | Contracts        | Added Gate 2 contract implementation packet.          |
-| `TRD-424` | accepted | Contracts        | Added simulated-order record contract schema.         |
-| `TRD-425` | accepted | Contracts        | Added simulation state contract schema.               |
-| `TRD-426` | accepted | Contracts        | Added risk review event contract schema.              |
-| `TRD-427` | accepted | Contracts        | Added operator action log contract schema.            |
-| `TRD-428` | accepted | Contracts        | Added simulated fill assumption schema.               |
-| `TRD-429` | accepted | Fixtures         | Added Gate 2 synthetic fixture set.                   |
-| `TRD-430` | accepted | Validation       | Added Gate 2 negative contract tests.                 |
-| `TRD-431` | accepted | Validation       | Indexed Gate 2 contract guard coverage.               |
-| `TRD-432` | accepted | Checkpoint       | Checkpointed Gate 2 contract-only lane.               |
-| `TRD-433` | accepted | Planning         | Planned Gate 2 mechanics lane boundaries.             |
-| `TRD-434` | accepted | Boundary         | Planned local simulation engine boundaries.           |
-| `TRD-435` | accepted | Planning         | Planned simulation input assembly.                    |
-| `TRD-436` | accepted | Planning         | Planned simulation output artifacts.                  |
-| `TRD-437` | accepted | Determinism      | Planned replay determinism requirements.              |
-| `TRD-438` | accepted | Failure modes    | Planned simulation failure modes.                     |
-| `TRD-439` | accepted | Command center   | Planned command-center mechanics copy.                |
-| `TRD-440` | accepted | Review           | Reviewed mechanics implementation blockers.           |
-| `TRD-441` | accepted | Source links     | Rechecked Gate 2 contract source links.               |
-| `TRD-442` | accepted | Checkpoint       | Checkpointed Gate 2 mechanics planning lane.          |
-| `TRD-443` | accepted | Implementation   | Accepted local-only mechanics implementation packet.  |
-| `TRD-444` | accepted | Simulation       | Added local simulation engine pure function.          |
-| `TRD-445` | accepted | Simulation       | Added simulation input assembler.                     |
-| `TRD-446` | accepted | Simulation       | Added simulation output artifact builder.             |
-| `TRD-447` | accepted | Determinism      | Added replay determinism guard.                       |
-| `TRD-448` | accepted | Fixtures         | Added failure-mode fixtures and tests.                |
-| `TRD-449` | accepted | Command center   | Added mechanics evidence view records.                |
-| `TRD-450` | accepted | Security         | Reviewed mechanics scanner boundary posture.          |
-| `TRD-451` | accepted | Source links     | Rechecked mechanics source-link guard coverage.       |
-| `TRD-452` | accepted | Checkpoint       | Checkpointed mechanics implementation lane.           |
-| `TRD-453` | accepted | Blockers         | Reviewed post-mechanics blockers.                     |
-| `TRD-454` | accepted | Handoff          | Added mechanics operator handoff note.                |
-| `TRD-455` | accepted | Audit            | Closed out Gate 2 mechanics lane.                     |
-| `TRD-456` | accepted | Gap intake       | Identified next Gate 2 local evidence gaps.           |
-| `TRD-457` | accepted | Wording          | Audited command-center post-mechanics copy.           |
+| Packet    | Status   | Workstream       | Primary outcome                                         |
+| --------- | -------- | ---------------- | ------------------------------------------------------- |
+| `TRD-201` | accepted | UI access        | Added command center accessibility contract checks.     |
+| `TRD-202` | accepted | UI preview       | Added command center preview script contract checks.    |
+| `TRD-203` | accepted | UI evidence      | Refreshed post-guard command center CI evidence.        |
+| `TRD-204` | accepted | UI contract      | Added command center rendered evidence contract.        |
+| `TRD-205` | accepted | UI access        | Added mobile evidence table labels and behavior.        |
+| `TRD-206` | accepted | UI source links  | Grouped command center source links by purpose.         |
+| `TRD-207` | accepted | UI handoff       | Added command center operator handoff note.             |
+| `TRD-208` | accepted | Skill governance | Added phase-aware project skill governance.             |
+| `TRD-209` | accepted | Skill governance | Added governed skill library intake policy.             |
+| `TRD-210` | accepted | CI evidence      | Refreshed remote CI evidence after skill intake.        |
+| `TRD-211` | accepted | UI evidence      | Refreshed command center CI run display.                |
+| `TRD-212` | accepted | Skill governance | Added orchestrator reviewer skill intake.               |
+| `TRD-213` | accepted | Skill governance | Added risk governance reviewer skill intake.            |
+| `TRD-214` | accepted | Skill governance | Added QA security reviewer skill intake.                |
+| `TRD-215` | accepted | Skill governance | Added docs control-plane reviewer skill intake.         |
+| `TRD-216` | accepted | Skill governance | Added product strategy reviewer skill intake.           |
+| `TRD-217` | accepted | Skill governance | Added UI command-center reviewer skill intake.          |
+| `TRD-218` | accepted | Skill governance | Added quant backtest reviewer skill intake.             |
+| `TRD-219` | accepted | Skill governance | Added Gate 0 skill routing matrix.                      |
+| `TRD-220` | accepted | Skill governance | Added Gate 0 skill routing guard.                       |
+| `TRD-221` | accepted | CI evidence      | Refreshed remote CI evidence after skill routing.       |
+| `TRD-222` | accepted | UI evidence      | Refreshed command center CI run after skill routing.    |
+| `TRD-223` | accepted | Skill governance | Added Gate 0 skill library closeout review.             |
+| `TRD-224` | accepted | Skill governance | Added Gate 0 skill usage handoff note.                  |
+| `TRD-225` | accepted | Scope control    | Added next scope recommendation after skill library.    |
+| `TRD-226` | accepted | CI evidence      | Refreshed remote CI evidence after skill closeout.      |
+| `TRD-227` | accepted | UI evidence      | Refreshed command center CI run after skill closeout.   |
+| `TRD-228` | accepted | UI orientation   | Added hash-aware command center navigation state.       |
+| `TRD-229` | accepted | CI runtime       | Upgraded GitHub Actions to Node 24-compatible majors.   |
+| `TRD-230` | accepted | CI evidence      | Refreshed CI evidence after action runtime upgrade.     |
+| `TRD-231` | accepted | UI evidence      | Refreshed command center CI run after TRD-230 push.     |
+| `TRD-232` | accepted | CI evidence      | Confirmed latest-push evidence index alignment.         |
+| `TRD-233` | accepted | Validation       | Added CI evidence count expectation coverage.           |
+| `TRD-234` | accepted | UI evidence      | Added command center last verified commit field.        |
+| `TRD-235` | accepted | Validation       | Added source-link duplicate guard.                      |
+| `TRD-236` | accepted | Validation       | Added tracklist section length guard.                   |
+| `TRD-237` | accepted | Control plane    | Cleaned tracklist source-link index.                    |
+| `TRD-238` | accepted | UI QA            | Added command center visual recheck after TRD-231.      |
+| `TRD-239` | accepted | Foundation       | Re-ranked maintenance backlog.                          |
+| `TRD-240` | accepted | Planning         | Rechecked Gate 1 blockers.                              |
+| `TRD-241` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-240 push.        |
+| `TRD-242` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-241.     |
+| `TRD-243` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-242 push.        |
+| `TRD-244` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-243.     |
+| `TRD-245` | accepted | UI runtime       | Added local command-center runtime snapshot endpoint.   |
+| `TRD-246` | accepted | UI runtime       | Added local command-center auto-refresh.                |
+| `TRD-247` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-246 push.        |
+| `TRD-248` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-247.     |
+| `TRD-249` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-248 push.        |
+| `TRD-250` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-249.     |
+| `TRD-251` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-250 push.        |
+| `TRD-252` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-251.     |
+| `TRD-253` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-252 push.        |
+| `TRD-254` | accepted | UI evidence      | Refreshed command center CI metadata after TRD-253.     |
+| `TRD-255` | accepted | UI runtime       | Added command-center runtime schema contract.           |
+| `TRD-256` | accepted | UI runtime       | Added runtime endpoint response contract.               |
+| `TRD-257` | accepted | UI runtime       | Added runtime endpoint local security boundary.         |
+| `TRD-258` | accepted | CI evidence      | Added local CI evidence refresh helper and record.      |
+| `TRD-259` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-258 push.        |
+| `TRD-260` | accepted | CI evidence      | Refreshed remote CI evidence after TRD-259 push.        |
+| `TRD-261` | accepted | CI evidence      | Added CI evidence refresh loop pause control.           |
+| `TRD-262` | accepted | Operations       | Aligned maintenance backlog with CI refresh pause.      |
+| `TRD-263` | accepted | Planning         | Authorized Gate 1 historical backtesting transition.    |
+| `TRD-264` | accepted | Brand alignment  | Aligned product name to TraderFrame.                    |
+| `TRD-265` | accepted | Gate activation  | Activated Gate 1 historical-backtesting-only state.     |
+| `TRD-266` | accepted | Validation       | Added stable CI test command.                           |
+| `TRD-267` | accepted | Security         | Recorded dependency audit and upgrade plan.             |
+| `TRD-268` | accepted | Security         | Upgraded test tooling and cleared dependency audit.     |
+| `TRD-269` | accepted | Contracts        | Added directional PnL correctness contract.             |
+| `TRD-270` | accepted | Validation       | Added directional PnL contract tests.                   |
+| `TRD-271` | accepted | Fixtures         | Added directional PnL long and short fixtures.          |
+| `TRD-272` | accepted | Validation       | Added directional PnL negative cases.                   |
+| `TRD-273` | accepted | Validation       | Hardened directional PnL guard indexing.                |
+| `TRD-274` | accepted | Planning         | Planned cross-currency PnL evidence contract.           |
+| `TRD-275` | accepted | Fixtures         | Added cross-currency PnL conversion fixture.            |
+| `TRD-276` | accepted | Fixtures         | Added JPY-pair precision PnL fixture.                   |
+| `TRD-277` | accepted | Validation       | Added PnL declared-cost consistency guard coverage.     |
+| `TRD-278` | accepted | Contracts        | Added backtest-result to PnL evidence reference.        |
+| `TRD-279` | accepted | Planning         | Planned PnL evidence bundle schema.                     |
+| `TRD-280` | accepted | Fixtures         | Added PnL evidence reference and bundle fixtures.       |
+| `TRD-281` | accepted | Review           | Reviewed Gate 1 backtest evidence integrity.            |
+| `TRD-282` | accepted | Validation       | Added PnL evidence bundle negative cases.               |
+| `TRD-283` | accepted | Validation       | Hardened PnL bundle guard indexing.                     |
+| `TRD-284` | accepted | Documentation    | Added PnL bundle docs/source-link coverage.             |
+| `TRD-285` | accepted | Planning         | Planned OHLC bid/ask historical data columns.           |
+| `TRD-286` | accepted | Fixtures         | Added bid/ask historical data snapshot fixture.         |
+| `TRD-287` | accepted | Validation       | Added spread assumption to bid/ask alignment.           |
+| `TRD-288` | accepted | Planning         | Added candle timing and timezone integrity contract.    |
+| `TRD-289` | accepted | Validation       | Added lookahead-bias blocker contract.                  |
+| `TRD-290` | accepted | Planning         | Added same-candle stop/target ambiguity plan.           |
+| `TRD-291` | accepted | Risk             | Added backtest assumption risk register.                |
+| `TRD-292` | accepted | Validation       | Added assumption risk register negative cases.          |
+| `TRD-293` | accepted | Validation       | Hardened risk-register guard indexing.                  |
+| `TRD-294` | accepted | Fixtures         | Added bad-assumption fixture cases.                     |
+| `TRD-295` | accepted | Contracts        | Added backtest run assembly contract.                   |
+| `TRD-296` | accepted | Contracts        | Added metric report evidence-only contract.             |
+| `TRD-297` | accepted | Validation       | Hardened reproducibility comparison failures.           |
+| `TRD-298` | accepted | Contracts        | Added operator decision event contract.                 |
+| `TRD-299` | accepted | Planning         | Drafted Gate 1 completion criteria.                     |
+| `TRD-300` | accepted | Risk             | Recorded Gate 2 blocker audit.                          |
+| `TRD-301` | accepted | Validation       | Rechecked Gate 1 source links and guard coverage.       |
+| `TRD-302` | accepted | Validation       | Added backtest run assembly negative cases.             |
+| `TRD-303` | accepted | Validation       | Added metric report evidence negative cases.            |
+| `TRD-304` | accepted | Validation       | Added operator decision event negative cases.           |
+| `TRD-305` | accepted | Documentation    | Hardened Gate 1 completion criteria source links.       |
+| `TRD-306` | accepted | Risk             | Hardened Gate 2 blocker guard coverage.                 |
+| `TRD-307` | accepted | Planning         | Planned missing-candle bad data fixtures.               |
+| `TRD-308` | accepted | Planning         | Planned stale-data blocker contract.                    |
+| `TRD-309` | accepted | Planning         | Recorded duplicate-signal blocker planning.             |
+| `TRD-310` | accepted | Planning         | Planned strategy parameter immutability guard.          |
+| `TRD-311` | accepted | Review           | Reviewed Gate 1 evidence bundle assembly.               |
+| `TRD-312` | accepted | Validation       | Rechecked backtest assembly guard indexing.             |
+| `TRD-313` | accepted | Validation       | Rechecked metric report guard indexing.                 |
+| `TRD-314` | accepted | Validation       | Rechecked operator decision guard indexing.             |
+| `TRD-315` | accepted | Contracts        | Added missing-candle bad-data fixture contract.         |
+| `TRD-316` | accepted | Contracts        | Added stale-data blocker contract.                      |
+| `TRD-317` | accepted | Contracts        | Added duplicate-signal blocker contract.                |
+| `TRD-318` | accepted | Contracts        | Added parameter immutability guard contract.            |
+| `TRD-319` | accepted | Contracts        | Added Gate 1 evidence bundle summary contract.          |
+| `TRD-320` | accepted | Risk             | Rechecked Gate 1 completion blockers.                   |
+| `TRD-321` | accepted | Checkpoint       | Checkpointed Gate 1 control-plane alignment.            |
+| `TRD-322` | accepted | Skills           | Aligned skill defaults to Gate 1 current state.         |
+| `TRD-323` | accepted | Planning         | Planned Gate command naming migration.                  |
+| `TRD-324` | accepted | Documentation    | Rechecked blocked-evidence docs coverage.               |
+| `TRD-325` | accepted | Validation       | Added evidence blocker aggregate guard.                 |
+| `TRD-326` | accepted | Validation       | Added fixture mutation negative cases.                  |
+| `TRD-327` | accepted | Validation       | Added snapshot column completeness guard.               |
+| `TRD-328` | accepted | Policy           | Drafted stale-data threshold policy.                    |
+| `TRD-329` | accepted | Provenance       | Recorded parameter hash provenance boundary.            |
+| `TRD-330` | accepted | Contracts        | Drafted duplicate signal fingerprint contract.          |
+| `TRD-331` | accepted | Risk             | Rechecked real historical data adapter blockers.        |
+| `TRD-332` | accepted | Skills           | Rechecked skill eval fixture phase alignment.           |
+| `TRD-333` | accepted | Planning         | Planned Gate command alias compatibility.               |
+| `TRD-334` | accepted | Skills           | Rechecked Gate 1 skill guard naming.                    |
+| `TRD-335` | accepted | Validation       | Added blocker aggregate negative fixture set.           |
+| `TRD-336` | accepted | Data             | Recorded OHLC mid-price limitation.                     |
+| `TRD-337` | accepted | Planning         | Drafted historical data adapter boundary.               |
+| `TRD-338` | accepted | Data             | Drafted data-provider provenance fields.                |
+| `TRD-339` | accepted | Documentation    | Rechecked stale-data policy source links.               |
+| `TRD-340` | accepted | Provenance       | Planned parameter hash canonicalization.                |
+| `TRD-341` | accepted | Validation       | Added duplicate signal fingerprint negative cases.      |
+| `TRD-342` | accepted | Checkpoint       | Checkpointed Gate 1 blocker expansion.                  |
+| `TRD-343` | accepted | Risk             | Inventoried adapter authorization blockers.             |
+| `TRD-344` | accepted | Planning         | Planned adapter fixture import contract boundaries.     |
+| `TRD-345` | accepted | Documentation    | Rechecked duplicate signal source links.                |
+| `TRD-346` | accepted | Provenance       | Planned parameter hash negative cases.                  |
+| `TRD-347` | accepted | Risk             | Drafted provider license review checklist.              |
+| `TRD-348` | accepted | Documentation    | Rechecked command alias docs coverage.                  |
+| `TRD-349` | accepted | Skills           | Indexed skill metadata guard record.                    |
+| `TRD-350` | accepted | Policy           | Drafted imported snapshot quarantine policy.            |
+| `TRD-351` | accepted | Documentation    | Rechecked Gate 1 blocker checkpoint coverage.           |
+| `TRD-352` | accepted | Checkpoint       | Checkpointed Gate 1 adapter-readiness blockers.         |
+| `TRD-353` | accepted | Documentation    | Rechecked adapter blocker source links.                 |
+| `TRD-354` | accepted | Governance       | Drafted imported snapshot schema authority.             |
+| `TRD-355` | accepted | Security         | Documented provider credential exclusion.               |
+| `TRD-356` | accepted | Documentation    | Rechecked quarantine policy coverage.                   |
+| `TRD-357` | accepted | Planning         | Planned adapter fixture negative cases.                 |
+| `TRD-358` | accepted | Policy           | Recorded data-retention limitations.                    |
+| `TRD-359` | accepted | Documentation    | Rechecked provider license checklist coverage.          |
+| `TRD-360` | accepted | Security         | Drafted adapter audit-log boundary.                     |
+| `TRD-361` | accepted | Checkpoint       | Rechecked Gate 1 adapter blocker checkpoint.            |
+| `TRD-362` | accepted | Checkpoint       | Froze adapter planning pending concrete gap.            |
+| `TRD-363` | accepted | Planning         | Selected post-adapter-freeze maintenance lane.          |
+| `TRD-364` | accepted | Documentation    | Rechecked guard command docs alignment.                 |
+| `TRD-365` | accepted | Validation       | Rechecked contract guard schema hardening.              |
+| `TRD-366` | accepted | Risk             | Rechecked readiness blocker language.                   |
+| `TRD-367` | accepted | Command center   | Audited Gate 1 command-center wording.                  |
+| `TRD-368` | accepted | Policy           | Drafted review artifact aging policy.                   |
+| `TRD-369` | accepted | Documentation    | Rechecked source-link map consistency.                  |
+| `TRD-370` | accepted | Security         | Reviewed Gate 1 blocked-scope scanner posture.          |
+| `TRD-371` | accepted | Handoff          | Reviewed operator handoff freshness.                    |
+| `TRD-372` | accepted | Checkpoint       | Checkpointed Gate 1 maintenance lane.                   |
+| `TRD-373` | accepted | Planning         | Intook remaining Gate 1 maintenance gaps.               |
+| `TRD-374` | accepted | Documentation    | Rechecked tracklist queue discipline.                   |
+| `TRD-375` | accepted | Command center   | Set command-center next-action pause wording.           |
+| `TRD-376` | accepted | Documentation    | Rechecked review aging policy source links.             |
+| `TRD-377` | accepted | Security         | Audited scanner blocked-term sample classes.            |
+| `TRD-378` | accepted | Documentation    | Swept Gate 1 docs stale-reference classes.              |
+| `TRD-379` | accepted | Checkpoint       | Defined Gate 1 maintenance stop conditions.             |
+| `TRD-380` | accepted | Evidence         | Reviewed evidence freshness churn guard.                |
+| `TRD-381` | accepted | Handoff          | Reviewed brand handoff isolation.                       |
+| `TRD-382` | accepted | Checkpoint       | Closed out Gate 1 maintenance lane.                     |
+| `TRD-383` | accepted | Evidence         | Reviewed Gate 1 closeout evidence.                      |
+| `TRD-384` | accepted | Audit            | Audited Gate 1 acceptance criteria.                     |
+| `TRD-385` | accepted | Assessment       | Drafted Gate 2 readiness assessment packet.             |
+| `TRD-386` | accepted | Blockers         | Inventoried Gate 2 blockers.                            |
+| `TRD-387` | accepted | Autonomy         | Reviewed autonomy gate deltas.                          |
+| `TRD-388` | accepted | Risk             | Reviewed financial risk gate deltas.                    |
+| `TRD-389` | accepted | Security         | Assessed credential boundary.                           |
+| `TRD-390` | accepted | Risk             | Reviewed execution-scope prohibition.                   |
+| `TRD-391` | accepted | Security         | Reviewed Gate 2 assessment QA/security posture.         |
+| `TRD-392` | accepted | Recommendation   | Recommended Gate 1 closeout signoff lane.               |
+| `TRD-393` | accepted | Signoff          | Prepared Gate 1 closeout signoff packet.                |
+| `TRD-394` | accepted | Planning         | Drafted Gate 2 authorization criteria.                  |
+| `TRD-395` | accepted | Risk             | Drafted risk-owner authorization checklist.             |
+| `TRD-396` | accepted | Autonomy         | Drafted autonomy-owner authorization checklist.         |
+| `TRD-397` | accepted | Security         | Drafted QA/security authorization checklist.            |
+| `TRD-398` | accepted | Boundary         | Confirmed Gate 2 implementation prohibition.            |
+| `TRD-399` | accepted | Governance       | Reviewed operator decision authority.                   |
+| `TRD-400` | accepted | Verification     | Recorded Gate 1 final verification requirement.         |
+| `TRD-401` | accepted | Planning         | Drafted gate movement decision packet shape.            |
+| `TRD-402` | accepted | Recommendation   | Recommended Gate 1 signoff review and pause.            |
+| `TRD-403` | accepted | Gate decision    | Recorded operator approval for Gate 2 planning.         |
+| `TRD-404` | accepted | Gate transition  | Exited the Gate 1 signoff pause.                        |
+| `TRD-405` | accepted | Gap intake       | Recorded no open material Gate 1 gap.                   |
+| `TRD-406` | accepted | Handoff          | Kept brand handoff isolated from gate movement.         |
+| `TRD-407` | accepted | Gate request     | Intook formal Gate 2 movement request.                  |
+| `TRD-408` | accepted | Approval routing | Routed Gate 2 movement approvals.                       |
+| `TRD-409` | accepted | Checklist        | Drafted Gate 2 movement dry-run checklist.              |
+| `TRD-410` | accepted | Planning hold    | Held Gate 2 to planning authorization only.             |
+| `TRD-411` | accepted | Command center   | Synced command center to Gate 2 planning.               |
+| `TRD-412` | accepted | Checkpoint       | Defined next Gate 2 planning decision.                  |
+| `TRD-413` | accepted | Planning         | Planned Gate 2 simulated-order record shape.            |
+| `TRD-414` | accepted | Planning         | Planned Gate 2 simulation state boundaries.             |
+| `TRD-415` | accepted | Security         | Planned no-external-account guard coverage.             |
+| `TRD-416` | accepted | Security         | Planned credential exclusion guard coverage.            |
+| `TRD-417` | accepted | Risk             | Planned simulated-fill assumption records.              |
+| `TRD-418` | accepted | Risk             | Planned Gate 2 risk review event records.               |
+| `TRD-419` | accepted | Governance       | Planned operator action log records.                    |
+| `TRD-420` | accepted | Fixtures         | Planned Gate 2 negative fixture classes.                |
+| `TRD-421` | accepted | Command center   | Planned Gate 2 command-center extension.                |
+| `TRD-422` | accepted | Review           | Reviewed Gate 2 implementation readiness.               |
+| `TRD-423` | accepted | Contracts        | Added Gate 2 contract implementation packet.            |
+| `TRD-424` | accepted | Contracts        | Added simulated-order record contract schema.           |
+| `TRD-425` | accepted | Contracts        | Added simulation state contract schema.                 |
+| `TRD-426` | accepted | Contracts        | Added risk review event contract schema.                |
+| `TRD-427` | accepted | Contracts        | Added operator action log contract schema.              |
+| `TRD-428` | accepted | Contracts        | Added simulated fill assumption schema.                 |
+| `TRD-429` | accepted | Fixtures         | Added Gate 2 synthetic fixture set.                     |
+| `TRD-430` | accepted | Validation       | Added Gate 2 negative contract tests.                   |
+| `TRD-431` | accepted | Validation       | Indexed Gate 2 contract guard coverage.                 |
+| `TRD-432` | accepted | Checkpoint       | Checkpointed Gate 2 contract-only lane.                 |
+| `TRD-433` | accepted | Planning         | Planned Gate 2 mechanics lane boundaries.               |
+| `TRD-434` | accepted | Boundary         | Planned local simulation engine boundaries.             |
+| `TRD-435` | accepted | Planning         | Planned simulation input assembly.                      |
+| `TRD-436` | accepted | Planning         | Planned simulation output artifacts.                    |
+| `TRD-437` | accepted | Determinism      | Planned replay determinism requirements.                |
+| `TRD-438` | accepted | Failure modes    | Planned simulation failure modes.                       |
+| `TRD-439` | accepted | Command center   | Planned command-center mechanics copy.                  |
+| `TRD-440` | accepted | Review           | Reviewed mechanics implementation blockers.             |
+| `TRD-441` | accepted | Source links     | Rechecked Gate 2 contract source links.                 |
+| `TRD-442` | accepted | Checkpoint       | Checkpointed Gate 2 mechanics planning lane.            |
+| `TRD-443` | accepted | Implementation   | Accepted local-only mechanics implementation packet.    |
+| `TRD-444` | accepted | Simulation       | Added local simulation engine pure function.            |
+| `TRD-445` | accepted | Simulation       | Added simulation input assembler.                       |
+| `TRD-446` | accepted | Simulation       | Added simulation output artifact builder.               |
+| `TRD-447` | accepted | Determinism      | Added replay determinism guard.                         |
+| `TRD-448` | accepted | Fixtures         | Added failure-mode fixtures and tests.                  |
+| `TRD-449` | accepted | Command center   | Added mechanics evidence view records.                  |
+| `TRD-450` | accepted | Security         | Reviewed mechanics scanner boundary posture.            |
+| `TRD-451` | accepted | Source links     | Rechecked mechanics source-link guard coverage.         |
+| `TRD-452` | accepted | Checkpoint       | Checkpointed mechanics implementation lane.             |
+| `TRD-453` | accepted | Blockers         | Reviewed post-mechanics blockers.                       |
+| `TRD-454` | accepted | Handoff          | Added mechanics operator handoff note.                  |
+| `TRD-455` | accepted | Audit            | Closed out Gate 2 mechanics lane.                       |
+| `TRD-456` | accepted | Gap intake       | Identified next Gate 2 local evidence gaps.             |
+| `TRD-457` | accepted | Wording          | Audited command-center post-mechanics copy.             |
+| `TRD-458` | accepted | Docs             | Swept mechanics docs stale-reference posture.           |
+| `TRD-459` | accepted | Guards           | Reviewed mechanics guard aging posture.                 |
+| `TRD-460` | accepted | Limitations      | Registered paper-simulation limitations.                |
+| `TRD-461` | accepted | Workflow         | Planned manual local operator workflow dry run.         |
+| `TRD-462` | accepted | Boundary         | Reconfirmed Gate 2 no-expansion posture.                |
+| `TRD-463` | accepted | Isolation        | Rechecked brand handoff isolation.                      |
+| `TRD-464` | accepted | Checkpoint       | Checkpointed Gate 2 maintenance state.                  |
+| `TRD-465` | accepted | Recommendation   | Recommended bounded read-only frontend planning.        |
+| `TRD-466` | accepted | Frontend scope   | Assessed read-only frontend app-shell scope.            |
+| `TRD-467` | accepted | Frontend panels  | Drafted read-only frontend evidence panel requirements. |
 
 ## Current Operator Commands
 
@@ -912,18 +925,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                           | Acceptance focus                                 |
-| ---- | --------- | ------ | ---------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-458` | queued | Mechanics docs stale-reference sweep.          | Remove stale planning-only wording.              |
-| 2    | `TRD-459` | queued | Mechanics guard aging review.                  | Confirm guard coverage remains current.          |
-| 3    | `TRD-460` | queued | Paper simulation limitation register.          | Record limitations before product expansion.     |
-| 4    | `TRD-461` | queued | Operator workflow dry-run plan.                | Plan manual local workflow only.                 |
-| 5    | `TRD-462` | queued | Gate 2 no-expansion recheck.                   | Reconfirm no broker, live, AI, or autonomy path. |
-| 6    | `TRD-463` | queued | Brand handoff isolation recheck.               | Keep brand work separate from gate mechanics.    |
-| 7    | `TRD-464` | queued | Gate 2 maintenance checkpoint.                 | Decide pause or next bounded lane.               |
-| 8    | `TRD-465` | queued | Gate 2 pause-or-proceed recommendation.        | Recommend maintenance pause or next bounded gap. |
-| 9    | `TRD-466` | queued | Read-only frontend app-shell scope assessment. | Define UI scope without execution controls.      |
-| 10   | `TRD-467` | queued | Frontend evidence panel requirements draft.    | Plan read-only evidence panels only.             |
+| Rank | Packet    | Status | Goal                                             | Acceptance focus                              |
+| ---- | --------- | ------ | ------------------------------------------------ | --------------------------------------------- |
+| 1    | `TRD-468` | queued | Frontend information architecture plan.          | Keep navigation evidence-first and read-only. |
+| 2    | `TRD-469` | queued | Frontend route boundary map.                     | Map routes without execution affordances.     |
+| 3    | `TRD-470` | queued | Evidence panel data contract plan.               | Define local read-only panel inputs.          |
+| 4    | `TRD-471` | queued | Limitation panel copy contract.                  | Keep assumptions near evidence.               |
+| 5    | `TRD-472` | queued | Risk panel copy contract.                        | Avoid approval or readiness semantics.        |
+| 6    | `TRD-473` | queued | Operator workflow panel contract.                | Show manual workflow state only.              |
+| 7    | `TRD-474` | queued | Frontend no-action-control guard plan.           | Block execution-like UI affordances.          |
+| 8    | `TRD-475` | queued | Frontend accessibility baseline plan.            | Plan readable, keyboard-safe views.           |
+| 9    | `TRD-476` | queued | Frontend visual hierarchy direction.             | Make risk and limitations prominent.          |
+| 10   | `TRD-477` | queued | Frontend implementation readiness blocker audit. | Decide if build packet is allowed.            |
 
 ## Rejected For Now
 
@@ -1570,6 +1583,20 @@ Do not mark a packet accepted until:
 - Gate 2 next gap intake: `docs/operations/GATE2_NEXT_GAP_INTAKE.md`
 - Gate 2 command-center post-mechanics wording audit:
   `docs/operations/GATE2_COMMAND_CENTER_POST_MECHANICS_WORDING_AUDIT.md`
+- Gate 2 mechanics docs stale-reference sweep:
+  `docs/operations/GATE2_MECHANICS_DOCS_STALE_REFERENCE_SWEEP.md`
+- Gate 2 mechanics guard aging review: `docs/operations/GATE2_MECHANICS_GUARD_AGING_REVIEW.md`
+- Gate 2 paper simulation limitation register:
+  `docs/operations/GATE2_PAPER_SIMULATION_LIMITATION_REGISTER.md`
+- Gate 2 operator workflow dry-run plan: `docs/operations/GATE2_OPERATOR_WORKFLOW_DRY_RUN_PLAN.md`
+- Gate 2 no-expansion recheck: `docs/operations/GATE2_NO_EXPANSION_RECHECK.md`
+- Gate 2 brand handoff isolation recheck: `docs/operations/GATE2_BRAND_HANDOFF_ISOLATION_RECHECK.md`
+- Gate 2 maintenance checkpoint: `docs/operations/GATE2_MAINTENANCE_CHECKPOINT.md`
+- Gate 2 pause-or-proceed recommendation: `docs/operations/GATE2_PAUSE_OR_PROCEED_RECOMMENDATION.md`
+- Gate 2 read-only frontend app-shell scope assessment:
+  `docs/operations/GATE2_READ_ONLY_FRONTEND_APP_SHELL_SCOPE_ASSESSMENT.md`
+- Gate 2 frontend evidence panel requirements draft:
+  `docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md`
 
 ## Source Of Truth Links Continued 2
 
