@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-478",
+  latestPacket: "TRD-479",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "478 / 478",
+      value: "479 / 479",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "478 accepted records"
+      reference: "479 accepted records"
     }
   ],
   nextActions: [
-    "TRD-478 added governed frontend skill lenses; next is a bounded read-only implementation packet draft.",
+    "TRD-479 drafted the bounded read-only frontend implementation packet; next is no-action-control test planning.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -310,7 +310,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_BASELINE_PLAN.md",
         "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
         "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
-        "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md"
+        "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md",
+        "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md"
       ]
     },
     {
