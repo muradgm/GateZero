@@ -2,12 +2,14 @@ import {
   Gate2NegativeBoundaryFixtureContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema,
   type Gate2NegativeBoundaryFixtureContract,
   type Gate2OperatorActionLogContract,
   type Gate2RiskReviewEventContract,
+  type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
   type Gate2SimulatedOrderRecordContract,
   type Gate2SimulationStateContract
@@ -159,3 +161,40 @@ export const gate2NegativeBoundaryFixtures: readonly Gate2NegativeBoundaryFixtur
     created_at: fixtureTimestamp
   })
 );
+
+export const gate2SimulationEvidenceDetailFixture: Gate2SimulationEvidenceDetailContract =
+  Gate2SimulationEvidenceDetailContractSchema.parse({
+    simulation_evidence_detail_id: "gate2-simulation-evidence-detail-fixture-001",
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    simulated_order_record_id: gate2SimulatedOrderRecordFixture.simulated_order_record_id,
+    simulation_state_record_id: gate2SimulationStateFixture.simulation_state_record_id,
+    operator_action_log_id: gate2OperatorActionLogFixture.operator_action_log_id,
+    risk_review_event_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    simulated_fill_assumption_id: gate2SimulatedFillAssumptionFixture.simulated_fill_assumption_id,
+    local_source_artifact_paths: [
+      "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+      "ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md"
+    ],
+    workflow_evidence_card_ids: ["gate2-workflow-evidence-card-fixture-001"],
+    risk_review_panel_ids: ["gate2-risk-review-panel-fixture-001"],
+    artifact_summary_refs: ["gate2-local-artifact-summary-fixture-001"],
+    failure_mode_evidence_refs: ["gate2-failure-mode-evidence-fixture-001"],
+    source_link_map_refs: ["docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md"],
+    reproducibility_notes: ["Synthetic local detail fixture; reproducible by contract tests only."],
+    limitation_notes: ["Planning-only evidence detail; no account, route, or execution authority."],
+    evidence_freshness_status: "fresh",
+    operator_required: true,
+    simulation_only: true,
+    no_external_account: true,
+    credentials_required: false,
+    live_route: false,
+    automated_action: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: fixtureTimestamp
+  });

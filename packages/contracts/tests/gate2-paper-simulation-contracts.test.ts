@@ -3,11 +3,13 @@ import {
   Gate2NegativeBoundaryFixtureContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema,
   type Gate2OperatorActionLogContract,
   type Gate2RiskReviewEventContract,
+  type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
   type Gate2SimulatedOrderRecordContract,
   type Gate2SimulationStateContract
@@ -145,6 +147,47 @@ function createFillAssumption(
     external_access: false,
     execution_path: false,
     reviewed_at: createdAt,
+    ...overrides
+  };
+}
+
+function createSimulationEvidenceDetail(
+  overrides: Partial<Gate2SimulationEvidenceDetailContract> = {}
+): Gate2SimulationEvidenceDetailContract {
+  return {
+    simulation_evidence_detail_id: "gate2-simulation-evidence-detail-001",
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    simulated_order_record_id: "gate2-sim-record-001",
+    simulation_state_record_id: "gate2-state-001",
+    operator_action_log_id: "gate2-operator-action-001",
+    risk_review_event_id: "gate2-risk-review-001",
+    simulated_fill_assumption_id: "gate2-fill-assumption-001",
+    local_source_artifact_paths: [
+      "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+      "ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md"
+    ],
+    workflow_evidence_card_ids: ["gate2-workflow-evidence-card-001"],
+    risk_review_panel_ids: ["gate2-risk-review-panel-001"],
+    artifact_summary_refs: ["gate2-local-artifact-summary-001"],
+    failure_mode_evidence_refs: ["gate2-failure-mode-evidence-001"],
+    source_link_map_refs: ["docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md"],
+    reproducibility_notes: ["Synthetic local evidence detail fixture."],
+    limitation_notes: ["Planning-only detail; no account, route, or execution authority."],
+    evidence_freshness_status: "fresh",
+    operator_required: true,
+    simulation_only: true,
+    no_external_account: true,
+    credentials_required: false,
+    live_route: false,
+    automated_action: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    created_at: createdAt,
     ...overrides
   };
 }
@@ -344,5 +387,69 @@ describe("Gate 2 paper simulation contracts", () => {
         })
       ).toThrow();
     }
+  });
+
+  it("validates simulation evidence details as local read-only records", () => {
+    const detail = Gate2SimulationEvidenceDetailContractSchema.parse(
+      createSimulationEvidenceDetail()
+    );
+
+    expect(detail.financial_gate).toBe("G2_PAPER_TRADING");
+    expect(detail.scope).toBe("paper_simulation_planning_only");
+    expect(detail.operator_required).toBe(true);
+    expect(detail.no_external_account).toBe(true);
+  });
+
+  it("rejects simulation evidence details with missing source artifacts or local references", () => {
+    expect(() =>
+      Gate2SimulationEvidenceDetailContractSchema.parse({
+        ...createSimulationEvidenceDetail(),
+        local_source_artifact_paths: []
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate2SimulationEvidenceDetailContractSchema.parse({
+        ...createSimulationEvidenceDetail(),
+        local_source_artifact_paths: ["https://example.invalid/not-local"]
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate2SimulationEvidenceDetailContractSchema.parse({
+        ...createSimulationEvidenceDetail(),
+        source_link_map_refs: []
+      })
+    ).toThrow();
+  });
+
+  it("rejects simulation evidence details with action, account, credential, claim, or automation paths", () => {
+    for (const mutation of [
+      { external_access: true },
+      { execution_path: true },
+      { no_external_account: false },
+      { credentials_required: true },
+      { live_route: true },
+      { automated_action: true },
+      { operator_required: false },
+      { approval_claim: true },
+      { performance_claim: true }
+    ]) {
+      expect(() =>
+        Gate2SimulationEvidenceDetailContractSchema.parse({
+          ...createSimulationEvidenceDetail(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("rejects fresh simulation evidence details that depend on blocked failure-mode references", () => {
+    expect(() =>
+      Gate2SimulationEvidenceDetailContractSchema.parse({
+        ...createSimulationEvidenceDetail(),
+        failure_mode_evidence_refs: ["gate2-blocked-failure-mode-evidence-001"]
+      })
+    ).toThrow();
   });
 });

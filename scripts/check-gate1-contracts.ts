@@ -359,7 +359,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_SIMULATION_EVIDENCE_SOURCE_LINK_MAP_PLAN.md",
   "docs/operations/GATE2_FRONTEND_EVIDENCE_DETAIL_DISPLAY_PACKET.md",
   "docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_UPDATE_PLAN.md",
-  "docs/operations/GATE2_SIMULATION_EVIDENCE_CHECKPOINT.md"
+  "docs/operations/GATE2_SIMULATION_EVIDENCE_CHECKPOINT.md",
+  "docs/operations/GATE2_SIMULATION_EVIDENCE_SCHEMA_IMPLEMENTATION_PACKET.md",
+  "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+  "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_TESTS.md",
+  "docs/operations/GATE2_OPERATOR_WORKFLOW_EVIDENCE_FIXTURE_IMPLEMENTATION.md",
+  "docs/operations/GATE2_RISK_REVIEW_FIXTURE_IMPLEMENTATION.md",
+  "docs/operations/GATE2_LOCAL_ARTIFACT_SUMMARY_FIXTURE_IMPLEMENTATION.md",
+  "docs/operations/GATE2_FAILURE_MODE_FIXTURE_IMPLEMENTATION.md",
+  "docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md",
+  "docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_IMPLEMENTATION.md",
+  "docs/operations/GATE2_EVIDENCE_IMPLEMENTATION_CHECKPOINT.md"
 ] as const;
 
 const requiredSourcePaths = [
@@ -458,7 +468,8 @@ const requiredGate2SchemaNames = [
   "Gate2RiskReviewEventContractSchema",
   "Gate2OperatorActionLogContractSchema",
   "Gate2SimulatedFillAssumptionContractSchema",
-  "Gate2NegativeBoundaryFixtureContractSchema"
+  "Gate2NegativeBoundaryFixtureContractSchema",
+  "Gate2SimulationEvidenceDetailContractSchema"
 ] as const;
 
 const requiredGate2FixtureNames = [
@@ -467,7 +478,8 @@ const requiredGate2FixtureNames = [
   "gate2RiskReviewEventFixture",
   "gate2OperatorActionLogFixture",
   "gate2SimulatedFillAssumptionFixture",
-  "gate2NegativeBoundaryFixtures"
+  "gate2NegativeBoundaryFixtures",
+  "gate2SimulationEvidenceDetailFixture"
 ] as const;
 
 const requiredGate2NegativeTestSnippets = [
@@ -476,7 +488,10 @@ const requiredGate2NegativeTestSnippets = [
   "rejects blocked risk review events without blocking issues or with claims",
   "rejects operator action logs with automation or sensitive payload storage",
   "rejects fill assumptions without limitations or with performance claims",
-  "rejects negative fixtures with real account data, secrets, or non-blocked outcomes"
+  "rejects negative fixtures with real account data, secrets, or non-blocked outcomes",
+  "rejects simulation evidence details with missing source artifacts or local references",
+  "rejects simulation evidence details with action, account, credential, claim, or automation paths",
+  "rejects fresh simulation evidence details that depend on blocked failure-mode references"
 ] as const;
 
 const guardCommand = "pnpm check:gate1-contracts";

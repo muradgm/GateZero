@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-530`                                                      |
-| Latest accepted validation | 74 test files, 455 tests passed                                |
+| Latest accepted packet     | `TRD-540`                                                      |
+| Latest accepted validation | 74 test files, 459 tests passed                                |
 
 ## Boundary
 
@@ -951,38 +951,48 @@ Latest accepted result:
 
 ## Accepted Packet Ledger Continued 2
 
-| Packet    | Status   | Area             | Result                                                |
-| --------- | -------- | ---------------- | ----------------------------------------------------- |
-| `TRD-501` | accepted | Operator review  | Reviewed frontend shell with operator lens.           |
-| `TRD-502` | accepted | Evidence plan    | Planned evidence detail expansion boundaries.         |
-| `TRD-503` | accepted | Copy audit       | Audited limitation copy for claim safety.             |
-| `TRD-504` | accepted | Source links     | Polished source-link group scanning.                  |
-| `TRD-505` | accepted | Runtime UX       | Reviewed local runtime refresh UX.                    |
-| `TRD-506` | accepted | Mobile QA        | Rechecked mobile visual layout.                       |
-| `TRD-507` | accepted | Keyboard QA      | Rechecked keyboard and hash navigation.               |
-| `TRD-508` | accepted | Copy guard       | Expanded frontend blocked-copy regression coverage.   |
-| `TRD-509` | accepted | Handoff          | Documented frontend shell handoff.                    |
-| `TRD-510` | accepted | Closeout         | Closed current frontend QA lane.                      |
-| `TRD-511` | accepted | Gap intake       | Selected local simulation evidence as next UI lane.   |
-| `TRD-512` | accepted | Evidence plan    | Planned simulation evidence detail contract.          |
-| `TRD-513` | accepted | Workflow card    | Planned manual workflow evidence card.                |
-| `TRD-514` | accepted | Risk data        | Planned risk-review panel data contract.              |
-| `TRD-515` | accepted | Artifact summary | Planned local simulation artifact summaries.          |
-| `TRD-516` | accepted | Failure modes    | Planned failure-mode evidence panel.                  |
-| `TRD-517` | accepted | Source density   | Reviewed source-link density follow-up.               |
-| `TRD-518` | accepted | Connector check  | Rechecked frontend no-account-connector boundary.     |
-| `TRD-519` | accepted | Handoff          | Routed frontend lane to simulation evidence planning. |
-| `TRD-520` | accepted | Checkpoint       | Checkpointed next Gate 2 implementation lane.         |
-| `TRD-521` | accepted | Schema draft     | Drafted simulation evidence detail schema plan.       |
-| `TRD-522` | accepted | Negative cases   | Planned blocked-field negative cases.                 |
-| `TRD-523` | accepted | Workflow fixture | Planned manual workflow evidence fixtures.            |
-| `TRD-524` | accepted | Risk fixture     | Planned risk-review panel fixtures.                   |
-| `TRD-525` | accepted | Artifact fixture | Planned local artifact summary fixtures.              |
-| `TRD-526` | accepted | Failure fixture  | Planned failure-mode evidence fixtures.               |
-| `TRD-527` | accepted | Source map       | Planned simulation evidence source-link map.          |
-| `TRD-528` | accepted | Display packet   | Gated frontend evidence detail display work.          |
-| `TRD-529` | accepted | Guard plan       | Planned evidence contract guard updates.              |
-| `TRD-530` | accepted | Checkpoint       | Checkpointed simulation evidence planning lane.       |
+| Packet    | Status   | Area             | Result                                                  |
+| --------- | -------- | ---------------- | ------------------------------------------------------- |
+| `TRD-501` | accepted | Operator review  | Reviewed frontend shell with operator lens.             |
+| `TRD-502` | accepted | Evidence plan    | Planned evidence detail expansion boundaries.           |
+| `TRD-503` | accepted | Copy audit       | Audited limitation copy for claim safety.               |
+| `TRD-504` | accepted | Source links     | Polished source-link group scanning.                    |
+| `TRD-505` | accepted | Runtime UX       | Reviewed local runtime refresh UX.                      |
+| `TRD-506` | accepted | Mobile QA        | Rechecked mobile visual layout.                         |
+| `TRD-507` | accepted | Keyboard QA      | Rechecked keyboard and hash navigation.                 |
+| `TRD-508` | accepted | Copy guard       | Expanded frontend blocked-copy regression coverage.     |
+| `TRD-509` | accepted | Handoff          | Documented frontend shell handoff.                      |
+| `TRD-510` | accepted | Closeout         | Closed current frontend QA lane.                        |
+| `TRD-511` | accepted | Gap intake       | Selected local simulation evidence as next UI lane.     |
+| `TRD-512` | accepted | Evidence plan    | Planned simulation evidence detail contract.            |
+| `TRD-513` | accepted | Workflow card    | Planned manual workflow evidence card.                  |
+| `TRD-514` | accepted | Risk data        | Planned risk-review panel data contract.                |
+| `TRD-515` | accepted | Artifact summary | Planned local simulation artifact summaries.            |
+| `TRD-516` | accepted | Failure modes    | Planned failure-mode evidence panel.                    |
+| `TRD-517` | accepted | Source density   | Reviewed source-link density follow-up.                 |
+| `TRD-518` | accepted | Connector check  | Rechecked frontend no-account-connector boundary.       |
+| `TRD-519` | accepted | Handoff          | Routed frontend lane to simulation evidence planning.   |
+| `TRD-520` | accepted | Checkpoint       | Checkpointed next Gate 2 implementation lane.           |
+| `TRD-521` | accepted | Schema draft     | Drafted simulation evidence detail schema plan.         |
+| `TRD-522` | accepted | Negative cases   | Planned blocked-field negative cases.                   |
+| `TRD-523` | accepted | Workflow fixture | Planned manual workflow evidence fixtures.              |
+| `TRD-524` | accepted | Risk fixture     | Planned risk-review panel fixtures.                     |
+| `TRD-525` | accepted | Artifact fixture | Planned local artifact summary fixtures.                |
+| `TRD-526` | accepted | Failure fixture  | Planned failure-mode evidence fixtures.                 |
+| `TRD-527` | accepted | Source map       | Planned simulation evidence source-link map.            |
+| `TRD-528` | accepted | Display packet   | Gated frontend evidence detail display work.            |
+| `TRD-529` | accepted | Guard plan       | Planned evidence contract guard updates.                |
+| `TRD-530` | accepted | Checkpoint       | Checkpointed simulation evidence planning lane.         |
+| `TRD-531` | accepted | Impl packet      | Prepared simulation evidence schema implementation.     |
+| `TRD-532` | accepted | Schema source    | Added local simulation evidence detail schema.          |
+| `TRD-533` | accepted | Schema tests     | Added required and blocked-field contract tests.        |
+| `TRD-534` | accepted | Workflow fixture | Added manual workflow evidence fixture references.      |
+| `TRD-535` | accepted | Risk fixture     | Added risk-review fixture references.                   |
+| `TRD-536` | accepted | Artifact refs    | Added local artifact summary fixture references.        |
+| `TRD-537` | accepted | Failure refs     | Added failure-mode evidence fixture references.         |
+| `TRD-538` | accepted | Source map refs  | Added evidence source-link map fixture references.      |
+| `TRD-539` | accepted | Guard update     | Indexed evidence schema, fixture, tests, and docs.      |
+| `TRD-540` | accepted | Checkpoint       | Checkpointed simulation evidence detail implementation. |
 
 ## Current Operator Commands
 
@@ -1012,25 +1022,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 455 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 459 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                              | Acceptance focus                         |
-| ---- | --------- | ------ | ------------------------------------------------- | ---------------------------------------- |
-| 1    | `TRD-531` | queued | Simulation evidence schema implementation packet. | Prepare guarded contract implementation. |
-| 2    | `TRD-532` | queued | Simulation evidence schema source update.         | Add local schema without UI expansion.   |
-| 3    | `TRD-533` | queued | Simulation evidence schema tests.                 | Validate required and blocked fields.    |
-| 4    | `TRD-534` | queued | Operator workflow fixture implementation packet.  | Prepare manual workflow fixtures.        |
-| 5    | `TRD-535` | queued | Risk-review fixture implementation packet.        | Prepare blocker and limitation fixtures. |
-| 6    | `TRD-536` | queued | Artifact summary fixture implementation packet.   | Prepare local artifact fixtures.         |
-| 7    | `TRD-537` | queued | Failure-mode fixture implementation packet.       | Prepare failure-state fixtures.          |
-| 8    | `TRD-538` | queued | Evidence source-link map implementation packet.   | Prepare local source-link map.           |
-| 9    | `TRD-539` | queued | Evidence contract guard implementation packet.    | Prepare guard updates before display.    |
-| 10   | `TRD-540` | queued | Gate 2 evidence implementation checkpoint.        | Decide implementation start or pause.    |
+| Rank | Packet    | Status | Goal                                           | Acceptance focus                          |
+| ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------- |
+| 1    | `TRD-541` | queued | Evidence detail display implementation packet. | Prepare read-only display surface.        |
+| 2    | `TRD-542` | queued | Evidence detail local data adapter update.     | Feed display from local contract data.    |
+| 3    | `TRD-543` | queued | Evidence detail panel component.               | Render details without action controls.   |
+| 4    | `TRD-544` | queued | Evidence detail risk adjacency pass.           | Keep risk and limitations near evidence.  |
+| 5    | `TRD-545` | queued | Evidence detail no-action-control tests.       | Reject action-like frontend affordances.  |
+| 6    | `TRD-546` | queued | Evidence detail source-link rendering.         | Render local source links clearly.        |
+| 7    | `TRD-547` | queued | Evidence detail mobile visual QA.              | Verify small-screen readability.          |
+| 8    | `TRD-548` | queued | Evidence detail keyboard accessibility QA.     | Verify keyboard and focus behavior.       |
+| 9    | `TRD-549` | queued | Evidence detail Command Center sync.           | Update metadata after display work.       |
+| 10   | `TRD-550` | queued | Gate 2 evidence detail display checkpoint.     | Decide display lane closeout or next gap. |
 
 ## Rejected For Now
 
@@ -1806,6 +1816,26 @@ Do not mark a packet accepted until:
 - Gate 2 evidence contract guard update plan:
   `docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_UPDATE_PLAN.md`
 - Gate 2 simulation evidence checkpoint: `docs/operations/GATE2_SIMULATION_EVIDENCE_CHECKPOINT.md`
+- Gate 2 simulation evidence schema implementation packet:
+  `docs/operations/GATE2_SIMULATION_EVIDENCE_SCHEMA_IMPLEMENTATION_PACKET.md`
+- Gate 2 simulation evidence detail schema implementation:
+  `docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md`
+- Gate 2 simulation evidence detail schema tests:
+  `docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_TESTS.md`
+- Gate 2 operator workflow evidence fixture implementation:
+  `docs/operations/GATE2_OPERATOR_WORKFLOW_EVIDENCE_FIXTURE_IMPLEMENTATION.md`
+- Gate 2 risk review fixture implementation:
+  `docs/operations/GATE2_RISK_REVIEW_FIXTURE_IMPLEMENTATION.md`
+- Gate 2 local artifact summary fixture implementation:
+  `docs/operations/GATE2_LOCAL_ARTIFACT_SUMMARY_FIXTURE_IMPLEMENTATION.md`
+- Gate 2 failure mode fixture implementation:
+  `docs/operations/GATE2_FAILURE_MODE_FIXTURE_IMPLEMENTATION.md`
+- Gate 2 evidence source-link map implementation:
+  `docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md`
+- Gate 2 evidence contract guard implementation:
+  `docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_IMPLEMENTATION.md`
+- Gate 2 evidence implementation checkpoint:
+  `docs/operations/GATE2_EVIDENCE_IMPLEMENTATION_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 3
 

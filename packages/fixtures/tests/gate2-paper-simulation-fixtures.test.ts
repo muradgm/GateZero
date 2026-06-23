@@ -3,6 +3,7 @@ import {
   Gate2NegativeBoundaryFixtureContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema
@@ -11,6 +12,7 @@ import {
   gate2NegativeBoundaryFixtures,
   gate2OperatorActionLogFixture,
   gate2RiskReviewEventFixture,
+  gate2SimulationEvidenceDetailFixture,
   gate2SimulatedFillAssumptionFixture,
   gate2SimulatedOrderRecordFixture,
   gate2SimulationStateFixture
@@ -33,6 +35,9 @@ describe("Gate 2 paper simulation fixtures", () => {
     expect(
       Gate2SimulatedFillAssumptionContractSchema.parse(gate2SimulatedFillAssumptionFixture)
     ).toEqual(gate2SimulatedFillAssumptionFixture);
+    expect(
+      Gate2SimulationEvidenceDetailContractSchema.parse(gate2SimulationEvidenceDetailFixture)
+    ).toEqual(gate2SimulationEvidenceDetailFixture);
   });
 
   it("keeps negative boundary fixtures synthetic and blocked", () => {

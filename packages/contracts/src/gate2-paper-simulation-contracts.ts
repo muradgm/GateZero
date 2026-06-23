@@ -24,6 +24,7 @@ export const Gate2RiskSeveritySchema = z.enum(["low", "medium", "high", "critica
 export const Gate2OperatorDecisionSchema = z.enum(["reject", "revise", "record_local_simulation"]);
 export const Gate2RedactionStatusSchema = z.enum(["redacted", "no_sensitive_payload"]);
 export const Gate2AssumptionStatusSchema = z.enum(["draft", "reviewed", "blocked"]);
+export const Gate2EvidenceFreshnessStatusSchema = z.enum(["fresh", "stale", "blocked"]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -169,6 +170,54 @@ export const Gate2NegativeBoundaryFixtureContractSchema = Gate2BoundarySchema.ex
   created_at: IsoDateTimeSchema
 }).strict();
 
+export const Gate2SimulationEvidenceDetailContractSchema = Gate2BoundarySchema.extend({
+  simulation_evidence_detail_id: IdentifierSchema,
+  simulated_order_record_id: IdentifierSchema,
+  simulation_state_record_id: IdentifierSchema,
+  operator_action_log_id: IdentifierSchema,
+  risk_review_event_id: IdentifierSchema,
+  simulated_fill_assumption_id: IdentifierSchema,
+  local_source_artifact_paths: z.array(NonEmptyStringSchema).min(1),
+  workflow_evidence_card_ids: z.array(IdentifierSchema).min(1),
+  risk_review_panel_ids: z.array(IdentifierSchema).min(1),
+  artifact_summary_refs: z.array(IdentifierSchema).min(1),
+  failure_mode_evidence_refs: z.array(IdentifierSchema).min(1),
+  source_link_map_refs: z.array(NonEmptyStringSchema).min(1),
+  reproducibility_notes: z.array(NonEmptyStringSchema).min(1),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  evidence_freshness_status: Gate2EvidenceFreshnessStatusSchema,
+  operator_required: z.literal(true),
+  simulation_only: z.literal(true),
+  no_external_account: z.literal(true),
+  credentials_required: z.literal(false),
+  live_route: z.literal(false),
+  automated_action: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((detail, context) => {
+    if (
+      detail.evidence_freshness_status === "fresh" &&
+      detail.failure_mode_evidence_refs.some((reference) => reference.includes("blocked"))
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "fresh evidence details cannot depend on blocked failure-mode references",
+        path: ["failure_mode_evidence_refs"]
+      });
+    }
+
+    for (const sourcePath of detail.local_source_artifact_paths) {
+      if (!sourcePath.startsWith("ops/") && !sourcePath.startsWith("docs/")) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "source artifacts must be local ops or docs records",
+          path: ["local_source_artifact_paths"]
+        });
+      }
+    }
+  });
+
 export type Gate2ContractAuthority = z.infer<typeof Gate2ContractAuthoritySchema>;
 export type Gate2ContractScope = z.infer<typeof Gate2ContractScopeSchema>;
 export type Gate2FinancialGate = z.infer<typeof Gate2FinancialGateSchema>;
@@ -179,6 +228,7 @@ export type Gate2RiskSeverity = z.infer<typeof Gate2RiskSeveritySchema>;
 export type Gate2OperatorDecision = z.infer<typeof Gate2OperatorDecisionSchema>;
 export type Gate2RedactionStatus = z.infer<typeof Gate2RedactionStatusSchema>;
 export type Gate2AssumptionStatus = z.infer<typeof Gate2AssumptionStatusSchema>;
+export type Gate2EvidenceFreshnessStatus = z.infer<typeof Gate2EvidenceFreshnessStatusSchema>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -191,4 +241,7 @@ export type Gate2SimulatedFillAssumptionContract = z.infer<
 >;
 export type Gate2NegativeBoundaryFixtureContract = z.infer<
   typeof Gate2NegativeBoundaryFixtureContractSchema
+>;
+export type Gate2SimulationEvidenceDetailContract = z.infer<
+  typeof Gate2SimulationEvidenceDetailContractSchema
 >;
