@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-510`                                                      |
+| Latest accepted packet     | `TRD-520`                                                      |
 | Latest accepted validation | 74 test files, 455 tests passed                                |
 
 ## Boundary
@@ -328,6 +328,10 @@ Latest accepted result:
   - Frontend operator review, evidence-detail planning, limitation copy audit, source-link grouping
     polish, runtime refresh UX review, mobile and keyboard QA rechecks, blocked-copy regression
     hardening, handoff note, and lane closeout checkpoint.
+  - Gate 2 frontend-to-simulation planning records covering UI gap intake, simulation evidence
+    detail contracts, operator workflow evidence cards, risk-review panel data, local simulation
+    artifact summaries, failure-mode evidence, source-link density, no-account-connector recheck,
+    handoff, and next implementation checkpoint.
 
 ## Workstream Summary
 
@@ -941,16 +945,31 @@ Latest accepted result:
 | `TRD-498` | accepted | Accessibility    | Verified frontend accessibility markers.                |
 | `TRD-499` | accepted | Guard evidence   | Rechecked frontend guard evidence.                      |
 | `TRD-500` | accepted | Checkpoint       | Checkpointed read-only frontend shell lane.             |
-| `TRD-501` | accepted | Operator review  | Reviewed frontend shell with operator lens.             |
-| `TRD-502` | accepted | Evidence plan    | Planned evidence detail expansion boundaries.           |
-| `TRD-503` | accepted | Copy audit       | Audited limitation copy for claim safety.               |
-| `TRD-504` | accepted | Source links     | Polished source-link group scanning.                    |
-| `TRD-505` | accepted | Runtime UX       | Reviewed local runtime refresh UX.                      |
-| `TRD-506` | accepted | Mobile QA        | Rechecked mobile visual layout.                         |
-| `TRD-507` | accepted | Keyboard QA      | Rechecked keyboard and hash navigation.                 |
-| `TRD-508` | accepted | Copy guard       | Expanded frontend blocked-copy regression coverage.     |
-| `TRD-509` | accepted | Handoff          | Documented frontend shell handoff.                      |
-| `TRD-510` | accepted | Closeout         | Closed current frontend QA lane.                        |
+
+## Accepted Packet Ledger Continued 2
+
+| Packet    | Status   | Area             | Result                                                |
+| --------- | -------- | ---------------- | ----------------------------------------------------- |
+| `TRD-501` | accepted | Operator review  | Reviewed frontend shell with operator lens.           |
+| `TRD-502` | accepted | Evidence plan    | Planned evidence detail expansion boundaries.         |
+| `TRD-503` | accepted | Copy audit       | Audited limitation copy for claim safety.             |
+| `TRD-504` | accepted | Source links     | Polished source-link group scanning.                  |
+| `TRD-505` | accepted | Runtime UX       | Reviewed local runtime refresh UX.                    |
+| `TRD-506` | accepted | Mobile QA        | Rechecked mobile visual layout.                       |
+| `TRD-507` | accepted | Keyboard QA      | Rechecked keyboard and hash navigation.               |
+| `TRD-508` | accepted | Copy guard       | Expanded frontend blocked-copy regression coverage.   |
+| `TRD-509` | accepted | Handoff          | Documented frontend shell handoff.                    |
+| `TRD-510` | accepted | Closeout         | Closed current frontend QA lane.                      |
+| `TRD-511` | accepted | Gap intake       | Selected local simulation evidence as next UI lane.   |
+| `TRD-512` | accepted | Evidence plan    | Planned simulation evidence detail contract.          |
+| `TRD-513` | accepted | Workflow card    | Planned manual workflow evidence card.                |
+| `TRD-514` | accepted | Risk data        | Planned risk-review panel data contract.              |
+| `TRD-515` | accepted | Artifact summary | Planned local simulation artifact summaries.          |
+| `TRD-516` | accepted | Failure modes    | Planned failure-mode evidence panel.                  |
+| `TRD-517` | accepted | Source density   | Reviewed source-link density follow-up.               |
+| `TRD-518` | accepted | Connector check  | Rechecked frontend no-account-connector boundary.     |
+| `TRD-519` | accepted | Handoff          | Routed frontend lane to simulation evidence planning. |
+| `TRD-520` | accepted | Checkpoint       | Checkpointed next Gate 2 implementation lane.         |
 
 ## Current Operator Commands
 
@@ -987,18 +1006,18 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                          | Acceptance focus                          |
-| ---- | --------- | ------ | --------------------------------------------- | ----------------------------------------- |
-| 1    | `TRD-511` | queued | Gate 2 paper-simulation UI gap intake.        | Pick next local evidence lane.            |
-| 2    | `TRD-512` | queued | Simulation evidence detail contract plan.     | Define read-only detail records.          |
-| 3    | `TRD-513` | queued | Operator workflow evidence card plan.         | Keep workflow manual and local.           |
-| 4    | `TRD-514` | queued | Risk-review panel data contract plan.         | Keep risk review separate from approval.  |
-| 5    | `TRD-515` | queued | Local simulation artifact summary plan.       | Summarize deterministic local outputs.    |
-| 6    | `TRD-516` | queued | Failure-mode evidence panel plan.             | Surface blockers without action controls. |
-| 7    | `TRD-517` | queued | Source-link density follow-up review.         | Avoid source panel overload.              |
-| 8    | `TRD-518` | queued | Frontend no-account-connector recheck.        | Guard against connector-shaped UI drift.  |
-| 9    | `TRD-519` | queued | Gate 2 frontend-to-simulation handoff packet. | Route next build lane safely.             |
-| 10   | `TRD-520` | queued | Gate 2 next implementation checkpoint.        | Decide proceed, pause, or narrow scope.   |
+| Rank | Packet    | Status | Goal                                        | Acceptance focus                            |
+| ---- | --------- | ------ | ------------------------------------------- | ------------------------------------------- |
+| 1    | `TRD-521` | queued | Simulation evidence detail schema draft.    | Define local read-only record shape.        |
+| 2    | `TRD-522` | queued | Simulation evidence detail negative cases.  | Reject approval and action fields.          |
+| 3    | `TRD-523` | queued | Operator workflow evidence fixture plan.    | Fixture manual workflow evidence only.      |
+| 4    | `TRD-524` | queued | Risk-review panel fixture plan.             | Fixture blocker and limitation records.     |
+| 5    | `TRD-525` | queued | Local artifact summary fixture plan.        | Fixture deterministic local outputs.        |
+| 6    | `TRD-526` | queued | Failure-mode evidence fixture plan.         | Fixture stale, missing, and invalid states. |
+| 7    | `TRD-527` | queued | Simulation evidence source-link map plan.   | Keep source maps local and deduplicated.    |
+| 8    | `TRD-528` | queued | Frontend evidence detail display packet.    | Prepare display only after contracts.       |
+| 9    | `TRD-529` | queued | Gate 2 evidence contract guard update plan. | Extend guards before implementation.        |
+| 10   | `TRD-530` | queued | Gate 2 simulation evidence checkpoint.      | Decide implementation readiness.            |
 
 ## Rejected For Now
 
@@ -1738,6 +1757,24 @@ Do not mark a packet accepted until:
 - Gate 2 frontend handoff note: `docs/operations/GATE2_FRONTEND_HANDOFF_NOTE.md`
 - Gate 2 frontend lane closeout checkpoint:
   `docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md`
+- Gate 2 paper-simulation UI gap intake: `docs/operations/GATE2_PAPER_SIMULATION_UI_GAP_INTAKE.md`
+- Gate 2 simulation evidence detail contract plan:
+  `docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_CONTRACT_PLAN.md`
+- Gate 2 operator workflow evidence card plan:
+  `docs/operations/GATE2_OPERATOR_WORKFLOW_EVIDENCE_CARD_PLAN.md`
+- Gate 2 risk-review panel data contract plan:
+  `docs/operations/GATE2_RISK_REVIEW_PANEL_DATA_CONTRACT_PLAN.md`
+- Gate 2 local simulation artifact summary plan:
+  `docs/operations/GATE2_LOCAL_SIMULATION_ARTIFACT_SUMMARY_PLAN.md`
+- Gate 2 failure-mode evidence panel plan:
+  `docs/operations/GATE2_FAILURE_MODE_EVIDENCE_PANEL_PLAN.md`
+- Gate 2 source-link density follow-up review:
+  `docs/operations/GATE2_SOURCE_LINK_DENSITY_FOLLOW_UP_REVIEW.md`
+- Gate 2 frontend no-account-connector recheck:
+  `docs/operations/GATE2_FRONTEND_NO_ACCOUNT_CONNECTOR_RECHECK.md`
+- Gate 2 frontend-to-simulation handoff packet:
+  `docs/operations/GATE2_FRONTEND_TO_SIMULATION_HANDOFF_PACKET.md`
+- Gate 2 next implementation checkpoint: `docs/operations/GATE2_NEXT_IMPLEMENTATION_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 3
 

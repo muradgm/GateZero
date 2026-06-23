@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-510",
+  latestPacket: "TRD-520",
   localVerification: "74 files / 455 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "510 / 510",
+      value: "520 / 520",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -152,11 +152,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "510 accepted records"
+      reference: "520 accepted records"
     }
   ],
   nextActions: [
-    "TRD-510 closed the read-only frontend shell QA lane with operator, copy, risk, and accessibility checks.",
+    "TRD-520 checkpointed the Gate 2 frontend-to-simulation planning lane without adding action controls.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -405,7 +405,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_KEYBOARD_NAVIGATION_QA_RECHECK.md",
         "docs/operations/GATE2_FRONTEND_BLOCKED_COPY_REGRESSION_PACK.md",
         "docs/operations/GATE2_FRONTEND_HANDOFF_NOTE.md",
-        "docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md"
+        "docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md",
+        "docs/operations/GATE2_PAPER_SIMULATION_UI_GAP_INTAKE.md",
+        "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_CONTRACT_PLAN.md",
+        "docs/operations/GATE2_OPERATOR_WORKFLOW_EVIDENCE_CARD_PLAN.md",
+        "docs/operations/GATE2_RISK_REVIEW_PANEL_DATA_CONTRACT_PLAN.md",
+        "docs/operations/GATE2_LOCAL_SIMULATION_ARTIFACT_SUMMARY_PLAN.md",
+        "docs/operations/GATE2_FAILURE_MODE_EVIDENCE_PANEL_PLAN.md",
+        "docs/operations/GATE2_SOURCE_LINK_DENSITY_FOLLOW_UP_REVIEW.md",
+        "docs/operations/GATE2_FRONTEND_NO_ACCOUNT_CONNECTOR_RECHECK.md",
+        "docs/operations/GATE2_FRONTEND_TO_SIMULATION_HANDOFF_PACKET.md",
+        "docs/operations/GATE2_NEXT_IMPLEMENTATION_CHECKPOINT.md"
       ]
     },
     {
