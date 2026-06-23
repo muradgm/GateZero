@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-500`                                                      |
-| Latest accepted validation | 74 test files, 454 tests passed                                |
+| Latest accepted packet     | `TRD-510`                                                      |
+| Latest accepted validation | 74 test files, 455 tests passed                                |
 
 ## Boundary
 
@@ -325,6 +325,9 @@ Latest accepted result:
   - Read-only frontend shell implementation with evidence, limitations, risk, manual workflow,
     docs/source-link rendering, responsive polish, accessibility verification, guard evidence
     recheck, and implementation checkpoint.
+  - Frontend operator review, evidence-detail planning, limitation copy audit, source-link grouping
+    polish, runtime refresh UX review, mobile and keyboard QA rechecks, blocked-copy regression
+    hardening, handoff note, and lane closeout checkpoint.
 
 ## Workstream Summary
 
@@ -938,6 +941,16 @@ Latest accepted result:
 | `TRD-498` | accepted | Accessibility    | Verified frontend accessibility markers.                |
 | `TRD-499` | accepted | Guard evidence   | Rechecked frontend guard evidence.                      |
 | `TRD-500` | accepted | Checkpoint       | Checkpointed read-only frontend shell lane.             |
+| `TRD-501` | accepted | Operator review  | Reviewed frontend shell with operator lens.             |
+| `TRD-502` | accepted | Evidence plan    | Planned evidence detail expansion boundaries.           |
+| `TRD-503` | accepted | Copy audit       | Audited limitation copy for claim safety.               |
+| `TRD-504` | accepted | Source links     | Polished source-link group scanning.                    |
+| `TRD-505` | accepted | Runtime UX       | Reviewed local runtime refresh UX.                      |
+| `TRD-506` | accepted | Mobile QA        | Rechecked mobile visual layout.                         |
+| `TRD-507` | accepted | Keyboard QA      | Rechecked keyboard and hash navigation.                 |
+| `TRD-508` | accepted | Copy guard       | Expanded frontend blocked-copy regression coverage.     |
+| `TRD-509` | accepted | Handoff          | Documented frontend shell handoff.                      |
+| `TRD-510` | accepted | Closeout         | Closed current frontend QA lane.                        |
 
 ## Current Operator Commands
 
@@ -967,25 +980,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 454 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 455 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                     | Acceptance focus                           |
-| ---- | --------- | ------ | ---------------------------------------- | ------------------------------------------ |
-| 1    | `TRD-501` | queued | Frontend operator review pass.           | Review shell usability with operator lens. |
-| 2    | `TRD-502` | queued | Frontend evidence detail expansion plan. | Add depth without action controls.         |
-| 3    | `TRD-503` | queued | Frontend limitation copy audit.          | Recheck claim-safe boundary copy.          |
-| 4    | `TRD-504` | queued | Frontend source-link grouping polish.    | Improve docs scanning and grouping.        |
-| 5    | `TRD-505` | queued | Frontend runtime refresh UX review.      | Keep local refresh understandable.         |
-| 6    | `TRD-506` | queued | Frontend mobile visual QA recheck.       | Inspect narrow viewport layout.            |
-| 7    | `TRD-507` | queued | Frontend keyboard navigation QA recheck. | Verify focus and hash navigation.          |
-| 8    | `TRD-508` | queued | Frontend blocked-copy regression pack.   | Expand UI negative cases if needed.        |
-| 9    | `TRD-509` | queued | Frontend handoff note.                   | Document shell usage and limitations.      |
-| 10   | `TRD-510` | queued | Frontend lane closeout checkpoint.       | Decide next UI lane or pause.              |
+| Rank | Packet    | Status | Goal                                          | Acceptance focus                          |
+| ---- | --------- | ------ | --------------------------------------------- | ----------------------------------------- |
+| 1    | `TRD-511` | queued | Gate 2 paper-simulation UI gap intake.        | Pick next local evidence lane.            |
+| 2    | `TRD-512` | queued | Simulation evidence detail contract plan.     | Define read-only detail records.          |
+| 3    | `TRD-513` | queued | Operator workflow evidence card plan.         | Keep workflow manual and local.           |
+| 4    | `TRD-514` | queued | Risk-review panel data contract plan.         | Keep risk review separate from approval.  |
+| 5    | `TRD-515` | queued | Local simulation artifact summary plan.       | Summarize deterministic local outputs.    |
+| 6    | `TRD-516` | queued | Failure-mode evidence panel plan.             | Surface blockers without action controls. |
+| 7    | `TRD-517` | queued | Source-link density follow-up review.         | Avoid source panel overload.              |
+| 8    | `TRD-518` | queued | Frontend no-account-connector recheck.        | Guard against connector-shaped UI drift.  |
+| 9    | `TRD-519` | queued | Gate 2 frontend-to-simulation handoff packet. | Route next build lane safely.             |
+| 10   | `TRD-520` | queued | Gate 2 next implementation checkpoint.        | Decide proceed, pause, or narrow scope.   |
 
 ## Rejected For Now
 
@@ -1708,6 +1721,23 @@ Do not mark a packet accepted until:
 - Gate 2 frontend guard evidence recheck: `docs/operations/GATE2_FRONTEND_GUARD_EVIDENCE_RECHECK.md`
 - Gate 2 frontend implementation checkpoint:
   `docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md`
+- Gate 2 frontend operator review pass: `docs/operations/GATE2_FRONTEND_OPERATOR_REVIEW_PASS.md`
+- Gate 2 frontend evidence detail expansion plan:
+  `docs/operations/GATE2_FRONTEND_EVIDENCE_DETAIL_EXPANSION_PLAN.md`
+- Gate 2 frontend limitation copy audit: `docs/operations/GATE2_FRONTEND_LIMITATION_COPY_AUDIT.md`
+- Gate 2 frontend source-link grouping polish:
+  `docs/operations/GATE2_FRONTEND_SOURCE_LINK_GROUPING_POLISH.md`
+- Gate 2 frontend runtime refresh UX review:
+  `docs/operations/GATE2_FRONTEND_RUNTIME_REFRESH_UX_REVIEW.md`
+- Gate 2 frontend mobile visual QA recheck:
+  `docs/operations/GATE2_FRONTEND_MOBILE_VISUAL_QA_RECHECK.md`
+- Gate 2 frontend keyboard navigation QA recheck:
+  `docs/operations/GATE2_FRONTEND_KEYBOARD_NAVIGATION_QA_RECHECK.md`
+- Gate 2 frontend blocked-copy regression pack:
+  `docs/operations/GATE2_FRONTEND_BLOCKED_COPY_REGRESSION_PACK.md`
+- Gate 2 frontend handoff note: `docs/operations/GATE2_FRONTEND_HANDOFF_NOTE.md`
+- Gate 2 frontend lane closeout checkpoint:
+  `docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 3
 

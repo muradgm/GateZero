@@ -228,7 +228,17 @@ const requiredDocPaths = [
   "docs/operations/GATE2_FRONTEND_RESPONSIVE_POLISH_PASS.md",
   "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_RUN.md",
   "docs/operations/GATE2_FRONTEND_GUARD_EVIDENCE_RECHECK.md",
-  "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md"
+  "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md",
+  "docs/operations/GATE2_FRONTEND_OPERATOR_REVIEW_PASS.md",
+  "docs/operations/GATE2_FRONTEND_EVIDENCE_DETAIL_EXPANSION_PLAN.md",
+  "docs/operations/GATE2_FRONTEND_LIMITATION_COPY_AUDIT.md",
+  "docs/operations/GATE2_FRONTEND_SOURCE_LINK_GROUPING_POLISH.md",
+  "docs/operations/GATE2_FRONTEND_RUNTIME_REFRESH_UX_REVIEW.md",
+  "docs/operations/GATE2_FRONTEND_MOBILE_VISUAL_QA_RECHECK.md",
+  "docs/operations/GATE2_FRONTEND_KEYBOARD_NAVIGATION_QA_RECHECK.md",
+  "docs/operations/GATE2_FRONTEND_BLOCKED_COPY_REGRESSION_PACK.md",
+  "docs/operations/GATE2_FRONTEND_HANDOFF_NOTE.md",
+  "docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md"
 ];
 
 const requiredSourcePaths = [
@@ -409,7 +419,7 @@ describe("Gate 1 contract guard", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedArtifactCount: 233
+      checkedArtifactCount: 243
     });
     expect(renderGate1ContractGuardResult(result)).toContain("Gate 1 contract guard passed.");
   });

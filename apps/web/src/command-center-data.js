@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-500",
-  localVerification: "74 files / 454 tests",
+  latestPacket: "TRD-510",
+  localVerification: "74 files / 455 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "500 / 500",
+      value: "510 / 510",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 454 tests"
+      reference: "74 files / 455 tests"
     },
     {
       area: "Verified commit",
@@ -140,7 +140,7 @@ export const commandCenterData = {
       area: "CI evidence",
       signal: "Freshness guard",
       state: "Passing",
-      reference: "15 evidence records"
+      reference: "18 evidence records"
     },
     {
       area: "Agent registry",
@@ -152,11 +152,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "500 accepted records"
+      reference: "510 accepted records"
     }
   ],
   nextActions: [
-    "TRD-500 checkpointed the read-only frontend shell lane after implementation and visual QA.",
+    "TRD-510 closed the read-only frontend shell QA lane with operator, copy, risk, and accessibility checks.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -395,7 +395,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_RESPONSIVE_POLISH_PASS.md",
         "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_RUN.md",
         "docs/operations/GATE2_FRONTEND_GUARD_EVIDENCE_RECHECK.md",
-        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md"
+        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md",
+        "docs/operations/GATE2_FRONTEND_OPERATOR_REVIEW_PASS.md",
+        "docs/operations/GATE2_FRONTEND_EVIDENCE_DETAIL_EXPANSION_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_LIMITATION_COPY_AUDIT.md",
+        "docs/operations/GATE2_FRONTEND_SOURCE_LINK_GROUPING_POLISH.md",
+        "docs/operations/GATE2_FRONTEND_RUNTIME_REFRESH_UX_REVIEW.md",
+        "docs/operations/GATE2_FRONTEND_MOBILE_VISUAL_QA_RECHECK.md",
+        "docs/operations/GATE2_FRONTEND_KEYBOARD_NAVIGATION_QA_RECHECK.md",
+        "docs/operations/GATE2_FRONTEND_BLOCKED_COPY_REGRESSION_PACK.md",
+        "docs/operations/GATE2_FRONTEND_HANDOFF_NOTE.md",
+        "docs/operations/GATE2_FRONTEND_LANE_CLOSEOUT_CHECKPOINT.md"
       ]
     },
     {

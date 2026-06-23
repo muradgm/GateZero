@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-500");
+    expect(data).toContain("TRD-510");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -67,11 +67,11 @@ describe("Gate 0 command center surface", () => {
 
     expect(main).toContain("data-section");
     expect(main).toContain("updateActiveNavigation()");
+    expect(main).toContain('link.setAttribute("aria-current", "page")');
+    expect(main).toContain('link.removeAttribute("aria-current")');
     expect(main).toContain('window.addEventListener("hashchange", updateActiveNavigation)');
     expect(main).toContain('window.location.hash.replace("#", "") || "overview"');
-    expect(main).toContain(
-      'link.classList.toggle("active", link.dataset.section === currentSection)'
-    );
+    expect(main).toContain('link.classList.toggle("active", isCurrent)');
   });
 
   it("refreshes from the local runtime endpoint without external services", () => {
@@ -109,7 +109,10 @@ describe("Gate 0 command center surface", () => {
 
     expect(main).toContain("data.docGroups");
     expect(main).toContain('class="doc-group"');
+    expect(main).toContain('class="doc-group-heading"');
+    expect(main).toContain("group.items.length");
     expect(styles).toContain(".doc-group");
+    expect(styles).toContain(".doc-group-heading");
   });
 
   it("renders read-only frontend shell sections", () => {
@@ -139,5 +142,26 @@ describe("Gate 0 command center surface", () => {
     expect(evidenceIndex).toBeGreaterThan(-1);
     expect(limitationsIndex).toBeGreaterThan(evidenceIndex);
     expect(riskIndex).toBeGreaterThan(limitationsIndex);
+  });
+
+  it("keeps blocked frontend claim and action language out of the shell", () => {
+    const source = [
+      readFileSync(indexPath, "utf8"),
+      readFileSync(dataPath, "utf8"),
+      readFileSync(mainPath, "utf8"),
+      readFileSync(stylePath, "utf8")
+    ]
+      .join("\n")
+      .toLowerCase();
+
+    for (const blockedCopy of [
+      ["bro", "ker-ready"].join(""),
+      "live-ready",
+      "optimized returns",
+      "approved for trading",
+      "strategy is safe"
+    ]) {
+      expect(source).not.toContain(blockedCopy);
+    }
   });
 });

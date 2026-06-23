@@ -48,10 +48,18 @@ export function checkGate0CommandCenterRenderContract(
   requireIncludes(findings, input.main, 'id="risk"', "Missing risk panel.");
   requireIncludes(findings, input.main, 'id="workflow"', "Missing workflow panel.");
   requireIncludes(findings, input.main, "data.docGroups", "Missing grouped source links.");
+  requireIncludes(findings, input.main, "aria-current", "Missing current navigation marker.");
+  requireIncludes(findings, input.main, "group.items.length", "Missing source-link group counts.");
   requireIncludes(findings, input.styles, "td::before", "Missing mobile evidence label styling.");
   requireIncludes(findings, input.styles, ".insight-list", "Missing risk/limitation list styling.");
   requireIncludes(findings, input.styles, ".workflow-list", "Missing workflow list styling.");
   requireIncludes(findings, input.styles, ".doc-group", "Missing grouped source link styling.");
+  requireIncludes(
+    findings,
+    input.styles,
+    ".doc-group-heading",
+    "Missing source-link heading styling."
+  );
   requireIncludes(findings, input.data, "G2_PAPER_TRADING", "Missing Gate 2 status.");
   requireIncludes(
     findings,
@@ -79,11 +87,17 @@ export function checkGate0CommandCenterRenderContract(
     ["sell", "signal"],
     ["ready", "to", "trade"],
     ["approved", "strategy"],
+    ["approved", "for", "trading"],
     ["safe", "to", "trade"],
+    ["strategy", "is", "safe"],
+    ["live-ready"],
     ["deploy", "strategy"],
     ["profit", "claim"],
-    ["performance", "guarantee"]
-  ].map((parts) => parts.join(" "));
+    ["performance", "guarantee"],
+    ["optimized", "returns"]
+  ]
+    .map((parts) => parts.join(" "))
+    .concat([["bro", "ker-ready"].join("")]);
 
   const scannedSource = [input.data, input.html, input.main, input.styles].join("\n").toLowerCase();
 

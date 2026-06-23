@@ -242,7 +242,10 @@ function renderCommandCenter(data) {
               .map(
                 (group) => `
                   <section class="doc-group" aria-label="${group.label} source links">
-                    <h3>${group.label}</h3>
+                    <div class="doc-group-heading">
+                      <h3>${group.label}</h3>
+                      <span>${group.items.length} refs</span>
+                    </div>
                     ${group.items.map((doc) => `<code>${doc}</code>`).join("")}
                   </section>
                 `
@@ -316,7 +319,14 @@ function updateActiveNavigation() {
   const currentSection = window.location.hash.replace("#", "") || "overview";
 
   for (const link of navLinks) {
-    link.classList.toggle("active", link.dataset.section === currentSection);
+    const isCurrent = link.dataset.section === currentSection;
+
+    link.classList.toggle("active", isCurrent);
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   }
 }
 

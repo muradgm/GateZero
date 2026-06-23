@@ -7,9 +7,9 @@ import {
 const baseInput = {
   data: 'gate: "G2_PAPER_TRADING", scope: "paper_simulation_planning_only", docGroups: [], limitationItems: [], riskItems: [], workflowItems: []',
   html: '<a class="skip-link" href="#main">Skip</a><div id="app"></div>',
-  main: 'main class="workspace" id="main" data-section updateActiveNavigation data-label="Area" data.docGroups id="limitations" id="risk" id="workflow"',
+  main: 'main class="workspace" id="main" data-section updateActiveNavigation aria-current data-label="Area" data.docGroups group.items.length id="limitations" id="risk" id="workflow"',
   styles:
-    "td::before { content: attr(data-label); } .doc-group { display: grid; } .insight-list {} .workflow-list {}"
+    "td::before { content: attr(data-label); } .doc-group { display: grid; } .doc-group-heading {} .insight-list {} .workflow-list {}"
 };
 
 describe("Gate 0 command center render contract", () => {
@@ -79,9 +79,14 @@ describe("Gate 0 command center render contract", () => {
       "enter api key",
       "auto execute",
       "approved strategy",
+      "approved for trading",
       "safe to trade",
+      "strategy is safe",
+      ["bro", "ker-ready"].join(""),
+      "live-ready",
       "profit claim",
-      "performance guarantee"
+      "performance guarantee",
+      "optimized returns"
     ]) {
       const result = checkGate0CommandCenterRenderContract({
         ...baseInput,
