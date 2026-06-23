@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-480",
-  localVerification: "74 files / 450 tests",
+  latestPacket: "TRD-490",
+  localVerification: "74 files / 452 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 450 tests.",
+      detail: "Latest suite: 74 files, 452 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "480 / 480",
+      value: "490 / 490",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -59,7 +59,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 450 tests"
+      reference: "74 files / 452 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "480 accepted records"
+      reference: "490 accepted records"
     }
   ],
   nextActions: [
-    "TRD-480 planned no-action-control tests; next is the local frontend data adapter plan.",
+    "TRD-490 implemented no-action-control guard hardening; next is a bounded read-only frontend shell implementation packet.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -312,7 +312,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
         "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md",
         "docs/operations/GATE2_READ_ONLY_FRONTEND_IMPLEMENTATION_PACKET_DRAFT.md",
-        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_TEST_PLAN.md"
+        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_TEST_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_LOCAL_DATA_ADAPTER_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_PANEL_COMPONENT_INVENTORY.md",
+        "docs/operations/GATE2_FRONTEND_NAVIGATION_SHELL_IMPLEMENTATION_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_IMPLEMENTATION_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_RISK_LIMITATION_PANEL_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_WORKFLOW_PANEL_IMPLEMENTATION_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_GO_NO_GO_CHECKPOINT.md",
+        "docs/operations/GATE2_FRONTEND_SHELL_BUILD_PACKET.md",
+        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_IMPLEMENTATION.md"
       ]
     },
     {

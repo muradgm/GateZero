@@ -62,4 +62,33 @@ describe("Gate 0 command center render contract", () => {
     expect(result.ok).toBe(false);
     expect(result.findings).toContain(`Blocked command-center copy found: ${blockedCopy}`);
   });
+
+  it("rejects blocked command-center action copy outside app data", () => {
+    const result = checkGate0CommandCenterRenderContract({
+      ...baseInput,
+      main: `${baseInput.main} generate buy`
+    });
+
+    expect(result.ok).toBe(false);
+    expect(result.findings).toContain("Blocked command-center copy found: generate buy");
+  });
+
+  it("rejects credential, execution, readiness, and claim copy", () => {
+    for (const blockedCopy of [
+      "enter api key",
+      "auto execute",
+      "approved strategy",
+      "safe to trade",
+      "profit claim",
+      "performance guarantee"
+    ]) {
+      const result = checkGate0CommandCenterRenderContract({
+        ...baseInput,
+        data: `${baseInput.data} ${blockedCopy}`
+      });
+
+      expect(result.ok).toBe(false);
+      expect(result.findings).toContain(`Blocked command-center copy found: ${blockedCopy}`);
+    }
+  });
 });

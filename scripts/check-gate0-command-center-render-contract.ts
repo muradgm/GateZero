@@ -56,15 +56,31 @@ export function checkGate0CommandCenterRenderContract(
   );
 
   const blockedCopies = [
+    ["connect", "account"],
     ["connect", "bro", "ker"],
+    ["enter", "api", "key"],
+    ["place", "trade"],
     ["place", "order"],
     ["submit", "order"],
+    ["route", "order"],
+    ["execute", "order"],
+    ["auto", "execute"],
+    ["generate", "buy"],
+    ["generate", "sell"],
+    ["buy", "signal"],
+    ["sell", "signal"],
     ["ready", "to", "trade"],
-    ["approved", "strategy"]
+    ["approved", "strategy"],
+    ["safe", "to", "trade"],
+    ["deploy", "strategy"],
+    ["profit", "claim"],
+    ["performance", "guarantee"]
   ].map((parts) => parts.join(" "));
 
+  const scannedSource = [input.data, input.html, input.main, input.styles].join("\n").toLowerCase();
+
   for (const blockedCopy of blockedCopies) {
-    if (input.data.toLowerCase().includes(blockedCopy)) {
+    if (scannedSource.includes(blockedCopy)) {
       findings.push(`Blocked command-center copy found: ${blockedCopy}`);
     }
   }
