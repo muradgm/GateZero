@@ -5,10 +5,11 @@ import {
 } from "../../../scripts/check-gate0-command-center-render-contract.js";
 
 const baseInput = {
-  data: 'gate: "G2_PAPER_TRADING", scope: "paper_simulation_planning_only", docGroups: []',
+  data: 'gate: "G2_PAPER_TRADING", scope: "paper_simulation_planning_only", docGroups: [], limitationItems: [], riskItems: [], workflowItems: []',
   html: '<a class="skip-link" href="#main">Skip</a><div id="app"></div>',
-  main: 'main class="workspace" id="main" data-section updateActiveNavigation data-label="Area" data.docGroups',
-  styles: "td::before { content: attr(data-label); } .doc-group { display: grid; }"
+  main: 'main class="workspace" id="main" data-section updateActiveNavigation data-label="Area" data.docGroups id="limitations" id="risk" id="workflow"',
+  styles:
+    "td::before { content: attr(data-label); } .doc-group { display: grid; } .insight-list {} .workflow-list {}"
 };
 
 describe("Gate 0 command center render contract", () => {

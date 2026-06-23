@@ -215,15 +215,20 @@ h3 {
   font-size: 18px;
 }
 
+.overview-grid {
+  display: grid;
+  gap: 14px;
+}
+
 .health-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
 
-.section-title {
-  grid-column: 1 / -1;
+.section-kicker {
   font-size: 14px;
+  font-weight: 800;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -265,8 +270,12 @@ h3 {
 
 .lower-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(360px, 0.8fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+}
+
+.wide-panel {
+  grid-column: 1 / -1;
 }
 
 .panel {
@@ -333,7 +342,9 @@ h3 {
 }
 
 .boundary-list,
-.action-list {
+.action-list,
+.insight-list,
+.workflow-list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -356,6 +367,75 @@ h3 {
   height: 10px;
   border-radius: 999px;
   background: var(--amber);
+}
+
+.insight-list li {
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  background: #f7faf9;
+  display: grid;
+  gap: 6px;
+  min-height: 92px;
+  padding: 14px;
+}
+
+.insight-list strong {
+  color: var(--accent-strong);
+}
+
+.insight-list span,
+.workflow-list p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.risk-list li {
+  border-left: 4px solid var(--amber);
+}
+
+.workflow-list {
+  gap: 12px;
+}
+
+.workflow-list li {
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  background: var(--panel-soft);
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  min-height: 92px;
+  padding: 14px;
+}
+
+.workflow-index {
+  align-self: start;
+  background: #dcebe8;
+  border-radius: 8px;
+  color: var(--accent-strong);
+  display: grid;
+  font-size: 12px;
+  font-weight: 800;
+  height: 34px;
+  place-items: center;
+  width: 34px;
+}
+
+.workflow-list strong,
+.workflow-list span {
+  display: block;
+}
+
+.workflow-list span {
+  color: var(--accent-strong);
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.workflow-list p {
+  margin-top: 7px;
 }
 
 .table-wrap {
@@ -448,6 +528,10 @@ code {
   .dashboard-grid,
   .lower-grid {
     grid-template-columns: 1fr;
+  }
+
+  .wide-panel {
+    grid-column: auto;
   }
 }
 

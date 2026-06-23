@@ -4,12 +4,12 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-490",
-  localVerification: "74 files / 452 tests",
+  latestPacket: "TRD-500",
+  localVerification: "74 files / 454 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
-  navItems: ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"],
+  navItems: ["Overview", "Evidence", "Limitations", "Risk", "Workflow", "Docs"],
   healthCards: [
     {
       label: "Gate Status",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 452 tests.",
+      detail: "Latest suite: 74 files, 454 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "490 / 490",
+      value: "500 / 500",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -54,12 +54,75 @@ export const commandCenterData = {
     "Readiness or promotion labels",
     "Performance claim language"
   ],
+  limitationItems: [
+    {
+      label: "Local-only data",
+      detail: "The shell reads checked-in and local runtime records only."
+    },
+    {
+      label: "Paper-simulation planning",
+      detail: "Gate 2 records describe planning and local evidence, not market access."
+    },
+    {
+      label: "Evidence before action",
+      detail: "Risk and limitation notes stay visible beside evidence surfaces."
+    },
+    {
+      label: "Operator-owned decisions",
+      detail: "The interface records manual review state without performing decisions."
+    }
+  ],
+  riskItems: [
+    {
+      label: "No external account surface",
+      detail: "The frontend must not collect or route account, token, or credential data."
+    },
+    {
+      label: "No execution surface",
+      detail: "The frontend must not place, route, schedule, or dispatch market activity."
+    },
+    {
+      label: "No prediction surface",
+      detail: "The frontend must not generate directional trading prompts."
+    },
+    {
+      label: "No claim surface",
+      detail: "The frontend treats validation as repo health, not trading permission."
+    }
+  ],
+  workflowItems: [
+    {
+      step: "Idea",
+      state: "Record",
+      detail: "Capture the research question."
+    },
+    {
+      step: "Evidence",
+      state: "Inspect",
+      detail: "Review local data and source links."
+    },
+    {
+      step: "Risk",
+      state: "Review",
+      detail: "Check limitations and blocker state."
+    },
+    {
+      step: "Decision",
+      state: "Manual",
+      detail: "Operator records the outcome outside any action control."
+    },
+    {
+      step: "Learning",
+      state: "Log",
+      detail: "Capture the lesson for future review."
+    }
+  ],
   evidenceRows: [
     {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 452 tests"
+      reference: "74 files / 454 tests"
     },
     {
       area: "Verified commit",
@@ -89,11 +152,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "490 accepted records"
+      reference: "500 accepted records"
     }
   ],
   nextActions: [
-    "TRD-490 implemented no-action-control guard hardening; next is a bounded read-only frontend shell implementation packet.",
+    "TRD-500 checkpointed the read-only frontend shell lane after implementation and visual QA.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -322,7 +385,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_PACKET.md",
         "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_GO_NO_GO_CHECKPOINT.md",
         "docs/operations/GATE2_FRONTEND_SHELL_BUILD_PACKET.md",
-        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_IMPLEMENTATION.md"
+        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_IMPLEMENTATION.md",
+        "docs/operations/GATE2_READ_ONLY_FRONTEND_SHELL_IMPLEMENTATION.md",
+        "docs/operations/GATE2_FRONTEND_RENDERED_SHELL_VISUAL_QA.md",
+        "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_IMPLEMENTATION.md",
+        "docs/operations/GATE2_FRONTEND_RISK_LIMITATION_PANEL_IMPLEMENTATION.md",
+        "docs/operations/GATE2_FRONTEND_WORKFLOW_PANEL_IMPLEMENTATION.md",
+        "docs/operations/GATE2_FRONTEND_DOCS_SOURCE_LINK_PANEL_IMPLEMENTATION.md",
+        "docs/operations/GATE2_FRONTEND_RESPONSIVE_POLISH_PASS.md",
+        "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_RUN.md",
+        "docs/operations/GATE2_FRONTEND_GUARD_EVIDENCE_RECHECK.md",
+        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md"
       ]
     },
     {

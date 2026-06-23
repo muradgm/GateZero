@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-490");
+    expect(data).toContain("TRD-500");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -54,7 +54,7 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
     const main = readFileSync(mainPath, "utf8");
 
-    for (const item of ["Overview", "Loop", "Risk", "Evidence", "Actions", "Docs"]) {
+    for (const item of ["Overview", "Evidence", "Limitations", "Risk", "Workflow", "Docs"]) {
       const id = item.toLowerCase();
 
       expect(data).toContain(`"${item}"`);
@@ -110,5 +110,34 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("data.docGroups");
     expect(main).toContain('class="doc-group"');
     expect(styles).toContain(".doc-group");
+  });
+
+  it("renders read-only frontend shell sections", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    for (const field of ["limitationItems", "riskItems", "workflowItems"]) {
+      expect(data).toContain(field);
+    }
+
+    for (const sectionId of ["evidence", "limitations", "risk", "workflow", "docs"]) {
+      expect(main).toContain(`id="${sectionId}"`);
+    }
+
+    expect(main).toContain("workflow-list");
+    expect(styles).toContain(".insight-list");
+    expect(styles).toContain(".workflow-list");
+  });
+
+  it("keeps risk and limitation copy close to evidence surfaces", () => {
+    const main = readFileSync(mainPath, "utf8");
+    const evidenceIndex = main.indexOf('id="evidence"');
+    const limitationsIndex = main.indexOf('id="limitations"');
+    const riskIndex = main.indexOf('id="risk"');
+
+    expect(evidenceIndex).toBeGreaterThan(-1);
+    expect(limitationsIndex).toBeGreaterThan(evidenceIndex);
+    expect(riskIndex).toBeGreaterThan(limitationsIndex);
   });
 });

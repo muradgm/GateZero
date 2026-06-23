@@ -44,8 +44,13 @@ export function checkGate0CommandCenterRenderContract(
     "Missing active navigation updater."
   );
   requireIncludes(findings, input.main, 'data-label="Area"', "Missing mobile table labels.");
+  requireIncludes(findings, input.main, 'id="limitations"', "Missing limitations panel.");
+  requireIncludes(findings, input.main, 'id="risk"', "Missing risk panel.");
+  requireIncludes(findings, input.main, 'id="workflow"', "Missing workflow panel.");
   requireIncludes(findings, input.main, "data.docGroups", "Missing grouped source links.");
   requireIncludes(findings, input.styles, "td::before", "Missing mobile evidence label styling.");
+  requireIncludes(findings, input.styles, ".insight-list", "Missing risk/limitation list styling.");
+  requireIncludes(findings, input.styles, ".workflow-list", "Missing workflow list styling.");
   requireIncludes(findings, input.styles, ".doc-group", "Missing grouped source link styling.");
   requireIncludes(findings, input.data, "G2_PAPER_TRADING", "Missing Gate 2 status.");
   requireIncludes(
@@ -54,6 +59,9 @@ export function checkGate0CommandCenterRenderContract(
     "paper_simulation_planning_only",
     "Missing paper-simulation planning scope."
   );
+  requireIncludes(findings, input.data, "limitationItems", "Missing limitation data.");
+  requireIncludes(findings, input.data, "riskItems", "Missing risk data.");
+  requireIncludes(findings, input.data, "workflowItems", "Missing workflow data.");
 
   const blockedCopies = [
     ["connect", "account"],

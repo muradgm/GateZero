@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-490`                                                      |
-| Latest accepted validation | 74 test files, 452 tests passed                                |
+| Latest accepted packet     | `TRD-500`                                                      |
+| Latest accepted validation | 74 test files, 454 tests passed                                |
 
 ## Boundary
 
@@ -102,7 +102,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 74 test files passed, 452 tests passed.
+- `pnpm test:ci`: 74 test files passed, 454 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -322,6 +322,9 @@ Latest accepted result:
   - Frontend local data adapter, panel inventory, navigation shell, evidence panel, risk/limitation
     panel, workflow panel, accessibility verification, go/no-go checkpoint, shell build packet, and
     no-action-control guard implementation records.
+  - Read-only frontend shell implementation with evidence, limitations, risk, manual workflow,
+    docs/source-link rendering, responsive polish, accessibility verification, guard evidence
+    recheck, and implementation checkpoint.
 
 ## Workstream Summary
 
@@ -925,6 +928,16 @@ Latest accepted result:
 | `TRD-488` | accepted | Checkpoint       | Recorded frontend implementation go/no-go checkpoint.   |
 | `TRD-489` | accepted | Frontend shell   | Drafted read-only frontend shell build packet.          |
 | `TRD-490` | accepted | UI guard         | Implemented no-action-control render guard hardening.   |
+| `TRD-491` | accepted | Frontend shell   | Implemented read-only frontend shell.                   |
+| `TRD-492` | accepted | Visual QA        | Verified rendered shell layout.                         |
+| `TRD-493` | accepted | Evidence UI      | Implemented read-only evidence panel.                   |
+| `TRD-494` | accepted | Risk UI          | Implemented risk and limitation panels.                 |
+| `TRD-495` | accepted | Workflow UI      | Implemented manual workflow panel.                      |
+| `TRD-496` | accepted | Docs UI          | Implemented docs/source-link panel.                     |
+| `TRD-497` | accepted | Responsive       | Polished responsive shell behavior.                     |
+| `TRD-498` | accepted | Accessibility    | Verified frontend accessibility markers.                |
+| `TRD-499` | accepted | Guard evidence   | Rechecked frontend guard evidence.                      |
+| `TRD-500` | accepted | Checkpoint       | Checkpointed read-only frontend shell lane.             |
 
 ## Current Operator Commands
 
@@ -954,25 +967,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 452 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 454 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                               | Acceptance focus                            |
-| ---- | --------- | ------ | -------------------------------------------------- | ------------------------------------------- |
-| 1    | `TRD-491` | queued | Read-only frontend shell implementation.           | Build local shell with no action controls.  |
-| 2    | `TRD-492` | queued | Frontend rendered shell visual QA.                 | Verify desktop and mobile layout.           |
-| 3    | `TRD-493` | queued | Frontend evidence panel implementation.            | Render evidence with limitations nearby.    |
-| 4    | `TRD-494` | queued | Frontend risk and limitation panel implementation. | Keep claim-safe risk copy visible.          |
-| 5    | `TRD-495` | queued | Frontend workflow panel implementation.            | Display manual workflow state only.         |
-| 6    | `TRD-496` | queued | Frontend docs/source-link panel implementation.    | Render local records without publishing.    |
-| 7    | `TRD-497` | queued | Frontend responsive polish pass.                   | Improve dense mobile and desktop scanning.  |
-| 8    | `TRD-498` | queued | Frontend accessibility verification run.           | Verify keyboard, focus, captions, contrast. |
-| 9    | `TRD-499` | queued | Frontend guard evidence recheck.                   | Re-run blocked UI and render guards.        |
-| 10   | `TRD-500` | queued | Frontend implementation checkpoint.                | Decide whether shell lane is complete.      |
+| Rank | Packet    | Status | Goal                                     | Acceptance focus                           |
+| ---- | --------- | ------ | ---------------------------------------- | ------------------------------------------ |
+| 1    | `TRD-501` | queued | Frontend operator review pass.           | Review shell usability with operator lens. |
+| 2    | `TRD-502` | queued | Frontend evidence detail expansion plan. | Add depth without action controls.         |
+| 3    | `TRD-503` | queued | Frontend limitation copy audit.          | Recheck claim-safe boundary copy.          |
+| 4    | `TRD-504` | queued | Frontend source-link grouping polish.    | Improve docs scanning and grouping.        |
+| 5    | `TRD-505` | queued | Frontend runtime refresh UX review.      | Keep local refresh understandable.         |
+| 6    | `TRD-506` | queued | Frontend mobile visual QA recheck.       | Inspect narrow viewport layout.            |
+| 7    | `TRD-507` | queued | Frontend keyboard navigation QA recheck. | Verify focus and hash navigation.          |
+| 8    | `TRD-508` | queued | Frontend blocked-copy regression pack.   | Expand UI negative cases if needed.        |
+| 9    | `TRD-509` | queued | Frontend handoff note.                   | Document shell usage and limitations.      |
+| 10   | `TRD-510` | queued | Frontend lane closeout checkpoint.       | Decide next UI lane or pause.              |
 
 ## Rejected For Now
 
@@ -1677,6 +1690,24 @@ Do not mark a packet accepted until:
 - Gate 2 frontend shell build packet: `docs/operations/GATE2_FRONTEND_SHELL_BUILD_PACKET.md`
 - Gate 2 frontend no-action-control guard implementation:
   `docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_IMPLEMENTATION.md`
+- Gate 2 read-only frontend shell implementation:
+  `docs/operations/GATE2_READ_ONLY_FRONTEND_SHELL_IMPLEMENTATION.md`
+- Gate 2 frontend rendered shell visual QA:
+  `docs/operations/GATE2_FRONTEND_RENDERED_SHELL_VISUAL_QA.md`
+- Gate 2 frontend evidence panel implementation:
+  `docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_IMPLEMENTATION.md`
+- Gate 2 frontend risk limitation panel implementation:
+  `docs/operations/GATE2_FRONTEND_RISK_LIMITATION_PANEL_IMPLEMENTATION.md`
+- Gate 2 frontend workflow panel implementation:
+  `docs/operations/GATE2_FRONTEND_WORKFLOW_PANEL_IMPLEMENTATION.md`
+- Gate 2 frontend docs/source-link panel implementation:
+  `docs/operations/GATE2_FRONTEND_DOCS_SOURCE_LINK_PANEL_IMPLEMENTATION.md`
+- Gate 2 frontend responsive polish pass: `docs/operations/GATE2_FRONTEND_RESPONSIVE_POLISH_PASS.md`
+- Gate 2 frontend accessibility verification run:
+  `docs/operations/GATE2_FRONTEND_ACCESSIBILITY_VERIFICATION_RUN.md`
+- Gate 2 frontend guard evidence recheck: `docs/operations/GATE2_FRONTEND_GUARD_EVIDENCE_RECHECK.md`
+- Gate 2 frontend implementation checkpoint:
+  `docs/operations/GATE2_FRONTEND_IMPLEMENTATION_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 3
 

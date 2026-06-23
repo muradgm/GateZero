@@ -55,23 +55,25 @@ function renderCommandCenter(data) {
         </div>
       </header>
 
-      <section class="health-grid" id="overview" aria-labelledby="overview-title">
-        <h2 class="section-title" id="overview-title">Gate 1 Health</h2>
-        ${data.healthCards
-          .map(
-            (card) => `
-              <article class="health-card ${card.tone}">
-                <span>${card.label}</span>
-                <strong>${card.value}</strong>
-                <p>${card.detail}</p>
-              </article>
-            `
-          )
-          .join("")}
+      <section class="overview-grid" id="overview" aria-labelledby="overview-title">
+        <div class="section-kicker" id="overview-title">Operating overview</div>
+        <div class="health-grid">
+          ${data.healthCards
+            .map(
+              (card) => `
+                <article class="health-card ${card.tone}">
+                  <span>${card.label}</span>
+                  <strong>${card.value}</strong>
+                  <p>${card.detail}</p>
+                </article>
+              `
+            )
+            .join("")}
+        </div>
       </section>
 
-      <section class="dashboard-grid">
-        <article class="panel loop-panel" id="loop" aria-labelledby="loop-title">
+      <section class="dashboard-grid" aria-label="Protected decision loop and boundary">
+        <article class="panel loop-panel" aria-labelledby="loop-title">
           <div class="panel-heading">
             <div>
               <h2 id="loop-title">Protected Loop</h2>
@@ -94,10 +96,10 @@ function renderCommandCenter(data) {
           </ol>
         </article>
 
-        <article class="panel boundary-panel" id="risk" aria-labelledby="risk-title">
+        <article class="panel boundary-panel" aria-labelledby="boundary-title">
           <div class="panel-heading">
             <div>
-              <h2 id="risk-title">Risk Boundary</h2>
+              <h2 id="boundary-title">Blocked Scope</h2>
               <p>No product breadth beyond trust in the loop.</p>
             </div>
           </div>
@@ -110,18 +112,18 @@ function renderCommandCenter(data) {
       </section>
 
       <section class="lower-grid">
-        <article class="panel evidence-panel" id="evidence" aria-labelledby="evidence-title">
+        <article class="panel evidence-panel wide-panel" id="evidence" aria-labelledby="evidence-title">
           <div class="panel-heading">
             <div>
               <h2 id="evidence-title">Evidence Freshness</h2>
-              <p>Latest local and remote operating signals.</p>
+              <p>Latest local and remote operating signals, with limitations nearby.</p>
             </div>
             <span class="panel-chip">latest ${data.latestPacket}</span>
           </div>
           <div class="table-wrap">
             <table>
               <caption>
-                Gate 1 operating signals shown by the local command center.
+                Gate 2 planning signals shown by the local command center.
               </caption>
               <thead>
                 <tr>
@@ -149,11 +151,78 @@ function renderCommandCenter(data) {
           </div>
         </article>
 
-        <article class="panel action-panel" id="actions" aria-labelledby="actions-title">
+        <article class="panel limitation-panel" id="limitations" aria-labelledby="limitations-title">
           <div class="panel-heading">
             <div>
-              <h2 id="actions-title">Next Action</h2>
-              <p>Maintenance posture and source links.</p>
+              <h2 id="limitations-title">Limitations</h2>
+              <p>Boundaries that keep evidence from becoming permission.</p>
+            </div>
+          </div>
+          <ul class="insight-list">
+            ${data.limitationItems
+              .map(
+                (item) => `
+                  <li>
+                    <strong>${item.label}</strong>
+                    <span>${item.detail}</span>
+                  </li>
+                `
+              )
+              .join("")}
+          </ul>
+        </article>
+
+        <article class="panel risk-panel" id="risk" aria-labelledby="risk-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="risk-title">Risk Review</h2>
+              <p>Read-only control checks that prevent accidental action semantics.</p>
+            </div>
+          </div>
+          <ul class="insight-list risk-list">
+            ${data.riskItems
+              .map(
+                (item) => `
+                  <li>
+                    <strong>${item.label}</strong>
+                    <span>${item.detail}</span>
+                  </li>
+                `
+              )
+              .join("")}
+          </ul>
+        </article>
+
+        <article class="panel workflow-panel" id="workflow" aria-labelledby="workflow-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="workflow-title">Manual Workflow</h2>
+              <p>Operator-owned review state without action controls.</p>
+            </div>
+          </div>
+          <ol class="workflow-list">
+            ${data.workflowItems
+              .map(
+                (item, index) => `
+                  <li>
+                    <span class="workflow-index">${String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <strong>${item.step}</strong>
+                      <span>${item.state}</span>
+                      <p>${item.detail}</p>
+                    </div>
+                  </li>
+                `
+              )
+              .join("")}
+          </ol>
+        </article>
+
+        <article class="panel next-panel" aria-labelledby="next-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="next-title">Next Review</h2>
+              <p>Current operating notes for the local shell.</p>
             </div>
           </div>
           <ul class="action-list">
@@ -161,7 +230,7 @@ function renderCommandCenter(data) {
           </ul>
         </article>
 
-        <article class="panel docs-panel" id="docs" aria-labelledby="docs-title">
+        <article class="panel docs-panel wide-panel" id="docs" aria-labelledby="docs-title">
           <div class="panel-heading">
             <div>
               <h2 id="docs-title">Source Links</h2>
