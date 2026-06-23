@@ -306,7 +306,8 @@ const requiredDocPaths = [
   "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_PLAN.md",
   "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_BASELINE_PLAN.md",
   "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
-  "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md"
+  "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
+  "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md"
 ] as const;
 
 const requiredSourcePaths = [

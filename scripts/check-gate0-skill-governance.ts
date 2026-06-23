@@ -27,6 +27,10 @@ const expectedSkills = [
   "gatezero-risk-governance-reviewer",
   "gatezero-ui-command-center-reviewer",
   "trader-product-reviewer",
+  "traderframe-copy-reviewer",
+  "traderframe-frontend-engineer",
+  "traderframe-marketing-strategy-reviewer",
+  "traderframe-visual-product-designer",
   "trading-forex-domain-expert"
 ] as const;
 const requiredSkillSnippets = [

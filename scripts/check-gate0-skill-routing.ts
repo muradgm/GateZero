@@ -22,6 +22,10 @@ const requiredSkills = [
   "gatezero-risk-governance-reviewer",
   "gatezero-ui-command-center-reviewer",
   "trader-product-reviewer",
+  "traderframe-copy-reviewer",
+  "traderframe-frontend-engineer",
+  "traderframe-marketing-strategy-reviewer",
+  "traderframe-visual-product-designer",
   "trading-forex-domain-expert"
 ] as const;
 
@@ -34,7 +38,11 @@ const requiredDecisionTypes = [
   "Static command-center UI review",
   "Backtest contract and metric review",
   "Trader workflow and trust review",
-  "Forex mechanics and domain review"
+  "Forex mechanics and domain review",
+  "Frontend marketing and positioning review",
+  "Frontend copy and claim-safety review",
+  "Frontend engineering architecture review",
+  "Frontend visual product design review"
 ] as const;
 
 const requiredSnippets = [

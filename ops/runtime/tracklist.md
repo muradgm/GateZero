@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-477`                                                      |
+| Latest accepted packet     | `TRD-478`                                                      |
 | Latest accepted validation | 74 test files, 450 tests passed                                |
 
 ## Boundary
@@ -312,6 +312,8 @@ Latest accepted result:
   - Gate 2 frontend planning records covering information architecture, route boundaries, panel
     contracts, no-action-control guard planning, accessibility, visual hierarchy, and readiness
     blockers.
+  - TraderFrame frontend skill lenses for marketing strategy, copy, visual product design, and
+    frontend engineering review under Gate 2 paper-simulation planning boundaries.
 
 ## Workstream Summary
 
@@ -902,6 +904,7 @@ Latest accepted result:
 | `TRD-475` | accepted | Accessibility    | Planned frontend accessibility baseline.                |
 | `TRD-476` | accepted | Hierarchy        | Directed frontend visual hierarchy.                     |
 | `TRD-477` | accepted | Readiness        | Audited frontend implementation readiness blockers.     |
+| `TRD-478` | accepted | Skill lenses     | Added governed TraderFrame frontend review skills.      |
 
 ## Current Operator Commands
 
@@ -940,16 +943,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                             | Acceptance focus                              |
 | ---- | --------- | ------ | ------------------------------------------------ | --------------------------------------------- |
-| 1    | `TRD-478` | queued | Read-only frontend implementation packet draft.  | Define build scope before code.               |
-| 2    | `TRD-479` | queued | Frontend no-action-control test plan.            | Require blocked UI affordance tests.          |
-| 3    | `TRD-480` | queued | Frontend local data adapter plan.                | Use local static/runtime data only.           |
-| 4    | `TRD-481` | queued | Frontend panel component inventory.              | Inventory read-only panel components.         |
-| 5    | `TRD-482` | queued | Frontend navigation shell implementation packet. | Authorize shell only if guards are ready.     |
-| 6    | `TRD-483` | queued | Frontend evidence panel implementation packet.   | Authorize evidence panel only if read-only.   |
-| 7    | `TRD-484` | queued | Frontend risk and limitation panel packet.       | Authorize copy-safe risk surfaces only.       |
-| 8    | `TRD-485` | queued | Frontend workflow panel implementation packet.   | Authorize manual workflow display only.       |
-| 9    | `TRD-486` | queued | Frontend accessibility verification packet.      | Verify keyboard and responsive behavior.      |
-| 10   | `TRD-487` | queued | Frontend implementation go/no-go checkpoint.     | Decide whether code implementation may start. |
+| 1    | `TRD-479` | queued | Read-only frontend implementation packet draft.  | Define build scope before code.               |
+| 2    | `TRD-480` | queued | Frontend no-action-control test plan.            | Require blocked UI affordance tests.          |
+| 3    | `TRD-481` | queued | Frontend local data adapter plan.                | Use local static/runtime data only.           |
+| 4    | `TRD-482` | queued | Frontend panel component inventory.              | Inventory read-only panel components.         |
+| 5    | `TRD-483` | queued | Frontend navigation shell implementation packet. | Authorize shell only if guards are ready.     |
+| 6    | `TRD-484` | queued | Frontend evidence panel implementation packet.   | Authorize evidence panel only if read-only.   |
+| 7    | `TRD-485` | queued | Frontend risk and limitation panel packet.       | Authorize copy-safe risk surfaces only.       |
+| 8    | `TRD-486` | queued | Frontend workflow panel implementation packet.   | Authorize manual workflow display only.       |
+| 9    | `TRD-487` | queued | Frontend accessibility verification packet.      | Verify keyboard and responsive behavior.      |
+| 10   | `TRD-488` | queued | Frontend implementation go/no-go checkpoint.     | Decide whether code implementation may start. |
 
 ## Rejected For Now
 
@@ -1630,6 +1633,7 @@ Do not mark a packet accepted until:
   `docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md`
 - Gate 2 frontend implementation readiness blocker audit:
   `docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md`
+- Gate 2 frontend skill lens intake: `docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md`
 
 ## Source Of Truth Links Continued 3
 
@@ -1651,6 +1655,11 @@ Do not mark a packet accepted until:
 - Skill governance guard script: `scripts/check-gate0-skill-governance.ts`
 - Skill governance guard tests: `packages/fixtures/tests/gate0-skill-governance.test.ts`
 - Trader product reviewer skill: `skills/trader-product-reviewer/SKILL.md`
+- TraderFrame copy reviewer skill: `skills/traderframe-copy-reviewer/SKILL.md`
+- TraderFrame frontend engineer skill: `skills/traderframe-frontend-engineer/SKILL.md`
+- TraderFrame marketing strategy reviewer skill:
+  `skills/traderframe-marketing-strategy-reviewer/SKILL.md`
+- TraderFrame visual product designer skill: `skills/traderframe-visual-product-designer/SKILL.md`
 - Trading forex domain expert skill: `skills/trading-forex-domain-expert/SKILL.md`
 - CI evidence freshness guard script: `scripts/check-gate0-ci-evidence-freshness.ts`
 - CI evidence freshness guard tests:

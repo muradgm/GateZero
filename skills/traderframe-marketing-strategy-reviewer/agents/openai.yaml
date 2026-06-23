@@ -1,0 +1,10 @@
+interface:
+  display_name: "TraderFrame Marketing Strategy Reviewer"
+  short_description: "TraderFrame positioning and claim discipline"
+  default_prompt:
+    "Use $traderframe-marketing-strategy-reviewer to review TraderFrame positioning, product
+    narrative, audience clarity, and claim safety without implying approval, readiness,
+    profitability, broker connectivity, live execution, or AI prediction."
+
+policy:
+  allow_implicit_invocation: false

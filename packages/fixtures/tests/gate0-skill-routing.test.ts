@@ -19,6 +19,10 @@ const completeInput: Gate0SkillRoutingInput = {
     "Backtest contract and metric review",
     "Trader workflow and trust review",
     "Forex mechanics and domain review",
+    "Frontend marketing and positioning review",
+    "Frontend copy and claim-safety review",
+    "Frontend engineering architecture review",
+    "Frontend visual product design review",
     "gatezero-docs-control-plane-reviewer",
     "gatezero-orchestrator-reviewer",
     "gatezero-product-strategy-reviewer",
@@ -27,6 +31,10 @@ const completeInput: Gate0SkillRoutingInput = {
     "gatezero-risk-governance-reviewer",
     "gatezero-ui-command-center-reviewer",
     "trader-product-reviewer",
+    "traderframe-copy-reviewer",
+    "traderframe-frontend-engineer",
+    "traderframe-marketing-strategy-reviewer",
+    "traderframe-visual-product-designer",
     "trading-forex-domain-expert"
   ].join("\n")
 };
@@ -38,8 +46,8 @@ describe("Gate 0 skill routing check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 9,
-      checkedDecisionCount: 9
+      checkedSkillCount: 13,
+      checkedDecisionCount: 13
     });
     expect(renderGate0SkillRoutingResult(result)).toContain("Gate 0 skill routing check passed.");
   });

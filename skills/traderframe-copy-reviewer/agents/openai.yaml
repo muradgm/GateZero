@@ -1,0 +1,9 @@
+interface:
+  display_name: "TraderFrame Copy Reviewer"
+  short_description: "TraderFrame safe UI and product copy"
+  default_prompt:
+    "Use $traderframe-copy-reviewer to review TraderFrame UI copy, warnings, labels, limitation
+    text, risk copy, and product language for clarity and claim safety."
+
+policy:
+  allow_implicit_invocation: false

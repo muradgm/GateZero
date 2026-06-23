@@ -208,6 +208,106 @@ const completeInput: Gate0SkillGovernanceInput = {
       ].join("\n")
     },
     {
+      relativePath: "skills/traderframe-copy-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: traderframe-copy-reviewer",
+        "description: GateZero-aware frontend copy review.",
+        "---",
+        "# TraderFrame Copy Reviewer",
+        "## GateZero Boundary First",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-copy-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $traderframe-copy-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-frontend-engineer/SKILL.md",
+      content: [
+        "---",
+        "name: traderframe-frontend-engineer",
+        "description: GateZero-aware frontend engineering review.",
+        "---",
+        "# TraderFrame Frontend Engineer",
+        "## GateZero Boundary First",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-frontend-engineer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $traderframe-frontend-engineer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-marketing-strategy-reviewer/SKILL.md",
+      content: [
+        "---",
+        "name: traderframe-marketing-strategy-reviewer",
+        "description: GateZero-aware marketing strategy review.",
+        "---",
+        "# TraderFrame Marketing Strategy Reviewer",
+        "## GateZero Boundary First",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-marketing-strategy-reviewer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $traderframe-marketing-strategy-reviewer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-visual-product-designer/SKILL.md",
+      content: [
+        "---",
+        "name: traderframe-visual-product-designer",
+        "description: GateZero-aware visual product design review.",
+        "---",
+        "# TraderFrame Visual Product Designer",
+        "## GateZero Boundary First",
+        "G1_BACKTESTING",
+        "historical_backtesting_only",
+        "At Gate 1",
+        "future-phase",
+        "blockers"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/traderframe-visual-product-designer/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $traderframe-visual-product-designer."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "skills/trading-forex-domain-expert/SKILL.md",
       content: [
         "---",
@@ -267,7 +367,7 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 9,
+      checkedSkillCount: 13,
       checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(

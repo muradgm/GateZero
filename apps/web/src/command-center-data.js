@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-477",
+  latestPacket: "TRD-478",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "477 / 477",
+      value: "478 / 478",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "477 accepted records"
+      reference: "478 accepted records"
     }
   ],
   nextActions: [
-    "TRD-477 completed frontend planning blockers; next is a bounded read-only implementation packet draft.",
+    "TRD-478 added governed frontend skill lenses; next is a bounded read-only implementation packet draft.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -309,7 +309,8 @@ export const commandCenterData = {
         "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_PLAN.md",
         "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_BASELINE_PLAN.md",
         "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
-        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md"
+        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md",
+        "docs/operations/GATE2_FRONTEND_SKILL_LENS_INTAKE.md"
       ]
     },
     {
@@ -379,6 +380,10 @@ export const commandCenterData = {
         "skills/gatezero-risk-governance-reviewer/SKILL.md",
         "skills/gatezero-ui-command-center-reviewer/SKILL.md",
         "skills/trader-product-reviewer/SKILL.md",
+        "skills/traderframe-copy-reviewer/SKILL.md",
+        "skills/traderframe-frontend-engineer/SKILL.md",
+        "skills/traderframe-marketing-strategy-reviewer/SKILL.md",
+        "skills/traderframe-visual-product-designer/SKILL.md",
         "skills/trading-forex-domain-expert/SKILL.md",
         "docs/operations/GATE0_SKILL_ROUTING_MATRIX.md",
         "docs/operations/GATE0_SKILL_GOVERNANCE_REVIEW.md",

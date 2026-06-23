@@ -1,0 +1,9 @@
+interface:
+  display_name: "TraderFrame Frontend Engineer"
+  short_description: "TraderFrame read-only frontend engineering"
+  default_prompt:
+    "Use $traderframe-frontend-engineer to review TraderFrame frontend architecture, component
+    boundaries, local data contracts, accessibility, tests, and no-action-control safeguards."
+
+policy:
+  allow_implicit_invocation: false

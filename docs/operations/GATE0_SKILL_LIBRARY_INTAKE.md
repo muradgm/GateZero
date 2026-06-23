@@ -65,15 +65,19 @@ This section is the candidate intake backlog.
 These are candidate reviewer skills only. They are not approved additions until each receives its
 own assignment, review, guard update, and passing validation:
 
-| Candidate skill                        | Intended Gate 1 use                                                |
-| -------------------------------------- | ------------------------------------------------------------------ |
-| `gatezero-orchestrator-reviewer`       | Check assignment packets, sequencing, scope, and acceptance logic. |
-| `gatezero-risk-governance-reviewer`    | Review risk gates, autonomy gates, and approval-language blockers. |
-| `gatezero-qa-security-reviewer`        | Review validation, blocked scope, secrets, and evidence gaps.      |
-| `gatezero-quant-backtest-reviewer`     | Review future backtest contract design without performance claims. |
-| `gatezero-product-strategy-reviewer`   | Review product scope against the protected decision loop.          |
-| `gatezero-ui-command-center-reviewer`  | Review command-center UI as read-only operating visibility.        |
-| `gatezero-docs-control-plane-reviewer` | Review source-of-truth, docs, tracker, and handoff consistency.    |
+| Candidate skill                           | Intended Gate 1 use                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------- |
+| `gatezero-orchestrator-reviewer`          | Check assignment packets, sequencing, scope, and acceptance logic.  |
+| `gatezero-risk-governance-reviewer`       | Review risk gates, autonomy gates, and approval-language blockers.  |
+| `gatezero-qa-security-reviewer`           | Review validation, blocked scope, secrets, and evidence gaps.       |
+| `gatezero-quant-backtest-reviewer`        | Review future backtest contract design without performance claims.  |
+| `gatezero-product-strategy-reviewer`      | Review product scope against the protected decision loop.           |
+| `gatezero-ui-command-center-reviewer`     | Review command-center UI as read-only operating visibility.         |
+| `gatezero-docs-control-plane-reviewer`    | Review source-of-truth, docs, tracker, and handoff consistency.     |
+| `traderframe-marketing-strategy-reviewer` | Review frontend positioning without claims or scope expansion.      |
+| `traderframe-copy-reviewer`               | Review interface copy for claim safety and blocked action language. |
+| `traderframe-frontend-engineer`           | Review read-only frontend architecture and local data boundaries.   |
+| `traderframe-visual-product-designer`     | Review visual hierarchy, density, accessibility, and scan behavior. |
 
 ## Blocked skill types
 
