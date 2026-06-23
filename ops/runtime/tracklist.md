@@ -10,7 +10,7 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-467`                                                      |
+| Latest accepted packet     | `TRD-477`                                                      |
 | Latest accepted validation | 74 test files, 450 tests passed                                |
 
 ## Boundary
@@ -309,6 +309,9 @@ Latest accepted result:
   - Gate 2 maintenance closeout records covering stale references, guard aging, limitations,
     operator workflow, no-expansion, brand isolation, maintenance decision, and read-only frontend
     planning requirements.
+  - Gate 2 frontend planning records covering information architecture, route boundaries, panel
+    contracts, no-action-control guard planning, accessibility, visual hierarchy, and readiness
+    blockers.
 
 ## Workstream Summary
 
@@ -889,6 +892,16 @@ Latest accepted result:
 | `TRD-465` | accepted | Recommendation   | Recommended bounded read-only frontend planning.        |
 | `TRD-466` | accepted | Frontend scope   | Assessed read-only frontend app-shell scope.            |
 | `TRD-467` | accepted | Frontend panels  | Drafted read-only frontend evidence panel requirements. |
+| `TRD-468` | accepted | Frontend IA      | Planned read-only frontend information architecture.    |
+| `TRD-469` | accepted | Route map        | Mapped read-only frontend route boundaries.             |
+| `TRD-470` | accepted | Data contract    | Planned local evidence panel data contracts.            |
+| `TRD-471` | accepted | Limitations      | Contracted limitation panel copy.                       |
+| `TRD-472` | accepted | Risk copy        | Contracted risk panel copy.                             |
+| `TRD-473` | accepted | Workflow panel   | Contracted read-only operator workflow panel state.     |
+| `TRD-474` | accepted | UI guard         | Planned frontend no-action-control guard coverage.      |
+| `TRD-475` | accepted | Accessibility    | Planned frontend accessibility baseline.                |
+| `TRD-476` | accepted | Hierarchy        | Directed frontend visual hierarchy.                     |
+| `TRD-477` | accepted | Readiness        | Audited frontend implementation readiness blockers.     |
 
 ## Current Operator Commands
 
@@ -927,16 +940,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                             | Acceptance focus                              |
 | ---- | --------- | ------ | ------------------------------------------------ | --------------------------------------------- |
-| 1    | `TRD-468` | queued | Frontend information architecture plan.          | Keep navigation evidence-first and read-only. |
-| 2    | `TRD-469` | queued | Frontend route boundary map.                     | Map routes without execution affordances.     |
-| 3    | `TRD-470` | queued | Evidence panel data contract plan.               | Define local read-only panel inputs.          |
-| 4    | `TRD-471` | queued | Limitation panel copy contract.                  | Keep assumptions near evidence.               |
-| 5    | `TRD-472` | queued | Risk panel copy contract.                        | Avoid approval or readiness semantics.        |
-| 6    | `TRD-473` | queued | Operator workflow panel contract.                | Show manual workflow state only.              |
-| 7    | `TRD-474` | queued | Frontend no-action-control guard plan.           | Block execution-like UI affordances.          |
-| 8    | `TRD-475` | queued | Frontend accessibility baseline plan.            | Plan readable, keyboard-safe views.           |
-| 9    | `TRD-476` | queued | Frontend visual hierarchy direction.             | Make risk and limitations prominent.          |
-| 10   | `TRD-477` | queued | Frontend implementation readiness blocker audit. | Decide if build packet is allowed.            |
+| 1    | `TRD-478` | queued | Read-only frontend implementation packet draft.  | Define build scope before code.               |
+| 2    | `TRD-479` | queued | Frontend no-action-control test plan.            | Require blocked UI affordance tests.          |
+| 3    | `TRD-480` | queued | Frontend local data adapter plan.                | Use local static/runtime data only.           |
+| 4    | `TRD-481` | queued | Frontend panel component inventory.              | Inventory read-only panel components.         |
+| 5    | `TRD-482` | queued | Frontend navigation shell implementation packet. | Authorize shell only if guards are ready.     |
+| 6    | `TRD-483` | queued | Frontend evidence panel implementation packet.   | Authorize evidence panel only if read-only.   |
+| 7    | `TRD-484` | queued | Frontend risk and limitation panel packet.       | Authorize copy-safe risk surfaces only.       |
+| 8    | `TRD-485` | queued | Frontend workflow panel implementation packet.   | Authorize manual workflow display only.       |
+| 9    | `TRD-486` | queued | Frontend accessibility verification packet.      | Verify keyboard and responsive behavior.      |
+| 10   | `TRD-487` | queued | Frontend implementation go/no-go checkpoint.     | Decide whether code implementation may start. |
 
 ## Rejected For Now
 
@@ -1599,6 +1612,26 @@ Do not mark a packet accepted until:
   `docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md`
 
 ## Source Of Truth Links Continued 2
+
+- Gate 2 frontend information architecture plan:
+  `docs/operations/GATE2_FRONTEND_INFORMATION_ARCHITECTURE_PLAN.md`
+- Gate 2 frontend route boundary map: `docs/operations/GATE2_FRONTEND_ROUTE_BOUNDARY_MAP.md`
+- Gate 2 evidence panel data contract plan:
+  `docs/operations/GATE2_EVIDENCE_PANEL_DATA_CONTRACT_PLAN.md`
+- Gate 2 limitation panel copy contract: `docs/operations/GATE2_LIMITATION_PANEL_COPY_CONTRACT.md`
+- Gate 2 risk panel copy contract: `docs/operations/GATE2_RISK_PANEL_COPY_CONTRACT.md`
+- Gate 2 operator workflow panel contract:
+  `docs/operations/GATE2_OPERATOR_WORKFLOW_PANEL_CONTRACT.md`
+- Gate 2 frontend no-action-control guard plan:
+  `docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_PLAN.md`
+- Gate 2 frontend accessibility baseline plan:
+  `docs/operations/GATE2_FRONTEND_ACCESSIBILITY_BASELINE_PLAN.md`
+- Gate 2 frontend visual hierarchy direction:
+  `docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md`
+- Gate 2 frontend implementation readiness blocker audit:
+  `docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md`
+
+## Source Of Truth Links Continued 3
 
 - Command center app: `apps/web/index.html`, `apps/web/src/main.js`,
   `apps/web/src/command-center-data.js`, `apps/web/src/styles.css`

@@ -4,7 +4,7 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-467",
+  latestPacket: "TRD-477",
   localVerification: "74 files / 450 tests",
   ciRun: "27787807220",
   ciState: "success",
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "467 / 467",
+      value: "477 / 477",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -89,11 +89,11 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "467 accepted records"
+      reference: "477 accepted records"
     }
   ],
   nextActions: [
-    "TRD-467 drafted read-only evidence panel requirements; next is bounded frontend information architecture.",
+    "TRD-477 completed frontend planning blockers; next is a bounded read-only implementation packet draft.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -299,7 +299,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_MAINTENANCE_CHECKPOINT.md",
         "docs/operations/GATE2_PAUSE_OR_PROCEED_RECOMMENDATION.md",
         "docs/operations/GATE2_READ_ONLY_FRONTEND_APP_SHELL_SCOPE_ASSESSMENT.md",
-        "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md"
+        "docs/operations/GATE2_FRONTEND_EVIDENCE_PANEL_REQUIREMENTS_DRAFT.md",
+        "docs/operations/GATE2_FRONTEND_INFORMATION_ARCHITECTURE_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_ROUTE_BOUNDARY_MAP.md",
+        "docs/operations/GATE2_EVIDENCE_PANEL_DATA_CONTRACT_PLAN.md",
+        "docs/operations/GATE2_LIMITATION_PANEL_COPY_CONTRACT.md",
+        "docs/operations/GATE2_RISK_PANEL_COPY_CONTRACT.md",
+        "docs/operations/GATE2_OPERATOR_WORKFLOW_PANEL_CONTRACT.md",
+        "docs/operations/GATE2_FRONTEND_NO_ACTION_CONTROL_GUARD_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_ACCESSIBILITY_BASELINE_PLAN.md",
+        "docs/operations/GATE2_FRONTEND_VISUAL_HIERARCHY_DIRECTION.md",
+        "docs/operations/GATE2_FRONTEND_IMPLEMENTATION_READINESS_BLOCKER_AUDIT.md"
       ]
     },
     {
