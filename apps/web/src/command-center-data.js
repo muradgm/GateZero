@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-580",
-  localVerification: "74 files / 484 tests",
+  latestPacket: "TRD-581",
+  localVerification: "74 files / 485 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 484 tests.",
+      detail: "Latest suite: 74 files, 485 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "580 / 580",
+      value: "581 / 581",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 484 tests"
+      reference: "74 files / 485 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,13 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "580 accepted records"
+      reference: "581 accepted records"
+    },
+    {
+      area: "Dependency audit",
+      signal: "Vite 8.1.0 / esbuild 0.28.1",
+      state: "Passing",
+      reference: "pnpm audit --audit-level low"
     }
   ],
   simulationEvidenceDetail: {
@@ -249,7 +255,7 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-580 closes the evidence-control hardening pass.",
+      "TRD-581 resolves the low-severity Vite/esbuild audit maintenance item.",
       "Next work should proceed only from a bounded Gate 2 maintenance gap."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
@@ -269,7 +275,7 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-580 checkpointed the read-only simulation evidence control lane.",
+    "TRD-581 resolved the low-severity Vite/esbuild audit warning and preserved Gate 2 boundaries.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],

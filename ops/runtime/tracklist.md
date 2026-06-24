@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-580`                                                      |
-| Latest accepted validation | 74 test files, 484 tests passed                                |
+| Latest accepted packet     | `TRD-581`                                                      |
+| Latest accepted validation | 74 test files, 485 tests passed                                |
 
 ## Boundary
 
@@ -1033,6 +1033,7 @@ Latest accepted result:
 | `TRD-578` | accepted | Source compaction | Planned long source-list grouping boundaries.           |
 | `TRD-579` | accepted | Output boundary   | Rechecked no report, export, share, or print channel.   |
 | `TRD-580` | accepted | Checkpoint        | Checkpointed evidence-control hardening lane.           |
+| `TRD-581` | accepted | Security          | Resolved low-severity Vite/esbuild audit warning.       |
 
 ## Current Operator Commands
 
@@ -1071,16 +1072,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                           | Acceptance focus                                |
 | ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------------- |
-| 1    | `TRD-581` | queued | Evidence-control gap intake.                   | Decide whether another bounded UI gap exists.   |
-| 2    | `TRD-582` | queued | Command Center source-link overflow review.    | Inspect long docs/source groups for usability.  |
-| 3    | `TRD-583` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow. |
-| 4    | `TRD-584` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.  |
-| 5    | `TRD-585` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.         |
-| 6    | `TRD-586` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.     |
-| 7    | `TRD-587` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.        |
-| 8    | `TRD-588` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.      |
-| 9    | `TRD-589` | queued | Inventory and note negative cases.             | Add blocked-field negative tests.               |
-| 10   | `TRD-590` | queued | Gate 2 inventory lane checkpoint.              | Decide closeout or next bounded gap.            |
+| 1    | `TRD-582` | queued | Command Center source-link overflow review.    | Inspect long docs/source groups for usability.  |
+| 2    | `TRD-583` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow. |
+| 3    | `TRD-584` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.  |
+| 4    | `TRD-585` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.         |
+| 5    | `TRD-586` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.     |
+| 6    | `TRD-587` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.        |
+| 7    | `TRD-588` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.      |
+| 8    | `TRD-589` | queued | Inventory and note negative cases.             | Add blocked-field negative tests.               |
+| 9    | `TRD-590` | queued | Gate 2 inventory lane checkpoint.              | Decide closeout or next bounded gap.            |
+| 10   | `TRD-591` | queued | Dependency maintenance follow-up checkpoint.   | Decide whether dependency lane needs more work. |
 
 ## Rejected For Now
 

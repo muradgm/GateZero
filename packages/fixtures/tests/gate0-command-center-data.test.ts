@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-580");
+    expect(data).toContain("TRD-581");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -453,8 +453,25 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain("TRD-580 closes the evidence-control hardening pass.");
+    expect(data).toContain(
+      "TRD-581 resolves the low-severity Vite/esbuild audit maintenance item."
+    );
     expect(data).toContain("bounded Gate 2 maintenance gap");
+  });
+
+  it("records dependency audit maintenance without adding runtime capability", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const packageJson = readFileSync(path.join(rootDir, "package.json"), "utf8");
+    const lockfile = readFileSync(path.join(rootDir, "pnpm-lock.yaml"), "utf8");
+
+    expect(data).toContain("Dependency audit");
+    expect(data).toContain("Vite 8.1.0 / esbuild 0.28.1");
+    expect(data).toContain("pnpm audit --audit-level low");
+    expect(packageJson).toContain('"vite": "^8.1.0"');
+    expect(packageJson).toContain('"esbuild": "^0.28.1"');
+    expect(lockfile).toContain("vite@8.1.0");
+    expect(lockfile).toContain("esbuild@0.28.1");
+    expect(data).not.toContain("dependency approval");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {
