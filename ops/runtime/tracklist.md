@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-584`                                                      |
-| Latest accepted validation | 74 test files, 490 tests passed                                |
+| Latest accepted packet     | `TRD-585`                                                      |
+| Latest accepted validation | 74 test files, 491 tests passed                                |
 
 ## Boundary
 
@@ -1037,6 +1037,7 @@ Latest accepted result:
 | `TRD-582` | accepted | Source links      | Reviewed source-link overflow for workspace inspection.  |
 | `TRD-583` | accepted | Truth             | Aligned market intelligence truth without autonomy gain. |
 | `TRD-584` | accepted | Roadmap           | Routed market-intelligence work after workspace MVP.     |
+| `TRD-585` | accepted | Inventory schema  | Planned local artifact inventory fields for workspace.   |
 
 ## Current Operator Commands
 
@@ -1075,16 +1076,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                           | Acceptance focus                                 |
 | ---- | --------- | ------ | ---------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-585` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow.  |
-| 2    | `TRD-586` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.   |
-| 3    | `TRD-587` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.          |
-| 4    | `TRD-588` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.      |
-| 5    | `TRD-589` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.         |
-| 6    | `TRD-590` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.       |
-| 7    | `TRD-591` | queued | Inventory and note negative cases checkpoint.  | Add negative tests and close inventory lane.     |
-| 8    | `TRD-592` | queued | Strategy Review Workspace MVP.                 | Render one local evidence chain end-to-end.      |
-| 9    | `TRD-593` | queued | Market Intelligence Input Model.               | Define source-linked local input boundaries.     |
-| 10   | `TRD-594` | queued | News/Event Scanner Contract.                   | Contract news/event records without action flow. |
+| 1    | `TRD-586` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.   |
+| 2    | `TRD-587` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.          |
+| 3    | `TRD-588` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.      |
+| 4    | `TRD-589` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.         |
+| 5    | `TRD-590` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.       |
+| 6    | `TRD-591` | queued | Inventory and note negative cases checkpoint.  | Add negative tests and close inventory lane.     |
+| 7    | `TRD-592` | queued | Strategy Review Workspace MVP.                 | Render one local evidence chain end-to-end.      |
+| 8    | `TRD-593` | queued | Market Intelligence Input Model.               | Define source-linked local input boundaries.     |
+| 9    | `TRD-594` | queued | News/Event Scanner Contract.                   | Contract news/event records without action flow. |
+| 10   | `TRD-595` | queued | Signal Candidate Contract.                     | Candidate evidence only; no action command.      |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

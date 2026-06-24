@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-584");
+    expect(data).toContain("TRD-585");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -499,7 +499,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
     expect(data).toContain(
-      "TRD-584 routes market-intelligence work after the Strategy Review Workspace MVP."
+      "TRD-585 defines only the local artifact inventory fields needed for TRD-592."
     );
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
@@ -530,6 +530,53 @@ describe("Gate 0 command center surface", () => {
     expect(tracklist.indexOf("TRD-592")).toBeLessThan(tracklist.indexOf("TRD-593"));
     expect(tracklist).toContain("no buy/sell command");
     expect(tracklist).toContain("no broker dispatch");
+  });
+
+  it("plans artifact inventory schema only for local workspace evidence files", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("artifactInventorySchemaPlan");
+    expect(data).toContain(
+      "Show which local evidence files support one Strategy Review Workspace research case."
+    );
+
+    for (const field of [
+      "artifact_id",
+      "artifact_type",
+      "local_path",
+      "source_category",
+      "linked_research_case_id",
+      "linked_evidence_detail_id",
+      "linked_risk_review_id_optional",
+      "freshness_status",
+      "limitation_notes",
+      "redaction_status",
+      "blocked_scope_flags",
+      "created_at",
+      "verified_at"
+    ]) {
+      expect(data).toContain(field);
+    }
+
+    for (const blockedFamily of [
+      "output_channel",
+      "external_storage",
+      "cloud_sync",
+      "external_account",
+      "market_account_data",
+      "credential_reference",
+      "execution_record",
+      "ai_recommendation_record"
+    ]) {
+      expect(data).toContain(blockedFamily);
+    }
+
+    expect(data).toContain(
+      "Keep only fields needed to show the operator which local evidence files support this research case."
+    );
+    expect(data).not.toContain("export_url");
+    expect(data).not.toContain("share_target");
+    expect(data).not.toContain("print_profile");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

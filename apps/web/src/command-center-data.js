@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-584",
-  localVerification: "74 files / 490 tests",
+  latestPacket: "TRD-585",
+  localVerification: "74 files / 491 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 490 tests.",
+      detail: "Latest suite: 74 files, 491 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "584 / 584",
+      value: "585 / 585",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 490 tests"
+      reference: "74 files / 491 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "584 accepted records"
+      reference: "585 accepted records"
     },
     {
       area: "Dependency audit",
@@ -171,6 +171,12 @@ export const commandCenterData = {
       signal: "TRD-593 through TRD-600",
       state: "Queued",
       reference: "After Strategy Review Workspace MVP"
+    },
+    {
+      area: "Artifact inventory schema",
+      signal: "Strategy Review Workspace support",
+      state: "Planned",
+      reference: "TRD-585 local schema"
     }
   ],
   simulationEvidenceDetail: {
@@ -292,10 +298,50 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-584 routes market-intelligence work after the Strategy Review Workspace MVP.",
-    "TRD-585 should plan artifact inventory only where it supports workspace rendering.",
+    "TRD-585 defines only the local artifact inventory fields needed for TRD-592.",
+    "TRD-586 should tie manual note sources to the same workspace evidence chain.",
     "Use the command center for operating health, not strategy selection."
   ],
+  artifactInventorySchemaPlan: {
+    purpose: "Show which local evidence files support one Strategy Review Workspace research case.",
+    workspaceFitRule:
+      "Keep only fields needed to show the operator which local evidence files support this research case.",
+    requiredFields: [
+      "artifact_id",
+      "artifact_type",
+      "local_path",
+      "source_category",
+      "linked_research_case_id",
+      "linked_evidence_detail_id",
+      "linked_risk_review_id_optional",
+      "freshness_status",
+      "limitation_notes",
+      "redaction_status",
+      "blocked_scope_flags",
+      "created_at",
+      "verified_at"
+    ],
+    sourceCategories: [
+      "strategy_idea",
+      "data_snapshot",
+      "backtest_evidence",
+      "metric_report",
+      "risk_review",
+      "operator_decision_note",
+      "outcome_log",
+      "learning_event"
+    ],
+    blockedFieldFamilies: [
+      "output_channel",
+      "external_storage",
+      "cloud_sync",
+      "external_account",
+      "market_account_data",
+      "credential_reference",
+      "execution_record",
+      "ai_recommendation_record"
+    ]
+  },
   marketIntelligenceRoadmap: [
     "TRD-592 Strategy Review Workspace MVP",
     "TRD-593 Market Intelligence Input Model",
