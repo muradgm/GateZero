@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-570",
-  localVerification: "74 files / 474 tests",
+  latestPacket: "TRD-580",
+  localVerification: "74 files / 484 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 474 tests.",
+      detail: "Latest suite: 74 files, 484 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "570 / 570",
+      value: "580 / 580",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 474 tests"
+      reference: "74 files / 484 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "570 accepted records"
+      reference: "580 accepted records"
     }
   ],
   simulationEvidenceDetail: {
@@ -212,6 +212,46 @@ export const commandCenterData = {
       "Source lists use scroll-bounded groups.",
       "Long paths wrap without horizontal page overflow."
     ],
+    visualDensityChecks: [
+      "Control cards stay compact.",
+      "Dense evidence is grouped before it becomes visually noisy."
+    ],
+    accessibilityRecheck: [
+      "Evidence-control cards retain labelled sections.",
+      "Reading order follows evidence, limitations, controls, then source links."
+    ],
+    copyMinimizationRules: [
+      "Prefer short inspection labels over explanatory paragraphs.",
+      "Keep risk context visible without repeating blocked-scope lists."
+    ],
+    sourceFreshnessPlan: [
+      "Source freshness remains a local planning record.",
+      "No automatic remote polling or external freshness worker is introduced."
+    ],
+    artifactInventoryPlan: [
+      "Inventory view may list local simulation artifacts only.",
+      "Inventory records must not expose account, credential, or execution data."
+    ],
+    operatorNoteModelPlan: [
+      "Operator notes are manual local review records.",
+      "Notes may describe observations but must not perform decisions."
+    ],
+    limitationProminenceChecks: [
+      "Limitations stay adjacent to evidence detail.",
+      "Risk and limitation panels remain visible as independent sections."
+    ],
+    sourceCompactionPlan: [
+      "Long source lists should group by operating purpose.",
+      "Compaction must preserve local path visibility and avoid hidden external links."
+    ],
+    outputChannelBoundary: [
+      "No report, export, publish, share, or print channel is added.",
+      "The Command Center remains a local inspection surface."
+    ],
+    controlLaneCheckpoint: [
+      "TRD-580 closes the evidence-control hardening pass.",
+      "Next work should proceed only from a bounded Gate 2 maintenance gap."
+    ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
       "Planning-only evidence detail.",
@@ -229,7 +269,7 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-570 checkpointed the read-only simulation evidence detail control lane.",
+    "TRD-580 checkpointed the read-only simulation evidence control lane.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],

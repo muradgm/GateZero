@@ -470,6 +470,10 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.detail-grid-compact {
+  gap: 10px;
+}
+
 .detail-card {
   background: #f7faf9;
   border: 1px solid var(--subtle);
@@ -479,6 +483,11 @@ h3 {
   min-height: 134px;
   min-width: 0;
   padding: 14px;
+}
+
+.detail-grid-compact .detail-card {
+  min-height: 112px;
+  padding: 12px;
 }
 
 .detail-card dl,
@@ -516,6 +525,7 @@ h3 {
 
 .detail-card code {
   box-shadow: none;
+  line-height: 1.45;
   padding: 7px 8px;
   white-space: normal;
   word-break: break-word;

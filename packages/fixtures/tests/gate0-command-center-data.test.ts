@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-570");
+    expect(data).toContain("TRD-580");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -202,6 +202,16 @@ describe("Gate 0 command center surface", () => {
       "failureTaxonomy",
       "displayPolicies",
       "performanceSmokeChecks",
+      "visualDensityChecks",
+      "accessibilityRecheck",
+      "copyMinimizationRules",
+      "sourceFreshnessPlan",
+      "artifactInventoryPlan",
+      "operatorNoteModelPlan",
+      "limitationProminenceChecks",
+      "sourceCompactionPlan",
+      "outputChannelBoundary",
+      "controlLaneCheckpoint",
       "reproducibilityNotes",
       "limitationNotes",
       "boundaryChecks"
@@ -341,6 +351,110 @@ describe("Gate 0 command center surface", () => {
     expect(main).not.toContain("<button");
     expect(main).not.toContain("<form");
     expect(main).not.toContain("target=");
+  });
+
+  it("keeps evidence controls visually compact and scannable", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("visualDensityChecks");
+    expect(data).toContain("Control cards stay compact.");
+    expect(main).toContain("Visual Density");
+    expect(main).toContain("detail-grid-compact");
+    expect(styles).toContain(".detail-grid-compact");
+  });
+
+  it("rechecks evidence-control accessibility structure", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("accessibilityRecheck");
+    expect(data).toContain(
+      "Reading order follows evidence, limitations, controls, then source links."
+    );
+    expect(main).toContain('aria-label="Evidence control follow-up checks"');
+    expect(main).toContain("Accessibility Recheck");
+  });
+
+  it("keeps evidence-control copy minimized without hiding risk context", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("copyMinimizationRules");
+    expect(data).toContain("Prefer short inspection labels over explanatory paragraphs.");
+    expect(data).toContain("Keep risk context visible");
+    expect(main).toContain("Copy Minimization");
+  });
+
+  it("plans source freshness without automation or external polling", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("sourceFreshnessPlan");
+    expect(data).toContain("local planning record");
+    expect(data).toContain("No automatic remote polling");
+    expect(data).not.toContain("webhook");
+    expect(data).not.toContain("cron");
+  });
+
+  it("keeps artifact inventory planning local and credential-free", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("artifactInventoryPlan");
+    expect(data).toContain("Inventory view may list local simulation artifacts only.");
+    expect(data).toContain("must not expose account, credential, or execution data");
+    expect(main).toContain("Artifact Inventory Plan");
+  });
+
+  it("keeps operator note model manual and non-decisioning", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("operatorNoteModelPlan");
+    expect(data).toContain("Operator notes are manual local review records.");
+    expect(data).toContain("must not perform decisions");
+    expect(main).toContain("Operator Note Model");
+  });
+
+  it("keeps limitation prominence adjacent to evidence controls", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const limitationIndex = main.indexOf("evidence-detail-limitations-title");
+    const controlsIndex = main.indexOf("evidence-controls-title");
+
+    expect(data).toContain("limitationProminenceChecks");
+    expect(data).toContain("Limitations stay adjacent to evidence detail.");
+    expect(limitationIndex).toBeGreaterThan(-1);
+    expect(controlsIndex).toBeGreaterThan(limitationIndex);
+  });
+
+  it("plans source-list compaction without hiding local path visibility", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("sourceCompactionPlan");
+    expect(data).toContain("Long source lists should group by operating purpose.");
+    expect(data).toContain("preserve local path visibility");
+    expect(main).toContain("Source Compaction");
+  });
+
+  it("rechecks no output-channel boundary for reports and sharing", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("outputChannelBoundary");
+    expect(data).toContain("No report, export, publish, share, or print channel is added.");
+    expect(main).toContain("Output Channel Boundary");
+    expect(main).not.toContain("navigator.share");
+  });
+
+  it("checkpoints the evidence-control lane without opening new scope", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("controlLaneCheckpoint");
+    expect(data).toContain("TRD-580 closes the evidence-control hardening pass.");
+    expect(data).toContain("bounded Gate 2 maintenance gap");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

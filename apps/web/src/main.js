@@ -205,6 +205,18 @@ function renderCommandCenter(data) {
                 ${renderListCard("Display Policy", simulationEvidenceDetail.displayPolicies)}
                 ${renderListCard("Performance Smoke", simulationEvidenceDetail.performanceSmokeChecks)}
               </div>
+              <div class="detail-grid detail-grid-compact" aria-label="Evidence control follow-up checks">
+                ${renderListCard("Visual Density", simulationEvidenceDetail.visualDensityChecks)}
+                ${renderListCard("Accessibility Recheck", simulationEvidenceDetail.accessibilityRecheck)}
+                ${renderListCard("Copy Minimization", simulationEvidenceDetail.copyMinimizationRules)}
+                ${renderListCard("Source Freshness Plan", simulationEvidenceDetail.sourceFreshnessPlan)}
+                ${renderListCard("Artifact Inventory Plan", simulationEvidenceDetail.artifactInventoryPlan)}
+                ${renderListCard("Operator Note Model", simulationEvidenceDetail.operatorNoteModelPlan)}
+                ${renderListCard("Limitation Prominence", simulationEvidenceDetail.limitationProminenceChecks)}
+                ${renderListCard("Source Compaction", simulationEvidenceDetail.sourceCompactionPlan)}
+                ${renderListCard("Output Channel Boundary", simulationEvidenceDetail.outputChannelBoundary)}
+                ${renderListCard("Control Lane Checkpoint", simulationEvidenceDetail.controlLaneCheckpoint)}
+              </div>
             </section>
           </section>
         </article>
@@ -452,6 +464,16 @@ function normalizeSimulationEvidenceDetail(detail = {}) {
     failureTaxonomy: asList(detail.failureTaxonomy),
     displayPolicies: asList(detail.displayPolicies),
     performanceSmokeChecks: asList(detail.performanceSmokeChecks),
+    visualDensityChecks: asList(detail.visualDensityChecks),
+    accessibilityRecheck: asList(detail.accessibilityRecheck),
+    copyMinimizationRules: asList(detail.copyMinimizationRules),
+    sourceFreshnessPlan: asList(detail.sourceFreshnessPlan),
+    artifactInventoryPlan: asList(detail.artifactInventoryPlan),
+    operatorNoteModelPlan: asList(detail.operatorNoteModelPlan),
+    limitationProminenceChecks: asList(detail.limitationProminenceChecks),
+    sourceCompactionPlan: asList(detail.sourceCompactionPlan),
+    outputChannelBoundary: asList(detail.outputChannelBoundary),
+    controlLaneCheckpoint: asList(detail.controlLaneCheckpoint),
     reproducibilityNotes: asList(detail.reproducibilityNotes),
     limitationNotes: asList(detail.limitationNotes),
     boundaryChecks: asList(detail.boundaryChecks)
