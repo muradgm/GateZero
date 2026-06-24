@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-583",
-  localVerification: "74 files / 489 tests",
+  latestPacket: "TRD-584",
+  localVerification: "74 files / 490 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 489 tests.",
+      detail: "Latest suite: 74 files, 490 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "583 / 583",
+      value: "584 / 584",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 489 tests"
+      reference: "74 files / 490 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "583 accepted records"
+      reference: "584 accepted records"
     },
     {
       area: "Dependency audit",
@@ -165,6 +165,12 @@ export const commandCenterData = {
       signal: "Scenario analysis boundary",
       state: "Recorded",
       reference: "ops/truth/MARKET_INTELLIGENCE_TRUTH.md"
+    },
+    {
+      area: "Market intelligence roadmap",
+      signal: "TRD-593 through TRD-600",
+      state: "Queued",
+      reference: "After Strategy Review Workspace MVP"
     }
   ],
   simulationEvidenceDetail: {
@@ -286,9 +292,20 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-583 extends truth for market intelligence without changing execution boundaries.",
-    "TRD-584 should plan artifact inventory only where it supports workspace rendering.",
+    "TRD-584 routes market-intelligence work after the Strategy Review Workspace MVP.",
+    "TRD-585 should plan artifact inventory only where it supports workspace rendering.",
     "Use the command center for operating health, not strategy selection."
+  ],
+  marketIntelligenceRoadmap: [
+    "TRD-592 Strategy Review Workspace MVP",
+    "TRD-593 Market Intelligence Input Model",
+    "TRD-594 News/Event Scanner Contract",
+    "TRD-595 Signal Candidate Contract",
+    "TRD-596 Red Flag Engine",
+    "TRD-597 Scenario Recommendation Model",
+    "TRD-598 Risk-Gated Recommendation Review",
+    "TRD-599 Market Intelligence Workspace",
+    "TRD-600 Paper Simulation From Recommendation Candidate"
   ],
   sourceOverflowReview: [
     {

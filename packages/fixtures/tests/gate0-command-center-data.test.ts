@@ -7,6 +7,7 @@ const dataPath = path.join(rootDir, "apps", "web", "src", "command-center-data.j
 const indexPath = path.join(rootDir, "apps", "web", "index.html");
 const mainPath = path.join(rootDir, "apps", "web", "src", "main.js");
 const stylePath = path.join(rootDir, "apps", "web", "src", "styles.css");
+const tracklistPath = path.join(rootDir, "ops", "runtime", "tracklist.md");
 
 describe("Gate 0 command center surface", () => {
   it("keeps the command center tied to Gate 2 simulation-planning scope", () => {
@@ -14,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-583");
+    expect(data).toContain("TRD-584");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -498,10 +499,37 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
     expect(data).toContain(
-      "TRD-583 extends truth for market intelligence without changing execution boundaries."
+      "TRD-584 routes market-intelligence work after the Strategy Review Workspace MVP."
     );
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
+  });
+
+  it("queues market intelligence after the strategy review workspace", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const tracklist = readFileSync(tracklistPath, "utf8");
+
+    for (const packet of [
+      "TRD-592 Strategy Review Workspace MVP",
+      "TRD-593 Market Intelligence Input Model",
+      "TRD-594 News/Event Scanner Contract",
+      "TRD-595 Signal Candidate Contract",
+      "TRD-596 Red Flag Engine",
+      "TRD-597 Scenario Recommendation Model",
+      "TRD-598 Risk-Gated Recommendation Review",
+      "TRD-599 Market Intelligence Workspace",
+      "TRD-600 Paper Simulation From Recommendation Candidate"
+    ]) {
+      expect(data).toContain(packet);
+    }
+
+    expect(tracklist).toContain("Post-TRD-592 Market Intelligence Roadmap");
+    expect(tracklist).toContain(
+      "No market-intelligence recommendation may appear without evidence"
+    );
+    expect(tracklist.indexOf("TRD-592")).toBeLessThan(tracklist.indexOf("TRD-593"));
+    expect(tracklist).toContain("no buy/sell command");
+    expect(tracklist).toContain("no broker dispatch");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

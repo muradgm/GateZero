@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-583`                                                      |
-| Latest accepted validation | 74 test files, 489 tests passed                                |
+| Latest accepted packet     | `TRD-584`                                                      |
+| Latest accepted validation | 74 test files, 490 tests passed                                |
 
 ## Boundary
 
@@ -1036,6 +1036,7 @@ Latest accepted result:
 | `TRD-581` | accepted | Security          | Resolved low-severity Vite/esbuild audit warning.        |
 | `TRD-582` | accepted | Source links      | Reviewed source-link overflow for workspace inspection.  |
 | `TRD-583` | accepted | Truth             | Aligned market intelligence truth without autonomy gain. |
+| `TRD-584` | accepted | Roadmap           | Routed market-intelligence work after workspace MVP.     |
 
 ## Current Operator Commands
 
@@ -1072,18 +1073,34 @@ Latest accepted result:
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                           | Acceptance focus                                |
-| ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------------- |
-| 1    | `TRD-584` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow. |
-| 2    | `TRD-585` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.  |
-| 3    | `TRD-586` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.         |
-| 4    | `TRD-587` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.     |
-| 5    | `TRD-588` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.        |
-| 6    | `TRD-589` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.      |
-| 7    | `TRD-590` | queued | Inventory and note negative cases checkpoint.  | Add negative tests and close inventory lane.    |
-| 8    | `TRD-591` | queued | Dependency maintenance follow-up checkpoint.   | Confirm no-op unless a concrete gap appears.    |
-| 9    | `TRD-592` | queued | Strategy Review Workspace MVP.                 | Render one local evidence chain end-to-end.     |
-| 10   | `TRD-593` | queued | Strategy Review Workspace hardening intake.    | Identify follow-up gaps after the MVP slice.    |
+| Rank | Packet    | Status | Goal                                           | Acceptance focus                                 |
+| ---- | --------- | ------ | ---------------------------------------------- | ------------------------------------------------ |
+| 1    | `TRD-585` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow.  |
+| 2    | `TRD-586` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.   |
+| 3    | `TRD-587` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.          |
+| 4    | `TRD-588` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.      |
+| 5    | `TRD-589` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.         |
+| 6    | `TRD-590` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.       |
+| 7    | `TRD-591` | queued | Inventory and note negative cases checkpoint.  | Add negative tests and close inventory lane.     |
+| 8    | `TRD-592` | queued | Strategy Review Workspace MVP.                 | Render one local evidence chain end-to-end.      |
+| 9    | `TRD-593` | queued | Market Intelligence Input Model.               | Define source-linked local input boundaries.     |
+| 10   | `TRD-594` | queued | News/Event Scanner Contract.                   | Contract news/event records without action flow. |
+
+## Post-TRD-592 Market Intelligence Roadmap
+
+No market-intelligence recommendation may appear without evidence, source references, confidence,
+red flags, invalidation, risk review, and operator decision requirement.
+
+| Packet    | Status | Goal                                            | Boundary                                                   |
+| --------- | ------ | ----------------------------------------------- | ---------------------------------------------------------- |
+| `TRD-593` | queued | Market Intelligence Input Model.                | Source-linked local inputs only; no execution route.       |
+| `TRD-594` | queued | News/Event Scanner Contract.                    | Event records only; no external action or alert selling.   |
+| `TRD-595` | queued | Signal Candidate Contract.                      | Candidate evidence only; no buy/sell command.              |
+| `TRD-596` | queued | Red Flag Engine.                                | Warning and blocker evidence only.                         |
+| `TRD-597` | queued | Scenario Recommendation Model.                  | Scenario drafts only; no certainty or profit claim.        |
+| `TRD-598` | queued | Risk-Gated Recommendation Review.               | Risk review required before operator consideration.        |
+| `TRD-599` | queued | Market Intelligence Workspace.                  | Read-only inspection workspace for sourced scenarios.      |
+| `TRD-600` | queued | Paper Simulation From Recommendation Candidate. | Local paper-simulation candidate only; no broker dispatch. |
 
 ## Rejected For Now
 
