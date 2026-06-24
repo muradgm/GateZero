@@ -443,6 +443,105 @@ h3 {
   overflow-x: auto;
 }
 
+.evidence-detail {
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.detail-heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.detail-heading p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+.detail-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.detail-card {
+  background: #f7faf9;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  min-height: 134px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.detail-card dl,
+.detail-card ul,
+.detail-adjacency ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-card dl div {
+  display: grid;
+  gap: 3px;
+}
+
+.detail-card dt {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.detail-card dd {
+  font-size: 12px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.detail-card li {
+  min-width: 0;
+}
+
+.detail-card code {
+  box-shadow: none;
+  padding: 7px 8px;
+}
+
+.detail-adjacency {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detail-adjacency section {
+  background: #fffaf0;
+  border: 1px solid rgba(183, 121, 31, 0.28);
+  border-radius: 8px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.detail-adjacency h3 {
+  color: #8a5a13;
+  margin-bottom: 10px;
+}
+
+.detail-adjacency li {
+  color: #4d4232;
+  line-height: 1.5;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -544,6 +643,7 @@ code {
 
   .health-grid,
   .dashboard-grid,
+  .detail-grid,
   .lower-grid {
     grid-template-columns: 1fr;
   }
@@ -569,6 +669,16 @@ code {
 
   .loop-list {
     grid-template-columns: 1fr;
+  }
+
+  .detail-heading,
+  .detail-adjacency {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-heading {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   h1 {

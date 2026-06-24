@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-540`                                                      |
-| Latest accepted validation | 74 test files, 459 tests passed                                |
+| Latest accepted packet     | `TRD-550`                                                      |
+| Latest accepted validation | 74 test files, 460 tests passed                                |
 
 ## Boundary
 
@@ -993,6 +993,16 @@ Latest accepted result:
 | `TRD-538` | accepted | Source map refs  | Added evidence source-link map fixture references.      |
 | `TRD-539` | accepted | Guard update     | Indexed evidence schema, fixture, tests, and docs.      |
 | `TRD-540` | accepted | Checkpoint       | Checkpointed simulation evidence detail implementation. |
+| `TRD-541` | accepted | Display packet   | Prepared read-only evidence detail display lane.        |
+| `TRD-542` | accepted | Local data       | Added local evidence detail display data.               |
+| `TRD-543` | accepted | Detail panel     | Rendered evidence detail panel without controls.        |
+| `TRD-544` | accepted | Risk adjacency   | Kept limitations and reproducibility near evidence.     |
+| `TRD-545` | accepted | Control tests    | Added no-action-control frontend tests.                 |
+| `TRD-546` | accepted | Source links     | Rendered local source-link references.                  |
+| `TRD-547` | accepted | Mobile QA        | Added responsive evidence detail layout support.        |
+| `TRD-548` | accepted | Keyboard QA      | Preserved semantic and keyboard accessibility posture.  |
+| `TRD-549` | accepted | Metadata sync    | Synced Command Center and tracker metadata.             |
+| `TRD-550` | accepted | Checkpoint       | Checkpointed read-only evidence detail display lane.    |
 
 ## Current Operator Commands
 
@@ -1022,25 +1032,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 459 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 460 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                           | Acceptance focus                          |
-| ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------- |
-| 1    | `TRD-541` | queued | Evidence detail display implementation packet. | Prepare read-only display surface.        |
-| 2    | `TRD-542` | queued | Evidence detail local data adapter update.     | Feed display from local contract data.    |
-| 3    | `TRD-543` | queued | Evidence detail panel component.               | Render details without action controls.   |
-| 4    | `TRD-544` | queued | Evidence detail risk adjacency pass.           | Keep risk and limitations near evidence.  |
-| 5    | `TRD-545` | queued | Evidence detail no-action-control tests.       | Reject action-like frontend affordances.  |
-| 6    | `TRD-546` | queued | Evidence detail source-link rendering.         | Render local source links clearly.        |
-| 7    | `TRD-547` | queued | Evidence detail mobile visual QA.              | Verify small-screen readability.          |
-| 8    | `TRD-548` | queued | Evidence detail keyboard accessibility QA.     | Verify keyboard and focus behavior.       |
-| 9    | `TRD-549` | queued | Evidence detail Command Center sync.           | Update metadata after display work.       |
-| 10   | `TRD-550` | queued | Gate 2 evidence detail display checkpoint.     | Decide display lane closeout or next gap. |
+| Rank | Packet    | Status | Goal                                          | Acceptance focus                                |
+| ---- | --------- | ------ | --------------------------------------------- | ----------------------------------------------- |
+| 1    | `TRD-551` | queued | Evidence detail runtime merge guard.          | Keep runtime refresh from dropping detail data. |
+| 2    | `TRD-552` | queued | Evidence detail data-shape contract test.     | Validate required display fields.               |
+| 3    | `TRD-553` | queued | Evidence detail empty-state guard.            | Handle missing arrays without action prompts.   |
+| 4    | `TRD-554` | queued | Evidence detail long-reference polish.        | Verify long source paths wrap cleanly.          |
+| 5    | `TRD-555` | queued | Evidence detail screen-reader label pass.     | Strengthen section and card labels.             |
+| 6    | `TRD-556` | queued | Evidence detail visual regression packet.     | Record desktop and mobile screenshots.          |
+| 7    | `TRD-557` | queued | Evidence detail source-link density review.   | Keep source detail useful without clutter.      |
+| 8    | `TRD-558` | queued | Evidence detail blocked-copy regression pass. | Recheck approval and readiness wording.         |
+| 9    | `TRD-559` | queued | Evidence detail closeout handoff note.        | Document operator review posture.               |
+| 10   | `TRD-560` | queued | Gate 2 evidence detail hardening checkpoint.  | Decide closeout or next maintenance gap.        |
 
 ## Rejected For Now
 
@@ -1836,6 +1846,25 @@ Do not mark a packet accepted until:
   `docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_IMPLEMENTATION.md`
 - Gate 2 evidence implementation checkpoint:
   `docs/operations/GATE2_EVIDENCE_IMPLEMENTATION_CHECKPOINT.md`
+- Gate 2 evidence detail display implementation packet:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_DISPLAY_IMPLEMENTATION_PACKET.md`
+- Gate 2 evidence detail local data adapter update:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_LOCAL_DATA_ADAPTER_UPDATE.md`
+- Gate 2 evidence detail panel component: `docs/operations/GATE2_EVIDENCE_DETAIL_PANEL_COMPONENT.md`
+- Gate 2 evidence detail risk adjacency pass:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_RISK_ADJACENCY_PASS.md`
+- Gate 2 evidence detail no-action-control tests:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_NO_ACTION_CONTROL_TESTS.md`
+- Gate 2 evidence detail source-link rendering:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_SOURCE_LINK_RENDERING.md`
+- Gate 2 evidence detail mobile visual QA:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_MOBILE_VISUAL_QA.md`
+- Gate 2 evidence detail keyboard accessibility QA:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_KEYBOARD_ACCESSIBILITY_QA.md`
+- Gate 2 evidence detail Command Center sync:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_COMMAND_CENTER_SYNC.md`
+- Gate 2 evidence detail display checkpoint:
+  `docs/operations/GATE2_EVIDENCE_DETAIL_DISPLAY_CHECKPOINT.md`
 
 ## Source Of Truth Links Continued 3
 

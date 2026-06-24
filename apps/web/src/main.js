@@ -149,6 +149,50 @@ function renderCommandCenter(data) {
               </tbody>
             </table>
           </div>
+          <section class="evidence-detail" aria-labelledby="evidence-detail-title">
+            <div class="detail-heading">
+              <div>
+                <h3 id="evidence-detail-title">${data.simulationEvidenceDetail.title}</h3>
+                <p>${data.simulationEvidenceDetail.summary}</p>
+              </div>
+              <span class="state-pill">${data.simulationEvidenceDetail.status}</span>
+            </div>
+            <div class="detail-grid">
+              ${renderDetailCard("Core Records", [
+                ["Detail", data.simulationEvidenceDetail.recordId],
+                ["Simulation", data.simulationEvidenceDetail.simulationRecordId],
+                ["State", data.simulationEvidenceDetail.stateRecordId],
+                ["Operator", data.simulationEvidenceDetail.operatorRecordId],
+                ["Risk", data.simulationEvidenceDetail.riskRecordId],
+                ["Assumption", data.simulationEvidenceDetail.assumptionRecordId]
+              ])}
+              ${renderListCard("Boundary Checks", data.simulationEvidenceDetail.boundaryChecks)}
+              ${renderListCard("Workflow Evidence", data.simulationEvidenceDetail.workflowRefs)}
+              ${renderListCard("Risk References", data.simulationEvidenceDetail.riskRefs)}
+              ${renderListCard("Artifact Summary", data.simulationEvidenceDetail.artifactRefs)}
+              ${renderListCard("Failure-Mode Evidence", data.simulationEvidenceDetail.failureModeRefs)}
+              ${renderListCard("Source Link Map", data.simulationEvidenceDetail.sourceLinkRefs)}
+              ${renderListCard("Local Source Artifacts", data.simulationEvidenceDetail.sourceArtifacts)}
+            </div>
+            <div class="detail-adjacency" aria-label="Evidence limitations and reproducibility">
+              <section>
+                <h3>Reproducibility Notes</h3>
+                <ul>
+                  ${data.simulationEvidenceDetail.reproducibilityNotes
+                    .map((note) => `<li>${note}</li>`)
+                    .join("")}
+                </ul>
+              </section>
+              <section>
+                <h3>Limitations</h3>
+                <ul>
+                  ${data.simulationEvidenceDetail.limitationNotes
+                    .map((note) => `<li>${note}</li>`)
+                    .join("")}
+                </ul>
+              </section>
+            </div>
+          </section>
         </article>
 
         <article class="panel limitation-panel" id="limitations" aria-labelledby="limitations-title">
@@ -312,6 +356,37 @@ window.addEventListener("hashchange", updateActiveNavigation);
 
 function slug(value) {
   return value.toLowerCase().replaceAll(" ", "-");
+}
+
+function renderDetailCard(title, rows) {
+  return `
+    <section class="detail-card">
+      <h3>${title}</h3>
+      <dl>
+        ${rows
+          .map(
+            ([label, value]) => `
+              <div>
+                <dt>${label}</dt>
+                <dd>${value}</dd>
+              </div>
+            `
+          )
+          .join("")}
+      </dl>
+    </section>
+  `;
+}
+
+function renderListCard(title, items) {
+  return `
+    <section class="detail-card">
+      <h3>${title}</h3>
+      <ul>
+        ${items.map((item) => `<li><code>${item}</code></li>`).join("")}
+      </ul>
+    </section>
+  `;
 }
 
 function updateActiveNavigation() {

@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-540",
-  localVerification: "74 files / 459 tests",
+  latestPacket: "TRD-550",
+  localVerification: "74 files / 460 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 459 tests.",
+      detail: "Latest suite: 74 files, 460 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "540 / 540",
+      value: "550 / 550",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 459 tests"
+      reference: "74 files / 460 tests"
     },
     {
       area: "Verified commit",
@@ -152,11 +152,47 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "540 accepted records"
+      reference: "550 accepted records"
     }
   ],
+  simulationEvidenceDetail: {
+    title: "Simulation Evidence Detail",
+    summary:
+      "Local evidence detail for the Gate 2 paper-simulation planning lane. This is a display record only.",
+    status: "Fresh",
+    recordId: "gate2-simulation-evidence-detail-fixture-001",
+    simulationRecordId: "gate2-sim-record-fixture-001",
+    stateRecordId: "gate2-state-fixture-001",
+    operatorRecordId: "gate2-operator-action-fixture-001",
+    riskRecordId: "gate2-risk-review-fixture-001",
+    assumptionRecordId: "gate2-fill-assumption-fixture-001",
+    workflowRefs: ["gate2-workflow-evidence-card-fixture-001"],
+    riskRefs: ["gate2-risk-review-panel-fixture-001"],
+    artifactRefs: ["gate2-local-artifact-summary-fixture-001"],
+    failureModeRefs: ["gate2-failure-mode-evidence-fixture-001"],
+    sourceLinkRefs: ["docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md"],
+    sourceArtifacts: [
+      "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+      "ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md"
+    ],
+    reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
+    limitationNotes: [
+      "Planning-only evidence detail.",
+      "No account surface, credential path, live route, automated action, approval claim, or performance claim."
+    ],
+    boundaryChecks: [
+      "operator_required",
+      "simulation_only",
+      "no_external_account",
+      "credentials_required_false",
+      "live_route_false",
+      "automated_action_false",
+      "approval_claim_false",
+      "performance_claim_false"
+    ]
+  },
   nextActions: [
-    "TRD-540 checkpointed the Gate 2 simulation evidence detail implementation lane.",
+    "TRD-550 checkpointed the read-only simulation evidence detail display lane.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],
@@ -435,7 +471,17 @@ export const commandCenterData = {
         "docs/operations/GATE2_FAILURE_MODE_FIXTURE_IMPLEMENTATION.md",
         "docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md",
         "docs/operations/GATE2_EVIDENCE_CONTRACT_GUARD_IMPLEMENTATION.md",
-        "docs/operations/GATE2_EVIDENCE_IMPLEMENTATION_CHECKPOINT.md"
+        "docs/operations/GATE2_EVIDENCE_IMPLEMENTATION_CHECKPOINT.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_DISPLAY_IMPLEMENTATION_PACKET.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_LOCAL_DATA_ADAPTER_UPDATE.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_PANEL_COMPONENT.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_RISK_ADJACENCY_PASS.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_NO_ACTION_CONTROL_TESTS.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_SOURCE_LINK_RENDERING.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_MOBILE_VISUAL_QA.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_KEYBOARD_ACCESSIBILITY_QA.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_COMMAND_CENTER_SYNC.md",
+        "docs/operations/GATE2_EVIDENCE_DETAIL_DISPLAY_CHECKPOINT.md"
       ]
     },
     {

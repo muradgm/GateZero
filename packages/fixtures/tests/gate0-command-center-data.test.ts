@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-540");
+    expect(data).toContain("TRD-550");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -120,7 +120,12 @@ describe("Gate 0 command center surface", () => {
     const main = readFileSync(mainPath, "utf8");
     const styles = readFileSync(stylePath, "utf8");
 
-    for (const field of ["limitationItems", "riskItems", "workflowItems"]) {
+    for (const field of [
+      "limitationItems",
+      "riskItems",
+      "workflowItems",
+      "simulationEvidenceDetail"
+    ]) {
       expect(data).toContain(field);
     }
 
@@ -129,19 +134,40 @@ describe("Gate 0 command center surface", () => {
     }
 
     expect(main).toContain("workflow-list");
+    expect(main).toContain("evidence-detail");
+    expect(main).toContain("renderDetailCard");
+    expect(main).toContain("renderListCard");
     expect(styles).toContain(".insight-list");
     expect(styles).toContain(".workflow-list");
+    expect(styles).toContain(".detail-grid");
+    expect(styles).toContain(".detail-adjacency");
   });
 
   it("keeps risk and limitation copy close to evidence surfaces", () => {
     const main = readFileSync(mainPath, "utf8");
     const evidenceIndex = main.indexOf('id="evidence"');
+    const evidenceDetailIndex = main.indexOf("evidence-detail");
     const limitationsIndex = main.indexOf('id="limitations"');
     const riskIndex = main.indexOf('id="risk"');
 
     expect(evidenceIndex).toBeGreaterThan(-1);
+    expect(evidenceDetailIndex).toBeGreaterThan(evidenceIndex);
     expect(limitationsIndex).toBeGreaterThan(evidenceIndex);
     expect(riskIndex).toBeGreaterThan(limitationsIndex);
+  });
+
+  it("renders evidence detail without action controls", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("Simulation Evidence Detail");
+    expect(main).toContain("Boundary Checks");
+    expect(main).toContain("Local Source Artifacts");
+    expect(main).toContain("Reproducibility Notes");
+    expect(main).not.toContain("<button");
+    expect(main).not.toContain("<form");
+    expect(styles).not.toContain("cursor: pointer");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {
