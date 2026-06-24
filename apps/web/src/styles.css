@@ -628,6 +628,33 @@ th {
   padding-left: 12px;
 }
 
+.source-review-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 16px;
+}
+
+.source-review-card {
+  background: #f7faf9;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 7px;
+  min-height: 96px;
+  padding: 12px;
+}
+
+.source-review-card strong {
+  color: var(--accent-strong);
+}
+
+.source-review-card span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .doc-stack {
   display: grid;
   gap: 16px;
@@ -681,6 +708,7 @@ code {
   .health-grid,
   .dashboard-grid,
   .detail-grid,
+  .source-review-grid,
   .lower-grid {
     grid-template-columns: 1fr;
   }

@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-581");
+    expect(data).toContain("TRD-582");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -113,6 +113,23 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("group.items.length");
     expect(styles).toContain(".doc-group");
     expect(styles).toContain(".doc-group-heading");
+  });
+
+  it("keeps source-link overflow review focused on workspace inspection", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("sourceOverflowReview");
+    expect(data).toContain("Workspace Sources First");
+    expect(data).toContain("TRD-592 should expose only the sources needed");
+    expect(data).toContain("Historical operating links remain grouped and scroll-bounded");
+    expect(main).toContain('aria-label="Source overflow review"');
+    expect(main).toContain("source-review-card");
+    expect(styles).toContain(".source-review-grid");
+    expect(styles).toContain("max-height: 330px");
+    expect(main).not.toContain("<button");
+    expect(main).not.toContain("download");
   });
 
   it("renders read-only frontend shell sections", () => {

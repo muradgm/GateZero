@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-581",
-  localVerification: "74 files / 485 tests",
+  latestPacket: "TRD-582",
+  localVerification: "74 files / 486 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 485 tests.",
+      detail: "Latest suite: 74 files, 486 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "581 / 581",
+      value: "582 / 582",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 485 tests"
+      reference: "74 files / 486 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "581 accepted records"
+      reference: "582 accepted records"
     },
     {
       area: "Dependency audit",
@@ -250,6 +250,11 @@ export const commandCenterData = {
       "Long source lists should group by operating purpose.",
       "Compaction must preserve local path visibility and avoid hidden external links."
     ],
+    sourceOverflowReview: [
+      "Workspace-critical sources must stay visible before archive-depth source groups.",
+      "Long source groups remain scroll-bounded and grouped by operator purpose.",
+      "TRD-592 should reuse source groups only when they clarify the research case."
+    ],
     outputChannelBoundary: [
       "No report, export, publish, share, or print channel is added.",
       "The Command Center remains a local inspection surface."
@@ -275,9 +280,23 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-581 resolved the low-severity Vite/esbuild audit warning and preserved Gate 2 boundaries.",
-    "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
+    "TRD-582 keeps source links inspectable for the Strategy Review Workspace lane.",
+    "TRD-583 should plan artifact inventory only where it supports workspace rendering.",
     "Use the command center for operating health, not strategy selection."
+  ],
+  sourceOverflowReview: [
+    {
+      label: "Workspace Sources First",
+      detail: "TRD-592 should expose only the sources needed to inspect one local research case."
+    },
+    {
+      label: "Archive Depth Bounded",
+      detail: "Historical operating links remain grouped and scroll-bounded rather than promoted."
+    },
+    {
+      label: "Local Paths Visible",
+      detail: "Compaction must keep checked-in paths visible and avoid external output channels."
+    }
   ],
   docGroups: [
     {

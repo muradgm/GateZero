@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-581`                                                      |
-| Latest accepted validation | 74 test files, 485 tests passed                                |
+| Latest accepted packet     | `TRD-582`                                                      |
+| Latest accepted validation | 74 test files, 486 tests passed                                |
 
 ## Boundary
 
@@ -1034,6 +1034,7 @@ Latest accepted result:
 | `TRD-579` | accepted | Output boundary   | Rechecked no report, export, share, or print channel.   |
 | `TRD-580` | accepted | Checkpoint        | Checkpointed evidence-control hardening lane.           |
 | `TRD-581` | accepted | Security          | Resolved low-severity Vite/esbuild audit warning.       |
+| `TRD-582` | accepted | Source links      | Reviewed source-link overflow for workspace inspection. |
 
 ## Current Operator Commands
 
@@ -1072,16 +1073,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                           | Acceptance focus                                |
 | ---- | --------- | ------ | ---------------------------------------------- | ----------------------------------------------- |
-| 1    | `TRD-582` | queued | Command Center source-link overflow review.    | Inspect long docs/source groups for usability.  |
-| 2    | `TRD-583` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow. |
-| 3    | `TRD-584` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.  |
-| 4    | `TRD-585` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.         |
-| 5    | `TRD-586` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.     |
-| 6    | `TRD-587` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.        |
-| 7    | `TRD-588` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.      |
-| 8    | `TRD-589` | queued | Inventory and note negative cases.             | Add blocked-field negative tests.               |
-| 9    | `TRD-590` | queued | Gate 2 inventory lane checkpoint.              | Decide closeout or next bounded gap.            |
-| 10   | `TRD-591` | queued | Dependency maintenance follow-up checkpoint.   | Decide whether dependency lane needs more work. |
+| 1    | `TRD-583` | queued | Gate 2 artifact inventory schema plan.         | Plan local inventory shape without output flow. |
+| 2    | `TRD-584` | queued | Gate 2 note model source-link plan.            | Tie manual note model to local source records.  |
+| 3    | `TRD-585` | queued | Evidence-control stale-reference fixture plan. | Plan stale-reference negative fixtures.         |
+| 4    | `TRD-586` | queued | Command Center control copy audit.             | Recheck compact copy for blocked semantics.     |
+| 5    | `TRD-587` | queued | Gate 2 local artifact inventory contract.      | Implement local-only inventory contract.        |
+| 6    | `TRD-588` | queued | Gate 2 operator note model contract.           | Implement manual note contract boundaries.      |
+| 7    | `TRD-589` | queued | Inventory and note negative cases.             | Add blocked-field negative tests.               |
+| 8    | `TRD-590` | queued | Gate 2 inventory lane checkpoint.              | Decide closeout or next bounded gap.            |
+| 9    | `TRD-591` | queued | Dependency maintenance follow-up checkpoint.   | Confirm no-op unless a concrete gap appears.    |
+| 10   | `TRD-592` | queued | Strategy Review Workspace MVP.                 | Render one local evidence chain end-to-end.     |
 
 ## Rejected For Now
 

@@ -307,6 +307,18 @@ function renderCommandCenter(data) {
               <p>Local artifacts behind this read-only surface.</p>
             </div>
           </div>
+          <div class="source-review-grid" aria-label="Source overflow review">
+            ${data.sourceOverflowReview
+              .map(
+                (item) => `
+                  <article class="source-review-card">
+                    <strong>${item.label}</strong>
+                    <span>${item.detail}</span>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
           <div class="doc-stack">
             ${data.docGroups
               .map(
