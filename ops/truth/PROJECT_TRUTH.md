@@ -2,7 +2,8 @@
 
 ## Product identity
 
-This product is a personal trading research, risk-control, and execution-support system.
+This product is a GateZero-controlled trading intelligence, research, risk-control, and
+execution-support system for one serious operator.
 
 It is not an AI money machine. It does not promise profit. It does not assume prediction is possible
 or reliable.
@@ -11,6 +12,10 @@ or reliable.
 
 The system exists to help the operator:
 
+- read market conditions
+- inspect related news and events
+- detect red flags
+- analyze signal candidates
 - research strategies honestly
 - backtest strategies reproducibly
 - detect weak assumptions and data leakage
@@ -25,6 +30,10 @@ The system exists to help the operator:
 The first real product is a backtesting and strategy-risk review workspace.
 
 A strategy may be created, tested, reviewed, and classified, but it may not place real trades.
+
+Future market-intelligence work may summarize conditions, source events, red flags, signal
+candidates, and evidence-based scenarios only when outputs remain source-linked, uncertainty-aware,
+risk-gated, and operator-reviewed.
 
 ## Hard constraint
 

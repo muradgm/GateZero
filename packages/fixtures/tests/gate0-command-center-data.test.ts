@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-582");
+    expect(data).toContain("TRD-583");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -489,6 +489,19 @@ describe("Gate 0 command center surface", () => {
     expect(lockfile).toContain("vite@8.1.0");
     expect(lockfile).toContain("esbuild@0.28.1");
     expect(data).not.toContain("dependency approval");
+  });
+
+  it("records market intelligence truth without adding prediction or execution authority", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("Market intelligence truth");
+    expect(data).toContain("Scenario analysis boundary");
+    expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
+    expect(data).toContain(
+      "TRD-583 extends truth for market intelligence without changing execution boundaries."
+    );
+    expect(data).not.toContain("trade caller");
+    expect(data).not.toContain("prediction engine");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

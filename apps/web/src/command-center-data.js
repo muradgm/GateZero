@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-582",
-  localVerification: "74 files / 486 tests",
+  latestPacket: "TRD-583",
+  localVerification: "74 files / 489 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 486 tests.",
+      detail: "Latest suite: 74 files, 489 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "582 / 582",
+      value: "583 / 583",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 486 tests"
+      reference: "74 files / 489 tests"
     },
     {
       area: "Verified commit",
@@ -152,13 +152,19 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "582 accepted records"
+      reference: "583 accepted records"
     },
     {
       area: "Dependency audit",
       signal: "Vite 8.1.0 / esbuild 0.28.1",
       state: "Passing",
       reference: "pnpm audit --audit-level low"
+    },
+    {
+      area: "Market intelligence truth",
+      signal: "Scenario analysis boundary",
+      state: "Recorded",
+      reference: "ops/truth/MARKET_INTELLIGENCE_TRUTH.md"
     }
   ],
   simulationEvidenceDetail: {
@@ -280,8 +286,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-582 keeps source links inspectable for the Strategy Review Workspace lane.",
-    "TRD-583 should plan artifact inventory only where it supports workspace rendering.",
+    "TRD-583 extends truth for market intelligence without changing execution boundaries.",
+    "TRD-584 should plan artifact inventory only where it supports workspace rendering.",
     "Use the command center for operating health, not strategy selection."
   ],
   sourceOverflowReview: [

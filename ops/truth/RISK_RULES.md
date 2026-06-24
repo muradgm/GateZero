@@ -14,8 +14,29 @@ unsafe, the task is blocked.
 - No auto-changing risk limits.
 - No strategy self-promotion.
 - No AI-generated live buy/sell decisions.
+- No unreviewed trade recommendations.
+- No confidence or profit claims.
+- No hidden promotion from scenario to action.
 - No hidden execution path.
 - No frontend access to broker secrets.
+
+## AI-assisted intelligence boundary
+
+Allowed in future phases, only when source-linked, risk-gated, and operator-reviewed:
+
+- AI-generated market summaries.
+- AI-assisted red-flag detection.
+- AI-assisted signal candidate analysis.
+- AI-generated scenario explanations.
+- AI-assisted recommendation drafts for watch, reject, paper-simulate, or prepare-plan outcomes.
+
+Still blocked:
+
+- AI-generated live buy/sell decisions.
+- Autonomous execution.
+- Unreviewed trade recommendations.
+- Prediction certainty, safety, or profit claims.
+- Hidden promotion from market scenario to trade action.
 
 ## Required risk controls before any paper trading
 
