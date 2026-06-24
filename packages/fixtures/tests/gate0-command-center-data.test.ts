@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-560");
+    expect(data).toContain("TRD-570");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -194,6 +194,14 @@ describe("Gate 0 command center surface", () => {
       "failureModeRefs",
       "sourceLinkRefs",
       "sourceArtifacts",
+      "runtimeSnapshotRefs",
+      "fixtureDriftChecks",
+      "reviewAgingPolicy",
+      "operatorScanChecklist",
+      "artifactRetentionNotes",
+      "failureTaxonomy",
+      "displayPolicies",
+      "performanceSmokeChecks",
       "reproducibilityNotes",
       "limitationNotes",
       "boundaryChecks"
@@ -239,6 +247,100 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md");
     expect(data).not.toContain("http://");
     expect(data).not.toContain("https://");
+  });
+
+  it("maps evidence detail to runtime snapshot sources without external endpoints", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("runtimeSnapshotRefs");
+    expect(data).toContain("scripts/build-command-center-runtime-data.ts");
+    expect(data).toContain("packages/fixtures/tests/gate0-command-center-runtime-data.test.ts");
+    expect(main).toContain("Runtime Snapshot Map");
+    expect(data).not.toContain("api.");
+  });
+
+  it("records fixture drift checks as local inspection signals", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    for (const check of [
+      "record_id_present",
+      "source_artifacts_present",
+      "boundary_checks_present",
+      "local_paths_only"
+    ]) {
+      expect(data).toContain(check);
+    }
+
+    expect(main).toContain("Fixture Drift Checks");
+  });
+
+  it("keeps review aging and operator scan wording manual and non-actionable", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("reviewAgingPolicy");
+    expect(data).toContain("operatorScanChecklist");
+    expect(data).toContain("display-only");
+    expect(data).not.toContain("certified");
+  });
+
+  it("records artifact retention without publishing or report controls", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("artifactRetentionNotes");
+    expect(data).toContain("external report distribution");
+    expect(main).toContain("Artifact Retention");
+    expect(main).not.toContain("download");
+  });
+
+  it("keeps failure taxonomy evidence-only and bounded", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    for (const failureLabel of [
+      "missing_local_reference",
+      "stale_fixture_reference",
+      "ambiguous_failure_label",
+      "blocked_scope_copy"
+    ]) {
+      expect(data).toContain(failureLabel);
+    }
+
+    expect(main).toContain("Failure Taxonomy");
+  });
+
+  it("prohibits print and export controls in display policy", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("displayPolicies");
+    expect(data).toContain("No print or export control is rendered.");
+    expect(main).toContain("Display Policy");
+    expect(main).not.toContain("window.print");
+  });
+
+  it("keeps performance smoke checks local and layout-oriented", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("performanceSmokeChecks");
+    expect(data).toContain("Source lists use scroll-bounded groups.");
+    expect(data).toContain("Long paths wrap without horizontal page overflow.");
+    expect(main).toContain("Performance Smoke");
+    expect(styles).toContain(".detail-control-plane");
+  });
+
+  it("renders evidence controls without introducing forms, buttons, or report links", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain("Evidence Controls");
+    expect(main).toContain("detail-control-plane");
+    expect(main).not.toContain("<button");
+    expect(main).not.toContain("<form");
+    expect(main).not.toContain("target=");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

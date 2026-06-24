@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-560",
-  localVerification: "74 files / 466 tests",
+  latestPacket: "TRD-570",
+  localVerification: "74 files / 474 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 466 tests.",
+      detail: "Latest suite: 74 files, 474 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "560 / 560",
+      value: "570 / 570",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 460 tests"
+      reference: "74 files / 474 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "560 accepted records"
+      reference: "570 accepted records"
     }
   ],
   simulationEvidenceDetail: {
@@ -175,6 +175,43 @@ export const commandCenterData = {
       "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
       "ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md"
     ],
+    runtimeSnapshotRefs: [
+      "scripts/build-command-center-runtime-data.ts",
+      "packages/fixtures/tests/gate0-command-center-runtime-data.test.ts"
+    ],
+    fixtureDriftChecks: [
+      "record_id_present",
+      "source_artifacts_present",
+      "boundary_checks_present",
+      "local_paths_only"
+    ],
+    reviewAgingPolicy: [
+      "Review records are local operating evidence.",
+      "Aging review records are inspected without creating approval or readiness language."
+    ],
+    operatorScanChecklist: [
+      "Confirm the detail panel is display-only.",
+      "Confirm limitations remain adjacent to source records.",
+      "Confirm no external account, credential, or action surface is present."
+    ],
+    artifactRetentionNotes: [
+      "Simulation artifact summaries remain local.",
+      "Retention records do not authorize external report distribution."
+    ],
+    failureTaxonomy: [
+      "missing_local_reference",
+      "stale_fixture_reference",
+      "ambiguous_failure_label",
+      "blocked_scope_copy"
+    ],
+    displayPolicies: [
+      "No print or export control is rendered.",
+      "Command Center records are local inspection surfaces, not output-channel surfaces."
+    ],
+    performanceSmokeChecks: [
+      "Source lists use scroll-bounded groups.",
+      "Long paths wrap without horizontal page overflow."
+    ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
       "Planning-only evidence detail.",
@@ -192,7 +229,7 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-560 checkpointed the read-only simulation evidence detail hardening lane.",
+    "TRD-570 checkpointed the read-only simulation evidence detail control lane.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],

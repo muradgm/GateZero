@@ -190,6 +190,22 @@ function renderCommandCenter(data) {
                 </ul>
               </section>
             </div>
+            <section class="detail-control-plane" aria-labelledby="evidence-controls-title">
+              <div class="detail-control-heading">
+                <h3 id="evidence-controls-title">Evidence Controls</h3>
+                <p>Local guardrails for source mapping, review posture, and display boundaries.</p>
+              </div>
+              <div class="detail-grid">
+                ${renderListCard("Runtime Snapshot Map", simulationEvidenceDetail.runtimeSnapshotRefs)}
+                ${renderListCard("Fixture Drift Checks", simulationEvidenceDetail.fixtureDriftChecks)}
+                ${renderListCard("Review Aging Policy", simulationEvidenceDetail.reviewAgingPolicy)}
+                ${renderListCard("Operator Scan Checklist", simulationEvidenceDetail.operatorScanChecklist)}
+                ${renderListCard("Artifact Retention", simulationEvidenceDetail.artifactRetentionNotes)}
+                ${renderListCard("Failure Taxonomy", simulationEvidenceDetail.failureTaxonomy)}
+                ${renderListCard("Display Policy", simulationEvidenceDetail.displayPolicies)}
+                ${renderListCard("Performance Smoke", simulationEvidenceDetail.performanceSmokeChecks)}
+              </div>
+            </section>
           </section>
         </article>
 
@@ -428,6 +444,14 @@ function normalizeSimulationEvidenceDetail(detail = {}) {
     failureModeRefs: asList(detail.failureModeRefs),
     sourceLinkRefs: asList(detail.sourceLinkRefs),
     sourceArtifacts: asList(detail.sourceArtifacts),
+    runtimeSnapshotRefs: asList(detail.runtimeSnapshotRefs),
+    fixtureDriftChecks: asList(detail.fixtureDriftChecks),
+    reviewAgingPolicy: asList(detail.reviewAgingPolicy),
+    operatorScanChecklist: asList(detail.operatorScanChecklist),
+    artifactRetentionNotes: asList(detail.artifactRetentionNotes),
+    failureTaxonomy: asList(detail.failureTaxonomy),
+    displayPolicies: asList(detail.displayPolicies),
+    performanceSmokeChecks: asList(detail.performanceSmokeChecks),
     reproducibilityNotes: asList(detail.reproducibilityNotes),
     limitationNotes: asList(detail.limitationNotes),
     boundaryChecks: asList(detail.boundaryChecks)

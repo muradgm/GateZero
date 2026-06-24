@@ -534,6 +534,23 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.detail-control-plane {
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  gap: 12px;
+  padding-top: 16px;
+}
+
+.detail-control-heading {
+  display: grid;
+  gap: 6px;
+}
+
+.detail-control-heading p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .detail-adjacency section {
   background: #fffaf0;
   border: 1px solid rgba(183, 121, 31, 0.28);
