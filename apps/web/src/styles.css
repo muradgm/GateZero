@@ -507,6 +507,7 @@ h3 {
   font-size: 12px;
   margin: 0;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .detail-card li {
@@ -516,6 +517,15 @@ h3 {
 .detail-card code {
   box-shadow: none;
   padding: 7px 8px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.empty-detail {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.5;
 }
 
 .detail-adjacency {

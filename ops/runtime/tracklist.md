@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-550`                                                      |
-| Latest accepted validation | 74 test files, 460 tests passed                                |
+| Latest accepted packet     | `TRD-560`                                                      |
+| Latest accepted validation | 74 test files, 466 tests passed                                |
 
 ## Boundary
 
@@ -102,7 +102,7 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 74 test files passed, 454 tests passed.
+- `pnpm test:ci`: 74 test files passed, 466 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -1003,6 +1003,16 @@ Latest accepted result:
 | `TRD-548` | accepted | Keyboard QA      | Preserved semantic and keyboard accessibility posture.  |
 | `TRD-549` | accepted | Metadata sync    | Synced Command Center and tracker metadata.             |
 | `TRD-550` | accepted | Checkpoint       | Checkpointed read-only evidence detail display lane.    |
+| `TRD-551` | accepted | Runtime merge    | Preserved evidence detail through runtime refresh.      |
+| `TRD-552` | accepted | Data shape       | Added required display-field regression coverage.       |
+| `TRD-553` | accepted | Empty state      | Added neutral fallback behavior for missing arrays.     |
+| `TRD-554` | accepted | Reference polish | Hardened long local reference wrapping.                 |
+| `TRD-555` | accepted | Screen reader    | Added explicit labels for evidence detail cards.        |
+| `TRD-556` | accepted | Visual QA        | Recorded desktop and mobile visual QA requirements.     |
+| `TRD-557` | accepted | Source density   | Kept source-link detail local, bounded, and readable.   |
+| `TRD-558` | accepted | Copy guard       | Rechecked blocked frontend wording coverage.            |
+| `TRD-559` | accepted | Handoff          | Documented operator posture for hardened detail lane.   |
+| `TRD-560` | accepted | Checkpoint       | Checkpointed evidence detail hardening lane.            |
 
 ## Current Operator Commands
 
@@ -1032,25 +1042,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 460 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 466 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                          | Acceptance focus                                |
-| ---- | --------- | ------ | --------------------------------------------- | ----------------------------------------------- |
-| 1    | `TRD-551` | queued | Evidence detail runtime merge guard.          | Keep runtime refresh from dropping detail data. |
-| 2    | `TRD-552` | queued | Evidence detail data-shape contract test.     | Validate required display fields.               |
-| 3    | `TRD-553` | queued | Evidence detail empty-state guard.            | Handle missing arrays without action prompts.   |
-| 4    | `TRD-554` | queued | Evidence detail long-reference polish.        | Verify long source paths wrap cleanly.          |
-| 5    | `TRD-555` | queued | Evidence detail screen-reader label pass.     | Strengthen section and card labels.             |
-| 6    | `TRD-556` | queued | Evidence detail visual regression packet.     | Record desktop and mobile screenshots.          |
-| 7    | `TRD-557` | queued | Evidence detail source-link density review.   | Keep source detail useful without clutter.      |
-| 8    | `TRD-558` | queued | Evidence detail blocked-copy regression pass. | Recheck approval and readiness wording.         |
-| 9    | `TRD-559` | queued | Evidence detail closeout handoff note.        | Document operator review posture.               |
-| 10   | `TRD-560` | queued | Gate 2 evidence detail hardening checkpoint.  | Decide closeout or next maintenance gap.        |
+| Rank | Packet    | Status | Goal                                          | Acceptance focus                                 |
+| ---- | --------- | ------ | --------------------------------------------- | ------------------------------------------------ |
+| 1    | `TRD-561` | queued | Evidence detail runtime snapshot source map.  | Tie display detail to generated runtime notes.   |
+| 2    | `TRD-562` | queued | Evidence detail fixture drift check.          | Detect stale local display fixture references.   |
+| 3    | `TRD-563` | queued | Evidence detail review-aging policy.          | Flag older review records without action copy.   |
+| 4    | `TRD-564` | queued | Evidence detail docs index sweep.             | Keep source links discoverable and bounded.      |
+| 5    | `TRD-565` | queued | Evidence detail operator scan checklist.      | Add manual inspection checklist language.        |
+| 6    | `TRD-566` | queued | Gate 2 paper artifact retention note.         | Define local retention limits for sim artifacts. |
+| 7    | `TRD-567` | queued | Gate 2 simulation failure taxonomy review.    | Keep failure labels evidence-only.               |
+| 8    | `TRD-568` | queued | Command Center performance smoke check.       | Verify large source lists remain responsive.     |
+| 9    | `TRD-569` | queued | Command Center print/export prohibition note. | Keep reports local and non-published.            |
+| 10   | `TRD-570` | queued | Gate 2 evidence detail next checkpoint.       | Decide closeout or next maintenance gap.         |
 
 ## Rejected For Now
 

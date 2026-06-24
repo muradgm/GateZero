@@ -14,7 +14,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-550");
+    expect(data).toContain("TRD-560");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -168,6 +168,77 @@ describe("Gate 0 command center surface", () => {
     expect(main).not.toContain("<button");
     expect(main).not.toContain("<form");
     expect(styles).not.toContain("cursor: pointer");
+  });
+
+  it("keeps runtime refresh from dropping simulation evidence detail", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain("const preservedDetail = normalizeSimulationEvidenceDetail");
+    expect(main).toContain("mergedData.simulationEvidenceDetail = preservedDetail");
+    expect(main).toContain("normalizeSimulationEvidenceDetail(data.simulationEvidenceDetail)");
+  });
+
+  it("validates required simulation evidence detail display fields", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    for (const field of [
+      "recordId",
+      "simulationRecordId",
+      "stateRecordId",
+      "operatorRecordId",
+      "riskRecordId",
+      "assumptionRecordId",
+      "workflowRefs",
+      "riskRefs",
+      "artifactRefs",
+      "failureModeRefs",
+      "sourceLinkRefs",
+      "sourceArtifacts",
+      "reproducibilityNotes",
+      "limitationNotes",
+      "boundaryChecks"
+    ]) {
+      expect(data).toContain(field);
+    }
+  });
+
+  it("handles missing evidence detail arrays with neutral empty states", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain("function asList");
+    expect(main).toContain("renderCodeListItems");
+    expect(main).toContain("renderPlainListItems");
+    expect(main).toContain("No local references recorded.");
+    expect(main).toContain("No local notes recorded.");
+    expect(main).not.toContain("please");
+  });
+
+  it("wraps long evidence detail references without layout pressure", () => {
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(styles).toContain("overflow-wrap: anywhere");
+    expect(styles).toContain("word-break: break-word");
+    expect(styles).toContain("white-space: normal");
+  });
+
+  it("labels evidence detail cards and adjacent sections for screen readers", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain('aria-labelledby="${slug(title)}-detail-card-title"');
+    expect(main).toContain('id="${slug(title)}-detail-card-title"');
+    expect(main).toContain('aria-labelledby="reproducibility-notes-title"');
+    expect(main).toContain('aria-labelledby="evidence-detail-limitations-title"');
+  });
+
+  it("keeps source detail dense but bounded", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("sourceLinkRefs");
+    expect(data).toContain("sourceArtifacts");
+    expect(data).toContain("docs/operations/GATE2_EVIDENCE_SOURCE_LINK_MAP_IMPLEMENTATION.md");
+    expect(data).toContain("ops/assignments/TRD-532_SIMULATION_EVIDENCE_SCHEMA_SOURCE_UPDATE.md");
+    expect(data).not.toContain("http://");
+    expect(data).not.toContain("https://");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

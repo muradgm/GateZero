@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-550",
-  localVerification: "74 files / 460 tests",
+  latestPacket: "TRD-560",
+  localVerification: "74 files / 466 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 460 tests.",
+      detail: "Latest suite: 74 files, 466 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "550 / 550",
+      value: "560 / 560",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "550 accepted records"
+      reference: "560 accepted records"
     }
   ],
   simulationEvidenceDetail: {
@@ -192,7 +192,7 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-550 checkpointed the read-only simulation evidence detail display lane.",
+    "TRD-560 checkpointed the read-only simulation evidence detail hardening lane.",
     "Record CI evidence only for concrete maintenance, audit, handoff, or incident needs.",
     "Use the command center for operating health, not strategy selection."
   ],

@@ -17,6 +17,8 @@ setInterval(() => {
 }, runtimeRefreshMs);
 
 function renderCommandCenter(data) {
+  const simulationEvidenceDetail = normalizeSimulationEvidenceDetail(data.simulationEvidenceDetail);
+
   app.innerHTML = `
   <div class="shell">
     <aside class="sidebar" aria-label="Command center navigation">
@@ -152,43 +154,39 @@ function renderCommandCenter(data) {
           <section class="evidence-detail" aria-labelledby="evidence-detail-title">
             <div class="detail-heading">
               <div>
-                <h3 id="evidence-detail-title">${data.simulationEvidenceDetail.title}</h3>
-                <p>${data.simulationEvidenceDetail.summary}</p>
+                <h3 id="evidence-detail-title">${simulationEvidenceDetail.title}</h3>
+                <p>${simulationEvidenceDetail.summary}</p>
               </div>
-              <span class="state-pill">${data.simulationEvidenceDetail.status}</span>
+              <span class="state-pill">${simulationEvidenceDetail.status}</span>
             </div>
             <div class="detail-grid">
               ${renderDetailCard("Core Records", [
-                ["Detail", data.simulationEvidenceDetail.recordId],
-                ["Simulation", data.simulationEvidenceDetail.simulationRecordId],
-                ["State", data.simulationEvidenceDetail.stateRecordId],
-                ["Operator", data.simulationEvidenceDetail.operatorRecordId],
-                ["Risk", data.simulationEvidenceDetail.riskRecordId],
-                ["Assumption", data.simulationEvidenceDetail.assumptionRecordId]
+                ["Detail", simulationEvidenceDetail.recordId],
+                ["Simulation", simulationEvidenceDetail.simulationRecordId],
+                ["State", simulationEvidenceDetail.stateRecordId],
+                ["Operator", simulationEvidenceDetail.operatorRecordId],
+                ["Risk", simulationEvidenceDetail.riskRecordId],
+                ["Assumption", simulationEvidenceDetail.assumptionRecordId]
               ])}
-              ${renderListCard("Boundary Checks", data.simulationEvidenceDetail.boundaryChecks)}
-              ${renderListCard("Workflow Evidence", data.simulationEvidenceDetail.workflowRefs)}
-              ${renderListCard("Risk References", data.simulationEvidenceDetail.riskRefs)}
-              ${renderListCard("Artifact Summary", data.simulationEvidenceDetail.artifactRefs)}
-              ${renderListCard("Failure-Mode Evidence", data.simulationEvidenceDetail.failureModeRefs)}
-              ${renderListCard("Source Link Map", data.simulationEvidenceDetail.sourceLinkRefs)}
-              ${renderListCard("Local Source Artifacts", data.simulationEvidenceDetail.sourceArtifacts)}
+              ${renderListCard("Boundary Checks", simulationEvidenceDetail.boundaryChecks)}
+              ${renderListCard("Workflow Evidence", simulationEvidenceDetail.workflowRefs)}
+              ${renderListCard("Risk References", simulationEvidenceDetail.riskRefs)}
+              ${renderListCard("Artifact Summary", simulationEvidenceDetail.artifactRefs)}
+              ${renderListCard("Failure-Mode Evidence", simulationEvidenceDetail.failureModeRefs)}
+              ${renderListCard("Source Link Map", simulationEvidenceDetail.sourceLinkRefs)}
+              ${renderListCard("Local Source Artifacts", simulationEvidenceDetail.sourceArtifacts)}
             </div>
             <div class="detail-adjacency" aria-label="Evidence limitations and reproducibility">
-              <section>
-                <h3>Reproducibility Notes</h3>
+              <section aria-labelledby="reproducibility-notes-title">
+                <h3 id="reproducibility-notes-title">Reproducibility Notes</h3>
                 <ul>
-                  ${data.simulationEvidenceDetail.reproducibilityNotes
-                    .map((note) => `<li>${note}</li>`)
-                    .join("")}
+                  ${renderPlainListItems(simulationEvidenceDetail.reproducibilityNotes)}
                 </ul>
               </section>
-              <section>
-                <h3>Limitations</h3>
+              <section aria-labelledby="evidence-detail-limitations-title">
+                <h3 id="evidence-detail-limitations-title">Limitations</h3>
                 <ul>
-                  ${data.simulationEvidenceDetail.limitationNotes
-                    .map((note) => `<li>${note}</li>`)
-                    .join("")}
+                  ${renderPlainListItems(simulationEvidenceDetail.limitationNotes)}
                 </ul>
               </section>
             </div>
@@ -323,6 +321,7 @@ function mergeRuntimeData(baseData, runtimeData) {
   const mergedData = window.structuredClone
     ? window.structuredClone(baseData)
     : JSON.parse(JSON.stringify(baseData));
+  const preservedDetail = normalizeSimulationEvidenceDetail(baseData.simulationEvidenceDetail);
   const acceptedRecords = Number(runtimeData.acceptedRecords);
   const evidenceRecords = Number(runtimeData.evidenceRecords);
 
@@ -331,6 +330,7 @@ function mergeRuntimeData(baseData, runtimeData) {
   mergedData.ciRun = runtimeData.ciRun;
   mergedData.ciState = runtimeData.ciState;
   mergedData.lastVerifiedCommit = runtimeData.lastVerifiedCommit;
+  mergedData.simulationEvidenceDetail = preservedDetail;
 
   updateHealthCard(
     mergedData,
@@ -360,15 +360,15 @@ function slug(value) {
 
 function renderDetailCard(title, rows) {
   return `
-    <section class="detail-card">
-      <h3>${title}</h3>
+    <section class="detail-card" aria-labelledby="${slug(title)}-detail-card-title">
+      <h3 id="${slug(title)}-detail-card-title">${title}</h3>
       <dl>
         ${rows
           .map(
             ([label, value]) => `
               <div>
                 <dt>${label}</dt>
-                <dd>${value}</dd>
+                <dd>${value || "Not recorded in local detail."}</dd>
               </div>
             `
           )
@@ -380,13 +380,62 @@ function renderDetailCard(title, rows) {
 
 function renderListCard(title, items) {
   return `
-    <section class="detail-card">
-      <h3>${title}</h3>
+    <section class="detail-card" aria-labelledby="${slug(title)}-detail-card-title">
+      <h3 id="${slug(title)}-detail-card-title">${title}</h3>
       <ul>
-        ${items.map((item) => `<li><code>${item}</code></li>`).join("")}
+        ${renderCodeListItems(items)}
       </ul>
     </section>
   `;
+}
+
+function renderCodeListItems(items) {
+  const safeItems = asList(items);
+
+  if (safeItems.length === 0) {
+    return '<li class="empty-detail">No local references recorded.</li>';
+  }
+
+  return safeItems.map((item) => `<li><code>${item}</code></li>`).join("");
+}
+
+function renderPlainListItems(items) {
+  const safeItems = asList(items);
+
+  if (safeItems.length === 0) {
+    return '<li class="empty-detail">No local notes recorded.</li>';
+  }
+
+  return safeItems.map((item) => `<li>${item}</li>`).join("");
+}
+
+function normalizeSimulationEvidenceDetail(detail = {}) {
+  return {
+    title: detail.title || "Simulation Evidence Detail",
+    summary:
+      detail.summary ||
+      "Local evidence detail for the Gate 2 paper-simulation planning lane. This is a display record only.",
+    status: detail.status || "Not recorded",
+    recordId: detail.recordId || "",
+    simulationRecordId: detail.simulationRecordId || "",
+    stateRecordId: detail.stateRecordId || "",
+    operatorRecordId: detail.operatorRecordId || "",
+    riskRecordId: detail.riskRecordId || "",
+    assumptionRecordId: detail.assumptionRecordId || "",
+    workflowRefs: asList(detail.workflowRefs),
+    riskRefs: asList(detail.riskRefs),
+    artifactRefs: asList(detail.artifactRefs),
+    failureModeRefs: asList(detail.failureModeRefs),
+    sourceLinkRefs: asList(detail.sourceLinkRefs),
+    sourceArtifacts: asList(detail.sourceArtifacts),
+    reproducibilityNotes: asList(detail.reproducibilityNotes),
+    limitationNotes: asList(detail.limitationNotes),
+    boundaryChecks: asList(detail.boundaryChecks)
+  };
+}
+
+function asList(value) {
+  return Array.isArray(value) ? value.filter((item) => typeof item === "string" && item) : [];
 }
 
 function updateActiveNavigation() {
