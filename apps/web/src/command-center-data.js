@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-636",
-  localVerification: "79 files / 548 tests",
+  latestPacket: "TRD-646",
+  localVerification: "80 files / 553 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 79 files, 548 tests.",
+      detail: "Latest suite: 80 files, 553 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "636 / 636",
+      value: "646 / 646",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "79 files / 548 tests"
+      reference: "80 files / 553 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "636 accepted records"
+      reference: "646 accepted records"
     },
     {
       area: "Dependency audit",
@@ -224,7 +224,7 @@ export const commandCenterData = {
       area: "Workspace visual QA",
       signal: "Risk adjacency and overflow",
       state: "Checked",
-      reference: "TRD-627 through TRD-636"
+      reference: "TRD-637 through TRD-646"
     }
   ],
   simulationEvidenceDetail: {
@@ -326,8 +326,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-636 closes the local paper-account state-reducer lane.",
-      "TRD-637 may authorize a read-only simulator evidence workspace."
+      "TRD-646 closes the first read-only simulator evidence workspace lane.",
+      "TRD-647 may make the workspace discoverable without adding controls."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -346,8 +346,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-636 closes the local paper-account state-reducer lane.",
-    "TRD-637 is the read-only simulator workspace authorization packet.",
+    "TRD-646 closes the first read-only simulator evidence workspace lane.",
+    "TRD-647 is the bounded Command Center navigation packet.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -435,7 +435,17 @@ export const commandCenterData = {
     "TRD-633 Journal integration",
     "TRD-634 Reconciliation freeze integration",
     "TRD-635 End-to-end local simulation scenario",
-    "TRD-636 Local simulator product checkpoint"
+    "TRD-636 Local simulator product checkpoint",
+    "TRD-637 Simulator workspace authorization",
+    "TRD-638 Simulator workspace data adapter",
+    "TRD-639 Paper-account summary panel",
+    "TRD-640 Position and equity evidence panel",
+    "TRD-641 Lifecycle evidence timeline",
+    "TRD-642 Risk and candidate guard panel",
+    "TRD-643 Fill-cost evidence panel",
+    "TRD-644 Journal and reconciliation panel",
+    "TRD-645 Workspace boundary and access QA",
+    "TRD-646 Simulator workspace checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

@@ -1,0 +1,79 @@
+{
+  "title": "Local Simulator Evidence",
+  "subtitle": "One deterministic paper-account record, inspected end to end.",
+  "gate": "G2_PAPER_TRADING",
+  "scope": "paper_simulation_planning_only",
+  "status": "local_state_recorded",
+  "reducedAt": "2026-07-19T12:00:00.000Z",
+  "account": {
+    "id": "gate2-paper-account-fixture-001",
+    "currency": "USD",
+    "cashBefore": 90000,
+    "cashAfter": 78996.6,
+    "equityBefore": 100000,
+    "equityAfter": 100996.6,
+    "feeAdjustedPnl": -0.1,
+    "openPositions": 1
+  },
+  "position": {
+    "instrument": "EURUSD",
+    "quantityBefore": 10000,
+    "quantityAfter": 20000,
+    "averagePriceBefore": 1,
+    "averagePriceAfter": 1.050165,
+    "markPrice": 1.1,
+    "markedValue": 22000
+  },
+  "lifecycle": {
+    "from": "review_required",
+    "to": "simulation_recorded",
+    "reason": "Operator recorded a reviewed local simulation result.",
+    "operatorRequired": true,
+    "automated": false
+  },
+  "risk": {
+    "status": "clear_for_local_simulation",
+    "breaches": [],
+    "positionFraction": 0.002,
+    "maxPositionFraction": 0.0025,
+    "drawdownFraction": 0.003,
+    "maxDrawdownFraction": 0.05,
+    "policyVersion": "fixture-v1",
+    "policyLocked": true
+  },
+  "candidate": {
+    "status": "clear_for_local_simulation",
+    "reasons": [],
+    "maxAgeSeconds": 300
+  },
+  "fill": {
+    "side": "long",
+    "quantity": 10000,
+    "price": 1.10033,
+    "notional": 11003.3,
+    "fee": 0.1,
+    "spreadBps": 1,
+    "slippageBps": 2,
+    "latencyMs": 100,
+    "limitation": "Synthetic local assumptions do not model market liquidity."
+  },
+  "journal": {
+    "eventCount": 1,
+    "eventType": "simulation_recorded",
+    "tailHash": "sha256:fe709014a81733860812827a3a873adcda78f965afc438f2accd5e5d7cca81a3",
+    "immutable": true
+  },
+  "reconciliation": {
+    "status": "reconciled",
+    "mismatchReasons": [],
+    "readonlyEmergency": false
+  },
+  "boundaries": [
+    "Synthetic local data only",
+    "No external account or credential surface",
+    "No external market route",
+    "No automated action",
+    "No prediction or performance claim",
+    "Operator review remains required"
+  ]
+}

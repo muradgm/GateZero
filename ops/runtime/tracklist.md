@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-19                                                     |
-| Latest accepted packet     | `TRD-636`                                                      |
-| Latest accepted validation | 79 test files, 548 tests passed                                |
+| Latest accepted packet     | `TRD-646`                                                      |
+| Latest accepted validation | 80 test files, 553 tests passed                                |
 
 ## Boundary
 
@@ -1091,6 +1091,16 @@ Latest accepted result:
 | `TRD-634` | accepted | Reconciliation    | Froze mutation when account or journal state drifted.      |
 | `TRD-635` | accepted | Scenario          | Proved deterministic synthetic end-to-end reduction.       |
 | `TRD-636` | accepted | Checkpoint        | Authorized a read-only simulator evidence workspace lane.  |
+| `TRD-637` | accepted | Authorization     | Authorized the read-only local simulator workspace.        |
+| `TRD-638` | accepted | Data adapter      | Generated browser evidence from the core reducer scenario. |
+| `TRD-639` | accepted | Account panel     | Displayed synthetic paper-account summary evidence.        |
+| `TRD-640` | accepted | Position panel    | Displayed position and equity accounting evidence.         |
+| `TRD-641` | accepted | Lifecycle panel   | Displayed manual lifecycle evidence timeline.              |
+| `TRD-642` | accepted | Risk panel        | Displayed risk and candidate guard evidence.               |
+| `TRD-643` | accepted | Fill panel        | Displayed explicit fill-cost assumptions and limitations.  |
+| `TRD-644` | accepted | Integrity panel   | Displayed journal and reconciliation evidence.             |
+| `TRD-645` | accepted | UI QA             | Verified workspace boundary and accessibility posture.     |
+| `TRD-646` | accepted | Checkpoint        | Closed the first read-only simulator workspace lane.       |
 
 ## Current Operator Commands
 
@@ -1102,6 +1112,7 @@ Latest accepted result:
 | `pnpm inspect:gate0-dry-run -- --scenario friction`                                               | Inspect blocked-friction dry-run scenario.              | Redacted JSON with `inspect_status: friction_found`.             |
 | `pnpm inspect:gate0-dry-run -- --scenario other`                                                  | Verify invalid scenario handling.                       | Nonzero exit with bounded local usage text and no stack trace.   |
 | `pnpm snapshot:gate0-progress`                                                                    | Write local progress snapshot.                          | Markdown snapshot under `ops/runtime/progress/`.                 |
+| `pnpm snapshot:simulator-workspace`                                                               | Generate local simulator workspace data.                | Browser JSON matches the deterministic reducer fixture.          |
 | `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
 | `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
 | `pnpm check:gate0-name`                                                                           | Check TraderFrame product-name consistency.             | Local project-name check passes.                                 |
@@ -1117,29 +1128,30 @@ Latest accepted result:
 | `pnpm check:gate0-command-center`                                                                 | Check command center evidence freshness.                | Local command center freshness guard passes.                     |
 | `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
 | `pnpm check:market-workspace`                                                                     | Check scenario and evidence reference consistency.      | Local market workspace consistency guard passes.                 |
+| `pnpm check:simulator-workspace`                                                                  | Check generated simulator workspace freshness.          | Local simulator workspace freshness guard passes.                |
 | `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 79 files and 548 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 80 files and 553 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                | Acceptance focus                                      |
-| ---- | --------- | ------ | ----------------------------------- | ----------------------------------------------------- |
-| 1    | `TRD-637` | queued | Simulator workspace authorization.  | Permit read-only local evidence display only.         |
-| 2    | `TRD-638` | queued | Simulator workspace data adapter.   | Adapt one deterministic local result for display.     |
-| 3    | `TRD-639` | queued | Paper-account summary panel.        | Show synthetic balances with limitations adjacent.    |
-| 4    | `TRD-640` | queued | Position and equity evidence panel. | Show accounting before and after without claims.      |
-| 5    | `TRD-641` | queued | Lifecycle evidence timeline.        | Show manual transition and operator ownership.        |
-| 6    | `TRD-642` | queued | Risk and candidate guard panel.     | Keep blockers visible beside mutation evidence.       |
-| 7    | `TRD-643` | queued | Fill-cost evidence panel.           | Show spread, slippage, fee, and model limitations.    |
-| 8    | `TRD-644` | queued | Journal and reconciliation panel.   | Show integrity and readonly-emergency posture.        |
-| 9    | `TRD-645` | queued | Workspace boundary and access QA.   | Prove no controls, forms, routes, or misleading copy. |
-| 10   | `TRD-646` | queued | Simulator workspace checkpoint.     | Decide the next bounded product gap.                  |
+| Rank | Packet    | Status | Goal                                     | Acceptance focus                                    |
+| ---- | --------- | ------ | ---------------------------------------- | --------------------------------------------------- |
+| 1    | `TRD-647` | queued | Command Center simulator navigation.     | Make the read-only workspace discoverable.          |
+| 2    | `TRD-648` | queued | Simulator snapshot workflow integration. | Refresh generated evidence with standard checks.    |
+| 3    | `TRD-649` | queued | Risk-blocked scenario workspace.         | Show blocked state without action controls.         |
+| 4    | `TRD-650` | queued | Stale and duplicate scenario workspace.  | Show candidate-integrity blockers clearly.          |
+| 5    | `TRD-651` | queued | Reconciliation mismatch workspace.       | Show readonly-emergency posture prominently.        |
+| 6    | `TRD-652` | queued | Journal chain evidence drilldown.        | Inspect local event sequence and hash linkage.      |
+| 7    | `TRD-653` | queued | Local scenario view selector.            | Switch checked-in views without triggering actions. |
+| 8    | `TRD-654` | queued | Simulator workspace mobile recheck.      | Validate dense blocked states on narrow screens.    |
+| 9    | `TRD-655` | queued | Simulator accessibility and copy audit.  | Preserve semantics, focus, and limitation clarity.  |
+| 10   | `TRD-656` | queued | Simulator workspace product checkpoint.  | Decide the next evidence-first product milestone.   |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
