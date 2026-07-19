@@ -2606,12 +2606,23 @@ footer img {
   color: #7f8991;
 }
 .landing-evidence-list em {
+  min-width: 82px;
+  padding: 6px 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 184, 77, 0.28);
+  background: rgba(255, 184, 77, 0.055);
   font: 10px "IBM Plex Mono";
   font-style: normal;
   color: #ffb84d;
 }
 .landing-evidence-list em.ok {
   color: var(--green);
+  border-color: rgba(49, 224, 151, 0.28);
+  background: rgba(49, 224, 151, 0.055);
 }
 .landing-governance {
   display: grid;
@@ -2891,7 +2902,7 @@ footer img {
   pointer-events: none;
 }
 .evidence-scene--gate > img {
-  opacity: 0.018;
+  opacity: 0;
   mix-blend-mode: screen;
 }
 .evidence-scene--gate canvas {
@@ -3117,24 +3128,35 @@ footer img {
   position: relative;
 }
 .method-steps:before {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  left: 8%;
-  right: 8%;
-  top: 89px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cyan), #56626b 48%, #ffb84d);
+  display: none;
 }
 .method-steps article > div {
   position: relative;
   z-index: 3;
+  min-height: 58px;
+  align-items: flex-start;
+}
+.method-steps article > div:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: -31px;
+  bottom: 0;
+  height: 1px;
+  background: #56626b;
+}
+.method-steps article:first-child > div:before {
+  background: linear-gradient(90deg, var(--cyan), #56626b);
+}
+.method-steps article:last-child > div:before {
+  right: 0;
+  background: linear-gradient(90deg, #56626b, #ffb84d);
 }
 .method-steps article > div:after {
   content: "";
   position: absolute;
-  left: 3px;
-  top: 54px;
+  left: 0;
+  bottom: -4px;
   width: 8px;
   height: 8px;
   border: 2px solid #07090b;
@@ -3144,6 +3166,9 @@ footer img {
 .method-steps article:last-child > div:after {
   background: #ffb84d;
   box-shadow: 0 0 0 1px rgba(255, 184, 77, 0.5);
+}
+.method-steps h3 {
+  margin-top: 48px;
 }
 @media (max-width: 1050px) {
   .outcome-grid {
@@ -3161,6 +3186,9 @@ footer img {
     display: none;
   }
   .method-steps article > div:after {
+    display: none;
+  }
+  .method-steps article > div:before {
     display: none;
   }
 }

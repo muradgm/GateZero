@@ -54,9 +54,13 @@ export default function EvidenceScene({
     const camera = new THREE.PerspectiveCamera(31, mount.clientWidth / mount.clientHeight, 0.1, 60);
     camera.position.set(0.55, 0.28, 11.9);
     const sculpture = new THREE.Group();
-    sculpture.rotation.set(-0.11, 0.42, -0.035);
-    sculpture.position.set(0.22, -0.02, 0);
+    sculpture.rotation.set(-0.08, 0.31, -0.025);
+    sculpture.position.set(0.08, -0.02, 0);
     scene.add(sculpture);
+    const scopeGate = new THREE.Group();
+    scopeGate.position.set(-1.35, 0, 0);
+    scopeGate.scale.setScalar(0.72);
+    sculpture.add(scopeGate);
 
     scene.add(new THREE.HemisphereLight(0xa8bdc5, 0x010203, 0.88));
     const key = new THREE.SpotLight(0xf4f8fa, 58, 25, 0.36, 0.65, 1.5);
@@ -103,7 +107,7 @@ export default function EvidenceScene({
       const bar = new THREE.Mesh(barGeometry, material);
       bar.scale.set(...scale);
       bar.position.set(...position);
-      sculpture.add(bar);
+      scopeGate.add(bar);
       return bar;
     };
     const leftBar = addBar([0.32, 5.25, 0.48], [-2.34, 0.12, 0.3]);
@@ -114,13 +118,17 @@ export default function EvidenceScene({
     const panelGeometry = new RoundedBoxGeometry(4.08, 4.08, 0.18, 10, 0.18);
     const glassPanel = new THREE.Mesh(panelGeometry, glass);
     glassPanel.position.z = -0.1;
-    sculpture.add(glassPanel);
+    scopeGate.add(glassPanel);
     const panelEdge = new THREE.LineSegments(
       new THREE.EdgesGeometry(panelGeometry, 38),
-      new THREE.LineBasicMaterial({ color: 0x5edcf4, transparent: true, opacity: 0.12 })
+      new THREE.LineBasicMaterial({
+        color: 0x5edcf4,
+        transparent: true,
+        opacity: 0.12
+      })
     );
     panelEdge.position.copy(glassPanel.position);
-    sculpture.add(panelEdge);
+    scopeGate.add(panelEdge);
     const membraneMaterial = new THREE.ShaderMaterial({
       uniforms: { uTime: { value: 0 } },
       vertexShader,
@@ -132,7 +140,7 @@ export default function EvidenceScene({
     const membrane = new THREE.Mesh(new THREE.CircleGeometry(1.82, 96), membraneMaterial);
     membrane.position.set(0.18, -0.05, 0.17);
     membrane.scale.set(0.78, 0.88, 1);
-    sculpture.add(membrane);
+    scopeGate.add(membrane);
 
     const riskMaterial = new THREE.MeshPhysicalMaterial({
       color: 0x7a3100,
@@ -148,9 +156,23 @@ export default function EvidenceScene({
       new RoundedBoxGeometry(0.18, 4.6, 2.9, 6, 0.08),
       riskMaterial
     );
-    riskBoundary.position.set(0.92, 0, 0.05);
+    riskBoundary.position.set(0.72, 0, 0.05);
     riskBoundary.scale.y = 0.001;
     sculpture.add(riskBoundary);
+    const riskRailMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x47301f,
+      metalness: 0.62,
+      roughness: 0.22,
+      emissive: 0xff8f21,
+      emissiveIntensity: 0.12
+    });
+    const riskTop = new THREE.Mesh(barGeometry, riskRailMaterial);
+    riskTop.scale.set(1.35, 0.18, 0.32);
+    riskTop.position.set(0.72, 2.35, 0.05);
+    sculpture.add(riskTop);
+    const riskBottom = riskTop.clone();
+    riskBottom.position.y = -2.35;
+    sculpture.add(riskBottom);
 
     const reviewMaterial = new THREE.MeshBasicMaterial({
       color: 0x25d4ff,
@@ -159,7 +181,7 @@ export default function EvidenceScene({
       blending: THREE.AdditiveBlending
     });
     const reviewRing = new THREE.Mesh(new THREE.TorusGeometry(0.74, 0.055, 10, 96), reviewMaterial);
-    reviewRing.position.set(1.7, 0, 0.66);
+    reviewRing.position.set(2.35, 0, 0.46);
     reviewRing.rotation.y = -0.18;
     sculpture.add(reviewRing);
 
@@ -173,7 +195,7 @@ export default function EvidenceScene({
       opacity: 0
     });
     const record = new THREE.Mesh(new RoundedBoxGeometry(1.58, 2.12, 0.16, 7, 0.1), recordMaterial);
-    record.position.set(3.6, 0, -0.2);
+    record.position.set(4.05, 0, -0.2);
     record.scale.set(0.01, 0.01, 0.01);
     sculpture.add(record);
 
@@ -186,7 +208,7 @@ export default function EvidenceScene({
         roughness: 0.14
       })
     );
-    core.position.set(0.16, -0.06, 0.48);
+    core.position.set(2.35, 0, 0.62);
     sculpture.add(core);
     const coreLight = new THREE.PointLight(0x25d4ff, 28, 4.5, 1.7);
     coreLight.position.copy(core.position);
@@ -236,7 +258,12 @@ export default function EvidenceScene({
         0.28
       );
       particle.position.copy(start);
-      particle.userData = { phase: index * 0.61, start, aligned, contradictory };
+      particle.userData = {
+        phase: index * 0.61,
+        start,
+        aligned,
+        contradictory
+      };
       sculpture.add(particle);
       particles.push(particle);
     }
@@ -283,10 +310,10 @@ export default function EvidenceScene({
       const reviewAmount = stageIndex >= 4 ? 1 : 0;
       const recordAmount = stageIndex >= 5 ? 1 : 0;
       const ease = economical ? 1 : 0.045;
-      leftBar.position.x += (-4.1 + frameAmount * 1.76 - leftBar.position.x) * ease;
-      topBar.position.y += (4.15 - frameAmount * 1.57 - topBar.position.y) * ease;
-      rightBar.position.x += (4.1 - frameAmount * 1.76 - rightBar.position.x) * ease;
-      bottomBar.position.y += (-4.15 + frameAmount * 1.57 - bottomBar.position.y) * ease;
+      leftBar.position.x += (-3.25 + frameAmount * 0.91 - leftBar.position.x) * ease;
+      topBar.position.y += (3.45 - frameAmount * 0.87 - topBar.position.y) * ease;
+      rightBar.position.x += (3.25 - frameAmount * 0.91 - rightBar.position.x) * ease;
+      bottomBar.position.y += (-3.45 + frameAmount * 0.87 - bottomBar.position.y) * ease;
       glassPanel.material.opacity +=
         ((frameAmount ? 0.34 : 0.06) - glassPanel.material.opacity) * ease;
       membraneMaterial.opacity += ((verifyAmount ? 1 : 0.08) - membraneMaterial.opacity) * ease;
@@ -319,7 +346,7 @@ export default function EvidenceScene({
           if (riskAmount && particle.userData.contradictory)
             target.set(0.9, particle.userData.aligned.y * 0.7, 1.35);
           if (recordAmount && !particle.userData.contradictory)
-            target.set(3.6, -0.72 + (index % 6) * 0.28, 0.05);
+            target.set(4.05, -0.72 + (index % 6) * 0.28, 0.05);
           particle.position.lerp(target, 0.035);
           particle.rotation.y = time * (0.18 + index * 0.012);
           const material = particle.material as THREE.MeshBasicMaterial;
