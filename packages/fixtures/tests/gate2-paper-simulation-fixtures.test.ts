@@ -6,8 +6,11 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2PaperSimulationFromRecommendationCandidateContractSchema,
   Gate2RedFlagEngineContractSchema,
+  Gate2RiskGatedRecommendationReviewContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2ScenarioRecommendationModelContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
@@ -22,8 +25,11 @@ import {
   gate2NegativeBoundaryFixtures,
   gate2OperatorActionLogFixture,
   gate2OperatorNoteModelFixture,
+  gate2PaperSimulationFromRecommendationCandidateFixture,
   gate2RedFlagEngineFixture,
+  gate2RiskGatedRecommendationReviewFixture,
   gate2RiskReviewEventFixture,
+  gate2ScenarioRecommendationModelFixture,
   gate2SignalCandidateFixture,
   gate2SimulationEvidenceDetailFixture,
   gate2SimulatedFillAssumptionFixture,
@@ -73,6 +79,19 @@ describe("Gate 2 paper simulation fixtures", () => {
     expect(Gate2RedFlagEngineContractSchema.parse(gate2RedFlagEngineFixture)).toEqual(
       gate2RedFlagEngineFixture
     );
+    expect(
+      Gate2ScenarioRecommendationModelContractSchema.parse(gate2ScenarioRecommendationModelFixture)
+    ).toEqual(gate2ScenarioRecommendationModelFixture);
+    expect(
+      Gate2RiskGatedRecommendationReviewContractSchema.parse(
+        gate2RiskGatedRecommendationReviewFixture
+      )
+    ).toEqual(gate2RiskGatedRecommendationReviewFixture);
+    expect(
+      Gate2PaperSimulationFromRecommendationCandidateContractSchema.parse(
+        gate2PaperSimulationFromRecommendationCandidateFixture
+      )
+    ).toEqual(gate2PaperSimulationFromRecommendationCandidateFixture);
   });
 
   it("keeps negative boundary fixtures synthetic and blocked", () => {
@@ -113,6 +132,11 @@ describe("Gate 2 paper simulation fixtures", () => {
     expect(gate2RedFlagEngineFixture.action_route_created).toBe(false);
     expect(gate2RedFlagEngineFixture.recommendation_final).toBe(false);
     expect(gate2RedFlagEngineFixture.risk_review_required).toBe(true);
+    expect(gate2ScenarioRecommendationModelFixture.certainty_claim).toBe(false);
+    expect(gate2ScenarioRecommendationModelFixture.recommendation_final).toBe(false);
+    expect(gate2RiskGatedRecommendationReviewFixture.operator_decision_required).toBe(true);
+    expect(gate2PaperSimulationFromRecommendationCandidateFixture.no_external_dispatch).toBe(true);
+    expect(gate2PaperSimulationFromRecommendationCandidateFixture.no_external_account).toBe(true);
     expect(gate2LocalArtifactInventoryFixtures).toHaveLength(2);
   });
 });

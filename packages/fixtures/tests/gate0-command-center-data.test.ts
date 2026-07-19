@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-596");
+    expect(data).toContain("TRD-606");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -480,9 +480,9 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("controlLaneCheckpoint");
     expect(data).toContain(
-      "TRD-581 resolves the low-severity Vite/esbuild audit maintenance item."
+      "TRD-606 closes the current market-intelligence workspace display batch."
     );
-    expect(data).toContain("bounded Gate 2 maintenance gap");
+    expect(data).toContain("bounded Gate 2 product gap");
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -506,7 +506,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-596 turns sourced risk signals into blocker evidence only.");
+    expect(data).toContain("TRD-606 keeps red-flag evidence visible without action controls.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
@@ -524,7 +524,13 @@ describe("Gate 0 command center surface", () => {
       "TRD-597 Scenario Recommendation Model",
       "TRD-598 Risk-Gated Recommendation Review",
       "TRD-599 Market Intelligence Workspace",
-      "TRD-600 Paper Simulation From Recommendation Candidate"
+      "TRD-600 Paper Simulation From Recommendation Candidate",
+      "TRD-601 Strategy workspace visual QA",
+      "TRD-602 Workspace source-link drilldown",
+      "TRD-603 Artifact inventory UI integration",
+      "TRD-604 Operator note UI integration",
+      "TRD-605 Market intelligence blocker checkpoint",
+      "TRD-606 Red flag visual QA"
     ]) {
       expect(data).toContain(packet);
     }
@@ -535,7 +541,7 @@ describe("Gate 0 command center surface", () => {
     );
     expect(tracklist.indexOf("TRD-592")).toBeLessThan(tracklist.indexOf("TRD-593"));
     expect(tracklist).toContain("no buy/sell command");
-    expect(tracklist).toContain("no broker dispatch");
+    expect(tracklist).toContain("no external dispatch");
   });
 
   it("plans artifact inventory schema only for local workspace evidence files", () => {
@@ -624,6 +630,9 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("gate2-news-event-fixture-001");
     expect(data).toContain("gate2-signal-candidate-fixture-001");
     expect(data).toContain("gate2-red-flag-engine-fixture-001");
+    expect(data).toContain("gate2-scenario-recommendation-fixture-001");
+    expect(data).toContain("gate2-recommendation-review-fixture-001");
+    expect(data).toContain("gate2-recommendation-simulation-link-fixture-001");
     expect(data).toContain("No final recommendation.");
     expect(data).not.toContain("buy signal");
     expect(data).not.toContain("sell signal");
@@ -638,6 +647,72 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("risk_review_required");
     expect(data).toContain("Blocker evidence only; no route or final recommendation.");
     expect(data).not.toContain("final trade");
+  });
+
+  it("renders the market intelligence workspace without action controls", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("marketIntelligenceWorkspace");
+    expect(data).toContain("Scenario recommendation is a draft candidate only.");
+    expect(data).toContain("risk_review_required");
+    expect(data).toContain("candidate_linked_for_local_simulation");
+    expect(main).toContain("normalizeMarketIntelligenceWorkspace");
+    expect(main).toContain("market-workspace");
+    expect(main).toContain("Scenario Draft");
+    expect(main).toContain("Risk-Gated Review");
+    expect(main).toContain("Local Simulation Candidate");
+    expect(styles).toContain(".market-workspace");
+    expect(main).not.toContain("<button");
+    expect(main).not.toContain("<form");
+  });
+
+  it("keeps recommendation candidate simulation local and external-dispatch-free", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    for (const boundary of [
+      "local_simulation_only",
+      "no_external_dispatch",
+      "no_external_account",
+      "credentials_required_false",
+      "live_route_false",
+      "automated_action_false",
+      "operator_required"
+    ]) {
+      expect(data).toContain(boundary);
+    }
+
+    expect(data).toContain("Local simulation candidate link only; no external dispatch");
+    expect(data).not.toContain("external dispatch enabled");
+  });
+
+  it("renders local artifact inventory and manual operator note in the workspace", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(data).toContain("artifactInventory");
+    expect(data).toContain("gate2-artifact-inventory-fixture-001");
+    expect(data).toContain("ops/assignments/TRD-001_INITIALIZE_GATE0_RESEARCH_ONLY_MONOREPO.md");
+    expect(data).toContain("operatorNote");
+    expect(data).toContain("Manual note fixture; no decision is performed.");
+    expect(main).toContain("Local artifact inventory records supporting the research case.");
+    expect(main).toContain("Operator Note");
+    expect(main).toContain("Manual Note Sources");
+    expect(main).toContain("Manual Note Limitations");
+  });
+
+  it("keeps red flag visual QA and blocker copy adjacent to the scenario workspace", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const recommendationIndex = main.indexOf("Scenario Draft");
+    const blockerIndex = main.indexOf("Blocker Checkpoint");
+
+    expect(data).toContain("blockerCheckpoint");
+    expect(data).toContain("No certainty or performance claim.");
+    expect(data).toContain("TRD-606 keeps red-flag evidence visible without action controls.");
+    expect(recommendationIndex).toBeGreaterThan(-1);
+    expect(blockerIndex).toBeGreaterThan(recommendationIndex);
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

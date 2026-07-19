@@ -633,6 +633,48 @@ h3 {
   padding-top: 16px;
 }
 
+.market-workspace {
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.market-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.market-grid-wide {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.inventory-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.operator-note-card {
+  background: #fffaf0;
+  border: 1px solid rgba(183, 121, 31, 0.28);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.operator-note-card strong,
+.operator-note-card p {
+  overflow-wrap: anywhere;
+}
+
+.operator-note-card p {
+  color: #4d4232;
+  line-height: 1.5;
+}
+
 .detail-adjacency section {
   background: #fffaf0;
   border: 1px solid rgba(183, 121, 31, 0.28);
@@ -780,6 +822,8 @@ code {
   .health-grid,
   .dashboard-grid,
   .detail-grid,
+  .market-grid,
+  .market-grid-wide,
   .workspace-evidence-grid,
   .workspace-adjacency,
   .source-review-grid,

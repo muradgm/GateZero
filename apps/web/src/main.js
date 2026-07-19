@@ -19,6 +19,9 @@ setInterval(() => {
 function renderCommandCenter(data) {
   const simulationEvidenceDetail = normalizeSimulationEvidenceDetail(data.simulationEvidenceDetail);
   const strategyReviewWorkspace = normalizeStrategyReviewWorkspace(data.strategyReviewWorkspace);
+  const marketIntelligenceWorkspace = normalizeMarketIntelligenceWorkspace(
+    data.marketIntelligenceWorkspace
+  );
 
   app.innerHTML = `
   <div class="shell">
@@ -255,6 +258,87 @@ function renderCommandCenter(data) {
             ${renderListCard("Market Intelligence", strategyReviewWorkspace.marketIntelligence)}
             ${renderListCard("Blocked Scope Reminder", strategyReviewWorkspace.blockedScopeReminder)}
           </div>
+          <section class="market-workspace" aria-labelledby="market-workspace-title">
+            <div class="detail-heading">
+              <div>
+                <h3 id="market-workspace-title">${marketIntelligenceWorkspace.title}</h3>
+                <p>${marketIntelligenceWorkspace.summary}</p>
+              </div>
+              <span class="state-pill">${marketIntelligenceWorkspace.status}</span>
+            </div>
+            <div class="market-grid">
+              ${renderDetailCard("Scenario Draft", [
+                ["Record", marketIntelligenceWorkspace.recommendation.id],
+                ["Action", marketIntelligenceWorkspace.recommendation.action],
+                ["Status", marketIntelligenceWorkspace.recommendation.status],
+                ["Confidence", marketIntelligenceWorkspace.recommendation.confidence],
+                ["Candidate", marketIntelligenceWorkspace.recommendation.candidate],
+                ["Red Flag", marketIntelligenceWorkspace.recommendation.redFlag]
+              ])}
+              ${renderDetailCard("Risk-Gated Review", [
+                ["Record", marketIntelligenceWorkspace.riskReview.id],
+                ["Status", marketIntelligenceWorkspace.riskReview.status],
+                ["Disposition", marketIntelligenceWorkspace.riskReview.disposition],
+                ["Risk Review", marketIntelligenceWorkspace.riskReview.riskReview]
+              ])}
+              ${renderDetailCard("Local Simulation Candidate", [
+                ["Record", marketIntelligenceWorkspace.simulationCandidate.id],
+                ["Status", marketIntelligenceWorkspace.simulationCandidate.status],
+                ["Simulation", marketIntelligenceWorkspace.simulationCandidate.simulationRecord],
+                ["Evidence Detail", marketIntelligenceWorkspace.simulationCandidate.evidenceDetail]
+              ])}
+            </div>
+            <div class="market-grid market-grid-wide" aria-label="Market intelligence supporting records">
+              ${renderListCard("Scenario Evidence", marketIntelligenceWorkspace.recommendation.evidenceRefs)}
+              ${renderListCard("Scenario Sources", marketIntelligenceWorkspace.recommendation.sourceRefs)}
+              ${renderListCard("Scenario Limitations", marketIntelligenceWorkspace.recommendation.limitationNotes)}
+              ${renderListCard("Risk Review Notes", marketIntelligenceWorkspace.riskReview.notes)}
+              ${renderListCard("Blocker References", marketIntelligenceWorkspace.riskReview.blockerRefs)}
+              ${renderListCard("Candidate Boundary Checks", marketIntelligenceWorkspace.simulationCandidate.boundaryChecks)}
+              ${renderListCard("Candidate Limitations", marketIntelligenceWorkspace.simulationCandidate.limitationNotes)}
+              ${renderListCard("Blocker Checkpoint", marketIntelligenceWorkspace.blockerCheckpoint)}
+            </div>
+            <div class="inventory-table-wrap">
+              <table>
+                <caption>
+                  Local artifact inventory records supporting the research case.
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Artifact</th>
+                    <th>Type</th>
+                    <th>Freshness</th>
+                    <th>Local path</th>
+                    <th>Limitation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${marketIntelligenceWorkspace.artifactInventory
+                    .map(
+                      (artifact) => `
+                        <tr>
+                          <td data-label="Artifact">${artifact.id}</td>
+                          <td data-label="Type">${artifact.type}</td>
+                          <td data-label="Freshness"><span class="state-pill">${artifact.freshness}</span></td>
+                          <td data-label="Local path"><code>${artifact.path}</code></td>
+                          <td data-label="Limitation">${artifact.limitation}</td>
+                        </tr>
+                      `
+                    )
+                    .join("")}
+                </tbody>
+              </table>
+            </div>
+            <div class="operator-note-card" aria-labelledby="operator-note-title">
+              <h3 id="operator-note-title">Operator Note</h3>
+              <strong>${marketIntelligenceWorkspace.operatorNote.id}</strong>
+              <p>${marketIntelligenceWorkspace.operatorNote.body}</p>
+              <div class="workspace-adjacency">
+                ${renderListCard("Manual Note Sources", marketIntelligenceWorkspace.operatorNote.sources)}
+                ${renderListCard("Manual Note Limitations", marketIntelligenceWorkspace.operatorNote.limitationNotes)}
+              </div>
+            </div>
+          </section>
         </article>
 
         <article class="panel limitation-panel" id="limitations" aria-labelledby="limitations-title">
@@ -551,6 +635,79 @@ function normalizeStrategyReviewWorkspace(workspace = {}) {
     artifactInventory: asList(workspace.artifactInventory),
     marketIntelligence: asList(workspace.marketIntelligence),
     blockedScopeReminder: asList(workspace.blockedScopeReminder)
+  };
+}
+
+function normalizeMarketIntelligenceWorkspace(workspace = {}) {
+  return {
+    title: workspace.title || "Market Intelligence Workspace",
+    status: workspace.status || "Not recorded",
+    summary:
+      workspace.summary ||
+      "Sourced local market context is shown as scenario evidence, not action authority.",
+    recommendation: normalizeScenarioRecommendation(workspace.recommendation),
+    riskReview: normalizeRecommendationRiskReview(workspace.riskReview),
+    simulationCandidate: normalizeSimulationCandidate(workspace.simulationCandidate),
+    artifactInventory: Array.isArray(workspace.artifactInventory)
+      ? workspace.artifactInventory
+          .filter((artifact) => artifact && typeof artifact === "object")
+          .map((artifact) => ({
+            id: typeof artifact.id === "string" ? artifact.id : "Not recorded",
+            type: typeof artifact.type === "string" ? artifact.type : "Not recorded",
+            path: typeof artifact.path === "string" ? artifact.path : "Not recorded",
+            freshness: typeof artifact.freshness === "string" ? artifact.freshness : "Not recorded",
+            limitation:
+              typeof artifact.limitation === "string" ? artifact.limitation : "Not recorded"
+          }))
+      : [],
+    operatorNote: normalizeOperatorNote(workspace.operatorNote),
+    blockerCheckpoint: asList(workspace.blockerCheckpoint)
+  };
+}
+
+function normalizeScenarioRecommendation(recommendation = {}) {
+  return {
+    id: recommendation.id || "",
+    action: recommendation.action || "",
+    status: recommendation.status || "",
+    confidence: recommendation.confidence || "",
+    candidate: recommendation.candidate || "",
+    redFlag: recommendation.redFlag || "",
+    evidenceRefs: asList(recommendation.evidenceRefs),
+    sourceRefs: asList(recommendation.sourceRefs),
+    limitationNotes: asList(recommendation.limitationNotes)
+  };
+}
+
+function normalizeRecommendationRiskReview(review = {}) {
+  return {
+    id: review.id || "",
+    status: review.status || "",
+    disposition: review.disposition || "",
+    riskReview: review.riskReview || "",
+    blockerRefs: asList(review.blockerRefs),
+    notes: asList(review.notes)
+  };
+}
+
+function normalizeSimulationCandidate(candidate = {}) {
+  return {
+    id: candidate.id || "",
+    status: candidate.status || "",
+    simulationRecord: candidate.simulationRecord || "",
+    evidenceDetail: candidate.evidenceDetail || "",
+    boundaryChecks: asList(candidate.boundaryChecks),
+    limitationNotes: asList(candidate.limitationNotes)
+  };
+}
+
+function normalizeOperatorNote(note = {}) {
+  return {
+    id: note.id || "",
+    type: note.type || "",
+    body: note.body || "No manual note recorded.",
+    sources: asList(note.sources),
+    limitationNotes: asList(note.limitationNotes)
   };
 }
 

@@ -6,8 +6,11 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2PaperSimulationFromRecommendationCandidateContractSchema,
   Gate2RedFlagEngineContractSchema,
+  Gate2RiskGatedRecommendationReviewContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2ScenarioRecommendationModelContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
@@ -19,8 +22,11 @@ import {
   type Gate2NewsEventScannerContract,
   type Gate2OperatorActionLogContract,
   type Gate2OperatorNoteModelContract,
+  type Gate2PaperSimulationFromRecommendationCandidateContract,
   type Gate2RedFlagEngineContract,
+  type Gate2RiskGatedRecommendationReviewContract,
   type Gate2RiskReviewEventContract,
+  type Gate2ScenarioRecommendationModelContract,
   type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
@@ -405,6 +411,104 @@ function createRedFlagEngine(
     operator_decision_required: true,
     action_route_created: false,
     recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createScenarioRecommendation(
+  overrides: Partial<Gate2ScenarioRecommendationModelContract> = {}
+): Gate2ScenarioRecommendationModelContract {
+  return {
+    scenario_recommendation_id: "gate2-scenario-recommendation-001",
+    linked_research_case_id: "gate2-research-case-001",
+    signal_candidate_id: "gate2-signal-candidate-001",
+    red_flag_engine_id: "gate2-red-flag-engine-001",
+    scenario_action: "paper_simulate",
+    recommendation_status: "risk_review_required",
+    evidence_refs: ["gate2-market-input-001", "gate2-news-event-001"],
+    source_refs: ["ops/truth/MARKET_INTELLIGENCE_TRUTH.md"],
+    confidence_level: "low",
+    invalidation_conditions: ["Risk review blocks the case."],
+    limitation_notes: ["Draft scenario only; no final recommendation or route."],
+    risk_review_required: true,
+    operator_decision_required: true,
+    certainty_claim: false,
+    recommendation_final: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createRiskGatedRecommendationReview(
+  overrides: Partial<Gate2RiskGatedRecommendationReviewContract> = {}
+): Gate2RiskGatedRecommendationReviewContract {
+  return {
+    recommendation_review_id: "gate2-recommendation-review-001",
+    scenario_recommendation_id: "gate2-scenario-recommendation-001",
+    linked_research_case_id: "gate2-research-case-001",
+    risk_review_event_id: "gate2-risk-review-001",
+    red_flag_engine_id: "gate2-red-flag-engine-001",
+    review_status: "risk_review_required",
+    risk_disposition: "needs_revision",
+    blocker_refs: ["gate2-red-flag-engine-001"],
+    review_notes: ["Risk review remains required before operator consideration."],
+    operator_view_allowed: true,
+    operator_decision_required: true,
+    recommendation_final: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    reviewed_at: createdAt,
+    ...overrides
+  };
+}
+
+function createPaperSimulationFromRecommendationCandidate(
+  overrides: Partial<Gate2PaperSimulationFromRecommendationCandidateContract> = {}
+): Gate2PaperSimulationFromRecommendationCandidateContract {
+  return {
+    recommendation_simulation_link_id: "gate2-recommendation-simulation-link-001",
+    scenario_recommendation_id: "gate2-scenario-recommendation-001",
+    signal_candidate_id: "gate2-signal-candidate-001",
+    recommendation_review_id: "gate2-recommendation-review-001",
+    simulated_order_record_id: "gate2-sim-record-001",
+    simulation_evidence_detail_id: "gate2-simulation-evidence-detail-001",
+    risk_review_event_id: "gate2-risk-review-001",
+    link_status: "candidate_linked_for_local_simulation",
+    local_simulation_only: true,
+    no_external_dispatch: true,
+    no_external_account: true,
+    credentials_required: false,
+    live_route: false,
+    automated_action: false,
+    operator_required: true,
+    recommendation_final: false,
+    action_route_created: false,
+    limitation_notes: ["Local simulation candidate link only."],
     evidence_only: true,
     approval_claim: false,
     performance_claim: false,
@@ -859,5 +963,101 @@ describe("Gate 2 paper simulation contracts", () => {
         detected_red_flags: ["Source quality concern."]
       })
     ).toThrow();
+  });
+
+  it("validates scenario recommendation models as draft-only risk-gated records", () => {
+    const recommendation = Gate2ScenarioRecommendationModelContractSchema.parse(
+      createScenarioRecommendation()
+    );
+
+    expect(recommendation.scenario_action).toBe("paper_simulate");
+    expect(recommendation.recommendation_status).toBe("risk_review_required");
+    expect(recommendation.certainty_claim).toBe(false);
+    expect(recommendation.recommendation_final).toBe(false);
+  });
+
+  it("rejects scenario recommendations with final, certainty, remote, or route semantics", () => {
+    for (const mutation of [
+      { risk_review_required: false },
+      { operator_decision_required: false },
+      { certainty_claim: true },
+      { recommendation_final: true },
+      { action_route_created: true },
+      { source_refs: ["https://example.invalid/source"] },
+      { scenario_action: "paper_simulate" as const, recommendation_status: "draft_only" as const }
+    ]) {
+      expect(() =>
+        Gate2ScenarioRecommendationModelContractSchema.parse({
+          ...createScenarioRecommendation(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates risk-gated recommendation reviews before operator consideration", () => {
+    const review = Gate2RiskGatedRecommendationReviewContractSchema.parse(
+      createRiskGatedRecommendationReview()
+    );
+
+    expect(review.review_status).toBe("risk_review_required");
+    expect(review.operator_view_allowed).toBe(true);
+    expect(review.recommendation_final).toBe(false);
+  });
+
+  it("rejects recommendation reviews that skip blockers, risk, or boundary controls", () => {
+    for (const mutation of [
+      { review_status: "blocked_by_risk" as const, blocker_refs: [] },
+      {
+        review_status: "operator_review_only" as const,
+        risk_disposition: "needs_revision" as const
+      },
+      { operator_decision_required: false },
+      { recommendation_final: true },
+      { action_route_created: true },
+      { execution_path: true }
+    ]) {
+      expect(() =>
+        Gate2RiskGatedRecommendationReviewContractSchema.parse({
+          ...createRiskGatedRecommendationReview(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates recommendation candidates linked to local paper simulation only", () => {
+    const link = Gate2PaperSimulationFromRecommendationCandidateContractSchema.parse(
+      createPaperSimulationFromRecommendationCandidate()
+    );
+
+    expect(link.local_simulation_only).toBe(true);
+    expect(link.no_external_dispatch).toBe(true);
+    expect(link.no_external_account).toBe(true);
+    expect(link.operator_required).toBe(true);
+  });
+
+  it("rejects recommendation simulation links with external dispatch, credential, live, or automated paths", () => {
+    for (const mutation of [
+      { local_simulation_only: false },
+      { no_external_dispatch: false },
+      { no_external_account: false },
+      { credentials_required: true },
+      { live_route: true },
+      { automated_action: true },
+      { operator_required: false },
+      { recommendation_final: true },
+      { action_route_created: true },
+      { external_access: true },
+      { execution_path: true },
+      { limitation_notes: ["Simulation candidate link only."] }
+    ]) {
+      expect(() =>
+        Gate2PaperSimulationFromRecommendationCandidateContractSchema.parse({
+          ...createPaperSimulationFromRecommendationCandidate(),
+          ...mutation
+        })
+      ).toThrow();
+    }
   });
 });

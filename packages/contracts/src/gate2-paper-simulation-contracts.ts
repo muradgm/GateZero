@@ -80,6 +80,22 @@ export const Gate2RedFlagBlockerStatusSchema = z.enum([
   "risk_review_required",
   "blocked"
 ]);
+export const Gate2ScenarioRecommendationStatusSchema = z.enum([
+  "draft_only",
+  "risk_review_required",
+  "risk_blocked",
+  "operator_review_required"
+]);
+export const Gate2RecommendationReviewStatusSchema = z.enum([
+  "risk_review_required",
+  "blocked_by_risk",
+  "operator_review_only"
+]);
+export const Gate2RecommendationSimulationLinkStatusSchema = z.enum([
+  "candidate_linked_for_local_simulation",
+  "blocked_by_risk",
+  "missing_operator_review"
+]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -482,6 +498,124 @@ export const Gate2RedFlagEngineContractSchema = Gate2BoundarySchema.extend({
     }
   });
 
+export const Gate2ScenarioRecommendationModelContractSchema = Gate2BoundarySchema.extend({
+  scenario_recommendation_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  signal_candidate_id: IdentifierSchema,
+  red_flag_engine_id: IdentifierSchema,
+  scenario_action: Gate2ScenarioActionSchema,
+  recommendation_status: Gate2ScenarioRecommendationStatusSchema,
+  evidence_refs: z.array(IdentifierSchema).min(1),
+  source_refs: z.array(NonEmptyStringSchema).min(1),
+  confidence_level: Gate2ConfidenceLevelSchema,
+  invalidation_conditions: z.array(NonEmptyStringSchema).min(1),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  risk_review_required: z.literal(true),
+  operator_decision_required: z.literal(true),
+  certainty_claim: z.literal(false),
+  recommendation_final: z.literal(false),
+  action_route_created: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((recommendation, context) => {
+    for (const sourceRef of recommendation.source_refs) {
+      if (!sourceRef.startsWith("ops/") && !sourceRef.startsWith("docs/")) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "scenario recommendation sources must be local ops or docs records",
+          path: ["source_refs"]
+        });
+      }
+    }
+
+    if (
+      recommendation.scenario_action === "paper_simulate" &&
+      recommendation.recommendation_status !== "risk_review_required" &&
+      recommendation.recommendation_status !== "operator_review_required"
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "paper-simulation scenario drafts must stay risk- or operator-review gated",
+        path: ["recommendation_status"]
+      });
+    }
+  });
+
+export const Gate2RiskGatedRecommendationReviewContractSchema = Gate2BoundarySchema.extend({
+  recommendation_review_id: IdentifierSchema,
+  scenario_recommendation_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  risk_review_event_id: IdentifierSchema,
+  red_flag_engine_id: IdentifierSchema,
+  review_status: Gate2RecommendationReviewStatusSchema,
+  risk_disposition: Gate2RiskDispositionSchema,
+  blocker_refs: z.array(IdentifierSchema),
+  review_notes: z.array(NonEmptyStringSchema).min(1),
+  operator_view_allowed: z.literal(true),
+  operator_decision_required: z.literal(true),
+  recommendation_final: z.literal(false),
+  action_route_created: z.literal(false),
+  reviewed_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((review, context) => {
+    if (review.review_status === "blocked_by_risk" && review.blocker_refs.length === 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "risk-blocked recommendation reviews require blocker references",
+        path: ["blocker_refs"]
+      });
+    }
+
+    if (
+      review.review_status === "operator_review_only" &&
+      review.risk_disposition !== "accepted_for_local_simulation_evidence"
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "operator review visibility requires local simulation evidence disposition",
+        path: ["risk_disposition"]
+      });
+    }
+  });
+
+export const Gate2PaperSimulationFromRecommendationCandidateContractSchema =
+  Gate2BoundarySchema.extend({
+    recommendation_simulation_link_id: IdentifierSchema,
+    scenario_recommendation_id: IdentifierSchema,
+    signal_candidate_id: IdentifierSchema,
+    recommendation_review_id: IdentifierSchema,
+    simulated_order_record_id: IdentifierSchema,
+    simulation_evidence_detail_id: IdentifierSchema,
+    risk_review_event_id: IdentifierSchema,
+    link_status: Gate2RecommendationSimulationLinkStatusSchema,
+    local_simulation_only: z.literal(true),
+    no_external_dispatch: z.literal(true),
+    no_external_account: z.literal(true),
+    credentials_required: z.literal(false),
+    live_route: z.literal(false),
+    automated_action: z.literal(false),
+    operator_required: z.literal(true),
+    recommendation_final: z.literal(false),
+    action_route_created: z.literal(false),
+    limitation_notes: z.array(NonEmptyStringSchema).min(1),
+    created_at: IsoDateTimeSchema
+  })
+    .strict()
+    .superRefine((link, context) => {
+      if (
+        link.link_status === "candidate_linked_for_local_simulation" &&
+        link.limitation_notes.every((note) => !note.toLowerCase().includes("local"))
+      ) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "local simulation candidate links require an explicit local limitation note",
+          path: ["limitation_notes"]
+        });
+      }
+    });
+
 export type Gate2ContractAuthority = z.infer<typeof Gate2ContractAuthoritySchema>;
 export type Gate2ContractScope = z.infer<typeof Gate2ContractScopeSchema>;
 export type Gate2FinancialGate = z.infer<typeof Gate2FinancialGateSchema>;
@@ -502,6 +636,13 @@ export type Gate2ScenarioAction = z.infer<typeof Gate2ScenarioActionSchema>;
 export type Gate2ConfidenceLevel = z.infer<typeof Gate2ConfidenceLevelSchema>;
 export type Gate2RedFlagCategory = z.infer<typeof Gate2RedFlagCategorySchema>;
 export type Gate2RedFlagBlockerStatus = z.infer<typeof Gate2RedFlagBlockerStatusSchema>;
+export type Gate2ScenarioRecommendationStatus = z.infer<
+  typeof Gate2ScenarioRecommendationStatusSchema
+>;
+export type Gate2RecommendationReviewStatus = z.infer<typeof Gate2RecommendationReviewStatusSchema>;
+export type Gate2RecommendationSimulationLinkStatus = z.infer<
+  typeof Gate2RecommendationSimulationLinkStatusSchema
+>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -531,3 +672,12 @@ export type Gate2MarketIntelligenceInputContract = z.infer<
 export type Gate2NewsEventScannerContract = z.infer<typeof Gate2NewsEventScannerContractSchema>;
 export type Gate2SignalCandidateContract = z.infer<typeof Gate2SignalCandidateContractSchema>;
 export type Gate2RedFlagEngineContract = z.infer<typeof Gate2RedFlagEngineContractSchema>;
+export type Gate2ScenarioRecommendationModelContract = z.infer<
+  typeof Gate2ScenarioRecommendationModelContractSchema
+>;
+export type Gate2RiskGatedRecommendationReviewContract = z.infer<
+  typeof Gate2RiskGatedRecommendationReviewContractSchema
+>;
+export type Gate2PaperSimulationFromRecommendationCandidateContract = z.infer<
+  typeof Gate2PaperSimulationFromRecommendationCandidateContractSchema
+>;

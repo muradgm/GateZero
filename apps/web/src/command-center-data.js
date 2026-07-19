@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-596",
-  localVerification: "74 files / 510 tests",
+  latestPacket: "TRD-606",
+  localVerification: "74 files / 520 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 510 tests.",
+      detail: "Latest suite: 74 files, 526 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "596 / 596",
+      value: "606 / 606",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 510 tests"
+      reference: "74 files / 520 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "596 accepted records"
+      reference: "606 accepted records"
     },
     {
       area: "Dependency audit",
@@ -195,6 +195,36 @@ export const commandCenterData = {
       signal: "Sourced blocker evidence",
       state: "Contracted",
       reference: "TRD-596 red flag fixture"
+    },
+    {
+      area: "Scenario recommendation",
+      signal: "Draft-only scenario action",
+      state: "Contracted",
+      reference: "TRD-597 scenario recommendation fixture"
+    },
+    {
+      area: "Risk-gated recommendation",
+      signal: "Review required before operator view",
+      state: "Contracted",
+      reference: "TRD-598 recommendation review fixture"
+    },
+    {
+      area: "Market intelligence workspace",
+      signal: "Read-only sourced scenario panel",
+      state: "Visible",
+      reference: "TRD-599 workspace display"
+    },
+    {
+      area: "Recommendation simulation link",
+      signal: "Local candidate only",
+      state: "Contracted",
+      reference: "TRD-600 no external dispatch"
+    },
+    {
+      area: "Workspace visual QA",
+      signal: "Risk adjacency and overflow",
+      state: "Checked",
+      reference: "TRD-601 through TRD-606"
     }
   ],
   simulationEvidenceDetail: {
@@ -296,8 +326,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-581 resolves the low-severity Vite/esbuild audit maintenance item.",
-      "Next work should proceed only from a bounded Gate 2 maintenance gap."
+      "TRD-606 closes the current market-intelligence workspace display batch.",
+      "Next work should proceed only from a bounded Gate 2 product gap."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -316,8 +346,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-596 turns sourced risk signals into blocker evidence only.",
-    "TRD-597 may draft scenario actions only without certainty or final recommendation claims.",
+    "TRD-606 keeps red-flag evidence visible without action controls.",
+    "TRD-607 should start only from a concrete Gate 2 workspace gap.",
     "Use the command center for operating health, not strategy selection."
   ],
   artifactInventorySchemaPlan: {
@@ -369,8 +399,107 @@ export const commandCenterData = {
     "TRD-597 Scenario Recommendation Model",
     "TRD-598 Risk-Gated Recommendation Review",
     "TRD-599 Market Intelligence Workspace",
-    "TRD-600 Paper Simulation From Recommendation Candidate"
+    "TRD-600 Paper Simulation From Recommendation Candidate",
+    "TRD-601 Strategy workspace visual QA",
+    "TRD-602 Workspace source-link drilldown",
+    "TRD-603 Artifact inventory UI integration",
+    "TRD-604 Operator note UI integration",
+    "TRD-605 Market intelligence blocker checkpoint",
+    "TRD-606 Red flag visual QA"
   ],
+  marketIntelligenceWorkspace: {
+    title: "Market Intelligence Workspace",
+    status: "Read-only scenario inspection",
+    summary:
+      "Sourced local market context is shown as scenario evidence, not certainty, advice, or execution authority.",
+    recommendation: {
+      id: "gate2-scenario-recommendation-fixture-001",
+      action: "paper_simulate",
+      status: "risk_review_required",
+      confidence: "low",
+      candidate: "gate2-signal-candidate-fixture-001",
+      redFlag: "gate2-red-flag-engine-fixture-001",
+      evidenceRefs: [
+        "gate2-market-intelligence-input-fixture-001",
+        "gate2-news-event-fixture-001",
+        "gate2-signal-candidate-fixture-001",
+        "gate2-red-flag-engine-fixture-001"
+      ],
+      sourceRefs: [
+        "ops/truth/MARKET_INTELLIGENCE_TRUTH.md",
+        "ops/runtime/reviews/TRD-596_ORCHESTRATOR_ACCEPTANCE.md"
+      ],
+      limitationNotes: [
+        "Scenario recommendation is a draft candidate only.",
+        "No final recommendation, route, certainty claim, or performance claim is created."
+      ]
+    },
+    riskReview: {
+      id: "gate2-recommendation-review-fixture-001",
+      status: "risk_review_required",
+      disposition: "needs_revision",
+      riskReview: "gate2-risk-review-fixture-001",
+      blockerRefs: ["gate2-red-flag-engine-fixture-001"],
+      notes: [
+        "Risk review remains required before operator consideration.",
+        "The record is visible as a local review checkpoint only."
+      ]
+    },
+    simulationCandidate: {
+      id: "gate2-recommendation-simulation-link-fixture-001",
+      status: "candidate_linked_for_local_simulation",
+      simulationRecord: "gate2-sim-record-fixture-001",
+      evidenceDetail: "gate2-simulation-evidence-detail-fixture-001",
+      boundaryChecks: [
+        "local_simulation_only",
+        "no_external_dispatch",
+        "no_external_account",
+        "credentials_required_false",
+        "live_route_false",
+        "automated_action_false",
+        "operator_required"
+      ],
+      limitationNotes: [
+        "Local simulation candidate link only; no external dispatch or external account route.",
+        "Operator review remains required before any local simulation evidence is recorded."
+      ]
+    },
+    artifactInventory: [
+      {
+        id: "gate2-artifact-inventory-fixture-001",
+        type: "strategy_idea",
+        path: "ops/assignments/TRD-001_INITIALIZE_GATE0_RESEARCH_ONLY_MONOREPO.md",
+        freshness: "fresh",
+        limitation: "Local source file proves traceability only."
+      },
+      {
+        id: "gate2-artifact-inventory-fixture-002",
+        type: "risk_review",
+        path: "ops/runtime/reviews/TRD-585_RISK_REVIEW.md",
+        freshness: "fresh",
+        limitation: "Risk source is local operating evidence, not permission."
+      }
+    ],
+    operatorNote: {
+      id: "gate2-operator-note-fixture-001",
+      type: "observation",
+      body: "Operator observes that local evidence and limitations are visible together.",
+      sources: [
+        "ops/runtime/reviews/TRD-585_ORCHESTRATOR_ACCEPTANCE.md",
+        "ops/assignments/TRD-585_GATE2_ARTIFACT_INVENTORY_SCHEMA_PLAN.md"
+      ],
+      limitationNotes: ["Manual note fixture; no decision is performed."]
+    },
+    blockerCheckpoint: [
+      "No final recommendation.",
+      "No external dispatch.",
+      "No external account route.",
+      "No credentials.",
+      "No live route.",
+      "No automated action.",
+      "No certainty or performance claim."
+    ]
+  },
   strategyReviewWorkspace: {
     title: "Strategy Review Workspace",
     status: "Read-only MVP",
@@ -426,7 +555,10 @@ export const commandCenterData = {
       "gate2-market-intelligence-input-fixture-001",
       "gate2-news-event-fixture-001",
       "gate2-signal-candidate-fixture-001",
-      "gate2-red-flag-engine-fixture-001"
+      "gate2-red-flag-engine-fixture-001",
+      "gate2-scenario-recommendation-fixture-001",
+      "gate2-recommendation-review-fixture-001",
+      "gate2-recommendation-simulation-link-fixture-001"
     ],
     redFlagEngine: {
       id: "gate2-red-flag-engine-fixture-001",

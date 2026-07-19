@@ -5,8 +5,11 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2PaperSimulationFromRecommendationCandidateContractSchema,
   Gate2RedFlagEngineContractSchema,
+  Gate2RiskGatedRecommendationReviewContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2ScenarioRecommendationModelContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
@@ -19,8 +22,11 @@ import {
   type Gate2NegativeBoundaryFixtureContract,
   type Gate2OperatorActionLogContract,
   type Gate2OperatorNoteModelContract,
+  type Gate2PaperSimulationFromRecommendationCandidateContract,
   type Gate2RedFlagEngineContract,
+  type Gate2RiskGatedRecommendationReviewContract,
   type Gate2RiskReviewEventContract,
+  type Gate2ScenarioRecommendationModelContract,
   type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
@@ -428,6 +434,113 @@ export const gate2RedFlagEngineFixture: Gate2RedFlagEngineContract =
     operator_decision_required: true,
     action_route_created: false,
     recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2ScenarioRecommendationModelFixture: Gate2ScenarioRecommendationModelContract =
+  Gate2ScenarioRecommendationModelContractSchema.parse({
+    scenario_recommendation_id: "gate2-scenario-recommendation-fixture-001",
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    signal_candidate_id: gate2SignalCandidateFixture.signal_candidate_id,
+    red_flag_engine_id: gate2RedFlagEngineFixture.red_flag_engine_id,
+    scenario_action: "paper_simulate",
+    recommendation_status: "risk_review_required",
+    evidence_refs: [
+      gate2MarketIntelligenceInputFixture.market_intelligence_input_id,
+      gate2NewsEventScannerFixture.news_event_id,
+      gate2SignalCandidateFixture.signal_candidate_id,
+      gate2RedFlagEngineFixture.red_flag_engine_id
+    ],
+    source_refs: [
+      "ops/truth/MARKET_INTELLIGENCE_TRUTH.md",
+      "ops/runtime/reviews/TRD-596_ORCHESTRATOR_ACCEPTANCE.md"
+    ],
+    confidence_level: "low",
+    invalidation_conditions: [
+      "Risk review blocks the scenario.",
+      "Source evidence becomes stale or incomplete."
+    ],
+    limitation_notes: [
+      "Scenario recommendation is a draft candidate only.",
+      "No final recommendation, route, certainty claim, or performance claim is created."
+    ],
+    risk_review_required: true,
+    operator_decision_required: true,
+    certainty_claim: false,
+    recommendation_final: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2RiskGatedRecommendationReviewFixture: Gate2RiskGatedRecommendationReviewContract =
+  Gate2RiskGatedRecommendationReviewContractSchema.parse({
+    recommendation_review_id: "gate2-recommendation-review-fixture-001",
+    scenario_recommendation_id: gate2ScenarioRecommendationModelFixture.scenario_recommendation_id,
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    risk_review_event_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    red_flag_engine_id: gate2RedFlagEngineFixture.red_flag_engine_id,
+    review_status: "risk_review_required",
+    risk_disposition: "needs_revision",
+    blocker_refs: [gate2RedFlagEngineFixture.red_flag_engine_id],
+    review_notes: [
+      "Risk review remains required before operator consideration.",
+      "The record is visible as a local review checkpoint only."
+    ],
+    operator_view_allowed: true,
+    operator_decision_required: true,
+    recommendation_final: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    reviewed_at: fixtureTimestamp
+  });
+
+export const gate2PaperSimulationFromRecommendationCandidateFixture: Gate2PaperSimulationFromRecommendationCandidateContract =
+  Gate2PaperSimulationFromRecommendationCandidateContractSchema.parse({
+    recommendation_simulation_link_id: "gate2-recommendation-simulation-link-fixture-001",
+    scenario_recommendation_id: gate2ScenarioRecommendationModelFixture.scenario_recommendation_id,
+    signal_candidate_id: gate2SignalCandidateFixture.signal_candidate_id,
+    recommendation_review_id: gate2RiskGatedRecommendationReviewFixture.recommendation_review_id,
+    simulated_order_record_id: gate2SimulatedOrderRecordFixture.simulated_order_record_id,
+    simulation_evidence_detail_id:
+      gate2SimulationEvidenceDetailFixture.simulation_evidence_detail_id,
+    risk_review_event_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    link_status: "candidate_linked_for_local_simulation",
+    local_simulation_only: true,
+    no_external_dispatch: true,
+    no_external_account: true,
+    credentials_required: false,
+    live_route: false,
+    automated_action: false,
+    operator_required: true,
+    recommendation_final: false,
+    action_route_created: false,
+    limitation_notes: [
+      "Local simulation candidate link only; no external dispatch or external account route.",
+      "Operator review remains required before any local simulation evidence is recorded."
+    ],
     evidence_only: true,
     approval_claim: false,
     performance_claim: false,
