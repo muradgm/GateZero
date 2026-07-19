@@ -4,6 +4,7 @@ import { productState } from "@gatezero/product-state";
 import { useEffect, useMemo, useState } from "react";
 import { experienceStages, type ExperienceStageId } from "./engine/stages";
 import { EvidenceMachine } from "./scenes/EvidenceMachine";
+import { ProductWorkspace } from "./ui/ProductWorkspace";
 
 export default function App() {
   const [stage, setStage] = useState<ExperienceStageId>("signal");
@@ -14,6 +15,7 @@ export default function App() {
   );
   const stageIndex = experienceStages.findIndex((item) => item.id === stage);
   const current = experienceStages[stageIndex];
+  const interfaceActive = stage === "interface";
 
   useEffect(() => {
     if (!autoPlay || reducedMotion) return;
@@ -40,42 +42,38 @@ export default function App() {
           </p>
           <div className="boundary">{productState.wedge}</div>
           <dl>
-            <div>
-              <dt>Current gate</dt>
-              <dd>{productState.id}</dd>
-            </div>
-            <div>
-              <dt>Mode</dt>
-              <dd>{productState.publicLabel}</dd>
-            </div>
-            <div>
-              <dt>Execution</dt>
-              <dd>Locked</dd>
-            </div>
+            <div><dt>Current gate</dt><dd>{productState.id}</dd></div>
+            <div><dt>Mode</dt><dd>{productState.publicLabel}</dd></div>
+            <div><dt>Execution</dt><dd>Locked</dd></div>
           </dl>
         </div>
 
-        <div className="experience-shell">
+        <div className={`experience-shell${interfaceActive ? " interface-active" : ""}`}>
           <div className="scene" aria-label="Interactive three-dimensional Evidence Gate prototype">
-            <Canvas camera={{ position: [0.55, 0.25, 11.8], fov: 31 }} dpr={[1, 1.5]}>
-              <color attach="background" args={["#07090b"]} />
-              <fog attach="fog" args={["#07090b", 8, 20]} />
-              <ambientLight intensity={0.55} />
-              <spotLight position={[-5, 7, 6]} intensity={58} angle={0.36} penumbra={0.7} />
-              <pointLight position={[3.2, -0.7, 2.2]} color="#25d4ff" intensity={24} />
-              <pointLight position={[-3.1, -2.4, 2.4]} color="#ffb84d" intensity={7} />
-              <EvidenceMachine stage={stage} reducedMotion={reducedMotion} />
-              <Environment preset="warehouse" />
-            </Canvas>
+            <div className="scene-canvas">
+              <Canvas camera={{ position: [0.55, 0.25, 11.8], fov: 31 }} dpr={[1, 1.5]}>
+                <color attach="background" args={["#07090b"]} />
+                <fog attach="fog" args={["#07090b", 8, 20]} />
+                <ambientLight intensity={0.55} />
+                <spotLight position={[-5, 7, 6]} intensity={58} angle={0.36} penumbra={0.7} />
+                <pointLight position={[3.2, -0.7, 2.2]} color="#25d4ff" intensity={24} />
+                <pointLight position={[-3.1, -2.4, 2.4]} color="#ffb84d" intensity={7} />
+                <EvidenceMachine stage={stage} reducedMotion={reducedMotion} />
+                <Environment preset="warehouse" />
+              </Canvas>
+            </div>
+
+            <ProductWorkspace active={interfaceActive} />
+
             <div className="hud hud-left" aria-hidden="true">
               <span>Evidence coverage</span>
-              <strong>{stageIndex >= 2 ? "71.6%" : "—"}</strong>
-              <em>{stageIndex >= 2 ? "Verified inputs stabilizing" : "Awaiting verification"}</em>
+              <strong>{stageIndex >= 2 ? (interfaceActive ? "100%" : "71.6%") : "—"}</strong>
+              <em>{interfaceActive ? "Record resolved into workspace" : stageIndex >= 2 ? "Verified inputs stabilizing" : "Awaiting verification"}</em>
             </div>
             <div className="hud hud-right" aria-hidden="true">
               <span>Risk review</span>
               <strong>{stageIndex >= 3 ? "18.6%" : "—"}</strong>
-              <em>{stageIndex >= 4 ? "Operator responsibility active" : "Boundary pending"}</em>
+              <em>{interfaceActive ? "Approval recorded" : stageIndex >= 4 ? "Operator responsibility active" : "Boundary pending"}</em>
             </div>
           </div>
 
