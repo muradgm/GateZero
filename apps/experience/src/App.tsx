@@ -4,29 +4,45 @@ import { productState } from "@gatezero/product-state";
 import { useEffect, useMemo, useState } from "react";
 import { experienceStages, type ExperienceStageId } from "./engine/stages";
 import { EvidenceMachine } from "./scenes/EvidenceMachine";
+import { OperatorEvidenceControl } from "./ui/OperatorEvidenceControl";
 import { ProductWorkspace } from "./ui/ProductWorkspace";
 
 export default function App() {
   const [stage, setStage] = useState<ExperienceStageId>("signal");
   const [autoPlay, setAutoPlay] = useState(true);
+  const [evidenceResolved, setEvidenceResolved] = useState(false);
   const reducedMotion = useMemo(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     []
   );
   const stageIndex = experienceStages.findIndex((item) => item.id === stage);
+  const operatorIndex = experienceStages.findIndex((item) => item.id === "operator");
   const current = experienceStages[stageIndex];
   const interfaceActive = stage === "interface";
+  const operatorActive = stage === "operator";
 
   useEffect(() => {
     if (!autoPlay || reducedMotion) return;
     const timer = window.setInterval(() => {
       setStage((currentStage) => {
         const currentIndex = experienceStages.findIndex((item) => item.id === currentStage);
+        if (currentStage === "operator" && !evidenceResolved) return currentStage;
         return experienceStages[(currentIndex + 1) % experienceStages.length].id;
       });
     }, 3200);
     return () => window.clearInterval(timer);
-  }, [autoPlay, reducedMotion]);
+  }, [autoPlay, evidenceResolved, reducedMotion]);
+
+  useEffect(() => {
+    if (operatorActive && !evidenceResolved) setAutoPlay(false);
+  }, [operatorActive, evidenceResolved]);
+
+  function resolveEvidence() {
+    if (evidenceResolved) return;
+    setEvidenceResolved(true);
+    setAutoPlay(false);
+    window.setTimeout(() => setStage("record"), reducedMotion ? 0 : 850);
+  }
 
   return (
     <main>
@@ -64,16 +80,39 @@ export default function App() {
             </div>
 
             <ProductWorkspace active={interfaceActive} />
+            <OperatorEvidenceControl
+              active={operatorActive}
+              resolved={evidenceResolved}
+              onResolve={resolveEvidence}
+            />
 
             <div className="hud hud-left" aria-hidden="true">
               <span>Evidence coverage</span>
-              <strong>{stageIndex >= 2 ? (interfaceActive ? "100%" : "71.6%") : "—"}</strong>
-              <em>{interfaceActive ? "Record resolved into workspace" : stageIndex >= 2 ? "Verified inputs stabilizing" : "Awaiting verification"}</em>
+              <strong>
+                {interfaceActive ? "100%" : evidenceResolved ? "100%" : stageIndex >= 2 ? "71.6%" : "—"}
+              </strong>
+              <em>
+                {interfaceActive
+                  ? "Record resolved into workspace"
+                  : evidenceResolved
+                    ? "Operator evidence accepted"
+                    : stageIndex >= 2
+                      ? "Verified inputs stabilizing"
+                      : "Awaiting verification"}
+              </em>
             </div>
             <div className="hud hud-right" aria-hidden="true">
               <span>Risk review</span>
               <strong>{stageIndex >= 3 ? "18.6%" : "—"}</strong>
-              <em>{interfaceActive ? "Approval recorded" : stageIndex >= 4 ? "Operator responsibility active" : "Boundary pending"}</em>
+              <em>
+                {interfaceActive
+                  ? "Approval recorded"
+                  : evidenceResolved
+                    ? "Boundary released"
+                    : stageIndex >= 4
+                      ? "Operator responsibility active"
+                      : "Boundary pending"}
+              </em>
             </div>
           </div>
 
@@ -81,28 +120,43 @@ export default function App() {
             <div>
               <span>{String(stageIndex + 1).padStart(2, "0")} / {String(experienceStages.length).padStart(2, "0")}</span>
               <h2>{current.title}</h2>
-              <p>{current.body}</p>
+              <p>
+                {operatorActive && !evidenceResolved
+                  ? "The system cannot approve itself. Place the missing market context into operator review to continue."
+                  : current.body}
+              </p>
             </div>
-            <button type="button" onClick={() => setAutoPlay((value) => !value)}>
-              {autoPlay ? "Pause sequence" : "Play sequence"}
-            </button>
+            {operatorActive && !evidenceResolved ? (
+              <button type="button" className="resolve-action" onClick={resolveEvidence}>
+                Place evidence
+              </button>
+            ) : (
+              <button type="button" onClick={() => setAutoPlay((value) => !value)}>
+                {autoPlay ? "Pause sequence" : "Play sequence"}
+              </button>
+            )}
           </div>
 
           <nav className="stage-nav" aria-label="Evidence Gate stages">
-            {experienceStages.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                className={item.id === stage ? "active" : ""}
-                onClick={() => {
-                  setStage(item.id);
-                  setAutoPlay(false);
-                }}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {item.label}
-              </button>
-            ))}
+            {experienceStages.map((item, index) => {
+              const locked = !evidenceResolved && index > operatorIndex;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={item.id === stage ? "active" : ""}
+                  disabled={locked}
+                  aria-label={locked ? `${item.label} locked until operator evidence is supplied` : item.label}
+                  onClick={() => {
+                    setStage(item.id);
+                    setAutoPlay(false);
+                  }}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  {item.label}
+                </button>
+              );
+            })}
           </nav>
         </div>
       </section>
