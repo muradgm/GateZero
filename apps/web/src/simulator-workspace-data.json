@@ -4,6 +4,71 @@
   "gate": "G2_PAPER_TRADING",
   "scope": "paper_simulation_planning_only",
   "defaultScenario": "recorded",
+  "researchCase": {
+    "id": "gate2-research-case-fixture-001",
+    "handoffId": "gate2-strategy-simulator-handoff-fixture-001",
+    "strategyIdeaId": "gate0-strategy-idea-fixture-001",
+    "simulationEvidenceDetailId": "gate2-simulation-evidence-detail-fixture-001",
+    "simulatedOrderRecordId": "gate2-sim-record-fixture-001",
+    "riskReviewId": "gate2-risk-review-fixture-001",
+    "provenanceRefs": [
+      "ops/runtime/reviews/TRD-592_ORCHESTRATOR_ACCEPTANCE.md",
+      "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md"
+    ],
+    "operatorChecklist": [
+      "Confirm the research case and simulation evidence identifiers match.",
+      "Inspect risk blockers and fill limitations before recording an observation.",
+      "Confirm outcome and learning records remain linked to local evidence."
+    ],
+    "limitationNotes": [
+      "The handoff connects checked-in evidence for inspection only.",
+      "It creates no account, credential, market, or automated action route."
+    ],
+    "operatorNote": {
+      "id": "gate2-operator-note-fixture-001",
+      "type": "observation",
+      "body": "Operator observes that local evidence and limitations are visible together.",
+      "sourceRefs": [
+        "ops/runtime/reviews/TRD-585_ORCHESTRATOR_ACCEPTANCE.md",
+        "ops/assignments/TRD-585_GATE2_ARTIFACT_INVENTORY_SCHEMA_PLAN.md"
+      ],
+      "limitationNotes": ["Manual note fixture; no decision is performed."],
+      "manualEntry": true,
+      "decisionPerformed": false
+    },
+    "outcome": {
+      "id": "gate0-outcome-log-fixture-001",
+      "status": "linked_local_record",
+      "limitation": "Outcome linkage is local evidence and does not make a performance claim."
+    },
+    "learning": {
+      "id": "gate0-learning-event-fixture-001",
+      "status": "linked_local_record",
+      "limitation": "Learning linkage does not promote strategy or simulation state."
+    }
+  },
+  "riskComparison": [
+    {
+      "scenarioKey": "recorded",
+      "scenarioLabel": "Recorded",
+      "reducerStatus": "local_state_recorded",
+      "riskStatus": "clear_for_local_simulation",
+      "drawdownFraction": 0.003,
+      "maxDrawdownFraction": 0.05,
+      "stateChanged": true,
+      "blockingReasons": []
+    },
+    {
+      "scenarioKey": "risk_blocked",
+      "scenarioLabel": "Risk blocked",
+      "reducerStatus": "local_state_blocked",
+      "riskStatus": "risk_blocked",
+      "drawdownFraction": 0.1,
+      "maxDrawdownFraction": 0.05,
+      "stateChanged": false,
+      "blockingReasons": ["risk evaluation blocks local state mutation"]
+    }
+  ],
   "scenarios": [
     {
       "key": "recorded",

@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-19                                                     |
-| Latest accepted packet     | `TRD-656`                                                      |
-| Latest accepted validation | 80 test files, 558 tests passed                                |
+| Latest accepted packet     | `TRD-666`                                                      |
+| Latest accepted validation | 81 test files, 568 tests passed                                |
 
 ## Boundary
 
@@ -1111,6 +1111,16 @@ Latest accepted result:
 | `TRD-654` | accepted | Mobile QA          | Verified blocked-state layouts at narrow widths.           |
 | `TRD-655` | accepted | Access and copy    | Verified semantics, focus, and non-actionable copy.        |
 | `TRD-656` | accepted | Checkpoint         | Closed the multi-scenario simulator evidence lane.         |
+| `TRD-657` | accepted | Handoff contract   | Validated the local strategy-to-simulator evidence link.   |
+| `TRD-658` | accepted | Case linkage       | Linked one research case to local simulation evidence.     |
+| `TRD-659` | accepted | Provenance         | Displayed checked-in handoff source records.               |
+| `TRD-660` | accepted | Risk comparison    | Compared clear and fail-closed risk evidence.              |
+| `TRD-661` | accepted | Review checklist   | Displayed manual operator review requirements.             |
+| `TRD-662` | accepted | Operator note      | Linked a manual display-only observation.                  |
+| `TRD-663` | accepted | Outcome linkage    | Linked local outcome evidence without claims.              |
+| `TRD-664` | accepted | Learning linkage   | Linked learning evidence without state promotion.          |
+| `TRD-665` | accepted | Workflow QA        | Verified the integrated inspection path responsively.      |
+| `TRD-666` | accepted | Checkpoint         | Closed the integrated one-case evidence workflow.          |
 
 ## Current Operator Commands
 
@@ -1143,25 +1153,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 80 files and 553 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 81 files and 568 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                     | Acceptance focus                                          |
-| ---- | --------- | ------ | ---------------------------------------- | --------------------------------------------------------- |
-| 1    | `TRD-657` | queued | Strategy-to-simulator handoff contract.  | Link reviewed research evidence without action authority. |
-| 2    | `TRD-658` | queued | Research-case simulation evidence link.  | Inspect one case and its local scenario records together. |
-| 3    | `TRD-659` | queued | Scenario provenance panel.               | Keep fixture origin and assumptions visible.              |
-| 4    | `TRD-660` | queued | Risk-block comparison view.              | Compare clear and blocked evidence without scoring.       |
-| 5    | `TRD-661` | queued | Operator review checklist display.       | Keep manual review requirements beside evidence.          |
-| 6    | `TRD-662` | queued | Manual operator note linkage.            | Attach local display-only observations to a case.         |
-| 7    | `TRD-663` | queued | Outcome-log evidence linkage.            | Trace recorded outcomes without performance claims.       |
-| 8    | `TRD-664` | queued | Learning-event evidence linkage.         | Connect lessons to their source case and outcome.         |
-| 9    | `TRD-665` | queued | Integrated operator workflow QA.         | Verify the end-to-end read-only inspection path.          |
-| 10   | `TRD-666` | queued | Integrated evidence workflow checkpoint. | Decide the next bounded product milestone.                |
+| Rank | Packet    | Status | Goal                                 | Acceptance focus                                              |
+| ---- | --------- | ------ | ------------------------------------ | ------------------------------------------------------------- |
+| 1    | `TRD-667` | queued | Multi-case workspace contract.       | Define a bounded local case inventory.                        |
+| 2    | `TRD-668` | queued | Blocked research-case fixture.       | Add a second case with explicit blocked evidence.             |
+| 3    | `TRD-669` | queued | Research-case inventory adapter.     | Generate a deterministic local case summary list.             |
+| 4    | `TRD-670` | queued | Read-only case selector.             | Switch case evidence without running workflow actions.        |
+| 5    | `TRD-671` | queued | Case completeness display.           | Show missing evidence without readiness scoring.              |
+| 6    | `TRD-672` | queued | Per-case freshness evidence.         | Keep stale and fresh references explicit.                     |
+| 7    | `TRD-673` | queued | Cross-case provenance inspection.    | Trace sources independently for each local case.              |
+| 8    | `TRD-674` | queued | Per-case manual review state.        | Keep operator requirements visible without approval controls. |
+| 9    | `TRD-675` | queued | Multi-case responsive and access QA. | Verify selection, density, and blocked-state semantics.       |
+| 10   | `TRD-676` | queued | Multi-case workspace checkpoint.     | Decide whether local case intake is the next milestone.       |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

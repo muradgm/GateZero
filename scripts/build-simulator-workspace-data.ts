@@ -12,7 +12,9 @@ import {
   gate2PaperAccountFixture,
   gate2PaperRiskLimitPolicyFixture,
   gate2PaperRiskSnapshotFixture,
-  gate2SimulatedOrderLifecycleEventFixture
+  gate2SimulatedOrderLifecycleEventFixture,
+  gate2OperatorNoteModelFixture,
+  gate2StrategySimulatorHandoffFixture
 } from "../packages/fixtures/src/index.js";
 
 type ScenarioKey = "recorded" | "risk_blocked" | "candidate_blocked" | "state_mismatch";
@@ -73,6 +75,49 @@ export function buildSimulatorWorkspaceData() {
     gate: "G2_PAPER_TRADING",
     scope: "paper_simulation_planning_only",
     defaultScenario: "recorded" as const,
+    researchCase: {
+      id: gate2StrategySimulatorHandoffFixture.linked_research_case_id,
+      handoffId: gate2StrategySimulatorHandoffFixture.strategy_simulator_handoff_id,
+      strategyIdeaId: gate2StrategySimulatorHandoffFixture.strategy_idea_id,
+      simulationEvidenceDetailId:
+        gate2StrategySimulatorHandoffFixture.simulation_evidence_detail_id,
+      simulatedOrderRecordId: gate2StrategySimulatorHandoffFixture.simulated_order_record_id,
+      riskReviewId: gate2StrategySimulatorHandoffFixture.risk_review_id,
+      provenanceRefs: gate2StrategySimulatorHandoffFixture.provenance_refs,
+      operatorChecklist: gate2StrategySimulatorHandoffFixture.operator_review_checklist,
+      limitationNotes: gate2StrategySimulatorHandoffFixture.limitation_notes,
+      operatorNote: {
+        id: gate2OperatorNoteModelFixture.operator_note_id,
+        type: gate2OperatorNoteModelFixture.note_type,
+        body: gate2OperatorNoteModelFixture.note_body,
+        sourceRefs: gate2OperatorNoteModelFixture.source_link_refs,
+        limitationNotes: gate2OperatorNoteModelFixture.limitation_notes,
+        manualEntry: gate2OperatorNoteModelFixture.manual_entry,
+        decisionPerformed: gate2OperatorNoteModelFixture.decision_performed
+      },
+      outcome: {
+        id: gate2StrategySimulatorHandoffFixture.outcome_log_id,
+        status: "linked_local_record" as const,
+        limitation: "Outcome linkage is local evidence and does not make a performance claim."
+      },
+      learning: {
+        id: gate2StrategySimulatorHandoffFixture.learning_event_id,
+        status: "linked_local_record" as const,
+        limitation: "Learning linkage does not promote strategy or simulation state."
+      }
+    },
+    riskComparison: scenarios
+      .filter((scenario) => scenario.key === "recorded" || scenario.key === "risk_blocked")
+      .map((scenario) => ({
+        scenarioKey: scenario.key,
+        scenarioLabel: scenario.label,
+        reducerStatus: scenario.status,
+        riskStatus: scenario.risk.status,
+        drawdownFraction: scenario.risk.drawdownFraction,
+        maxDrawdownFraction: scenario.risk.maxDrawdownFraction,
+        stateChanged: scenario.account.stateChanged,
+        blockingReasons: scenario.blockingReasons
+      })),
     scenarios,
     boundaries: [
       "Synthetic local data only",

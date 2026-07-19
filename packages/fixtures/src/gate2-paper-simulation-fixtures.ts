@@ -16,6 +16,7 @@ import {
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema,
   Gate2StrategyReviewWorkspaceCaseContractSchema,
+  Gate2StrategySimulatorHandoffContractSchema,
   type Gate2LocalArtifactInventoryContract,
   type Gate2MarketIntelligenceInputContract,
   type Gate2NewsEventScannerContract,
@@ -32,7 +33,8 @@ import {
   type Gate2SimulatedFillAssumptionContract,
   type Gate2SimulatedOrderRecordContract,
   type Gate2SimulationStateContract,
-  type Gate2StrategyReviewWorkspaceCaseContract
+  type Gate2StrategyReviewWorkspaceCaseContract,
+  type Gate2StrategySimulatorHandoffContract
 } from "../../contracts/src/index.js";
 
 const fixtureTimestamp = "2026-01-01T00:00:00.000Z";
@@ -320,6 +322,48 @@ export const gate2StrategyReviewWorkspaceCaseFixture: Gate2StrategyReviewWorkspa
     limitation_notes: ["Workspace fixture is read-only and local."],
     operator_required: true,
     read_only_workspace: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2StrategySimulatorHandoffFixture: Gate2StrategySimulatorHandoffContract =
+  Gate2StrategySimulatorHandoffContractSchema.parse({
+    strategy_simulator_handoff_id: "gate2-strategy-simulator-handoff-fixture-001",
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    strategy_idea_id: gate2StrategyReviewWorkspaceCaseFixture.strategy_idea_id,
+    simulation_evidence_detail_id:
+      gate2StrategyReviewWorkspaceCaseFixture.simulation_evidence_detail_id,
+    simulated_order_record_id: gate2SimulatedOrderRecordFixture.simulated_order_record_id,
+    risk_review_id: gate2StrategyReviewWorkspaceCaseFixture.risk_review_id,
+    operator_note_id: gate2StrategyReviewWorkspaceCaseFixture.operator_note_id,
+    outcome_log_id: gate2StrategyReviewWorkspaceCaseFixture.outcome_log_id,
+    learning_event_id: gate2StrategyReviewWorkspaceCaseFixture.learning_event_id,
+    scenario_keys: ["recorded", "risk_blocked", "candidate_blocked", "state_mismatch"],
+    provenance_refs: [
+      "ops/runtime/reviews/TRD-592_ORCHESTRATOR_ACCEPTANCE.md",
+      "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md"
+    ],
+    operator_review_checklist: [
+      "Confirm the research case and simulation evidence identifiers match.",
+      "Inspect risk blockers and fill limitations before recording an observation.",
+      "Confirm outcome and learning records remain linked to local evidence."
+    ],
+    limitation_notes: [
+      "The handoff connects checked-in evidence for inspection only.",
+      "It creates no account, credential, market, or automated action route."
+    ],
+    local_only: true,
+    read_only: true,
+    operator_required: true,
+    automated_action: false,
+    action_route_created: false,
     evidence_only: true,
     approval_claim: false,
     performance_claim: false,

@@ -39,6 +39,48 @@ root.innerHTML = `
           <small>${data.scope}</small>
         </div>
       </section>
+      <section class="case-handoff" aria-labelledby="case-handoff-title">
+        <header>
+          <div>
+            <p class="eyebrow">Strategy-to-simulator handoff</p>
+            <h2 id="case-handoff-title">Research case ${data.researchCase.id}</h2>
+            <p>Reviewed strategy evidence and local simulation records are linked for inspection.</p>
+          </div>
+          <span>Read-only handoff</span>
+        </header>
+        <dl class="case-link-grid">
+          ${caseLink("Handoff", data.researchCase.handoffId)}
+          ${caseLink("Strategy idea", data.researchCase.strategyIdeaId)}
+          ${caseLink("Simulation detail", data.researchCase.simulationEvidenceDetailId)}
+          ${caseLink("Simulation record", data.researchCase.simulatedOrderRecordId)}
+          ${caseLink("Risk review", data.researchCase.riskReviewId)}
+        </dl>
+        <div class="case-support-grid">
+          ${supportPanel(
+            "Scenario provenance",
+            `<ul>${data.researchCase.provenanceRefs.map((item) => `<li><code>${item}</code></li>`).join("")}</ul>`
+          )}
+          ${supportPanel(
+            "Operator review checklist",
+            `<ol>${data.researchCase.operatorChecklist.map((item) => `<li>${item}</li>`).join("")}</ol>`
+          )}
+          ${supportPanel(
+            "Manual operator note",
+            `<strong>${data.researchCase.operatorNote.id}</strong><p>${data.researchCase.operatorNote.body}</p><small>${data.researchCase.operatorNote.limitationNotes.join(" ")}</small>`
+          )}
+          ${supportPanel(
+            "Outcome and learning",
+            `<dl class="linked-records">
+              <div><dt>Outcome</dt><dd><code>${data.researchCase.outcome.id}</code><small>${data.researchCase.outcome.limitation}</small></dd></div>
+              <div><dt>Learning</dt><dd><code>${data.researchCase.learning.id}</code><small>${data.researchCase.learning.limitation}</small></dd></div>
+            </dl>`
+          )}
+        </div>
+        <div class="handoff-limitations" role="note">
+          <strong>Handoff limitations</strong>
+          <span>${data.researchCase.limitationNotes.join(" ")}</span>
+        </div>
+      </section>
       <section class="scenario-toolbar" aria-labelledby="scenario-title">
         <div>
           <p class="eyebrow" id="scenario-title">Evidence scenario</p>
@@ -51,6 +93,31 @@ root.innerHTML = `
                 `<button type="button" data-scenario="${scenario.key}" aria-pressed="${scenario.key === data.defaultScenario}">${scenario.label}</button>`
             )
             .join("")}
+        </div>
+      </section>
+      <section class="risk-comparison" aria-labelledby="risk-comparison-title">
+        <header>
+          <div>
+            <p class="eyebrow">Evidence comparison</p>
+            <h2 id="risk-comparison-title">Clear and blocked risk states</h2>
+          </div>
+          <span>No score or promotion</span>
+        </header>
+        <div class="comparison-table-wrap">
+          <table>
+            <thead><tr><th>Scenario</th><th>Risk state</th><th>Drawdown</th><th>Mutation</th><th>Reason</th></tr></thead>
+            <tbody>${data.riskComparison
+              .map(
+                (item) => `<tr>
+                  <td data-label="Scenario">${item.scenarioLabel}</td>
+                  <td data-label="Risk state">${statusLabel(item.riskStatus)}</td>
+                  <td data-label="Drawdown">${percent(item.drawdownFraction)} / ${percent(item.maxDrawdownFraction)}</td>
+                  <td data-label="Mutation">${item.stateChanged ? "Recorded" : "Blocked"}</td>
+                  <td data-label="Reason">${evidenceReasons(item.blockingReasons)}</td>
+                </tr>`
+              )
+              .join("")}</tbody>
+          </table>
         </div>
       </section>
       <div id="scenario-view" aria-live="polite"></div>
@@ -219,6 +286,14 @@ function renderScenario(key) {
 
 function evidenceReasons(items) {
   return items.length > 0 ? items.map(statusLabel).join(", ") : "None recorded";
+}
+
+function caseLink(label, value) {
+  return `<div><dt>${label}</dt><dd><code>${value}</code></dd></div>`;
+}
+
+function supportPanel(title, content) {
+  return `<section><h3>${title}</h3>${content}</section>`;
 }
 
 function metric(label, value, detail) {

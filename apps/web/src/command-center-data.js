@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-656",
-  localVerification: "80 files / 558 tests",
+  latestPacket: "TRD-666",
+  localVerification: "81 files / 568 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 80 files, 558 tests.",
+      detail: "Latest suite: 81 files, 568 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "656 / 656",
+      value: "666 / 666",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "80 files / 558 tests"
+      reference: "81 files / 568 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "656 accepted records"
+      reference: "666 accepted records"
     },
     {
       area: "Dependency audit",
@@ -225,6 +225,12 @@ export const commandCenterData = {
       signal: "Risk adjacency and overflow",
       state: "Checked",
       reference: "TRD-637 through TRD-646"
+    },
+    {
+      area: "Integrated evidence workflow",
+      signal: "Research case to simulator handoff",
+      state: "Visible",
+      reference: "TRD-657 through TRD-666"
     }
   ],
   simulationEvidenceDetail: {
@@ -326,8 +332,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-656 closes the multi-scenario simulator evidence workspace lane.",
-      "TRD-657 may link reviewed strategy evidence to local simulator records."
+      "TRD-666 closes the integrated one-case evidence workflow.",
+      "TRD-667 may define a bounded local multi-case inventory."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -346,8 +352,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-656 closes the multi-scenario simulator evidence workspace lane.",
-    "TRD-657 is the bounded strategy-to-simulator handoff contract.",
+    "TRD-666 closes the integrated one-case evidence workflow.",
+    "TRD-667 is the bounded multi-case workspace contract.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -455,7 +461,17 @@ export const commandCenterData = {
     "TRD-653 Local scenario view selector",
     "TRD-654 Simulator workspace mobile recheck",
     "TRD-655 Simulator accessibility and copy audit",
-    "TRD-656 Simulator workspace product checkpoint"
+    "TRD-656 Simulator workspace product checkpoint",
+    "TRD-657 Strategy-to-simulator handoff contract",
+    "TRD-658 Research-case simulation evidence link",
+    "TRD-659 Scenario provenance panel",
+    "TRD-660 Risk-block comparison view",
+    "TRD-661 Operator review checklist display",
+    "TRD-662 Manual operator note linkage",
+    "TRD-663 Outcome-log evidence linkage",
+    "TRD-664 Learning-event evidence linkage",
+    "TRD-665 Integrated operator workflow QA",
+    "TRD-666 Integrated evidence workflow checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

@@ -23,6 +23,77 @@ describe("Gate 2 simulator evidence workspace", () => {
     ]);
   });
 
+  it("links the reviewed research case to simulator evidence", () => {
+    const { researchCase } = buildSimulatorWorkspaceData();
+
+    expect(researchCase).toMatchObject({
+      id: "gate2-research-case-fixture-001",
+      handoffId: "gate2-strategy-simulator-handoff-fixture-001",
+      strategyIdeaId: "gate0-strategy-idea-fixture-001",
+      simulationEvidenceDetailId: "gate2-simulation-evidence-detail-fixture-001",
+      simulatedOrderRecordId: "gate2-sim-record-fixture-001",
+      riskReviewId: "gate2-risk-review-fixture-001"
+    });
+  });
+
+  it("keeps handoff provenance local and operator review explicit", () => {
+    const { researchCase } = buildSimulatorWorkspaceData();
+
+    expect(researchCase.provenanceRefs).toHaveLength(2);
+    expect(
+      researchCase.provenanceRefs.every(
+        (source) => source.startsWith("ops/") || source.startsWith("docs/")
+      )
+    ).toBe(true);
+    expect(researchCase.operatorChecklist).toHaveLength(3);
+    expect(researchCase.limitationNotes).toHaveLength(2);
+  });
+
+  it("links a manual note without performing an operator decision", () => {
+    const { operatorNote } = buildSimulatorWorkspaceData().researchCase;
+
+    expect(operatorNote).toMatchObject({
+      id: "gate2-operator-note-fixture-001",
+      manualEntry: true,
+      decisionPerformed: false
+    });
+    expect(operatorNote.limitationNotes).toContain(
+      "Manual note fixture; no decision is performed."
+    );
+  });
+
+  it("links outcome and learning records without promotion semantics", () => {
+    const { researchCase } = buildSimulatorWorkspaceData();
+
+    expect(researchCase.outcome).toMatchObject({
+      id: "gate0-outcome-log-fixture-001",
+      status: "linked_local_record"
+    });
+    expect(researchCase.learning).toMatchObject({
+      id: "gate0-learning-event-fixture-001",
+      status: "linked_local_record"
+    });
+    expect(`${researchCase.outcome.limitation} ${researchCase.learning.limitation}`).not.toMatch(
+      /approved|ready|profitable/i
+    );
+  });
+
+  it("compares clear and risk-blocked states without scoring", () => {
+    const { riskComparison } = buildSimulatorWorkspaceData();
+
+    expect(riskComparison).toHaveLength(2);
+    expect(riskComparison[0]).toMatchObject({
+      scenarioKey: "recorded",
+      riskStatus: "clear_for_local_simulation",
+      stateChanged: true
+    });
+    expect(riskComparison[1]).toMatchObject({
+      scenarioKey: "risk_blocked",
+      riskStatus: "risk_blocked",
+      stateChanged: false
+    });
+  });
+
   it("shows a recorded local mutation with an immutable journal event", () => {
     const scenario = scenarioByKey("recorded");
 
@@ -95,6 +166,12 @@ describe("Gate 2 simulator evidence workspace", () => {
     );
 
     for (const label of [
+      "Strategy-to-simulator handoff",
+      "Scenario provenance",
+      "Operator review checklist",
+      "Manual operator note",
+      "Outcome and learning",
+      "Clear and blocked risk states",
       "Position and equity",
       "Lifecycle evidence",
       "Risk and candidate guards",

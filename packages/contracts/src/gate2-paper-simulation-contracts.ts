@@ -96,6 +96,12 @@ export const Gate2RecommendationSimulationLinkStatusSchema = z.enum([
   "blocked_by_risk",
   "missing_operator_review"
 ]);
+export const Gate2SimulatorScenarioKeySchema = z.enum([
+  "recorded",
+  "risk_blocked",
+  "candidate_blocked",
+  "state_mismatch"
+]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -385,6 +391,60 @@ export const Gate2StrategyReviewWorkspaceCaseContractSchema = Gate2BoundarySchem
     }
   });
 
+export const Gate2StrategySimulatorHandoffContractSchema = Gate2BoundarySchema.extend({
+  strategy_simulator_handoff_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  strategy_idea_id: IdentifierSchema,
+  simulation_evidence_detail_id: IdentifierSchema,
+  simulated_order_record_id: IdentifierSchema,
+  risk_review_id: IdentifierSchema,
+  operator_note_id: IdentifierSchema,
+  outcome_log_id: IdentifierSchema,
+  learning_event_id: IdentifierSchema,
+  scenario_keys: z.array(Gate2SimulatorScenarioKeySchema).min(2),
+  provenance_refs: z.array(NonEmptyStringSchema).min(1),
+  operator_review_checklist: z.array(NonEmptyStringSchema).min(1),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  local_only: z.literal(true),
+  read_only: z.literal(true),
+  operator_required: z.literal(true),
+  automated_action: z.literal(false),
+  action_route_created: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((handoff, context) => {
+    if (new Set(handoff.scenario_keys).size !== handoff.scenario_keys.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "strategy simulator handoff scenario keys must be unique",
+        path: ["scenario_keys"]
+      });
+    }
+
+    for (const provenanceRef of handoff.provenance_refs) {
+      if (!provenanceRef.startsWith("ops/") && !provenanceRef.startsWith("docs/")) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "strategy simulator handoff provenance must use local ops or docs records",
+          path: ["provenance_refs"]
+        });
+      }
+    }
+
+    if (
+      !handoff.scenario_keys.includes("recorded") ||
+      !handoff.scenario_keys.includes("risk_blocked")
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          "strategy simulator handoff requires recorded and risk-blocked comparison evidence",
+        path: ["scenario_keys"]
+      });
+    }
+  });
+
 export const Gate2MarketIntelligenceInputContractSchema = Gate2BoundarySchema.extend({
   market_intelligence_input_id: IdentifierSchema,
   input_type: Gate2MarketInputTypeSchema,
@@ -643,6 +703,7 @@ export type Gate2RecommendationReviewStatus = z.infer<typeof Gate2Recommendation
 export type Gate2RecommendationSimulationLinkStatus = z.infer<
   typeof Gate2RecommendationSimulationLinkStatusSchema
 >;
+export type Gate2SimulatorScenarioKey = z.infer<typeof Gate2SimulatorScenarioKeySchema>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -665,6 +726,9 @@ export type Gate2LocalArtifactInventoryContract = z.infer<
 export type Gate2OperatorNoteModelContract = z.infer<typeof Gate2OperatorNoteModelContractSchema>;
 export type Gate2StrategyReviewWorkspaceCaseContract = z.infer<
   typeof Gate2StrategyReviewWorkspaceCaseContractSchema
+>;
+export type Gate2StrategySimulatorHandoffContract = z.infer<
+  typeof Gate2StrategySimulatorHandoffContractSchema
 >;
 export type Gate2MarketIntelligenceInputContract = z.infer<
   typeof Gate2MarketIntelligenceInputContractSchema
