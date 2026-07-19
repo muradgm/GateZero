@@ -4,7 +4,8 @@ import {
   calculateGate2DeterministicFill,
   evaluateGate2PaperRiskLimits,
   evaluateGate2SimulationCandidateIntegrity,
-  reconcileGate2PaperAccount
+  reconcileGate2PaperAccount,
+  verifyGate2SimulationJournal
 } from "../src/index.js";
 import {
   gate2DeterministicFillModelFixture,
@@ -101,6 +102,29 @@ describe("Gate 2 local paper simulator controls", () => {
     expect(Object.isFrozen(first)).toBe(true);
     expect(second[1]?.previous_event_hash).toBe(first[0]?.event_hash);
     expect(() => appendGate2SimulationJournalEvent(first, draft)).toThrow(/sequence/);
+  });
+
+  it("rejects duplicate ids and tampered prior journal events", () => {
+    const draft = {
+      journal_id: "gate2-journal-fixture-001",
+      event_id: "gate2-journal-event-fixture-001",
+      sequence: 1,
+      event_type: "candidate_checked" as const,
+      paper_account_id: gate2PaperAccountFixture.paper_account_id,
+      simulated_order_record_id: "gate2-sim-record-fixture-001",
+      risk_review_event_id: "gate2-risk-review-fixture-001",
+      operator_action_log_id: "gate2-operator-action-fixture-001",
+      payload_digest: "sha256:payload-a",
+      occurred_at: gate2LocalPaperSimulatorFixtureTimestamp
+    };
+    const first = appendGate2SimulationJournalEvent([], draft);
+
+    expect(() => appendGate2SimulationJournalEvent(first, { ...draft, sequence: 2 })).toThrow(
+      /unique/
+    );
+    expect(() =>
+      verifyGate2SimulationJournal([{ ...first[0]!, payload_digest: "sha256:tampered" }])
+    ).toThrow(/event hash/);
   });
 
   it("reconciles exact state and freezes mismatched state", () => {

@@ -164,7 +164,7 @@ export function appendGate2SimulationJournalEvent(
   journal: readonly Gate2SimulationJournalEventContract[],
   draftInput: Gate2SimulationJournalEventDraft
 ): readonly Gate2SimulationJournalEventContract[] {
-  const existing = journal.map((event) => Gate2SimulationJournalEventContractSchema.parse(event));
+  const existing = verifyGate2SimulationJournal(journal);
   const draft = Gate2SimulationJournalEventDraftSchema.parse(draftInput);
   const previous = existing.at(-1);
 
@@ -174,36 +174,53 @@ export function appendGate2SimulationJournalEvent(
   if (draft.sequence !== existing.length + 1) {
     throw new Error("journal sequence must append exactly one immutable event");
   }
+  if (existing.some((event) => event.event_id === draft.event_id)) {
+    throw new Error("journal event ids must be unique");
+  }
 
   const previousEventHash = previous?.event_hash ?? "GENESIS";
-  const eventHash = createHash("sha256")
-    .update(
-      [
-        draft.journal_id,
-        draft.event_id,
-        draft.sequence,
-        draft.event_type,
-        draft.paper_account_id,
-        draft.simulated_order_record_id,
-        draft.risk_review_event_id,
-        draft.operator_action_log_id,
-        draft.payload_digest,
-        previousEventHash,
-        draft.occurred_at
-      ].join("|")
-    )
-    .digest("hex");
+  const eventHash = calculateJournalEventHash(draft, previousEventHash);
   const event = Object.freeze(
     Gate2SimulationJournalEventContractSchema.parse({
       ...localBoundary,
       ...draft,
       previous_event_hash: previousEventHash,
-      event_hash: `sha256:${eventHash}`,
+      event_hash: eventHash,
       immutable: true
     })
   );
 
   return Object.freeze([...existing, event]);
+}
+
+export function verifyGate2SimulationJournal(
+  journal: readonly Gate2SimulationJournalEventContract[]
+): readonly Gate2SimulationJournalEventContract[] {
+  const verified: Gate2SimulationJournalEventContract[] = [];
+  const eventIds = new Set<string>();
+
+  for (const [index, eventInput] of journal.entries()) {
+    const event = Gate2SimulationJournalEventContractSchema.parse(eventInput);
+    const previousEventHash = verified.at(-1)?.event_hash ?? "GENESIS";
+
+    if (event.sequence !== index + 1) {
+      throw new Error("journal sequence is not contiguous");
+    }
+    if (event.previous_event_hash !== previousEventHash) {
+      throw new Error("journal previous-event hash does not match");
+    }
+    if (event.event_hash !== calculateJournalEventHash(event, previousEventHash)) {
+      throw new Error("journal event hash does not match its payload");
+    }
+    if (eventIds.has(event.event_id)) {
+      throw new Error("journal event ids must be unique");
+    }
+
+    eventIds.add(event.event_id);
+    verified.push(Object.freeze(event));
+  }
+
+  return Object.freeze(verified);
 }
 
 export function reconcileGate2PaperAccount(
@@ -248,4 +265,29 @@ export function reconcileGate2PaperAccount(
 
 function round(value: number): number {
   return Number(value.toFixed(10));
+}
+
+function calculateJournalEventHash(
+  event: Gate2SimulationJournalEventDraft,
+  previousEventHash: string
+): string {
+  const eventHash = createHash("sha256")
+    .update(
+      [
+        event.journal_id,
+        event.event_id,
+        event.sequence,
+        event.event_type,
+        event.paper_account_id,
+        event.simulated_order_record_id,
+        event.risk_review_event_id,
+        event.operator_action_log_id,
+        event.payload_digest,
+        previousEventHash,
+        event.occurred_at
+      ].join("|")
+    )
+    .digest("hex");
+
+  return `sha256:${eventHash}`;
 }

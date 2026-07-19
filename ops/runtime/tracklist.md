@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-19                                                     |
-| Latest accepted packet     | `TRD-626`                                                      |
-| Latest accepted validation | 78 test files, 540 tests passed                                |
+| Latest accepted packet     | `TRD-636`                                                      |
+| Latest accepted validation | 79 test files, 548 tests passed                                |
 
 ## Boundary
 
@@ -1081,6 +1081,16 @@ Latest accepted result:
 | `TRD-624` | accepted | Reconciliation    | Added fail-closed local account-state drift detection.     |
 | `TRD-625` | accepted | Negative coverage | Rejected unsafe simulator boundary mutations.              |
 | `TRD-626` | accepted | Checkpoint        | Closed the simulator contract/control foundation lane.     |
+| `TRD-627` | accepted | Authorization     | Authorized bounded pure paper-account state reduction.     |
+| `TRD-628` | accepted | Position reducer  | Added deterministic position accounting.                   |
+| `TRD-629` | accepted | Account reducer   | Added cash, fee, and equity accounting.                    |
+| `TRD-630` | accepted | Lifecycle reducer | Required manual local recording transition evidence.       |
+| `TRD-631` | accepted | Risk integration  | Blocked mutation after any risk breach.                    |
+| `TRD-632` | accepted | Fill integration  | Applied explicit deterministic fill-cost evidence.         |
+| `TRD-633` | accepted | Journal integrity | Validated hash chain and exactly-once append.              |
+| `TRD-634` | accepted | Reconciliation    | Froze mutation when account or journal state drifted.      |
+| `TRD-635` | accepted | Scenario          | Proved deterministic synthetic end-to-end reduction.       |
+| `TRD-636` | accepted | Checkpoint        | Authorized a read-only simulator evidence workspace lane.  |
 
 ## Current Operator Commands
 
@@ -1111,25 +1121,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 78 files and 540 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 79 files and 548 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                  | Acceptance focus                                      |
-| ---- | --------- | ------ | ------------------------------------- | ----------------------------------------------------- |
-| 1    | `TRD-627` | queued | Paper-account state reducer packet.   | Authorize pure local state mutation only.             |
-| 2    | `TRD-628` | queued | Position accounting reducer.          | Reconcile quantity, cost basis, and marked value.     |
-| 3    | `TRD-629` | queued | Cash and equity accounting reducer.   | Preserve deterministic account invariants.            |
-| 4    | `TRD-630` | queued | Order lifecycle reducer.              | Apply only contract-authorized manual transitions.    |
-| 5    | `TRD-631` | queued | Risk guard integration.               | Prevent state mutation after any risk breach.         |
-| 6    | `TRD-632` | queued | Fill model integration.               | Feed explicit deterministic cost evidence to reducer. |
-| 7    | `TRD-633` | queued | Journal integration.                  | Append each accepted local mutation exactly once.     |
-| 8    | `TRD-634` | queued | Reconciliation freeze integration.    | Freeze local mutation when state drifts.              |
-| 9    | `TRD-635` | queued | End-to-end local simulation scenario. | Prove deterministic replay from synthetic fixtures.   |
-| 10   | `TRD-636` | queued | Local simulator product checkpoint.   | Decide whether a read-only workspace view is useful.  |
+| Rank | Packet    | Status | Goal                                | Acceptance focus                                      |
+| ---- | --------- | ------ | ----------------------------------- | ----------------------------------------------------- |
+| 1    | `TRD-637` | queued | Simulator workspace authorization.  | Permit read-only local evidence display only.         |
+| 2    | `TRD-638` | queued | Simulator workspace data adapter.   | Adapt one deterministic local result for display.     |
+| 3    | `TRD-639` | queued | Paper-account summary panel.        | Show synthetic balances with limitations adjacent.    |
+| 4    | `TRD-640` | queued | Position and equity evidence panel. | Show accounting before and after without claims.      |
+| 5    | `TRD-641` | queued | Lifecycle evidence timeline.        | Show manual transition and operator ownership.        |
+| 6    | `TRD-642` | queued | Risk and candidate guard panel.     | Keep blockers visible beside mutation evidence.       |
+| 7    | `TRD-643` | queued | Fill-cost evidence panel.           | Show spread, slippage, fee, and model limitations.    |
+| 8    | `TRD-644` | queued | Journal and reconciliation panel.   | Show integrity and readonly-emergency posture.        |
+| 9    | `TRD-645` | queued | Workspace boundary and access QA.   | Prove no controls, forms, routes, or misleading copy. |
+| 10   | `TRD-646` | queued | Simulator workspace checkpoint.     | Decide the next bounded product gap.                  |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

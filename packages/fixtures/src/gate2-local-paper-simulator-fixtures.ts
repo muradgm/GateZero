@@ -49,7 +49,7 @@ export const gate2PaperAccountFixture: Gate2PaperAccountContract =
     ],
     open_position_count: 1,
     leverage_multiple: 1,
-    journal_tail_hash: "sha256:gate2-fixture-tail",
+    journal_tail_hash: "GENESIS",
     snapshot_at: fixtureTimestamp
   });
 
