@@ -5,6 +5,9 @@
   "description": "GateZero-controlled research foundation for TraderFrame.",
   "type": "module",
   "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22 <25"
+  },
   "scripts": {
     "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
     "check:gate0-evidence-index": "tsx scripts/check-gate0-evidence-index-drift.ts",
@@ -52,10 +55,5 @@
     "typescript-eslint": "^8.18.1",
     "vite": "^8.1.0",
     "vitest": "^4.1.9"
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild": "^0.28.1"
-    }
   }
 }
