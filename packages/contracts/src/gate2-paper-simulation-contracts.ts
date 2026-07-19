@@ -102,6 +102,12 @@ export const Gate2SimulatorScenarioKeySchema = z.enum([
   "candidate_blocked",
   "state_mismatch"
 ]);
+export const Gate2ResearchCaseCompletenessSchema = z.enum(["complete", "incomplete", "blocked"]);
+export const Gate2ResearchCaseReviewStatusSchema = z.enum([
+  "review_required",
+  "review_recorded",
+  "blocked"
+]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -445,6 +451,92 @@ export const Gate2StrategySimulatorHandoffContractSchema = Gate2BoundarySchema.e
     }
   });
 
+export const Gate2ResearchCaseInventoryItemContractSchema = Gate2BoundarySchema.extend({
+  case_inventory_item_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  handoff_id: IdentifierSchema,
+  workspace_case_status: Gate2WorkspaceCaseStatusSchema,
+  completeness_status: Gate2ResearchCaseCompletenessSchema,
+  freshness_status: Gate2EvidenceFreshnessStatusSchema,
+  linked_scenario_key: Gate2SimulatorScenarioKeySchema,
+  evidence_refs: z.array(IdentifierSchema).min(1),
+  missing_evidence: z.array(Gate2ArtifactTypeSchema),
+  provenance_refs: z.array(NonEmptyStringSchema).min(1),
+  operator_review_status: Gate2ResearchCaseReviewStatusSchema,
+  operator_required: z.literal(true),
+  read_only: z.literal(true),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((item, context) => {
+    if (item.completeness_status === "complete" && item.missing_evidence.length > 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "complete research cases cannot declare missing evidence",
+        path: ["missing_evidence"]
+      });
+    }
+
+    if (item.completeness_status === "blocked" && item.missing_evidence.length === 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "blocked research cases require explicit missing evidence",
+        path: ["missing_evidence"]
+      });
+    }
+
+    if (item.freshness_status === "stale" && item.operator_review_status !== "blocked") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "stale research cases must remain blocked from operator review",
+        path: ["operator_review_status"]
+      });
+    }
+
+    for (const provenanceRef of item.provenance_refs) {
+      if (!provenanceRef.startsWith("ops/") && !provenanceRef.startsWith("docs/")) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "research case provenance must use local ops or docs records",
+          path: ["provenance_refs"]
+        });
+      }
+    }
+  });
+
+export const Gate2MultiCaseWorkspaceContractSchema = Gate2BoundarySchema.extend({
+  workspace_inventory_id: IdentifierSchema,
+  case_inventory_item_ids: z.array(IdentifierSchema).min(2),
+  default_case_inventory_item_id: IdentifierSchema,
+  local_only: z.literal(true),
+  read_only: z.literal(true),
+  operator_required: z.literal(true),
+  action_route_created: z.literal(false),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((workspace, context) => {
+    if (
+      new Set(workspace.case_inventory_item_ids).size !== workspace.case_inventory_item_ids.length
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "multi-case workspace inventory ids must be unique",
+        path: ["case_inventory_item_ids"]
+      });
+    }
+
+    if (!workspace.case_inventory_item_ids.includes(workspace.default_case_inventory_item_id)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "multi-case workspace default must reference an inventory item",
+        path: ["default_case_inventory_item_id"]
+      });
+    }
+  });
+
 export const Gate2MarketIntelligenceInputContractSchema = Gate2BoundarySchema.extend({
   market_intelligence_input_id: IdentifierSchema,
   input_type: Gate2MarketInputTypeSchema,
@@ -704,6 +796,8 @@ export type Gate2RecommendationSimulationLinkStatus = z.infer<
   typeof Gate2RecommendationSimulationLinkStatusSchema
 >;
 export type Gate2SimulatorScenarioKey = z.infer<typeof Gate2SimulatorScenarioKeySchema>;
+export type Gate2ResearchCaseCompleteness = z.infer<typeof Gate2ResearchCaseCompletenessSchema>;
+export type Gate2ResearchCaseReviewStatus = z.infer<typeof Gate2ResearchCaseReviewStatusSchema>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -730,6 +824,10 @@ export type Gate2StrategyReviewWorkspaceCaseContract = z.infer<
 export type Gate2StrategySimulatorHandoffContract = z.infer<
   typeof Gate2StrategySimulatorHandoffContractSchema
 >;
+export type Gate2ResearchCaseInventoryItemContract = z.infer<
+  typeof Gate2ResearchCaseInventoryItemContractSchema
+>;
+export type Gate2MultiCaseWorkspaceContract = z.infer<typeof Gate2MultiCaseWorkspaceContractSchema>;
 export type Gate2MarketIntelligenceInputContract = z.infer<
   typeof Gate2MarketIntelligenceInputContractSchema
 >;

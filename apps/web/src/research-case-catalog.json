@@ -1,0 +1,32 @@
+{
+  "catalog_id": "gate2-local-case-catalog-001",
+  "generated_at": "2026-07-20T00:00:00.000Z",
+  "items": [
+    {
+      "case_id": "gate2-research-case-fixture-003",
+      "title": "Local evidence intake case",
+      "status": "review_required",
+      "freshness_status": "fresh",
+      "evidence_count": 2,
+      "source_refs": [
+        "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+        "ops/truth/PROJECT_TRUTH.md",
+        "ops/truth/RISK_RULES.md",
+        "packages/fixtures/data/gate2-local-research-case-003.json"
+      ],
+      "risk_review_ref": "ops/runtime/reviews/TRD-676_RISK_REVIEW.md",
+      "limitation_notes": [
+        "Checked-in local intake fixture only; no market account or execution route exists."
+      ],
+      "operator_review_required": true,
+      "local_only": true,
+      "read_only": true,
+      "action_route_created": false,
+      "verified_at": "2026-07-20T00:00:00.000Z"
+    }
+  ],
+  "local_only": true,
+  "read_only": true,
+  "operator_review_required": true,
+  "action_route_created": false
+}

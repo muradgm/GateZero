@@ -5,6 +5,7 @@ export * from "./gate0-dry-run-inspect-result.js";
 export * from "./gate0-dry-run-iteration-recommendation.js";
 export * from "./gate0-dry-run-operator-checklist.js";
 export * from "./gate2-local-simulation-engine.js";
+export * from "./gate2-local-case-intake.js";
 export * from "./gate2-local-paper-simulator-controls.js";
 export * from "./gate2-local-paper-account-reducer.js";
 export * from "./local-audit-log.js";

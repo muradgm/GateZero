@@ -4,25 +4,50 @@
   "gate": "G2_PAPER_TRADING",
   "scope": "paper_simulation_planning_only",
   "defaultScenario": "recorded",
+  "caseWorkspace": {
+    "id": "gate2-multi-case-workspace-fixture-001",
+    "defaultCaseInventoryId": "gate2-case-inventory-fixture-001",
+    "localOnly": true,
+    "readonly": true,
+    "operatorRequired": true,
+    "actionRoutePresent": false,
+    "limitationNotes": ["The inventory compares checked-in research evidence only."]
+  },
   "researchCase": {
+    "inventoryId": "gate2-case-inventory-fixture-001",
     "id": "gate2-research-case-fixture-001",
+    "label": "Complete local case",
     "handoffId": "gate2-strategy-simulator-handoff-fixture-001",
-    "strategyIdeaId": "gate0-strategy-idea-fixture-001",
-    "simulationEvidenceDetailId": "gate2-simulation-evidence-detail-fixture-001",
-    "simulatedOrderRecordId": "gate2-sim-record-fixture-001",
-    "riskReviewId": "gate2-risk-review-fixture-001",
+    "status": "inspection_ready",
+    "completeness": "complete",
+    "freshness": "fresh",
+    "linkedScenarioKey": "recorded",
+    "evidenceRefs": [
+      "gate0-strategy-idea-fixture-001",
+      "gate2-simulation-evidence-detail-fixture-001",
+      "gate2-risk-review-fixture-001",
+      "gate2-operator-note-fixture-001",
+      "gate0-outcome-log-fixture-001",
+      "gate0-learning-event-fixture-001"
+    ],
+    "missingEvidence": [],
     "provenanceRefs": [
       "ops/runtime/reviews/TRD-592_ORCHESTRATOR_ACCEPTANCE.md",
       "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md"
     ],
+    "operatorReviewStatus": "review_recorded",
+    "operatorRequired": true,
+    "limitationNotes": [
+      "Complete means the local fixture chain is present, not approved or ready."
+    ],
+    "strategyIdeaId": "gate0-strategy-idea-fixture-001",
+    "simulationEvidenceDetailId": "gate2-simulation-evidence-detail-fixture-001",
+    "simulatedOrderRecordId": "gate2-sim-record-fixture-001",
+    "riskReviewId": "gate2-risk-review-fixture-001",
     "operatorChecklist": [
       "Confirm the research case and simulation evidence identifiers match.",
       "Inspect risk blockers and fill limitations before recording an observation.",
       "Confirm outcome and learning records remain linked to local evidence."
-    ],
-    "limitationNotes": [
-      "The handoff connects checked-in evidence for inspection only.",
-      "It creates no account, credential, market, or automated action route."
     ],
     "operatorNote": {
       "id": "gate2-operator-note-fixture-001",
@@ -46,6 +71,133 @@
       "status": "linked_local_record",
       "limitation": "Learning linkage does not promote strategy or simulation state."
     }
+  },
+  "researchCases": [
+    {
+      "inventoryId": "gate2-case-inventory-fixture-001",
+      "id": "gate2-research-case-fixture-001",
+      "label": "Complete local case",
+      "handoffId": "gate2-strategy-simulator-handoff-fixture-001",
+      "status": "inspection_ready",
+      "completeness": "complete",
+      "freshness": "fresh",
+      "linkedScenarioKey": "recorded",
+      "evidenceRefs": [
+        "gate0-strategy-idea-fixture-001",
+        "gate2-simulation-evidence-detail-fixture-001",
+        "gate2-risk-review-fixture-001",
+        "gate2-operator-note-fixture-001",
+        "gate0-outcome-log-fixture-001",
+        "gate0-learning-event-fixture-001"
+      ],
+      "missingEvidence": [],
+      "provenanceRefs": [
+        "ops/runtime/reviews/TRD-592_ORCHESTRATOR_ACCEPTANCE.md",
+        "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md"
+      ],
+      "operatorReviewStatus": "review_recorded",
+      "operatorRequired": true,
+      "limitationNotes": [
+        "Complete means the local fixture chain is present, not approved or ready."
+      ],
+      "strategyIdeaId": "gate0-strategy-idea-fixture-001",
+      "simulationEvidenceDetailId": "gate2-simulation-evidence-detail-fixture-001",
+      "simulatedOrderRecordId": "gate2-sim-record-fixture-001",
+      "riskReviewId": "gate2-risk-review-fixture-001",
+      "operatorChecklist": [
+        "Confirm the research case and simulation evidence identifiers match.",
+        "Inspect risk blockers and fill limitations before recording an observation.",
+        "Confirm outcome and learning records remain linked to local evidence."
+      ],
+      "operatorNote": {
+        "id": "gate2-operator-note-fixture-001",
+        "type": "observation",
+        "body": "Operator observes that local evidence and limitations are visible together.",
+        "sourceRefs": [
+          "ops/runtime/reviews/TRD-585_ORCHESTRATOR_ACCEPTANCE.md",
+          "ops/assignments/TRD-585_GATE2_ARTIFACT_INVENTORY_SCHEMA_PLAN.md"
+        ],
+        "limitationNotes": ["Manual note fixture; no decision is performed."],
+        "manualEntry": true,
+        "decisionPerformed": false
+      },
+      "outcome": {
+        "id": "gate0-outcome-log-fixture-001",
+        "status": "linked_local_record",
+        "limitation": "Outcome linkage is local evidence and does not make a performance claim."
+      },
+      "learning": {
+        "id": "gate0-learning-event-fixture-001",
+        "status": "linked_local_record",
+        "limitation": "Learning linkage does not promote strategy or simulation state."
+      }
+    },
+    {
+      "inventoryId": "gate2-case-inventory-fixture-002",
+      "id": "gate2-research-case-fixture-002",
+      "label": "Blocked stale case",
+      "handoffId": "gate2-strategy-simulator-handoff-fixture-002",
+      "status": "risk_blocked",
+      "completeness": "blocked",
+      "freshness": "stale",
+      "linkedScenarioKey": "risk_blocked",
+      "evidenceRefs": ["gate0-strategy-idea-fixture-002", "gate2-risk-review-fixture-002"],
+      "missingEvidence": [
+        "metric_report",
+        "operator_decision_note",
+        "outcome_log",
+        "learning_event"
+      ],
+      "provenanceRefs": ["ops/truth/RISK_RULES.md"],
+      "operatorReviewStatus": "blocked",
+      "operatorRequired": true,
+      "limitationNotes": [
+        "Stale and missing evidence keeps this synthetic case blocked from review recording."
+      ],
+      "strategyIdeaId": "gate0-strategy-idea-fixture-002",
+      "simulationEvidenceDetailId": null,
+      "simulatedOrderRecordId": null,
+      "riskReviewId": "gate2-risk-review-fixture-002",
+      "operatorChecklist": [
+        "Inspect stale provenance before any further review.",
+        "Record the missing evidence without promoting case state."
+      ],
+      "operatorNote": null,
+      "outcome": null,
+      "learning": null
+    }
+  ],
+  "caseCatalog": {
+    "catalog_id": "gate2-local-case-catalog-001",
+    "generated_at": "2026-07-20T00:00:00.000Z",
+    "items": [
+      {
+        "case_id": "gate2-research-case-fixture-003",
+        "title": "Local evidence intake case",
+        "status": "review_required",
+        "freshness_status": "fresh",
+        "evidence_count": 2,
+        "source_refs": [
+          "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+          "ops/truth/PROJECT_TRUTH.md",
+          "ops/truth/RISK_RULES.md",
+          "packages/fixtures/data/gate2-local-research-case-003.json"
+        ],
+        "risk_review_ref": "ops/runtime/reviews/TRD-676_RISK_REVIEW.md",
+        "limitation_notes": [
+          "Checked-in local intake fixture only; no market account or execution route exists."
+        ],
+        "operator_review_required": true,
+        "local_only": true,
+        "read_only": true,
+        "action_route_created": false,
+        "verified_at": "2026-07-20T00:00:00.000Z"
+      }
+    ],
+    "local_only": true,
+    "read_only": true,
+    "operator_review_required": true,
+    "action_route_created": false
   },
   "riskComparison": [
     {

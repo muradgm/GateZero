@@ -46,11 +46,16 @@ describe("Gate 2 simulator evidence workspace", () => {
       )
     ).toBe(true);
     expect(researchCase.operatorChecklist).toHaveLength(3);
-    expect(researchCase.limitationNotes).toHaveLength(2);
+    expect(researchCase.limitationNotes).toHaveLength(1);
   });
 
   it("links a manual note without performing an operator decision", () => {
     const { operatorNote } = buildSimulatorWorkspaceData().researchCase;
+
+    expect(operatorNote).not.toBeNull();
+    if (!operatorNote) {
+      throw new Error("Expected the default research case to include an operator note.");
+    }
 
     expect(operatorNote).toMatchObject({
       id: "gate2-operator-note-fixture-001",
@@ -65,6 +70,14 @@ describe("Gate 2 simulator evidence workspace", () => {
   it("links outcome and learning records without promotion semantics", () => {
     const { researchCase } = buildSimulatorWorkspaceData();
 
+    expect(researchCase.outcome).not.toBeNull();
+    expect(researchCase.learning).not.toBeNull();
+    if (!researchCase.outcome || !researchCase.learning) {
+      throw new Error(
+        "Expected the default research case to include outcome and learning records."
+      );
+    }
+
     expect(researchCase.outcome).toMatchObject({
       id: "gate0-outcome-log-fixture-001",
       status: "linked_local_record"
@@ -76,6 +89,45 @@ describe("Gate 2 simulator evidence workspace", () => {
     expect(`${researchCase.outcome.limitation} ${researchCase.learning.limitation}`).not.toMatch(
       /approved|ready|profitable/i
     );
+  });
+
+  it("builds a read-only two-case workspace with a stable default", () => {
+    const { caseWorkspace, researchCase, researchCases } = buildSimulatorWorkspaceData();
+
+    expect(caseWorkspace).toMatchObject({
+      localOnly: true,
+      readonly: true,
+      operatorRequired: true,
+      actionRoutePresent: false
+    });
+    expect(researchCases).toHaveLength(2);
+    expect(researchCase.inventoryId).toBe(caseWorkspace.defaultCaseInventoryId);
+  });
+
+  it("keeps the second case stale, blocked, and explicit about missing evidence", () => {
+    const blockedCase = buildSimulatorWorkspaceData().researchCases[1];
+
+    expect(blockedCase).toBeDefined();
+    if (!blockedCase) {
+      throw new Error("Expected a blocked research case fixture.");
+    }
+
+    expect(blockedCase).toMatchObject({
+      status: "risk_blocked",
+      completeness: "blocked",
+      freshness: "stale",
+      operatorReviewStatus: "blocked",
+      operatorRequired: true,
+      operatorNote: null,
+      outcome: null,
+      learning: null
+    });
+    expect(blockedCase.missingEvidence).toEqual([
+      "metric_report",
+      "operator_decision_note",
+      "outcome_log",
+      "learning_event"
+    ]);
   });
 
   it("compares clear and risk-blocked states without scoring", () => {
@@ -167,7 +219,10 @@ describe("Gate 2 simulator evidence workspace", () => {
 
     for (const label of [
       "Strategy-to-simulator handoff",
-      "Scenario provenance",
+      "Research cases",
+      "Completeness",
+      "Missing records",
+      "Case provenance",
       "Operator review checklist",
       "Manual operator note",
       "Outcome and learning",
@@ -183,6 +238,7 @@ describe("Gate 2 simulator evidence workspace", () => {
       expect(main).toContain(label);
     }
     expect(main).toContain('data-scenario="${scenario.key}"');
+    expect(main).toContain('data-case="${item.inventoryId}"');
     expect(main).toContain('aria-pressed="${scenario.key === data.defaultScenario}"');
     expect(html).not.toMatch(/<form|<button|<input|<select|<textarea/i);
     expect(main).not.toMatch(/<form|<input|<select|<textarea/i);
@@ -221,6 +277,8 @@ describe("Gate 2 simulator evidence workspace", () => {
     expect(css).toContain("@media (max-width: 820px)");
     expect(css).toContain("@media (max-width: 480px)");
     expect(css).toContain(".scenario-selector button:focus-visible");
+    expect(css).toContain(".case-selector button:focus-visible");
+    expect(css).toContain(".case-state-strip");
     expect(css).toContain('button[aria-pressed="true"]');
   });
 });

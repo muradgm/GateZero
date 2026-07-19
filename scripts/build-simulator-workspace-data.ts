@@ -14,12 +14,16 @@ import {
   gate2PaperRiskSnapshotFixture,
   gate2SimulatedOrderLifecycleEventFixture,
   gate2OperatorNoteModelFixture,
+  gate2MultiCaseWorkspaceFixture,
+  gate2ResearchCaseInventoryFixtures,
   gate2StrategySimulatorHandoffFixture
 } from "../packages/fixtures/src/index.js";
+import { buildCheckedInLocalCaseCatalog } from "./build-local-case-catalog.js";
 
 type ScenarioKey = "recorded" | "risk_blocked" | "candidate_blocked" | "state_mismatch";
 
 export function buildSimulatorWorkspaceData() {
+  const caseCatalog = buildCheckedInLocalCaseCatalog();
   const baseInput = buildBaseReducerInput();
   const scenarios = [
     buildScenario("recorded", "Recorded", "A fully reconciled local evidence record.", baseInput),
@@ -68,6 +72,77 @@ export function buildSimulatorWorkspaceData() {
       }
     )
   ];
+  const researchCases = gate2ResearchCaseInventoryFixtures.map((item) => {
+    const isPrimary =
+      item.linked_research_case_id === gate2StrategySimulatorHandoffFixture.linked_research_case_id;
+
+    return {
+      inventoryId: item.case_inventory_item_id,
+      id: item.linked_research_case_id,
+      label: isPrimary ? "Complete local case" : "Blocked stale case",
+      handoffId: item.handoff_id,
+      status: item.workspace_case_status,
+      completeness: item.completeness_status,
+      freshness: item.freshness_status,
+      linkedScenarioKey: item.linked_scenario_key,
+      evidenceRefs: item.evidence_refs,
+      missingEvidence: item.missing_evidence,
+      provenanceRefs: item.provenance_refs,
+      operatorReviewStatus: item.operator_review_status,
+      operatorRequired: item.operator_required,
+      limitationNotes: item.limitation_notes,
+      strategyIdeaId: isPrimary
+        ? gate2StrategySimulatorHandoffFixture.strategy_idea_id
+        : item.evidence_refs[0],
+      simulationEvidenceDetailId: isPrimary
+        ? gate2StrategySimulatorHandoffFixture.simulation_evidence_detail_id
+        : null,
+      simulatedOrderRecordId: isPrimary
+        ? gate2StrategySimulatorHandoffFixture.simulated_order_record_id
+        : null,
+      riskReviewId: isPrimary
+        ? gate2StrategySimulatorHandoffFixture.risk_review_id
+        : item.evidence_refs[1],
+      operatorChecklist: isPrimary
+        ? gate2StrategySimulatorHandoffFixture.operator_review_checklist
+        : [
+            "Inspect stale provenance before any further review.",
+            "Record the missing evidence without promoting case state."
+          ],
+      operatorNote: isPrimary
+        ? {
+            id: gate2OperatorNoteModelFixture.operator_note_id,
+            type: gate2OperatorNoteModelFixture.note_type,
+            body: gate2OperatorNoteModelFixture.note_body,
+            sourceRefs: gate2OperatorNoteModelFixture.source_link_refs,
+            limitationNotes: gate2OperatorNoteModelFixture.limitation_notes,
+            manualEntry: gate2OperatorNoteModelFixture.manual_entry,
+            decisionPerformed: gate2OperatorNoteModelFixture.decision_performed
+          }
+        : null,
+      outcome: isPrimary
+        ? {
+            id: gate2StrategySimulatorHandoffFixture.outcome_log_id,
+            status: "linked_local_record" as const,
+            limitation: "Outcome linkage is local evidence and does not make a performance claim."
+          }
+        : null,
+      learning: isPrimary
+        ? {
+            id: gate2StrategySimulatorHandoffFixture.learning_event_id,
+            status: "linked_local_record" as const,
+            limitation: "Learning linkage does not promote strategy or simulation state."
+          }
+        : null
+    };
+  });
+  const defaultResearchCase = researchCases.find(
+    (item) => item.inventoryId === gate2MultiCaseWorkspaceFixture.default_case_inventory_item_id
+  );
+
+  if (!defaultResearchCase) {
+    throw new Error("Multi-case workspace requires a valid default research case.");
+  }
 
   return {
     title: "Local Simulator Evidence",
@@ -75,37 +150,18 @@ export function buildSimulatorWorkspaceData() {
     gate: "G2_PAPER_TRADING",
     scope: "paper_simulation_planning_only",
     defaultScenario: "recorded" as const,
-    researchCase: {
-      id: gate2StrategySimulatorHandoffFixture.linked_research_case_id,
-      handoffId: gate2StrategySimulatorHandoffFixture.strategy_simulator_handoff_id,
-      strategyIdeaId: gate2StrategySimulatorHandoffFixture.strategy_idea_id,
-      simulationEvidenceDetailId:
-        gate2StrategySimulatorHandoffFixture.simulation_evidence_detail_id,
-      simulatedOrderRecordId: gate2StrategySimulatorHandoffFixture.simulated_order_record_id,
-      riskReviewId: gate2StrategySimulatorHandoffFixture.risk_review_id,
-      provenanceRefs: gate2StrategySimulatorHandoffFixture.provenance_refs,
-      operatorChecklist: gate2StrategySimulatorHandoffFixture.operator_review_checklist,
-      limitationNotes: gate2StrategySimulatorHandoffFixture.limitation_notes,
-      operatorNote: {
-        id: gate2OperatorNoteModelFixture.operator_note_id,
-        type: gate2OperatorNoteModelFixture.note_type,
-        body: gate2OperatorNoteModelFixture.note_body,
-        sourceRefs: gate2OperatorNoteModelFixture.source_link_refs,
-        limitationNotes: gate2OperatorNoteModelFixture.limitation_notes,
-        manualEntry: gate2OperatorNoteModelFixture.manual_entry,
-        decisionPerformed: gate2OperatorNoteModelFixture.decision_performed
-      },
-      outcome: {
-        id: gate2StrategySimulatorHandoffFixture.outcome_log_id,
-        status: "linked_local_record" as const,
-        limitation: "Outcome linkage is local evidence and does not make a performance claim."
-      },
-      learning: {
-        id: gate2StrategySimulatorHandoffFixture.learning_event_id,
-        status: "linked_local_record" as const,
-        limitation: "Learning linkage does not promote strategy or simulation state."
-      }
+    caseWorkspace: {
+      id: gate2MultiCaseWorkspaceFixture.workspace_inventory_id,
+      defaultCaseInventoryId: gate2MultiCaseWorkspaceFixture.default_case_inventory_item_id,
+      localOnly: gate2MultiCaseWorkspaceFixture.local_only,
+      readonly: gate2MultiCaseWorkspaceFixture.read_only,
+      operatorRequired: gate2MultiCaseWorkspaceFixture.operator_required,
+      actionRoutePresent: gate2MultiCaseWorkspaceFixture.action_route_created,
+      limitationNotes: gate2MultiCaseWorkspaceFixture.limitation_notes
     },
+    researchCase: defaultResearchCase,
+    researchCases,
+    caseCatalog,
     riskComparison: scenarios
       .filter((scenario) => scenario.key === "recorded" || scenario.key === "risk_blocked")
       .map((scenario) => ({

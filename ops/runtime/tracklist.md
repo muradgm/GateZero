@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-07-19                                                     |
-| Latest accepted packet     | `TRD-666`                                                      |
-| Latest accepted validation | 81 test files, 568 tests passed                                |
+| Last updated               | 2026-07-20                                                     |
+| Latest accepted packet     | `TRD-696`                                                      |
+| Latest accepted validation | 85 test files, 601 tests passed                                |
 
 ## Boundary
 
@@ -1121,6 +1121,36 @@ Latest accepted result:
 | `TRD-664` | accepted | Learning linkage   | Linked learning evidence without state promotion.          |
 | `TRD-665` | accepted | Workflow QA        | Verified the integrated inspection path responsively.      |
 | `TRD-666` | accepted | Checkpoint         | Closed the integrated one-case evidence workflow.          |
+| `TRD-667` | accepted | Case contract      | Defined a bounded local multi-case inventory.              |
+| `TRD-668` | accepted | Blocked fixture    | Added stale, missing-evidence case coverage.               |
+| `TRD-669` | accepted | Inventory adapter  | Generated deterministic local case summaries.              |
+| `TRD-670` | accepted | Case selector      | Added view-only case switching.                            |
+| `TRD-671` | accepted | Completeness       | Displayed missing evidence without scoring.                |
+| `TRD-672` | accepted | Freshness          | Displayed freshness independently per case.                |
+| `TRD-673` | accepted | Provenance         | Kept per-case checked-in sources traceable.                |
+| `TRD-674` | accepted | Manual review      | Displayed operator review state without approval controls. |
+| `TRD-675` | accepted | UI QA              | Covered selector semantics and responsive layout.          |
+| `TRD-676` | accepted | Checkpoint         | Authorized bounded local case intake work.                 |
+| `TRD-677` | accepted | Intake boundary    | Restricted intake to checked-in local drafts.              |
+| `TRD-678` | accepted | Draft schema       | Defined strict evidence and authority fields.              |
+| `TRD-679` | accepted | JSON fixture       | Added one deterministic local intake record.               |
+| `TRD-680` | accepted | Parser             | Parsed local JSON without side effects.                    |
+| `TRD-681` | accepted | Error taxonomy     | Added bounded structured intake failures.                  |
+| `TRD-682` | accepted | Unsafe rejection   | Rejected secrets, URLs, traversal, and absolute paths.     |
+| `TRD-683` | accepted | Identity guard     | Failed closed on duplicate local case ids.                 |
+| `TRD-684` | accepted | Stale guard        | Kept stale intake records blocked.                         |
+| `TRD-685` | accepted | Risk guard         | Required a checked-in local risk review.                   |
+| `TRD-686` | accepted | Assembler          | Normalized drafts into sorted catalog records.             |
+| `TRD-687` | accepted | Catalog generator  | Generated deterministic local browser data.                |
+| `TRD-688` | accepted | Freshness check    | Added generated-catalog drift detection.                   |
+| `TRD-689` | accepted | List CLI           | Listed local case summaries without mutation.              |
+| `TRD-690` | accepted | Detail CLI         | Inspected one local case and its sources.                  |
+| `TRD-691` | accepted | CLI failure UX     | Returned bounded errors without stack traces.              |
+| `TRD-692` | accepted | Catalog UI         | Rendered intake records in the workspace.                  |
+| `TRD-693` | accepted | Source drilldown   | Exposed checked-in provenance in a details control.        |
+| `TRD-694` | accepted | Boundary tests     | Covered unsafe inputs and authority changes.               |
+| `TRD-695` | accepted | Intake QA          | Verified fixture-to-workspace inspection.                  |
+| `TRD-696` | accepted | Checkpoint         | Closed the bounded local case intake lane.                 |
 
 ## Current Operator Commands
 
@@ -1133,6 +1163,9 @@ Latest accepted result:
 | `pnpm inspect:gate0-dry-run -- --scenario other`                                                  | Verify invalid scenario handling.                       | Nonzero exit with bounded local usage text and no stack trace.   |
 | `pnpm snapshot:gate0-progress`                                                                    | Write local progress snapshot.                          | Markdown snapshot under `ops/runtime/progress/`.                 |
 | `pnpm snapshot:simulator-workspace`                                                               | Generate local simulator workspace data.                | Browser JSON matches the deterministic reducer fixture.          |
+| `pnpm snapshot:case-catalog`                                                                      | Generate the checked-in local case catalog.             | Browser catalog matches validated local intake records.          |
+| `pnpm inspect:local-cases`                                                                        | List checked-in local research cases.                   | Neutral read-only JSON summaries.                                |
+| `pnpm inspect:local-cases -- --case <id>`                                                         | Inspect one checked-in local research case.             | Local evidence, source, risk, and limitation detail.             |
 | `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
 | `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
 | `pnpm check:gate0-name`                                                                           | Check TraderFrame product-name consistency.             | Local project-name check passes.                                 |
@@ -1149,29 +1182,30 @@ Latest accepted result:
 | `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
 | `pnpm check:market-workspace`                                                                     | Check scenario and evidence reference consistency.      | Local market workspace consistency guard passes.                 |
 | `pnpm check:simulator-workspace`                                                                  | Check generated simulator workspace freshness.          | Local simulator workspace freshness guard passes.                |
+| `pnpm check:case-catalog`                                                                         | Check generated local case catalog freshness.           | Local case catalog freshness guard passes.                       |
 | `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 81 files and 568 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 85 files and 601 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                 | Acceptance focus                                              |
-| ---- | --------- | ------ | ------------------------------------ | ------------------------------------------------------------- |
-| 1    | `TRD-667` | queued | Multi-case workspace contract.       | Define a bounded local case inventory.                        |
-| 2    | `TRD-668` | queued | Blocked research-case fixture.       | Add a second case with explicit blocked evidence.             |
-| 3    | `TRD-669` | queued | Research-case inventory adapter.     | Generate a deterministic local case summary list.             |
-| 4    | `TRD-670` | queued | Read-only case selector.             | Switch case evidence without running workflow actions.        |
-| 5    | `TRD-671` | queued | Case completeness display.           | Show missing evidence without readiness scoring.              |
-| 6    | `TRD-672` | queued | Per-case freshness evidence.         | Keep stale and fresh references explicit.                     |
-| 7    | `TRD-673` | queued | Cross-case provenance inspection.    | Trace sources independently for each local case.              |
-| 8    | `TRD-674` | queued | Per-case manual review state.        | Keep operator requirements visible without approval controls. |
-| 9    | `TRD-675` | queued | Multi-case responsive and access QA. | Verify selection, density, and blocked-state semantics.       |
-| 10   | `TRD-676` | queued | Multi-case workspace checkpoint.     | Decide whether local case intake is the next milestone.       |
+| Rank | Packet    | Status | Goal                             | Acceptance focus                                   |
+| ---- | --------- | ------ | -------------------------------- | -------------------------------------------------- |
+| 1    | `TRD-697` | queued | Multi-file intake gap review.    | Confirm a concrete operator need before expansion. |
+| 2    | `TRD-698` | queued | Intake directory boundary.       | Permit one checked-in fixture directory only.      |
+| 3    | `TRD-699` | queued | Deterministic fixture discovery. | Sort local JSON inputs consistently.               |
+| 4    | `TRD-700` | queued | Invalid-file isolation.          | Keep one invalid draft from hiding valid records.  |
+| 5    | `TRD-701` | queued | Mixed catalog fixture set.       | Cover fresh, stale, and invalid local drafts.      |
+| 6    | `TRD-702` | queued | Catalog diagnostics contract.    | Report bounded per-file validation outcomes.       |
+| 7    | `TRD-703` | queued | Catalog diagnostics CLI.         | Inspect accepted and rejected local inputs.        |
+| 8    | `TRD-704` | queued | Workspace intake diagnostics.    | Show neutral local validation state.               |
+| 9    | `TRD-705` | queued | Multi-file intake QA.            | Verify deterministic behavior and responsive UX.   |
+| 10   | `TRD-706` | queued | Multi-file intake checkpoint.    | Decide whether local case authoring is justified.  |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

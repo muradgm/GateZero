@@ -17,6 +17,8 @@ import {
   Gate2SimulationStateContractSchema,
   Gate2StrategyReviewWorkspaceCaseContractSchema,
   Gate2StrategySimulatorHandoffContractSchema,
+  Gate2ResearchCaseInventoryItemContractSchema,
+  Gate2MultiCaseWorkspaceContractSchema,
   type Gate2LocalArtifactInventoryContract,
   type Gate2MarketIntelligenceInputContract,
   type Gate2NewsEventScannerContract,
@@ -34,7 +36,9 @@ import {
   type Gate2SimulatedOrderRecordContract,
   type Gate2SimulationStateContract,
   type Gate2StrategyReviewWorkspaceCaseContract,
-  type Gate2StrategySimulatorHandoffContract
+  type Gate2StrategySimulatorHandoffContract,
+  type Gate2ResearchCaseInventoryItemContract,
+  type Gate2MultiCaseWorkspaceContract
 } from "../../contracts/src/index.js";
 
 const fixtureTimestamp = "2026-01-01T00:00:00.000Z";
@@ -364,6 +368,99 @@ export const gate2StrategySimulatorHandoffFixture: Gate2StrategySimulatorHandoff
     operator_required: true,
     automated_action: false,
     action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2ResearchCaseInventoryFixtures: readonly Gate2ResearchCaseInventoryItemContract[] =
+  [
+    Gate2ResearchCaseInventoryItemContractSchema.parse({
+      case_inventory_item_id: "gate2-case-inventory-fixture-001",
+      linked_research_case_id: gate2StrategySimulatorHandoffFixture.linked_research_case_id,
+      handoff_id: gate2StrategySimulatorHandoffFixture.strategy_simulator_handoff_id,
+      workspace_case_status: "inspection_ready",
+      completeness_status: "complete",
+      freshness_status: "fresh",
+      linked_scenario_key: "recorded",
+      evidence_refs: [
+        gate2StrategySimulatorHandoffFixture.strategy_idea_id,
+        gate2StrategySimulatorHandoffFixture.simulation_evidence_detail_id,
+        gate2StrategySimulatorHandoffFixture.risk_review_id,
+        gate2StrategySimulatorHandoffFixture.operator_note_id,
+        gate2StrategySimulatorHandoffFixture.outcome_log_id,
+        gate2StrategySimulatorHandoffFixture.learning_event_id
+      ],
+      missing_evidence: [],
+      provenance_refs: gate2StrategySimulatorHandoffFixture.provenance_refs,
+      operator_review_status: "review_recorded",
+      operator_required: true,
+      read_only: true,
+      limitation_notes: [
+        "Complete means the local fixture chain is present, not approved or ready."
+      ],
+      evidence_only: true,
+      approval_claim: false,
+      performance_claim: false,
+      external_access: false,
+      execution_path: false,
+      financial_gate: "G2_PAPER_TRADING",
+      scope: "paper_simulation_planning_only",
+      contract_authority: "contract_only",
+      created_at: fixtureTimestamp
+    }),
+    Gate2ResearchCaseInventoryItemContractSchema.parse({
+      case_inventory_item_id: "gate2-case-inventory-fixture-002",
+      linked_research_case_id: "gate2-research-case-fixture-002",
+      handoff_id: "gate2-strategy-simulator-handoff-fixture-002",
+      workspace_case_status: "risk_blocked",
+      completeness_status: "blocked",
+      freshness_status: "stale",
+      linked_scenario_key: "risk_blocked",
+      evidence_refs: ["gate0-strategy-idea-fixture-002", "gate2-risk-review-fixture-002"],
+      missing_evidence: [
+        "metric_report",
+        "operator_decision_note",
+        "outcome_log",
+        "learning_event"
+      ],
+      provenance_refs: ["ops/truth/RISK_RULES.md"],
+      operator_review_status: "blocked",
+      operator_required: true,
+      read_only: true,
+      limitation_notes: [
+        "Stale and missing evidence keeps this synthetic case blocked from review recording."
+      ],
+      evidence_only: true,
+      approval_claim: false,
+      performance_claim: false,
+      external_access: false,
+      execution_path: false,
+      financial_gate: "G2_PAPER_TRADING",
+      scope: "paper_simulation_planning_only",
+      contract_authority: "contract_only",
+      created_at: fixtureTimestamp
+    })
+  ];
+
+export const gate2MultiCaseWorkspaceFixture: Gate2MultiCaseWorkspaceContract =
+  Gate2MultiCaseWorkspaceContractSchema.parse({
+    workspace_inventory_id: "gate2-multi-case-workspace-fixture-001",
+    case_inventory_item_ids: gate2ResearchCaseInventoryFixtures.map(
+      (item) => item.case_inventory_item_id
+    ),
+    default_case_inventory_item_id: gate2ResearchCaseInventoryFixtures[0]?.case_inventory_item_id,
+    local_only: true,
+    read_only: true,
+    operator_required: true,
+    action_route_created: false,
+    limitation_notes: ["The inventory compares checked-in research evidence only."],
     evidence_only: true,
     approval_claim: false,
     performance_claim: false,

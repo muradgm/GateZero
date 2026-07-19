@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-666",
-  localVerification: "81 files / 568 tests",
+  latestPacket: "TRD-696",
+  localVerification: "85 files / 601 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 81 files, 568 tests.",
+      detail: "Latest suite: 85 files, 601 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "666 / 666",
+      value: "696 / 696",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "81 files / 568 tests"
+      reference: "85 files / 601 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "666 accepted records"
+      reference: "696 accepted records"
     },
     {
       area: "Dependency audit",
@@ -230,7 +230,7 @@ export const commandCenterData = {
       area: "Integrated evidence workflow",
       signal: "Research case to simulator handoff",
       state: "Visible",
-      reference: "TRD-657 through TRD-666"
+      reference: "TRD-657 through TRD-696"
     }
   ],
   simulationEvidenceDetail: {
@@ -332,8 +332,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-666 closes the integrated one-case evidence workflow.",
-      "TRD-667 may define a bounded local multi-case inventory."
+      "TRD-696 closes the bounded local case intake lane.",
+      "TRD-697 must confirm a concrete multi-file intake need before expansion."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -352,8 +352,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-666 closes the integrated one-case evidence workflow.",
-    "TRD-667 is the bounded multi-case workspace contract.",
+    "TRD-696 closes the bounded local case intake lane.",
+    "TRD-697 is a concrete multi-file intake gap review.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -471,7 +471,7 @@ export const commandCenterData = {
     "TRD-663 Outcome-log evidence linkage",
     "TRD-664 Learning-event evidence linkage",
     "TRD-665 Integrated operator workflow QA",
-    "TRD-666 Integrated evidence workflow checkpoint"
+    "TRD-696 Local case intake checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

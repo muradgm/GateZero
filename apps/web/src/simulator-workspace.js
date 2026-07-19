@@ -39,48 +39,41 @@ root.innerHTML = `
           <small>${data.scope}</small>
         </div>
       </section>
-      <section class="case-handoff" aria-labelledby="case-handoff-title">
-        <header>
-          <div>
-            <p class="eyebrow">Strategy-to-simulator handoff</p>
-            <h2 id="case-handoff-title">Research case ${data.researchCase.id}</h2>
-            <p>Reviewed strategy evidence and local simulation records are linked for inspection.</p>
-          </div>
-          <span>Read-only handoff</span>
-        </header>
-        <dl class="case-link-grid">
-          ${caseLink("Handoff", data.researchCase.handoffId)}
-          ${caseLink("Strategy idea", data.researchCase.strategyIdeaId)}
-          ${caseLink("Simulation detail", data.researchCase.simulationEvidenceDetailId)}
-          ${caseLink("Simulation record", data.researchCase.simulatedOrderRecordId)}
-          ${caseLink("Risk review", data.researchCase.riskReviewId)}
-        </dl>
-        <div class="case-support-grid">
-          ${supportPanel(
-            "Scenario provenance",
-            `<ul>${data.researchCase.provenanceRefs.map((item) => `<li><code>${item}</code></li>`).join("")}</ul>`
-          )}
-          ${supportPanel(
-            "Operator review checklist",
-            `<ol>${data.researchCase.operatorChecklist.map((item) => `<li>${item}</li>`).join("")}</ol>`
-          )}
-          ${supportPanel(
-            "Manual operator note",
-            `<strong>${data.researchCase.operatorNote.id}</strong><p>${data.researchCase.operatorNote.body}</p><small>${data.researchCase.operatorNote.limitationNotes.join(" ")}</small>`
-          )}
-          ${supportPanel(
-            "Outcome and learning",
-            `<dl class="linked-records">
-              <div><dt>Outcome</dt><dd><code>${data.researchCase.outcome.id}</code><small>${data.researchCase.outcome.limitation}</small></dd></div>
-              <div><dt>Learning</dt><dd><code>${data.researchCase.learning.id}</code><small>${data.researchCase.learning.limitation}</small></dd></div>
-            </dl>`
-          )}
+      <section class="case-selector-band" aria-labelledby="case-selector-title">
+        <div>
+          <p class="eyebrow">Local research inventory</p>
+          <h2 id="case-selector-title">Research cases</h2>
+          <p>Switch checked-in case evidence. Selection does not record or approve a decision.</p>
         </div>
-        <div class="handoff-limitations" role="note">
-          <strong>Handoff limitations</strong>
-          <span>${data.researchCase.limitationNotes.join(" ")}</span>
+        <div class="case-selector" role="group" aria-label="Research case">
+          ${data.researchCases
+            .map(
+              (item) =>
+                `<button type="button" data-case="${item.inventoryId}" aria-pressed="${item.inventoryId === data.caseWorkspace.defaultCaseInventoryId}">${item.label}</button>`
+            )
+            .join("")}
         </div>
-      </section>
+       </section>
+       <section class="catalog-band" aria-labelledby="catalog-title">
+         <header>
+           <div><p class="eyebrow">Checked-in intake</p><h2 id="catalog-title">Local case catalog</h2></div>
+           <span>${data.caseCatalog.items.length} record</span>
+         </header>
+         ${data.caseCatalog.items
+           .map(
+             (item) => `<article>
+               <div><strong>${item.title}</strong><code>${item.case_id}</code></div>
+               <dl>
+                 <div><dt>Status</dt><dd>${statusLabel(item.status)}</dd></div>
+                 <div><dt>Freshness</dt><dd>${statusLabel(item.freshness_status)}</dd></div>
+                 <div><dt>Evidence</dt><dd>${item.evidence_count}</dd></div>
+               </dl>
+               <details><summary>Checked-in sources</summary><ul>${item.source_refs.map((source) => `<li><code>${source}</code></li>`).join("")}</ul><p>${item.limitation_notes.join(" ")}</p></details>
+             </article>`
+           )
+           .join("")}
+       </section>
+       <div id="case-workspace-view" aria-live="polite"></div>
       <section class="scenario-toolbar" aria-labelledby="scenario-title">
         <div>
           <p class="eyebrow" id="scenario-title">Evidence scenario</p>
@@ -127,12 +120,25 @@ root.innerHTML = `
 
 const scenarioView = document.querySelector("#scenario-view");
 const scenarioButtons = [...document.querySelectorAll("[data-scenario]")];
+const caseWorkspaceView = document.querySelector("#case-workspace-view");
+const caseButtons = [...document.querySelectorAll("[data-case]")];
 
-if (!scenarioView) {
-  throw new Error("Missing scenario evidence view.");
+if (!scenarioView || !caseWorkspaceView) {
+  throw new Error("Missing local evidence workspace view.");
 }
 
+renderResearchCase(data.caseWorkspace.defaultCaseInventoryId);
 renderScenario(data.defaultScenario);
+
+for (const button of caseButtons) {
+  button.addEventListener("click", () => {
+    for (const candidate of caseButtons) {
+      candidate.setAttribute("aria-pressed", String(candidate === button));
+    }
+    const researchCase = renderResearchCase(button.dataset.case);
+    selectScenario(researchCase.linkedScenarioKey);
+  });
+}
 
 for (const button of scenarioButtons) {
   button.addEventListener("click", () => {
@@ -141,6 +147,78 @@ for (const button of scenarioButtons) {
     }
     renderScenario(button.dataset.scenario);
   });
+}
+
+function renderResearchCase(inventoryId) {
+  const researchCase = data.researchCases.find((item) => item.inventoryId === inventoryId);
+
+  if (!researchCase) {
+    throw new Error(`Unknown local research case: ${inventoryId}`);
+  }
+
+  const blocked = researchCase.completeness === "blocked";
+  caseWorkspaceView.innerHTML = `
+    <section class="case-handoff ${blocked ? "blocked" : "complete"}" aria-labelledby="case-handoff-title">
+      <header>
+        <div>
+          <p class="eyebrow">Strategy-to-simulator handoff</p>
+          <h2 id="case-handoff-title">Research case ${researchCase.id}</h2>
+          <p>${blocked ? "Missing or stale evidence keeps this case blocked." : "Reviewed strategy evidence and local simulation records are linked for inspection."}</p>
+        </div>
+        <span>${statusLabel(researchCase.completeness)}</span>
+      </header>
+      <div class="case-state-strip" aria-label="Case evidence state">
+        ${metric("Completeness", statusLabel(researchCase.completeness), statusLabel(researchCase.status))}
+        ${metric("Freshness", statusLabel(researchCase.freshness), "Per-case evidence")}
+        ${metric("Manual review", statusLabel(researchCase.operatorReviewStatus), researchCase.operatorRequired ? "Operator required" : "Review missing")}
+        ${metric("Missing records", String(researchCase.missingEvidence.length), evidenceReasons(researchCase.missingEvidence))}
+      </div>
+      <dl class="case-link-grid">
+        ${caseLink("Handoff", researchCase.handoffId)}
+        ${caseLink("Strategy idea", researchCase.strategyIdeaId)}
+        ${caseLink("Simulation detail", researchCase.simulationEvidenceDetailId)}
+        ${caseLink("Simulation record", researchCase.simulatedOrderRecordId)}
+        ${caseLink("Risk review", researchCase.riskReviewId)}
+      </dl>
+      <div class="case-support-grid">
+        ${supportPanel(
+          "Case provenance",
+          `<ul>${researchCase.provenanceRefs.map((item) => `<li><code>${item}</code></li>`).join("")}</ul>`
+        )}
+        ${supportPanel(
+          "Operator review checklist",
+          `<ol>${researchCase.operatorChecklist.map((item) => `<li>${item}</li>`).join("")}</ol>`
+        )}
+        ${supportPanel(
+          "Manual operator note",
+          researchCase.operatorNote
+            ? `<strong>${researchCase.operatorNote.id}</strong><p>${researchCase.operatorNote.body}</p><small>${researchCase.operatorNote.limitationNotes.join(" ")}</small>`
+            : `<p class="missing-record">No local operator note recorded.</p>`
+        )}
+        ${supportPanel("Outcome and learning", linkedOutcomeAndLearning(researchCase))}
+      </div>
+      <div class="handoff-limitations" role="note">
+        <strong>Case limitations</strong>
+        <span>${researchCase.limitationNotes.join(" ")}</span>
+      </div>
+    </section>
+  `;
+
+  return researchCase;
+}
+
+function linkedOutcomeAndLearning(researchCase) {
+  return `<dl class="linked-records">
+    <div><dt>Outcome</dt><dd>${researchCase.outcome ? `<code>${researchCase.outcome.id}</code><small>${researchCase.outcome.limitation}</small>` : '<span class="missing-record">Not recorded</span>'}</dd></div>
+    <div><dt>Learning</dt><dd>${researchCase.learning ? `<code>${researchCase.learning.id}</code><small>${researchCase.learning.limitation}</small>` : '<span class="missing-record">Not recorded</span>'}</dd></div>
+  </dl>`;
+}
+
+function selectScenario(key) {
+  for (const button of scenarioButtons) {
+    button.setAttribute("aria-pressed", String(button.dataset.scenario === key));
+  }
+  renderScenario(key);
 }
 
 function renderScenario(key) {
@@ -289,7 +367,7 @@ function evidenceReasons(items) {
 }
 
 function caseLink(label, value) {
-  return `<div><dt>${label}</dt><dd><code>${value}</code></dd></div>`;
+  return `<div><dt>${label}</dt><dd>${value ? `<code>${value}</code>` : '<span class="missing-record">Not recorded</span>'}</dd></div>`;
 }
 
 function supportPanel(title, content) {
