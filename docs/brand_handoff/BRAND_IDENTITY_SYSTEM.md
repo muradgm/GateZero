@@ -1,6 +1,6 @@
-# GateZero Brand Identity System
+# TraderFrame Brand Identity System
 
-Reference board: `docs/brand_handoff/reference/gatezero-identity-board.png`
+Reference board: `docs/brand_handoff/reference/TraderFrame-identity-board.png`
 
 ## Brand Essence
 
@@ -8,7 +8,7 @@ The control layer before every trade.
 
 ## Brand Definition
 
-GateZero is a personal trading research, risk-control, and execution-support system.
+TraderFrame is a personal trading research, risk-control, and execution-support system.
 
 No trade without evidence. No execution without risk approval.
 
@@ -18,7 +18,7 @@ Evidence in. Risk approved. Execution controlled.
 
 ## Logo Direction
 
-The GateZero logo uses an angular dimensional `G` mark with an inner gate and keyhole.
+The TraderFrame logo uses an angular dimensional `G` mark with an inner gate and keyhole.
 
 The mark represents:
 

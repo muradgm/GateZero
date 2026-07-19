@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Northstar Terminal app icon</title>
+  <desc id="desc">Abyss app icon with a refined bracketed northstar and brass checkpoint.</desc>
+  <rect width="512" height="512" rx="96" fill="#071018"/>
+  <path d="M102 118h128v48h-72v180h72v48H102z" fill="#DDEBE7"/>
+  <path d="M410 118H282v48h72v180h-72v48h128z" fill="#DDEBE7"/>
+  <path d="M256 118l48 104 108 34-108 34-48 104-48-104-108-34 108-34z" fill="#1E8F86"/>
+  <path d="M256 164l30 72 74 20-74 20-30 72-30-72-74-20 74-20z" fill="#DDEBE7"/>
+  <circle cx="256" cy="256" r="32" fill="#C9963E"/>
+</svg>

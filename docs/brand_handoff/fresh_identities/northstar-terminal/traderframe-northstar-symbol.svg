@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Northstar Terminal symbol</title>
+  <desc id="desc">A refined bracketed northstar with a brass checkpoint.</desc>
+  <path d="M20 22h34v12H34v60h20v12H20z" fill="#071018"/>
+  <path d="M108 22H74v12h20v60H74v12h34z" fill="#071018"/>
+  <path d="M64 28l13 28 29 8-29 8-13 28-13-28-29-8 29-8z" fill="#1E8F86"/>
+  <path d="M64 40l8 19 20 5-20 5-8 19-8-19-20-5 20-5z" fill="#DDEBE7"/>
+  <circle cx="64" cy="64" r="8" fill="#C9963E"/>
+</svg>

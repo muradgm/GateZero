@@ -1,4 +1,4 @@
-# GateZero Logo Production Requirements
+# TraderFrame Logo Production Requirements
 
 ## Required File Formats
 
@@ -13,14 +13,14 @@
 
 ## Required SVGs
 
-- gatezero-primary-lockup.svg
-- gatezero-horizontal-lockup.svg
-- gatezero-symbol.svg
-- gatezero-wordmark.svg
-- gatezero-app-icon.svg
-- gatezero-monochrome-black.svg
-- gatezero-monochrome-white.svg
-- gatezero-favicon.svg
+- traderframe-primary-lockup.svg
+- traderframe-horizontal-lockup.svg
+- traderframe-symbol.svg
+- traderframe-wordmark.svg
+- traderframe-app-icon.svg
+- traderframe-monochrome-black.svg
+- traderframe-monochrome-white.svg
+- traderframe-favicon.svg
 
 ## Required PNG Sizes
 

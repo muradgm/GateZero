@@ -1,223 +1,321 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GateZero Logo Preview</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TraderFrame Brand Preview</title>
     <style>
       :root {
-        --navy: #1a1028;
+        --deep: #1a1028;
+        --blackened: #09040f;
         --violet: #7c5cff;
         --teal: #00c6a7;
+        --slate: #eaeff5;
         --orange: #ff8a00;
-        --slate: #657085;
-        --line: #d9dee7;
-        --paper: #f7f9fc;
+        --ink: #17111f;
+        --muted: #5b6472;
+        --line: #d8dee8;
+        --panel: #fff;
       }
-
       * {
         box-sizing: border-box;
       }
-
       body {
         margin: 0;
-        background: var(--paper);
-        color: var(--navy);
-        font-family: Inter, Arial, sans-serif;
+        background: #f5f7fa;
+        color: var(--ink);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
       }
-
       main {
-        width: min(1180px, calc(100vw - 40px));
+        display: grid;
+        gap: 30px;
         margin: 0 auto;
-        padding: 36px 0 56px;
+        max-width: 1280px;
+        padding: 38px;
       }
-
       h1,
-      h2 {
+      h2,
+      p {
         margin: 0;
+      }
+      h1 {
+        font-size: 34px;
         letter-spacing: 0;
       }
-
-      h1 {
-        font-size: 32px;
-      }
-
       h2 {
-        font-size: 18px;
-      }
-
-      p {
-        margin: 10px 0 0;
-        color: var(--slate);
-        line-height: 1.5;
-      }
-
-      .section {
-        margin-top: 30px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 18px;
-        margin-top: 14px;
-      }
-
-      .tile {
-        display: grid;
-        align-content: center;
-        min-height: 240px;
-        padding: 22px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-      }
-
-      .tile.dark {
-        background: var(--navy);
-      }
-
-      .tile.checker {
-        background-image:
-          linear-gradient(45deg, #eef2f7 25%, transparent 25%),
-          linear-gradient(-45deg, #eef2f7 25%, transparent 25%),
-          linear-gradient(45deg, transparent 75%, #eef2f7 75%),
-          linear-gradient(-45deg, transparent 75%, #eef2f7 75%);
-        background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-        background-size: 20px 20px;
-      }
-
-      .label {
-        margin-bottom: 16px;
-        color: var(--slate);
+        color: var(--violet);
         font-size: 13px;
-        font-weight: 700;
-        letter-spacing: .08em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
-
-      .dark .label {
-        color: #b5bfcc;
+      p {
+        color: var(--muted);
+        line-height: 1.55;
       }
-
-      .lockup {
-        width: 100%;
-        max-height: 220px;
+      .hero,
+      .grid,
+      .palette,
+      .rules {
+        display: grid;
+        gap: 18px;
       }
-
-      .symbol {
-        width: min(220px, 70%);
-        margin: auto;
+      .hero {
+        grid-template-columns: 1.05fr 0.95fr;
+        align-items: stretch;
       }
-
-      .scale-row {
-        display: flex;
-        align-items: end;
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+      }
+      .dark-card {
+        background: linear-gradient(135deg, var(--deep), var(--blackened));
+        color: #fff;
+      }
+      .dark-card p {
+        color: #dfe5ee;
+      }
+      .lockup-preview {
+        display: grid;
         gap: 24px;
-        flex-wrap: wrap;
+        min-height: 260px;
       }
-
-      .sample {
+      .lockup-preview img {
+        max-width: 100%;
+      }
+      .hero-symbol {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+      }
+      .hero-symbol img {
+        width: min(280px, 64vw);
+      }
+      .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .asset-card {
+        display: grid;
+        gap: 16px;
+        min-height: 220px;
+      }
+      .asset-stage {
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        justify-items: center;
+        min-height: 150px;
+        padding: 20px;
+      }
+      .asset-stage.dark {
+        background: var(--deep);
+      }
+      .asset-stage img {
+        max-height: 112px;
+        max-width: 100%;
+      }
+      .size-row {
+        align-items: end;
+        display: flex;
+        gap: 28px;
+        min-height: 170px;
+      }
+      .size-check {
+        align-items: center;
         display: grid;
         gap: 8px;
         justify-items: center;
-        color: var(--slate);
+      }
+      .size-check span {
+        color: var(--muted);
         font-size: 12px;
-      }
-
-      .swatches {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 12px;
-        margin-top: 14px;
-      }
-
-      .swatch {
-        min-height: 84px;
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        font-size: 13px;
         font-weight: 700;
       }
-
+      .palette {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+      .swatch {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+      }
       .chip {
-        width: 100%;
-        height: 28px;
-        margin-bottom: 10px;
-        border-radius: 4px;
+        border-radius: 6px;
+        height: 56px;
+      }
+      .swatch strong,
+      .rules strong {
+        display: block;
+        font-size: 13px;
+      }
+      .swatch code {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .rules {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .rules ul {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 22px;
+        }
+        .hero,
+        .grid,
+        .palette,
+        .rules {
+          grid-template-columns: 1fr;
+        }
+        .size-row {
+          flex-wrap: wrap;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>GateZero Logo Draft</h1>
-      <p>Dimensional Gate: angular G mark, inner keyhole, approval threshold, and controlled execution.</p>
-
-      <section class="section">
-        <h2>Lockups</h2>
-        <div class="grid">
-          <div class="tile">
-            <div class="label">Horizontal</div>
-            <img class="lockup" src="gatezero-horizontal-lockup.svg" alt="GateZero horizontal lockup">
+      <section class="hero">
+        <article class="card lockup-preview">
+          <div>
+            <h1>TraderFrame Brand System</h1>
+            <p>Framed Judgment: a simple iconic TF mark for evidence-first trading control.</p>
           </div>
-          <div class="tile dark">
-            <div class="label">Dark Background</div>
-            <img class="lockup" src="gatezero-dark-lockup.svg" alt="GateZero dark lockup">
-          </div>
-          <div class="tile">
-            <div class="label">Primary Stacked</div>
-            <img class="lockup" src="gatezero-primary-lockup.svg" alt="GateZero stacked lockup">
-          </div>
-        </div>
+          <img src="traderframe-horizontal-lockup.svg" alt="TraderFrame horizontal lockup" />
+        </article>
+        <article class="card dark-card hero-symbol">
+          <img src="traderframe-app-icon.svg" alt="TraderFrame app icon" />
+          <p>Research the trade. Frame the risk. Execute only when allowed.</p>
+        </article>
       </section>
-
-      <section class="section">
-        <h2>Symbols</h2>
-        <div class="grid">
-          <div class="tile">
-            <div class="label">Symbol</div>
-            <img class="symbol" src="gatezero-symbol.svg" alt="GateZero symbol">
+      <section class="grid" aria-label="Logo assets">
+        <article class="card asset-card">
+          <h2>Symbol</h2>
+          <div class="asset-stage">
+            <img src="traderframe-symbol.svg" alt="TraderFrame symbol" />
           </div>
-          <div class="tile">
-            <div class="label">App Icon</div>
-            <img class="symbol" src="gatezero-app-icon.svg" alt="GateZero app icon">
+        </article>
+        <article class="card asset-card">
+          <h2>Wordmark</h2>
+          <div class="asset-stage">
+            <img src="traderframe-wordmark.svg" alt="TraderFrame wordmark" />
           </div>
-          <div class="tile dark">
-            <div class="label">Reversed</div>
-            <img class="symbol" src="gatezero-monochrome-white.svg" alt="GateZero white symbol">
+        </article>
+        <article class="card asset-card">
+          <h2>Reversed</h2>
+          <div class="asset-stage dark">
+            <img src="traderframe-monochrome-white.svg" alt="TraderFrame reversed symbol" />
           </div>
-          <div class="tile checker">
-            <div class="label">Monochrome</div>
-            <img class="symbol" src="gatezero-monochrome-black.svg" alt="GateZero black symbol">
+        </article>
+        <article class="card asset-card">
+          <h2>Monochrome</h2>
+          <div class="asset-stage">
+            <img src="traderframe-monochrome-black.svg" alt="TraderFrame monochrome symbol" />
           </div>
-        </div>
+        </article>
       </section>
-
-      <section class="section">
+      <section class="card">
         <h2>Small Size Checks</h2>
-        <div class="tile">
-          <div class="scale-row">
-            <div class="sample"><img src="gatezero-small-symbol.svg" width="16" height="16" alt="">16px</div>
-            <div class="sample"><img src="gatezero-small-symbol.svg" width="24" height="24" alt="">24px</div>
-            <div class="sample"><img src="gatezero-small-symbol.svg" width="32" height="32" alt="">32px</div>
-            <div class="sample"><img src="gatezero-small-symbol.svg" width="64" height="64" alt="">64px</div>
-            <div class="sample"><img src="gatezero-app-icon.svg" width="64" height="64" alt="">app 64px</div>
-            <div class="sample"><img src="gatezero-app-icon.svg" width="128" height="128" alt="">app 128px</div>
+        <div class="size-row">
+          <div class="size-check">
+            <img src="traderframe-small-symbol.svg" width="16" height="16" alt="" /><span
+              >16px</span
+            >
+          </div>
+          <div class="size-check">
+            <img src="traderframe-small-symbol.svg" width="24" height="24" alt="" /><span
+              >24px</span
+            >
+          </div>
+          <div class="size-check">
+            <img src="traderframe-small-symbol.svg" width="32" height="32" alt="" /><span
+              >32px</span
+            >
+          </div>
+          <div class="size-check">
+            <img src="traderframe-symbol.svg" width="64" height="64" alt="" /><span>64px</span>
+          </div>
+          <div class="size-check">
+            <img src="traderframe-app-icon.svg" width="96" height="96" alt="" /><span
+              >app 96px</span
+            >
+          </div>
+          <div class="size-check">
+            <img src="traderframe-app-icon.svg" width="144" height="144" alt="" /><span
+              >app 144px</span
+            >
           </div>
         </div>
       </section>
-
-      <section class="section">
-        <h2>Color System</h2>
-        <div class="swatches">
-          <div class="swatch"><div class="chip" style="background:#1A1028"></div>Deep Purple<br>#1A1028</div>
-          <div class="swatch"><div class="chip" style="background:#7C5CFF"></div>Violet<br>#7C5CFF</div>
-          <div class="swatch"><div class="chip" style="background:#00C6A7"></div>Teal<br>#00C6A7</div>
-          <div class="swatch"><div class="chip" style="background:#EAEFF5;border:1px solid #d9dee7"></div>Slate<br>#EAEFF5</div>
-          <div class="swatch"><div class="chip" style="background:#FF8A00"></div>Signal Orange<br>#FF8A00</div>
-        </div>
+      <section class="palette" aria-label="Color palette">
+        <article class="swatch">
+          <div class="chip" style="background: var(--deep)"></div>
+          <div><strong>Deep Purple</strong><code>#1A1028</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--blackened)"></div>
+          <div><strong>Blackened Purple</strong><code>#09040F</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--violet)"></div>
+          <div><strong>Violet</strong><code>#7C5CFF</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--teal)"></div>
+          <div><strong>Teal</strong><code>#00C6A7</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--slate)"></div>
+          <div><strong>Slate</strong><code>#EAEFF5</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--orange)"></div>
+          <div><strong>Signal Orange</strong><code>#FF8A00</code></div>
+        </article>
+      </section>
+      <section class="rules">
+        <article class="card">
+          <strong>Brand Essence</strong>
+          <ul>
+            <li>Research the trade.</li>
+            <li>Frame the risk.</li>
+            <li>Execute only when allowed.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <strong>Use For</strong>
+          <ul>
+            <li>Risk framing</li>
+            <li>Evidence review</li>
+            <li>Decision control</li>
+            <li>Operator accountability</li>
+          </ul>
+        </article>
+        <article class="card">
+          <strong>Do Not Use For</strong>
+          <ul>
+            <li>Profit promises</li>
+            <li>Signal hype</li>
+            <li>Casino energy</li>
+            <li>Green-arrow trading cliches</li>
+          </ul>
+        </article>
       </section>
     </main>
   </body>

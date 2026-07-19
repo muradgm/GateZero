@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 220" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Risk Ledger horizontal lockup</title>
+  <desc id="desc">TraderFrame Risk Ledger symbol and wordmark.</desc>
+  <g transform="translate(32 46)">
+    <path d="M24 22h80v18H24z" fill="#1A1028"/>
+    <path d="M24 22h18v84H24z" fill="#1A1028"/>
+    <path d="M86 22h18v84H86z" fill="#1A1028"/>
+    <path d="M24 88h80v18H24z" fill="#1A1028"/>
+    <path d="M50 44h14v38H50z" fill="#7C5CFF"/>
+    <path d="M68 44h14v62H68z" fill="#00C6A7"/>
+    <path d="M42 62h46v14H42z" fill="#7C5CFF"/>
+  </g>
+  <line x1="184" y1="55" x2="184" y2="165" stroke="#D8DEE8" stroke-width="2"/>
+  <text x="222" y="108" fill="#1A1028" font-family="Raleway, Inter, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="3">TRADER</text>
+  <text x="553" y="108" fill="#7C5CFF" font-family="Raleway, Inter, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="3">FRAME</text>
+  <text x="225" y="150" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="500">Research first.</text>
+  <text x="360" y="150" fill="#1A1028" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Risk framed.</text>
+  <text x="492" y="150" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="500">Execution controlled.</text>
+</svg>

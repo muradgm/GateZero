@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Risk Ledger symbol</title>
+  <desc id="desc">A ledger-like frame mark with evidence, risk, and decision columns.</desc>
+  <path d="M24 22h80v18H24z" fill="#1A1028"/>
+  <path d="M24 22h18v84H24z" fill="#1A1028"/>
+  <path d="M86 22h18v84H86z" fill="#1A1028"/>
+  <path d="M24 88h80v18H24z" fill="#1A1028"/>
+  <path d="M50 44h14v38H50z" fill="#7C5CFF"/>
+  <path d="M68 44h14v62H68z" fill="#00C6A7"/>
+  <path d="M42 62h46v14H42z" fill="#7C5CFF"/>
+</svg>

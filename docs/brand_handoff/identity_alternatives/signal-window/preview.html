@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TraderFrame Signal Window Preview</title>
+    <style>
+      :root {
+        --deep: #1a1028;
+        --blackened: #09040f;
+        --violet: #7c5cff;
+        --teal: #00c6a7;
+        --slate: #eaeff5;
+        --orange: #ff8a00;
+        --ink: #17111f;
+        --muted: #5b6472;
+        --line: #d8dee8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f5f7fa;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      main {
+        display: grid;
+        gap: 30px;
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 38px;
+      }
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: 34px;
+      }
+      h2 {
+        color: var(--violet);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .hero,
+      .grid,
+      .palette,
+      .rules {
+        display: grid;
+        gap: 18px;
+      }
+      .hero {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+      }
+      .dark-card {
+        background: linear-gradient(135deg, var(--deep), var(--blackened));
+        color: #fff;
+      }
+      .dark-card p {
+        color: #dfe5ee;
+      }
+      .lockup-preview {
+        display: grid;
+        gap: 24px;
+        min-height: 260px;
+      }
+      .lockup-preview img {
+        max-width: 100%;
+      }
+      .hero-symbol {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+      }
+      .hero-symbol img {
+        width: min(280px, 64vw);
+      }
+      .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .asset-card {
+        display: grid;
+        gap: 16px;
+        min-height: 220px;
+      }
+      .asset-stage {
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        justify-items: center;
+        min-height: 150px;
+        padding: 20px;
+      }
+      .asset-stage.dark {
+        background: var(--deep);
+      }
+      .asset-stage img {
+        max-height: 112px;
+        max-width: 100%;
+      }
+      .size-row {
+        align-items: end;
+        display: flex;
+        gap: 28px;
+        min-height: 170px;
+      }
+      .size-check {
+        align-items: center;
+        display: grid;
+        gap: 8px;
+        justify-items: center;
+      }
+      .size-check span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .palette {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+      .swatch {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+      }
+      .chip {
+        border-radius: 6px;
+        height: 56px;
+      }
+      .swatch strong,
+      .rules strong {
+        display: block;
+        font-size: 13px;
+      }
+      .swatch code {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .rules {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .rules ul {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 22px;
+        }
+        .hero,
+        .grid,
+        .palette,
+        .rules {
+          grid-template-columns: 1fr;
+        }
+        .size-row {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <article class="card lockup-preview">
+          <div>
+            <h1>TraderFrame Identity: Signal Window</h1>
+            <p>Abstract frame, approval axis, and contained signal rail.</p>
+          </div>
+          <img
+            src="traderframe-signal-window-horizontal-lockup.svg"
+            alt="TraderFrame Signal Window horizontal lockup"
+          />
+        </article>
+        <article class="card dark-card hero-symbol">
+          <img
+            src="traderframe-signal-window-app-icon.svg"
+            alt="TraderFrame Signal Window app icon"
+          />
+          <p>Research the trade. Frame the risk. Execute only when allowed.</p>
+        </article>
+      </section>
+      <section class="grid" aria-label="Logo assets">
+        <article class="card asset-card">
+          <h2>Symbol</h2>
+          <div class="asset-stage">
+            <img src="traderframe-signal-window-symbol.svg" alt="Signal Window symbol" />
+          </div>
+        </article>
+        <article class="card asset-card">
+          <h2>Wordmark</h2>
+          <div class="asset-stage">
+            <img src="traderframe-signal-window-wordmark.svg" alt="TraderFrame wordmark" />
+          </div>
+        </article>
+        <article class="card asset-card">
+          <h2>Reversed</h2>
+          <div class="asset-stage dark">
+            <img
+              src="traderframe-signal-window-monochrome-white.svg"
+              alt="Signal Window reversed symbol"
+            />
+          </div>
+        </article>
+        <article class="card asset-card">
+          <h2>Monochrome</h2>
+          <div class="asset-stage">
+            <img
+              src="traderframe-signal-window-monochrome-black.svg"
+              alt="Signal Window monochrome symbol"
+            />
+          </div>
+        </article>
+      </section>
+      <section class="card">
+        <h2>Small Size Checks</h2>
+        <div class="size-row">
+          <div class="size-check">
+            <img
+              src="traderframe-signal-window-small-symbol.svg"
+              width="16"
+              height="16"
+              alt=""
+            /><span>16px</span>
+          </div>
+          <div class="size-check">
+            <img
+              src="traderframe-signal-window-small-symbol.svg"
+              width="24"
+              height="24"
+              alt=""
+            /><span>24px</span>
+          </div>
+          <div class="size-check">
+            <img
+              src="traderframe-signal-window-small-symbol.svg"
+              width="32"
+              height="32"
+              alt=""
+            /><span>32px</span>
+          </div>
+          <div class="size-check">
+            <img src="traderframe-signal-window-symbol.svg" width="64" height="64" alt="" /><span
+              >64px</span
+            >
+          </div>
+          <div class="size-check">
+            <img src="traderframe-signal-window-app-icon.svg" width="96" height="96" alt="" /><span
+              >app 96px</span
+            >
+          </div>
+          <div class="size-check">
+            <img
+              src="traderframe-signal-window-app-icon.svg"
+              width="144"
+              height="144"
+              alt=""
+            /><span>app 144px</span>
+          </div>
+        </div>
+      </section>
+      <section class="palette">
+        <article class="swatch">
+          <div class="chip" style="background: var(--deep)"></div>
+          <div><strong>Deep Purple</strong><code>#1A1028</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--blackened)"></div>
+          <div><strong>Blackened Purple</strong><code>#09040F</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--violet)"></div>
+          <div><strong>Violet</strong><code>#7C5CFF</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--teal)"></div>
+          <div><strong>Teal</strong><code>#00C6A7</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--slate)"></div>
+          <div><strong>Slate</strong><code>#EAEFF5</code></div>
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: var(--orange)"></div>
+          <div><strong>Signal Orange</strong><code>#FF8A00</code></div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

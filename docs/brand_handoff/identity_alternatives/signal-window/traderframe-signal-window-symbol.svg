@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Signal Window symbol</title>
+  <desc id="desc">An abstract framed decision window with a contained signal rail and approval axis.</desc>
+  <path d="M24 24h80v16H40v64H24z" fill="#1A1028"/>
+  <path d="M88 24h16v80H24V88h64z" fill="#1A1028"/>
+  <path d="M36 58h56v14H36z" fill="#7C5CFF"/>
+  <path d="M57 36h14v56H57z" fill="#00C6A7"/>
+  <circle cx="64" cy="65" r="6" fill="#1A1028"/>
+</svg>

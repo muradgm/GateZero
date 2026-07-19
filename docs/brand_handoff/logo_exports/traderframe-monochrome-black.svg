@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame monochrome black symbol</title>
+  <desc id="desc">Single-color TraderFrame TF frame mark.</desc>
+  <path d="M22 24h84v18H74v62H56V42H22z" fill="#000000"/>
+  <path d="M22 24h18v80H22z" fill="#000000"/>
+  <path d="M40 61h52v18H40z" fill="#000000"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Risk Ledger small symbol</title>
+  <desc id="desc">Simplified ledger frame mark for small sizes.</desc>
+  <path d="M24 22h80v20H24z" fill="#1A1028"/>
+  <path d="M24 22h20v84H24z" fill="#1A1028"/>
+  <path d="M84 22h20v84H84z" fill="#1A1028"/>
+  <path d="M24 86h80v20H24z" fill="#1A1028"/>
+  <path d="M44 61h44v18H44z" fill="#7C5CFF"/>
+</svg>

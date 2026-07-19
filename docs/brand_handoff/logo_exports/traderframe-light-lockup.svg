@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 300" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame light-background lockup</title>
+  <desc id="desc">TraderFrame lockup on a light slate background.</desc>
+  <rect width="1080" height="300" fill="#F5F7FA"/>
+  <g transform="translate(58 86)">
+    <path d="M22 24h84v18H74v62H56V42H22z" fill="#1A1028"/>
+    <path d="M22 24h18v80H22z" fill="#1A1028"/>
+    <path d="M40 61h52v18H40z" fill="#7C5CFF"/>
+    <path d="M56 42h18v62H56z" fill="#00C6A7"/>
+  </g>
+  <line x1="210" y1="88" x2="210" y2="212" stroke="#D8DEE8" stroke-width="2"/>
+  <text x="250" y="142" fill="#1A1028" font-family="Raleway, Inter, Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="3">TRADER</text>
+  <text x="604" y="142" fill="#7C5CFF" font-family="Raleway, Inter, Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="3">FRAME</text>
+  <text x="253" y="190" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500">Research first.</text>
+  <text x="410" y="190" fill="#1A1028" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="700">Risk framed.</text>
+  <text x="552" y="190" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="500">Execution controlled.</text>
+</svg>
+

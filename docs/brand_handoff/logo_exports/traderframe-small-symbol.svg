@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame small-size symbol</title>
+  <desc id="desc">A simplified TF frame mark optimized for favicon and small UI use.</desc>
+  <path d="M22 24h84v20H75v60H55V44H22z" fill="#1A1028"/>
+  <path d="M22 24h20v80H22z" fill="#1A1028"/>
+  <path d="M42 60h50v20H42z" fill="#7C5CFF"/>
+</svg>

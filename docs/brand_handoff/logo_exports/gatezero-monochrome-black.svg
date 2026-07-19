@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">GateZero monochrome black symbol</title>
-  <desc id="desc">One-color black angular GateZero mark.</desc>
-  <path d="M142 176L258 106V172L190 214V322L258 362V428L142 362Z" fill="#000000"/>
-  <path d="M258 106L414 198L338 244L258 172Z" fill="#000000"/>
-  <path d="M224 270L258 250L292 270V426L258 448L224 426Z" fill="#000000"/>
-  <path d="M292 270H410V366L330 414V348L368 326V306H292Z" fill="#000000"/>
-</svg>

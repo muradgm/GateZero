@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame favicon</title>
+  <desc id="desc">Small TraderFrame TF mark.</desc>
+  <rect width="64" height="64" rx="14" fill="#1A1028"/>
+  <path d="M13 13h42v10H38v29H28V23H13z" fill="#FFFFFF"/>
+  <path d="M13 13h10v39H13z" fill="#FFFFFF"/>
+  <path d="M23 31h25v9H23z" fill="#7C5CFF"/>
+</svg>

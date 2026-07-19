@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Signal Window monochrome white</title>
+  <desc id="desc">Reversed single-color Signal Window mark.</desc>
+  <path d="M24 24h80v16H40v64H24z" fill="#FFFFFF"/>
+  <path d="M88 24h16v80H24V88h64z" fill="#FFFFFF"/>
+  <path d="M36 58h56v14H36z" fill="#FFFFFF"/>
+  <path d="M57 36h14v56H57z" fill="#FFFFFF"/>
+</svg>

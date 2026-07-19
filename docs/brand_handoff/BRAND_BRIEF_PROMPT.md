@@ -1,35 +1,35 @@
-# GateZero Brand Brief Prompt
+# TraderFrame Brand Brief Prompt
 
 Use this prompt to brief a brand designer, identity designer, logo designer, or brand agent.
 
 ## Role
 
-You are a senior brand identity designer helping define the brand foundation for GateZero.
+You are a senior brand identity designer helping define the brand foundation for TraderFrame.
 
 Your job is to create a clear, serious, premium brand brief that can guide logo design, visual
 identity, product messaging, and future brand assets.
 
 ## About The Brand
 
-GateZero is a personal trading research, risk-control, and execution-support system.
+TraderFrame is a personal trading research, risk-control, and execution-support system.
 
 It is built for one serious trader/operator who wants to make trading decisions from evidence
-instead of impulse. GateZero helps the operator research strategies, review backtests, frame risk,
-journal decisions, and support disciplined execution workflows.
+instead of impulse. TraderFrame helps the operator research strategies, review backtests, frame
+risk, journal decisions, and support disciplined execution workflows.
 
-GateZero is not an AI money machine, trading signal seller, casino-style app, or get-rich-quick
+TraderFrame is not an AI money machine, trading signal seller, casino-style app, or get-rich-quick
 product.
 
 ## Core Wedge
 
 > No trade without evidence. No execution without risk approval.
 
-This wedge is the center of the brand. GateZero should communicate disciplined judgment, risk
+This wedge is the center of the brand. TraderFrame should communicate disciplined judgment, risk
 control, and operator accountability before action.
 
 ## Service
 
-GateZero provides an operating system for personal trading discipline.
+TraderFrame provides an operating system for personal trading discipline.
 
 The service supports:
 
@@ -58,10 +58,10 @@ The target user is a serious personal trader/operator who wants:
 
 ## Brand Meaning
 
-GateZero means:
+TraderFrame means:
 
 - the first gate before any trading action
-- the zero point where evidence is checked
+- the decision frame where evidence is checked
 - control risk before execution
 - research before action
 - evidence before confidence
@@ -70,7 +70,7 @@ GateZero means:
 
 ## Brand Personality
 
-GateZero should feel:
+TraderFrame should feel:
 
 - disciplined
 - precise
@@ -83,7 +83,7 @@ GateZero should feel:
 - evidence-first
 - risk-aware
 
-GateZero must not feel:
+TraderFrame must not feel:
 
 - hype-driven
 - casino-like
@@ -111,8 +111,8 @@ Explore a premium fintech identity system built around:
 
 Preferred logo direction:
 
-- a strong G or GZ monogram
-- gate, threshold, and zero-point symbolism
+- a strong G or TF monogram
+- gate, threshold, and decision-frame symbolism
 - a circular frame or arc representing risk boundary and decision gates
 - app-icon readiness
 - premium, restrained, non-mascot execution
@@ -154,7 +154,7 @@ Create a brand brief that includes:
 
 The resulting brand brief is only successful if it:
 
-- clearly explains what GateZero is
+- clearly explains what TraderFrame is
 - centers the wedge
 - explains the service without hype
 - avoids profit promises

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Risk Ledger monochrome white</title>
+  <desc id="desc">Reversed single-color Risk Ledger mark.</desc>
+  <path d="M24 22h80v18H24z" fill="#FFFFFF"/>
+  <path d="M24 22h18v84H24z" fill="#FFFFFF"/>
+  <path d="M86 22h18v84H86z" fill="#FFFFFF"/>
+  <path d="M24 88h80v18H24z" fill="#FFFFFF"/>
+  <path d="M50 44h14v38H50z" fill="#FFFFFF"/>
+  <path d="M68 44h14v62H68z" fill="#FFFFFF"/>
+  <path d="M42 62h46v14H42z" fill="#FFFFFF"/>
+</svg>

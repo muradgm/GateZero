@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TraderFrame Clearance Protocol</title>
+    <style>
+      :root {
+        --paper: #f4efe6;
+        --ink: #17202a;
+        --red: #c13b32;
+        --steel: #6b7280;
+        --blue: #2f6fed;
+        --line: #d7cec0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+      }
+      main {
+        display: grid;
+        gap: 28px;
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 38px;
+      }
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-family: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+        font-size: 46px;
+        line-height: 1;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+      h2 {
+        color: var(--red);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      p {
+        color: var(--steel);
+        line-height: 1.55;
+      }
+      .hero,
+      .grid,
+      .palette {
+        display: grid;
+        gap: 18px;
+      }
+      .hero {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card {
+        background: #fffaf2;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 24px;
+      }
+      .dark {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .dark p {
+        color: #e7dccb;
+      }
+      .stage {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+        min-height: 260px;
+      }
+      .stage img {
+        max-height: 210px;
+        max-width: 100%;
+      }
+      .lockup {
+        align-items: center;
+        display: grid;
+        min-height: 220px;
+      }
+      .lockup img {
+        max-width: 100%;
+      }
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .panel {
+        display: grid;
+        gap: 16px;
+      }
+      .panel img {
+        height: 104px;
+        max-width: 100%;
+      }
+      .sizes {
+        align-items: end;
+        display: flex;
+        gap: 22px;
+        min-height: 96px;
+      }
+      .palette {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .swatch {
+        background: #fffaf2;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 14px;
+      }
+      .chip {
+        border-radius: 3px;
+        height: 54px;
+        margin-bottom: 12px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 22px;
+        }
+        .hero,
+        .grid,
+        .palette {
+          grid-template-columns: 1fr;
+        }
+        .sizes {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <article class="card lockup">
+          <div>
+            <h1>TraderFrame</h1>
+            <p>Clearance Protocol: research logged, risk checked, action controlled.</p>
+          </div>
+          <img src="traderframe-clearance-wordmark.svg" alt="TraderFrame Clearance wordmark" />
+        </article>
+        <article class="card dark stage">
+          <img src="traderframe-clearance-app-icon.svg" alt="TraderFrame Clearance app icon" />
+          <p>Research the trade. Frame the risk. Execute only when allowed.</p>
+        </article>
+      </section>
+      <section class="grid">
+        <article class="card panel">
+          <h2>Symbol</h2>
+          <img src="traderframe-clearance-symbol.svg" alt="Clearance symbol" />
+          <p>Control gate, risk stop line, approval check.</p>
+        </article>
+        <article class="card panel">
+          <h2>Type</h2>
+          <img src="traderframe-clearance-wordmark.svg" alt="Wordmark" />
+          <p>Condensed technical wordmark with mono-system posture.</p>
+        </article>
+        <article class="card panel">
+          <h2>Small Size</h2>
+          <div class="sizes">
+            <img src="traderframe-clearance-symbol.svg" width="16" height="16" alt="" /><img
+              src="traderframe-clearance-symbol.svg"
+              width="24"
+              height="24"
+              alt=""
+            /><img src="traderframe-clearance-symbol.svg" width="32" height="32" alt="" /><img
+              src="traderframe-clearance-symbol.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+          </div>
+        </article>
+      </section>
+      <section class="palette">
+        <article class="swatch">
+          <div class="chip" style="background: #f4efe6"></div>
+          <strong>Paper</strong><br />#F4EFE6
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #17202a"></div>
+          <strong>Ink</strong><br />#17202A
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #c13b32"></div>
+          <strong>Clearance Red</strong><br />#C13B32
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #6b7280"></div>
+          <strong>Steel</strong><br />#6B7280
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #2f6fed"></div>
+          <strong>Signal Blue</strong><br />#2F6FED
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

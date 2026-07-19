@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Clearance Protocol symbol</title>
+  <desc id="desc">A clearance stamp with a control gate, red risk stop line, and blue approval check.</desc>
+  <rect x="18" y="18" width="92" height="92" rx="10" fill="#F4EFE6" stroke="#17202A" stroke-width="10"/>
+  <path d="M39 42h50v13H39z" fill="#17202A"/>
+  <path d="M39 42h15v46H39z" fill="#17202A"/>
+  <path d="M74 42h15v46H74z" fill="#17202A"/>
+  <rect x="39" y="92" width="50" height="9" rx="2" fill="#C13B32"/>
+  <path d="M50 70l12 12 24-30" fill="none" stroke="#2F6FED" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

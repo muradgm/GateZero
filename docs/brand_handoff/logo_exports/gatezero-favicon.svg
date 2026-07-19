@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">GateZero favicon</title>
-  <desc id="desc">Simplified angular GateZero mark for favicon use.</desc>
-  <rect x="4" y="4" width="56" height="56" rx="14" fill="#1A1028"/>
-  <path d="M16 22L32 12V22L24 27V39L32 44V54L16 44Z" fill="#FFFFFF"/>
-  <path d="M32 12L54 25L43 31L32 22Z" fill="#7C5CFF"/>
-  <path d="M28 34L32 32L36 34V53L32 56L28 53Z" fill="#FFFFFF"/>
-  <path d="M36 34H53V45L42 52V43L47 40V38H36Z" fill="#7C5CFF"/>
-</svg>

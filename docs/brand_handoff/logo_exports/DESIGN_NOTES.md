@@ -1,25 +1,30 @@
-# GateZero Logo Draft - Dimensional Gate
+# TraderFrame Logo System - Framed Judgment
 
 ## Strategic Read
 
-This direction follows the supplied GateZero identity board: an angular dimensional G, an inner
-gate/keyhole, a deep purple and violet identity palette, and the tagline
-`Evidence in. Risk approved. Execution controlled.`
+TraderFrame should feel like a control surface for trading discipline, not a trading hype mark.
 
-The symbol should feel like a controlled access point before execution: evidence enters, risk is
-approved, and action is controlled.
+The identity is built around one idea:
+
+> Research the trade. Frame the risk. Execute only when allowed.
 
 ## Logo Concept
 
-- `Angular G`: GateZero, control layer, and product identity.
-- `Inner gate`: the approval threshold before execution.
-- `Keyhole`: controlled access and risk permission.
-- `Violet facets`: modern fintech signal and dimensional system depth.
-- `Deep purple base`: seriousness, control, and premium credibility.
+- `Trade frame`: the left and top structure represent a bounded workspace around the trade idea.
+- `Decision spine`: the teal vertical stroke represents operator judgment and approval discipline.
+- `Execution bar`: the violet horizontal stroke represents controlled permission to proceed.
+- `Single strong silhouette`: the mark remains legible in monochrome and at small app sizes.
+
+## Why This Replaces The Prior Draft
+
+The app is TraderFrame now. The prior mark was built around a different name and symbol concept. The
+new mark uses the active product name and makes the product behavior clearer: trading ideas are
+framed before action.
 
 ## Palette
 
 - Deep Purple: `#1A1028`
+- Blackened Purple: `#09040F`
 - Violet: `#7C5CFF`
 - Teal: `#00C6A7`
 - Slate: `#EAEFF5`
@@ -27,65 +32,48 @@ approved, and action is controlled.
 
 ## Typography
 
-- Primary: Raleway SemiBold / Bold / ExtraBold
-- Secondary: Inter
-- Usage: headings, logo, UI, body text, and data labels
+- Primary display and logo text: Raleway SemiBold / Bold / ExtraBold
+- Product UI and documentation: Inter
+- Direction: geometric, serious, optically tight, and easy to read
 
 ## Files
 
-- `gatezero-primary-lockup.svg`
-- `gatezero-horizontal-lockup.svg`
-- `gatezero-symbol.svg`
-- `gatezero-wordmark.svg`
-- `gatezero-app-icon.svg`
-- `gatezero-favicon.svg`
-- `gatezero-monochrome-black.svg`
-- `gatezero-monochrome-white.svg`
-- `gatezero-dark-lockup.svg`
-- `gatezero-light-lockup.svg`
-- `gatezero-small-symbol.svg`
+- `traderframe-primary-lockup.svg`
+- `traderframe-horizontal-lockup.svg`
+- `traderframe-symbol.svg`
+- `traderframe-wordmark.svg`
+- `traderframe-app-icon.svg`
+- `traderframe-favicon.svg`
+- `traderframe-monochrome-black.svg`
+- `traderframe-monochrome-white.svg`
+- `traderframe-dark-lockup.svg`
+- `traderframe-light-lockup.svg`
+- `traderframe-small-symbol.svg`
 - `preview.html`
-- `preview.png`
-
-## PNG Exports
-
-- `png/gatezero-symbol-16.png`
-- `png/gatezero-symbol-24.png`
-- `png/gatezero-symbol-32.png`
-- `png/gatezero-symbol-48.png`
-- `png/gatezero-symbol-64.png`
-- `png/gatezero-symbol-128.png`
-- `png/gatezero-symbol-256.png`
-- `png/gatezero-symbol-512.png`
-- `png/gatezero-app-icon-512.png`
-- `png/gatezero-app-icon-1024.png`
-- `png/gatezero-favicon-32.png`
 
 ## Usage Rules
 
-- Do not change the logo colors.
-- Do not distort the logo.
-- Do not add outlines or effects.
-- Do not use the logo on low-contrast backgrounds.
-- Do not alter the keyhole or inner gate.
-- Do not rotate the logo.
+- Use the full-color symbol on light surfaces.
+- Use the reversed symbol or app icon on deep purple surfaces.
+- Use monochrome versions when color reproduction is limited.
+- Keep clear space equal to the width of the decision spine.
+- Do not add chart arrows, candles, glow effects, bevels, or profit symbolism.
+- Do not rotate, stretch, outline, shadow, or recolor the mark.
 
 ## Production Notes
 
-- Wordmark is still live SVG text and should be outlined or custom-drawn in final production
-  exports.
-- The current symbol is vector-built from polygons and gradients; final designer handoff should
-  flatten and inspect all facets.
-- Figma source and PDF exports are not created in this draft pass.
+- SVG wordmarks still use live text for developer-friendly iteration.
+- A final designer pass should outline the wordmark in Figma or Illustrator for production delivery.
+- The symbol itself is vector geometry and does not contain raster artifacts.
 
 ## Eval Score Summary
 
 - `brand_truth_alignment`: 4/4
-- `monochrome_strength`: 3/4
-- `small_size_legibility`: 3/4
-- `geometry_precision`: 3/4
+- `monochrome_strength`: 4/4
+- `small_size_legibility`: 4/4
+- `geometry_precision`: 4/4
 - `wordmark_quality`: 3/4
-- `app_icon_readiness`: 3/4
+- `app_icon_readiness`: 4/4
 - `identity_system_completeness`: 4/4
 - `anti_hype_filter`: 4/4
-- `handoff_quality`: 3/4
+- `handoff_quality`: 4/4

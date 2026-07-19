@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 220" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame horizontal lockup</title>
+  <desc id="desc">TraderFrame symbol and wordmark with evidence-first tagline.</desc>
+  <g transform="translate(32 46)">
+    <path d="M22 24h84v18H74v62H56V42H22z" fill="#1A1028"/>
+    <path d="M22 24h18v80H22z" fill="#1A1028"/>
+    <path d="M40 61h52v18H40z" fill="#7C5CFF"/>
+    <path d="M56 42h18v62H56z" fill="#00C6A7"/>
+  </g>
+  <line x1="184" y1="55" x2="184" y2="165" stroke="#D8DEE8" stroke-width="2"/>
+  <text x="222" y="108" fill="#1A1028" font-family="Raleway, Inter, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="3">TRADER</text>
+  <text x="553" y="108" fill="#7C5CFF" font-family="Raleway, Inter, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="3">FRAME</text>
+  <text x="225" y="150" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="500">Research first.</text>
+  <text x="360" y="150" fill="#1A1028" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Risk framed.</text>
+  <text x="492" y="150" fill="#4B5565" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="500">Execution controlled.</text>
+</svg>
+

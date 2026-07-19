@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame Clearance Protocol app icon</title>
+  <desc id="desc">Paper-toned app icon with a control gate, red risk stop line, and blue approval check.</desc>
+  <rect width="512" height="512" rx="96" fill="#F4EFE6"/>
+  <rect x="88" y="88" width="336" height="336" rx="42" fill="#F4EFE6" stroke="#17202A" stroke-width="42"/>
+  <path d="M166 178h180v48H166z" fill="#17202A"/>
+  <path d="M166 178h48v150h-48z" fill="#17202A"/>
+  <path d="M298 178h48v150h-48z" fill="#17202A"/>
+  <rect x="166" y="345" width="180" height="34" rx="8" fill="#C13B32"/>
+  <path d="M192 278l44 44 88-112" fill="none" stroke="#2F6FED" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

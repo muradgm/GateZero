@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">TraderFrame app icon</title>
+  <desc id="desc">Deep purple app icon with a simple TraderFrame TF frame symbol.</desc>
+  <defs>
+    <linearGradient id="bg" x1="64" y1="32" x2="448" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#211238"/>
+      <stop offset="1" stop-color="#09040F"/>
+    </linearGradient>
+  </defs>
+  <rect x="32" y="32" width="448" height="448" rx="104" fill="url(#bg)"/>
+  <path d="M104 106h304v72H285v228h-72V178H104z" fill="#FFFFFF"/>
+  <path d="M104 106h72v300h-72z" fill="#FFFFFF"/>
+  <path d="M176 244h188v68H176z" fill="#7C5CFF"/>
+  <path d="M213 178h72v228h-72z" fill="#00C6A7"/>
+</svg>

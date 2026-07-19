@@ -1,12 +1,12 @@
-# GateZero Brand Brief
+# TraderFrame Brand Brief
 
 ## Product
 
-GateZero
+TraderFrame
 
 ## Definition
 
-GateZero is a personal trading research, risk-control, and execution-support system.
+TraderFrame is a personal trading research, risk-control, and execution-support system.
 
 It helps one serious operator research strategies, review evidence, frame risk, and support
 disciplined trading execution decisions.
@@ -19,10 +19,10 @@ It is not a trading-signal seller, not a casino-style app, and not an AI money m
 
 ## Brand Meaning
 
-GateZero means:
+TraderFrame means:
 
 - the first gate before any trading action
-- the zero point where evidence is checked
+- the decision frame where evidence is checked
 - control risk before execution
 - make trading decisions from evidence, not impulse
 - keep the operator accountable
@@ -42,7 +42,7 @@ A serious personal trader/operator who wants:
 
 ## Emotional Positioning
 
-GateZero should feel like a professional-grade trading operating system.
+TraderFrame should feel like a professional-grade trading operating system.
 
 The emotional promise is not excitement.  
 The emotional promise is control.
@@ -78,8 +78,8 @@ The emotional promise is control.
 
 The preferred direction uses:
 
-- a strong G / GZ structure
-- gate, threshold, and zero-point symbolism
+- a strong TF structure
+- gate, threshold, and decision-frame symbolism
 - a circular control frame/arc
 - deep purple authority
 - violet dimensional accent
@@ -96,16 +96,16 @@ The gate / threshold represents:
 - risk gate before execution
 - operator control
 
-The zero point / circular arc represents:
+The decision frame / circular arc represents:
 
 - baseline discipline
 - control boundary
 - decision gate
 - risk containment
 
-The G/GZ monogram represents:
+The G/TF monogram represents:
 
-- GateZero
+- TraderFrame
 - governance
 - gate state
 - structure

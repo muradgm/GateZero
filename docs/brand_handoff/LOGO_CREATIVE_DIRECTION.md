@@ -1,69 +1,80 @@
-# GateZero Logo Creative Direction
+# TraderFrame Logo Creative Direction
 
 ## Direction Name
 
-Controlled Judgment
+Framed Judgment
 
 ## Core Idea
 
-GateZero is the zero point before execution: research enters, risk is evaluated, and execution only
-happens after evidence and approval gates are satisfied.
+TraderFrame frames the trade before action. A strategy idea enters the workspace, evidence is
+reviewed, risk is made visible, and execution remains controlled until the operator accepts the
+decision.
 
-The logo should visualize controlled judgment, not market excitement.
+The logo should visualize disciplined framing, not market excitement.
 
-## Preferred Symbol Concept
+## Symbol Concept
 
-A refined G or GZ monogram integrated with gate, threshold, zero-point, and control-boundary
-symbolism.
+A simple `TF` monogram formed from:
 
-### G / GZ
+- a trade frame
+- a decision spine
+- a risk boundary
+- a controlled execution bar
 
-Represents GateZero, governance, gate state, and product identity.
+### Trade Frame
 
-### Gate / Threshold
+Represents the structured container around every trading idea before it can become a decision.
 
-Represents approval boundary, evidence check, risk approval, and controlled execution.
+### Decision Spine
 
-### Zero Point / Arc
+Represents operator judgment, review discipline, and the central control path.
 
-Represents baseline discipline, no unchecked risk, containment, and the zero point before a trade
-can proceed.
+### Risk Boundary
+
+Represents the line that keeps evidence, risk, and action separated until approval.
+
+### Execution Bar
+
+Represents controlled permission to proceed, not a prediction or profit signal.
 
 ## Style
 
+- flat vector first
 - sharp but calm
 - premium but not flashy
 - strong but not aggressive
 - modern but not trendy
 - app-ready
-- vector-first
+- monochrome-strong
 
 ## Shape Rules
 
 - strong silhouette with minimal internal detail
-- gate or zero-point idea must be readable at small sizes
-- avoid sports-team feeling
-- arc must feel like a control boundary, not decoration
+- readable at 16px, 24px, and 32px
+- no tiny keyholes or decorative inner detail
+- no sports-team feeling
+- no crypto-hype gradient dependence
 - negative space should be intentional
 - mark must work without color
 
 ## Wordmark Rules
 
-- custom or semi-custom geometric sans
-- wide tracking, but not loose
-- strong optical spacing
+- geometric sans
+- compact optical spacing
+- single clear `TRADERFRAME` reading
+- violet may emphasize `FRAME`
 - no warped AI text
-- no default all-caps font without modification
+- no default all-caps treatment without spacing review
 
 ## App Icon Rules
 
-- use simplified symbol
+- use the simplified symbol
 - avoid tagline or tiny text
-- strong silhouette on navy
+- strong silhouette on deep purple
 - must read at 32px
-- create flat and presentation versions
+- avoid glow, bevel, or chart-background texture
 
 ## Recommendation
 
-Build around the G/GZ gate-zero idea and refine it into a production-grade identity system. The
-final logo should be simple, distinctive, and stronger in monochrome than in color.
+Use the Framed Judgment mark as the primary identity direction. It uses the active product name and
+turns the product promise into a simple visual system: trade, frame, risk, control.

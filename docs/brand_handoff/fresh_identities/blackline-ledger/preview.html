@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TraderFrame Blackline Ledger</title>
+    <style>
+      :root {
+        --paper: #f6f1e8;
+        --ink: #101010;
+        --graphite: #3a3a3a;
+        --red: #d1493f;
+        --rule: #b8b0a4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter Tight", Inter, Arial, sans-serif;
+      }
+      main {
+        display: grid;
+        gap: 28px;
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 38px;
+      }
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 44px;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+      h2 {
+        color: var(--red);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      p {
+        color: var(--graphite);
+        line-height: 1.55;
+      }
+      .hero,
+      .grid,
+      .palette {
+        display: grid;
+        gap: 18px;
+      }
+      .hero {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card {
+        background: #fffaf2;
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+        padding: 24px;
+      }
+      .dark {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .dark p {
+        color: #eadfce;
+      }
+      .stage {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+        min-height: 260px;
+      }
+      .stage img {
+        max-height: 210px;
+        max-width: 100%;
+      }
+      .lockup {
+        align-items: center;
+        display: grid;
+        min-height: 220px;
+      }
+      .lockup img {
+        max-width: 100%;
+      }
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .panel {
+        display: grid;
+        gap: 16px;
+      }
+      .panel img {
+        height: 104px;
+        max-width: 100%;
+      }
+      .sizes {
+        align-items: end;
+        display: flex;
+        gap: 22px;
+        min-height: 96px;
+      }
+      .palette {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .swatch {
+        background: #fffaf2;
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+        padding: 14px;
+      }
+      .chip {
+        height: 54px;
+        margin-bottom: 12px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 22px;
+        }
+        .hero,
+        .grid,
+        .palette {
+          grid-template-columns: 1fr;
+        }
+        .sizes {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <article class="card lockup">
+          <div>
+            <h1>TraderFrame</h1>
+            <p>Blackline Ledger: research records, risk stops, disciplined review.</p>
+          </div>
+          <img src="traderframe-blackline-wordmark.svg" alt="TraderFrame Blackline wordmark" />
+        </article>
+        <article class="card dark stage">
+          <img src="traderframe-blackline-app-icon.svg" alt="TraderFrame Blackline app icon" />
+          <p>Research the trade. Frame the risk. Execute only when allowed.</p>
+        </article>
+      </section>
+      <section class="grid">
+        <article class="card panel">
+          <h2>Symbol</h2>
+          <img src="traderframe-blackline-symbol.svg" alt="Blackline symbol" />
+          <p>Ledger page, evidence rules, red risk stop line.</p>
+        </article>
+        <article class="card panel">
+          <h2>Type</h2>
+          <img src="traderframe-blackline-wordmark.svg" alt="Wordmark" />
+          <p>Editorial serif wordmark with evidence-journal posture.</p>
+        </article>
+        <article class="card panel">
+          <h2>Small Size</h2>
+          <div class="sizes">
+            <img src="traderframe-blackline-symbol.svg" width="16" height="16" alt="" /><img
+              src="traderframe-blackline-symbol.svg"
+              width="24"
+              height="24"
+              alt=""
+            /><img src="traderframe-blackline-symbol.svg" width="32" height="32" alt="" /><img
+              src="traderframe-blackline-symbol.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+          </div>
+        </article>
+      </section>
+      <section class="palette">
+        <article class="swatch">
+          <div class="chip" style="background: #f6f1e8"></div>
+          <strong>Ledger Paper</strong><br />#F6F1E8
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #101010"></div>
+          <strong>Blackline</strong><br />#101010
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #3a3a3a"></div>
+          <strong>Graphite</strong><br />#3A3A3A
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #d1493f"></div>
+          <strong>Risk Red</strong><br />#D1493F
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #b8b0a4"></div>
+          <strong>Rule Gray</strong><br />#B8B0A4
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

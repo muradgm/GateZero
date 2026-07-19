@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TraderFrame Northstar Terminal</title>
+    <style>
+      :root {
+        --mid: #071018;
+        --frost: #ddebe7;
+        --north: #1e8f86;
+        --brass: #c9963e;
+        --haze: #eef3f0;
+        --muted: #50615f;
+        --line: #cbdad6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--haze);
+        color: var(--mid);
+        font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+      }
+      main {
+        display: grid;
+        gap: 28px;
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 38px;
+      }
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-family:
+          "Aptos Display", "Segoe UI Variable Display", "Segoe UI", Inter, Arial, sans-serif;
+        font-size: 48px;
+        line-height: 1;
+        letter-spacing: 0;
+      }
+      h2 {
+        color: var(--north);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .hero,
+      .grid,
+      .palette {
+        display: grid;
+        gap: 18px;
+      }
+      .hero {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+      }
+      .dark {
+        background: var(--mid);
+        color: var(--frost);
+      }
+      .dark p {
+        color: var(--frost);
+      }
+      .stage {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+        min-height: 260px;
+      }
+      .stage img {
+        max-height: 210px;
+        max-width: 100%;
+      }
+      .lockup {
+        align-items: center;
+        display: grid;
+        min-height: 220px;
+      }
+      .lockup img {
+        max-width: 100%;
+      }
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .panel {
+        display: grid;
+        gap: 16px;
+      }
+      .panel img {
+        height: 104px;
+        max-width: 100%;
+      }
+      .sizes {
+        align-items: end;
+        display: flex;
+        gap: 22px;
+        min-height: 96px;
+      }
+      .palette {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .swatch {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+      }
+      .chip {
+        border-radius: 4px;
+        height: 54px;
+        margin-bottom: 12px;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 22px;
+        }
+        .hero,
+        .grid,
+        .palette {
+          grid-template-columns: 1fr;
+        }
+        .sizes {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <article class="card lockup">
+          <div>
+            <h1>TraderFrame</h1>
+            <p>Northstar Terminal: orient the strategy, locate the risk, decide with control.</p>
+          </div>
+          <img src="traderframe-northstar-wordmark.svg" alt="TraderFrame Northstar wordmark" />
+        </article>
+        <article class="card dark stage">
+          <img src="traderframe-northstar-app-icon.svg" alt="TraderFrame Northstar app icon" />
+          <p>Research the trade. Frame the risk. Execute only when allowed.</p>
+        </article>
+      </section>
+      <section class="grid">
+        <article class="card panel">
+          <h2>Symbol</h2>
+          <img src="traderframe-northstar-symbol.svg" alt="Northstar symbol" />
+          <p>Bracketed northstar, terminal frame, brass checkpoint.</p>
+        </article>
+        <article class="card panel">
+          <h2>Type</h2>
+          <img src="traderframe-northstar-wordmark.svg" alt="Wordmark" />
+          <p>Clean display wordmark with terminal data support.</p>
+        </article>
+        <article class="card panel">
+          <h2>Small Size</h2>
+          <div class="sizes">
+            <img src="traderframe-northstar-symbol.svg" width="16" height="16" alt="" /><img
+              src="traderframe-northstar-symbol.svg"
+              width="24"
+              height="24"
+              alt=""
+            /><img src="traderframe-northstar-symbol.svg" width="32" height="32" alt="" /><img
+              src="traderframe-northstar-symbol.svg"
+              width="64"
+              height="64"
+              alt=""
+            />
+          </div>
+        </article>
+      </section>
+      <section class="palette">
+        <article class="swatch">
+          <div class="chip" style="background: #071018"></div>
+          <strong>Abyss</strong><br />#071018
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #ddebe7"></div>
+          <strong>Frost</strong><br />#DDEBE7
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #1e8f86"></div>
+          <strong>North Teal</strong><br />#1E8F86
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #c9963e"></div>
+          <strong>Brass Checkpoint</strong><br />#C9963E
+        </article>
+        <article class="swatch">
+          <div class="chip" style="background: #eef3f0"></div>
+          <strong>Haze</strong><br />#EEF3F0
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
