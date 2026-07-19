@@ -23,7 +23,7 @@ const particleCount = 72;
 
 function MechanicalRing({ radius, tube, depth = 0, color = "#9da8ae", opacity = 1 }: { radius: number; tube: number; depth?: number; color?: string; opacity?: number }) {
   return (
-    <mesh position={[0, 0, depth]} rotation={[Math.PI / 2, 0, 0]}>
+    <mesh position={[0, 0, depth]}>
       <torusGeometry args={[radius, tube, 18, 128]} />
       <meshPhysicalMaterial color={color} metalness={0.78} roughness={0.2} clearcoat={0.9} clearcoatRoughness={0.14} transparent opacity={opacity} />
     </mesh>
@@ -170,15 +170,15 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
       <Float speed={reducedMotion ? 0 : 0.38} rotationIntensity={0.025} floatIntensity={0.045}>
         <group position={[-1.5, 0, 0]}>
           <GateHousing />
-          <mesh ref={ringA} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.28]}>
+          <mesh ref={ringA} position={[0, 0, 0.28]}>
             <torusGeometry args={[1.82, 0.18, 22, 128]} />
             <meshPhysicalMaterial color="#909ba1" metalness={0.82} roughness={0.17} clearcoat={1} clearcoatRoughness={0.12} />
           </mesh>
-          <mesh ref={ringB} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.38]}>
+          <mesh ref={ringB} position={[0, 0, 0.38]}>
             <torusGeometry args={[1.46, 0.08, 18, 128]} />
             <meshPhysicalMaterial color="#2a3439" metalness={0.76} roughness={0.22} emissive="#25d4ff" emissiveIntensity={stageIndex >= 2 ? 0.24 : 0.05} />
           </mesh>
-          <mesh ref={ringC} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.45]}>
+          <mesh ref={ringC} position={[0, 0, 0.45]}>
             <torusGeometry args={[1.1, 0.045, 16, 128]} />
             <meshBasicMaterial color="#69ecff" transparent opacity={stageIndex >= 2 ? 0.72 : 0.18} />
           </mesh>
