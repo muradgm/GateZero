@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-606",
-  localVerification: "74 files / 520 tests",
+  latestPacket: "TRD-616",
+  localVerification: "75 files / 528 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 526 tests.",
+      detail: "Latest suite: 75 files, 528 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "606 / 606",
+      value: "616 / 616",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 520 tests"
+      reference: "75 files / 528 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "606 accepted records"
+      reference: "616 accepted records"
     },
     {
       area: "Dependency audit",
@@ -224,7 +224,7 @@ export const commandCenterData = {
       area: "Workspace visual QA",
       signal: "Risk adjacency and overflow",
       state: "Checked",
-      reference: "TRD-601 through TRD-606"
+      reference: "TRD-601 through TRD-616"
     }
   ],
   simulationEvidenceDetail: {
@@ -326,8 +326,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-606 closes the current market-intelligence workspace display batch.",
-      "Next work should proceed only from a bounded Gate 2 product gap."
+      "TRD-616 closes the market-intelligence workspace display lane.",
+      "TRD-617 must authorize any local simulator milestone before implementation."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -346,9 +346,9 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-606 keeps red-flag evidence visible without action controls.",
-    "TRD-607 should start only from a concrete Gate 2 workspace gap.",
-    "Use the command center for operating health, not strategy selection."
+    "TRD-616 closes the market-workspace display lane.",
+    "TRD-617 must authorize any local paper-simulator milestone before implementation.",
+    "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
     purpose: "Show which local evidence files support one Strategy Review Workspace research case.",
@@ -405,13 +405,22 @@ export const commandCenterData = {
     "TRD-603 Artifact inventory UI integration",
     "TRD-604 Operator note UI integration",
     "TRD-605 Market intelligence blocker checkpoint",
-    "TRD-606 Red flag visual QA"
+    "TRD-606 Red flag visual QA",
+    "TRD-607 Market intelligence workspace gap intake",
+    "TRD-608 Scenario review empty-state handling",
+    "TRD-609 Recommendation evidence consistency guard",
+    "TRD-610 Workspace runtime preservation recheck",
+    "TRD-611 Market workspace mobile QA",
+    "TRD-612 Market workspace keyboard QA",
+    "TRD-613 Scenario copy minimization pass",
+    "TRD-614 Blocked-scope regression expansion",
+    "TRD-615 Market intelligence source grouping polish",
+    "TRD-616 Market workspace checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",
     status: "Read-only scenario inspection",
-    summary:
-      "Sourced local market context is shown as scenario evidence, not certainty, advice, or execution authority.",
+    summary: "Local, sourced scenario evidence for review; no action authority.",
     recommendation: {
       id: "gate2-scenario-recommendation-fixture-001",
       action: "paper_simulate",
@@ -430,8 +439,8 @@ export const commandCenterData = {
         "ops/runtime/reviews/TRD-596_ORCHESTRATOR_ACCEPTANCE.md"
       ],
       limitationNotes: [
-        "Scenario recommendation is a draft candidate only.",
-        "No final recommendation, route, certainty claim, or performance claim is created."
+        "Draft scenario; not a final recommendation.",
+        "Confidence and evidence do not imply future results."
       ]
     },
     riskReview: {
@@ -441,8 +450,8 @@ export const commandCenterData = {
       riskReview: "gate2-risk-review-fixture-001",
       blockerRefs: ["gate2-red-flag-engine-fixture-001"],
       notes: [
-        "Risk review remains required before operator consideration.",
-        "The record is visible as a local review checkpoint only."
+        "Risk review is required before operator consideration.",
+        "Local review checkpoint only."
       ]
     },
     simulationCandidate: {
@@ -460,8 +469,8 @@ export const commandCenterData = {
         "operator_required"
       ],
       limitationNotes: [
-        "Local simulation candidate link only; no external dispatch or external account route.",
-        "Operator review remains required before any local simulation evidence is recorded."
+        "Local simulation link only; no external route.",
+        "Operator review is required before simulation evidence is recorded."
       ]
     },
     artifactInventory: [
@@ -492,12 +501,37 @@ export const commandCenterData = {
     },
     blockerCheckpoint: [
       "No final recommendation.",
-      "No external dispatch.",
-      "No external account route.",
-      "No credentials.",
-      "No live route.",
-      "No automated action.",
+      "No external route or credentials.",
+      "No live or automated action.",
       "No certainty or performance claim."
+    ],
+    sourceGroups: [
+      {
+        label: "Scenario Inputs",
+        purpose: "Evidence used to frame the local scenario.",
+        refs: [
+          "gate2-market-intelligence-input-fixture-001",
+          "gate2-news-event-fixture-001",
+          "gate2-signal-candidate-fixture-001"
+        ]
+      },
+      {
+        label: "Risk Controls",
+        purpose: "Blockers and review records that constrain interpretation.",
+        refs: [
+          "gate2-red-flag-engine-fixture-001",
+          "gate2-risk-review-fixture-001",
+          "gate2-recommendation-review-fixture-001"
+        ]
+      },
+      {
+        label: "Local Provenance",
+        purpose: "Checked-in truth and acceptance records for traceability.",
+        refs: [
+          "ops/truth/MARKET_INTELLIGENCE_TRUTH.md",
+          "ops/runtime/reviews/TRD-596_ORCHESTRATOR_ACCEPTANCE.md"
+        ]
+      }
     ]
   },
   strategyReviewWorkspace: {

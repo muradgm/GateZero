@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-606");
+    expect(data).toContain('latestPacket: "TRD-616"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -78,7 +78,8 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("updateActiveNavigation()");
     expect(main).toContain('link.setAttribute("aria-current", "page")');
     expect(main).toContain('link.removeAttribute("aria-current")');
-    expect(main).toContain('window.addEventListener("hashchange", updateActiveNavigation)');
+    expect(main).toContain('window.addEventListener("hashchange", () =>');
+    expect(main).toContain("focusHashTarget()");
     expect(main).toContain('window.location.hash.replace("#", "") || "overview"');
     expect(main).toContain('link.classList.toggle("active", isCurrent)');
   });
@@ -479,10 +480,8 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain(
-      "TRD-606 closes the current market-intelligence workspace display batch."
-    );
-    expect(data).toContain("bounded Gate 2 product gap");
+    expect(data).toContain("TRD-616 closes the market-intelligence workspace display lane.");
+    expect(data).toContain("TRD-617 must authorize any local simulator milestone");
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -506,7 +505,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-606 keeps red-flag evidence visible without action controls.");
+    expect(data).toContain("TRD-616 closes the market-workspace display lane.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
@@ -655,7 +654,7 @@ describe("Gate 0 command center surface", () => {
     const styles = readFileSync(stylePath, "utf8");
 
     expect(data).toContain("marketIntelligenceWorkspace");
-    expect(data).toContain("Scenario recommendation is a draft candidate only.");
+    expect(data).toContain("Draft scenario; not a final recommendation.");
     expect(data).toContain("risk_review_required");
     expect(data).toContain("candidate_linked_for_local_simulation");
     expect(main).toContain("normalizeMarketIntelligenceWorkspace");
@@ -683,7 +682,7 @@ describe("Gate 0 command center surface", () => {
       expect(data).toContain(boundary);
     }
 
-    expect(data).toContain("Local simulation candidate link only; no external dispatch");
+    expect(data).toContain("Local simulation link only; no external route.");
     expect(data).not.toContain("external dispatch enabled");
   });
 
@@ -710,9 +709,54 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("blockerCheckpoint");
     expect(data).toContain("No certainty or performance claim.");
-    expect(data).toContain("TRD-606 keeps red-flag evidence visible without action controls.");
     expect(recommendationIndex).toBeGreaterThan(-1);
     expect(blockerIndex).toBeGreaterThan(recommendationIndex);
+  });
+
+  it("renders neutral local empty states for missing scenario records", () => {
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(main).toContain("renderEmptyState");
+    expect(main).toContain("No local artifacts recorded.");
+    expect(main).toContain("No local operator note recorded.");
+    expect(main).toContain("Local workspace only.");
+    expect(styles).toContain(".empty-state");
+  });
+
+  it("preserves strategy and market workspace records during runtime refresh", () => {
+    const main = readFileSync(mainPath, "utf8");
+
+    expect(main).toContain("preservedStrategyWorkspace");
+    expect(main).toContain("preservedMarketWorkspace");
+    expect(main).toContain("mergedData.strategyReviewWorkspace = preservedStrategyWorkspace");
+    expect(main).toContain("mergedData.marketIntelligenceWorkspace = preservedMarketWorkspace");
+  });
+
+  it("keeps market workspace responsive and keyboard-addressable", () => {
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(main).toContain("focusHashTarget");
+    expect(main).toContain('target.setAttribute("tabindex", "-1")');
+    expect(main).toContain("target.focus({ preventScroll: true })");
+    expect(styles).toContain("[id]:focus-visible");
+    expect(styles).toContain("@media (max-width: 680px)");
+    expect(styles).toContain(".market-source-groups");
+    expect(styles).toContain("overflow-wrap: anywhere");
+  });
+
+  it("groups market intelligence sources by operator purpose", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+
+    for (const label of ["Scenario Inputs", "Risk Controls", "Local Provenance"]) {
+      expect(data).toContain(label);
+    }
+
+    expect(data).toContain("sourceGroups");
+    expect(main).toContain("market-source-groups");
+    expect(main).toContain("Market intelligence sources by purpose");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

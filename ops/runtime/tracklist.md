@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-606`                                                      |
-| Latest accepted validation | 74 test files, 520 tests passed                                |
+| Last updated               | 2026-07-19                                                     |
+| Latest accepted packet     | `TRD-616`                                                      |
+| Latest accepted validation | 75 test files, 528 tests passed                                |
 
 ## Boundary
 
@@ -47,6 +47,7 @@ pnpm check:gate0-evidence-index
 pnpm check:gate0-ci-evidence
 pnpm check:gate0-command-center
 pnpm check:gate0-command-center-render
+pnpm check:market-workspace
 pnpm check:gate0-skills
 pnpm check:gate0-skill-routing
 pnpm check:gate0-agents
@@ -102,7 +103,8 @@ Latest accepted result:
 - `pnpm lint`: passed.
 - `pnpm format:check`: passed.
 - `pnpm typecheck`: passed.
-- `pnpm test:ci`: 74 test files passed, 526 tests passed.
+- `pnpm check:market-workspace`: passed.
+- `pnpm test:ci`: 75 test files passed, 528 tests passed.
 - `pnpm validate:gate0`: passed.
 - `pnpm preview:web`: local host static preview available for visual QA.
 
@@ -1059,6 +1061,16 @@ Latest accepted result:
 | `TRD-604` | accepted | Operator note     | Rendered manual operator note evidence in workspace.      |
 | `TRD-605` | accepted | Blocker check     | Added market-intelligence blocker checkpoint.             |
 | `TRD-606` | accepted | Red flag QA       | Verified red-flag blocker evidence display and copy.      |
+| `TRD-607` | accepted | Gap intake        | Selected missing-state and reference-integrity hardening. |
+| `TRD-608` | accepted | Empty states      | Added neutral local states for absent workspace records.  |
+| `TRD-609` | accepted | Evidence guard    | Added scenario-reference consistency validation.          |
+| `TRD-610` | accepted | Runtime refresh   | Preserved workspace panels during metadata refresh.       |
+| `TRD-611` | accepted | Mobile QA         | Verified narrow-screen scenario readability.              |
+| `TRD-612` | accepted | Keyboard QA       | Added visible hash-target focus behavior.                 |
+| `TRD-613` | accepted | Copy pass         | Reduced repetition while retaining limitations.           |
+| `TRD-614` | accepted | Scope regression  | Expanded unsafe scenario-copy rejection coverage.         |
+| `TRD-615` | accepted | Source grouping   | Grouped inputs, risk controls, and provenance.            |
+| `TRD-616` | accepted | Checkpoint        | Closed the market-workspace display lane.                 |
 
 ## Current Operator Commands
 
@@ -1084,29 +1096,30 @@ Latest accepted result:
 | `pnpm check:gate0-ci-evidence`                                                                    | Check remote CI evidence freshness.                     | Manual CI evidence freshness guard passes.                       |
 | `pnpm check:gate0-command-center`                                                                 | Check command center evidence freshness.                | Local command center freshness guard passes.                     |
 | `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
+| `pnpm check:market-workspace`                                                                     | Check scenario and evidence reference consistency.      | Local market workspace consistency guard passes.                 |
 | `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 74 files and 520 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 75 files and 528 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                        | Acceptance focus                               |
-| ---- | --------- | ------ | ------------------------------------------- | ---------------------------------------------- |
-| 1    | `TRD-607` | queued | Market intelligence workspace gap intake.   | Identify next concrete product gap.            |
-| 2    | `TRD-608` | queued | Scenario review empty-state handling.       | Keep missing records neutral and local.        |
-| 3    | `TRD-609` | queued | Recommendation evidence consistency guard.  | Check scenario refs match local fixtures.      |
-| 4    | `TRD-610` | queued | Workspace runtime preservation recheck.     | Ensure runtime refresh keeps scenario panels.  |
-| 5    | `TRD-611` | queued | Market workspace mobile QA.                 | Verify dense scenario panels on small screens. |
-| 6    | `TRD-612` | queued | Market workspace keyboard QA.               | Verify reading order and hash navigation.      |
-| 7    | `TRD-613` | queued | Scenario copy minimization pass.            | Reduce copy without hiding limitations.        |
-| 8    | `TRD-614` | queued | Blocked-scope regression expansion.         | Add forbidden scenario/action copy samples.    |
-| 9    | `TRD-615` | queued | Market intelligence source grouping polish. | Group scenario sources by operating purpose.   |
-| 10   | `TRD-616` | queued | Market workspace checkpoint.                | Decide whether product gap remains.            |
+| Rank | Packet    | Status | Goal                                             | Acceptance focus                                   |
+| ---- | --------- | ------ | ------------------------------------------------ | -------------------------------------------------- |
+| 1    | `TRD-617` | queued | Local paper-simulator authorization packet.      | Require PM, Quant, Risk, and QA/Security approval. |
+| 2    | `TRD-618` | queued | Deterministic paper-account contract.            | Define local balances and positions only.          |
+| 3    | `TRD-619` | queued | Simulated order lifecycle contract.              | Model local order states without dispatch.         |
+| 4    | `TRD-620` | queued | Paper risk-limit enforcement contract.           | Fail closed on configured local limits.            |
+| 5    | `TRD-621` | queued | Local fill, fee, and slippage model.             | Keep assumptions explicit and reproducible.        |
+| 6    | `TRD-622` | queued | Duplicate and stale-input guards.                | Block invalid simulated order candidates.          |
+| 7    | `TRD-623` | queued | Immutable simulation event journal.              | Record deterministic local lifecycle events.       |
+| 8    | `TRD-624` | queued | Simulation-state reconciliation.                 | Detect local order, position, and balance drift.   |
+| 9    | `TRD-625` | queued | Local simulator negative-boundary fixtures.      | Reject external, credential, and autonomy paths.   |
+| 10   | `TRD-626` | queued | Local paper-simulator implementation checkpoint. | Decide whether implementation may begin.           |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
@@ -1123,6 +1136,22 @@ red flags, invalidation, risk review, and operator decision requirement.
 | `TRD-598` | accepted | Risk-Gated Recommendation Review.               | Risk review required before operator consideration.          |
 | `TRD-599` | accepted | Market Intelligence Workspace.                  | Read-only inspection workspace for sourced scenarios.        |
 | `TRD-600` | accepted | Paper Simulation From Recommendation Candidate. | Local paper-simulation candidate only; no external dispatch. |
+| `TRD-601` | accepted | Strategy workspace visual QA.                   | Evidence and limitations remain adjacent.                    |
+| `TRD-602` | accepted | Workspace source-link drilldown.                | Checked-in local paths only.                                 |
+| `TRD-603` | accepted | Artifact inventory UI integration.              | Local traceability without output channels.                  |
+| `TRD-604` | accepted | Operator note UI integration.                   | Manual display-only note evidence.                           |
+| `TRD-605` | accepted | Market intelligence blocker checkpoint.         | Blocked scope remains explicit.                              |
+| `TRD-606` | accepted | Red flag visual QA.                             | Blocker evidence remains non-actionable.                     |
+| `TRD-607` | accepted | Market workspace gap intake.                    | Concrete inspection gap only.                                |
+| `TRD-608` | accepted | Scenario empty-state handling.                  | Missing records remain neutral and local.                    |
+| `TRD-609` | accepted | Recommendation evidence consistency guard.      | Scenario references match local evidence.                    |
+| `TRD-610` | accepted | Workspace runtime preservation.                 | Runtime metadata refresh preserves panels.                   |
+| `TRD-611` | accepted | Market workspace mobile QA.                     | Dense panels remain readable at narrow widths.               |
+| `TRD-612` | accepted | Market workspace keyboard QA.                   | Hash targets receive visible focus.                          |
+| `TRD-613` | accepted | Scenario copy minimization.                     | Shorter copy retains limitations.                            |
+| `TRD-614` | accepted | Blocked-scope regression expansion.             | Unsafe action language remains rejected.                     |
+| `TRD-615` | accepted | Market source grouping.                         | Inputs, controls, and provenance are distinct.               |
+| `TRD-616` | accepted | Market workspace checkpoint.                    | Display lane closed without scope promotion.                 |
 
 ## Rejected For Now
 

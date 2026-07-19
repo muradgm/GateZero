@@ -238,9 +238,11 @@ function renderCommandCenter(data) {
             <strong>${strategyReviewWorkspace.researchCaseId}</strong>
           </div>
           <div class="workspace-evidence-grid">
-            ${strategyReviewWorkspace.evidenceChain
-              .map(
-                (item, index) => `
+            ${
+              strategyReviewWorkspace.evidenceChain.length > 0
+                ? strategyReviewWorkspace.evidenceChain
+                    .map(
+                      (item, index) => `
                   <section class="workspace-step" aria-labelledby="workspace-step-${index}-title">
                     <div class="workspace-step-index">${String(index + 1).padStart(2, "0")}</div>
                     <div>
@@ -250,8 +252,10 @@ function renderCommandCenter(data) {
                     </div>
                   </section>
                 `
-              )
-              .join("")}
+                    )
+                    .join("")
+                : renderEmptyState("Research evidence", "No local research evidence recorded.")
+            }
           </div>
           <div class="workspace-adjacency" aria-label="Workspace supporting evidence and limitations">
             ${renderListCard("Artifact Inventory", strategyReviewWorkspace.artifactInventory)}
@@ -267,7 +271,7 @@ function renderCommandCenter(data) {
               <span class="state-pill">${marketIntelligenceWorkspace.status}</span>
             </div>
             <div class="market-grid">
-              ${renderDetailCard("Scenario Draft", [
+              ${renderRecordCard("Scenario Draft", marketIntelligenceWorkspace.recommendation.id, [
                 ["Record", marketIntelligenceWorkspace.recommendation.id],
                 ["Action", marketIntelligenceWorkspace.recommendation.action],
                 ["Status", marketIntelligenceWorkspace.recommendation.status],
@@ -275,18 +279,25 @@ function renderCommandCenter(data) {
                 ["Candidate", marketIntelligenceWorkspace.recommendation.candidate],
                 ["Red Flag", marketIntelligenceWorkspace.recommendation.redFlag]
               ])}
-              ${renderDetailCard("Risk-Gated Review", [
+              ${renderRecordCard("Risk-Gated Review", marketIntelligenceWorkspace.riskReview.id, [
                 ["Record", marketIntelligenceWorkspace.riskReview.id],
                 ["Status", marketIntelligenceWorkspace.riskReview.status],
                 ["Disposition", marketIntelligenceWorkspace.riskReview.disposition],
                 ["Risk Review", marketIntelligenceWorkspace.riskReview.riskReview]
               ])}
-              ${renderDetailCard("Local Simulation Candidate", [
-                ["Record", marketIntelligenceWorkspace.simulationCandidate.id],
-                ["Status", marketIntelligenceWorkspace.simulationCandidate.status],
-                ["Simulation", marketIntelligenceWorkspace.simulationCandidate.simulationRecord],
-                ["Evidence Detail", marketIntelligenceWorkspace.simulationCandidate.evidenceDetail]
-              ])}
+              ${renderRecordCard(
+                "Local Simulation Candidate",
+                marketIntelligenceWorkspace.simulationCandidate.id,
+                [
+                  ["Record", marketIntelligenceWorkspace.simulationCandidate.id],
+                  ["Status", marketIntelligenceWorkspace.simulationCandidate.status],
+                  ["Simulation", marketIntelligenceWorkspace.simulationCandidate.simulationRecord],
+                  [
+                    "Evidence Detail",
+                    marketIntelligenceWorkspace.simulationCandidate.evidenceDetail
+                  ]
+                ]
+              )}
             </div>
             <div class="market-grid market-grid-wide" aria-label="Market intelligence supporting records">
               ${renderListCard("Scenario Evidence", marketIntelligenceWorkspace.recommendation.evidenceRefs)}
@@ -297,6 +308,21 @@ function renderCommandCenter(data) {
               ${renderListCard("Candidate Boundary Checks", marketIntelligenceWorkspace.simulationCandidate.boundaryChecks)}
               ${renderListCard("Candidate Limitations", marketIntelligenceWorkspace.simulationCandidate.limitationNotes)}
               ${renderListCard("Blocker Checkpoint", marketIntelligenceWorkspace.blockerCheckpoint)}
+            </div>
+            <div class="market-source-groups" aria-label="Market intelligence sources by purpose">
+              ${marketIntelligenceWorkspace.sourceGroups
+                .map(
+                  (group) => `
+                    <section class="market-source-group" aria-labelledby="${slug(group.label)}-source-group-title">
+                      <div>
+                        <h4 id="${slug(group.label)}-source-group-title">${group.label}</h4>
+                        <p>${group.purpose}</p>
+                      </div>
+                      <ul>${renderCodeListItems(group.refs)}</ul>
+                    </section>
+                  `
+                )
+                .join("")}
             </div>
             <div class="inventory-table-wrap">
               <table>
@@ -313,9 +339,11 @@ function renderCommandCenter(data) {
                   </tr>
                 </thead>
                 <tbody>
-                  ${marketIntelligenceWorkspace.artifactInventory
-                    .map(
-                      (artifact) => `
+                  ${
+                    marketIntelligenceWorkspace.artifactInventory.length > 0
+                      ? marketIntelligenceWorkspace.artifactInventory
+                          .map(
+                            (artifact) => `
                         <tr>
                           <td data-label="Artifact">${artifact.id}</td>
                           <td data-label="Type">${artifact.type}</td>
@@ -324,19 +352,27 @@ function renderCommandCenter(data) {
                           <td data-label="Limitation">${artifact.limitation}</td>
                         </tr>
                       `
-                    )
-                    .join("")}
+                          )
+                          .join("")
+                      : `<tr><td class="empty-detail" colspan="5">No local artifacts recorded.</td></tr>`
+                  }
                 </tbody>
               </table>
             </div>
             <div class="operator-note-card" aria-labelledby="operator-note-title">
               <h3 id="operator-note-title">Operator Note</h3>
-              <strong>${marketIntelligenceWorkspace.operatorNote.id}</strong>
-              <p>${marketIntelligenceWorkspace.operatorNote.body}</p>
-              <div class="workspace-adjacency">
-                ${renderListCard("Manual Note Sources", marketIntelligenceWorkspace.operatorNote.sources)}
-                ${renderListCard("Manual Note Limitations", marketIntelligenceWorkspace.operatorNote.limitationNotes)}
-              </div>
+              ${
+                marketIntelligenceWorkspace.operatorNote.id
+                  ? `
+                    <strong>${marketIntelligenceWorkspace.operatorNote.id}</strong>
+                    <p>${marketIntelligenceWorkspace.operatorNote.body}</p>
+                    <div class="workspace-adjacency">
+                      ${renderListCard("Manual Note Sources", marketIntelligenceWorkspace.operatorNote.sources)}
+                      ${renderListCard("Manual Note Limitations", marketIntelligenceWorkspace.operatorNote.limitationNotes)}
+                    </div>
+                  `
+                  : '<p class="empty-detail">No local operator note recorded.</p>'
+              }
             </div>
           </section>
         </article>
@@ -482,6 +518,12 @@ function mergeRuntimeData(baseData, runtimeData) {
     ? window.structuredClone(baseData)
     : JSON.parse(JSON.stringify(baseData));
   const preservedDetail = normalizeSimulationEvidenceDetail(baseData.simulationEvidenceDetail);
+  const preservedStrategyWorkspace = normalizeStrategyReviewWorkspace(
+    baseData.strategyReviewWorkspace
+  );
+  const preservedMarketWorkspace = normalizeMarketIntelligenceWorkspace(
+    baseData.marketIntelligenceWorkspace
+  );
   const acceptedRecords = Number(runtimeData.acceptedRecords);
   const evidenceRecords = Number(runtimeData.evidenceRecords);
 
@@ -491,6 +533,8 @@ function mergeRuntimeData(baseData, runtimeData) {
   mergedData.ciState = runtimeData.ciState;
   mergedData.lastVerifiedCommit = runtimeData.lastVerifiedCommit;
   mergedData.simulationEvidenceDetail = preservedDetail;
+  mergedData.strategyReviewWorkspace = preservedStrategyWorkspace;
+  mergedData.marketIntelligenceWorkspace = preservedMarketWorkspace;
 
   updateHealthCard(
     mergedData,
@@ -512,7 +556,10 @@ function mergeRuntimeData(baseData, runtimeData) {
   return mergedData;
 }
 
-window.addEventListener("hashchange", updateActiveNavigation);
+window.addEventListener("hashchange", () => {
+  updateActiveNavigation();
+  focusHashTarget();
+});
 
 function slug(value) {
   return value.toLowerCase().replaceAll(" ", "-");
@@ -534,6 +581,24 @@ function renderDetailCard(title, rows) {
           )
           .join("")}
       </dl>
+    </section>
+  `;
+}
+
+function renderRecordCard(title, recordId, rows) {
+  if (!recordId) {
+    return renderEmptyState(title, `No local ${title.toLowerCase()} recorded.`);
+  }
+
+  return renderDetailCard(title, rows);
+}
+
+function renderEmptyState(title, detail) {
+  return `
+    <section class="detail-card empty-state" aria-labelledby="${slug(title)}-empty-state-title">
+      <h3 id="${slug(title)}-empty-state-title">${title}</h3>
+      <p>${detail}</p>
+      <small>Local workspace only.</small>
     </section>
   `;
 }
@@ -661,7 +726,19 @@ function normalizeMarketIntelligenceWorkspace(workspace = {}) {
           }))
       : [],
     operatorNote: normalizeOperatorNote(workspace.operatorNote),
-    blockerCheckpoint: asList(workspace.blockerCheckpoint)
+    blockerCheckpoint: asList(workspace.blockerCheckpoint),
+    sourceGroups: Array.isArray(workspace.sourceGroups)
+      ? workspace.sourceGroups
+          .filter((group) => group && typeof group === "object")
+          .map((group) => ({
+            label: typeof group.label === "string" ? group.label : "Local sources",
+            purpose:
+              typeof group.purpose === "string"
+                ? group.purpose
+                : "Checked-in evidence for local inspection.",
+            refs: asList(group.refs)
+          }))
+      : []
   };
 }
 
@@ -729,6 +806,23 @@ function updateActiveNavigation() {
       link.removeAttribute("aria-current");
     }
   }
+}
+
+function focusHashTarget() {
+  const targetId = window.location.hash.replace("#", "");
+
+  if (!targetId) {
+    return;
+  }
+
+  const target = document.getElementById(targetId);
+
+  if (!target) {
+    return;
+  }
+
+  target.setAttribute("tabindex", "-1");
+  target.focus({ preventScroll: true });
 }
 
 function updateHealthCard(data, label, value) {

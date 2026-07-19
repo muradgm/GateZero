@@ -49,10 +49,31 @@ export function checkGate0CommandCenterRenderContract(
   requireIncludes(findings, input.main, 'id="workflow"', "Missing workflow panel.");
   requireIncludes(findings, input.main, "data.docGroups", "Missing grouped source links.");
   requireIncludes(findings, input.main, "aria-current", "Missing current navigation marker.");
+  requireIncludes(findings, input.main, "focusHashTarget", "Missing hash-target focus handling.");
+  requireIncludes(
+    findings,
+    input.main,
+    "renderEmptyState",
+    "Missing neutral workspace empty states."
+  );
+  requireIncludes(
+    findings,
+    input.main,
+    "preservedMarketWorkspace",
+    "Missing market workspace runtime preservation."
+  );
+  requireIncludes(findings, input.main, "market-source-groups", "Missing market source grouping.");
   requireIncludes(findings, input.main, "group.items.length", "Missing source-link group counts.");
   requireIncludes(findings, input.styles, "td::before", "Missing mobile evidence label styling.");
   requireIncludes(findings, input.styles, ".insight-list", "Missing risk/limitation list styling.");
   requireIncludes(findings, input.styles, ".workflow-list", "Missing workflow list styling.");
+  requireIncludes(findings, input.styles, "[id]:focus-visible", "Missing focused target styling.");
+  requireIncludes(
+    findings,
+    input.styles,
+    ".market-source-groups",
+    "Missing market source group styling."
+  );
   requireIncludes(findings, input.styles, ".doc-group", "Missing grouped source link styling.");
   requireIncludes(
     findings,
@@ -94,7 +115,14 @@ export function checkGate0CommandCenterRenderContract(
     ["deploy", "strategy"],
     ["profit", "claim"],
     ["performance", "guarantee"],
-    ["optimized", "returns"]
+    ["optimized", "returns"],
+    ["trade", "now"],
+    ["recommended", "buy"],
+    ["recommended", "sell"],
+    ["high", "confidence", "trade"],
+    ["guaranteed", "outcome"],
+    ["one-click", "order"],
+    ["automatic", "trading"]
   ]
     .map((parts) => parts.join(" "))
     .concat([["bro", "ker-ready"].join("")]);
