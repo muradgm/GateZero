@@ -6,6 +6,7 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2RedFlagEngineContractSchema,
   Gate2RiskReviewEventContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
@@ -21,6 +22,7 @@ import {
   gate2NegativeBoundaryFixtures,
   gate2OperatorActionLogFixture,
   gate2OperatorNoteModelFixture,
+  gate2RedFlagEngineFixture,
   gate2RiskReviewEventFixture,
   gate2SignalCandidateFixture,
   gate2SimulationEvidenceDetailFixture,
@@ -68,6 +70,9 @@ describe("Gate 2 paper simulation fixtures", () => {
     expect(Gate2SignalCandidateContractSchema.parse(gate2SignalCandidateFixture)).toEqual(
       gate2SignalCandidateFixture
     );
+    expect(Gate2RedFlagEngineContractSchema.parse(gate2RedFlagEngineFixture)).toEqual(
+      gate2RedFlagEngineFixture
+    );
   });
 
   it("keeps negative boundary fixtures synthetic and blocked", () => {
@@ -105,6 +110,9 @@ describe("Gate 2 paper simulation fixtures", () => {
     expect(gate2NewsEventScannerFixture.action_route_created).toBe(false);
     expect(gate2SignalCandidateFixture.action_route_created).toBe(false);
     expect(gate2SignalCandidateFixture.recommendation_final).toBe(false);
+    expect(gate2RedFlagEngineFixture.action_route_created).toBe(false);
+    expect(gate2RedFlagEngineFixture.recommendation_final).toBe(false);
+    expect(gate2RedFlagEngineFixture.risk_review_required).toBe(true);
     expect(gate2LocalArtifactInventoryFixtures).toHaveLength(2);
   });
 });

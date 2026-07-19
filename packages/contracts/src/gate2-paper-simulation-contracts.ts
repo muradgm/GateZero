@@ -68,6 +68,18 @@ export const Gate2ScenarioActionSchema = z.enum([
   "prepare_plan"
 ]);
 export const Gate2ConfidenceLevelSchema = z.enum(["low", "medium", "high"]);
+export const Gate2RedFlagCategorySchema = z.enum([
+  "source_staleness",
+  "missing_evidence",
+  "risk_conflict",
+  "scope_boundary",
+  "scenario_uncertainty"
+]);
+export const Gate2RedFlagBlockerStatusSchema = z.enum([
+  "watch_only",
+  "risk_review_required",
+  "blocked"
+]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -425,6 +437,51 @@ export const Gate2SignalCandidateContractSchema = Gate2BoundarySchema.extend({
     }
   });
 
+export const Gate2RedFlagEngineContractSchema = Gate2BoundarySchema.extend({
+  red_flag_engine_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  market_intelligence_input_ids: z.array(IdentifierSchema).min(1),
+  news_event_ids: z.array(IdentifierSchema).min(1),
+  signal_candidate_ids: z.array(IdentifierSchema).min(1),
+  red_flag_category: Gate2RedFlagCategorySchema,
+  severity: Gate2RiskSeveritySchema,
+  blocker_status: Gate2RedFlagBlockerStatusSchema,
+  detected_red_flags: z.array(NonEmptyStringSchema).min(1),
+  evidence_refs: z.array(IdentifierSchema).min(1),
+  invalidation_conditions: z.array(NonEmptyStringSchema).min(1),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  risk_review_required: z.literal(true),
+  operator_decision_required: z.literal(true),
+  action_route_created: z.literal(false),
+  recommendation_final: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((redFlag, context) => {
+    if (
+      redFlag.blocker_status === "blocked" &&
+      redFlag.severity !== "high" &&
+      redFlag.severity !== "critical"
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "blocked red flags require high or critical severity",
+        path: ["severity"]
+      });
+    }
+
+    if (
+      redFlag.red_flag_category === "missing_evidence" &&
+      !redFlag.detected_red_flags.some((flag) => flag.toLowerCase().includes("missing"))
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "missing-evidence red flags require explicit missing evidence detail",
+        path: ["detected_red_flags"]
+      });
+    }
+  });
+
 export type Gate2ContractAuthority = z.infer<typeof Gate2ContractAuthoritySchema>;
 export type Gate2ContractScope = z.infer<typeof Gate2ContractScopeSchema>;
 export type Gate2FinancialGate = z.infer<typeof Gate2FinancialGateSchema>;
@@ -443,6 +500,8 @@ export type Gate2WorkspaceCaseStatus = z.infer<typeof Gate2WorkspaceCaseStatusSc
 export type Gate2MarketInputType = z.infer<typeof Gate2MarketInputTypeSchema>;
 export type Gate2ScenarioAction = z.infer<typeof Gate2ScenarioActionSchema>;
 export type Gate2ConfidenceLevel = z.infer<typeof Gate2ConfidenceLevelSchema>;
+export type Gate2RedFlagCategory = z.infer<typeof Gate2RedFlagCategorySchema>;
+export type Gate2RedFlagBlockerStatus = z.infer<typeof Gate2RedFlagBlockerStatusSchema>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -471,3 +530,4 @@ export type Gate2MarketIntelligenceInputContract = z.infer<
 >;
 export type Gate2NewsEventScannerContract = z.infer<typeof Gate2NewsEventScannerContractSchema>;
 export type Gate2SignalCandidateContract = z.infer<typeof Gate2SignalCandidateContractSchema>;
+export type Gate2RedFlagEngineContract = z.infer<typeof Gate2RedFlagEngineContractSchema>;

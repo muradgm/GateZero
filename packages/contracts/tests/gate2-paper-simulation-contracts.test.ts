@@ -6,6 +6,7 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2RedFlagEngineContractSchema,
   Gate2RiskReviewEventContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
@@ -18,6 +19,7 @@ import {
   type Gate2NewsEventScannerContract,
   type Gate2OperatorActionLogContract,
   type Gate2OperatorNoteModelContract,
+  type Gate2RedFlagEngineContract,
   type Gate2RiskReviewEventContract,
   type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
@@ -367,6 +369,39 @@ function createSignalCandidate(
     risk_review_id: "gate2-risk-review-001",
     red_flags: ["Not final."],
     invalidation_conditions: ["Risk review blocks the case."],
+    operator_decision_required: true,
+    action_route_created: false,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createRedFlagEngine(
+  overrides: Partial<Gate2RedFlagEngineContract> = {}
+): Gate2RedFlagEngineContract {
+  return {
+    red_flag_engine_id: "gate2-red-flag-engine-001",
+    linked_research_case_id: "gate2-research-case-001",
+    market_intelligence_input_ids: ["gate2-market-input-001"],
+    news_event_ids: ["gate2-news-event-001"],
+    signal_candidate_ids: ["gate2-signal-candidate-001"],
+    red_flag_category: "scenario_uncertainty",
+    severity: "medium",
+    blocker_status: "risk_review_required",
+    detected_red_flags: ["Scenario candidate requires risk review before operator consideration."],
+    evidence_refs: ["gate2-market-input-001", "gate2-news-event-001"],
+    invalidation_conditions: ["Evidence goes stale."],
+    limitation_notes: ["Red flag engine emits blocker evidence only."],
+    risk_review_required: true,
     operator_decision_required: true,
     action_route_created: false,
     recommendation_final: false,
@@ -782,5 +817,47 @@ describe("Gate 2 paper simulation contracts", () => {
         })
       ).toThrow();
     }
+  });
+
+  it("validates red flag engine records as sourced blocker evidence", () => {
+    const redFlag = Gate2RedFlagEngineContractSchema.parse(createRedFlagEngine());
+
+    expect(redFlag.blocker_status).toBe("risk_review_required");
+    expect(redFlag.risk_review_required).toBe(true);
+    expect(redFlag.recommendation_final).toBe(false);
+  });
+
+  it("rejects red flag engine records with route creation, final recommendation, or skipped review", () => {
+    for (const mutation of [
+      { action_route_created: true },
+      { recommendation_final: true },
+      { risk_review_required: false },
+      { operator_decision_required: false }
+    ]) {
+      expect(() =>
+        Gate2RedFlagEngineContractSchema.parse({
+          ...createRedFlagEngine(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("rejects incoherent red flag blocker evidence", () => {
+    expect(() =>
+      Gate2RedFlagEngineContractSchema.parse({
+        ...createRedFlagEngine(),
+        blocker_status: "blocked",
+        severity: "medium"
+      })
+    ).toThrow();
+
+    expect(() =>
+      Gate2RedFlagEngineContractSchema.parse({
+        ...createRedFlagEngine(),
+        red_flag_category: "missing_evidence",
+        detected_red_flags: ["Source quality concern."]
+      })
+    ).toThrow();
   });
 });

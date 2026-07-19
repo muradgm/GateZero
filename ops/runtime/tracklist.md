@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-06-18                                                     |
-| Latest accepted packet     | `TRD-595`                                                      |
-| Latest accepted validation | 74 test files, 506 tests passed                                |
+| Latest accepted packet     | `TRD-596`                                                      |
+| Latest accepted validation | 74 test files, 510 tests passed                                |
 
 ## Boundary
 
@@ -1048,6 +1048,7 @@ Latest accepted result:
 | `TRD-593` | accepted | Market input      | Implemented sourced market-intelligence input model.     |
 | `TRD-594` | accepted | News events       | Implemented local news/event scanner contract.           |
 | `TRD-595` | accepted | Signal candidate  | Implemented evidence-only signal candidate contract.     |
+| `TRD-596` | accepted | Red flags         | Implemented sourced red-flag blocker evidence contract.  |
 
 ## Current Operator Commands
 
@@ -1086,16 +1087,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                            | Acceptance focus                                 |
 | ---- | --------- | ------ | ----------------------------------------------- | ------------------------------------------------ |
-| 1    | `TRD-596` | queued | Red Flag Engine.                                | Turn sourced risks into blocker evidence.        |
-| 2    | `TRD-597` | queued | Scenario Recommendation Model.                  | Draft scenario actions without certainty claims. |
-| 3    | `TRD-598` | queued | Risk-Gated Recommendation Review.               | Require risk review before operator view.        |
-| 4    | `TRD-599` | queued | Market Intelligence Workspace.                  | Inspect sourced scenarios in a read-only panel.  |
-| 5    | `TRD-600` | queued | Paper Simulation From Recommendation Candidate. | Keep candidate-to-simulation local and gated.    |
-| 6    | `TRD-601` | queued | Strategy workspace visual QA.                   | Verify layout, overflow, and risk adjacency.     |
-| 7    | `TRD-602` | queued | Workspace source-link drilldown.                | Show local refs without output channels.         |
-| 8    | `TRD-603` | queued | Artifact inventory UI integration.              | Connect inventory contract to workspace display. |
-| 9    | `TRD-604` | queued | Operator note UI integration.                   | Display manual notes beside evidence.            |
-| 10   | `TRD-605` | queued | Market intelligence blocker checkpoint.         | Recheck boundaries before broader intelligence.  |
+| 1    | `TRD-597` | queued | Scenario Recommendation Model.                  | Draft scenario actions without certainty claims. |
+| 2    | `TRD-598` | queued | Risk-Gated Recommendation Review.               | Require risk review before operator view.        |
+| 3    | `TRD-599` | queued | Market Intelligence Workspace.                  | Inspect sourced scenarios in a read-only panel.  |
+| 4    | `TRD-600` | queued | Paper Simulation From Recommendation Candidate. | Keep candidate-to-simulation local and gated.    |
+| 5    | `TRD-601` | queued | Strategy workspace visual QA.                   | Verify layout, overflow, and risk adjacency.     |
+| 6    | `TRD-602` | queued | Workspace source-link drilldown.                | Show local refs without output channels.         |
+| 7    | `TRD-603` | queued | Artifact inventory UI integration.              | Connect inventory contract to workspace display. |
+| 8    | `TRD-604` | queued | Operator note UI integration.                   | Display manual notes beside evidence.            |
+| 9    | `TRD-605` | queued | Market intelligence blocker checkpoint.         | Recheck boundaries before broader intelligence.  |
+| 10   | `TRD-606` | queued | Red flag visual QA.                             | Check blocker evidence display and copy.         |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

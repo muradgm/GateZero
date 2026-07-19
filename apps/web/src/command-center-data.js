@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-595",
-  localVerification: "74 files / 506 tests",
+  latestPacket: "TRD-596",
+  localVerification: "74 files / 510 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 506 tests.",
+      detail: "Latest suite: 74 files, 510 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "595 / 595",
+      value: "596 / 596",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 506 tests"
+      reference: "74 files / 510 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "595 accepted records"
+      reference: "596 accepted records"
     },
     {
       area: "Dependency audit",
@@ -189,6 +189,12 @@ export const commandCenterData = {
       signal: "Input, event, and candidate models",
       state: "Contracted",
       reference: "TRD-593 through TRD-595"
+    },
+    {
+      area: "Red flag engine",
+      signal: "Sourced blocker evidence",
+      state: "Contracted",
+      reference: "TRD-596 red flag fixture"
     }
   ],
   simulationEvidenceDetail: {
@@ -310,8 +316,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-592 makes one local research case inspectable end-to-end.",
-    "TRD-596 should add red-flag engine rules only after source-linked evidence is present.",
+    "TRD-596 turns sourced risk signals into blocker evidence only.",
+    "TRD-597 may draft scenario actions only without certainty or final recommendation claims.",
     "Use the command center for operating health, not strategy selection."
   ],
   artifactInventorySchemaPlan: {
@@ -419,8 +425,16 @@ export const commandCenterData = {
     marketIntelligence: [
       "gate2-market-intelligence-input-fixture-001",
       "gate2-news-event-fixture-001",
-      "gate2-signal-candidate-fixture-001"
+      "gate2-signal-candidate-fixture-001",
+      "gate2-red-flag-engine-fixture-001"
     ],
+    redFlagEngine: {
+      id: "gate2-red-flag-engine-fixture-001",
+      category: "scenario_uncertainty",
+      severity: "medium",
+      blockerStatus: "risk_review_required",
+      limitation: "Blocker evidence only; no route or final recommendation."
+    },
     blockedScopeReminder: [
       "No external account route.",
       "No automated action.",

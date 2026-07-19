@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-595");
+    expect(data).toContain("TRD-596");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -506,7 +506,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-596 should add red-flag engine rules only after");
+    expect(data).toContain("TRD-596 turns sourced risk signals into blocker evidence only.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
@@ -623,9 +623,21 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("gate2-market-intelligence-input-fixture-001");
     expect(data).toContain("gate2-news-event-fixture-001");
     expect(data).toContain("gate2-signal-candidate-fixture-001");
+    expect(data).toContain("gate2-red-flag-engine-fixture-001");
     expect(data).toContain("No final recommendation.");
     expect(data).not.toContain("buy signal");
     expect(data).not.toContain("sell signal");
+  });
+
+  it("records red flag engine output as blocker evidence only", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("Red flag engine");
+    expect(data).toContain("Sourced blocker evidence");
+    expect(data).toContain("redFlagEngine");
+    expect(data).toContain("risk_review_required");
+    expect(data).toContain("Blocker evidence only; no route or final recommendation.");
+    expect(data).not.toContain("final trade");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

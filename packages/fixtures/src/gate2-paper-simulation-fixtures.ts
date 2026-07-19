@@ -5,6 +5,7 @@ import {
   Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
   Gate2OperatorNoteModelContractSchema,
+  Gate2RedFlagEngineContractSchema,
   Gate2RiskReviewEventContractSchema,
   Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
@@ -18,6 +19,7 @@ import {
   type Gate2NegativeBoundaryFixtureContract,
   type Gate2OperatorActionLogContract,
   type Gate2OperatorNoteModelContract,
+  type Gate2RedFlagEngineContract,
   type Gate2RiskReviewEventContract,
   type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
@@ -386,6 +388,43 @@ export const gate2SignalCandidateFixture: Gate2SignalCandidateContract =
     risk_review_id: gate2RiskReviewEventFixture.risk_review_event_id,
     red_flags: ["Candidate is not a final recommendation."],
     invalidation_conditions: ["Evidence goes stale or risk review blocks continuation."],
+    operator_decision_required: true,
+    action_route_created: false,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2RedFlagEngineFixture: Gate2RedFlagEngineContract =
+  Gate2RedFlagEngineContractSchema.parse({
+    red_flag_engine_id: "gate2-red-flag-engine-fixture-001",
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    market_intelligence_input_ids: [
+      gate2MarketIntelligenceInputFixture.market_intelligence_input_id
+    ],
+    news_event_ids: [gate2NewsEventScannerFixture.news_event_id],
+    signal_candidate_ids: [gate2SignalCandidateFixture.signal_candidate_id],
+    red_flag_category: "scenario_uncertainty",
+    severity: "medium",
+    blocker_status: "risk_review_required",
+    detected_red_flags: [
+      "Synthetic scenario candidate depends on local context and requires risk review."
+    ],
+    evidence_refs: [
+      gate2MarketIntelligenceInputFixture.market_intelligence_input_id,
+      gate2NewsEventScannerFixture.news_event_id,
+      gate2SignalCandidateFixture.signal_candidate_id
+    ],
+    invalidation_conditions: ["Source evidence becomes stale or risk review blocks the case."],
+    limitation_notes: ["Red flag fixture is blocker evidence only, not a final recommendation."],
+    risk_review_required: true,
     operator_decision_required: true,
     action_route_created: false,
     recommendation_final: false,
