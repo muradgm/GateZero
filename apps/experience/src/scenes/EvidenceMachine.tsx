@@ -53,16 +53,16 @@ function GateHousing() {
 }
 
 export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) {
-  const group = useRef<THREE.Group>(null);
-  const particles = useRef<THREE.InstancedMesh>(null);
-  const energyMaterial = useRef<THREE.ShaderMaterial>(null);
-  const riskWall = useRef<THREE.Mesh>(null);
-  const riskRails = useRef<THREE.Group>(null);
-  const operatorCore = useRef<THREE.Group>(null);
-  const auditRecord = useRef<THREE.Mesh>(null);
-  const ringA = useRef<THREE.Mesh>(null);
-  const ringB = useRef<THREE.Mesh>(null);
-  const ringC = useRef<THREE.Mesh>(null);
+  const group = useRef<THREE.Group>(null!);
+  const particles = useRef<THREE.InstancedMesh>(null!);
+  const energyMaterial = useRef<THREE.ShaderMaterial>(null!);
+  const riskWall = useRef<THREE.Mesh>(null!);
+  const riskRails = useRef<THREE.Group>(null!);
+  const operatorCore = useRef<THREE.Group>(null!);
+  const auditRecord = useRef<THREE.Mesh>(null!);
+  const ringA = useRef<THREE.Mesh>(null!);
+  const ringB = useRef<THREE.Mesh>(null!);
+  const ringC = useRef<THREE.Mesh>(null!);
   const stageIndex = getStageIndex(stage);
 
   const particleData = useMemo<ParticleDatum[]>(
@@ -149,8 +149,8 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
         dummy.scale.setScalar(item.stale ? 0.045 : item.contradictory ? 0.078 : 0.062);
         dummy.rotation.set(time * 0.16, time * 0.22 + item.phase, 0);
         dummy.updateMatrix();
-        particles.current?.setMatrixAt(index, dummy.matrix);
-        particles.current?.setColorAt(index, item.contradictory ? amber : item.stale ? muted : cyan);
+        particles.current.setMatrixAt(index, dummy.matrix);
+        particles.current.setColorAt(index, item.contradictory ? amber : item.stale ? muted : cyan);
       });
       particles.current.instanceMatrix.needsUpdate = true;
       if (particles.current.instanceColor) particles.current.instanceColor.needsUpdate = true;
@@ -214,52 +214,46 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
           </RoundedBox>
         </group>
 
-        <mesh ref={riskWall} position={[0.95, 0, 0.1]} scale={[1, 0.001, 1]}>
-          <boxGeometry args={[0.14, 4.7, 2.95]} />
-          <meshPhysicalMaterial color="#7b3100" emissive="#ff8f21" emissiveIntensity={0.75} metalness={0.25} roughness={0.28} transparent opacity={0.74} transmission={0.08} />
+        <mesh ref={riskWall} position={[0.95, 0, 0.18]} scale={[1, 0.001, 1]}>
+          <boxGeometry args={[0.14, 4.65, 3.15]} />
+          <meshPhysicalMaterial color="#6d2e05" emissive="#ff8f21" emissiveIntensity={0.62} metalness={0.28} roughness={0.28} transparent opacity={0.76} />
         </mesh>
 
-        <group ref={operatorCore} position={[3.0, 0, 0.42]} scale={0.74}>
-          <MechanicalRing radius={0.9} tube={0.13} color="#6f7d84" />
-          <MechanicalRing radius={0.62} tube={0.055} depth={0.1} color="#25d4ff" opacity={stageIndex >= 4 ? 0.85 : 0.2} />
-          <mesh position={[0, 0, 0.18]}>
-            <sphereGeometry args={[0.18, 48, 48]} />
-            <meshStandardMaterial color="#d4fbff" emissive="#25d4ff" emissiveIntensity={stageIndex >= 4 ? 6 : 1.2} roughness={0.12} />
+        <group ref={operatorCore} position={[3.05, 0, 0.5]} scale={0.74}>
+          <mesh>
+            <torusGeometry args={[0.78, 0.12, 20, 128]} />
+            <meshPhysicalMaterial color="#303a3f" metalness={0.8} roughness={0.2} emissive="#25d4ff" emissiveIntensity={stageIndex >= 4 ? 0.32 : 0.06} />
           </mesh>
-          <pointLight position={[0, 0, 0.3]} color="#25d4ff" intensity={stageIndex >= 4 ? 22 : 4} distance={3.5} />
+          <mesh position={[0, 0, 0.08]}>
+            <circleGeometry args={[0.56, 96]} />
+            <meshBasicMaterial color="#25d4ff" transparent opacity={stageIndex >= 4 ? 0.34 : 0.08} />
+          </mesh>
+          <mesh position={[0, 0, 0.16]}>
+            <icosahedronGeometry args={[0.12, 3]} />
+            <meshStandardMaterial color="#d9fbff" emissive="#25d4ff" emissiveIntensity={stageIndex >= 4 ? 6 : 1.5} />
+          </mesh>
         </group>
 
         <mesh ref={auditRecord} position={[4.55, 0, -0.08]} scale={0.001}>
-          <boxGeometry args={[1.75, 2.35, 0.2]} />
-          <meshPhysicalMaterial color="#bdf7ff" emissive="#25d4ff" emissiveIntensity={2.1} metalness={0.3} roughness={0.16} transparent opacity={0.78} transmission={0.2} />
+          <boxGeometry args={[1.55, 2.15, 0.18]} />
+          <meshPhysicalMaterial color="#bdf7ff" emissive="#25d4ff" emissiveIntensity={1.8} metalness={0.28} roughness={0.18} transparent opacity={0.78} />
         </mesh>
 
         <instancedMesh ref={particles} args={[undefined, undefined, particleCount]}>
           <octahedronGeometry args={[1, 0]} />
           <meshBasicMaterial vertexColors />
         </instancedMesh>
-
-        <Html position={[-5.7, -2.15, 0.6]} transform distanceFactor={8} className="machine-hud machine-hud--inputs">
-          <span>Evidence inputs</span>
-          <b>{stageIndex >= 2 ? "54 verified" : "72 unresolved"}</b>
-          <small>Cyan / verified · Amber / conflict</small>
-        </Html>
-        <Html position={[1.35, 2.05, 0.7]} transform distanceFactor={8} className="machine-hud machine-hud--risk">
-          <span>Risk boundary</span>
-          <b>{stageIndex >= 3 && stageIndex < 5 ? "Blocked" : "Standby"}</b>
-          <small>No progression without review</small>
-        </Html>
-        <Html position={[3.45, -1.55, 0.8]} transform distanceFactor={8} className="machine-hud machine-hud--operator">
-          <span>Operator control</span>
-          <b>{stageIndex >= 4 ? "Review active" : "Awaiting evidence"}</b>
-          <small>Human approval remains explicit</small>
-        </Html>
-        <Html position={[5.15, 1.6, 0.35]} transform distanceFactor={8} className="machine-hud machine-hud--record">
-          <span>Audit record</span>
-          <b>{stageIndex >= 5 ? "Record locked" : "Not created"}</b>
-          <small>Immutable after approval</small>
-        </Html>
       </Float>
+
+      {stageIndex >= 5 && (
+        <Html position={[4.55, 0, 0.3]} transform distanceFactor={9} style={{ pointerEvents: "none" }}>
+          <div className="scene-record-card">
+            <span>Audit record</span>
+            <strong>TF-0248</strong>
+            <em>{stageIndex >= 6 ? "Interface resolved" : "Operator approved"}</em>
+          </div>
+        </Html>
+      )}
     </group>
   );
 }
