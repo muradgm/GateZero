@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-19                                                     |
-| Latest accepted packet     | `TRD-616`                                                      |
-| Latest accepted validation | 75 test files, 528 tests passed                                |
+| Latest accepted packet     | `TRD-626`                                                      |
+| Latest accepted validation | 78 test files, 540 tests passed                                |
 
 ## Boundary
 
@@ -953,124 +953,134 @@ Latest accepted result:
 
 ## Accepted Packet Ledger Continued 2
 
-| Packet    | Status   | Area              | Result                                                    |
-| --------- | -------- | ----------------- | --------------------------------------------------------- |
-| `TRD-501` | accepted | Operator review   | Reviewed frontend shell with operator lens.               |
-| `TRD-502` | accepted | Evidence plan     | Planned evidence detail expansion boundaries.             |
-| `TRD-503` | accepted | Copy audit        | Audited limitation copy for claim safety.                 |
-| `TRD-504` | accepted | Source links      | Polished source-link group scanning.                      |
-| `TRD-505` | accepted | Runtime UX        | Reviewed local runtime refresh UX.                        |
-| `TRD-506` | accepted | Mobile QA         | Rechecked mobile visual layout.                           |
-| `TRD-507` | accepted | Keyboard QA       | Rechecked keyboard and hash navigation.                   |
-| `TRD-508` | accepted | Copy guard        | Expanded frontend blocked-copy regression coverage.       |
-| `TRD-509` | accepted | Handoff           | Documented frontend shell handoff.                        |
-| `TRD-510` | accepted | Closeout          | Closed current frontend QA lane.                          |
-| `TRD-511` | accepted | Gap intake        | Selected local simulation evidence as next UI lane.       |
-| `TRD-512` | accepted | Evidence plan     | Planned simulation evidence detail contract.              |
-| `TRD-513` | accepted | Workflow card     | Planned manual workflow evidence card.                    |
-| `TRD-514` | accepted | Risk data         | Planned risk-review panel data contract.                  |
-| `TRD-515` | accepted | Artifact summary  | Planned local simulation artifact summaries.              |
-| `TRD-516` | accepted | Failure modes     | Planned failure-mode evidence panel.                      |
-| `TRD-517` | accepted | Source density    | Reviewed source-link density follow-up.                   |
-| `TRD-518` | accepted | Connector check   | Rechecked frontend no-account-connector boundary.         |
-| `TRD-519` | accepted | Handoff           | Routed frontend lane to simulation evidence planning.     |
-| `TRD-520` | accepted | Checkpoint        | Checkpointed next Gate 2 implementation lane.             |
-| `TRD-521` | accepted | Schema draft      | Drafted simulation evidence detail schema plan.           |
-| `TRD-522` | accepted | Negative cases    | Planned blocked-field negative cases.                     |
-| `TRD-523` | accepted | Workflow fixture  | Planned manual workflow evidence fixtures.                |
-| `TRD-524` | accepted | Risk fixture      | Planned risk-review panel fixtures.                       |
-| `TRD-525` | accepted | Artifact fixture  | Planned local artifact summary fixtures.                  |
-| `TRD-526` | accepted | Failure fixture   | Planned failure-mode evidence fixtures.                   |
-| `TRD-527` | accepted | Source map        | Planned simulation evidence source-link map.              |
-| `TRD-528` | accepted | Display packet    | Gated frontend evidence detail display work.              |
-| `TRD-529` | accepted | Guard plan        | Planned evidence contract guard updates.                  |
-| `TRD-530` | accepted | Checkpoint        | Checkpointed simulation evidence planning lane.           |
-| `TRD-531` | accepted | Impl packet       | Prepared simulation evidence schema implementation.       |
-| `TRD-532` | accepted | Schema source     | Added local simulation evidence detail schema.            |
-| `TRD-533` | accepted | Schema tests      | Added required and blocked-field contract tests.          |
-| `TRD-534` | accepted | Workflow fixture  | Added manual workflow evidence fixture references.        |
-| `TRD-535` | accepted | Risk fixture      | Added risk-review fixture references.                     |
-| `TRD-536` | accepted | Artifact refs     | Added local artifact summary fixture references.          |
-| `TRD-537` | accepted | Failure refs      | Added failure-mode evidence fixture references.           |
-| `TRD-538` | accepted | Source map refs   | Added evidence source-link map fixture references.        |
-| `TRD-539` | accepted | Guard update      | Indexed evidence schema, fixture, tests, and docs.        |
-| `TRD-540` | accepted | Checkpoint        | Checkpointed simulation evidence detail implementation.   |
-| `TRD-541` | accepted | Display packet    | Prepared read-only evidence detail display lane.          |
-| `TRD-542` | accepted | Local data        | Added local evidence detail display data.                 |
-| `TRD-543` | accepted | Detail panel      | Rendered evidence detail panel without controls.          |
-| `TRD-544` | accepted | Risk adjacency    | Kept limitations and reproducibility near evidence.       |
-| `TRD-545` | accepted | Control tests     | Added no-action-control frontend tests.                   |
-| `TRD-546` | accepted | Source links      | Rendered local source-link references.                    |
-| `TRD-547` | accepted | Mobile QA         | Added responsive evidence detail layout support.          |
-| `TRD-548` | accepted | Keyboard QA       | Preserved semantic and keyboard accessibility posture.    |
-| `TRD-549` | accepted | Metadata sync     | Synced Command Center and tracker metadata.               |
-| `TRD-550` | accepted | Checkpoint        | Checkpointed read-only evidence detail display lane.      |
-| `TRD-551` | accepted | Runtime merge     | Preserved evidence detail through runtime refresh.        |
-| `TRD-552` | accepted | Data shape        | Added required display-field regression coverage.         |
-| `TRD-553` | accepted | Empty state       | Added neutral fallback behavior for missing arrays.       |
-| `TRD-554` | accepted | Reference polish  | Hardened long local reference wrapping.                   |
-| `TRD-555` | accepted | Screen reader     | Added explicit labels for evidence detail cards.          |
-| `TRD-556` | accepted | Visual QA         | Recorded desktop and mobile visual QA requirements.       |
-| `TRD-557` | accepted | Source density    | Kept source-link detail local, bounded, and readable.     |
-| `TRD-558` | accepted | Copy guard        | Rechecked blocked frontend wording coverage.              |
-| `TRD-559` | accepted | Handoff           | Documented operator posture for hardened detail lane.     |
-| `TRD-560` | accepted | Checkpoint        | Checkpointed evidence detail hardening lane.              |
-| `TRD-561` | accepted | Source map        | Mapped evidence detail to runtime snapshot sources.       |
-| `TRD-562` | accepted | Fixture drift     | Added local fixture drift regression coverage.            |
-| `TRD-563` | accepted | Review aging      | Added non-actionable review aging policy copy.            |
-| `TRD-564` | accepted | Docs sweep        | Kept evidence-detail source links local and bounded.      |
-| `TRD-565` | accepted | Operator scan     | Added manual inspection checklist language.               |
-| `TRD-566` | accepted | Retention         | Added local simulation artifact retention limits.         |
-| `TRD-567` | accepted | Failure taxonomy  | Added evidence-only failure taxonomy labels.              |
-| `TRD-568` | accepted | Performance       | Added source-list performance smoke checks.               |
-| `TRD-569` | accepted | Export boundary   | Recorded print/export prohibition policy.                 |
-| `TRD-570` | accepted | Checkpoint        | Checkpointed evidence detail control lane.                |
-| `TRD-571` | accepted | Visual density    | Added compact evidence-control display checks.            |
-| `TRD-572` | accepted | Accessibility     | Rechecked labels and evidence-control reading order.      |
-| `TRD-573` | accepted | Copy minimization | Added compact copy rules with risk context preserved.     |
-| `TRD-574` | accepted | Source freshness  | Planned local source freshness without automation.        |
-| `TRD-575` | accepted | Inventory plan    | Planned local simulation artifact inventory boundaries.   |
-| `TRD-576` | accepted | Note model        | Planned manual operator notes without decisions.          |
-| `TRD-577` | accepted | Limitations       | Rechecked limitation prominence near evidence.            |
-| `TRD-578` | accepted | Source compaction | Planned long source-list grouping boundaries.             |
-| `TRD-579` | accepted | Output boundary   | Rechecked no report, export, share, or print channel.     |
-| `TRD-580` | accepted | Checkpoint        | Checkpointed evidence-control hardening lane.             |
-| `TRD-581` | accepted | Security          | Resolved low-severity Vite/esbuild audit warning.         |
-| `TRD-582` | accepted | Source links      | Reviewed source-link overflow for workspace inspection.   |
-| `TRD-583` | accepted | Truth             | Aligned market intelligence truth without autonomy gain.  |
-| `TRD-584` | accepted | Roadmap           | Routed market-intelligence work after workspace MVP.      |
-| `TRD-585` | accepted | Inventory schema  | Planned local artifact inventory fields for workspace.    |
-| `TRD-586` | accepted | Note sources      | Planned manual note source links for workspace.           |
-| `TRD-587` | accepted | Stale refs        | Planned local stale-reference negative cases.             |
-| `TRD-588` | accepted | Control copy      | Audited Command Center copy for blocked semantics.        |
-| `TRD-589` | accepted | Inventory         | Implemented local artifact inventory contract.            |
-| `TRD-590` | accepted | Note model        | Implemented manual operator note contract.                |
-| `TRD-591` | accepted | Negative cases    | Added fail-closed inventory and note coverage.            |
-| `TRD-592` | accepted | Workspace MVP     | Rendered one local research case end-to-end.              |
-| `TRD-593` | accepted | Market input      | Implemented sourced market-intelligence input model.      |
-| `TRD-594` | accepted | News events       | Implemented local news/event scanner contract.            |
-| `TRD-595` | accepted | Signal candidate  | Implemented evidence-only signal candidate contract.      |
-| `TRD-596` | accepted | Red flags         | Implemented sourced red-flag blocker evidence contract.   |
-| `TRD-597` | accepted | Scenario draft    | Implemented draft-only scenario recommendation model.     |
-| `TRD-598` | accepted | Risk review       | Implemented risk-gated recommendation review contract.    |
-| `TRD-599` | accepted | Workspace         | Rendered read-only market-intelligence workspace panel.   |
-| `TRD-600` | accepted | Simulation link   | Linked recommendation candidate to local simulation only. |
-| `TRD-601` | accepted | Visual QA         | Added workspace visual QA assertions.                     |
-| `TRD-602` | accepted | Source links      | Added local source-link drilldown display.                |
-| `TRD-603` | accepted | Inventory UI      | Rendered artifact inventory records in workspace.         |
-| `TRD-604` | accepted | Operator note     | Rendered manual operator note evidence in workspace.      |
-| `TRD-605` | accepted | Blocker check     | Added market-intelligence blocker checkpoint.             |
-| `TRD-606` | accepted | Red flag QA       | Verified red-flag blocker evidence display and copy.      |
-| `TRD-607` | accepted | Gap intake        | Selected missing-state and reference-integrity hardening. |
-| `TRD-608` | accepted | Empty states      | Added neutral local states for absent workspace records.  |
-| `TRD-609` | accepted | Evidence guard    | Added scenario-reference consistency validation.          |
-| `TRD-610` | accepted | Runtime refresh   | Preserved workspace panels during metadata refresh.       |
-| `TRD-611` | accepted | Mobile QA         | Verified narrow-screen scenario readability.              |
-| `TRD-612` | accepted | Keyboard QA       | Added visible hash-target focus behavior.                 |
-| `TRD-613` | accepted | Copy pass         | Reduced repetition while retaining limitations.           |
-| `TRD-614` | accepted | Scope regression  | Expanded unsafe scenario-copy rejection coverage.         |
-| `TRD-615` | accepted | Source grouping   | Grouped inputs, risk controls, and provenance.            |
-| `TRD-616` | accepted | Checkpoint        | Closed the market-workspace display lane.                 |
+| Packet    | Status   | Area              | Result                                                     |
+| --------- | -------- | ----------------- | ---------------------------------------------------------- |
+| `TRD-501` | accepted | Operator review   | Reviewed frontend shell with operator lens.                |
+| `TRD-502` | accepted | Evidence plan     | Planned evidence detail expansion boundaries.              |
+| `TRD-503` | accepted | Copy audit        | Audited limitation copy for claim safety.                  |
+| `TRD-504` | accepted | Source links      | Polished source-link group scanning.                       |
+| `TRD-505` | accepted | Runtime UX        | Reviewed local runtime refresh UX.                         |
+| `TRD-506` | accepted | Mobile QA         | Rechecked mobile visual layout.                            |
+| `TRD-507` | accepted | Keyboard QA       | Rechecked keyboard and hash navigation.                    |
+| `TRD-508` | accepted | Copy guard        | Expanded frontend blocked-copy regression coverage.        |
+| `TRD-509` | accepted | Handoff           | Documented frontend shell handoff.                         |
+| `TRD-510` | accepted | Closeout          | Closed current frontend QA lane.                           |
+| `TRD-511` | accepted | Gap intake        | Selected local simulation evidence as next UI lane.        |
+| `TRD-512` | accepted | Evidence plan     | Planned simulation evidence detail contract.               |
+| `TRD-513` | accepted | Workflow card     | Planned manual workflow evidence card.                     |
+| `TRD-514` | accepted | Risk data         | Planned risk-review panel data contract.                   |
+| `TRD-515` | accepted | Artifact summary  | Planned local simulation artifact summaries.               |
+| `TRD-516` | accepted | Failure modes     | Planned failure-mode evidence panel.                       |
+| `TRD-517` | accepted | Source density    | Reviewed source-link density follow-up.                    |
+| `TRD-518` | accepted | Connector check   | Rechecked frontend no-account-connector boundary.          |
+| `TRD-519` | accepted | Handoff           | Routed frontend lane to simulation evidence planning.      |
+| `TRD-520` | accepted | Checkpoint        | Checkpointed next Gate 2 implementation lane.              |
+| `TRD-521` | accepted | Schema draft      | Drafted simulation evidence detail schema plan.            |
+| `TRD-522` | accepted | Negative cases    | Planned blocked-field negative cases.                      |
+| `TRD-523` | accepted | Workflow fixture  | Planned manual workflow evidence fixtures.                 |
+| `TRD-524` | accepted | Risk fixture      | Planned risk-review panel fixtures.                        |
+| `TRD-525` | accepted | Artifact fixture  | Planned local artifact summary fixtures.                   |
+| `TRD-526` | accepted | Failure fixture   | Planned failure-mode evidence fixtures.                    |
+| `TRD-527` | accepted | Source map        | Planned simulation evidence source-link map.               |
+| `TRD-528` | accepted | Display packet    | Gated frontend evidence detail display work.               |
+| `TRD-529` | accepted | Guard plan        | Planned evidence contract guard updates.                   |
+| `TRD-530` | accepted | Checkpoint        | Checkpointed simulation evidence planning lane.            |
+| `TRD-531` | accepted | Impl packet       | Prepared simulation evidence schema implementation.        |
+| `TRD-532` | accepted | Schema source     | Added local simulation evidence detail schema.             |
+| `TRD-533` | accepted | Schema tests      | Added required and blocked-field contract tests.           |
+| `TRD-534` | accepted | Workflow fixture  | Added manual workflow evidence fixture references.         |
+| `TRD-535` | accepted | Risk fixture      | Added risk-review fixture references.                      |
+| `TRD-536` | accepted | Artifact refs     | Added local artifact summary fixture references.           |
+| `TRD-537` | accepted | Failure refs      | Added failure-mode evidence fixture references.            |
+| `TRD-538` | accepted | Source map refs   | Added evidence source-link map fixture references.         |
+| `TRD-539` | accepted | Guard update      | Indexed evidence schema, fixture, tests, and docs.         |
+| `TRD-540` | accepted | Checkpoint        | Checkpointed simulation evidence detail implementation.    |
+| `TRD-541` | accepted | Display packet    | Prepared read-only evidence detail display lane.           |
+| `TRD-542` | accepted | Local data        | Added local evidence detail display data.                  |
+| `TRD-543` | accepted | Detail panel      | Rendered evidence detail panel without controls.           |
+| `TRD-544` | accepted | Risk adjacency    | Kept limitations and reproducibility near evidence.        |
+| `TRD-545` | accepted | Control tests     | Added no-action-control frontend tests.                    |
+| `TRD-546` | accepted | Source links      | Rendered local source-link references.                     |
+| `TRD-547` | accepted | Mobile QA         | Added responsive evidence detail layout support.           |
+| `TRD-548` | accepted | Keyboard QA       | Preserved semantic and keyboard accessibility posture.     |
+| `TRD-549` | accepted | Metadata sync     | Synced Command Center and tracker metadata.                |
+| `TRD-550` | accepted | Checkpoint        | Checkpointed read-only evidence detail display lane.       |
+| `TRD-551` | accepted | Runtime merge     | Preserved evidence detail through runtime refresh.         |
+| `TRD-552` | accepted | Data shape        | Added required display-field regression coverage.          |
+| `TRD-553` | accepted | Empty state       | Added neutral fallback behavior for missing arrays.        |
+| `TRD-554` | accepted | Reference polish  | Hardened long local reference wrapping.                    |
+| `TRD-555` | accepted | Screen reader     | Added explicit labels for evidence detail cards.           |
+| `TRD-556` | accepted | Visual QA         | Recorded desktop and mobile visual QA requirements.        |
+| `TRD-557` | accepted | Source density    | Kept source-link detail local, bounded, and readable.      |
+| `TRD-558` | accepted | Copy guard        | Rechecked blocked frontend wording coverage.               |
+| `TRD-559` | accepted | Handoff           | Documented operator posture for hardened detail lane.      |
+| `TRD-560` | accepted | Checkpoint        | Checkpointed evidence detail hardening lane.               |
+| `TRD-561` | accepted | Source map        | Mapped evidence detail to runtime snapshot sources.        |
+| `TRD-562` | accepted | Fixture drift     | Added local fixture drift regression coverage.             |
+| `TRD-563` | accepted | Review aging      | Added non-actionable review aging policy copy.             |
+| `TRD-564` | accepted | Docs sweep        | Kept evidence-detail source links local and bounded.       |
+| `TRD-565` | accepted | Operator scan     | Added manual inspection checklist language.                |
+| `TRD-566` | accepted | Retention         | Added local simulation artifact retention limits.          |
+| `TRD-567` | accepted | Failure taxonomy  | Added evidence-only failure taxonomy labels.               |
+| `TRD-568` | accepted | Performance       | Added source-list performance smoke checks.                |
+| `TRD-569` | accepted | Export boundary   | Recorded print/export prohibition policy.                  |
+| `TRD-570` | accepted | Checkpoint        | Checkpointed evidence detail control lane.                 |
+| `TRD-571` | accepted | Visual density    | Added compact evidence-control display checks.             |
+| `TRD-572` | accepted | Accessibility     | Rechecked labels and evidence-control reading order.       |
+| `TRD-573` | accepted | Copy minimization | Added compact copy rules with risk context preserved.      |
+| `TRD-574` | accepted | Source freshness  | Planned local source freshness without automation.         |
+| `TRD-575` | accepted | Inventory plan    | Planned local simulation artifact inventory boundaries.    |
+| `TRD-576` | accepted | Note model        | Planned manual operator notes without decisions.           |
+| `TRD-577` | accepted | Limitations       | Rechecked limitation prominence near evidence.             |
+| `TRD-578` | accepted | Source compaction | Planned long source-list grouping boundaries.              |
+| `TRD-579` | accepted | Output boundary   | Rechecked no report, export, share, or print channel.      |
+| `TRD-580` | accepted | Checkpoint        | Checkpointed evidence-control hardening lane.              |
+| `TRD-581` | accepted | Security          | Resolved low-severity Vite/esbuild audit warning.          |
+| `TRD-582` | accepted | Source links      | Reviewed source-link overflow for workspace inspection.    |
+| `TRD-583` | accepted | Truth             | Aligned market intelligence truth without autonomy gain.   |
+| `TRD-584` | accepted | Roadmap           | Routed market-intelligence work after workspace MVP.       |
+| `TRD-585` | accepted | Inventory schema  | Planned local artifact inventory fields for workspace.     |
+| `TRD-586` | accepted | Note sources      | Planned manual note source links for workspace.            |
+| `TRD-587` | accepted | Stale refs        | Planned local stale-reference negative cases.              |
+| `TRD-588` | accepted | Control copy      | Audited Command Center copy for blocked semantics.         |
+| `TRD-589` | accepted | Inventory         | Implemented local artifact inventory contract.             |
+| `TRD-590` | accepted | Note model        | Implemented manual operator note contract.                 |
+| `TRD-591` | accepted | Negative cases    | Added fail-closed inventory and note coverage.             |
+| `TRD-592` | accepted | Workspace MVP     | Rendered one local research case end-to-end.               |
+| `TRD-593` | accepted | Market input      | Implemented sourced market-intelligence input model.       |
+| `TRD-594` | accepted | News events       | Implemented local news/event scanner contract.             |
+| `TRD-595` | accepted | Signal candidate  | Implemented evidence-only signal candidate contract.       |
+| `TRD-596` | accepted | Red flags         | Implemented sourced red-flag blocker evidence contract.    |
+| `TRD-597` | accepted | Scenario draft    | Implemented draft-only scenario recommendation model.      |
+| `TRD-598` | accepted | Risk review       | Implemented risk-gated recommendation review contract.     |
+| `TRD-599` | accepted | Workspace         | Rendered read-only market-intelligence workspace panel.    |
+| `TRD-600` | accepted | Simulation link   | Linked recommendation candidate to local simulation only.  |
+| `TRD-601` | accepted | Visual QA         | Added workspace visual QA assertions.                      |
+| `TRD-602` | accepted | Source links      | Added local source-link drilldown display.                 |
+| `TRD-603` | accepted | Inventory UI      | Rendered artifact inventory records in workspace.          |
+| `TRD-604` | accepted | Operator note     | Rendered manual operator note evidence in workspace.       |
+| `TRD-605` | accepted | Blocker check     | Added market-intelligence blocker checkpoint.              |
+| `TRD-606` | accepted | Red flag QA       | Verified red-flag blocker evidence display and copy.       |
+| `TRD-607` | accepted | Gap intake        | Selected missing-state and reference-integrity hardening.  |
+| `TRD-608` | accepted | Empty states      | Added neutral local states for absent workspace records.   |
+| `TRD-609` | accepted | Evidence guard    | Added scenario-reference consistency validation.           |
+| `TRD-610` | accepted | Runtime refresh   | Preserved workspace panels during metadata refresh.        |
+| `TRD-611` | accepted | Mobile QA         | Verified narrow-screen scenario readability.               |
+| `TRD-612` | accepted | Keyboard QA       | Added visible hash-target focus behavior.                  |
+| `TRD-613` | accepted | Copy pass         | Reduced repetition while retaining limitations.            |
+| `TRD-614` | accepted | Scope regression  | Expanded unsafe scenario-copy rejection coverage.          |
+| `TRD-615` | accepted | Source grouping   | Grouped inputs, risk controls, and provenance.             |
+| `TRD-616` | accepted | Checkpoint        | Closed the market-workspace display lane.                  |
+| `TRD-617` | accepted | Authorization     | Authorized bounded hardening of the existing simulator.    |
+| `TRD-618` | accepted | Account contract  | Added deterministic local paper-account invariants.        |
+| `TRD-619` | accepted | Lifecycle         | Constrained manual local simulation state transitions.     |
+| `TRD-620` | accepted | Risk controls     | Added locked, fail-closed local risk-limit evaluation.     |
+| `TRD-621` | accepted | Fill model        | Added explicit deterministic fill, fee, and cost evidence. |
+| `TRD-622` | accepted | Input integrity   | Blocked duplicate and stale simulation candidates.         |
+| `TRD-623` | accepted | Event journal     | Added immutable hash-chained local simulation events.      |
+| `TRD-624` | accepted | Reconciliation    | Added fail-closed local account-state drift detection.     |
+| `TRD-625` | accepted | Negative coverage | Rejected unsafe simulator boundary mutations.              |
+| `TRD-626` | accepted | Checkpoint        | Closed the simulator contract/control foundation lane.     |
 
 ## Current Operator Commands
 
@@ -1101,25 +1111,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 75 files and 528 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 78 files and 540 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                             | Acceptance focus                                   |
-| ---- | --------- | ------ | ------------------------------------------------ | -------------------------------------------------- |
-| 1    | `TRD-617` | queued | Local paper-simulator authorization packet.      | Require PM, Quant, Risk, and QA/Security approval. |
-| 2    | `TRD-618` | queued | Deterministic paper-account contract.            | Define local balances and positions only.          |
-| 3    | `TRD-619` | queued | Simulated order lifecycle contract.              | Model local order states without dispatch.         |
-| 4    | `TRD-620` | queued | Paper risk-limit enforcement contract.           | Fail closed on configured local limits.            |
-| 5    | `TRD-621` | queued | Local fill, fee, and slippage model.             | Keep assumptions explicit and reproducible.        |
-| 6    | `TRD-622` | queued | Duplicate and stale-input guards.                | Block invalid simulated order candidates.          |
-| 7    | `TRD-623` | queued | Immutable simulation event journal.              | Record deterministic local lifecycle events.       |
-| 8    | `TRD-624` | queued | Simulation-state reconciliation.                 | Detect local order, position, and balance drift.   |
-| 9    | `TRD-625` | queued | Local simulator negative-boundary fixtures.      | Reject external, credential, and autonomy paths.   |
-| 10   | `TRD-626` | queued | Local paper-simulator implementation checkpoint. | Decide whether implementation may begin.           |
+| Rank | Packet    | Status | Goal                                  | Acceptance focus                                      |
+| ---- | --------- | ------ | ------------------------------------- | ----------------------------------------------------- |
+| 1    | `TRD-627` | queued | Paper-account state reducer packet.   | Authorize pure local state mutation only.             |
+| 2    | `TRD-628` | queued | Position accounting reducer.          | Reconcile quantity, cost basis, and marked value.     |
+| 3    | `TRD-629` | queued | Cash and equity accounting reducer.   | Preserve deterministic account invariants.            |
+| 4    | `TRD-630` | queued | Order lifecycle reducer.              | Apply only contract-authorized manual transitions.    |
+| 5    | `TRD-631` | queued | Risk guard integration.               | Prevent state mutation after any risk breach.         |
+| 6    | `TRD-632` | queued | Fill model integration.               | Feed explicit deterministic cost evidence to reducer. |
+| 7    | `TRD-633` | queued | Journal integration.                  | Append each accepted local mutation exactly once.     |
+| 8    | `TRD-634` | queued | Reconciliation freeze integration.    | Freeze local mutation when state drifts.              |
+| 9    | `TRD-635` | queued | End-to-end local simulation scenario. | Prove deterministic replay from synthetic fixtures.   |
+| 10   | `TRD-636` | queued | Local simulator product checkpoint.   | Decide whether a read-only workspace view is useful.  |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

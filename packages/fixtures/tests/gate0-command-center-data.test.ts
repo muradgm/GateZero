@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain('latestPacket: "TRD-616"');
+    expect(data).toContain('latestPacket: "TRD-626"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -480,8 +480,10 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain("TRD-616 closes the market-intelligence workspace display lane.");
-    expect(data).toContain("TRD-617 must authorize any local simulator milestone");
+    expect(data).toContain(
+      "TRD-626 closes the local simulator contract and control foundation lane."
+    );
+    expect(data).toContain("TRD-627 may authorize pure local state-reducer work");
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -505,7 +507,9 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-616 closes the market-workspace display lane.");
+    expect(data).toContain(
+      "TRD-626 closes the local simulator contract and control foundation lane."
+    );
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
