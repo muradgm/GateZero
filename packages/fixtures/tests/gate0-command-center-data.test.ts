@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain("TRD-585");
+    expect(data).toContain("TRD-595");
   });
 
   it("does not expose trading action language in app data", () => {
@@ -55,7 +55,15 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
     const main = readFileSync(mainPath, "utf8");
 
-    for (const item of ["Overview", "Evidence", "Limitations", "Risk", "Workflow", "Docs"]) {
+    for (const item of [
+      "Overview",
+      "Evidence",
+      "Workspace",
+      "Limitations",
+      "Risk",
+      "Workflow",
+      "Docs"
+    ]) {
       const id = item.toLowerCase();
 
       expect(data).toContain(`"${item}"`);
@@ -147,7 +155,7 @@ describe("Gate 0 command center surface", () => {
       expect(data).toContain(field);
     }
 
-    for (const sectionId of ["evidence", "limitations", "risk", "workflow", "docs"]) {
+    for (const sectionId of ["evidence", "workspace", "limitations", "risk", "workflow", "docs"]) {
       expect(main).toContain(`id="${sectionId}"`);
     }
 
@@ -498,9 +506,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain(
-      "TRD-585 defines only the local artifact inventory fields needed for TRD-592."
-    );
+    expect(data).toContain("TRD-596 should add red-flag engine rules only after");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
@@ -577,6 +583,49 @@ describe("Gate 0 command center surface", () => {
     expect(data).not.toContain("export_url");
     expect(data).not.toContain("share_target");
     expect(data).not.toContain("print_profile");
+  });
+
+  it("renders the Strategy Review Workspace as a read-only evidence chain", () => {
+    const data = readFileSync(dataPath, "utf8");
+    const main = readFileSync(mainPath, "utf8");
+    const styles = readFileSync(stylePath, "utf8");
+
+    expect(data).toContain("strategyReviewWorkspace");
+    expect(data).toContain("Can the operator inspect the full evidence chain");
+    expect(data).toContain("gate2-research-case-fixture-001");
+
+    for (const label of [
+      "Strategy Idea",
+      "Data Snapshot",
+      "Backtest Evidence",
+      "Metric Report",
+      "Risk Review",
+      "Operator Note",
+      "Outcome Log",
+      "Learning Event"
+    ]) {
+      expect(data).toContain(label);
+    }
+
+    expect(main).toContain('id="workspace"');
+    expect(main).toContain("normalizeStrategyReviewWorkspace");
+    expect(main).toContain("workspace-evidence-grid");
+    expect(main).toContain("workspace-adjacency");
+    expect(styles).toContain(".workspace-evidence-grid");
+    expect(styles).toContain(".workspace-adjacency");
+    expect(main).not.toContain("<button");
+    expect(main).not.toContain("<form");
+  });
+
+  it("keeps market intelligence display evidence-only and non-final", () => {
+    const data = readFileSync(dataPath, "utf8");
+
+    expect(data).toContain("gate2-market-intelligence-input-fixture-001");
+    expect(data).toContain("gate2-news-event-fixture-001");
+    expect(data).toContain("gate2-signal-candidate-fixture-001");
+    expect(data).toContain("No final recommendation.");
+    expect(data).not.toContain("buy signal");
+    expect(data).not.toContain("sell signal");
   });
 
   it("keeps blocked frontend claim and action language out of the shell", () => {

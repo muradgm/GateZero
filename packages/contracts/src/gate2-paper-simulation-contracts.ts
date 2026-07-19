@@ -25,6 +25,49 @@ export const Gate2OperatorDecisionSchema = z.enum(["reject", "revise", "record_l
 export const Gate2RedactionStatusSchema = z.enum(["redacted", "no_sensitive_payload"]);
 export const Gate2AssumptionStatusSchema = z.enum(["draft", "reviewed", "blocked"]);
 export const Gate2EvidenceFreshnessStatusSchema = z.enum(["fresh", "stale", "blocked"]);
+export const Gate2ArtifactTypeSchema = z.enum([
+  "strategy_idea",
+  "data_snapshot",
+  "backtest_evidence",
+  "metric_report",
+  "risk_review",
+  "operator_decision_note",
+  "outcome_log",
+  "learning_event",
+  "simulation_evidence"
+]);
+export const Gate2SourceCategorySchema = z.enum([
+  "protected_loop",
+  "simulation_detail",
+  "risk_control",
+  "operator_review",
+  "market_intelligence"
+]);
+export const Gate2OperatorNoteTypeSchema = z.enum([
+  "observation",
+  "limitation",
+  "risk_question",
+  "revision_note",
+  "learning_note"
+]);
+export const Gate2WorkspaceCaseStatusSchema = z.enum([
+  "inspection_ready",
+  "missing_evidence",
+  "risk_blocked"
+]);
+export const Gate2MarketInputTypeSchema = z.enum([
+  "market_condition",
+  "news_event",
+  "red_flag",
+  "signal_candidate"
+]);
+export const Gate2ScenarioActionSchema = z.enum([
+  "watch",
+  "reject",
+  "paper_simulate",
+  "prepare_plan"
+]);
+export const Gate2ConfidenceLevelSchema = z.enum(["low", "medium", "high"]);
 export const Gate2BoundaryTypeSchema = z.enum([
   "external_account_route",
   "credential_payload",
@@ -218,6 +261,170 @@ export const Gate2SimulationEvidenceDetailContractSchema = Gate2BoundarySchema.e
     }
   });
 
+export const Gate2LocalArtifactInventoryContractSchema = Gate2BoundarySchema.extend({
+  artifact_id: IdentifierSchema,
+  artifact_type: Gate2ArtifactTypeSchema,
+  local_path: NonEmptyStringSchema,
+  source_category: Gate2SourceCategorySchema,
+  linked_research_case_id: IdentifierSchema,
+  linked_evidence_detail_id: IdentifierSchema,
+  linked_risk_review_id: IdentifierSchema.optional(),
+  freshness_status: Gate2EvidenceFreshnessStatusSchema,
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  redaction_status: Gate2RedactionStatusSchema,
+  blocked_scope_flags: z.array(Gate2BoundaryTypeSchema),
+  created_at: IsoDateTimeSchema,
+  verified_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((artifact, context) => {
+    if (!artifact.local_path.startsWith("ops/") && !artifact.local_path.startsWith("docs/")) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "artifact inventory paths must be local ops or docs records",
+        path: ["local_path"]
+      });
+    }
+
+    if (artifact.freshness_status === "blocked" && artifact.blocked_scope_flags.length === 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "blocked inventory artifacts require blocked-scope flags",
+        path: ["blocked_scope_flags"]
+      });
+    }
+  });
+
+export const Gate2OperatorNoteModelContractSchema = Gate2BoundarySchema.extend({
+  operator_note_id: IdentifierSchema,
+  note_type: Gate2OperatorNoteTypeSchema,
+  linked_research_case_id: IdentifierSchema,
+  linked_evidence_detail_id: IdentifierSchema,
+  linked_artifact_ids: z.array(IdentifierSchema).min(1),
+  source_link_refs: z.array(NonEmptyStringSchema).min(1),
+  note_body: NonEmptyStringSchema,
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  redaction_status: Gate2RedactionStatusSchema,
+  manual_entry: z.literal(true),
+  operator_retains_authority: z.literal(true),
+  automated_action: z.literal(false),
+  decision_performed: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((note, context) => {
+    for (const sourceRef of note.source_link_refs) {
+      if (!sourceRef.startsWith("ops/") && !sourceRef.startsWith("docs/")) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "operator note sources must be local ops or docs records",
+          path: ["source_link_refs"]
+        });
+      }
+    }
+  });
+
+export const Gate2StrategyReviewWorkspaceCaseContractSchema = Gate2BoundarySchema.extend({
+  research_case_id: IdentifierSchema,
+  workspace_case_status: Gate2WorkspaceCaseStatusSchema,
+  strategy_idea_id: IdentifierSchema,
+  data_snapshot_id: IdentifierSchema,
+  backtest_evidence_id: IdentifierSchema,
+  metric_report_id: IdentifierSchema,
+  risk_review_id: IdentifierSchema,
+  operator_note_id: IdentifierSchema,
+  outcome_log_id: IdentifierSchema,
+  learning_event_id: IdentifierSchema,
+  simulation_evidence_detail_id: IdentifierSchema,
+  artifact_inventory_ids: z.array(IdentifierSchema).min(1),
+  blocked_scope_reminders: z.array(Gate2BoundaryTypeSchema).min(1),
+  limitation_notes: z.array(NonEmptyStringSchema).min(1),
+  operator_required: z.literal(true),
+  read_only_workspace: z.literal(true),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((workspaceCase, context) => {
+    if (
+      workspaceCase.workspace_case_status === "inspection_ready" &&
+      workspaceCase.blocked_scope_reminders.length === 0
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "workspace cases require visible blocked-scope reminders",
+        path: ["blocked_scope_reminders"]
+      });
+    }
+  });
+
+export const Gate2MarketIntelligenceInputContractSchema = Gate2BoundarySchema.extend({
+  market_intelligence_input_id: IdentifierSchema,
+  input_type: Gate2MarketInputTypeSchema,
+  linked_research_case_id: IdentifierSchema,
+  source_title: NonEmptyStringSchema,
+  source_ref: NonEmptyStringSchema,
+  observed_at: IsoDateTimeSchema,
+  summary: NonEmptyStringSchema,
+  confidence_level: Gate2ConfidenceLevelSchema,
+  red_flags: z.array(NonEmptyStringSchema),
+  invalidation_conditions: z.array(NonEmptyStringSchema).min(1),
+  source_references: z.array(NonEmptyStringSchema).min(1),
+  risk_review_required: z.literal(true),
+  operator_decision_required: z.literal(true),
+  recommendation_final: z.literal(false),
+  created_at: IsoDateTimeSchema
+}).strict();
+
+export const Gate2NewsEventScannerContractSchema = Gate2BoundarySchema.extend({
+  news_event_id: IdentifierSchema,
+  market_intelligence_input_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  event_time: IsoDateTimeSchema,
+  event_summary: NonEmptyStringSchema,
+  source_refs: z.array(NonEmptyStringSchema).min(1),
+  red_flags: z.array(NonEmptyStringSchema),
+  stale_reference: z.literal(false),
+  action_route_created: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((event, context) => {
+    if (event.source_refs.some((sourceRef) => sourceRef.startsWith("http"))) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "news event scanner fixtures must use local source references",
+        path: ["source_refs"]
+      });
+    }
+  });
+
+export const Gate2SignalCandidateContractSchema = Gate2BoundarySchema.extend({
+  signal_candidate_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  market_intelligence_input_ids: z.array(IdentifierSchema).min(1),
+  evidence_refs: z.array(IdentifierSchema).min(1),
+  candidate_summary: NonEmptyStringSchema,
+  scenario_action: Gate2ScenarioActionSchema,
+  confidence_level: Gate2ConfidenceLevelSchema,
+  risk_review_id: IdentifierSchema.optional(),
+  red_flags: z.array(NonEmptyStringSchema).min(1),
+  invalidation_conditions: z.array(NonEmptyStringSchema).min(1),
+  operator_decision_required: z.literal(true),
+  action_route_created: z.literal(false),
+  recommendation_final: z.literal(false),
+  created_at: IsoDateTimeSchema
+})
+  .strict()
+  .superRefine((candidate, context) => {
+    if (candidate.scenario_action === "paper_simulate" && !candidate.risk_review_id) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "paper-simulation candidates require a risk review reference",
+        path: ["risk_review_id"]
+      });
+    }
+  });
+
 export type Gate2ContractAuthority = z.infer<typeof Gate2ContractAuthoritySchema>;
 export type Gate2ContractScope = z.infer<typeof Gate2ContractScopeSchema>;
 export type Gate2FinancialGate = z.infer<typeof Gate2FinancialGateSchema>;
@@ -229,6 +436,13 @@ export type Gate2OperatorDecision = z.infer<typeof Gate2OperatorDecisionSchema>;
 export type Gate2RedactionStatus = z.infer<typeof Gate2RedactionStatusSchema>;
 export type Gate2AssumptionStatus = z.infer<typeof Gate2AssumptionStatusSchema>;
 export type Gate2EvidenceFreshnessStatus = z.infer<typeof Gate2EvidenceFreshnessStatusSchema>;
+export type Gate2ArtifactType = z.infer<typeof Gate2ArtifactTypeSchema>;
+export type Gate2SourceCategory = z.infer<typeof Gate2SourceCategorySchema>;
+export type Gate2OperatorNoteType = z.infer<typeof Gate2OperatorNoteTypeSchema>;
+export type Gate2WorkspaceCaseStatus = z.infer<typeof Gate2WorkspaceCaseStatusSchema>;
+export type Gate2MarketInputType = z.infer<typeof Gate2MarketInputTypeSchema>;
+export type Gate2ScenarioAction = z.infer<typeof Gate2ScenarioActionSchema>;
+export type Gate2ConfidenceLevel = z.infer<typeof Gate2ConfidenceLevelSchema>;
 export type Gate2BoundaryType = z.infer<typeof Gate2BoundaryTypeSchema>;
 export type Gate2SimulatedOrderRecordContract = z.infer<
   typeof Gate2SimulatedOrderRecordContractSchema
@@ -245,3 +459,15 @@ export type Gate2NegativeBoundaryFixtureContract = z.infer<
 export type Gate2SimulationEvidenceDetailContract = z.infer<
   typeof Gate2SimulationEvidenceDetailContractSchema
 >;
+export type Gate2LocalArtifactInventoryContract = z.infer<
+  typeof Gate2LocalArtifactInventoryContractSchema
+>;
+export type Gate2OperatorNoteModelContract = z.infer<typeof Gate2OperatorNoteModelContractSchema>;
+export type Gate2StrategyReviewWorkspaceCaseContract = z.infer<
+  typeof Gate2StrategyReviewWorkspaceCaseContractSchema
+>;
+export type Gate2MarketIntelligenceInputContract = z.infer<
+  typeof Gate2MarketIntelligenceInputContractSchema
+>;
+export type Gate2NewsEventScannerContract = z.infer<typeof Gate2NewsEventScannerContractSchema>;
+export type Gate2SignalCandidateContract = z.infer<typeof Gate2SignalCandidateContractSchema>;

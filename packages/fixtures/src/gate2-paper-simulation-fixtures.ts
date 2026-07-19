@@ -1,18 +1,30 @@
 import {
   Gate2NegativeBoundaryFixtureContractSchema,
+  Gate2LocalArtifactInventoryContractSchema,
+  Gate2MarketIntelligenceInputContractSchema,
+  Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
+  Gate2OperatorNoteModelContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema,
+  Gate2StrategyReviewWorkspaceCaseContractSchema,
+  type Gate2LocalArtifactInventoryContract,
+  type Gate2MarketIntelligenceInputContract,
+  type Gate2NewsEventScannerContract,
   type Gate2NegativeBoundaryFixtureContract,
   type Gate2OperatorActionLogContract,
+  type Gate2OperatorNoteModelContract,
   type Gate2RiskReviewEventContract,
+  type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
   type Gate2SimulatedOrderRecordContract,
-  type Gate2SimulationStateContract
+  type Gate2SimulationStateContract,
+  type Gate2StrategyReviewWorkspaceCaseContract
 } from "../../contracts/src/index.js";
 
 const fixtureTimestamp = "2026-01-01T00:00:00.000Z";
@@ -196,5 +208,194 @@ export const gate2SimulationEvidenceDetailFixture: Gate2SimulationEvidenceDetail
     performance_claim: false,
     external_access: false,
     execution_path: false,
+    created_at: fixtureTimestamp
+  });
+
+export const gate2LocalArtifactInventoryFixtures: readonly Gate2LocalArtifactInventoryContract[] = [
+  {
+    artifact_id: "gate2-artifact-inventory-fixture-001",
+    artifact_type: "strategy_idea",
+    local_path: "ops/assignments/TRD-001_INITIALIZE_GATE0_RESEARCH_ONLY_MONOREPO.md",
+    source_category: "protected_loop",
+    linked_research_case_id: "gate2-research-case-fixture-001",
+    linked_evidence_detail_id: gate2SimulationEvidenceDetailFixture.simulation_evidence_detail_id,
+    linked_risk_review_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    freshness_status: "fresh",
+    limitation_notes: ["Local source file proves traceability only."],
+    redaction_status: "no_sensitive_payload",
+    blocked_scope_flags: [],
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp,
+    verified_at: fixtureTimestamp
+  },
+  {
+    artifact_id: "gate2-artifact-inventory-fixture-002",
+    artifact_type: "risk_review",
+    local_path: "ops/runtime/reviews/TRD-585_RISK_REVIEW.md",
+    source_category: "risk_control",
+    linked_research_case_id: "gate2-research-case-fixture-001",
+    linked_evidence_detail_id: gate2SimulationEvidenceDetailFixture.simulation_evidence_detail_id,
+    linked_risk_review_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    freshness_status: "fresh",
+    limitation_notes: ["Risk source is local operating evidence, not permission."],
+    redaction_status: "no_sensitive_payload",
+    blocked_scope_flags: [],
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp,
+    verified_at: fixtureTimestamp
+  }
+].map((fixture) => Gate2LocalArtifactInventoryContractSchema.parse(fixture));
+
+export const gate2OperatorNoteModelFixture: Gate2OperatorNoteModelContract =
+  Gate2OperatorNoteModelContractSchema.parse({
+    operator_note_id: "gate2-operator-note-fixture-001",
+    note_type: "observation",
+    linked_research_case_id: "gate2-research-case-fixture-001",
+    linked_evidence_detail_id: gate2SimulationEvidenceDetailFixture.simulation_evidence_detail_id,
+    linked_artifact_ids: gate2LocalArtifactInventoryFixtures.map(
+      (artifact) => artifact.artifact_id
+    ),
+    source_link_refs: [
+      "ops/runtime/reviews/TRD-585_ORCHESTRATOR_ACCEPTANCE.md",
+      "ops/assignments/TRD-585_GATE2_ARTIFACT_INVENTORY_SCHEMA_PLAN.md"
+    ],
+    note_body: "Operator observes that local evidence and limitations are visible together.",
+    limitation_notes: ["Manual note fixture; no decision is performed."],
+    redaction_status: "no_sensitive_payload",
+    manual_entry: true,
+    operator_retains_authority: true,
+    automated_action: false,
+    decision_performed: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2StrategyReviewWorkspaceCaseFixture: Gate2StrategyReviewWorkspaceCaseContract =
+  Gate2StrategyReviewWorkspaceCaseContractSchema.parse({
+    research_case_id: "gate2-research-case-fixture-001",
+    workspace_case_status: "inspection_ready",
+    strategy_idea_id: "gate0-strategy-idea-fixture-001",
+    data_snapshot_id: "gate1-historical-data-snapshot-fixture-001",
+    backtest_evidence_id: "gate1-backtest-run-assembly-fixture-001",
+    metric_report_id: "gate1-metric-report-evidence-fixture-001",
+    risk_review_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    operator_note_id: gate2OperatorNoteModelFixture.operator_note_id,
+    outcome_log_id: "gate0-outcome-log-fixture-001",
+    learning_event_id: "gate0-learning-event-fixture-001",
+    simulation_evidence_detail_id:
+      gate2SimulationEvidenceDetailFixture.simulation_evidence_detail_id,
+    artifact_inventory_ids: gate2LocalArtifactInventoryFixtures.map(
+      (artifact) => artifact.artifact_id
+    ),
+    blocked_scope_reminders: ["external_account_route", "autonomy_attempt", "live_action_claim"],
+    limitation_notes: ["Workspace fixture is read-only and local."],
+    operator_required: true,
+    read_only_workspace: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2MarketIntelligenceInputFixture: Gate2MarketIntelligenceInputContract =
+  Gate2MarketIntelligenceInputContractSchema.parse({
+    market_intelligence_input_id: "gate2-market-intelligence-input-fixture-001",
+    input_type: "market_condition",
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    source_title: "Synthetic local market condition note",
+    source_ref: "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+    observed_at: fixtureTimestamp,
+    summary: "Local scenario context recorded for later risk review.",
+    confidence_level: "medium",
+    red_flags: ["Synthetic source requires operator review."],
+    invalidation_conditions: ["Source becomes stale or risk review blocks the case."],
+    source_references: ["ops/truth/MARKET_INTELLIGENCE_TRUTH.md"],
+    risk_review_required: true,
+    operator_decision_required: true,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2NewsEventScannerFixture: Gate2NewsEventScannerContract =
+  Gate2NewsEventScannerContractSchema.parse({
+    news_event_id: "gate2-news-event-fixture-001",
+    market_intelligence_input_id: gate2MarketIntelligenceInputFixture.market_intelligence_input_id,
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    event_time: fixtureTimestamp,
+    event_summary: "Synthetic local event context for inspection only.",
+    source_refs: ["ops/truth/MARKET_INTELLIGENCE_TRUTH.md"],
+    red_flags: ["Event source is synthetic and must stay risk-reviewed."],
+    stale_reference: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: fixtureTimestamp
+  });
+
+export const gate2SignalCandidateFixture: Gate2SignalCandidateContract =
+  Gate2SignalCandidateContractSchema.parse({
+    signal_candidate_id: "gate2-signal-candidate-fixture-001",
+    linked_research_case_id: gate2StrategyReviewWorkspaceCaseFixture.research_case_id,
+    market_intelligence_input_ids: [
+      gate2MarketIntelligenceInputFixture.market_intelligence_input_id
+    ],
+    evidence_refs: [gate2NewsEventScannerFixture.news_event_id],
+    candidate_summary: "Scenario candidate remains evidence-only and operator-reviewed.",
+    scenario_action: "watch",
+    confidence_level: "low",
+    risk_review_id: gate2RiskReviewEventFixture.risk_review_event_id,
+    red_flags: ["Candidate is not a final recommendation."],
+    invalidation_conditions: ["Evidence goes stale or risk review blocks continuation."],
+    operator_decision_required: true,
+    action_route_created: false,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
     created_at: fixtureTimestamp
   });

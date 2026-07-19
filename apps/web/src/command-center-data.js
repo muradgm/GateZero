@@ -4,12 +4,12 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-585",
-  localVerification: "74 files / 491 tests",
+  latestPacket: "TRD-595",
+  localVerification: "74 files / 506 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
-  navItems: ["Overview", "Evidence", "Limitations", "Risk", "Workflow", "Docs"],
+  navItems: ["Overview", "Evidence", "Workspace", "Limitations", "Risk", "Workflow", "Docs"],
   healthCards: [
     {
       label: "Gate Status",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 74 files, 491 tests.",
+      detail: "Latest suite: 74 files, 506 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "585 / 585",
+      value: "595 / 595",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "74 files / 491 tests"
+      reference: "74 files / 506 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "585 accepted records"
+      reference: "595 accepted records"
     },
     {
       area: "Dependency audit",
@@ -177,6 +177,18 @@ export const commandCenterData = {
       signal: "Strategy Review Workspace support",
       state: "Planned",
       reference: "TRD-585 local schema"
+    },
+    {
+      area: "Strategy Review Workspace",
+      signal: "One local research case",
+      state: "Ready",
+      reference: "TRD-592 MVP fixture"
+    },
+    {
+      area: "Market intelligence contracts",
+      signal: "Input, event, and candidate models",
+      state: "Contracted",
+      reference: "TRD-593 through TRD-595"
     }
   ],
   simulationEvidenceDetail: {
@@ -298,8 +310,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-585 defines only the local artifact inventory fields needed for TRD-592.",
-    "TRD-586 should tie manual note sources to the same workspace evidence chain.",
+    "TRD-592 makes one local research case inspectable end-to-end.",
+    "TRD-596 should add red-flag engine rules only after source-linked evidence is present.",
     "Use the command center for operating health, not strategy selection."
   ],
   artifactInventorySchemaPlan: {
@@ -353,6 +365,70 @@ export const commandCenterData = {
     "TRD-599 Market Intelligence Workspace",
     "TRD-600 Paper Simulation From Recommendation Candidate"
   ],
+  strategyReviewWorkspace: {
+    title: "Strategy Review Workspace",
+    status: "Read-only MVP",
+    researchCaseId: "gate2-research-case-fixture-001",
+    coreQuestion: "Can the operator inspect the full evidence chain for one research case?",
+    evidenceChain: [
+      {
+        label: "Strategy Idea",
+        ref: "gate0-strategy-idea-fixture-001",
+        limitation: "Idea context only; no recommendation."
+      },
+      {
+        label: "Data Snapshot",
+        ref: "gate1-historical-data-snapshot-fixture-001",
+        limitation: "Local fixture evidence only."
+      },
+      {
+        label: "Backtest Evidence",
+        ref: "gate1-backtest-run-assembly-fixture-001",
+        limitation: "Historical evidence is not permission."
+      },
+      {
+        label: "Metric Report",
+        ref: "gate1-metric-report-evidence-fixture-001",
+        limitation: "Metrics do not imply future performance."
+      },
+      {
+        label: "Risk Review",
+        ref: "gate2-risk-review-fixture-001",
+        limitation: "Risk review remains required beside evidence."
+      },
+      {
+        label: "Operator Note",
+        ref: "gate2-operator-note-fixture-001",
+        limitation: "Manual local note; no decision performed."
+      },
+      {
+        label: "Outcome Log",
+        ref: "gate0-outcome-log-fixture-001",
+        limitation: "Outcome is local learning evidence."
+      },
+      {
+        label: "Learning Event",
+        ref: "gate0-learning-event-fixture-001",
+        limitation: "Learning record does not promote strategy state."
+      }
+    ],
+    artifactInventory: [
+      "gate2-artifact-inventory-fixture-001",
+      "gate2-artifact-inventory-fixture-002"
+    ],
+    marketIntelligence: [
+      "gate2-market-intelligence-input-fixture-001",
+      "gate2-news-event-fixture-001",
+      "gate2-signal-candidate-fixture-001"
+    ],
+    blockedScopeReminder: [
+      "No external account route.",
+      "No automated action.",
+      "No live route.",
+      "No final recommendation.",
+      "No performance claim."
+    ]
+  },
   sourceOverflowReview: [
     {
       label: "Workspace Sources First",

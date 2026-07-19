@@ -18,6 +18,7 @@ setInterval(() => {
 
 function renderCommandCenter(data) {
   const simulationEvidenceDetail = normalizeSimulationEvidenceDetail(data.simulationEvidenceDetail);
+  const strategyReviewWorkspace = normalizeStrategyReviewWorkspace(data.strategyReviewWorkspace);
 
   app.innerHTML = `
   <div class="shell">
@@ -219,6 +220,41 @@ function renderCommandCenter(data) {
               </div>
             </section>
           </section>
+        </article>
+
+        <article class="panel workspace-panel wide-panel" id="workspace" aria-labelledby="workspace-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="workspace-title">${strategyReviewWorkspace.title}</h2>
+              <p>${strategyReviewWorkspace.coreQuestion}</p>
+            </div>
+            <span class="panel-chip">${strategyReviewWorkspace.status}</span>
+          </div>
+          <div class="workspace-case-summary">
+            <span>Research case</span>
+            <strong>${strategyReviewWorkspace.researchCaseId}</strong>
+          </div>
+          <div class="workspace-evidence-grid">
+            ${strategyReviewWorkspace.evidenceChain
+              .map(
+                (item, index) => `
+                  <section class="workspace-step" aria-labelledby="workspace-step-${index}-title">
+                    <div class="workspace-step-index">${String(index + 1).padStart(2, "0")}</div>
+                    <div>
+                      <h3 id="workspace-step-${index}-title">${item.label}</h3>
+                      <code>${item.ref}</code>
+                      <p>${item.limitation}</p>
+                    </div>
+                  </section>
+                `
+              )
+              .join("")}
+          </div>
+          <div class="workspace-adjacency" aria-label="Workspace supporting evidence and limitations">
+            ${renderListCard("Artifact Inventory", strategyReviewWorkspace.artifactInventory)}
+            ${renderListCard("Market Intelligence", strategyReviewWorkspace.marketIntelligence)}
+            ${renderListCard("Blocked Scope Reminder", strategyReviewWorkspace.blockedScopeReminder)}
+          </div>
         </article>
 
         <article class="panel limitation-panel" id="limitations" aria-labelledby="limitations-title">
@@ -489,6 +525,32 @@ function normalizeSimulationEvidenceDetail(detail = {}) {
     reproducibilityNotes: asList(detail.reproducibilityNotes),
     limitationNotes: asList(detail.limitationNotes),
     boundaryChecks: asList(detail.boundaryChecks)
+  };
+}
+
+function normalizeStrategyReviewWorkspace(workspace = {}) {
+  return {
+    title: workspace.title || "Strategy Review Workspace",
+    status: workspace.status || "Not recorded",
+    researchCaseId: workspace.researchCaseId || "",
+    coreQuestion:
+      workspace.coreQuestion ||
+      "Can the operator inspect the full evidence chain for one research case?",
+    evidenceChain: Array.isArray(workspace.evidenceChain)
+      ? workspace.evidenceChain
+          .filter((item) => item && typeof item === "object")
+          .map((item) => ({
+            label: typeof item.label === "string" ? item.label : "Evidence",
+            ref: typeof item.ref === "string" ? item.ref : "Not recorded in local workspace.",
+            limitation:
+              typeof item.limitation === "string"
+                ? item.limitation
+                : "No local limitation recorded."
+          }))
+      : [],
+    artifactInventory: asList(workspace.artifactInventory),
+    marketIntelligence: asList(workspace.marketIntelligence),
+    blockedScopeReminder: asList(workspace.blockedScopeReminder)
   };
 }
 

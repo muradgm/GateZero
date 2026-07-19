@@ -561,6 +561,78 @@ h3 {
   line-height: 1.55;
 }
 
+.workspace-case-summary {
+  background: #f7faf9;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  margin-bottom: 14px;
+  padding: 14px;
+}
+
+.workspace-case-summary span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.workspace-case-summary strong {
+  color: var(--accent-strong);
+  overflow-wrap: anywhere;
+}
+
+.workspace-evidence-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.workspace-step {
+  background: #f7faf9;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 36px minmax(0, 1fr);
+  min-height: 156px;
+  padding: 14px;
+}
+
+.workspace-step-index {
+  align-items: center;
+  background: #dcebe8;
+  border-radius: 8px;
+  color: var(--accent-strong);
+  display: flex;
+  font-size: 12px;
+  font-weight: 800;
+  height: 34px;
+  justify-content: center;
+  width: 34px;
+}
+
+.workspace-step code {
+  margin-top: 8px;
+}
+
+.workspace-step p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 8px;
+}
+
+.workspace-adjacency {
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
 .detail-adjacency section {
   background: #fffaf0;
   border: 1px solid rgba(183, 121, 31, 0.28);
@@ -708,6 +780,8 @@ code {
   .health-grid,
   .dashboard-grid,
   .detail-grid,
+  .workspace-evidence-grid,
+  .workspace-adjacency,
   .source-review-grid,
   .lower-grid {
     grid-template-columns: 1fr;

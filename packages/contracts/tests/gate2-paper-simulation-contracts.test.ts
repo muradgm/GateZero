@@ -1,18 +1,30 @@
 import { describe, expect, it } from "vitest";
 import {
   Gate2NegativeBoundaryFixtureContractSchema,
+  Gate2LocalArtifactInventoryContractSchema,
+  Gate2MarketIntelligenceInputContractSchema,
+  Gate2NewsEventScannerContractSchema,
   Gate2OperatorActionLogContractSchema,
+  Gate2OperatorNoteModelContractSchema,
   Gate2RiskReviewEventContractSchema,
+  Gate2SignalCandidateContractSchema,
   Gate2SimulationEvidenceDetailContractSchema,
   Gate2SimulatedFillAssumptionContractSchema,
   Gate2SimulatedOrderRecordContractSchema,
   Gate2SimulationStateContractSchema,
+  Gate2StrategyReviewWorkspaceCaseContractSchema,
+  type Gate2LocalArtifactInventoryContract,
+  type Gate2MarketIntelligenceInputContract,
+  type Gate2NewsEventScannerContract,
   type Gate2OperatorActionLogContract,
+  type Gate2OperatorNoteModelContract,
   type Gate2RiskReviewEventContract,
+  type Gate2SignalCandidateContract,
   type Gate2SimulationEvidenceDetailContract,
   type Gate2SimulatedFillAssumptionContract,
   type Gate2SimulatedOrderRecordContract,
-  type Gate2SimulationStateContract
+  type Gate2SimulationStateContract,
+  type Gate2StrategyReviewWorkspaceCaseContract
 } from "../src/index.js";
 
 const createdAt = "2026-01-01T00:00:00.000Z";
@@ -187,6 +199,185 @@ function createSimulationEvidenceDetail(
     performance_claim: false,
     external_access: false,
     execution_path: false,
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createLocalArtifactInventory(
+  overrides: Partial<Gate2LocalArtifactInventoryContract> = {}
+): Gate2LocalArtifactInventoryContract {
+  return {
+    artifact_id: "gate2-artifact-001",
+    artifact_type: "strategy_idea",
+    local_path: "ops/assignments/TRD-585_GATE2_ARTIFACT_INVENTORY_SCHEMA_PLAN.md",
+    source_category: "protected_loop",
+    linked_research_case_id: "gate2-research-case-001",
+    linked_evidence_detail_id: "gate2-simulation-evidence-detail-001",
+    linked_risk_review_id: "gate2-risk-review-001",
+    freshness_status: "fresh",
+    limitation_notes: ["Local evidence only."],
+    redaction_status: "no_sensitive_payload",
+    blocked_scope_flags: [],
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    verified_at: createdAt,
+    ...overrides
+  };
+}
+
+function createOperatorNoteModel(
+  overrides: Partial<Gate2OperatorNoteModelContract> = {}
+): Gate2OperatorNoteModelContract {
+  return {
+    operator_note_id: "gate2-operator-note-001",
+    note_type: "observation",
+    linked_research_case_id: "gate2-research-case-001",
+    linked_evidence_detail_id: "gate2-simulation-evidence-detail-001",
+    linked_artifact_ids: ["gate2-artifact-001"],
+    source_link_refs: ["ops/runtime/reviews/TRD-585_ORCHESTRATOR_ACCEPTANCE.md"],
+    note_body: "Operator note records an observation for local review.",
+    limitation_notes: ["Manual local note; no decision performed."],
+    redaction_status: "no_sensitive_payload",
+    manual_entry: true,
+    operator_retains_authority: true,
+    automated_action: false,
+    decision_performed: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createWorkspaceCase(
+  overrides: Partial<Gate2StrategyReviewWorkspaceCaseContract> = {}
+): Gate2StrategyReviewWorkspaceCaseContract {
+  return {
+    research_case_id: "gate2-research-case-001",
+    workspace_case_status: "inspection_ready",
+    strategy_idea_id: "gate0-strategy-idea-001",
+    data_snapshot_id: "gate1-data-snapshot-001",
+    backtest_evidence_id: "gate1-backtest-evidence-001",
+    metric_report_id: "gate1-metric-report-001",
+    risk_review_id: "gate2-risk-review-001",
+    operator_note_id: "gate2-operator-note-001",
+    outcome_log_id: "gate0-outcome-log-001",
+    learning_event_id: "gate0-learning-event-001",
+    simulation_evidence_detail_id: "gate2-simulation-evidence-detail-001",
+    artifact_inventory_ids: ["gate2-artifact-001"],
+    blocked_scope_reminders: ["external_account_route"],
+    limitation_notes: ["Read-only local workspace case."],
+    operator_required: true,
+    read_only_workspace: true,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createMarketInput(
+  overrides: Partial<Gate2MarketIntelligenceInputContract> = {}
+): Gate2MarketIntelligenceInputContract {
+  return {
+    market_intelligence_input_id: "gate2-market-input-001",
+    input_type: "market_condition",
+    linked_research_case_id: "gate2-research-case-001",
+    source_title: "Synthetic local market context",
+    source_ref: "ops/truth/MARKET_INTELLIGENCE_TRUTH.md",
+    observed_at: createdAt,
+    summary: "Evidence-only local context for operator inspection.",
+    confidence_level: "medium",
+    red_flags: ["Synthetic source."],
+    invalidation_conditions: ["Source becomes stale."],
+    source_references: ["ops/truth/MARKET_INTELLIGENCE_TRUTH.md"],
+    risk_review_required: true,
+    operator_decision_required: true,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createNewsEvent(
+  overrides: Partial<Gate2NewsEventScannerContract> = {}
+): Gate2NewsEventScannerContract {
+  return {
+    news_event_id: "gate2-news-event-001",
+    market_intelligence_input_id: "gate2-market-input-001",
+    linked_research_case_id: "gate2-research-case-001",
+    event_time: createdAt,
+    event_summary: "Synthetic event context for local inspection.",
+    source_refs: ["ops/truth/MARKET_INTELLIGENCE_TRUTH.md"],
+    red_flags: ["Requires risk review."],
+    stale_reference: false,
+    action_route_created: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
+    created_at: createdAt,
+    ...overrides
+  };
+}
+
+function createSignalCandidate(
+  overrides: Partial<Gate2SignalCandidateContract> = {}
+): Gate2SignalCandidateContract {
+  return {
+    signal_candidate_id: "gate2-signal-candidate-001",
+    linked_research_case_id: "gate2-research-case-001",
+    market_intelligence_input_ids: ["gate2-market-input-001"],
+    evidence_refs: ["gate2-news-event-001"],
+    candidate_summary: "Scenario candidate for operator review.",
+    scenario_action: "watch",
+    confidence_level: "low",
+    risk_review_id: "gate2-risk-review-001",
+    red_flags: ["Not final."],
+    invalidation_conditions: ["Risk review blocks the case."],
+    operator_decision_required: true,
+    action_route_created: false,
+    recommendation_final: false,
+    evidence_only: true,
+    approval_claim: false,
+    performance_claim: false,
+    external_access: false,
+    execution_path: false,
+    financial_gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    contract_authority: "contract_only",
     created_at: createdAt,
     ...overrides
   };
@@ -451,5 +642,145 @@ describe("Gate 2 paper simulation contracts", () => {
         failure_mode_evidence_refs: ["gate2-blocked-failure-mode-evidence-001"]
       })
     ).toThrow();
+  });
+
+  it("validates local artifact inventory records for workspace evidence files", () => {
+    const artifact = Gate2LocalArtifactInventoryContractSchema.parse(
+      createLocalArtifactInventory()
+    );
+
+    expect(artifact.linked_research_case_id).toBe("gate2-research-case-001");
+    expect(artifact.local_path.startsWith("ops/")).toBe(true);
+  });
+
+  it("rejects artifact inventory records with nonlocal paths, missing limits, or blocked stale state", () => {
+    for (const mutation of [
+      { local_path: "https://example.invalid/evidence" },
+      { limitation_notes: [] },
+      { freshness_status: "blocked" as const, blocked_scope_flags: [] }
+    ]) {
+      expect(() =>
+        Gate2LocalArtifactInventoryContractSchema.parse({
+          ...createLocalArtifactInventory(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates operator note models as manual source-linked records", () => {
+    const note = Gate2OperatorNoteModelContractSchema.parse(createOperatorNoteModel());
+
+    expect(note.manual_entry).toBe(true);
+    expect(note.decision_performed).toBe(false);
+    expect(note.source_link_refs).toHaveLength(1);
+  });
+
+  it("rejects operator note models with automation, decisioning, or nonlocal sources", () => {
+    for (const mutation of [
+      { automated_action: true },
+      { decision_performed: true },
+      { source_link_refs: ["https://example.invalid/source"] }
+    ]) {
+      expect(() =>
+        Gate2OperatorNoteModelContractSchema.parse({
+          ...createOperatorNoteModel(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates strategy review workspace cases as read-only evidence chains", () => {
+    const workspaceCase =
+      Gate2StrategyReviewWorkspaceCaseContractSchema.parse(createWorkspaceCase());
+
+    expect(workspaceCase.read_only_workspace).toBe(true);
+    expect(workspaceCase.artifact_inventory_ids).toContain("gate2-artifact-001");
+  });
+
+  it("rejects workspace cases that hide blockers or imply action authority", () => {
+    for (const mutation of [
+      { blocked_scope_reminders: [] },
+      { read_only_workspace: false },
+      { operator_required: false },
+      { execution_path: true }
+    ]) {
+      expect(() =>
+        Gate2StrategyReviewWorkspaceCaseContractSchema.parse({
+          ...createWorkspaceCase(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates market intelligence inputs as sourced scenario context", () => {
+    const input = Gate2MarketIntelligenceInputContractSchema.parse(createMarketInput());
+
+    expect(input.risk_review_required).toBe(true);
+    expect(input.operator_decision_required).toBe(true);
+    expect(input.recommendation_final).toBe(false);
+  });
+
+  it("rejects market intelligence inputs that skip risk review or finalise recommendations", () => {
+    for (const mutation of [
+      { risk_review_required: false },
+      { operator_decision_required: false },
+      { recommendation_final: true },
+      { source_references: [] }
+    ]) {
+      expect(() =>
+        Gate2MarketIntelligenceInputContractSchema.parse({
+          ...createMarketInput(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates news event scanner records without action routes", () => {
+    const event = Gate2NewsEventScannerContractSchema.parse(createNewsEvent());
+
+    expect(event.stale_reference).toBe(false);
+    expect(event.action_route_created).toBe(false);
+  });
+
+  it("rejects news event scanner records with stale refs, remote refs, or action routes", () => {
+    for (const mutation of [
+      { stale_reference: true },
+      { action_route_created: true },
+      { source_refs: ["https://example.invalid/news"] }
+    ]) {
+      expect(() =>
+        Gate2NewsEventScannerContractSchema.parse({
+          ...createNewsEvent(),
+          ...mutation
+        })
+      ).toThrow();
+    }
+  });
+
+  it("validates signal candidates as evidence-only scenario candidates", () => {
+    const candidate = Gate2SignalCandidateContractSchema.parse(createSignalCandidate());
+
+    expect(candidate.scenario_action).toBe("watch");
+    expect(candidate.recommendation_final).toBe(false);
+    expect(candidate.action_route_created).toBe(false);
+  });
+
+  it("rejects signal candidates with action routes, final recommendations, or missing risk review", () => {
+    for (const mutation of [
+      { action_route_created: true },
+      { recommendation_final: true },
+      { scenario_action: "paper_simulate" as const, risk_review_id: undefined }
+    ]) {
+      expect(() =>
+        Gate2SignalCandidateContractSchema.parse({
+          ...createSignalCandidate(),
+          ...mutation
+        })
+      ).toThrow();
+    }
   });
 });
