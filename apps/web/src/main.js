@@ -42,6 +42,7 @@ function renderCommandCenter(data) {
               )}">${item}</a>`
           )
           .join("")}
+        <a href="./simulator.html">Simulator Evidence</a>
       </nav>
       <div class="rail-note">
         <span class="note-label">Operating scope</span>

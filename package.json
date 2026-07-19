@@ -26,7 +26,7 @@
     "check:gate0-snapshot": "tsx scripts/check-gate0-progress-snapshot-freshness.ts",
     "check:gate0-tracklist": "tsx scripts/check-gate0-tracklist-consistency.ts",
     "check:gate0-reviews": "tsx scripts/check-gate0-review-coverage.ts",
-    "check:gate0": "pnpm snapshot:gate0-progress && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "check:gate0": "pnpm snapshot:gate0-progress && pnpm snapshot:simulator-workspace && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "lint": "eslint .",
     "preview:web": "tsx scripts/preview-web.ts",

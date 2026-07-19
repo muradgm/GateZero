@@ -1,10 +1,15 @@
 import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { format } from "prettier";
 import { buildSimulatorWorkspaceData } from "./build-simulator-workspace-data.js";
 
-export function renderSimulatorWorkspaceData(): string {
-  return `${JSON.stringify(buildSimulatorWorkspaceData(), null, 2)}\n`;
+export async function renderSimulatorWorkspaceData(): Promise<string> {
+  return format(JSON.stringify(buildSimulatorWorkspaceData()), {
+    parser: "json",
+    printWidth: 100,
+    trailingComma: "none"
+  });
 }
 
 export async function generateSimulatorWorkspaceData(): Promise<void> {
@@ -15,7 +20,7 @@ export async function generateSimulatorWorkspaceData(): Promise<void> {
     "src",
     "simulator-workspace-data.json"
   );
-  await writeFile(outputPath, renderSimulatorWorkspaceData(), "utf8");
+  await writeFile(outputPath, await renderSimulatorWorkspaceData(), "utf8");
   console.log(`Simulator workspace data written: ${path.relative(process.cwd(), outputPath)}`);
 }
 
