@@ -27,10 +27,15 @@ function renderCommandCenter(data) {
   <div class="shell">
     <aside class="sidebar" aria-label="Command center navigation">
       <div class="brand">
-        <div class="brand-mark">TF</div>
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="12" fill="#111318"></rect>
+          <path d="M12 31.5C12 20.9 20.6 12.25 31.25 12.25H48.75V19H31.25C24.35 19 18.75 24.6 18.75 31.5V34.25H12V31.5Z" fill="#6D7074"></path>
+          <path d="M23.75 23H52V29.75H41.25V51.75H33.75V29.75H23.75V23Z" fill="#5B45FF"></path>
+          <path d="M12 39.5H26.75V46.25H12V39.5Z" fill="#6D7074"></path>
+        </svg>
         <div>
           <div class="brand-name">${data.project}</div>
-          <div class="brand-subtitle">Command Center</div>
+          <div class="brand-subtitle">Research command center</div>
         </div>
       </div>
       <nav class="nav-list" aria-label="Primary sections">
@@ -45,14 +50,25 @@ function renderCommandCenter(data) {
         <a href="./simulator.html">Simulator Evidence</a>
       </nav>
       <div class="rail-note">
-        <span class="note-label">Operating scope</span>
-        <strong>${data.scope}</strong>
+        <svg class="control-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="12" fill="#F5F6F4"></rect>
+          <path d="M11 19.75H27.75V27H20.75V40H11V19.75Z" fill="#4A4C4E"></path>
+          <path d="M28 19.75H47.25V27H37.75V40H28V19.75Z" fill="#6D7074"></path>
+          <path d="M11 40H20.75V46.75H11V40Z" fill="#111318"></path>
+          <path d="M37.75 40H53V46.75H37.75V40Z" fill="#4A4C4E"></path>
+          <path d="M47.25 13H53V19.75H47.25V13Z" fill="#6D7074"></path>
+        </svg>
+        <div>
+          <span class="note-label">Controlled by GateZero</span>
+          <strong>${data.scope}</strong>
+        </div>
       </div>
     </aside>
 
     <main class="workspace" id="main" tabindex="-1">
       <header class="topbar">
-        <div>
+        <div class="topbar-copy">
+          <span class="topbar-eyebrow">Read the market · Frame the risk · Decide with evidence</span>
           <h1>${data.title}</h1>
           <p>${data.subtitle}</p>
         </div>
