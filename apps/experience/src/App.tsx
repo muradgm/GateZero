@@ -1,63 +1,111 @@
+import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float, RoundedBox } from "@react-three/drei";
 import { productState } from "@gatezero/product-state";
-
-function EvidenceGate() {
-  return (
-    <group rotation={[-0.08, 0.32, -0.02]}>
-      <Float speed={0.65} rotationIntensity={0.08} floatIntensity={0.12}>
-        <RoundedBox args={[0.32, 5.2, 0.48]} position={[-2.3, 0, 0]} radius={0.12}>
-          <meshStandardMaterial color="#a6b0b5" metalness={0.72} roughness={0.22} />
-        </RoundedBox>
-        <RoundedBox args={[3.05, 0.32, 0.48]} position={[-0.82, 2.55, 0]} radius={0.12}>
-          <meshStandardMaterial color="#a6b0b5" metalness={0.72} roughness={0.22} />
-        </RoundedBox>
-        <RoundedBox args={[0.32, 5.2, 0.48]} position={[2.3, 0, -0.3]} radius={0.12}>
-          <meshStandardMaterial color="#242b2f" metalness={0.68} roughness={0.24} />
-        </RoundedBox>
-        <RoundedBox args={[3.05, 0.32, 0.48]} position={[0.82, -2.55, -0.3]} radius={0.12}>
-          <meshStandardMaterial color="#242b2f" metalness={0.68} roughness={0.24} />
-        </RoundedBox>
-        <mesh position={[0, 0, 0.18]}>
-          <circleGeometry args={[1.65, 96]} />
-          <meshStandardMaterial color="#25d4ff" emissive="#25d4ff" emissiveIntensity={1.8} transparent opacity={0.12} />
-        </mesh>
-        <mesh position={[0, 0, 0.48]}>
-          <icosahedronGeometry args={[0.15, 3]} />
-          <meshStandardMaterial color="#c7f8ff" emissive="#25d4ff" emissiveIntensity={4} />
-        </mesh>
-        <pointLight color="#25d4ff" intensity={24} distance={5} />
-      </Float>
-    </group>
-  );
-}
+import { useEffect, useMemo, useState } from "react";
+import { experienceStages, type ExperienceStageId } from "./engine/stages";
+import { EvidenceMachine } from "./scenes/EvidenceMachine";
 
 export default function App() {
+  const [stage, setStage] = useState<ExperienceStageId>("signal");
+  const [autoPlay, setAutoPlay] = useState(true);
+  const reducedMotion = useMemo(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    []
+  );
+  const stageIndex = experienceStages.findIndex((item) => item.id === stage);
+  const current = experienceStages[stageIndex];
+
+  useEffect(() => {
+    if (!autoPlay || reducedMotion) return;
+    const timer = window.setInterval(() => {
+      setStage((currentStage) => {
+        const currentIndex = experienceStages.findIndex((item) => item.id === currentStage);
+        return experienceStages[(currentIndex + 1) % experienceStages.length].id;
+      });
+    }, 3200);
+    return () => window.clearInterval(timer);
+  }, [autoPlay, reducedMotion]);
+
   return (
     <main>
       <section className="hero">
         <div className="copy">
           <p className="eyebrow">TraderFrame / Evidence Gate</p>
-          <h1>Frame the evidence. <span>Control the decision.</span></h1>
-          <p className="lede">A real-time decision-governance experience for making evidence, uncertainty, and operator responsibility visible before action.</p>
+          <h1>
+            Frame the evidence. <span>Control the decision.</span>
+          </h1>
+          <p className="lede">
+            A real-time decision-governance experience where fragmented signals become a bounded,
+            risk-gated, operator-owned record.
+          </p>
           <div className="boundary">{productState.wedge}</div>
           <dl>
-            <div><dt>Current gate</dt><dd>{productState.id}</dd></div>
-            <div><dt>Mode</dt><dd>{productState.publicLabel}</dd></div>
-            <div><dt>Execution</dt><dd>Locked</dd></div>
+            <div>
+              <dt>Current gate</dt>
+              <dd>{productState.id}</dd>
+            </div>
+            <div>
+              <dt>Mode</dt>
+              <dd>{productState.publicLabel}</dd>
+            </div>
+            <div>
+              <dt>Execution</dt>
+              <dd>Locked</dd>
+            </div>
           </dl>
         </div>
-        <div className="scene" aria-label="Interactive three-dimensional Evidence Gate prototype">
-          <Canvas camera={{ position: [0.5, 0.25, 11.8], fov: 31 }} dpr={[1, 1.6]}>
-            <color attach="background" args={["#07090b"]} />
-            <fog attach="fog" args={["#07090b", 8, 20]} />
-            <ambientLight intensity={0.6} />
-            <spotLight position={[-5, 7, 6]} intensity={60} angle={0.36} penumbra={0.7} />
-            <pointLight position={[3, -1, 2]} color="#25d4ff" intensity={22} />
-            <pointLight position={[-3, -2, 2]} color="#ffb84d" intensity={6} />
-            <EvidenceGate />
-            <Environment preset="warehouse" />
-          </Canvas>
+
+        <div className="experience-shell">
+          <div className="scene" aria-label="Interactive three-dimensional Evidence Gate prototype">
+            <Canvas camera={{ position: [0.55, 0.25, 11.8], fov: 31 }} dpr={[1, 1.5]}>
+              <color attach="background" args={["#07090b"]} />
+              <fog attach="fog" args={["#07090b", 8, 20]} />
+              <ambientLight intensity={0.55} />
+              <spotLight position={[-5, 7, 6]} intensity={58} angle={0.36} penumbra={0.7} />
+              <pointLight position={[3.2, -0.7, 2.2]} color="#25d4ff" intensity={24} />
+              <pointLight position={[-3.1, -2.4, 2.4]} color="#ffb84d" intensity={7} />
+              <EvidenceMachine stage={stage} reducedMotion={reducedMotion} />
+              <Environment preset="warehouse" />
+            </Canvas>
+            <div className="hud hud-left" aria-hidden="true">
+              <span>Evidence coverage</span>
+              <strong>{stageIndex >= 2 ? "71.6%" : "—"}</strong>
+              <em>{stageIndex >= 2 ? "Verified inputs stabilizing" : "Awaiting verification"}</em>
+            </div>
+            <div className="hud hud-right" aria-hidden="true">
+              <span>Risk review</span>
+              <strong>{stageIndex >= 3 ? "18.6%" : "—"}</strong>
+              <em>{stageIndex >= 4 ? "Operator responsibility active" : "Boundary pending"}</em>
+            </div>
+          </div>
+
+          <div className="stage-panel" aria-live="polite">
+            <div>
+              <span>{String(stageIndex + 1).padStart(2, "0")} / {String(experienceStages.length).padStart(2, "0")}</span>
+              <h2>{current.title}</h2>
+              <p>{current.body}</p>
+            </div>
+            <button type="button" onClick={() => setAutoPlay((value) => !value)}>
+              {autoPlay ? "Pause sequence" : "Play sequence"}
+            </button>
+          </div>
+
+          <nav className="stage-nav" aria-label="Evidence Gate stages">
+            {experienceStages.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                className={item.id === stage ? "active" : ""}
+                onClick={() => {
+                  setStage(item.id);
+                  setAutoPlay(false);
+                }}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {item.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </section>
     </main>
