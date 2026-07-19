@@ -21,11 +21,31 @@ type ParticleDatum = {
 
 const particleCount = 72;
 
-function MechanicalRing({ radius, tube, depth = 0, color = "#9da8ae", opacity = 1 }: { radius: number; tube: number; depth?: number; color?: string; opacity?: number }) {
+function MechanicalRing({
+  radius,
+  tube,
+  depth = 0,
+  color = "#9da8ae",
+  opacity = 1
+}: {
+  radius: number;
+  tube: number;
+  depth?: number;
+  color?: string;
+  opacity?: number;
+}) {
   return (
     <mesh position={[0, 0, depth]}>
       <torusGeometry args={[radius, tube, 18, 128]} />
-      <meshPhysicalMaterial color={color} metalness={0.78} roughness={0.2} clearcoat={0.9} clearcoatRoughness={0.14} transparent opacity={opacity} />
+      <meshPhysicalMaterial
+        color={color}
+        metalness={0.78}
+        roughness={0.2}
+        clearcoat={0.9}
+        clearcoatRoughness={0.14}
+        transparent
+        opacity={opacity}
+      />
     </mesh>
   );
 }
@@ -53,16 +73,19 @@ function GateHousing() {
 }
 
 export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) {
-  const group = useRef<THREE.Group>(null!);
-  const particles = useRef<THREE.InstancedMesh>(null!);
-  const energyMaterial = useRef<THREE.ShaderMaterial>(null!);
-  const riskWall = useRef<THREE.Mesh>(null!);
-  const riskRails = useRef<THREE.Group>(null!);
-  const operatorCore = useRef<THREE.Group>(null!);
-  const auditRecord = useRef<THREE.Mesh>(null!);
-  const ringA = useRef<THREE.Mesh>(null!);
-  const ringB = useRef<THREE.Mesh>(null!);
-  const ringC = useRef<THREE.Mesh>(null!);
+  // R3F and the monorepo may resolve structurally identical Three.js types through
+  // different package identities. Keep the public/component data typed and use
+  // untyped storage only at the React ref boundary.
+  const group = useRef<any>(null);
+  const particles = useRef<any>(null);
+  const energyMaterial = useRef<any>(null);
+  const riskWall = useRef<any>(null);
+  const riskRails = useRef<any>(null);
+  const operatorCore = useRef<any>(null);
+  const auditRecord = useRef<any>(null);
+  const ringA = useRef<any>(null);
+  const ringB = useRef<any>(null);
+  const ringC = useRef<any>(null);
   const stageIndex = getStageIndex(stage);
 
   const particleData = useMemo<ParticleDatum[]>(
@@ -71,9 +94,21 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
         const lane = index % 9;
         const row = Math.floor(index / 9);
         return {
-          start: new THREE.Vector3(-7 + (index % 6) * 0.38, -2.45 + lane * 0.58, -1.5 + (index % 7) * 0.42),
-          framed: new THREE.Vector3(-2.45 + (index % 11) * 0.44, -1.9 + row * 0.58, -0.35 + (index % 4) * 0.24),
-          verified: new THREE.Vector3(-0.9 + (index % 9) * 0.24, -1.65 + row * 0.48, 0.22 + (index % 3) * 0.18),
+          start: new THREE.Vector3(
+            -7 + (index % 6) * 0.38,
+            -2.45 + lane * 0.58,
+            -1.5 + (index % 7) * 0.42
+          ),
+          framed: new THREE.Vector3(
+            -2.45 + (index % 11) * 0.44,
+            -1.9 + row * 0.58,
+            -0.35 + (index % 4) * 0.24
+          ),
+          verified: new THREE.Vector3(
+            -0.9 + (index % 9) * 0.24,
+            -1.65 + row * 0.48,
+            0.22 + (index % 3) * 0.18
+          ),
           contradictory: index % 8 === 0 || index % 13 === 0,
           stale: index % 11 === 0,
           phase: index * 0.37
@@ -99,7 +134,8 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
 
     if (energyMaterial.current) {
       energyMaterial.current.uniforms.uTime.value = time;
-      energyMaterial.current.uniforms.uIntensity.value += ((stageIndex >= 2 ? 1 : 0.3) - energyMaterial.current.uniforms.uIntensity.value) * ease;
+      energyMaterial.current.uniforms.uIntensity.value +=
+        ((stageIndex >= 2 ? 1 : 0.3) - energyMaterial.current.uniforms.uIntensity.value) * ease;
     }
 
     if (ringA.current && !reducedMotion) ringA.current.rotation.z = time * 0.08;
@@ -134,11 +170,19 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
         const target = item.start.clone();
         if (stageIndex >= 1) target.copy(item.framed);
         if (stageIndex >= 2) target.copy(item.verified);
-        if (stageIndex >= 2 && item.contradictory) target.set(0.15, item.verified.y * 0.72, 1.4 + (index % 3) * 0.18);
+        if (stageIndex >= 2 && item.contradictory) {
+          target.set(0.15, item.verified.y * 0.72, 1.4 + (index % 3) * 0.18);
+        }
         if (stageIndex >= 3 && item.contradictory) target.set(1.1, item.verified.y * 0.72, 1.3);
-        if (stageIndex >= 4 && item.contradictory) target.set(3.05, -1.15 + (index % 5) * 0.56, 0.48);
-        if (stageIndex >= 5) target.set(4.55, -1.05 + (index % 9) * 0.25, -0.04 + Math.floor(index / 9) * 0.035);
-        if (stageIndex >= 6) target.set(2.75 + (index % 6) * 0.48, -1.55 + Math.floor(index / 6) * 0.32, -0.48);
+        if (stageIndex >= 4 && item.contradictory) {
+          target.set(3.05, -1.15 + (index % 5) * 0.56, 0.48);
+        }
+        if (stageIndex >= 5) {
+          target.set(4.55, -1.05 + (index % 9) * 0.25, -0.04 + Math.floor(index / 9) * 0.035);
+        }
+        if (stageIndex >= 6) {
+          target.set(2.75 + (index % 6) * 0.48, -1.55 + Math.floor(index / 6) * 0.32, -0.48);
+        }
 
         const progress = reducedMotion ? 1 : Math.min(1, 0.22 + stageIndex * 0.14);
         dummy.position.lerpVectors(item.start, target, progress);
@@ -172,17 +216,39 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
           <GateHousing />
           <mesh ref={ringA} position={[0, 0, 0.28]}>
             <torusGeometry args={[1.82, 0.18, 22, 128]} />
-            <meshPhysicalMaterial color="#909ba1" metalness={0.82} roughness={0.17} clearcoat={1} clearcoatRoughness={0.12} />
+            <meshPhysicalMaterial
+              color="#909ba1"
+              metalness={0.82}
+              roughness={0.17}
+              clearcoat={1}
+              clearcoatRoughness={0.12}
+            />
           </mesh>
           <mesh ref={ringB} position={[0, 0, 0.38]}>
             <torusGeometry args={[1.46, 0.08, 18, 128]} />
-            <meshPhysicalMaterial color="#2a3439" metalness={0.76} roughness={0.22} emissive="#25d4ff" emissiveIntensity={stageIndex >= 2 ? 0.24 : 0.05} />
+            <meshPhysicalMaterial
+              color="#2a3439"
+              metalness={0.76}
+              roughness={0.22}
+              emissive="#25d4ff"
+              emissiveIntensity={stageIndex >= 2 ? 0.24 : 0.05}
+            />
           </mesh>
           <mesh ref={ringC} position={[0, 0, 0.45]}>
             <torusGeometry args={[1.1, 0.045, 16, 128]} />
-            <meshBasicMaterial color="#69ecff" transparent opacity={stageIndex >= 2 ? 0.72 : 0.18} />
+            <meshBasicMaterial
+              color="#69ecff"
+              transparent
+              opacity={stageIndex >= 2 ? 0.72 : 0.18}
+            />
           </mesh>
-          <MechanicalRing radius={2.14} tube={0.035} depth={0.12} color="#25d4ff" opacity={stageIndex >= 1 ? 0.35 : 0.08} />
+          <MechanicalRing
+            radius={2.14}
+            tube={0.035}
+            depth={0.12}
+            color="#25d4ff"
+            opacity={stageIndex >= 1 ? 0.35 : 0.08}
+          />
           <mesh position={[0, 0, 0.5]}>
             <circleGeometry args={[1.18, 128]} />
             <shaderMaterial
@@ -197,46 +263,104 @@ export function EvidenceMachine({ stage, reducedMotion }: EvidenceMachineProps) 
           </mesh>
           <mesh position={[0, 0, 0.72]}>
             <icosahedronGeometry args={[0.16, 4]} />
-            <meshStandardMaterial color="#d8fbff" emissive="#25d4ff" emissiveIntensity={stageIndex >= 2 ? 7 : 2.4} roughness={0.1} />
+            <meshStandardMaterial
+              color="#d8fbff"
+              emissive="#25d4ff"
+              emissiveIntensity={stageIndex >= 2 ? 7 : 2.4}
+              roughness={0.1}
+            />
           </mesh>
-          <pointLight position={[0, 0, 0.8]} color="#25d4ff" intensity={stageIndex >= 2 ? 36 : 12} distance={5.5} />
+          <pointLight
+            position={[0, 0, 0.8]}
+            color="#25d4ff"
+            intensity={stageIndex >= 2 ? 36 : 12}
+            distance={5.5}
+          />
         </group>
 
         <group ref={riskRails} position={[0.95, 0, 0.05]} scale={[1, 0.72, 1]}>
           <RoundedBox args={[1.65, 0.24, 1.05]} position={[0, 2.48, 0]} radius={0.08}>
-            <meshPhysicalMaterial color="#4b3424" emissive="#ff8f21" emissiveIntensity={0.18} metalness={0.7} roughness={0.24} />
+            <meshPhysicalMaterial
+              color="#4b3424"
+              emissive="#ff8f21"
+              emissiveIntensity={0.18}
+              metalness={0.7}
+              roughness={0.24}
+            />
           </RoundedBox>
           <RoundedBox args={[1.65, 0.24, 1.05]} position={[0, -2.48, 0]} radius={0.08}>
-            <meshPhysicalMaterial color="#4b3424" emissive="#ff8f21" emissiveIntensity={0.18} metalness={0.7} roughness={0.24} />
+            <meshPhysicalMaterial
+              color="#4b3424"
+              emissive="#ff8f21"
+              emissiveIntensity={0.18}
+              metalness={0.7}
+              roughness={0.24}
+            />
           </RoundedBox>
           <RoundedBox args={[0.24, 5.18, 1.05]} position={[0, 0, 0]} radius={0.08}>
-            <meshPhysicalMaterial color="#4b3424" emissive="#ff8f21" emissiveIntensity={0.18} metalness={0.7} roughness={0.24} />
+            <meshPhysicalMaterial
+              color="#4b3424"
+              emissive="#ff8f21"
+              emissiveIntensity={0.18}
+              metalness={0.7}
+              roughness={0.24}
+            />
           </RoundedBox>
         </group>
 
         <mesh ref={riskWall} position={[0.95, 0, 0.18]} scale={[1, 0.001, 1]}>
           <boxGeometry args={[0.14, 4.65, 3.15]} />
-          <meshPhysicalMaterial color="#6d2e05" emissive="#ff8f21" emissiveIntensity={0.62} metalness={0.28} roughness={0.28} transparent opacity={0.76} />
+          <meshPhysicalMaterial
+            color="#6d2e05"
+            emissive="#ff8f21"
+            emissiveIntensity={0.62}
+            metalness={0.28}
+            roughness={0.28}
+            transparent
+            opacity={0.76}
+          />
         </mesh>
 
         <group ref={operatorCore} position={[3.05, 0, 0.5]} scale={0.74}>
           <mesh>
             <torusGeometry args={[0.78, 0.12, 20, 128]} />
-            <meshPhysicalMaterial color="#303a3f" metalness={0.8} roughness={0.2} emissive="#25d4ff" emissiveIntensity={stageIndex >= 4 ? 0.32 : 0.06} />
+            <meshPhysicalMaterial
+              color="#303a3f"
+              metalness={0.8}
+              roughness={0.2}
+              emissive="#25d4ff"
+              emissiveIntensity={stageIndex >= 4 ? 0.32 : 0.06}
+            />
           </mesh>
           <mesh position={[0, 0, 0.08]}>
             <circleGeometry args={[0.56, 96]} />
-            <meshBasicMaterial color="#25d4ff" transparent opacity={stageIndex >= 4 ? 0.34 : 0.08} />
+            <meshBasicMaterial
+              color="#25d4ff"
+              transparent
+              opacity={stageIndex >= 4 ? 0.34 : 0.08}
+            />
           </mesh>
           <mesh position={[0, 0, 0.16]}>
             <icosahedronGeometry args={[0.12, 3]} />
-            <meshStandardMaterial color="#d9fbff" emissive="#25d4ff" emissiveIntensity={stageIndex >= 4 ? 6 : 1.5} />
+            <meshStandardMaterial
+              color="#d9fbff"
+              emissive="#25d4ff"
+              emissiveIntensity={stageIndex >= 4 ? 6 : 1.5}
+            />
           </mesh>
         </group>
 
         <mesh ref={auditRecord} position={[4.55, 0, -0.08]} scale={0.001}>
           <boxGeometry args={[1.55, 2.15, 0.18]} />
-          <meshPhysicalMaterial color="#bdf7ff" emissive="#25d4ff" emissiveIntensity={1.8} metalness={0.28} roughness={0.18} transparent opacity={0.78} />
+          <meshPhysicalMaterial
+            color="#bdf7ff"
+            emissive="#25d4ff"
+            emissiveIntensity={1.8}
+            metalness={0.28}
+            roughness={0.18}
+            transparent
+            opacity={0.78}
+          />
         </mesh>
 
         <instancedMesh ref={particles} args={[undefined, undefined, particleCount]}>
