@@ -4,14 +4,15 @@ import { productState } from "@gatezero/product-state";
 import { useEffect, useMemo, useState } from "react";
 import { experienceStages, type ExperienceStageId } from "./engine/stages";
 import { IntelligencePlayground } from "./playground/IntelligencePlayground";
+import { LandscapePlayground } from "./playground/LandscapePlayground";
 import { EvidenceMachine } from "./scenes/EvidenceMachine";
 import { OperatorEvidenceControl } from "./ui/OperatorEvidenceControl";
 import { ProductWorkspace } from "./ui/ProductWorkspace";
 
-type ExperienceMode = "atlas" | "legacy";
+type ExperienceMode = "landscape" | "intelligence" | "legacy";
 
 export default function App() {
-  const [mode, setMode] = useState<ExperienceMode>("atlas");
+  const [mode, setMode] = useState<ExperienceMode>("landscape");
   const [stage, setStage] = useState<ExperienceStageId>("signal");
   const [autoPlay, setAutoPlay] = useState(true);
   const [evidenceResolved, setEvidenceResolved] = useState(false);
@@ -51,26 +52,22 @@ export default function App() {
   return (
     <>
       <nav className="experience-mode-switch" aria-label="Experience development modes">
-        <button type="button" className={mode === "atlas" ? "active" : ""} onClick={() => setMode("atlas")}>Intelligence engine</button>
+        <button type="button" className={mode === "landscape" ? "active" : ""} onClick={() => setMode("landscape")}>Landscape engine</button>
+        <button type="button" className={mode === "intelligence" ? "active" : ""} onClick={() => setMode("intelligence")}>Intelligence engine</button>
         <button type="button" className={mode === "legacy" ? "active" : ""} onClick={() => setMode("legacy")}>Evidence Gate archive</button>
       </nav>
 
-      {mode === "atlas" ? (
-        <main>
-          <IntelligencePlayground />
-        </main>
+      {mode === "landscape" ? (
+        <main><LandscapePlayground /></main>
+      ) : mode === "intelligence" ? (
+        <main><IntelligencePlayground /></main>
       ) : (
         <main>
           <section className="hero">
             <div className="copy">
               <p className="eyebrow">TraderFrame / Evidence Gate</p>
-              <h1>
-                Frame the evidence. <span>Control the decision.</span>
-              </h1>
-              <p className="lede">
-                A real-time decision-governance experience where fragmented signals become a bounded,
-                risk-gated, operator-owned record.
-              </p>
+              <h1>Frame the evidence. <span>Control the decision.</span></h1>
+              <p className="lede">A real-time decision-governance experience where fragmented signals become a bounded, risk-gated, operator-owned record.</p>
               <div className="boundary">{productState.wedge}</div>
               <dl>
                 <div><dt>Current gate</dt><dd>{productState.id}</dd></div>
@@ -95,15 +92,10 @@ export default function App() {
                 </div>
 
                 <ProductWorkspace active={interfaceActive} />
-                <OperatorEvidenceControl
-                  active={operatorActive}
-                  resolved={evidenceResolved}
-                  onResolve={resolveEvidence}
-                />
-
+                <OperatorEvidenceControl active={operatorActive} resolved={evidenceResolved} onResolve={resolveEvidence} />
                 <div className="hud hud-left" aria-hidden="true">
                   <span>Evidence coverage</span>
-                  <strong>{interfaceActive ? "100%" : evidenceResolved ? "100%" : stageIndex >= 2 ? "71.6%" : "—"}</strong>
+                  <strong>{interfaceActive || evidenceResolved ? "100%" : stageIndex >= 2 ? "71.6%" : "—"}</strong>
                   <em>{interfaceActive ? "Record resolved into workspace" : evidenceResolved ? "Operator evidence accepted" : stageIndex >= 2 ? "Verified inputs stabilizing" : "Awaiting verification"}</em>
                 </div>
                 <div className="hud hud-right" aria-hidden="true">
@@ -136,10 +128,7 @@ export default function App() {
                       className={item.id === stage ? "active" : ""}
                       disabled={locked}
                       aria-label={locked ? `${item.label} locked until operator evidence is supplied` : item.label}
-                      onClick={() => {
-                        setStage(item.id);
-                        setAutoPlay(false);
-                      }}
+                      onClick={() => { setStage(item.id); setAutoPlay(false); }}
                     >
                       <span>{String(index + 1).padStart(2, "0")}</span>
                       {item.label}
