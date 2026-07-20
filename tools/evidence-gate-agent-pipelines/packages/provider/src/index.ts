@@ -7,6 +7,16 @@ type OllamaChatResponse = {
   };
 };
 
+type OpenAIResponse = {
+  output_text?: string;
+  output?: Array<{
+    content?: Array<{
+      type?: string;
+      text?: string;
+    }>;
+  }>;
+};
+
 export class OllamaProvider implements ModelProvider {
   readonly id: string;
 
@@ -33,7 +43,6 @@ export class OllamaProvider implements ModelProvider {
           model: this.model,
           stream: false,
           think: false,
-          keep_alive: process.env.OLLAMA_KEEP_ALIVE ?? "15m",
           format: request.responseFormat === "json" ? "json" : undefined,
           messages: [
             { role: "system", content: request.system },
@@ -74,6 +83,103 @@ export class OllamaProvider implements ModelProvider {
     }
 
     return content;
+  }
+}
+
+export class OpenAIProvider implements ModelProvider {
+  readonly id: string;
+
+  constructor(
+    private readonly model = process.env.OPENAI_TEXT_MODEL ?? "gpt-5.2",
+    private readonly apiKey = process.env.OPENAI_API_KEY,
+    private readonly baseUrl = process.env.OPENAI_BASE_URL ?? "https://api.openai.com/v1"
+  ) {
+    this.id = `openai:${this.model}`;
+  }
+
+  async complete(request: ModelRequest): Promise<string> {
+    if (!this.apiKey) {
+      throw new Error("OPENAI_API_KEY is required for the OpenAI provider.");
+    }
+
+    const controller = new AbortController();
+    const timeoutMs = Number(process.env.OPENAI_TIMEOUT_MS ?? 5 * 60 * 1000);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    let response: Response;
+
+    try {
+      response = await fetch(`${this.baseUrl}/responses`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.apiKey}`
+        },
+        signal: controller.signal,
+        body: JSON.stringify({
+          model: this.model,
+          instructions: request.system,
+          input: request.prompt,
+          temperature: request.temperature ?? 0.4,
+          max_output_tokens: Number(process.env.OPENAI_MAX_OUTPUT_TOKENS ?? 1800)
+        })
+      });
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new Error(
+          `OpenAI timed out after ${timeoutMs / 1000} seconds while running ${this.model}.`
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (!response.ok) {
+      const details = await response.text();
+      throw new Error(
+        `OpenAI request failed (${response.status} ${response.statusText}): ${details}`
+      );
+    }
+
+    const data = (await response.json()) as OpenAIResponse;
+    const content =
+      data.output_text?.trim() ??
+      data.output
+        ?.flatMap(item => item.content ?? [])
+        .filter(item => item.type === "output_text" && item.text)
+        .map(item => item.text)
+        .join("\n")
+        .trim();
+
+    if (!content) {
+      throw new Error(`OpenAI model ${this.model} returned an empty response.`);
+    }
+
+    return content;
+  }
+}
+
+export class FallbackProvider implements ModelProvider {
+  readonly id: string;
+
+  constructor(
+    private readonly primary: ModelProvider,
+    private readonly fallback: ModelProvider
+  ) {
+    this.id = `${primary.id} -> ${fallback.id}`;
+  }
+
+  async complete(request: ModelRequest): Promise<string> {
+    try {
+      return await this.primary.complete(request);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(`Primary provider failed: ${message}`);
+      console.warn(`Falling back to ${this.fallback.id}`);
+      return this.fallback.complete(request);
+    }
   }
 }
 
