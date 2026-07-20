@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactElement } from "react";
 
 const concepts = [
   {
@@ -39,7 +39,6 @@ const concepts = [
 ] as const;
 
 type ConceptId = (typeof concepts)[number]["id"];
-
 type ScoreSet = Record<"clarity" | "originality" | "scalability" | "performance" | "wedgeFit", number>;
 
 const defaultScores: Record<ConceptId, ScoreSet> = {
@@ -53,9 +52,7 @@ const defaultScores: Record<ConceptId, ScoreSet> = {
 function FiberPrototype() {
   return (
     <svg viewBox="0 0 900 460" role="img" aria-label="Fiber intelligence strands merging and splitting">
-      <defs>
-        <linearGradient id="fiber-cyan" x1="0" x2="1"><stop stopColor="#4de3ff" stopOpacity="0.08"/><stop offset="0.52" stopColor="#4de3ff"/><stop offset="1" stopColor="#a884ff"/></linearGradient>
-      </defs>
+      <defs><linearGradient id="fiber-cyan" x1="0" x2="1"><stop stopColor="#4de3ff" stopOpacity="0.08"/><stop offset="0.52" stopColor="#4de3ff"/><stop offset="1" stopColor="#a884ff"/></linearGradient></defs>
       {Array.from({ length: 12 }, (_, index) => {
         const y = 68 + index * 27;
         const offset = (index % 4) * 11;
@@ -84,9 +81,7 @@ function MagneticPrototype() {
 function LiquidPrototype() {
   return (
     <svg viewBox="0 0 900 460" role="img" aria-label="Liquid probability interference field">
-      <defs>
-        <radialGradient id="liquid-field"><stop stopColor="#7de9ff" stopOpacity="0.75"/><stop offset="0.5" stopColor="#765bff" stopOpacity="0.22"/><stop offset="1" stopColor="#071013" stopOpacity="0"/></radialGradient>
-      </defs>
+      <defs><radialGradient id="liquid-field"><stop stopColor="#7de9ff" stopOpacity="0.75"/><stop offset="0.5" stopColor="#765bff" stopOpacity="0.22"/><stop offset="1" stopColor="#071013" stopOpacity="0"/></radialGradient></defs>
       {Array.from({ length: 9 }, (_, index) => <ellipse key={index} cx={250 + index * 54} cy={220 + Math.sin(index) * 40} rx={125 - index * 4} ry={46 + index * 3} className="rnd-liquid-ring" style={{ animationDelay: `${index * -0.24}s` }} />)}
       <rect width="900" height="460" fill="url(#liquid-field)" opacity="0.7" />
     </svg>
@@ -123,7 +118,7 @@ function TopologyPrototype() {
   );
 }
 
-const renderers: Record<ConceptId, () => JSX.Element> = {
+const renderers: Record<ConceptId, () => ReactElement> = {
   fiber: FiberPrototype,
   magnetic: MagneticPrototype,
   liquid: LiquidPrototype,
@@ -131,7 +126,7 @@ const renderers: Record<ConceptId, () => JSX.Element> = {
   topology: TopologyPrototype
 };
 
-export function IntelligenceRendLab() {
+export function IntelligenceRndLab() {
   const [active, setActive] = useState<ConceptId>("topology");
   const [scores, setScores] = useState(defaultScores);
   const selected = concepts.find((concept) => concept.id === active)!;
@@ -153,13 +148,10 @@ export function IntelligenceRendLab() {
         </div>
         <div className="rnd-total"><span>Current score</span><strong>{total}/25</strong><em>{selected.label}</em></div>
       </header>
-
       <nav className="rnd-tabs" aria-label="Intelligence language prototypes">
         {concepts.map((concept, index) => <button key={concept.id} type="button" className={active === concept.id ? "active" : ""} onClick={() => setActive(concept.id)}><span>{String(index + 1).padStart(2, "0")}</span>{concept.label}</button>)}
       </nav>
-
       <div className={`rnd-stage rnd-${active}`}><Renderer /><div className="rnd-stage-caption"><span>{selected.label}</span><strong>{selected.idea}</strong></div></div>
-
       <div className="rnd-analysis-grid">
         <article>
           <h2>Why it could work</h2>
