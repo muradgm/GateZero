@@ -18,24 +18,43 @@ export class OllamaProvider implements ModelProvider {
   }
 
   async complete(request: ModelRequest): Promise<string> {
-    const response = await fetch(`${this.baseUrl}/api/chat`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: this.model,
-        stream: false,
-        think: false,
-        format: request.responseFormat === "json" ? "json" : undefined,
-        messages: [
-          { role: "system", content: request.system },
-          { role: "user", content: request.prompt }
-        ],
-        options: {
-          temperature: request.temperature ?? 0.4,
-          num_ctx: 8192
-        }
-      })
-    });
+    const controller = new AbortController();
+    const timeoutMs = 5 * 60 * 1000;
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    let response: Response;
+
+    try {
+      response = await fetch(`${this.baseUrl}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          model: this.model,
+          stream: false,
+          think: false,
+          format: request.responseFormat === "json" ? "json" : undefined,
+          messages: [
+            { role: "system", content: request.system },
+            { role: "user", content: request.prompt }
+          ],
+          options: {
+            temperature: request.temperature ?? 0.4,
+            num_ctx: 8192
+          }
+        })
+      });
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new Error(
+          `Ollama timed out after ${timeoutMs / 1000} seconds while running ${this.model}.`
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (!response.ok) {
       const details = await response.text();
@@ -60,16 +79,20 @@ export class MockProvider implements ModelProvider {
 
   async complete(request: ModelRequest): Promise<string> {
     if (request.responseFormat === "json") {
-      return JSON.stringify({
-        generatedBy: this.id,
-        objective: request.prompt,
-        decisions: [
-          "Preserve approved upstream decisions.",
-          "Make assumptions explicit.",
-          "Keep outputs production-oriented."
-        ],
-        risks: ["Mock output is not suitable for final production decisions."]
-      }, null, 2);
+      return JSON.stringify(
+        {
+          generatedBy: this.id,
+          objective: request.prompt,
+          decisions: [
+            "Preserve approved upstream decisions.",
+            "Make assumptions explicit.",
+            "Keep outputs production-oriented."
+          ],
+          risks: ["Mock output is not suitable for final production decisions."]
+        },
+        null,
+        2
+      );
     }
 
     return [
@@ -88,13 +111,24 @@ export async function checkOllama(
 ): Promise<{ ok: boolean; models: string[]; error?: string }> {
   try {
     const response = await fetch(`${baseUrl}/api/tags`);
+
     if (!response.ok) {
-      return { ok: false, models: [], error: `${response.status} ${response.statusText}` };
+      return {
+        ok: false,
+        models: [],
+        error: `${response.status} ${response.statusText}`
+      };
     }
-    const data = await response.json() as { models?: Array<{ name?: string }> };
+
+    const data = (await response.json()) as {
+      models?: Array<{ name?: string }>;
+    };
+
     return {
       ok: true,
-      models: (data.models ?? []).map(item => item.name ?? "").filter(Boolean)
+      models: (data.models ?? [])
+        .map(item => item.name ?? "")
+        .filter(Boolean)
     };
   } catch (error) {
     return {
