@@ -39,19 +39,18 @@ export class WorkflowEngine {
     const stages: StageResult[] = [];
 
     for (const [index, stage] of definition.stages.entries()) {
-  console.log(
-    `\n[${index + 1}/${definition.stages.length}] ${definition.name} → ${stage.name}`
-  );
+      console.log(
+        `\n[${index + 1}/${definition.stages.length}] ${definition.name} → ${stage.name}`
+      );
 
-  state.currentStage = stage.id;
+      state.currentStage = stage.id;
       await this.store.saveManifest(context.projectId, manifest);
 
       const provider = this.router.route(definition.id);
-      
       console.log(`Using model: ${provider.id}`);
       console.log("Generating...");
-      const startedAt = Date.now();
 
+      const startedAt = Date.now();
       const raw = await provider.complete({
         system: [
           `You are the ${definition.name}.`,
@@ -72,8 +71,9 @@ export class WorkflowEngine {
         ].join("\n"),
         responseFormat: stage.outputKind === "markdown" ? "markdown" : "json",
         temperature: 0.4
-      }); const durationSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
+      });
 
+      const durationSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
       console.log(`✓ Generated in ${durationSeconds}s`);
 
       let output: unknown = raw;
