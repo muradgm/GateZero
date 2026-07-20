@@ -4,7 +4,7 @@ import { productState } from "@gatezero/product-state";
 import { useEffect, useMemo, useState } from "react";
 import { experienceStages, type ExperienceStageId } from "./engine/stages";
 import { IntelligencePlayground } from "./playground/IntelligencePlayground";
-import { IntelligenceRendLab } from "./playground/IntelligenceRndLab";
+import { IntelligenceRndLab } from "./playground/IntelligenceRndLab";
 import { LandscapePlayground } from "./playground/LandscapePlayground";
 import { EvidenceMachine } from "./scenes/EvidenceMachine";
 import { OperatorEvidenceControl } from "./ui/OperatorEvidenceControl";
@@ -60,7 +60,7 @@ export default function App() {
       </nav>
 
       {mode === "rnd" ? (
-        <main><IntelligenceRendLab /></main>
+        <main><IntelligenceRndLab /></main>
       ) : mode === "landscape" ? (
         <main><LandscapePlayground /></main>
       ) : mode === "intelligence" ? (
