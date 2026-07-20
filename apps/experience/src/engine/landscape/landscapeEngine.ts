@@ -53,7 +53,6 @@ function sampleField(
 
 function createRoute(
   index: number,
-  count: number,
   state: IntelligenceState,
   size: number,
   random: () => number,
@@ -81,7 +80,13 @@ function createRoute(
   const contradiction = clamp01(state.contradiction * (0.72 + random() * 0.4));
   const risk = clamp01(state.risk * (0.7 + random() * 0.45));
   const dominantBoost = bias === dominant ? 0.2 : 0;
-  const weight = clamp01(confidence * 0.58 + biasBalance * 0.3 + dominantBoost - contradiction * 0.18 - risk * 0.22);
+  const weight = clamp01(
+    confidence * 0.58 +
+      biasBalance * 0.3 +
+      dominantBoost -
+      contradiction * 0.18 -
+      risk * 0.22
+  );
 
   return {
     id: `route:${index}`,
@@ -116,7 +121,7 @@ export function buildLandscape(
 
   const thesisBias = dominantBias(source);
   const routes = Array.from({ length: routeCount }, (_, index) =>
-    createRoute(index, routeCount, source, size, random, thesisBias)
+    createRoute(index, source, size, random, thesisBias)
   );
   const winner = routes.filter((route) => route.visible).sort((a, b) => b.weight - a.weight)[0];
   const resolvedRoutes = routes.map((route) => ({ ...route, dominant: route.id === winner?.id }));
@@ -131,6 +136,8 @@ export function buildLandscape(
     contourDensity: 0.35 + source.confidence * 0.65,
     fractureStrength: source.contradiction,
     valleyDepth: source.risk,
-    surfaceEnergy: clamp01(source.confidence * 0.46 + source.freshness * 0.34 - source.risk * 0.2)
+    surfaceEnergy: clamp01(
+      source.confidence * 0.46 + source.freshness * 0.34 - source.risk * 0.2
+    )
   };
 }
