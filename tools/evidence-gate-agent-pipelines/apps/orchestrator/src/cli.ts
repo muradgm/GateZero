@@ -1,5 +1,3 @@
-import { rm } from "node:fs/promises";
-import path from "node:path";
 import type { PipelineId } from "@eg/core";
 import { EvaluationEngine } from "@eg/eval";
 import { ModelRouter } from "@eg/model-router";
@@ -57,7 +55,7 @@ async function run() {
     console.log(result.summary);
     console.log(`Status: ${result.status}`);
     console.log(`Artifacts: ${result.stages.length}`);
-    console.log(`Approve with: pnpm approve`);
+    console.log("Approve with: pnpm approve");
     return;
   }
 
@@ -80,11 +78,20 @@ async function approve() {
     throw new Error(`${id} is not awaiting review.`);
   }
 
+  const promoted = await store.promotePipeline(
+    projectId,
+    id,
+    state.pipelines[id].artifacts
+  );
+
+  state.pipelines[id].artifacts = promoted;
   state.pipelines[id].status = "approved";
   state.pipelines[id].approvedAt = new Date().toISOString();
   state.project.updatedAt = new Date().toISOString();
   await store.saveManifest(projectId, state);
+
   console.log(`✓ Approved ${id}`);
+  console.log(`✓ Promoted ${promoted.length} artifact(s) to projects/${projectId}/approved/${id}`);
 }
 
 async function status() {
@@ -100,12 +107,10 @@ async function status() {
 }
 
 async function reset() {
-  await rm(path.join(workspaceRoot, "projects", projectId, "artifacts"), {
-    recursive: true,
-    force: true
-  });
+  await store.clearDrafts(projectId);
   await store.saveManifest(projectId, createManifest());
-  console.log(`✓ Reset ${projectId}`);
+  console.log(`✓ Reset ${projectId} drafts and workflow state`);
+  console.log("Approved artifacts were preserved.");
 }
 
 async function doctor() {
@@ -139,7 +144,7 @@ function help() {
 Evidence Gate Agent Pipelines
 
 Commands:
-  pnpm doctor
+  pnpm run doctor
   pnpm run:demo
   pnpm approve
   pnpm status
