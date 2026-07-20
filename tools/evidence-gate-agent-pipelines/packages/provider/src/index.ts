@@ -43,7 +43,8 @@ export class OllamaProvider implements ModelProvider {
             temperature: request.temperature ?? 0.4,
             num_ctx: Number(process.env.OLLAMA_NUM_CTX ?? 4096),
             num_predict: Number(process.env.OLLAMA_NUM_PREDICT ?? 1200)
-          }
+          },
+          keep_alive: process.env.OLLAMA_KEEP_ALIVE ?? "15m"
         })
       });
     } catch (error) {
