@@ -4,15 +4,16 @@ import { productState } from "@gatezero/product-state";
 import { useEffect, useMemo, useState } from "react";
 import { experienceStages, type ExperienceStageId } from "./engine/stages";
 import { IntelligencePlayground } from "./playground/IntelligencePlayground";
+import { IntelligenceRendLab } from "./playground/IntelligenceRndLab";
 import { LandscapePlayground } from "./playground/LandscapePlayground";
 import { EvidenceMachine } from "./scenes/EvidenceMachine";
 import { OperatorEvidenceControl } from "./ui/OperatorEvidenceControl";
 import { ProductWorkspace } from "./ui/ProductWorkspace";
 
-type ExperienceMode = "landscape" | "intelligence" | "legacy";
+type ExperienceMode = "rnd" | "landscape" | "intelligence" | "legacy";
 
 export default function App() {
-  const [mode, setMode] = useState<ExperienceMode>("landscape");
+  const [mode, setMode] = useState<ExperienceMode>("rnd");
   const [stage, setStage] = useState<ExperienceStageId>("signal");
   const [autoPlay, setAutoPlay] = useState(true);
   const [evidenceResolved, setEvidenceResolved] = useState(false);
@@ -52,12 +53,15 @@ export default function App() {
   return (
     <>
       <nav className="experience-mode-switch" aria-label="Experience development modes">
+        <button type="button" className={mode === "rnd" ? "active" : ""} onClick={() => setMode("rnd")}>R&amp;D lab</button>
         <button type="button" className={mode === "landscape" ? "active" : ""} onClick={() => setMode("landscape")}>Landscape engine</button>
         <button type="button" className={mode === "intelligence" ? "active" : ""} onClick={() => setMode("intelligence")}>Intelligence engine</button>
         <button type="button" className={mode === "legacy" ? "active" : ""} onClick={() => setMode("legacy")}>Evidence Gate archive</button>
       </nav>
 
-      {mode === "landscape" ? (
+      {mode === "rnd" ? (
+        <main><IntelligenceRendLab /></main>
+      ) : mode === "landscape" ? (
         <main><LandscapePlayground /></main>
       ) : mode === "intelligence" ? (
         <main><IntelligencePlayground /></main>
