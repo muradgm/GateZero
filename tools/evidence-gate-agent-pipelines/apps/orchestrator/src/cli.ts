@@ -107,10 +107,19 @@ async function status() {
 }
 
 async function reset() {
+  const current = await manifest();
+  const fresh = createManifest();
+
+  for (const id of pipelineOrder) {
+    if (current.pipelines[id].status === "approved") {
+      fresh.pipelines[id] = current.pipelines[id];
+    }
+  }
+
   await store.clearDrafts(projectId);
-  await store.saveManifest(projectId, createManifest());
-  console.log(`✓ Reset ${projectId} drafts and workflow state`);
-  console.log("Approved artifacts were preserved.");
+  await store.saveManifest(projectId, fresh);
+  console.log(`✓ Reset unapproved drafts and workflow state for ${projectId}`);
+  console.log("Approved artifacts and approved pipeline state were preserved.");
 }
 
 async function doctor() {
