@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@eg/core": ["packages/core/src/index.ts"],
+      "@eg/eval": ["packages/eval/src/index.ts"],
+      "@eg/model-router": ["packages/model-router/src/index.ts"],
+      "@eg/pipelines": ["packages/pipelines/src/index.ts"],
+      "@eg/provider": ["packages/provider/src/index.ts"],
+      "@eg/store": ["packages/store/src/index.ts"],
+      "@eg/workflow": ["packages/workflow/src/index.ts"]
+    }
+  },
+  "include": ["apps/**/*.ts", "packages/**/*.ts", "tests/**/*.ts"]
+}

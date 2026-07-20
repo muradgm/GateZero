@@ -1,0 +1,13 @@
+{
+  "projectId": "traderframe-evidence-gate",
+  "productName": "TraderFrame \u2014 Evidence Gate",
+  "coreMetaphor": "Evidence passes through scope, risk and operator approval before becoming an immutable record.",
+  "narrativeFlow": [
+    "uncertainty",
+    "framing",
+    "verification",
+    "risk boundary",
+    "operator decision",
+    "immutable record"
+  ]
+}
