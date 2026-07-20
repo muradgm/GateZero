@@ -19,9 +19,22 @@ TraderFrame is a private trading decision-intelligence platform. It interprets m
 
 > TraderFrame turns fragmented market evidence into one explainable, risk-aware trading decision.
 
-## Concept direction
+## Approved concept direction
 
-**Conviction Atlas** maps possible market outcomes as a changing landscape. Evidence raises or weakens paths, contradiction splits them, risk closes unsafe routes, and one recommendation emerges without removing uncertainty or user control.
+**Conviction Atlas** is a living intelligence system, not a static infographic.
+
+Incoming intelligence flows carve a changing topographic field of possible market futures. Agreement strengthens routes. Contradiction fractures them. Risk reshapes or collapses weak paths. Conviction grows until one conditional thesis becomes the strongest current route. The landscape then transforms directly into the TraderFrame interface.
+
+## Approved narrative
+
+```text
+Observe
+→ Correlate
+→ Form Thesis
+→ Challenge
+→ Conviction
+→ Execute
+```
 
 ## Workflow
 
@@ -45,12 +58,28 @@ Production
 └─ Deployment
 ```
 
+## Visual doctrine
+
+1. Intelligence should flow, not float.
+2. Probability should emerge, not appear.
+3. Risk should reshape, not merely block.
+4. Conviction should grow, not flash.
+5. The interface should evolve, not overlay.
+6. Motion must communicate reasoning.
+7. Every visual must explain decision quality.
+
 ## Source-of-truth files
 
 - `01-creative-thinking.md`
 - `02-production.md`
 - `creative-council.md`
 - `concept-brief.md`
+- `visual-operating-system.md`
+- `implementation-roadmap.md`
 - `production-gates.md`
 - `deliverables.md`
-- `../src/config/creativeSystem.ts`
+- `../../src/config/creativeSystem.ts`
+
+## Current implementation boundary
+
+The existing mechanical Evidence Gate prototype remains available as inherited exploration. New work on this branch must follow Conviction Atlas and should be built in isolated `conviction-atlas` modules before replacing the previous scene.
