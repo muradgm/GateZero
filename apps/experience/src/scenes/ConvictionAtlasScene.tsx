@@ -43,7 +43,13 @@ function TerrainSurface({ landscape }: { landscape: LandscapeState }) {
   }, [landscape]);
 
   return (
-    <mesh geometry={geometry} rotation={[0, 0, 0]}>
+    <mesh
+      // The workspace currently resolves structurally identical BufferGeometry
+      // types through different Three.js type identities. Keep the geometry
+      // construction typed and bridge only the R3F prop boundary.
+      geometry={geometry as any}
+      rotation={[0, 0, 0]}
+    >
       <meshPhysicalMaterial
         vertexColors
         roughness={0.54}
