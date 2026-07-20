@@ -39,6 +39,27 @@ export class WorkflowEngine {
     const stages: StageResult[] = [];
 
     for (const [index, stage] of definition.stages.entries()) {
+      const existingArtifact = state.artifacts.find(
+        artifact => artifact.stageId === stage.id
+      );
+
+      if (existingArtifact) {
+        console.log(
+          `\n[${index + 1}/${definition.stages.length}] ${definition.name} → ${stage.name}`
+        );
+        console.log("✓ Existing artifact found; skipping generation.");
+
+        stages.push({
+          stageId: stage.id,
+          summary: `${stage.name} restored from an existing artifact.`,
+          output: null,
+          artifacts: [existingArtifact],
+          assumptions: ["Existing stage artifact remains valid for this resume run."],
+          risks: ["Human review is required before approval."]
+        });
+        continue;
+      }
+
       console.log(
         `\n[${index + 1}/${definition.stages.length}] ${definition.name} → ${stage.name}`
       );
@@ -51,27 +72,36 @@ export class WorkflowEngine {
       console.log("Generating...");
 
       const startedAt = Date.now();
-      const raw = await provider.complete({
-        system: [
-          `You are the ${definition.name}.`,
-          definition.purpose,
-          "Respect approved upstream decisions.",
-          "Return implementation-ready work.",
-          "Do not invent unsupported product facts."
-        ].join(" "),
-        prompt: [
-          `Project: ${context.productName}`,
-          `Product: ${context.productDescription}`,
-          `Audience: ${context.targetAudience.join(", ")}`,
-          `Business goal: ${context.businessGoal}`,
-          `Core message: ${context.coreMessage}`,
-          `Brand principles: ${context.brandPrinciples.join(", ")}`,
-          `Stage: ${stage.name}`,
-          `Objective: ${stage.objective}`
-        ].join("\n"),
-        responseFormat: stage.outputKind === "markdown" ? "markdown" : "json",
-        temperature: 0.4
-      });
+      let raw: string;
+
+      try {
+        raw = await provider.complete({
+          system: [
+            `You are the ${definition.name}.`,
+            definition.purpose,
+            "Respect approved upstream decisions.",
+            "Return implementation-ready work.",
+            "Do not invent unsupported product facts."
+          ].join(" "),
+          prompt: [
+            `Project: ${context.productName}`,
+            `Product: ${context.productDescription}`,
+            `Audience: ${context.targetAudience.join(", ")}`,
+            `Business goal: ${context.businessGoal}`,
+            `Core message: ${context.coreMessage}`,
+            `Brand principles: ${context.brandPrinciples.join(", ")}`,
+            `Stage: ${stage.name}`,
+            `Objective: ${stage.objective}`
+          ].join("\n"),
+          responseFormat: stage.outputKind === "markdown" ? "markdown" : "json",
+          temperature: 0.4
+        });
+      } catch (error) {
+        state.status = "failed";
+        manifest.project.updatedAt = new Date().toISOString();
+        await this.store.saveManifest(context.projectId, manifest);
+        throw error;
+      }
 
       const durationSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
       console.log(`✓ Generated in ${durationSeconds}s`);
