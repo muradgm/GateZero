@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type {
   ArtifactKind,
@@ -14,6 +14,14 @@ export class ArtifactStore {
     return path.join(this.workspaceRoot, "projects", projectId);
   }
 
+  private draftDir(projectId: string, pipelineId: PipelineId): string {
+    return path.join(this.projectDir(projectId), "drafts", pipelineId);
+  }
+
+  private approvedDir(projectId: string, pipelineId: PipelineId): string {
+    return path.join(this.projectDir(projectId), "approved", pipelineId);
+  }
+
   async saveArtifact(input: {
     projectId: string;
     pipelineId: PipelineId;
@@ -22,11 +30,7 @@ export class ArtifactStore {
     kind: ArtifactKind;
     content: unknown;
   }): Promise<ArtifactReference> {
-    const directory = path.join(
-      this.projectDir(input.projectId),
-      "artifacts",
-      input.pipelineId
-    );
+    const directory = this.draftDir(input.projectId, input.pipelineId);
     await mkdir(directory, { recursive: true });
 
     const extension = input.kind === "markdown" ? "md" : "json";
@@ -48,6 +52,39 @@ export class ArtifactStore {
       version: 1,
       createdAt: new Date().toISOString()
     };
+  }
+
+  async promotePipeline(
+    projectId: string,
+    pipelineId: PipelineId,
+    artifacts: ArtifactReference[]
+  ): Promise<ArtifactReference[]> {
+    const directory = this.approvedDir(projectId, pipelineId);
+    await mkdir(directory, { recursive: true });
+
+    const promoted: ArtifactReference[] = [];
+
+    for (const artifact of artifacts) {
+      const extension = artifact.kind === "markdown" ? "md" : "json";
+      const destination = path.join(directory, `${artifact.name}.${extension}`);
+      await copyFile(artifact.path, destination);
+
+      promoted.push({
+        ...artifact,
+        path: destination,
+        version: artifact.version + 1,
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    return promoted;
+  }
+
+  async clearDrafts(projectId: string): Promise<void> {
+    await rm(path.join(this.projectDir(projectId), "drafts"), {
+      recursive: true,
+      force: true
+    });
   }
 
   async saveManifest(projectId: string, manifest: ProjectManifest): Promise<void> {
