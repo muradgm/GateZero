@@ -19,7 +19,7 @@ export class OllamaProvider implements ModelProvider {
 
   async complete(request: ModelRequest): Promise<string> {
     const controller = new AbortController();
-    const timeoutMs = 5 * 60 * 1000;
+    const timeoutMs = Number(process.env.OLLAMA_TIMEOUT_MS ?? 10 * 60 * 1000);
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
     let response: Response;
@@ -33,6 +33,7 @@ export class OllamaProvider implements ModelProvider {
           model: this.model,
           stream: false,
           think: false,
+          keep_alive: process.env.OLLAMA_KEEP_ALIVE ?? "15m",
           format: request.responseFormat === "json" ? "json" : undefined,
           messages: [
             { role: "system", content: request.system },
@@ -40,7 +41,8 @@ export class OllamaProvider implements ModelProvider {
           ],
           options: {
             temperature: request.temperature ?? 0.4,
-            num_ctx: 8192
+            num_ctx: Number(process.env.OLLAMA_NUM_CTX ?? 4096),
+            num_predict: Number(process.env.OLLAMA_NUM_PREDICT ?? 1200)
           }
         })
       });
