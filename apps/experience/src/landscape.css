@@ -1,0 +1,147 @@
+.landscape-playground {
+  min-height: 100vh;
+  padding: 7rem clamp(1rem, 4vw, 4rem) 3rem;
+  background: #050708;
+  color: #edf7fb;
+}
+
+.landscape-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+.landscape-header h1 {
+  max-width: 780px;
+  margin: 0.5rem 0 0.8rem;
+  font-size: clamp(2.2rem, 5vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.landscape-header p:not(.eyebrow) {
+  max-width: 720px;
+  color: #91a2ab;
+  line-height: 1.65;
+}
+
+.landscape-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.landscape-metrics div {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(147, 184, 201, 0.14);
+  background: rgba(12, 18, 22, 0.78);
+  border-radius: 0.8rem;
+}
+
+.landscape-metrics span,
+.landscape-controls span,
+.landscape-legend span {
+  color: #81939d;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.landscape-metrics strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.landscape-stage {
+  position: relative;
+  height: min(68vh, 720px);
+  min-height: 480px;
+  overflow: hidden;
+  border: 1px solid rgba(147, 184, 201, 0.13);
+  border-radius: 1.25rem;
+  background: #050708;
+}
+
+.landscape-stage canvas {
+  display: block;
+}
+
+.landscape-legend {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgba(147, 184, 201, 0.12);
+  border-radius: 0.7rem;
+  background: rgba(5, 7, 8, 0.72);
+  backdrop-filter: blur(14px);
+}
+
+.landscape-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.landscape-legend i {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.landscape-legend .cyan { color: #33d7ff; background: currentColor; }
+.landscape-legend .violet { color: #a77cff; background: currentColor; }
+.landscape-legend .amber { color: #ff9f43; background: currentColor; }
+
+.landscape-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.landscape-controls label {
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(147, 184, 201, 0.12);
+  border-radius: 0.8rem;
+  background: #0b1013;
+}
+
+.landscape-controls label > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.landscape-controls strong {
+  color: #d8edf5;
+  font-weight: 500;
+}
+
+.landscape-controls input {
+  width: 100%;
+  accent-color: #8d72ff;
+}
+
+@media (max-width: 900px) {
+  .landscape-header { grid-template-columns: 1fr; }
+  .landscape-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .landscape-stage { min-height: 420px; height: 58vh; }
+}
+
+@media (max-width: 560px) {
+  .landscape-playground { padding-top: 6.5rem; }
+  .landscape-metrics,
+  .landscape-controls { grid-template-columns: 1fr; }
+  .landscape-stage { min-height: 380px; }
+  .landscape-legend { right: 0.7rem; left: 0.7rem; }
+}
