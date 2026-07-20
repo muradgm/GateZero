@@ -1,6 +1,6 @@
 # TraderFrame — Conviction Atlas
 
-Interactive brand and product-storytelling experience for GateZero.
+Interactive visual operating system for GateZero and TraderFrame.
 
 ## Active branch
 
@@ -8,7 +8,7 @@ Interactive brand and product-storytelling experience for GateZero.
 agent/conviction-atlas-creative-system
 ```
 
-This branch preserves the Evidence Gate prototype while establishing the new two-layer creative system for the **Conviction Atlas / Decision Landscape** direction.
+This branch preserves the Evidence Gate prototype while building the reusable **TraderFrame Experience Engine** around the Conviction Atlas direction.
 
 ## Product definition
 
@@ -18,24 +18,41 @@ TraderFrame is a private trading decision-intelligence platform. It interprets m
 
 > TraderFrame turns fragmented market evidence into one explainable, risk-aware trading decision.
 
-## Creative system
+## Source of truth
 
-The work is structured into two layers:
-
-1. **Creative Thinking** — product strategy, creative direction, information architecture, experience narrative, and art direction.
-2. **Production** — concept art, storyboard, design system, 3D, motion, shaders, implementation, QA, and deployment.
-
-Start here:
+Start with:
 
 ```text
 apps/experience/docs/creative-system/README.md
-```
-
-The machine-readable source of truth is:
-
-```text
+apps/experience/docs/creative-system/experience-principles.md
+apps/experience/docs/creative-system/experience-engine-architecture.md
+apps/experience/docs/creative-system/visual-operating-system.md
 apps/experience/src/config/creativeSystem.ts
 ```
+
+## Experience Engine
+
+```text
+Intelligence
+→ Landscape
+→ Routes
+→ Motion
+→ Camera
+→ Materials
+→ Interface
+```
+
+The landscape and routes must be derived from semantic intelligence state. Visual geometry must not invent product meaning independently.
+
+## Current implementation status
+
+- Existing Evidence Gate prototype remains runnable.
+- Conviction Atlas visual operating system is documented.
+- Canonical experience principles are locked.
+- Reusable engine architecture is defined.
+- The first typed Intelligence Engine is implemented.
+- Signals now carry confidence, freshness, importance, contradiction, risk impact, and route weight.
+- The next code milestone is a playground that visualizes intelligence clusters before terrain generation begins.
 
 ## Product boundary
 
@@ -58,11 +75,3 @@ Build and typecheck:
 pnpm --filter @gatezero/experience typecheck
 pnpm --filter @gatezero/experience build
 ```
-
-## Current implementation status
-
-- Existing Evidence Gate prototype remains runnable.
-- Conviction Atlas creative brief is defined.
-- Creative Council and approval gates are documented.
-- Production deliverables and initial performance budgets are defined.
-- The next implementation milestone is a new terrain-based prototype built from the approved brief rather than modifying the old gate scene in place.
