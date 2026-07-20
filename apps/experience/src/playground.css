@@ -1,0 +1,99 @@
+.experience-mode-switch {
+  position: fixed;
+  z-index: 30;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.35rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(7,9,11,0.82);
+  backdrop-filter: blur(14px);
+}
+.experience-mode-switch button {
+  border: 0;
+  background: transparent;
+  color: #77848c;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+}
+.experience-mode-switch button.active { background: rgba(83,230,255,0.1); color: #dffbff; }
+
+.intelligence-playground {
+  min-height: 100vh;
+  padding: 6.5rem 4vw 4rem;
+  color: #e8ecef;
+  background:
+    radial-gradient(circle at 70% 25%, rgba(83,230,255,0.08), transparent 25%),
+    radial-gradient(circle at 35% 72%, rgba(168,137,255,0.06), transparent 24%),
+    #07090b;
+}
+.playground-header {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(260px,0.35fr);
+  gap: 3rem;
+  align-items: end;
+  max-width: 1500px;
+  margin: 0 auto 2.5rem;
+}
+.playground-header h1 { margin: 1rem 0; font-size: clamp(3.2rem, 7vw, 7.8rem); max-width: 900px; }
+.playground-header p:not(.eyebrow) { color: #8e9aa2; line-height: 1.7; max-width: 720px; }
+.playground-verdict {
+  padding: 1.25rem;
+  border-left: 1px solid rgba(83,230,255,0.5);
+  background: rgba(255,255,255,0.018);
+  display: grid;
+  gap: 0.45rem;
+}
+.playground-verdict span,.playground-verdict em { color: #71808a; font: 0.68rem ui-monospace,monospace; font-style: normal; }
+.playground-verdict strong { text-transform: uppercase; font-size: 1.7rem; font-weight: 500; }
+.playground-controls,.intelligence-summary,.cluster-grid { max-width: 1500px; margin-inline: auto; }
+.playground-controls {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.playground-controls label { background: #0a0d10; padding: 1rem; display: grid; grid-template-columns: 1fr auto; gap: 0.7rem; }
+.playground-controls label span,.playground-controls label strong { font: 0.68rem ui-monospace,monospace; }
+.playground-controls label span { color: #7c8991; }
+.playground-controls input { grid-column: 1 / -1; width: 100%; accent-color: #53e6ff; }
+.intelligence-summary { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 1px; gap: 1px; background: rgba(255,255,255,0.08); }
+.intelligence-summary article { background: #0a0d10; padding: 1rem; display: grid; gap: 0.5rem; }
+.intelligence-summary span { color: #70808a; font-size: 0.68rem; }
+.intelligence-summary strong { font-size: 1.5rem; font-weight: 500; }
+.thread-field {
+  max-width: 1500px;
+  margin: 2.4rem auto;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg,rgba(255,255,255,0.018),transparent),#080b0e;
+  overflow: hidden;
+}
+.thread-field svg { width: 100%; height: auto; display: block; color: #b7c2c8; }
+.thread-field text { fill: #9aa7ae; font: 12px ui-monospace,monospace; }
+.thread-field .thread-meta { fill: #607079; font-size: 10px; }
+.cluster-node { fill: #102d35; stroke: #53e6ff; stroke-width: 1.5; }
+.thesis-node { fill: #241e36; stroke: #a889ff; stroke-width: 2; }
+.thread-field .thesis-label { fill: #ece9ff; font-size: 11px; letter-spacing: 0.16em; }
+.cluster-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.08); }
+.cluster-grid article { background: #0a0d10; padding: 1rem; }
+.cluster-grid header { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.cluster-grid header span { color: #d8e0e4; }
+.cluster-grid header strong { color: #53e6ff; font: 0.68rem ui-monospace,monospace; text-transform: uppercase; }
+.cluster-grid dl { margin: 0.8rem 0 0; display: grid; grid-template-columns: 1fr 1fr; border: 0; gap: 0.8rem; }
+.cluster-grid dl div { padding: 0; border: 0; }
+.cluster-grid dt { color: #63717a; font-size: 0.62rem; }
+.cluster-grid dd { margin-top: 0.25rem; font-size: 0.8rem; }
+@media (max-width: 980px) {
+  .playground-header { grid-template-columns: 1fr; }
+  .cluster-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 680px) {
+  .intelligence-playground { padding-inline: 1rem; }
+  .playground-controls,.intelligence-summary { grid-template-columns: 1fr; }
+  .cluster-grid { grid-template-columns: 1fr; }
+  .thread-field text { display: none; }
+  .experience-mode-switch { position: absolute; }
+}
