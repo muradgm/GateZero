@@ -22,7 +22,31 @@ export type ArtifactKind =
   | "json"
   | "prompt-pack"
   | "scorecard"
-  | "report";
+  | "report"
+  | "image"
+  | "model-3d"
+  | "animation-clip"
+  | "shader"
+  | "design-export"
+  | "test-report";
+
+export type ServiceCapability =
+  | "text-generation"
+  | "image-generation"
+  | "model-generation-3d"
+  | "design-export"
+  | "animation-production"
+  | "shader-production"
+  | "implementation"
+  | "quality-assurance";
+
+export interface ServiceSelection {
+  capability: ServiceCapability;
+  preferred: string;
+  fallback: string;
+  requiresExplicitApproval: boolean;
+  estimatedCostUsd?: number;
+}
 
 export interface TechnicalConstraints {
   targetFpsDesktop: number;
@@ -73,6 +97,9 @@ export interface ArtifactReference {
   path: string;
   version: number;
   createdAt: string;
+  generatedBy?: string;
+  mimeType?: string;
+  metadata?: Record<string, unknown>;
 }
 
 export interface StageResult {
@@ -125,6 +152,7 @@ export interface ProjectManifest {
     artifacts: ArtifactReference[];
   }>;
   constraints: TechnicalConstraints;
+  services?: ServiceSelection[];
 }
 
 export interface ModelRequest {
