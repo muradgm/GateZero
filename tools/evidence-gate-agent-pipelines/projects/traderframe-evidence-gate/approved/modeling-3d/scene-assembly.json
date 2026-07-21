@@ -1,0 +1,106 @@
+{
+  "scene": {
+    "name": "TraderFrame - Evidence Gate",
+    "purpose": "To visually and interactively represent the core decision-making process of TraderFrame through a structured, evidence-based narrative.",
+    "audience": [
+      "Independent traders",
+      "Portfolio managers",
+      "Research-led market participants"
+    ],
+    "brand_principles": [
+      "Evidence first",
+      "Transparent reasoning",
+      "User control",
+      "Risk awareness",
+      "Calm precision"
+    ],
+    "scene_hierarchy": {
+      "main_narrative": {
+        "title": "Evidence Gate",
+        "description": "A central interactive interface that represents the gate through which market evidence is filtered, challenged, approved, and recorded. This is the core decision-making engine of TraderFrame.",
+        "components": [
+          {
+            "name": "Evidence Filter",
+            "origin": "Market Data Ingestion Module",
+            "description": "A visual representation of how raw market data is processed and filtered for relevance and credibility."
+          },
+          {
+            "name": "Challenge Panel",
+            "origin": "Analytical Reasoning Engine",
+            "description": "A dynamic interface where users can interrogate and challenge the validity of evidence through interactive prompts and data cross-checks."
+          },
+          {
+            "name": "Approval Ledger",
+            "origin": "Decision Recording System",
+            "description": "A transparent, immutable record of approved evidence and decisions, visualized as a blockchain-like ledger."
+          },
+          {
+            "": "",
+            "origin": "User Control Interface",
+            "description": "A customizable panel that allows users to adjust filtering parameters, set risk thresholds, and manage their own evidence workflow."
+          },
+          {
+            "name": "Risk Awareness Dashboard",
+            "origin": "Risk Modeling Engine",
+            "description": "A real-time visualization of risk exposure, calibrated to the user’s portfolio and current market conditions."
+          }
+        ]
+      },
+      "environment": {
+        "name": "Calm Precision Workspace",
+        "description": "A clean, minimalistic environment that reflects the brand's emphasis on clarity, control, and precision. The space is designed for focus and decision-making, with subtle ambient lighting and a neutral color palette."
+      },
+      "assets": [
+        {
+          "name": "Evidence Gate Interface",
+          "type": "3D UI Panel",
+          "description": "A modular, interactive interface that serves as the central hub for evidence processing. Features layered panels for filtering, challenge, approval, and recording."
+        },
+        {
+          "name": "Market Data Stream",
+          "type": "Dynamic Visualizer",
+          "description": "A flowing, animated data stream that represents incoming market evidence. Data points are color-coded and animated to reflect their credibility and relevance."
+        },
+        {
+          "name": "Blockchain Ledger Visualization",
+          "type": "3D Graphical Representation",
+          "description": "A stylized blockchain-like structure that visually represents the immutable record of approved evidence and decisions."
+        },
+        {
+          "name": "Risk Indicator",
+          "type": "Interactive Indicator",
+          "description": "A dynamic, real-time risk indicator that adjusts based on user input and market conditions. Visualized as a rotating, translucent sphere with color-coded zones."
+        },
+        {
+          "name": "User Control Panel",
+          "type": "Customizable UI Module",
+          "description": "A modular panel that allows users to customize their workflow, set risk thresholds, and manage their evidence filtering preferences."
+        }
+      ]
+    }
+  },
+  "implementation_notes": {
+    "asset_types": [
+      "3D UI Panels",
+      "Dynamic Data Visualizers",
+      "Blockchain Graphs",
+      "Interactive Indicators",
+      "Customizable UI Modules"
+    ],
+    "style_guidelines": {
+      "color_palette": [
+        "Neutral grays",
+        "Soft blues for trust and clarity",
+        "Warm oranges for risk and alert",
+        "Cool greens for data flow and transparency"
+      ],
+      "typography": "Clean, sans-serif fonts for readability and precision",
+      "lighting": "Subtle ambient lighting with directional highlights to emphasize key elements"
+    },
+    "interactivity_guidelines": {
+      "user_controls": "Allow for real-time adjustment of filtering parameters, risk thresholds, and evidence validation",
+      "data_flow": "Visualize data flow and credibility through animated transitions and color-coded feedback",
+      "decision_logging": "Provide a visual record of decisions made, with timestamps and user annotations"
+    }
+  }
+}

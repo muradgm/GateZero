@@ -1,0 +1,41 @@
+{
+  "motion_vocabulary": {
+    "core_behaviors": {
+      "evidence_filter": {
+        "motion": "A dynamic, layered interface that expands and contracts like a sieve, with data points (represented as glowing orbs) being filtered through. The orbs pulse with color intensity based on confidence level.",
+        "camera": "Orbiting zoom with a slow, deliberate focus on the sieve as it filters, then a smooth cut to the selected evidence."
+      },
+      "challenge_evidence": {
+        "motion": "A visual 'challenge' animation where the selected evidence is overlaid with a red question mark, and a counter appears with a countdown to validation. The counter pulses with urgency.",
+        "camera": "Slight push-in to the evidence, followed by a slow pan to the counter."
+      },
+      "approval_record": {
+        "motion": "A glowing, circular approval badge appears at the center of the screen, with a timestamp and signature. The badge pulses with a soft, steady light, symbolizing finality and transparency.",
+        "camera": "Smooth zoom into the badge, then a slow pull back to show the full interface."
+      },
+      "risk_indicator": {
+        "motion": "A red-to-yellow-to-green gradient bar at the bottom of the screen that pulses in sync with the risk level. The bar grows or shrinks based on the confidence of the decision.",
+        "camera": "Fixed camera, with subtle focus shifts to the bar when risk level changes."
+      }
+    },
+    "user_control": {
+      "motion": "A floating, translucent control panel that appears on the side of the screen. It contains buttons for 'Filter', 'Challenge', 'Approve', and 'Record'. The panel fades in and out based on user interaction.",
+      "camera": "Fixed camera with slight zoom when the panel is active."
+    },
+    "calm_precision": {
+      "motion": "All animations are slow, deliberate, and avoid rapid transitions. The interface moves with a soft, mechanical precision, like a well-oiled machine.",
+      "camera": "Consistent, smooth transitions with no abrupt cuts. Camera movement is always controlled and intentional."
+    },
+    "interactive_elements": {
+      "motion": "When a user selects an evidence point, it scales up and highlights with a soft glow. The motion is smooth and responsive, with a slight delay to simulate processing.",
+      "camera": "Camera smoothly follows the selected element with a slight offset to maintain context."
+    }
+  },
+  "brand_alignment": {
+    "evidence_first": "All motion and interface behaviors are centered around the flow of evidence—filtering, challenging, approving, and recording—ensuring the evidence remains the focal point.",
+    "transparent_reasoning": "All animations and transitions are clear and legible, with visual cues that explain the reasoning behind each step in the decision process.",
+    "user_control": "The control panel and interaction mechanics are designed to give the user full agency over the process, with visual feedback that confirms their actions.",
+    "risk_awareness": "Risk indicators are always visible and clearly communicated through motion and color, ensuring the user is constantly aware of the risk profile of their decisions.",
+    "calm_precision": "All motion and camera choreography is designed to reflect the brand's calm, precise, and methodical approach to trading and decision-making."
+  }
+}

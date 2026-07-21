@@ -1,0 +1,128 @@
+{
+  "particleSystems": {
+    "evidenceParticles": {
+      "name": "Evidence Stream",
+      "description": "Visual representation of market data being filtered and validated through the TraderFrame process. These particles represent raw data points that are being evaluated for relevance and credibility.",
+      "color": "rgba(255, 153, 0, 0.7)",
+      "emissionRate": 15,
+      "lifetime": 3,
+      "velocity": {
+        "min": {
+          "x": -1,
+          "y": -1,
+          "z": -1
+        },
+        "max": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      "rotationSpeed": 0.5,
+      "texture": "evidence_icon.png",
+      "shader": "evidence_shader.glsl",
+      "behavior": {
+        "filtering": true,
+        "challenge": true,
+        "approval": false,
+        "record": false
+      }
+    },
+    "riskParticles": {
+      "name": "Risk Indicator",
+      "description": "Particles that visually represent the risk profile of a decision. They evolve as the evidence is challenged and approved, reflecting the growing confidence or uncertainty in the trade.",
+      "color": "rgba(255, 51, 51, 0.6)",
+      "emissionRate": 8,
+      "lifetime": 5,
+      "velocity": {
+        "min": {
+          "x": -0.5,
+          "y": -0.5,
+          "z": -0.5
+        },
+        "max": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        }
+      },
+      "rotationSpeed": 0.3,
+      "texture": "risk_icon.png",
+      "shader": "risk_shader.glsl",
+      "behavior": {
+        "filtering": false,
+        "challenge": false,
+        "approval": false,
+        "record": true
+      }
+    },
+    "approvalParticles": {
+      "name": "Approval Signal",
+      "description": "Particles that visually confirm the approval of a trade decision. These are the final stage of the evidence process and are used to reinforce the credibility of the decision.",
+      "color": "rgba(0, 153, 255, 0.9)",
+      "emissionRate": 5,
+      "lifetime": 6,
+      "velocity": {
+        "min": {
+          "x": -0.3,
+          "y": -0.3,
+          "z": -0.3
+        },
+        "max": {
+          "x": 0.3,
+          "y": 0.3,
+          "z": 0.3
+        }
+      },
+      "rotationSpeed": 0.2,
+      "texture": "approval_icon.png",
+      "shader": "approval_shader.glsl",
+      "behavior": {
+        "filtering": false,
+        "challenge": false,
+        "approval": true,
+        "record": true
+      }
+    }
+  },
+  "narrativeIntegration": {
+    "evidenceParticles": {
+      "trigger": "data_inflow",
+      "animation": "fade_in",
+      "fadeOutDelay": 2,
+      "fadeOutDuration": 1
+    },
+    "riskParticles": {
+      "trigger": "risk_assessment",
+      "animation": "pulse",
+      "pulseFrequency": 1.5,
+      "pulseAmplitude": 0.2
+    },
+    "approvalParticles": {
+      "trigger": "approval_confirmation",
+      "animation": "glow",
+      "glowIntensity": 0.8,
+      "glowDuration": 3
+    }
+  },
+  "brandAlignment": {
+    "evidenceParticles": {
+      "principles": [
+        "Evidence first",
+        "Transparent reasoning"
+      ]
+    },
+    "riskParticles": {
+      "principles": [
+        "Risk awareness"
+      ]
+    },
+    "approvalParticles": {
+      "principles": [
+        "Transparent reasoning",
+        "User control",
+        "Calm precision"
+      ]
+    }
+  }
+}

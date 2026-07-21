@@ -1,0 +1,94 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "objective": "Define LOD, compression, and mobile fallback for production-ready 3D assets and environments",
+  "implementation_plan": {
+    "lod_strategy": {
+      "lod_1": {
+        "description": "Low-poly base mesh with minimal texture detail",
+        "use_case": "Mobile and low-end devices",
+        "asset_types": [
+          "UI elements",
+          "basic UI panels",
+          "static icons",
+          "simple animations"
+        ]
+      },
+      "lod_2": {
+        "description": "Medium-poly mesh with optimized textures and basic lighting",
+        "use_case": "Mid-range devices and desktop fallback",
+        "asset_types": [
+          "3D UI elements",
+          "animated UI transitions",
+          "environmental lighting",
+          "simple 3D models"
+        ]
+      },
+      "lod_3": {
+        "description": "High-poly, detailed mesh with full texture and lighting",
+        "use_case": "High-end devices and premium desktop experience",
+        "asset_types": [
+          "3D evidence panels",
+          "animated data visualizations",
+          "environmental assets",
+          "interactive UI elements"
+        ]
+      }
+    },
+    "compression": {
+      "textures": {
+        "format": "WebP (lossy for UI, lossless for critical data visualization)",
+        "compression_ratio": "85% for UI, 95% for data visualization"
+      },
+      "models": {
+        "format": "glTF (binary format for performance)",
+        "compression": "ZIP for mobile, GLB for desktop"
+      },
+      "animations": {
+        "format": "glTF with animation compression",
+        "compression_ratio": "70% for UI transitions, 90% for data visualization"
+      }
+    },
+    "mobile_fallback": {
+      "rendering": {
+        "technology": "WebGL 2.0 with fallback to WebGL 1.0",
+        "shaders": "Simplified shaders for mobile GPUs"
+      },
+      "assets": {
+        "texture": "Downsampled to 1024x1024 for mobile",
+        "model": "LOD 1 for mobile, LOD 2 for desktop"
+      },
+      "interaction": {
+        "touch": "Gesture-based navigation",
+        "hover": "Tap-based interaction"
+      },
+      "performance": {
+        "frame_rate": "60fps on mobile, 90fps on desktop",
+        "memory": "Optimized memory usage with asset pooling"
+      }
+    },
+    "brand_integration": {
+      "visual_language": {
+        "colors": "Brand color palette with high contrast for readability",
+        "fonts": "Custom UI font for brand consistency"
+      },
+      "ui_elements": {
+        "icons": "Vector-based, scalable, and optimized for mobile",
+        "panels": "Responsive layout for all screen sizes"
+      },
+      "animations": {
+        "timing": "Subtle, clean animations aligned with brand principles",
+        "transitions": "Smooth, non-disruptive UI transitions"
+      }
+    }
+  },
+  "notes": {
+    "approved_upstream_decisions": {
+      "brand_colors": "Primary: #007BFF, Secondary: #28A745, Neutral: #FFFFFF, Accent: #FF6B6B",
+      "font_family": "Custom UI Font (Font Awesome + custom glyphs)"
+    },
+    "risk_awareness": {
+      "visual_cues": "Red/green indicators for risk levels",
+      "data_transparency": "Layered visualization with opacity controls"
+    }
+  }
+}

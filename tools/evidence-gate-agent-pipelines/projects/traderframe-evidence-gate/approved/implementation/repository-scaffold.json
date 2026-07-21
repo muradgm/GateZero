@@ -1,0 +1,69 @@
+{
+  "repository_structure": {
+    "root_directory": "TraderFrame",
+    "subdirectories": [
+      {
+        "name": "assets",
+        "description": "Stores all static assets such as images, videos, and fonts."
+      },
+      {
+        "name": "components",
+        "description": "Contains reusable React components for the application."
+      },
+      {
+        "name": "data",
+        "description": "Holds datasets, API endpoints, and local storage configurations."
+      },
+      {
+        "name": "services",
+        "description": "Includes all service logic such as data fetching, authentication, and business rules."
+      },
+      {
+        "name": "styles",
+        "description": "Centralizes CSS, SCSS, or styled-components for consistent styling across the application."
+      },
+      {
+        "name": "utils",
+        "description": "Contains utility functions and helper scripts used throughout the project."
+      }
+    ]
+  },
+  "module_structure": {
+    "core_modules": [
+      {
+        "name": "EvidenceGate",
+        "description": "The main entry point of the application, presenting the interactive 3D narrative."
+      },
+      {
+        "name": "EvidenceFilter",
+        "description": "A module responsible for filtering and presenting market evidence to users."
+      },
+      {
+        "name": "DecisionMaker",
+        "description": "Handles the decision-making process based on filtered evidence, providing risk-aware recommendations."
+      },
+      {
+        "name": "UserInterface",
+        "description": "Manages user interactions, controls, and display elements."
+      },
+      {
+        "name": "Authentication",
+        "description": "Manages user authentication, including login, logout, and session management."
+      }
+    ],
+    "additional_modules": [
+      {
+        "name": "DataVisualization",
+        "description": "Includes components for visualizing market data in 3D and other formats."
+      },
+      {
+        "name": "RiskAssessment",
+        "description": "Provides tools and algorithms to assess and mitigate risks based on evidence."
+      },
+      {
+        "name": "UserPreferences",
+        "description": "Handles user settings, preferences, and customization options."
+      }
+    ]
+  }
+}

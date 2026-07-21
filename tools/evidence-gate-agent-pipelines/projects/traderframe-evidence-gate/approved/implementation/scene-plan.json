@@ -1,0 +1,40 @@
+{
+  "scene_modules": [
+    {
+      "module_name": "Evidence Gate Introduction",
+      "asset_type": "Video",
+      "description": "A brief introduction video showcasing the concept of TraderFrame and its mission to transform fragmented market evidence into transparent, risk-aware decisions.",
+      "delivery_method": "Embedded in the main dashboard"
+    },
+    {
+      "module_name": "Market Evidence Filtering",
+      "asset_type": "Interactive 3D Model",
+      "description": "An interactive 3D model demonstrating how traders can filter market evidence based on various criteria such as time frame, source reliability, and historical performance.",
+      "delivery_method": "Accessible from the main dashboard"
+    },
+    {
+      "module_name": "Evidence Challenge and Approval",
+      "asset_type": "Interactive Quiz",
+      "description": "An interactive quiz where users can challenge and approve pieces of evidence. The system provides feedback on the validity and relevance of each piece of evidence.",
+      "delivery_method": "Accessible from the main dashboard"
+    },
+    {
+      "module_name": "Transparent Reasoning",
+      "asset_type": "Textual Explanation",
+      "description": "A textual explanation detailing how transparent reasoning is used to evaluate market evidence, ensuring that decisions are based on credible sources and well-considered factors.",
+      "delivery_method": "Integrated into the decision-making process"
+    },
+    {
+      "module_name": "Risk Awareness Dashboard",
+      "asset_type": "Dashboard",
+      "description": "A risk-aware dashboard displaying real-time market data, potential risks, and recommended actions based on the filtered evidence.",
+      "delivery_method": "Accessible from the main dashboard"
+    },
+    {
+      "module_name": "User Control Panel",
+      "asset_type": "Control Panel",
+      "description": "A user control panel allowing traders to customize their experience, set preferences, and manage their access rights.",
+      "delivery_method": "Accessible from the main dashboard"
+    }
+  ]
+}

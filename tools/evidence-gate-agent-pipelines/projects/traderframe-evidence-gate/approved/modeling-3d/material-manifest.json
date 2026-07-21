@@ -1,0 +1,126 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Material Preparation",
+  "objective": "Define UV and material requirements",
+  "material_requirements": {
+    "surface_types": {
+      "glass": {
+        "uv_mapping": "planar",
+        "material": "clear glass with subtle refractive highlights",
+        "texture": "low-poly glass surface with reflection map",
+        "use_case": "evidence gate interface, data visualization panels"
+      },
+      "metal": {
+        "uv_mapping": "cylindrical",
+        "material": "polished steel with brushed texture",
+        "texture": "high-resolution metal surface with specular highlights",
+        "use_case": "control panels, hardware interfaces, structural elements"
+      },
+      "wood": {
+        "uv_mapping": "planar",
+        "material": "dark walnut with grain texture",
+        "texture": "high-resolution wood grain with subtle lighting variation",
+        "use_case": "desktop surfaces, control panels, aesthetic framing"
+      },
+      "metallic_surface": {
+        "uv_mapping": "planar",
+        "material": "matte metallic with subtle color variation",
+        "texture": "low-poly metallic surface with color variation map",
+        "use_case": "data visualization panels, interface elements"
+      },
+      "fabric": {
+        "uv_mapping": "planar",
+        "material": "matte fabric with subtle texture",
+        "texture": "low-poly fabric with subtle pattern",
+        "use_case": "control panel overlays, UI elements"
+      },
+      "screen": {
+        "uv_mapping": "planar",
+        "material": "glass with embedded screen",
+        "texture": "glass with embedded UI texture",
+        "use_case": "evidence gate interface, data visualization panels"
+      }
+    },
+    "lighting_requirements": {
+      "ambient_light": "soft white light (1000 lux)",
+      "key_light": "focused directional light (3000 lux)",
+      "fill_light": "diffused light (1500 lux)",
+      "back_light": "soft directional light (1000 lux)",
+      "specular_reflection": "enabled with intensity 0.5"
+    },
+    "rendering_settings": {
+      "render_engine": "Unreal Engine 5.3 or higher",
+      "render_resolution": "4K (3840x2160)",
+      "render_format": "EXR (32-bit float)",
+      "render_samples": "128",
+      "render_passes": [
+        "color",
+        "depth",
+        "normal",
+        "specular",
+        "roughness",
+        "metallic"
+      ]
+    },
+    "material_pipeline": {
+      "texture_resolution": "4K (4096x4096)",
+      "texture_format": "PNG or EXR",
+      "normal_map": "high-resolution normal map",
+      "roughness_map": "high-resolution roughness map",
+      "metallic_map": "high-resolution metallic map",
+      "specular_map": "high-resolution specular map"
+    },
+    "texture_pipeline": {
+      "base_color": "high-resolution base color map",
+      "emissive": "high-resolution emissive map",
+      "alpha": "high-resolution alpha map",
+      "mask": "high-resolution mask map"
+    },
+    "asset_requirements": {
+      "models": {
+        "format": "FBX or glTF",
+        "scale": "1:1",
+        "units": "centimeters",
+        "polygon_count": "100,000 - 500,000"
+      },
+      "textures": {
+        "format": "PNG or EXR",
+        "resolution": "4K (4096x4096)",
+        "compression": "lossless"
+      },
+      "materials": {
+        "format": "Material Graph (Unreal) or PBR material",
+        "type": "PBR (Physical Based Rendering)",
+        "properties": [
+          "base color",
+          "metallic",
+          "roughness",
+          "specular",
+          "emissive",
+          "normal"
+        ]
+      }
+    },
+    "environment_requirements": {
+      "background": "neutral, high-contrast environment",
+      "lighting": "soft, directional lighting with minimal shadows",
+      "atmosphere": "neutral, with slight depth of field",
+      "camera": "static, with 180° field of view"
+    }
+  }
+}

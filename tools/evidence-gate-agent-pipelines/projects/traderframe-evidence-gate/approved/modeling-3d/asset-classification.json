@@ -1,0 +1,86 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Asset Classification",
+  "objective": "Classify assets by role and complexity",
+  "asset_classification": {
+    "core_assets": [
+      {
+        "name": "Evidence Gate Interface",
+        "role": "Central decision-making hub",
+        "complexity": "High",
+        "description": "Interactive 3D interface where traders input, filter, and validate market evidence. Features layered transparency, risk indicators, and real-time feedback. Must support multi-user collaboration and version control."
+      },
+      {
+        "name": "Evidence Timeline",
+        "role": "Narrative visualization of decision process",
+        "complexity": "High",
+        "description": "3D timeline that visually maps the progression of evidence collection, challenge, approval, and recording. Supports dynamic annotations, user-controlled pacing, and branching paths for different risk scenarios."
+      },
+      {
+        "name": "Market Evidence Library",
+        "role": "Repository of validated data sources",
+        "complexity": "Medium",
+        "description": "3D library with categorized, searchable, and taggable evidence sources. Includes visual indicators of reliability, timeliness, and relevance. Supports user-defined filters and risk-based sorting."
+      }
+    ],
+    "supporting_assets": [
+      {
+        "name": "Risk Dashboard",
+        "role": "Real-time risk visualization",
+        "complexity": "Medium",
+        "description": "3D dashboard that overlays risk metrics on the decision process. Includes heatmaps, risk thresholds, and user-controlled alerts. Must integrate with live market data feeds."
+      },
+      {
+        "name": "User Control Panel",
+        "role": "Customization and control interface",
+        "complexity": "Medium",
+        "description": "3D panel allowing users to adjust transparency levels, filter criteria, and risk parameters. Supports user-defined workflows and saved configurations."
+      },
+      {
+        "name": "Transaction Log",
+        "role": "Record of approved decisions",
+        "complexity": "Low",
+        "description": "3D log that records and visualizes approved decisions with timestamps, evidence sources, and risk ratings. Supports export and audit trails."
+      }
+    ],
+    "environment_assets": [
+      {
+        "name": "Trading Workspace",
+        "role": "Immersive environment for decision-making",
+        "complexity": "High",
+        "description": "3D environment that simulates a professional trading workspace. Includes interactive whiteboards, data visualization panels, and a central control hub. Supports multi-user presence and real-time collaboration."
+      },
+      {
+        "name": "Market Data Visualizer",
+        "role": "Dynamic data visualization",
+        "complexity": "High",
+        "description": "3D visualization of real-time market data, including price movements, volume, and sentiment. Supports user-defined data layers and interactive exploration."
+      },
+      {
+        "name": "Evidence Validation Panel",
+        "role": "Tool for challenging and approving evidence",
+        "complexity": "Medium",
+        "description": "3D panel that allows users to review, challenge, and approve evidence. Includes visual indicators of evidence strength, user feedback, and approval status."
+      }
+    ]
+  },
+  "notes": {
+    "implementation": "All assets must be production-ready, with support for real-time interaction, multi-user collaboration, and integration with live market data feeds. Assets should reflect the brand principles of transparency, user control, and risk awareness.",
+    "guidelines": "Avoid unsupported product facts. Focus on asset roles and complexity as defined by the narrative and brand principles. Ensure assets are scalable and modular for future expansion."
+  }
+}

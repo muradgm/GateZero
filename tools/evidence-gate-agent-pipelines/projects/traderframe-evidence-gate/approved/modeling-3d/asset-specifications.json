@@ -1,0 +1,90 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Technical Specification",
+  "objective": "Define scale, pivots, budgets, UVs, LODs and collision",
+  "technical_spec": {
+    "scale": {
+      "scene": "Medium to large scale (100m x 100m x 100m)",
+      "assets": "Medium to high detail (100k to 500k polygons)",
+      "environment": "High detail (100k to 200k polygons)"
+    },
+    "pivots": {
+      "primary": "Evidence Gate interface (central hub for filtering, challenging, approving, and recording evidence)",
+      "secondary": "Market data visualization (charts, graphs, real-time indicators)",
+      "tertiary": "User control panel (risk settings, transparency toggles, audit logs)"
+    },
+    "budget": {
+      "3D modeling": "$25,000 - $40,000",
+      "texturing": "$15,000 - $25,000",
+      "rigging": "$10,000 - $15,000",
+      "animation": "$15,000 - $25,000",
+      "environment design": "$15,000 - $25,000",
+      "total": "$85,000 - $130,000"
+    },
+    "uv_mapping": {
+      "approach": "Seamless UV unwrapping with UV seams minimized for complex geometries",
+      "tools": [
+        "Maya",
+        "Blender",
+        "Substance Painter"
+      ],
+      "standards": "PBR texture mapping, UV islands clearly defined, no overlapping"
+    },
+    "lod": {
+      "lod1": "High detail (100k to 500k polygons) for close interaction",
+      "lod2": "Medium detail (50k to 100k polygons) for mid-range interaction",
+      "lod3": "Low detail (10k to 50k polygons) for far-range interaction",
+      "transition": "Smooth LOD transitions using distance-based culling and level-of-detail switching"
+    },
+    "collision": {
+      "approach": "Physics-based collision detection using Havok or PhysX",
+      "tools": [
+        "Unity",
+        "Unreal Engine",
+        "Havok"
+      ],
+      "standards": "Real-time collision response, no penetration, accurate hit detection for UI elements and interactive assets"
+    },
+    "assets": {
+      "evidence_gate": {
+        "scale": "1:1 (interactive interface)",
+        "uv_mapping": "Seamless, PBR texture mapping",
+        "lod": "LOD1 for close interaction, LOD2 for mid-range, LOD3 for far-range",
+        "collision": "Physics-based collision with UI elements"
+      },
+      "market_data_visualization": {
+        "scale": "1:1 (dynamic UI elements)",
+        "uv_mapping": "UI texture mapping",
+        "lod": "LOD1 for close interaction, LOD2 for mid-range, LOD3 for far-range",
+        "collision": "Collision with UI elements and user controls"
+      },
+      "user_control_panel": {
+        "scale": "1:1 (interactive UI elements)",
+        "uv_mapping": "UI texture mapping",
+        "lod": "LOD1 for close interaction, LOD2 for mid-range, LOD3 for far-range",
+        "collision": "Collision with UI elements and user controls"
+      }
+    },
+    "environment": {
+      "scale": "1:1 (interactive 3D space)",
+      "uv_mapping": "PBR texture mapping",
+      "lod": "LOD1 for close interaction, LOD2 for mid-range, LOD3 for far-range",
+      "collision": "Physics-based collision with environmental objects"
+    }
+  }
+}

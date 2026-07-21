@@ -1,0 +1,51 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative.",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Generation Plan",
+  "production_methods": {
+    "environment": {
+      "method": "Procedural generation",
+      "justification": "Allows for scalable, consistent, and customizable environments that reflect financial markets' complexity and data flow."
+    },
+    "assets": {
+      "method": "AI-assisted modeling",
+      "justification": "Enables rapid creation of high-fidelity, stylized 3D assets (e.g., data streams, market indicators, transaction nodes) while maintaining brand principles of precision and clarity."
+    },
+    "narrative": {
+      "method": "Manual 3D animation + AI-driven motion capture",
+      "justification": "Combines human artistic control with AI efficiency to create a seamless, immersive, and emotionally resonant narrative that aligns with the brand's calm precision and transparency."
+    },
+    "UI/UX": {
+      "method": "Manual 3D UI design with procedural layout tools",
+      "justification": "Ensures user control and intuitive interaction while maintaining a clean, evidence-first visual language."
+    },
+    "interactivity": {
+      "method": "AI-assisted real-time rendering + manual scripting",
+      "justification": "Supports dynamic, user-driven exploration of market evidence while preserving the integrity of the decision process."
+    },
+    "sound": {
+      "method": "Manual audio design + AI-assisted sound synthesis",
+      "justification": "Creates a calm, precise auditory environment that supports the brand's focus on risk awareness and transparency."
+    }
+  },
+  "implementation_notes": {
+    "asset_pipeline": "Use of industry-standard tools (Blender, Maya, Unreal Engine) with AI-assisted modeling plugins (e.g., ZBrush, DAZ Studio) for asset creation.",
+    "environment_pipeline": "Procedural generation via Unreal Engine's Lumen and Nanite for photorealistic, scalable environments.",
+    "narrative_pipeline": "Manual 3D animation with AI-assisted motion capture for character and data visualization elements.",
+    "quality_control": "Final assets and environments will be reviewed by a 3D modeling and UX review board to ensure alignment with brand principles and production readiness."
+  }
+}

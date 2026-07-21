@@ -1,0 +1,20 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "A private trading decision-intelligence experience that transforms fragmented market evidence into explainable, risk-aware decisions.",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative.",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "UI Integration",
+  "objective": "Map the design system into responsive UI."
+}

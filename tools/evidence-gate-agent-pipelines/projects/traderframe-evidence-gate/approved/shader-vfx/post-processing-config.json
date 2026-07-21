@@ -1,0 +1,79 @@
+{
+  "postProcessing": {
+    "tone": "Calm precision",
+    "colorPalette": {
+      "primary": "#1a1a1a",
+      "secondary": "#2a2a2a",
+      "accent": "#4a4a4a",
+      "highlight": "#6a6a6a",
+      "background": "#0a0a0a"
+    },
+    "contrast": "Low",
+    "grain": {
+      "enabled": false,
+      "intensity": 0
+    },
+    "colorGrading": {
+      "enabled": true,
+      "toneMapping": "Reinhard",
+      "exposure": 1,
+      "contrast": 0.1,
+      "saturation": 0.05,
+      "temperature": 6500,
+      "tint": 0
+    },
+    "depthOfField": {
+      "enabled": false,
+      "focusDistance": 1,
+      "focalLength": 24,
+      "aperture": 0
+    },
+    "motionBlur": {
+      "enabled": false,
+      "shutterAngle": 180,
+      "samples": 1
+    },
+    "filmGrain": {
+      "enabled": false,
+      "intensity": 0
+    },
+    "lensDistortion": {
+      "enabled": false,
+      "distortion": 0,
+      "zoom": 1
+    },
+    "vignette": {
+      "enabled": false,
+      "intensity": 0,
+      "offset": 0,
+      "roundness": 0
+    },
+    "toneMapping": "Reinhard",
+    "exposure": 1,
+    "gamma": 2.2,
+    "colorSpace": "Rec. 709",
+    "renderPipeline": "Cinematic",
+    "renderQuality": "High",
+    "renderMode": "Final",
+    "renderSettings": {
+      "postProcessingEnabled": true,
+      "renderPasses": [
+        "ColorGrading",
+        "ToneMapping",
+        "GammaCorrection"
+      ],
+      "renderOrder": [
+        "Base",
+        "PostProcessing"
+      ]
+    },
+    "brandAlignment": {
+      "evidenceFirst": true,
+      "transparentReasoning": true,
+      "userControl": true,
+      "riskAwareness": true,
+      "calmPrecision": true
+    },
+    "notes": "The post-processing is restrained to maintain the clarity and precision of the narrative. Subtle color grading and tone mapping are used to enhance readability and reinforce the brand's focus on evidence and transparency. No grain, motion blur, or depth of field is applied to ensure the visual language remains clean and focused on the data-driven narrative."
+  }
+}
