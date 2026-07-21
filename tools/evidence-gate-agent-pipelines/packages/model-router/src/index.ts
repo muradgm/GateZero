@@ -1,62 +1,80 @@
 import type { ModelProvider, PipelineId } from "@eg/core";
 import {
   FallbackProvider,
+  GeminiProvider,
   MockProvider,
   OllamaProvider,
   OpenAIProvider
 } from "@eg/provider";
 
-export type ProviderPreference = "openai" | "ollama" | "hybrid" | "mock";
+export type ProviderPreference =
+  | "gemini"
+  | "openai"
+  | "ollama"
+  | "hybrid"
+  | "mock";
+
+type ProviderName = "gemini" | "openai" | "ollama";
 
 export const pipelineProviderMatrix: Record<PipelineId, {
-  preferred: "openai" | "ollama";
-  fallback: "openai" | "ollama";
+  preferred: ProviderName;
+  fallback: ProviderName;
+  specialist: string;
   reason: string;
 }> = {
   strategy: {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "High-value product reasoning and decision synthesis."
+    specialist: "DeepSeek (optional second opinion)",
+    reason: "Use the hosted free tier for synthesis while preserving a local fallback."
   },
   "concept-art": {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Creative direction benefits from stronger multimodal reasoning; image generation is added separately."
+    specialist: "GPT Image, Ideogram or Krea after text approval",
+    reason: "Separate concept reasoning from paid image generation."
   },
   storyboard: {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Narrative continuity, camera logic and scene sequencing are quality-critical."
+    specialist: "Configurable image provider for approved scene frames",
+    reason: "Narrative continuity and camera logic benefit from stronger hosted reasoning."
   },
   "design-system": {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Requires consistent translation from brand intent into reusable system rules."
+    specialist: "Figma exporter/plugin",
+    reason: "The model defines the system; Figma remains the editable delivery surface."
   },
   "modeling-3d": {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Complex production planning, topology constraints and implementation-ready specifications."
+    specialist: "Meshy with explicit cost approval, then Blender validation",
+    reason: "Generate production specifications before requesting paid mesh generation."
   },
   animation: {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Timing, choreography, interaction and reduced-motion planning need coherent cross-scene reasoning."
+    specialist: "Blender first; Cascadeur or Rokoko only for character motion",
+    reason: "Most current motion is procedural, camera or object choreography."
   },
   "shader-vfx": {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Technical-art decisions require balanced visual quality, performance and implementation detail."
+    specialist: "React Three Fiber, Three.js and GLSL",
+    reason: "Outputs must be executable web shaders with performance fallbacks."
   },
   implementation: {
     preferred: "ollama",
-    fallback: "openai",
-    reason: "Local coder handles routine production work; OpenAI is reserved for difficult implementation failures."
+    fallback: "gemini",
+    specialist: "Codex or GitHub Copilot for difficult repository work",
+    reason: "Keep routine code generation local and use hosted reasoning only when needed."
   },
   qa: {
-    preferred: "openai",
+    preferred: "gemini",
     fallback: "ollama",
-    reason: "Independent final review should use the strongest available reasoning provider."
+    specialist: "Playwright, Lighthouse, axe-core and visual snapshots",
+    reason: "AI interprets deterministic evidence rather than replacing tests."
   }
 };
 
@@ -71,6 +89,16 @@ export class ModelRouter {
 
   private readonly ollamaCoder = new OllamaProvider(
     process.env.OLLAMA_CODER_MODEL ?? "qwen2.5-coder:7b"
+  );
+
+  private readonly geminiGeneral = new GeminiProvider(
+    process.env.GEMINI_TEXT_MODEL ?? "gemini-3.5-flash"
+  );
+
+  private readonly geminiCoder = new GeminiProvider(
+    process.env.GEMINI_CODER_MODEL ??
+      process.env.GEMINI_TEXT_MODEL ??
+      "gemini-3.5-flash"
   );
 
   private readonly openaiGeneral = new OpenAIProvider(
@@ -93,18 +121,17 @@ export class ModelRouter {
       return this.mock;
     }
 
-    const ollama =
-      pipelineId === "implementation" || pipelineId === "qa"
-        ? this.ollamaCoder
-        : this.ollamaGeneral;
-
-    const openai =
-      pipelineId === "implementation"
-        ? this.openaiCoder
-        : this.openaiGeneral;
+    const isCodePipeline = pipelineId === "implementation" || pipelineId === "qa";
+    const ollama = isCodePipeline ? this.ollamaCoder : this.ollamaGeneral;
+    const gemini = pipelineId === "implementation" ? this.geminiCoder : this.geminiGeneral;
+    const openai = pipelineId === "implementation" ? this.openaiCoder : this.openaiGeneral;
 
     if (pipelinePreference === "ollama") {
       return ollama;
+    }
+
+    if (pipelinePreference === "gemini") {
+      return gemini;
     }
 
     if (pipelinePreference === "openai") {
@@ -112,8 +139,8 @@ export class ModelRouter {
     }
 
     const matrix = pipelineProviderMatrix[pipelineId];
-    return matrix.preferred === "openai"
-      ? new FallbackProvider(openai, ollama)
-      : new FallbackProvider(ollama, openai);
+    return matrix.preferred === "ollama"
+      ? new FallbackProvider(ollama, gemini)
+      : new FallbackProvider(gemini, ollama);
   }
 }
