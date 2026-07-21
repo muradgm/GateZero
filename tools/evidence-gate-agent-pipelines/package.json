@@ -5,14 +5,14 @@
   "type": "module",
   "packageManager": "pnpm@10.6.0",
   "scripts": {
-    "dev": "tsx apps/orchestrator/src/cli.ts",
-    "run:demo": "tsx apps/orchestrator/src/cli.ts run",
-    "status": "tsx apps/orchestrator/src/cli.ts status",
-    "approve": "tsx apps/orchestrator/src/cli.ts approve",
-    "reset": "tsx apps/orchestrator/src/cli.ts reset",
-    "doctor": "tsx apps/orchestrator/src/cli.ts doctor",
+    "dev": "tsx --env-file=.env apps/orchestrator/src/cli.ts",
+    "run:demo": "tsx --env-file=.env apps/orchestrator/src/cli.ts run",
+    "status": "tsx --env-file=.env apps/orchestrator/src/cli.ts status",
+    "approve": "tsx --env-file=.env apps/orchestrator/src/cli.ts approve",
+    "reset": "tsx --env-file=.env apps/orchestrator/src/cli.ts reset",
+    "doctor": "tsx --env-file=.env apps/orchestrator/src/cli.ts doctor",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/**/*.test.ts"
+    "test": "tsx --env-file=.env --test tests/**/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
