@@ -73,6 +73,24 @@ root.innerHTML = `
            )
            .join("")}
        </section>
+       <section class="intake-diagnostics" aria-labelledby="intake-diagnostics-title">
+         <header>
+           <div><p class="eyebrow">Local validation</p><h2 id="intake-diagnostics-title">Intake diagnostics</h2></div>
+           <span>${data.caseIntakeDiagnostics.accepted_count} accepted / ${data.caseIntakeDiagnostics.rejected_count} rejected</span>
+         </header>
+         <p class="diagnostic-boundary"><code>${data.caseIntakeDiagnostics.intake_directory}</code> is the only scanned directory.</p>
+         <ul>
+           ${data.caseIntakeDiagnostics.files
+             .map(
+               (file) => `<li class="${file.status}">
+                 <div><strong>${statusLabel(file.status)}</strong><code>${file.source_file}</code></div>
+                 <span>${file.error_code ? statusLabel(file.error_code) : file.case_id}</span>
+                 <p>${file.message}</p>
+               </li>`
+             )
+             .join("")}
+         </ul>
+       </section>
        <div id="case-workspace-view" aria-live="polite"></div>
       <section class="scenario-toolbar" aria-labelledby="scenario-title">
         <div>

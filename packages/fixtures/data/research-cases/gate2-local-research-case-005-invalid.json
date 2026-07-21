@@ -1,0 +1,15 @@
+{
+  "case_id": "gate2-research-case-fixture-005",
+  "title": "Incomplete local evidence case",
+  "strategy_idea_ref": "packages/fixtures/data/research-cases/gate2-local-research-case-005-invalid.json",
+  "evidence_refs": ["ops/truth/PROJECT_TRUTH.md"],
+  "freshness_status": "fresh",
+  "provenance_refs": ["ops/truth/PROJECT_TRUTH.md"],
+  "limitation_notes": ["Intentionally incomplete fixture for isolated validation diagnostics."],
+  "operator_review_required": true,
+  "local_only": true,
+  "read_only": true,
+  "action_route_created": false,
+  "created_at": "2026-07-20T00:00:00.000Z",
+  "verified_at": "2026-07-20T00:00:00.000Z"
+}

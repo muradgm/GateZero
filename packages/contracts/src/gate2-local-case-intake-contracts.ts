@@ -90,7 +90,58 @@ export const Gate2LocalCaseCatalogSchema = z
     }
   });
 
+export const Gate2LocalCaseIntakeDiagnosticSchema = z
+  .object({
+    source_file: LocalSourcePathSchema,
+    status: z.enum(["accepted", "rejected"]),
+    case_id: IdentifierSchema.nullable(),
+    error_code: Gate2CaseIntakeErrorCodeSchema.nullable(),
+    message: NonEmptyStringSchema
+  })
+  .strict()
+  .superRefine((value, context) => {
+    if (value.status === "accepted" && value.error_code !== null) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["error_code"],
+        message: "Accepted files cannot carry an error code."
+      });
+    }
+    if (value.status === "rejected" && value.error_code === null) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["error_code"],
+        message: "Rejected files require an error code."
+      });
+    }
+  });
+
+export const Gate2LocalCaseIntakeDiagnosticsSchema = z
+  .object({
+    intake_directory: z.literal("packages/fixtures/data/research-cases"),
+    files: z.array(Gate2LocalCaseIntakeDiagnosticSchema).min(1),
+    accepted_count: z.number().int().nonnegative(),
+    rejected_count: z.number().int().nonnegative(),
+    local_only: z.literal(true),
+    read_only: z.literal(true),
+    action_route_created: z.literal(false)
+  })
+  .strict()
+  .superRefine((value, context) => {
+    const accepted = value.files.filter((file) => file.status === "accepted").length;
+    const rejected = value.files.length - accepted;
+    if (accepted !== value.accepted_count || rejected !== value.rejected_count) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["files"],
+        message: "Diagnostic counts must match file outcomes."
+      });
+    }
+  });
+
 export type Gate2LocalResearchCaseDraft = z.infer<typeof Gate2LocalResearchCaseDraftSchema>;
 export type Gate2LocalCaseCatalogItem = z.infer<typeof Gate2LocalCaseCatalogItemSchema>;
 export type Gate2LocalCaseCatalog = z.infer<typeof Gate2LocalCaseCatalogSchema>;
 export type Gate2CaseIntakeErrorCode = z.infer<typeof Gate2CaseIntakeErrorCodeSchema>;
+export type Gate2LocalCaseIntakeDiagnostic = z.infer<typeof Gate2LocalCaseIntakeDiagnosticSchema>;
+export type Gate2LocalCaseIntakeDiagnostics = z.infer<typeof Gate2LocalCaseIntakeDiagnosticsSchema>;

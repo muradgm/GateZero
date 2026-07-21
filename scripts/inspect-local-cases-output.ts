@@ -1,5 +1,5 @@
 import { findLocalCase, Gate2CaseIntakeError } from "../packages/core/src/index.js";
-import { buildCheckedInLocalCaseCatalog } from "./build-local-case-catalog.js";
+import { buildCheckedInLocalCaseIntake } from "./build-local-case-catalog.js";
 
 export interface InspectLocalCasesResult {
   readonly exitCode: number;
@@ -9,8 +9,12 @@ export interface InspectLocalCasesResult {
 
 export function runInspectLocalCasesCli(args: readonly string[]): InspectLocalCasesResult {
   try {
-    const catalog = buildCheckedInLocalCaseCatalog();
+    const intake = buildCheckedInLocalCaseIntake();
+    const catalog = intake.catalog;
     if (args.includes("--help") || args.includes("-h")) return result(0, help(), "");
+    if (args.includes("--diagnostics")) {
+      return result(0, JSON.stringify(intake.diagnostics, null, 2), "");
+    }
     const caseIndex = args.indexOf("--case");
     if (caseIndex === -1) {
       return result(
@@ -47,6 +51,7 @@ function help(): string {
     "Local research-case inspection",
     "Usage: pnpm inspect:local-cases",
     "       pnpm inspect:local-cases -- --case <case-id>",
+    "       pnpm inspect:local-cases -- --diagnostics",
     "Boundary: checked-in, read-only, operator-reviewed Gate 2 evidence only."
   ].join("\n");
 }

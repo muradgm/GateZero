@@ -12,7 +12,10 @@ describe("Gate 2 checked-in local case catalog", () => {
       read_only: true,
       operator_review_required: true,
       action_route_created: false,
-      items: [{ case_id: "gate2-research-case-fixture-003", status: "review_required" }]
+      items: [
+        { case_id: "gate2-research-case-fixture-003", status: "review_required" },
+        { case_id: "gate2-research-case-fixture-004", status: "blocked" }
+      ]
     });
   });
 

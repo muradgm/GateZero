@@ -12,12 +12,29 @@
         "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
         "ops/truth/PROJECT_TRUTH.md",
         "ops/truth/RISK_RULES.md",
-        "packages/fixtures/data/gate2-local-research-case-003.json"
+        "packages/fixtures/data/research-cases/gate2-local-research-case-003.json"
       ],
       "risk_review_ref": "ops/runtime/reviews/TRD-676_RISK_REVIEW.md",
-      "limitation_notes": [
-        "Checked-in local intake fixture only; no market account or execution route exists."
+      "limitation_notes": ["Checked-in local intake fixture only; no market route exists."],
+      "operator_review_required": true,
+      "local_only": true,
+      "read_only": true,
+      "action_route_created": false,
+      "verified_at": "2026-07-20T00:00:00.000Z"
+    },
+    {
+      "case_id": "gate2-research-case-fixture-004",
+      "title": "Stale local evidence case",
+      "status": "blocked",
+      "freshness_status": "stale",
+      "evidence_count": 1,
+      "source_refs": [
+        "docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md",
+        "ops/truth/PROJECT_TRUTH.md",
+        "packages/fixtures/data/research-cases/gate2-local-research-case-004-stale.json"
       ],
+      "risk_review_ref": "ops/runtime/reviews/TRD-676_RISK_REVIEW.md",
+      "limitation_notes": ["Stale evidence remains blocked until local operator review."],
       "operator_review_required": true,
       "local_only": true,
       "read_only": true,

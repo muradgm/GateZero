@@ -198,6 +198,64 @@ h1 {
   max-width: 42ch;
 }
 
+.intake-diagnostics {
+  margin: 0 0 20px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.intake-diagnostics > header,
+.intake-diagnostics > p,
+.intake-diagnostics li {
+  padding: 14px 18px;
+}
+
+.intake-diagnostics > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.intake-diagnostics ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intake-diagnostics li {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  gap: 6px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.intake-diagnostics li:first-child {
+  border-top: 0;
+}
+
+.intake-diagnostics li.rejected {
+  border-left: 3px solid var(--danger);
+}
+
+.intake-diagnostics li div {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.intake-diagnostics li p {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin: 0;
+  color: var(--muted);
+}
+
+.intake-diagnostics code {
+  overflow-wrap: anywhere;
+}
+
 .case-selector-band > div:first-child > p:last-child {
   color: var(--muted);
   font-size: 12px;
@@ -728,6 +786,14 @@ footer {
 
   .catalog-band article details {
     max-width: none;
+  }
+
+  .intake-diagnostics li {
+    grid-template-columns: 1fr;
+  }
+
+  .intake-diagnostics li p {
+    grid-column: auto;
   }
   .sim-shell {
     padding: 0 20px 24px;

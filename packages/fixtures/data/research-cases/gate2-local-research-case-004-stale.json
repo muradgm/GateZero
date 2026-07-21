@@ -1,0 +1,16 @@
+{
+  "case_id": "gate2-research-case-fixture-004",
+  "title": "Stale local evidence case",
+  "strategy_idea_ref": "packages/fixtures/data/research-cases/gate2-local-research-case-004-stale.json",
+  "evidence_refs": ["docs/operations/GATE2_SIMULATION_EVIDENCE_DETAIL_SCHEMA_IMPLEMENTATION.md"],
+  "risk_review_ref": "ops/runtime/reviews/TRD-676_RISK_REVIEW.md",
+  "freshness_status": "stale",
+  "provenance_refs": ["ops/truth/PROJECT_TRUTH.md"],
+  "limitation_notes": ["Stale evidence remains blocked until local operator review."],
+  "operator_review_required": true,
+  "local_only": true,
+  "read_only": true,
+  "action_route_created": false,
+  "created_at": "2026-07-19T00:00:00.000Z",
+  "verified_at": "2026-07-20T00:00:00.000Z"
+}
