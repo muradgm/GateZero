@@ -11,6 +11,8 @@
     "approve": "tsx --env-file=.env apps/orchestrator/src/cli.ts approve",
     "reset": "tsx --env-file=.env apps/orchestrator/src/cli.ts reset",
     "doctor": "tsx --env-file=.env apps/orchestrator/src/cli.ts doctor",
+    "normalize:approved": "tsx scripts/normalize-approved-manifest.ts",
+    "verify:approved": "tsx scripts/verify-approved.ts",
     "typecheck": "tsc --noEmit",
     "test": "tsx --env-file=.env --test tests/**/*.test.ts"
   },
