@@ -4,7 +4,7 @@
     "version": "0.2.0",
     "status": "active",
     "createdAt": "2026-07-20T21:39:29.489Z",
-    "updatedAt": "2026-07-21T07:01:02.387Z"
+    "updatedAt": "2026-07-21T07:25:05.440Z"
   },
   "pipelineOrder": [
     "strategy",
@@ -387,8 +387,100 @@
       "approvedAt": "2026-07-21T07:01:02.387Z"
     },
     "modeling-3d": {
-      "status": "pending",
-      "artifacts": []
+      "status": "review",
+      "artifacts": [
+        {
+          "id": "modeling-3d:asset-breakdown:asset-registry",
+          "pipelineId": "modeling-3d",
+          "stageId": "asset-breakdown",
+          "name": "asset-registry",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\asset-registry.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:14:05.109Z"
+        },
+        {
+          "id": "modeling-3d:asset-classification:asset-classification",
+          "pipelineId": "modeling-3d",
+          "stageId": "asset-classification",
+          "name": "asset-classification",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\asset-classification.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:15:22.491Z"
+        },
+        {
+          "id": "modeling-3d:technical-specification:asset-specifications",
+          "pipelineId": "modeling-3d",
+          "stageId": "technical-specification",
+          "name": "asset-specifications",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\asset-specifications.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:16:46.816Z"
+        },
+        {
+          "id": "modeling-3d:generation-plan:generation-plan",
+          "pipelineId": "modeling-3d",
+          "stageId": "generation-plan",
+          "name": "generation-plan",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\generation-plan.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:17:37.748Z"
+        },
+        {
+          "id": "modeling-3d:geometry-cleanup:geometry-cleanup",
+          "pipelineId": "modeling-3d",
+          "stageId": "geometry-cleanup",
+          "name": "geometry-cleanup",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\geometry-cleanup.md",
+          "version": 1,
+          "createdAt": "2026-07-21T07:19:16.152Z"
+        },
+        {
+          "id": "modeling-3d:material-preparation:material-manifest",
+          "pipelineId": "modeling-3d",
+          "stageId": "material-preparation",
+          "name": "material-manifest",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\material-manifest.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:20:48.607Z"
+        },
+        {
+          "id": "modeling-3d:scene-assembly:scene-assembly",
+          "pipelineId": "modeling-3d",
+          "stageId": "scene-assembly",
+          "name": "scene-assembly",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\scene-assembly.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:22:12.175Z"
+        },
+        {
+          "id": "modeling-3d:optimization:optimization-report",
+          "pipelineId": "modeling-3d",
+          "stageId": "optimization",
+          "name": "optimization-report",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\optimization-report.json",
+          "version": 1,
+          "createdAt": "2026-07-21T07:23:18.810Z"
+        },
+        {
+          "id": "modeling-3d:asset-approval:3d-assets-lock",
+          "pipelineId": "modeling-3d",
+          "stageId": "asset-approval",
+          "name": "3d-assets-lock",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\drafts\\modeling-3d\\3d-assets-lock.md",
+          "version": 1,
+          "createdAt": "2026-07-21T07:25:05.440Z"
+        }
+      ],
+      "score": 8.38
     },
     "animation": {
       "status": "pending",
