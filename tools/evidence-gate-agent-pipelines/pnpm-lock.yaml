@@ -28,6 +28,12 @@ importers:
 
   packages/pipelines: {}
 
+  packages/production-adapters:
+    dependencies:
+      '@eg/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/provider: {}
 
   packages/store: {}
