@@ -17,6 +17,17 @@ type OpenAIResponse = {
   }>;
 };
 
+type GeminiResponse = {
+  candidates?: Array<{
+    content?: {
+      parts?: Array<{ text?: string }>;
+    };
+  }>;
+  promptFeedback?: {
+    blockReason?: string;
+  };
+};
+
 export class OllamaProvider implements ModelProvider {
   readonly id: string;
 
@@ -80,6 +91,92 @@ export class OllamaProvider implements ModelProvider {
 
     if (!content) {
       throw new Error(`Ollama model ${this.model} returned an empty response.`);
+    }
+
+    return content;
+  }
+}
+
+export class GeminiProvider implements ModelProvider {
+  readonly id: string;
+
+  constructor(
+    private readonly model = process.env.GEMINI_TEXT_MODEL ?? "gemini-3.5-flash",
+    private readonly apiKey = process.env.GEMINI_API_KEY,
+    private readonly baseUrl = process.env.GEMINI_BASE_URL ??
+      "https://generativelanguage.googleapis.com/v1beta"
+  ) {
+    this.id = `gemini:${this.model}`;
+  }
+
+  async complete(request: ModelRequest): Promise<string> {
+    if (!this.apiKey) {
+      throw new Error("GEMINI_API_KEY is required for the Gemini provider.");
+    }
+
+    const controller = new AbortController();
+    const timeoutMs = Number(process.env.GEMINI_TIMEOUT_MS ?? 5 * 60 * 1000);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    let response: Response;
+
+    try {
+      const endpoint = `${this.baseUrl}/models/${encodeURIComponent(this.model)}:generateContent?key=${encodeURIComponent(this.apiKey)}`;
+      response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [{ text: request.system }]
+          },
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: request.prompt }]
+            }
+          ],
+          generationConfig: {
+            temperature: request.temperature ?? 0.4,
+            maxOutputTokens: Number(process.env.GEMINI_MAX_OUTPUT_TOKENS ?? 1800),
+            responseMimeType:
+              request.responseFormat === "json" ? "application/json" : "text/plain"
+          }
+        })
+      });
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new Error(
+          `Gemini timed out after ${timeoutMs / 1000} seconds while running ${this.model}.`
+        );
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (!response.ok) {
+      const details = await response.text();
+      throw new Error(
+        `Gemini request failed (${response.status} ${response.statusText}): ${details}`
+      );
+    }
+
+    const data = (await response.json()) as GeminiResponse;
+    const content = data.candidates
+      ?.flatMap(candidate => candidate.content?.parts ?? [])
+      .map(part => part.text ?? "")
+      .join("\n")
+      .trim();
+
+    if (!content) {
+      const reason = data.promptFeedback?.blockReason;
+      throw new Error(
+        reason
+          ? `Gemini model ${this.model} returned no content. Block reason: ${reason}.`
+          : `Gemini model ${this.model} returned an empty response.`
+      );
     }
 
     return content;
