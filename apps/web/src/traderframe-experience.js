@@ -1,3 +1,5 @@
+import { mountConvictionAtlasEngine } from "./conviction-atlas-engine.js";
+
 /* global document, matchMedia */
 
 const app = document.querySelector("#traderframe-app");
@@ -45,12 +47,13 @@ app.innerHTML = `
         </div>
       </aside>
 
-      <section class="landscape" aria-labelledby="landscape-title">
+      <section class="landscape is-live" data-active-scenario="rec" aria-labelledby="landscape-title">
         <div class="landscape-heading"><h1 id="landscape-title">The market landscape</h1><p>Multiple paths. Many possibilities.<br />We map the probabilities and reveal the best route.</p></div>
         <div class="input-stack" aria-label="Evidence streams">
           ${inputs.map(([label, color], index) => `<span style="--stream:${color};--row:${index}">${label}<i></i></span>`).join("")}
         </div>
-        <svg class="terrain" viewBox="0 0 1000 600" role="img" aria-label="Abstract market terrain with scenario routes">
+        <canvas class="atlas-canvas" aria-label="Animated market contour field and scenario routes"></canvas>
+        <svg class="terrain" viewBox="0 0 1000 600" role="img" aria-label="Static fallback market terrain with scenario routes">
           <defs>
             <linearGradient id="terrainFade" x1="0" x2="1"><stop stop-color="#0b78ff"/><stop offset=".48" stop-color="#7b4cff"/><stop offset="1" stop-color="#ff8b34"/></linearGradient>
             <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -66,22 +69,22 @@ app.innerHTML = `
             <path class="route route-main" d="M120 360 C300 340, 370 410, 515 355 S705 325, 925 430"/>
           </g>
           <g class="risk-zones"><circle cx="360" cy="440" r="48"/><circle cx="765" cy="470" r="52"/></g>
-          <g class="scenario-nodes">
-            <circle cx="390" cy="165" r="8"/><circle cx="545" cy="205" r="8"/><circle cx="705" cy="190" r="8"/><circle cx="865" cy="360" r="10"/>
-          </g>
+          <g class="scenario-nodes"><circle cx="390" cy="165" r="8"/><circle cx="545" cy="205" r="8"/><circle cx="705" cy="190" r="8"/><circle cx="865" cy="360" r="10"/></g>
         </svg>
-        <div class="scenario-label bull"><b>Bull case</b><span>28%</span></div>
-        <div class="scenario-label side"><b>Sideways</b><span>18%</span></div>
-        <div class="scenario-label bear"><b>Bear case</b><span>22%</span></div>
-        <div class="scenario-label rec"><b>Recommended path</b><span>62%</span></div>
+        <button class="scenario-label bull" type="button" data-scenario="bull" aria-pressed="false"><b>Bull case</b><span>28%</span></button>
+        <button class="scenario-label side" type="button" data-scenario="side" aria-pressed="false"><b>Sideways</b><span>18%</span></button>
+        <button class="scenario-label bear" type="button" data-scenario="bear" aria-pressed="false"><b>Bear case</b><span>22%</span></button>
+        <button class="scenario-label rec" type="button" data-scenario="rec" aria-pressed="true"><b>Recommended path</b><span>62%</span></button>
         <div class="risk-label risk-a">△ High risk zone</div><div class="risk-label risk-b">△ High risk zone</div>
+        <div class="atlas-live-state" aria-live="polite"><i></i><span>Live contour engine · Recommended path selected</span></div>
+        <div class="atlas-controls"><button class="atlas-control" type="button" data-action="pause" aria-pressed="false">Pause motion</button></div>
       </section>
 
       <aside class="decision-rail">
-        <article class="metric-card thesis"><span>Current thesis</span><div><strong>Moderately Bullish</strong><b>62%</b></div><small>Bias · Confidence</small></article>
+        <article class="metric-card thesis" data-scenario-tone="rec"><span>Current thesis</span><div><strong data-thesis>Moderately Bullish</strong><b data-confidence>62%</b></div><small>Bias · Confidence</small></article>
         <article class="metric-card"><span>Key drivers</span><ul>${drivers.map(([label, value, tone]) => `<li><i></i><span>${label}</span><b class="${tone}">${value}</b></li>`).join("")}</ul></article>
-        <article class="metric-card risk"><span>Risk overview</span><div class="gauge"><b>38</b><small>/100</small></div><strong>Moderate Risk</strong><p>Position sizing recommended<br />Small to Moderate</p></article>
-        <article class="metric-card recommendation"><span>Recommendation</span><strong>Conditional long</strong><div><small>Timeframe<br /><b>1D – 1W</b></small><small>Invalidate if<br /><b>Below 1.2360</b></small></div></article>
+        <article class="metric-card risk"><span>Risk overview</span><div class="gauge"><b data-risk>38</b><small>/100</small></div><strong data-risk-label>Moderate Risk</strong><p>Position sizing recommended<br />Small to Moderate</p></article>
+        <article class="metric-card recommendation"><span>Recommendation</span><strong data-recommendation>Conditional long</strong><div><small>Timeframe<br /><b>1D – 1W</b></small><small>Invalidate if<br /><b>Below 1.2360</b></small></div></article>
       </aside>
     </section>
 
@@ -98,4 +101,49 @@ app.innerHTML = `
   </main>
 `;
 
-if (matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reduced-motion");
+const landscape = document.querySelector(".landscape");
+const canvas = document.querySelector(".atlas-canvas");
+const thesisCard = document.querySelector(".metric-card.thesis");
+const thesis = document.querySelector("[data-thesis]");
+const confidence = document.querySelector("[data-confidence]");
+const risk = document.querySelector("[data-risk]");
+const riskLabel = document.querySelector("[data-risk-label]");
+const recommendation = document.querySelector("[data-recommendation]");
+const liveState = document.querySelector(".atlas-live-state span");
+const pauseButton = document.querySelector("[data-action=pause]");
+const scenarioButtons = [...document.querySelectorAll("[data-scenario]")];
+
+const engine = mountConvictionAtlasEngine({
+  canvas,
+  root: landscape,
+  onScenarioChange: updateScenarioState
+});
+
+scenarioButtons.forEach((button) => {
+  button.addEventListener("click", () => engine.setScenario(button.dataset.scenario));
+});
+
+pauseButton?.addEventListener("click", () => {
+  const paused = pauseButton.getAttribute("aria-pressed") !== "true";
+  pauseButton.setAttribute("aria-pressed", String(paused));
+  pauseButton.textContent = paused ? "Resume motion" : "Pause motion";
+  engine.setPaused(paused);
+});
+
+function updateScenarioState(scenario) {
+  scenarioButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.scenario === scenario.id)));
+  if (thesis) thesis.textContent = scenario.bias;
+  if (confidence) confidence.textContent = `${scenario.probability}%`;
+  if (risk) risk.textContent = String(scenario.risk);
+  if (riskLabel) riskLabel.textContent = scenario.risk >= 60 ? "High Risk" : scenario.risk >= 35 ? "Moderate Risk" : "Controlled Risk";
+  if (recommendation) recommendation.textContent = scenario.id === "bear" ? "Stand aside" : scenario.id === "side" ? "Wait for confirmation" : scenario.id === "bull" ? "Selective long" : "Conditional long";
+  if (liveState) liveState.textContent = `Live contour engine · ${scenario.label} selected`;
+  thesisCard?.setAttribute("data-scenario-tone", scenario.id);
+}
+
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.documentElement.classList.add("reduced-motion");
+  pauseButton?.setAttribute("aria-pressed", "true");
+  if (pauseButton) pauseButton.textContent = "Motion reduced";
+  engine.setPaused(true);
+}
