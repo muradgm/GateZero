@@ -1,0 +1,417 @@
+{
+  "project": {
+    "id": "traderframe-evidence-gate",
+    "version": "0.2.0",
+    "status": "active",
+    "createdAt": "2026-07-20T21:39:29.489Z",
+    "updatedAt": "2026-07-21T07:01:02.387Z"
+  },
+  "pipelineOrder": [
+    "strategy",
+    "concept-art",
+    "storyboard",
+    "design-system",
+    "modeling-3d",
+    "animation",
+    "shader-vfx",
+    "implementation",
+    "qa"
+  ],
+  "pipelines": {
+    "strategy": {
+      "status": "approved",
+      "artifacts": [
+        {
+          "id": "strategy:product-intelligence:product-intelligence",
+          "pipelineId": "strategy",
+          "stageId": "product-intelligence",
+          "name": "product-intelligence",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\product-intelligence.json",
+          "version": 1,
+          "createdAt": "2026-07-20T21:41:25.436Z"
+        },
+        {
+          "id": "strategy:audience-analysis:audience-analysis",
+          "pipelineId": "strategy",
+          "stageId": "audience-analysis",
+          "name": "audience-analysis",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\audience-analysis.json",
+          "version": 1,
+          "createdAt": "2026-07-20T21:42:29.544Z"
+        },
+        {
+          "id": "strategy:brand-extraction:brand-principles",
+          "pipelineId": "strategy",
+          "stageId": "brand-extraction",
+          "name": "brand-principles",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\brand-principles.json",
+          "version": 1,
+          "createdAt": "2026-07-20T21:43:23.587Z"
+        },
+        {
+          "id": "strategy:message-hierarchy:message-hierarchy",
+          "pipelineId": "strategy",
+          "stageId": "message-hierarchy",
+          "name": "message-hierarchy",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\message-hierarchy.json",
+          "version": 1,
+          "createdAt": "2026-07-20T21:43:43.121Z"
+        },
+        {
+          "id": "strategy:narrative-strategy:narrative-strategy",
+          "pipelineId": "strategy",
+          "stageId": "narrative-strategy",
+          "name": "narrative-strategy",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\narrative-strategy.md",
+          "version": 1,
+          "createdAt": "2026-07-20T21:45:21.605Z"
+        },
+        {
+          "id": "strategy:strategic-critique:strategy-scorecard",
+          "pipelineId": "strategy",
+          "stageId": "strategic-critique",
+          "name": "strategy-scorecard",
+          "kind": "scorecard",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\strategy-scorecard.json",
+          "version": 1,
+          "createdAt": "2026-07-20T21:46:46.833Z"
+        },
+        {
+          "id": "strategy:strategy-approval:strategy-brief",
+          "pipelineId": "strategy",
+          "stageId": "strategy-approval",
+          "name": "strategy-brief",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\strategy-brief.md",
+          "version": 1,
+          "createdAt": "2026-07-20T21:48:23.528Z"
+        }
+      ],
+      "score": 8.78,
+      "approvedAt": "2026-07-20T21:49:13.464Z"
+    },
+    "concept-art": {
+      "status": "approved",
+      "artifacts": [
+        {
+          "id": "concept-art:brand-analysis:visual-principles",
+          "pipelineId": "concept-art",
+          "stageId": "brand-analysis",
+          "name": "visual-principles",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\visual-principles.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.175Z"
+        },
+        {
+          "id": "concept-art:metaphor-generation:metaphor-library",
+          "pipelineId": "concept-art",
+          "stageId": "metaphor-generation",
+          "name": "metaphor-library",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\metaphor-library.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.176Z"
+        },
+        {
+          "id": "concept-art:metaphor-clustering:metaphor-clusters",
+          "pipelineId": "concept-art",
+          "stageId": "metaphor-clustering",
+          "name": "metaphor-clusters",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\metaphor-clusters.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.177Z"
+        },
+        {
+          "id": "concept-art:direction-generation:concept-directions",
+          "pipelineId": "concept-art",
+          "stageId": "direction-generation",
+          "name": "concept-directions",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\concept-directions.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.178Z"
+        },
+        {
+          "id": "concept-art:direction-critique:direction-scorecard",
+          "pipelineId": "concept-art",
+          "stageId": "direction-critique",
+          "name": "direction-scorecard",
+          "kind": "scorecard",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\direction-scorecard.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.178Z"
+        },
+        {
+          "id": "concept-art:direction-selection:selected-direction",
+          "pipelineId": "concept-art",
+          "stageId": "direction-selection",
+          "name": "selected-direction",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\selected-direction.md",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.179Z"
+        },
+        {
+          "id": "concept-art:art-direction:art-direction",
+          "pipelineId": "concept-art",
+          "stageId": "art-direction",
+          "name": "art-direction",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\art-direction.md",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.179Z"
+        },
+        {
+          "id": "concept-art:prompt-builder:prompt-pack",
+          "pipelineId": "concept-art",
+          "stageId": "prompt-builder",
+          "name": "prompt-pack",
+          "kind": "prompt-pack",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\prompt-pack.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.180Z"
+        },
+        {
+          "id": "concept-art:output-critique:output-critique",
+          "pipelineId": "concept-art",
+          "stageId": "output-critique",
+          "name": "output-critique",
+          "kind": "scorecard",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\output-critique.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.180Z"
+        },
+        {
+          "id": "concept-art:concept-approval:concept-lock",
+          "pipelineId": "concept-art",
+          "stageId": "concept-approval",
+          "name": "concept-lock",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\concept-lock.md",
+          "version": 2,
+          "createdAt": "2026-07-20T22:41:03.181Z"
+        }
+      ],
+      "score": 8.59,
+      "approvedAt": "2026-07-20T22:41:03.181Z"
+    },
+    "storyboard": {
+      "status": "approved",
+      "artifacts": [
+        {
+          "id": "storyboard:narrative-decomposition:narrative-beats",
+          "pipelineId": "storyboard",
+          "stageId": "narrative-decomposition",
+          "name": "narrative-beats",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\narrative-beats.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.461Z"
+        },
+        {
+          "id": "storyboard:interaction-mapping:interaction-map",
+          "pipelineId": "storyboard",
+          "stageId": "interaction-mapping",
+          "name": "interaction-map",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\interaction-map.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.462Z"
+        },
+        {
+          "id": "storyboard:shot-generation:shot-list",
+          "pipelineId": "storyboard",
+          "stageId": "shot-generation",
+          "name": "shot-list",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\shot-list.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.471Z"
+        },
+        {
+          "id": "storyboard:camera-language:camera-language",
+          "pipelineId": "storyboard",
+          "stageId": "camera-language",
+          "name": "camera-language",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\camera-language.md",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.472Z"
+        },
+        {
+          "id": "storyboard:sequence-assembly:sequence",
+          "pipelineId": "storyboard",
+          "stageId": "sequence-assembly",
+          "name": "sequence",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\sequence.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.473Z"
+        },
+        {
+          "id": "storyboard:timing-design:timing-sheet",
+          "pipelineId": "storyboard",
+          "stageId": "timing-design",
+          "name": "timing-sheet",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\timing-sheet.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.473Z"
+        },
+        {
+          "id": "storyboard:continuity-critique:continuity-scorecard",
+          "pipelineId": "storyboard",
+          "stageId": "continuity-critique",
+          "name": "continuity-scorecard",
+          "kind": "scorecard",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\continuity-scorecard.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.474Z"
+        },
+        {
+          "id": "storyboard:reduced-motion:reduced-motion-storyboard",
+          "pipelineId": "storyboard",
+          "stageId": "reduced-motion",
+          "name": "reduced-motion-storyboard",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\reduced-motion-storyboard.json",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.474Z"
+        },
+        {
+          "id": "storyboard:storyboard-approval:storyboard-lock",
+          "pipelineId": "storyboard",
+          "stageId": "storyboard-approval",
+          "name": "storyboard-lock",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\storyboard-lock.md",
+          "version": 2,
+          "createdAt": "2026-07-20T22:59:31.475Z"
+        }
+      ],
+      "score": 8.79,
+      "approvedAt": "2026-07-20T22:59:31.475Z"
+    },
+    "design-system": {
+      "status": "approved",
+      "artifacts": [
+        {
+          "id": "design-system:interface-inventory:interface-inventory",
+          "pipelineId": "design-system",
+          "stageId": "interface-inventory",
+          "name": "interface-inventory",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\interface-inventory.json",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.381Z"
+        },
+        {
+          "id": "design-system:information-architecture:information-architecture",
+          "pipelineId": "design-system",
+          "stageId": "information-architecture",
+          "name": "information-architecture",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\information-architecture.json",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.382Z"
+        },
+        {
+          "id": "design-system:token-generation:tokens",
+          "pipelineId": "design-system",
+          "stageId": "token-generation",
+          "name": "tokens",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\tokens.json",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.384Z"
+        },
+        {
+          "id": "design-system:component-architecture:components",
+          "pipelineId": "design-system",
+          "stageId": "component-architecture",
+          "name": "components",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\components.json",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.384Z"
+        },
+        {
+          "id": "design-system:state-design:component-states",
+          "pipelineId": "design-system",
+          "stageId": "state-design",
+          "name": "component-states",
+          "kind": "json",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\component-states.json",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.385Z"
+        },
+        {
+          "id": "design-system:2d-3d-integration:2d-3d-integration",
+          "pipelineId": "design-system",
+          "stageId": "2d-3d-integration",
+          "name": "2d-3d-integration",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\2d-3d-integration.md",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.386Z"
+        },
+        {
+          "id": "design-system:accessibility-review:accessibility-spec",
+          "pipelineId": "design-system",
+          "stageId": "accessibility-review",
+          "name": "accessibility-spec",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\accessibility-spec.md",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.386Z"
+        },
+        {
+          "id": "design-system:design-approval:design-system-lock",
+          "pipelineId": "design-system",
+          "stageId": "design-approval",
+          "name": "design-system-lock",
+          "kind": "markdown",
+          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\design-system-lock.md",
+          "version": 2,
+          "createdAt": "2026-07-21T07:01:02.387Z"
+        }
+      ],
+      "score": 8.77,
+      "approvedAt": "2026-07-21T07:01:02.387Z"
+    },
+    "modeling-3d": {
+      "status": "pending",
+      "artifacts": []
+    },
+    "animation": {
+      "status": "pending",
+      "artifacts": []
+    },
+    "shader-vfx": {
+      "status": "pending",
+      "artifacts": []
+    },
+    "implementation": {
+      "status": "pending",
+      "artifacts": []
+    },
+    "qa": {
+      "status": "pending",
+      "artifacts": []
+    }
+  },
+  "constraints": {
+    "targetFpsDesktop": 60,
+    "targetFpsMobile": 30,
+    "maxInitialDownloadMb": 4,
+    "reducedMotionRequired": true,
+    "mobileFallbackRequired": true
+  }
+}

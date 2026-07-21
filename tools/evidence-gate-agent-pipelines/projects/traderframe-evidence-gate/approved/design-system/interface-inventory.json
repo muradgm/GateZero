@@ -1,0 +1,173 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Interface Inventory",
+  "objective": "Identify all UI components and information surfaces",
+  "components": {
+    "navigation": {
+      "primary": {
+        "components": [
+          "Header",
+          "Sidebar",
+          "Breadcrumb",
+          "Global search"
+        ],
+        "design_principles": [
+          "Calm precision",
+          "User control"
+        ]
+      },
+      "secondary": {
+        "components": [
+          "Quick access panel",
+          "Notification center",
+          "Settings panel",
+          "Help overlay"
+        ],
+        "design_principles": [
+          "User control",
+          "Risk awareness"
+        ]
+      }
+    },
+    "content_surfaces": {
+      "main": {
+        "components": [
+          "3D Narrative Canvas",
+          "Evidence Timeline",
+          "Market Context Layer",
+          "Decision Workspace"
+        ],
+        "design_principles": [
+          "Evidence first",
+          "Transparent reasoning"
+        ]
+      },
+      "modals": {
+        "components": [
+          "Evidence Review Modal",
+          "Risk Assessment Modal",
+          "Approval Workflow Modal",
+          "Annotation Panel"
+        ],
+        "design_principles": [
+          "Evidence first",
+          "Calm precision"
+        ]
+      },
+      "panels": {
+        "components": [
+          "Evidence Filter Panel",
+          "Risk Dashboard",
+          "Transaction Log",
+          "Performance Metrics"
+        ],
+        "design_principles": [
+          "Risk awareness",
+          "User control"
+        ]
+      }
+    },
+    "interaction": {
+      "components": [
+        "Drag-and-drop evidence nodes",
+        "Timeline scrubbing",
+        "3D object manipulation",
+        "Annotation tools"
+      ],
+      "design_principles": [
+        "Calm precision",
+        "User control"
+      ]
+    },
+    "feedback": {
+      "components": [
+        "Status indicators",
+        "Progress bars",
+        "Validation feedback",
+        "Error alerts"
+      ],
+      "design_principles": [
+        "Risk awareness",
+        "Transparent reasoning"
+      ]
+    },
+    "accessibility": {
+      "contrast_ratio": "4.5:1",
+      "focus_outline": "2px solid #007BFF",
+      "keyboard_focus": true,
+      "aria_labels": true,
+      "screen_reader_support": true,
+      "high_contrast_mode": true
+    },
+    "tokens": {
+      "color": {
+        "primary": "#007BFF",
+        "secondary": "#6C757D",
+        "success": "#28A745",
+        "danger": "#DC3545",
+        "warning": "#FFC107",
+        "info": "#17A2B8",
+        "light": "#F8F9FA",
+        "dark": "#343A40"
+      },
+      "typography": {
+        "font_family": "Inter, sans-serif",
+        "font_weight": "400",
+        "line_height": "1.5",
+        "letter_spacing": "0.05em"
+      },
+      "spacing": {
+        "xs": "0.25rem",
+        "sm": "0.5rem",
+        "md": "1rem",
+        "lg": "1.5rem",
+        "xl": "2rem"
+      },
+      "radius": {
+        "xs": "0.2rem",
+        "sm": "0.3rem",
+        "md": "0.5rem",
+        "lg": "0.75rem",
+        "xl": "1rem"
+      },
+      "shadow": {
+        "sm": "0 1px 2px 0 rgba(0,0,0,0.1)",
+        "md": "0 2px 4px 0 rgba(0,0,0,0.15)",
+        "lg": "0 4px 8px 0 rgba(0,0,0,0.2)"
+      },
+      "elevation": {
+        "base": "0",
+        "low": "1",
+        "medium": "2",
+        "high": "3"
+      }
+    },
+    "design_guidelines": {
+      "visual_hierarchy": "Evidence > Context > Decision",
+      "flow": "Evidence filtering → Challenge → Approval → Recording",
+      "interaction": "Calm, precise, and intuitive",
+      "risk_callout": "Visible and actionable risk indicators",
+      "user_control": "All actions are reversible or confirmable"
+    }
+  },
+  "notes": {
+    "implementation": "All components are designed for 3D spatial interaction. Tokens and accessibility are aligned with upstream design system for consistency.",
+    "branding": "Brand principles are embedded in all interaction patterns and visual hierarchy.",
+    "risk": "Risk awareness is a core design principle, with clear indicators and actionable feedback."
+  }
+}

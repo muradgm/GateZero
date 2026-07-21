@@ -1,0 +1,65 @@
+{
+  "VisualConcept": {
+    "Name": "Evidence Gate",
+    "VisualPrinciples": [
+      {
+        "Name": "Evidence Flow",
+        "Description": "Visualize the journey of market evidence through the TraderFrame system. Use a clean, linear path with nodes representing stages: Capture, Filter, Challenge, Approve, Record. Each node should reflect the brand’s principles, with color and motion indicating the transformation of raw data into actionable insight."
+      },
+      {
+        "Name": "Transparency Layer",
+        "Description": "Implement a layered visual metaphor where each stage of the evidence process is transparent, allowing users to see the internal logic and reasoning. Use semi-transparent overlays with subtle animations to show the evolution of evidence from raw to refined."
+      },
+      {
+        " ": "Description"
+      },
+      {
+        "Name": "User Control",
+        "Description": "Incorporate interactive elements that allow users to manipulate the flow of evidence. Use sliders, toggle switches, and drag-and-drop interfaces to represent user influence over the decision process. Visual feedback should reflect real-time changes in risk and conviction."
+      },
+      {
+        "Name": "Risk Awareness",
+        "Description": "Integrate a risk indicator system that visually represents the level of risk associated with each decision. Use color gradients (e.g., green for low risk, red for high risk) and dynamic visual cues (e.g., warning icons, risk bars) to guide user perception."
+      },
+      {
+        "Name": "Calm Precision",
+        "Description": "Maintain a clean, minimalistic aesthetic with precise, deliberate motion. Use soft transitions, controlled animations, and a neutral color palette to reflect the brand’s calm and precise nature. Avoid clutter and ensure every visual element serves a functional purpose."
+      }
+    ],
+    "VisualAssets": {
+      "ColorPalette": {
+        "Primary": "#1E1E2F",
+        "Secondary": "#4A90E2",
+        "Accent": "#FF6B6B",
+        "Neutral": "#F5F5F5",
+        "Warning": "#FF4B4B"
+      },
+      "Typography": {
+        "PrimaryFont": "Inter",
+        "SecondaryFont": "Roboto",
+        "Weights": {
+          "Body": "400",
+          "Heading": "700"
+        }
+      },
+      "Icons": {
+        "Capture": "📷",
+        "Filter": "🔍",
+        "Challenge": "⚔️",
+        "Approve": "✅",
+        "Record": "📝"
+      },
+      "Motion": {
+        "TransitionSpeed": "0.3s",
+        "Easing": "ease-in-out"
+      }
+    },
+    "ImplementationNotes": [
+      "Use a 3D environment to represent the evidence flow, with each stage as a modular node.",
+      "Ensure interactivity is intuitive and aligns with the user’s control over the decision process.",
+      "Risk indicators should be clearly visible and update dynamically based on user input.",
+      "Maintain a consistent visual language across all stages to reinforce brand identity.",
+      "Avoid overcomplication; prioritize clarity and precision in all visual elements."
+    ]
+  }
+}

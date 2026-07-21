@@ -1,0 +1,74 @@
+{
+  "sequence": {
+    "title": "TraderFrame - Evidence Gate",
+    "description": "A premium interactive 3D narrative that demonstrates TraderFrame's evidence-first decision process. The sequence shows how fragmented market evidence is filtered, challenged, approved, and recorded transparently to form credible market conviction.",
+    "brand_principles": [
+      "Evidence first",
+      "Transparent reasoning",
+      "User control",
+      "Risk awareness",
+      "Calm precision"
+    ],
+    "sequence_steps": [
+      {
+        "shot_id": "S01",
+        "title": "The Fragmented Market",
+        "description": "A chaotic visual representation of fragmented market data—news tickers, price charts, social media sentiment, and analyst reports—flooding the screen. The user is shown as a trader in a high-stakes environment, overwhelmed by the volume of information.",
+        "duration": "10",
+        "interaction": "User can click on any data point to see its source and relevance.",
+        "brand_principle": "Evidence first"
+      },
+      {
+        "shot_id": "S02",
+        "title": "Filtering the Noise",
+        "description": "The screen transitions to a clean, structured interface where the user filters the data through a series of logical steps—timeframe, source credibility, and relevance. The interface highlights key evidence with visual indicators.",
+        "duration": "12",
+        "interaction": "User can toggle filters and see real-time impact on data visibility.",
+        "brand_principle": "Transparent reasoning"
+      },
+      {
+        "shot_id": "S03",
+        "title": "Challenging the Evidence",
+        "description": "The user is shown engaging with a challenge panel where they can question the validity of each piece of evidence. A counterpoint appears, and the user can choose to accept, reject, or refine the evidence with additional data.",
+        "duration": "15",
+        "interaction": "User can select and modify evidence with real-time feedback.",
+        "brand_principle": "User control"
+      },
+      {
+        "shot_id": "S04",
+        ",": "title",
+        "Approving the Evidence": "",
+        "description": "The interface transitions to a confirmation panel where the user reviews the final set of approved evidence. Each item is visually marked with a 'verified' badge, and the user can see the full chain of reasoning that led to the approval.",
+        "duration": "12",
+        "interaction": "User can view the full reasoning chain and export the evidence.",
+        "brand_principle": "Transparent reasoning"
+      },
+      {
+        "shot": "S05",
+        "title": "Recording the Decision",
+        "description": "The user is shown creating a structured decision record—complete with time-stamped evidence, reasoning, and risk assessment. The interface visually represents the decision as a 'decision tree' with branches for risk scenarios and outcomes.",
+        "duration": "14",
+        "interaction": "User can save, share, or export the decision record.",
+        "brand_principle": "Risk awareness"
+      },
+      {
+        "shot_id": "S06",
+        "title": "Market Conviction",
+        "description": "The final shot shows the user's decision being implemented in the market. A clean, calm interface displays the trade execution, with real-time performance metrics and a visual representation of the decision's impact on risk and reward.",
+        "duration": "10",
+        "interaction": "User can view performance analytics and adjust the decision if needed.",
+        "brand_principle": "Calm precision"
+      }
+    ],
+    "timing": {
+      "total_duration": "73",
+      "intro": "S01",
+      "core": "S02, S03, S04, S05",
+      "conclusion": "S06"
+    },
+    "call_to_action": {
+      "prompt": "Explore the full sequence to experience TraderFrame's evidence-first decision process in action.",
+      "button_text": "Start the Sequence"
+    }
+  }
+}

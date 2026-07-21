@@ -1,0 +1,103 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "A private trading decision-intelligence experience that transforms fragmented market evidence into explainable, risk-aware decisions.",
+  "audience": "Independent traders, Portfolio managers, Research-led market participants",
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative.",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Narrative Decomposition",
+  "objective": "Break the concept into narrative beats",
+  "narrative_beats": [
+    {
+      "beat": "Opening Scene - The Market's Noise",
+      "description": "A visually dense 3D environment representing the chaotic, fragmented nature of financial markets. Data streams, news alerts, and conflicting signals swirl around the viewer. The tone is tense and overwhelming.",
+      "duration": "0:00 - 0:30",
+      "tone": "Chaotic, overwhelming",
+      "key_elements": [
+        "Data streams",
+        "News alerts",
+        "Conflicting signals",
+        "Visual clutter"
+      ]
+    },
+    {
+      "beat": "Introducing the Trader",
+      "description": "A trader (or portfolio manager) enters the environment, navigating through the chaos with a calm, focused demeanor. They are shown interacting with the system, filtering and organizing the data.",
+      "duration": "0:30 - 1:00",
+      "tone": "Focused, controlled",
+      "key_elements": [
+        "Trader entering the space",
+        "Data filtering interface",
+        "Focus on clarity"
+      ]
+    },
+    {
+      "beat": "The Evidence Gate - First Challenge",
+      "description": "The trader encounters a gate labeled 'Evidence Gate'. It requires them to validate a piece of market evidence before proceeding. The system presents conflicting data points and asks the trader to assess their credibility.",
+      "duration": "1:00 - 1:45",
+      "tone": "Analytical, methodical",
+      "key_elements": [
+        "Evidence Gate interface",
+        "Conflicting data points",
+        "Credibility assessment prompt"
+      ]
+    },
+    {
+      "": "",
+      "description": "The trader reviews the evidence, challenges its validity, and engages with a system that provides context, sources, and historical data. This reinforces the 'transparent reasoning' brand principle.",
+      "duration": "1:45 - 2:30",
+      "tone": "Inquisitive, analytical",
+      "key_elements": [
+        "Evidence review",
+        "Contextual data",
+        "Source verification"
+      ]
+    },
+    {
+      "beat": "Approval and Recording",
+      "description": "Once the trader is satisfied with the evidence, they approve it and the system records the decision in a transparent, auditable format. This reinforces the 'user control' and 'risk awareness' principles.",
+      "duration": "2:30 - 3:15",
+      "tone": "Calm, confident",
+      "key_elements": [
+        "Approval confirmation",
+        "Recorded decision",
+        "Audit trail"
+      ]
+    },
+    {
+      "beat": "Decision Made - The Outcome",
+      "description": "The trader's decision is executed, and the market reacts. The system shows the outcome in real-time, but with a focus on the decision-making process rather than just the result. This reinforces the 'evidence first' and 'risk awareness' principles.",
+      "duration": "3:15 - 4:00",
+      "tone": "Reflective, results-oriented",
+      "key_elements": [
+        "Real-time market reaction",
+        "Decision impact visualization",
+        "Outcome analysis"
+      ]
+    },
+    {
+      "beat": "Closing Scene - The Trader's Perspective",
+      "description": "The trader steps back, reviewing the entire process. The system highlights the key steps taken, reinforcing the 'transparent reasoning' and 'user control' principles. The scene ends with a calm, confident tone, emphasizing the power of evidence-driven decision-making.",
+      "duration": "4:00 - 4:30",
+      "tone": "Calm, confident",
+      "key_elements": [
+        "Process review",
+        "Key steps highlighted",
+        "Calm conclusion"
+      ]
+    }
+  ],
+  "implementation_notes": [
+    "Use a 3D environment with dynamic data visualization to represent market noise.",
+    "Integrate interactive elements for evidence filtering, challenge, and approval.",
+    "Ensure all steps are clearly visualized and aligned with brand principles.",
+    "Maintain a consistent tone throughout the narrative to reflect 'calm precision'.",
+    "Include real-time market reaction visuals to reinforce the outcome of evidence-driven decisions."
+  ]
+}

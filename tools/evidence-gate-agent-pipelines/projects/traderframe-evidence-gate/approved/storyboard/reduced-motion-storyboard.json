@@ -1,0 +1,71 @@
+{
+  "title": "TraderFrame — Evidence Gate",
+  "stage": "Reduced Motion Storyboard",
+  "objective": "Create a reduced-motion interactive cinematic experience that demonstrates TraderFrame's evidence-first decision process.",
+  "brand_principles": [
+    "Evidence First",
+    "Transparent Reasoning",
+    "User Control",
+    "Risk Awareness",
+    "Calm Precision"
+  ],
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+  "audience": [
+    "Independent Traders",
+    "Portfolio Managers",
+    "Research-Led Market Participants"
+  ],
+  "product": "TraderFrame — A private trading decision-intelligence experience that transforms fragmented market evidence into explainable, risk-aware decisions.",
+  "storyboard": [
+    {
+      "scene": "Scene 01 - The Fragmented Market",
+      "description": "A visual representation of fragmented market data — news clips, charts, trade flows, social sentiment — all floating in a chaotic, dimly lit space. The camera slowly pans across the data, emphasizing the noise and lack of clarity.",
+      "motion": "Reduced motion: slow pan, no zoom, no animation.",
+      "sound": "Ambient noise with low-frequency hum, representing market noise.",
+      "interaction": "User can click on any data point to reveal a brief summary, but no action is taken."
+    },
+    {
+      "scene": "Scene 02 - The Gate Opens",
+      "description": "A central gate appears, glowing with a soft blue light. It is labeled 'Evidence Gate.' The gate is a visual metaphor for the decision-making process. The camera slowly approaches it.",
+      "motion": "Reduced motion: slow approach, no animation.",
+      "sound": "Soft chime, signaling the start of the process.",
+      "interaction": "User can click on the gate to initiate the process."
+    },
+    {
+      "scene": "Scene 03 - Filtering the Evidence",
+      "description": "The gate opens, revealing a transparent interface. Data points are filtered through a series of logical steps: relevance, credibility, and timeliness. Each data point is visually tagged and categorized.",
+      "motion": "Reduced motion: static interface with subtle transitions between categories.",
+      "sound": "Subtle data processing sounds, like a soft 'click' for each filter step.",
+      "interaction": "User can select a filter category to view the filtered data."
+    },
+    {
+      "scene": "Scene 04 - Challenging the Evidence",
+      "description": "A panel appears, displaying a challenge mechanism. Users can question the credibility of a data point, and the system responds with counter-evidence or sources. A visual 'challenge' icon appears next to each point.",
+      "motion": "Reduced motion: static panel with icons, no animation.",
+      "sound": "Soft 'ding' for each challenge, with a brief pause for user response.",
+      "interaction": "User can click on a challenge icon to view supporting or refuting evidence."
+    },
+    {
+      "scene": "Scene 05 - Approval and Recording",
+      "description": "The filtered and challenged data is now marked as 'approved.' A final confirmation panel appears, showing the approved evidence, along with a risk assessment. The user can choose to record the decision in a secure log.",
+      "motion": "Reduced motion: static confirmation panel, no animation.",
+      "sound": "Soft 'confirmation' chime and a brief tone for recording.",
+      "interaction": "User can click to record the decision or view the risk summary."
+    },
+    {
+      "scene": "Scene 06 - The Decision Made",
+      "description": "The final screen shows a clean, structured decision summary. The user has full control over the outcome, with a clear risk-aware message. The screen fades to a calm, precise closing message: 'Evidence First. Decisions Made.'",
+      "motion": "Reduced motion: fade-in and fade-out, no animation.",
+      "sound": "Soft, calm ambient tone, signaling the end of the process.",
+      "interaction": "No interaction required; the experience ends."
+    }
+  ],
+  "technical_notes": {
+    "platform": "Web-based interactive 3D experience (VR or desktop)",
+    "duration": "Approximately 2 minutes",
+    "interactivity": "User can select, filter, challenge, and record evidence at each stage",
+    "accessibility": "Keyboard navigation and screen reader compatibility",
+    "branding": "Visual identity consistent with TraderFrame's brand: clean, precise, and evidence-based"
+  },
+  "implementation_ready": true
+}

@@ -1,0 +1,50 @@
+{
+  "timing_design": {
+    "intro": {
+      "duration": "0:00 - 0:10",
+      "content": "Opening scene: A dimly lit trading room with a single screen displaying fragmented market data. The camera slowly pans across the screen, revealing streams of news, charts, and trade signals. A low, ambient hum of market activity fills the background.",
+      "purpose": "Establish the chaotic, fragmented nature of market evidence."
+    },
+    "scene_1": {
+      "duration": "0:10 - 0:30",
+      "content": "A trader (user) sits at a desk, surrounded by multiple monitors. They begin to filter data using TraderFrame's interface, sorting through news, charts, and sentiment analysis. The interface highlights key evidence with visual cues.",
+      "purpose": "Introduce the filtering process and the interface as a tool for clarity."
+    },
+    "scene_2": {
+      "duration": "0:30 - 0:50",
+      "content": "The trader challenges the filtered evidence by comparing it with historical data and alternative viewpoints. The screen shows a split view: current data vs. historical context. A subtle animation shows the trader questioning the data visually.",
+      "purpose": "Demonstrate the challenge phase of the decision process."
+    },
+    "scene_3": {
+      "duration": "0:50 - 1:10",
+      "content": "The trader reviews the evidence with a team (or AI assistant) in a collaborative workspace. They approve the evidence, and the system logs the approval with a timestamp and justification. A visual confirmation appears: 'Evidence Approved – Reasoning Recorded.'",
+      "purpose": "Show the approval and recording of reasoning as part of the process."
+    },
+    "scene_4": {
+      "duration": "1:10 - 1:30",
+      "content": "The trader makes a decision, visualized as a trade being executed. The system overlays a risk assessment panel showing potential outcomes, volatility, and confidence levels. The trader confirms the trade with a final click.",
+      "purpose": "Show the final decision being made with risk awareness."
+    },
+    "scene_5": {
+      "duration": "1:30 - 1:50",
+      "content": "A dashboard view appears, showing the trade in context: profit/loss, risk metrics, and the full chain of evidence that led to the decision. The trader reviews the full history of the decision process, from filtering to recording.",
+      "purpose": "Demonstrate transparency and the full evidence trail."
+    },
+    "scene_6": {
+      "duration": "1:50 - 2:00",
+      "content": "Closing scene: The trader looks up, satisfied. The screen fades to a logo: TraderFrame – Evidence First. A soft, calm sound of a ticking clock fades in, symbolizing precision and control.",
+      "purpose": "Reinforce the brand principles and leave the viewer with a sense of calm precision."
+    }
+  },
+  "timing_summary": {
+    "total_duration": "2:00",
+    "structure": "Intro (0:00–0:10) → Filtering (0:10–0:30) → Challenging (0:30–0:50) → Approval (0:50–1:10) → Decision (1:10–1:30) → Transparency (1:30–1:50) → Closing (1:50–2:00)"
+  },
+  "brand_alignment": {
+    "evidence_first": "Visible throughout the process, from filtering to recording.",
+    "transparent_reasoning": "Displayed in the approval and dashboard scenes.",
+    "user_control": "Emphasized in the filtering and decision-making phases.",
+    "risk_awareness": "Integrated into the decision and dashboard scenes.",
+    "calm_precision": "Reinforced in the closing scene and throughout the visual tone."
+  }
+}

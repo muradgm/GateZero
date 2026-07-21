@@ -1,0 +1,55 @@
+{
+  "stage": "Continuity Critique",
+  "objective": "Review spatial continuity and cognitive load",
+  "product": "TraderFrame — Evidence Gate",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "implementation_ready": true,
+  "feedback": {
+    "spatial_continuity": {
+      "rating": "High",
+      "notes": "The narrative flow maintains a consistent spatial orientation, with clear transitions between evidence filtering, challenge, approval, and recording. The 3D environment supports intuitive navigation, and the user remains grounded in the decision-making process without disorientation."
+    },
+    "cognitive_load": {
+      "rating": "Moderate",
+      "notes": "The interactive elements are well-structured, but the complexity of the evidence filtering and challenge phases may require user guidance. To reduce cognitive load, consider introducing a 'Guided Flow' mode that walks users through each phase step-by-step, especially for first-time users."
+    },
+    "user_control": {
+      "rating": "High",
+      "notes": "Users retain full control over the decision process, including the ability to pause, review, or re-evaluate evidence at any stage. This aligns with the brand principle of 'User control' and supports risk-aware decision-making."
+    },
+    "risk_awareness": {
+      "rating": "High",
+      "notes": "The narrative emphasizes risk at every stage, with visual cues and contextual overlays that highlight potential pitfalls. This supports the 'Risk awareness' brand principle and ensures users are constantly reminded of the stakes involved."
+    },
+    "calm_precision": {
+      "rating": "High",
+      "notes": "The interface maintains a calm, precise aesthetic with minimal visual clutter. The use of clean typography, consistent color schemes, and intuitive UI elements supports the 'Calm precision' brand principle."
+    }
+  },
+  "recommendations": {
+    "spatial_continuity": "Maintain the current spatial flow but consider adding subtle visual anchors (e.g., a central 'Evidence Gate' hub) to reinforce continuity across phases.",
+    "cognitive_load": "Implement a 'Guided Flow' mode for first-time users, with optional tooltips and step-by-step prompts to reduce mental effort during complex phases.",
+    "user_control": "Enhance the user control interface with a 'Decision Map' that allows users to visually track their progress and revisit any stage at will.",
+    "risk_awareness": "Introduce a 'Risk Dashboard' that dynamically updates based on user decisions, providing real-time feedback on potential outcomes and risk exposure.",
+    "calm_precision": "Refine the visual hierarchy to ensure critical information (e.g., risk indicators, approval status) is always easily accessible without overwhelming the user."
+  },
+  "next_steps": [
+    "Conduct a usability test with a sample of traders and portfolio managers to validate the cognitive load and spatial continuity assumptions.",
+    "Develop the 'Guided Flow' mode and integrate it into the core experience.",
+    "Refine the 'Decision Map' and 'Risk Dashboard' based on user feedback.",
+    "Finalize the visual design and interface elements to ensure alignment with brand principles."
+  ]
+}

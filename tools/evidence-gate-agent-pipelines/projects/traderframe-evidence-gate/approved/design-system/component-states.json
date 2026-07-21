@@ -1,0 +1,51 @@
+{
+  "component_states": {
+    "evidence_gate": {
+      "state": "recorded",
+      "description": "Gate is in a recorded state, indicating that the evidence has been recorded and is part of the transparent decision history. Visual cues show a record icon or a timestamp.",
+      "accessibility": "Screen readers should announce 'Evidence Gate - Recorded' and indicate that the evidence is now part of the decision history.",
+      "token": "evidence_gate_recorded",
+      "icon": "record",
+      "color": "neutral_700",
+      "interaction": "non-interactive"
+    }
+  },
+  "brand_principles": {
+    "evidence_first": "All states must reflect the status of evidence filtering, validation, and recording.",
+    "transparent_reasoning": "Each state must be clearly communicated to the user with visual and textual cues.",
+    "user_control": "Users must be able to open, close, and interact with the gate through clear, accessible actions.",
+    "risk_awareness": "States must clearly indicate the risk status of the evidence (e.g., rejected, unapproved).",
+    "calm_precision": "Visual and interaction design must remain calm, precise, and unambiguous."
+  },
+  "implementation_notes": {
+    "tokens": {
+      "evidence_gate_closed": "evidence_gate_closed",
+      "evidence_gate_open": "evidence_gate_open",
+      "evidence_gate_processing": "evidence_gate_processing",
+      "evidence_gate_approved": "evidence_gate_approved",
+      "evidence_gate_rejected": "evidence_gate_rejected",
+      "evidence_gate_recorded": "evidence_gate_recorded"
+    },
+    "icons": {
+      "lock": "lock",
+      "unlock": "unlock",
+      "spinner": "spinner",
+      "check": "check",
+      "cross": "cross",
+      "record": "record"
+    },
+    "color_palette": {
+      "neutral_600": "#4B5563",
+      "primary_500": "#10B981",
+      "secondary_500": "#8B5CF6",
+      "success_500": "#10B981",
+      "error_500": "#EF4444",
+      "neutral_700": "#1F2937"
+    },
+    "accessibility": {
+      "screen_reader_announcement": "Evidence Gate - [state]",
+      "keyboard_shortcut": "Enter to toggle gate state",
+      "focus_state": "evidence_gate_state"
+    }
+  }
+}

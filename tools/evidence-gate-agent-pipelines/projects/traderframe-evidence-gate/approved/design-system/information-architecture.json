@@ -1,0 +1,140 @@
+{
+  "information_hierarchy": {
+    "primary_navigation": [
+      {
+        "label": "Evidence Gate",
+        "description": "The central hub for curating, validating, and recording market evidence.",
+        "icon": "gate",
+        "priority": 1
+      },
+      {
+        "label": "Decision Timeline",
+        "description": "A visual narrative of the decision-making process, from evidence to action.",
+        "icon": "timeline",
+        "priority": 2
+      },
+      {
+        "label": "Risk Dashboard",
+        "description": "Real-time risk metrics and scenario analysis for each decision.",
+        "icon": "risk",
+        "priority": 3
+      },
+      {
+        "label": "Audit Trail",
+        "description": "Immutable record of all evidence, challenges, and approvals.",
+        "icon": "audit",
+        "priority": 4
+      },
+      {
+        "label": "User Profile",
+        "description": "Personalized settings, preferences, and access controls.",
+        "icon": "profile",
+        "priority": 5
+      }
+    ],
+    "secondary_navigation": [
+      {
+        "label": "Evidence Library",
+        "description": "Curated collection of market data, reports, and analysis.",
+        "icon": "library",
+        "priority": 1
+      },
+      {
+        "label": "Challenge Queue",
+        "description": "Pending evidence reviews and validation requests.",
+        "icon": "challenge",
+        "priority": 2
+      },
+      {
+        "label": "Decision Templates",
+        "description": "Reusable frameworks for structuring and documenting decisions.",
+        "icon": "template",
+        "priority": 3
+      },
+      {
+        "label": "Market Insights",
+        "description": "Aggregated intelligence and trend analysis from the community.",
+        "icon": "insight",
+        "priority": 4
+      }
+    ],
+    "content_areas": [
+      {
+        "label": "Evidence Filtering",
+        "description": "Tools and criteria for selecting and prioritizing market evidence.",
+        "priority": 1
+      },
+      {
+        "label": "Evidence Validation",
+        "description": "Process for reviewing, challenging, and approving evidence.",
+        "priority": 2
+      },
+      {
+        "label": "Decision Recording",
+        "description": "Methods for documenting and storing decisions with full transparency.",
+        "priority": 3
+      },
+      {
+        "label": "Risk Assessment",
+        "description": "Quantitative and qualitative tools for evaluating risk exposure.",
+        "priority": 4
+      },
+      {
+        "label": "User Control Panel",
+        "description": "Customization and access management for user experience and data.",
+        "priority": 5
+      }
+    ],
+    "accessibility": {
+      "priority": "high",
+      "guidelines": [
+        "Ensure all interactive elements are keyboard-navigable.",
+        "Provide alt text for all visual content, including 3D models.",
+        "Support screen reader compatibility for 3D narrative components.",
+        "Offer adjustable color contrast and font sizes.",
+        "Ensure all user actions are logged and accessible via audit trail."
+      ]
+    },
+    "design_tokens": {
+      "color": {
+        "primary": "#0066CC",
+        "secondary": "#228B22",
+        "danger": "#D32F2F",
+        "success": "#4CAF50",
+        "neutral": "#666666"
+      },
+      "spacing": {
+        "small": "12px",
+        "medium": "24px",
+        "large": "48px"
+      },
+      "typography": {
+        "font_family": "Inter, sans-serif",
+        "font_weight": {
+          "light": 300,
+          "normal": 400,
+          "bold": 700
+        },
+        "font_size": {
+          "small": "14px",
+          "medium": "16px",
+          "large": "20px"
+        }
+      },
+      "border_radius": {
+        "small": "4px",
+        "medium": "8px",
+        "large": "12px"
+      }
+    },
+    "branding": {
+      "primary_color": "#0066CC",
+      "secondary_color": "#228B22",
+      "logo": {
+        "file": "traderframe-logo.svg",
+        "alt": "TraderFrame Logo"
+      },
+      "tagline": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently."
+    }
+  }
+}

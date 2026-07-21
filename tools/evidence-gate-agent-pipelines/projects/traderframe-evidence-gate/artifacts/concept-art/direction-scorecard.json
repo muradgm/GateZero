@@ -1,0 +1,55 @@
+{
+  "directions": [
+    {
+      "direction": "Visualize a 3D narrative where market evidence is physically manipulated and transformed into decision-making.",
+      "score": {
+        "originality": 9,
+        "clarity": 8,
+        "brand_fit": 9,
+        "feasibility": 8
+      },
+      "feedback": "Strong conceptual alignment with 'evidence first' and 'transparent reasoning'. The physical manipulation of data adds a unique layer. Feasibility could be improved with more specific UI/UX constraints."
+    },
+    {
+      "direction": "Create a dynamic, data-driven visualization that shows the flow of evidence into decisions with real-time risk indicators.",
+      "score": {
+        "originality": 7,
+        "clarity": 9,
+        "brand_fit": 8,
+        "feasibility": 9
+      },
+      "feedback": "Clear and functional, aligns well with 'risk awareness' and 'calm precision'. Feasibility is high, but could benefit from more emphasis on 'user control'."
+    },
+    {
+      "direction": "Design an interactive 3D environment where traders can filter, challenge, and approve evidence through a transparent, risk-aware process.",
+      "score": {
+        "originality": 10,
+        "clarity": 9,
+        "brand_fit": 10,
+        "feasibility": 7
+      },
+      "feedback": "Excellent alignment with all brand principles. The interactive 3D environment is highly original and conceptually rich. Feasibility could be improved with more detailed technical constraints and user flow planning."
+    },
+    {
+      "direction": "Develop a 3D narrative that walks through a trader's decision-making process, using visual metaphors to represent evidence filtering and risk assessment.",
+      "score": {
+        "originality": 8,
+        "clarity": 7,
+        "brand_fit": 8,
+        "feasibility": 8
+      },
+      "feedback": "Good conceptual clarity. The use of visual metaphors is a strong approach, but could be more specific in terms of how the narrative structure aligns with the brand's core message."
+    },
+    {
+      "direction": "Construct a 3D interface where traders can visually 'build' their decisions by assembling and validating evidence in real-time.",
+      "score": {
+        "originality": 9,
+        "clarity": 8,
+        "brand_fit": 9,
+        "feasibility": 8
+      },
+      "feedback": "Strong alignment with 'user control' and 'transparent reasoning'. The 'building' metaphor is engaging but could benefit from more defined interaction rules and visual hierarchy."
+    }
+  ],
+  "summary": "The highest-scoring direction is the one that designs an interactive 3D environment where traders can filter, challenge, and approve evidence through a transparent, risk-aware process. This direction best aligns with all brand principles and offers a high level of originality. However, it requires more detailed technical constraints and user flow planning to ensure feasibility."
+}

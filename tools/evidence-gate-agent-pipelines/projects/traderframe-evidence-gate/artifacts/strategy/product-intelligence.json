@@ -1,0 +1,93 @@
+{
+  "product_truth": {
+    "definition": "TraderFrame is a private, secure trading decision-intelligence platform that transforms fragmented market evidence into explainable, risk-aware decisions through a structured, evidence-first process.",
+    "core_function": "Filter, challenge, approve, and record market evidence to build credible trading decisions with transparency and user control.",
+    "differentiation": "TraderFrame stands apart by prioritizing evidence over intuition, offering a structured, auditable, and interactive decision-making process that is both risk-aware and user-centric.",
+    "trust_requirements": "Users must trust the integrity of the evidence, the transparency of the reasoning, and the security of their data. Trust is built through clear, verifiable processes and user control over their own evidence and decisions."
+  },
+  "audience_analysis": {
+    "primary_audience": {
+      "segment": "Independent traders and portfolio managers",
+      "pain_points": [
+        "Overwhelmed by fragmented, unverified market data",
+        "Lack of structured evidence to support trading decisions",
+        "Difficulty in documenting and justifying decisions for compliance or review",
+        "High risk exposure from unverified or emotional decisions"
+      ],
+      "needs": [
+        "Clear, actionable insights from structured evidence",
+        "Transparent, auditable decision-making process",
+        "Risk-aware framework for decision validation",
+        "Control over their own data and evidence"
+      ]
+    },
+    "secondary_audience": {
+      "segment": "Research-led market participants",
+      "pain_points": [
+        "Fragmented access to high-quality, actionable market data",
+        "Lack of tools to validate and contextualize research findings",
+        "Need for a platform that supports both hypothesis and evidence-based trading"
+      ],
+      "needs": [
+        "Integration with research workflows",
+        "Tools to challenge and validate evidence",
+        "Exportable, auditable decision records"
+      ]
+    }
+  },
+  "message_hierarchy": {
+    "primary_message": "Market conviction becomes credible when evidence is filtered, challenged, approved, and recorded transparently.",
+    "secondary_messages": [
+      "Evidence first: Every decision is grounded in verified market data.",
+      "Transparent reasoning: Every step of the decision is visible and auditable.",
+      "User control: You decide what evidence to trust and how to use it.",
+      "Risk awareness: Every decision includes a clear assessment of risk and uncertainty."
+    ],
+    "call_to_action": "Experience the future of trading with TraderFrame — where evidence leads to conviction."
+  },
+  "narrative_strategy": {
+    "tone": "Calm, precise, and confident — reflecting the brand's commitment to clarity and control.",
+    "structure": {
+      "introduction": "Introduce the problem: traders and portfolio managers are overwhelmed by fragmented, unverified market data.",
+      "challenge": "Present the gap: there’s no structured, evidence-first process to build credible decisions.",
+      "solution": "Introduce TraderFrame as the platform that transforms fragmented evidence into explainable, risk-aware decisions.",
+      "value_proposition": "Highlight the core message: market conviction becomes credible when evidence is filtered, challenged, approved, and recorded transparently.",
+      "differentiation": "Position TraderFrame as the only platform that prioritizes evidence over intuition, with a structured, auditable, and user-controlled process.",
+      "trust_build": "Reinforce trust through transparency, user control, and risk awareness — the core brand principles."
+    },
+    "delivery_format": "Premium interactive 3D narrative — designed to immerse users in the decision-making process, allowing them to experience how evidence shapes conviction."
+  },
+  "implementation_ready_work": {
+    "content_outline": [
+      {
+        "scene": "Market Chaos",
+        "description": "Visualize the overwhelming, fragmented nature of market data — charts, news, social sentiment, and unverified signals — all competing for attention.",
+        "message": "Traders and portfolio managers are drowning in data, not driving decisions."
+      },
+      {
+        "scene": "The Evidence Gap",
+        "description": "Show the absence of a clear, structured process for validating and recording decisions. Highlight the risks of emotional or unverified trading.",
+        "message": "Without a structured approach, decisions are based on intuition, not evidence."
+      },
+      {
+        "scene": "TraderFrame: The Evidence Engine",
+        "description": "Introduce TraderFrame as the platform that transforms fragmented evidence into a structured, auditable process. Show the four steps: filter, challenge, approve, record.",
+        "message": "TraderFrame gives traders and portfolio managers the tools to build credible, risk-aware decisions."
+      },
+      {
+        "scene": "Calm Precision in Action",
+        "description": "Walk through a real-time trading scenario, showing how evidence is used to build conviction. Highlight transparency, user control, and risk-aware decision-making.",
+        "message": "With TraderFrame, every decision is built on verified evidence — and every step is visible."
+      },
+      {
+        " ": "description: End with a call to action, inviting users to experience the platform and see how evidence transforms trading decisions.",
+        "message": "Experience the future of trading — where evidence leads to conviction."
+      }
+    ],
+    "branding_consistency": {
+      "visual_identity": "Calm, clean, and precise — using neutral tones with subtle color accents to reflect trust and clarity.",
+      "language": "Concise, direct, and confident — avoiding jargon but maintaining authority and clarity.",
+      "tone": "Empowering and reassuring — reinforcing that TraderFrame is a tool for control, not complexity."
+    }
+  }
+}

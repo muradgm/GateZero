@@ -1,0 +1,105 @@
+{
+  "metaphor_library": {
+    "1. The Evidence Vault": {
+      "description": "A secure, visually distinct chamber where all market evidence is stored, categorized, and audited. It represents the foundational trust in data integrity and transparency.",
+      "visual_elements": [
+        "Glass walls with glowing data streams",
+        "Vault doors with digital locks and audit trails",
+        "Floating data orbs representing evidence types"
+      ],
+      "brand_alignment": "Evidence first, Transparent reasoning"
+    },
+    "2. The Filter Forge": {
+      "description": "A dynamic, evolving system where traders and analysts refine raw data into actionable insights. It symbolizes the process of critical thinking and evidence validation.",
+      "visual_elements": [
+        "A forge-like interface with molten data streams",
+        "Sculpting tools that shape raw data into structured insights",
+        "Glowing runes representing validation stages"
+      ],
+      "brand_alignment": "Transparent reasoning, User control"
+    },
+    "3. The Approval Ledger": {
+      "description": "A digital, immutable record of all approved evidence and decisions. It embodies the principle of accountability and traceability.",
+      "visual_elements": [
+        "A glowing, scrolling ledger with timestamps and signatures",
+        "Chain-link visuals representing immutability",
+        "Dynamic signatures that appear as approvals are made"
+      ],
+      "brand_alignment": "Evidence first, Transparent reasoning, Risk awareness"
+    },
+    "4. The Risk Compass": {
+      "description": "A navigational tool that guides traders through the risk landscape, helping them make decisions with awareness and precision.",
+      "visual_elements": [
+        "A floating compass with risk indicators",
+        "Color-coded zones representing risk levels",
+        "A central needle that points toward the most defensible path"
+      ],
+      "brand_alignment": "Risk awareness, Calm precision"
+    },
+    "5. The Conviction Nexus": {
+      "description": "A central hub where all evidence, reasoning, and decisions converge. It represents the culmination of the evidence-first process.",
+      "visual_elements": [
+        "A glowing, interconnected node with branching pathways",
+        "Visual representations of evidence, logic, and outcomes",
+        "A central core that pulses with confidence and clarity"
+      ],
+      "brand_alignment": "Evidence first, Transparent reasoning, Calm precision"
+    },
+    "6. The Evidence Stream": {
+      "description": "A continuous flow of data, insights, and decisions that mirrors the real-time nature of market activity. It emphasizes the dynamic and evolving nature of trading evidence.",
+      "visual_elements": [
+        "A flowing, translucent river of data",
+        "Floating glyphs representing different types of evidence",
+        "A current that shifts based on user interaction and validation"
+      ],
+      "brand_alignment": "Transparent reasoning, User control"
+    },
+    "7. The Decision Forge": {
+      "description": "A space where traders craft their decisions through a process of evidence synthesis and reasoning. It represents the active, intentional act of decision-making.",
+      "visual_elements": [
+        "A forge with glowing hammers and anvil",
+        "Floating evidence fragments that can be combined",
+        "A glowing decision output that solidifies as it's formed"
+      ],
+      "brand_alignment": "Evidence first, User control, Calm precision"
+    },
+    "8. The Risk Mirror": {
+      "description": "A reflective surface that shows traders the full impact of their decisions, helping them see risk in real-time and with clarity.",
+      "visual_elements": [
+        "A large, curved mirror with dynamic reflections",
+        "Visual overlays showing risk exposure and potential outcomes",
+        "A central light source that represents clarity and awareness"
+      ],
+      "brand_alignment": "Risk awareness, Calm precision"
+    },
+    "9. The Evidence Archive": {
+      "description": "A repository of all past decisions and evidence, allowing traders to learn from history and refine their approach.",
+      "visual_elements": [
+        "A vast, glowing archive with floating shelves",
+        "Time-lapse visuals showing how evidence evolved",
+        "Interactive nodes that allow users to explore historical decisions"
+      ],
+      "brand_alignment": "Evidence first, Transparent reasoning"
+    },
+    "10. The Conviction Bridge": {
+      "description": "A symbolic bridge that connects raw data to confident, defensible decisions. It represents the journey from uncertainty to clarity.",
+      "visual_elements": [
+        "A glowing, translucent bridge with steps representing stages of reasoning",
+        "Floating evidence orbs that light up as they are validated",
+        "A central platform where decisions are made and recorded"
+      ],
+      "brand_alignment": "Evidence first, Transparent reasoning, Risk awareness"
+    }
+  },
+  "next_steps": {
+    "1. Select Core Metaphors": {
+      "description": "Choose 3–5 metaphors that best represent the core message and brand principles. These will form the foundation of the 3D narrative."
+    },
+    "2. Develop Visual Language": {
+      "description": "Create a consistent visual style that aligns with the metaphors, using color, motion, and interactivity to reinforce the brand principles."
+    },
+    "3. Build Interactive Narrative": {
+      "description": "Map the metaphors into an interactive 3D experience, allowing users to engage with the evidence, reasoning, and decisions in a natural, intuitive way."
+    }
+  }
+}

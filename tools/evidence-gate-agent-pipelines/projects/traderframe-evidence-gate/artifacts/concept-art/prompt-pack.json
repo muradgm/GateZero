@@ -1,0 +1,19 @@
+{
+  "prompt": "A sleek, modern 3D interface representing TraderFrame's Evidence Gate. The interface is composed of a central, glowing, circular panel with a transparent, layered structure that symbolizes the filtering, challenging, and approval of market evidence. The panel is surrounded by a dynamic, data-rich environment with floating, interactive elements such as charts, news snippets, and risk indicators. The color palette is cool and precise, with deep blues, soft grays, and subtle neon accents for clarity and focus. The interface exudes calm precision, with clean lines and minimalistic design. The background is a dark, textured void with faint, glowing market data trails. The overall look is premium, interactive, and immersive, reflecting the brand's principles of evidence-first reasoning, transparency, user control, and risk awareness.",
+  "style": "Cyberpunk meets minimalism, with a focus on clarity and precision. The design is clean, interactive, and immersive, suitable for a premium digital experience.",
+  "tone": "Professional, calm, and confident, reflecting the brand's commitment to transparency and risk-aware decision-making.",
+  "brand_principles": [
+    "Evidence first: The central panel represents the core process of filtering and validating market evidence.",
+    "Transparent reasoning: The layered structure and floating elements symbolize the open, challengeable nature of the process.",
+    "User control: The interface is interactive, allowing users to engage with and manipulate the data.",
+    "Risk awareness: Risk indicators and visual cues are integrated throughout the design.",
+    "Calm precision: The design is clean, focused, and visually balanced to support clear, rational decision-making."
+  ],
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative.",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved, and recorded transparently."
+}

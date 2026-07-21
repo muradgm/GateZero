@@ -1,0 +1,128 @@
+{
+  "project": "TraderFrame — Evidence Gate",
+  "product": "Private trading decision-intelligence experience",
+  "audience": [
+    "Independent traders",
+    "Portfolio managers",
+    "Research-led market participants"
+  ],
+  "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative",
+  "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently",
+  "brand_principles": [
+    "Evidence first",
+    "Transparent reasoning",
+    "User control",
+    "Risk awareness",
+    "Calm precision"
+  ],
+  "stage": "Interaction Mapping",
+  "objective": "Map user interactions and state transitions",
+  "interaction_mapping": {
+    "entry_point": {
+      "trigger": "User initiates session",
+      "state": "Welcome Screen",
+      "interaction": "User selects 'Start Session' or 'Load Evidence'",
+      "next_state": "Evidence Selection"
+    },
+    "evidence_selection": {
+      "trigger": "User selects evidence type or uploads file",
+      "state": "Evidence Selection",
+      "interaction": "User filters by time, asset, or category",
+      "next_state": "Evidence Preview"
+    },
+    "evidence_preview": {
+      "trigger": "User reviews evidence summary",
+      "state": "Evidence Preview",
+      "interaction": "User clicks 'Challenge' or 'Approve' or 'Reject'",
+      "next_state": "Challenge/Approval Modal"
+    },
+    "challenge_modal": {
+      "trigger": "User initiates challenge",
+      "state": "Challenge/Approval Modal",
+      "interaction": "User selects challenge type (e.g., data source, correlation, bias)",
+      "next_state": "Challenge Resolution"
+    },
+    "challenge_resolution": {
+      "trigger": "System evaluates challenge",
+      "state": "Challenge Resolution",
+      "interaction": "User reviews resolution and confirms acceptance",
+      "next_state": "Evidence Approved"
+    },
+    "evidence_approved": {
+      "trigger": "Evidence is validated",
+      "state": "Evidence Approved",
+      "interaction": "User selects 'Record' or 'Save for Later'",
+      "next_state": "Record Decision"
+    },
+    "record_decision": {
+      "trigger": "User records decision",
+      "state": "Record Decision",
+      "interaction": "User inputs trade parameters, risk level, and rationale",
+      "next_state": "Decision Confirmed"
+    },
+    "decision_confirmed": {
+      "trigger": "Decision is logged",
+      "state": "Decision Confirmed",
+      "interaction": "User receives confirmation and risk summary",
+      "next_state": "Post-Decision Review"
+    },
+    "post_decision_review": {
+      "trigger": "User reviews decision",
+      "state": "Post-Decision Review",
+      "interaction": "User can edit, re-evaluate, or archive decision",
+      "next_state": "Session End"
+    },
+    "session_end": {
+      "trigger": "User ends session",
+      "state": "Session End",
+      "interaction": "User logs out or returns to dashboard",
+      "next_state": "Dashboard"
+    },
+    "dashboard": {
+      "trigger": "User returns to dashboard",
+      "state": "Dashboard",
+      "interaction": "User can start new session, view history, or access analytics",
+      "next_state": "Dashboard"
+    }
+  },
+  "state_transitions": [
+    "Welcome Screen → Evidence Selection",
+    "Evidence Selection → Evidence Preview",
+    "Evidence Preview → Challenge/Approval Modal",
+    "Challenge/Approval Modal → Challenge Resolution",
+    "Challenge Resolution → Evidence Approved",
+    "Evidence Approved → Record Decision",
+    "Record Decision → Decision Confirmed",
+    "Decision Confirmed → Post-Decision Review",
+    "Post-Decision Review → Session End",
+    "Session End → Dashboard"
+  ],
+  "user_controls": {
+    "evidence_filtering": true,
+    "challenge_selection": true,
+    "risk_level_input": true,
+    "decision_editing": true,
+    "session_ending": true
+  },
+  "risk_indicators": {
+    "real_time": true,
+    "post_decision": true,
+    "visual": true
+  },
+  "interaction_types": [
+    "Selection",
+    "Filtering",
+    "Challenge",
+    "Approval",
+    "Recording",
+    "Review",
+    "Navigation"
+  ],
+  "brand_alignment": {
+    "evidence_first": true,
+    "transparent_reasoning": true,
+    "user_control": true,
+    "risk_awareness": true,
+    "calm_precision": true
+  }
+}

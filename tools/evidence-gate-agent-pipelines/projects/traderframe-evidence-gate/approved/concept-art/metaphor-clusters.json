@@ -1,0 +1,95 @@
+{
+  "metaphor_clusters": {
+    "Filtering & Validation": [
+      "Lens",
+      "Sieve",
+      "Filter",
+      "Gate",
+      "Validator",
+      "Curator"
+    ],
+    "Transparency & Reasoning": [
+      "Journal",
+      "Ledger",
+      "Timeline",
+      "Dashboard",
+      "Map",
+      "Chart"
+    ],
+    "Control & Agency": [
+      "Console",
+      "Panel",
+      "Workspace",
+      "Hub",
+      "Interface",
+      "Station"
+    ],
+    "Risk & Awareness": [
+      "Scale",
+      "Meter",
+      "Indicator",
+      "Monitor",
+      "Guardrail",
+      "Shield"
+    ],
+    "Calm & Precision": [
+      "Clock",
+      "Timer",
+      "Scale",
+      "Balance",
+      "Anchor",
+      "Focus"
+    ]
+  },
+  "cluster_analysis": {
+    "Filtering & Validation": {
+      "core_concept": "Evidence evaluation and approval",
+      "visual_implication": "A gate that filters and validates data, ensuring only credible evidence passes through",
+      "brand_alignment": "Evidence first, Transparent reasoning"
+    },
+    "Transparency & Reasoning": {
+      "core_concept": "Visible, explainable decision-making",
+      "visual_implication": "A timeline or ledger that records and visualizes the reasoning behind each decision",
+      "brand_alignment": "Transparent reasoning, User control"
+    },
+    "Control & Agency": {
+      "core_concept": "User-driven decision process",
+      "visual_implication": "A console or interface where users manage and interact with the system",
+      "brand_alignment": "User control"
+    },
+    "Risk & Awareness": {
+      "core_concept": "Risk monitoring and mitigation",
+      "visual_implication": "A meter or scale that visually represents risk levels and thresholds",
+      "brand_alignment": "Risk awareness"
+    },
+    "Calm & Precision": {
+      "core_concept": "Focus and clarity in decision-making",
+      "visual_implication": "A balance scale or clock that symbolizes precision and timing",
+      "brand_alignment": "Calm precision"
+    }
+  },
+  "implementation_ready_concept": {
+    "title": "Evidence Gate: The Filtered Path to Market Conviction",
+    "visual_overview": {
+      "main_element": "A circular gate with a transparent center, symbolizing the filtering and validation of evidence",
+      "background": "A dynamic, data-rich environment with floating indicators and timelines",
+      "user_interface": "A central console with a timeline, risk meter, and control panel",
+      "risk_indicator": "A scale that shows the balance between risk and conviction",
+      "decision_flow": "A path that moves through the gate, validated by a validator panel and recorded in a ledger"
+    },
+    "brand_integration": {
+      "evidence_first": "The gate is the central metaphor, filtering and validating all data before it is used",
+      "transparent_reasoning": "The timeline and ledger show the full reasoning process behind each decision",
+      "user_control": "The console and control panel give the user full agency over the process",
+      "risk_awareness": "The risk meter and scale visually represent the risk profile and thresholds",
+      "calm_precision": "The balance scale and clock emphasize focus and timing in decision-making"
+    },
+    "next_steps": [
+      "3D modeling of the gate and surrounding environment",
+      "Development of the timeline and ledger UI elements",
+      "Creation of the risk meter and scale visualizations",
+      "Integration of the console and control panel",
+      "Animation of the decision flow through the gate"
+    ]
+  }
+}
