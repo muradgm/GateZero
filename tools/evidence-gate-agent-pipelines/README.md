@@ -10,6 +10,7 @@ packages/
 ├── eval/
 ├── model-router/
 ├── pipelines/
+├── production-adapters/
 ├── provider/
 ├── store/
 └── workflow/
@@ -37,6 +38,21 @@ The full service matrix and approval boundaries are documented in:
 ```text
 docs/PRODUCTION-SERVICE-MATRIX.md
 ```
+
+## Production adapter layer
+
+`@eg/production-adapters` now defines the contracts for image generation, Meshy, Figma export, Blender automation, R3F/GLSL production and deterministic QA.
+
+The package includes:
+
+- a provider registry
+- production job request/result contracts
+- the preferred-service matrix for all nine pipelines
+- explicit paid-service approval enforcement
+- per-job budget enforcement
+- artifact metadata support for images, 3D models, animation clips, shaders, design exports and test reports
+
+Adapters are registered only when implemented and configured. Missing adapters fail clearly rather than silently pretending that an external artifact was generated.
 
 ## Setup
 
@@ -126,15 +142,28 @@ Repeat until all nine pipelines are approved.
 
 ## Paid-service gates
 
-Paid generation remains disabled by default:
+Paid generation is disabled by default:
 
 ```env
-EG_ALLOW_PAID_IMAGE_GENERATION=false
-EG_ALLOW_PAID_3D_GENERATION=false
-EG_MAX_PAID_JOB_USD=0
+EG_ALLOW_PAID_GENERATION=false
+EG_APPROVED_PAID_PROVIDERS=
+EG_MAX_SINGLE_JOB_COST_USD=0
 ```
 
-A future image or Meshy adapter must require both an explicit environment opt-in and human approval before submitting a paid job.
+A paid adapter can execute only when:
+
+1. `EG_ALLOW_PAID_GENERATION=true`
+2. its exact adapter ID appears in `EG_APPROVED_PAID_PROVIDERS`
+3. its estimate does not exceed `EG_MAX_SINGLE_JOB_COST_USD`
+4. the pipeline artifact has passed the normal human review gate
+
+Example:
+
+```env
+EG_ALLOW_PAID_GENERATION=true
+EG_APPROVED_PAID_PROVIDERS=meshy,gpt-image
+EG_MAX_SINGLE_JOB_COST_USD=2.50
+```
 
 ## Status
 
@@ -150,6 +179,20 @@ pnpm reset
 
 Reset removes unapproved drafts and resets incomplete pipeline state. Approved artifacts and approved pipeline state are preserved.
 
-## Important limitation
+## Current production status
 
-The Gemini text provider and provider routing are implemented. Image generation, Meshy jobs, Figma export, Blender automation and deterministic browser QA adapters are defined as the next production adapters; they are not yet pretending to be complete.
+Implemented:
+
+- Gemini, OpenAI and Ollama text providers
+- hybrid routing and fallback
+- draft/approved artifact lifecycle
+- resumable pipeline execution
+- production adapter contracts and governance
+
+Next adapters:
+
+1. generic image adapter plus one configured image provider
+2. Meshy job adapter and GLB download validation
+3. Figma design-token exporter
+4. Blender automation contract and validation scripts
+5. Playwright, axe and Lighthouse QA runner
