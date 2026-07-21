@@ -37,7 +37,8 @@ function extractProjectRelativePath(value: string): string | null {
 }
 
 async function main(): Promise<void> {
-  const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as Manifest;
+  const original = await readFile(manifestPath, "utf8");
+  const manifest = JSON.parse(original) as Manifest;
   const pipelines = manifest.pipelines ?? {};
   let normalizedCount = 0;
   let migratedCount = 0;
@@ -75,10 +76,13 @@ async function main(): Promise<void> {
     }
   }
 
-  if (manifest.project) manifest.project.updatedAt = new Date().toISOString();
-  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  const changed = normalizedCount > 0 || migratedCount > 0;
+  if (changed) {
+    if (manifest.project) manifest.project.updatedAt = new Date().toISOString();
+    await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+  }
 
-  console.log("Approved manifest normalized");
+  console.log(changed ? "Approved manifest normalized" : "Approved manifest already normalized");
   console.log(`Paths normalized: ${normalizedCount}`);
   console.log(`Legacy artifacts migrated: ${migratedCount}`);
 }
