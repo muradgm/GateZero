@@ -1,143 +1,101 @@
-import { summarizeEvidence, traderFrameExperience } from "./traderframe-experience-data.js";
-
 /* global document, matchMedia */
 
 const app = document.querySelector("#traderframe-app");
-
 if (!app) throw new Error("Missing TraderFrame mount node.");
 
-const evidence = traderFrameExperience.evidence;
-const summary = summarizeEvidence(evidence);
-const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const inputs = [
+  ["Price action", "#3977ff"], ["News & events", "#8d55ff"], ["Sentiment", "#b667ff"],
+  ["Macro data", "#1fd1d7"], ["Options flow", "#7adf70"], ["On-chain data", "#e6dc52"],
+  ["Liquidity map", "#ff9b36"], ["Earnings", "#ff792f"], ["Social signals", "#ff3c34"]
+];
+
+const drivers = [
+  ["Momentum building", "+20%", "good"], ["Macro tailwinds", "+18%", "good"],
+  ["Volume support", "+12%", "good"], ["News sentiment", "+8%", "good"],
+  ["Resistance cluster", "-16%", "bad"], ["Volatility risk", "-14%", "bad"],
+  ["Liquidity thinning", "-8%", "bad"]
+];
+
+const journey = [
+  ["01", "Observe", "Raw signals enter from everywhere.", "Chaos"],
+  ["02", "Correlate", "Patterns form. Relationships begin to emerge.", "Clarity"],
+  ["03", "Form thesis", "Multiple scenarios take shape. Probabilities are estimated.", "Structure"],
+  ["04", "Challenge", "Contradictions and risks test the thesis. Weak paths fade.", "Pressure"],
+  ["05", "Conviction", "One path remains with the highest risk-adjusted edge.", "Conviction"],
+  ["06", "Execute", "The landscape folds into your workspace. You decide.", "Action"]
+];
+
+const systemCards = ["Intelligence language", "Geometry language", "Material language", "Color system", "Typography", "Icon language", "Motion language"];
 
 app.innerHTML = `
-  <main class="tf-shell" id="experience">
-    <header class="tf-nav">
-      <a class="tf-brand" href="./index.html" aria-label="TraderFrame command center">
-        <span class="tf-mark" aria-hidden="true"><i></i><i></i></span>
-        <span>TraderFrame</span>
-      </a>
-      <div class="tf-nav-meta">
-        <span class="tf-status"><i></i> Evidence gate online</span>
-        <button class="tf-control" type="button" aria-pressed="false">Pause flow</button>
-      </div>
-    </header>
-
-    <section class="tf-hero" aria-labelledby="tf-title">
-      <div class="tf-copy">
-        <p class="tf-eyebrow">${traderFrameExperience.eyebrow}</p>
-        <h1 id="tf-title">Conviction should be <em>earned.</em></h1>
-        <p class="tf-lede">${traderFrameExperience.lede}</p>
-        <div class="tf-actions">
-          <a class="tf-primary" href="#gate">Enter the evidence gate</a>
-          <a class="tf-secondary" href="./simulator.html">Open simulator evidence</a>
+  <main class="atlas" id="experience">
+    <section class="atlas-top">
+      <aside class="brand-rail">
+        <a class="wordmark" href="./index.html" aria-label="TraderFrame command center">TRADER<span>FRAME</span></a>
+        <p class="product-name">Conviction Atlas</p>
+        <p class="product-tagline">Private trading decision intelligence</p>
+        <p class="intro">We transform fragmented market evidence into one explainable, risk-aware decision.</p>
+        <div class="principles">
+          ${[
+            ["Evidence first", "Every insight is backed by real market data."],
+            ["Transparent reasoning", "We show why we believe, not just what we believe."],
+            ["You stay in control", "Recommendations, not autopilot. You decide."],
+            ["Risk aware", "No trade is good if the risk is wrong."]
+          ].map(([title, copy], i) => `<article><span class="principle-icon">0${i + 1}</span><div><strong>${title}</strong><p>${copy}</p></div></article>`).join("")}
         </div>
-      </div>
+      </aside>
 
-      <div class="tf-stage" id="gate" aria-label="Evidence filtering visualization">
-        <div class="tf-orbit tf-orbit-a" aria-hidden="true"></div>
-        <div class="tf-orbit tf-orbit-b" aria-hidden="true"></div>
-        <div class="tf-gate" aria-hidden="true">
-          <span class="tf-gate-edge tf-gate-edge-left"></span>
-          <span class="tf-gate-core"></span>
-          <span class="tf-gate-edge tf-gate-edge-right"></span>
+      <section class="landscape" aria-labelledby="landscape-title">
+        <div class="landscape-heading"><h1 id="landscape-title">The market landscape</h1><p>Multiple paths. Many possibilities.<br />We map the probabilities and reveal the best route.</p></div>
+        <div class="input-stack" aria-label="Evidence streams">
+          ${inputs.map(([label, color], index) => `<span style="--stream:${color};--row:${index}">${label}<i></i></span>`).join("")}
         </div>
-        <div class="tf-flow" aria-hidden="true">
-          ${evidence.map((item, index) => `<span class="tf-particle tf-${item.state}" style="--i:${index}"></span>`).join("")}
-        </div>
-        <div class="tf-stage-label tf-stage-label-in"><span>Raw signals</span><strong>${String(summary.total).padStart(2, "0")}</strong></div>
-        <div class="tf-stage-label tf-stage-label-out"><span>Verified evidence</span><strong>${String(summary.approved).padStart(2, "0")}</strong></div>
-      </div>
-    </section>
+        <svg class="terrain" viewBox="0 0 1000 600" role="img" aria-label="Abstract market terrain with scenario routes">
+          <defs>
+            <linearGradient id="terrainFade" x1="0" x2="1"><stop stop-color="#0b78ff"/><stop offset=".48" stop-color="#7b4cff"/><stop offset="1" stop-color="#ff8b34"/></linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <g class="contours">
+            ${Array.from({length: 24}, (_, i) => `<path d="M40 ${120+i*15} C180 ${40+i*7}, 280 ${220-i*3}, 420 ${135+i*4} S680 ${70+i*8}, 960 ${145+i*9}"/>`).join("")}
+            ${Array.from({length: 14}, (_, i) => `<ellipse cx="${360+i*34}" cy="${250+i*8}" rx="${110+i*20}" ry="${34+i*9}"/>`).join("")}
+          </g>
+          <g class="routes" filter="url(#glow)">
+            <path class="route route-cyan" d="M30 220 C220 210, 270 280, 420 250 S650 155, 760 190"/>
+            <path class="route route-blue" d="M35 278 C190 300, 260 215, 430 285 S620 350, 770 245"/>
+            <path class="route route-orange" d="M30 335 C250 325, 330 245, 500 300 S700 240, 885 315"/>
+            <path class="route route-main" d="M120 360 C300 340, 370 410, 515 355 S705 325, 925 430"/>
+          </g>
+          <g class="risk-zones"><circle cx="360" cy="440" r="48"/><circle cx="765" cy="470" r="52"/></g>
+          <g class="scenario-nodes">
+            <circle cx="390" cy="165" r="8"/><circle cx="545" cy="205" r="8"/><circle cx="705" cy="190" r="8"/><circle cx="865" cy="360" r="10"/>
+          </g>
+        </svg>
+        <div class="scenario-label bull"><b>Bull case</b><span>28%</span></div>
+        <div class="scenario-label side"><b>Sideways</b><span>18%</span></div>
+        <div class="scenario-label bear"><b>Bear case</b><span>22%</span></div>
+        <div class="scenario-label rec"><b>Recommended path</b><span>62%</span></div>
+        <div class="risk-label risk-a">△ High risk zone</div><div class="risk-label risk-b">△ High risk zone</div>
+      </section>
 
-    <section class="tf-proof" aria-label="Evidence gate summary">
-      <article><span>Current thesis</span><strong>${traderFrameExperience.thesis}</strong><small>Confidence adjusted after challenge</small></article>
-      <article><span>Evidence accepted</span><strong>${summary.approved} / ${summary.total}</strong><small>${summary.challenged + summary.rejected} signals did not pass cleanly</small></article>
-      <article><span>Decision state</span><strong>Reviewable</strong><small>Every claim linked to evidence</small></article>
-    </section>
-
-    <section class="tf-workbench" aria-labelledby="workbench-title">
-      <div class="tf-section-heading">
-        <div><p class="tf-eyebrow">Live decision record</p><h2 id="workbench-title">See what passed. See what did not.</h2></div>
-        <p>No hidden score. No black-box confidence. Every signal keeps its status, challenge history and risk weight.</p>
-      </div>
-      <div class="tf-evidence-list" role="list" aria-label="Evidence records">
-        ${evidence.map((item) => `
-          <button class="tf-evidence-row" type="button" data-id="${item.id}" aria-expanded="false" role="listitem">
-            <span class="tf-evidence-id">${item.id}</span>
-            <span class="tf-evidence-name">${item.label}</span>
-            <span class="tf-score" aria-label="Evidence score ${item.score} out of 100"><i style="--score:${item.score}%"></i></span>
-            <span class="tf-state tf-state-${item.state}">${item.state}</span>
-            <span class="tf-chevron" aria-hidden="true">↗</span>
-          </button>
-        `).join("")}
-      </div>
-      <aside class="tf-detail" aria-live="polite" aria-atomic="true">
-        <p>Select an evidence row to inspect its decision role.</p>
+      <aside class="decision-rail">
+        <article class="metric-card thesis"><span>Current thesis</span><div><strong>Moderately Bullish</strong><b>62%</b></div><small>Bias · Confidence</small></article>
+        <article class="metric-card"><span>Key drivers</span><ul>${drivers.map(([label, value, tone]) => `<li><i></i><span>${label}</span><b class="${tone}">${value}</b></li>`).join("")}</ul></article>
+        <article class="metric-card risk"><span>Risk overview</span><div class="gauge"><b>38</b><small>/100</small></div><strong>Moderate Risk</strong><p>Position sizing recommended<br />Small to Moderate</p></article>
+        <article class="metric-card recommendation"><span>Recommendation</span><strong>Conditional long</strong><div><small>Timeframe<br /><b>1D – 1W</b></small><small>Invalidate if<br /><b>Below 1.2360</b></small></div></article>
       </aside>
     </section>
 
-    <footer class="tf-footer">
-      <span>TraderFrame / Evidence before conviction</span>
-      <span>Production shell · reduced-motion ready</span>
-    </footer>
+    <section class="decision-journey" aria-labelledby="journey-title">
+      <h2 id="journey-title">The decision journey</h2>
+      <div class="journey-grid">${journey.map(([n, title, copy, state], i) => `<article style="--step:${i}"><header><span>${n}</span><strong>${title}</strong></header><div class="mini-map"><i></i><i></i><i></i></div><p>${copy}</p><small>State: ${state}</small></article>`).join("")}</div>
+    </section>
+
+    <section class="language-system" aria-labelledby="language-title"><h2 id="language-title">Visual language system</h2><div>${systemCards.map((title, i) => `<article><h3>${title}</h3><p>${["Signals are living threads.","Contour fields driven by invisible forces.","Premium, minimal, timeless.","Purpose-driven palette.","Clean. Technical. Confident.","Minimal. Meaningful.","Meaningful. Directional. Fluid."][i]}</p><div class="system-demo system-${i}"></div></article>`).join("")}</div></section>
+
+    <section class="pipeline"><h2>Creative & production pipeline</h2><div class="pipeline-track">${["Product strategy","Creative direction","Information architecture","Experience narrative","Art direction","Concept art","Storyboarding","Design system","3D & motion","Shaders & VFX","Implementation","QA & optimization","Deploy & monitor"].map((label, i) => `<span><b>${String(i+1).padStart(2,"0")}</b>${label}</span>`).join("")}</div></section>
+
+    <footer><span>Concept 03 v2.1 · Conviction Atlas</span><span>TraderFrame — Private trading decision intelligence</span><span>Evidence. Reasoning. Conviction.</span></footer>
   </main>
 `;
 
-const shell = document.querySelector(".tf-shell");
-const pauseButton = document.querySelector(".tf-control");
-const detail = document.querySelector(".tf-detail");
-const rows = [...document.querySelectorAll(".tf-evidence-row")];
-
-if (reducedMotion) {
-  shell?.classList.add("is-paused");
-  pauseButton?.setAttribute("aria-pressed", "true");
-  if (pauseButton) pauseButton.textContent = "Resume flow";
-}
-
-pauseButton?.addEventListener("click", () => {
-  const paused = shell?.classList.toggle("is-paused") ?? false;
-  pauseButton.setAttribute("aria-pressed", String(paused));
-  pauseButton.textContent = paused ? "Resume flow" : "Pause flow";
-});
-
-rows.forEach((row, index) => {
-  row.addEventListener("click", () => selectEvidence(row));
-  row.addEventListener("keydown", (event) => {
-    if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
-    event.preventDefault();
-    const direction = event.key === "ArrowDown" ? 1 : -1;
-    rows[(index + direction + rows.length) % rows.length]?.focus();
-  });
-});
-
-function selectEvidence(row) {
-  const id = row.getAttribute("data-id");
-  const item = evidence.find((entry) => entry.id === id);
-  if (!item || !detail) return;
-
-  rows.forEach((candidate) => {
-    candidate.classList.remove("is-active");
-    candidate.setAttribute("aria-expanded", "false");
-  });
-
-  row.classList.add("is-active");
-  row.setAttribute("aria-expanded", "true");
-  detail.innerHTML = `
-    <div><span>${item.id} / ${item.state}</span><strong>${item.label}</strong></div>
-    <p>${detailCopy(item.state)}</p>
-    <dl>
-      <div><dt>Evidence score</dt><dd>${item.score}/100</dd></div>
-      <div><dt>Gate result</dt><dd>${item.state}</dd></div>
-      <div><dt>Source</dt><dd>${item.source}</dd></div>
-      <div><dt>Challenge</dt><dd>${item.challenge}</dd></div>
-      <div><dt>Risk weight</dt><dd>${item.riskWeight}</dd></div>
-    </dl>
-  `;
-}
-
-function detailCopy(state) {
-  if (state === "approved") return "The signal survived source validation, contradiction checks and risk-weight review. It can influence the current thesis.";
-  if (state === "challenged") return "The signal remains visible but cannot increase conviction until its contradiction or source-quality issue is resolved.";
-  return "The signal failed the evidence threshold and is recorded for traceability, but it is excluded from the active thesis.";
-}
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("reduced-motion");
