@@ -1,0 +1,22 @@
+{
+  "primary_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+  "proof_points": [
+    {
+      "point": "Evidence-first filtering",
+      "description": "TraderFrame transforms fragmented market data into structured, verifiable evidence, ensuring only relevant and reliable inputs shape decisions."
+    },
+    {
+      "point": "Transparent reasoning",
+      "description": "Every decision is backed by a clear, auditable trail of evidence, enabling users to understand and challenge the logic behind each trade."
+    },
+    {
+      "point": "User control",
+      "description": "Traders and portfolio managers retain full control over their evidence, decisions, and risk parameters, ensuring autonomy in the decision-making process."
+    },
+    {
+      "point": "Risk-aware insights",
+      "description": "TraderFrame integrates real-time risk assessment and scenario modeling, helping users make informed, calibrated decisions with full visibility into potential outcomes."
+    }
+  ],
+  "call_to_action": "Experience TraderFrame — where evidence shapes conviction, and conviction drives results."
+}

@@ -4,7 +4,7 @@
     "version": "0.2.0",
     "status": "active",
     "createdAt": "2026-07-20T21:39:29.489Z",
-    "updatedAt": "2026-07-21T22:07:11.085Z"
+    "updatedAt": "2026-07-21T22:17:32.171Z"
   },
   "pipelineOrder": [
     "strategy",
@@ -27,7 +27,7 @@
           "stageId": "product-intelligence",
           "name": "product-intelligence",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\product-intelligence.json",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/product-intelligence.json",
           "version": 1,
           "createdAt": "2026-07-20T21:41:25.436Z"
         },
@@ -37,7 +37,7 @@
           "stageId": "audience-analysis",
           "name": "audience-analysis",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\audience-analysis.json",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/audience-analysis.json",
           "version": 1,
           "createdAt": "2026-07-20T21:42:29.544Z"
         },
@@ -47,7 +47,7 @@
           "stageId": "brand-extraction",
           "name": "brand-principles",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\brand-principles.json",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/brand-principles.json",
           "version": 1,
           "createdAt": "2026-07-20T21:43:23.587Z"
         },
@@ -57,7 +57,7 @@
           "stageId": "message-hierarchy",
           "name": "message-hierarchy",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\message-hierarchy.json",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/message-hierarchy.json",
           "version": 1,
           "createdAt": "2026-07-20T21:43:43.121Z"
         },
@@ -67,7 +67,7 @@
           "stageId": "narrative-strategy",
           "name": "narrative-strategy",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\narrative-strategy.md",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/narrative-strategy.md",
           "version": 1,
           "createdAt": "2026-07-20T21:45:21.605Z"
         },
@@ -77,7 +77,7 @@
           "stageId": "strategic-critique",
           "name": "strategy-scorecard",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\strategy-scorecard.json",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/strategy-scorecard.json",
           "version": 1,
           "createdAt": "2026-07-20T21:46:46.833Z"
         },
@@ -87,7 +87,7 @@
           "stageId": "strategy-approval",
           "name": "strategy-brief",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\artifacts\\strategy\\strategy-brief.md",
+          "path": "projects/traderframe-evidence-gate/approved/strategy/strategy-brief.md",
           "version": 1,
           "createdAt": "2026-07-20T21:48:23.528Z"
         }
@@ -104,7 +104,7 @@
           "stageId": "brand-analysis",
           "name": "visual-principles",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\visual-principles.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/visual-principles.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.175Z"
         },
@@ -114,7 +114,7 @@
           "stageId": "metaphor-generation",
           "name": "metaphor-library",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\metaphor-library.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/metaphor-library.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.176Z"
         },
@@ -124,7 +124,7 @@
           "stageId": "metaphor-clustering",
           "name": "metaphor-clusters",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\metaphor-clusters.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/metaphor-clusters.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.177Z"
         },
@@ -134,7 +134,7 @@
           "stageId": "direction-generation",
           "name": "concept-directions",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\concept-directions.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/concept-directions.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.178Z"
         },
@@ -144,7 +144,7 @@
           "stageId": "direction-critique",
           "name": "direction-scorecard",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\direction-scorecard.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/direction-scorecard.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.178Z"
         },
@@ -154,7 +154,7 @@
           "stageId": "direction-selection",
           "name": "selected-direction",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\selected-direction.md",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/selected-direction.md",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.179Z"
         },
@@ -164,7 +164,7 @@
           "stageId": "art-direction",
           "name": "art-direction",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\art-direction.md",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/art-direction.md",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.179Z"
         },
@@ -174,7 +174,7 @@
           "stageId": "prompt-builder",
           "name": "prompt-pack",
           "kind": "prompt-pack",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\prompt-pack.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/prompt-pack.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.180Z"
         },
@@ -184,7 +184,7 @@
           "stageId": "output-critique",
           "name": "output-critique",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\output-critique.json",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/output-critique.json",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.180Z"
         },
@@ -194,7 +194,7 @@
           "stageId": "concept-approval",
           "name": "concept-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\concept-art\\concept-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/concept-art/concept-lock.md",
           "version": 2,
           "createdAt": "2026-07-20T22:41:03.181Z"
         }
@@ -211,7 +211,7 @@
           "stageId": "narrative-decomposition",
           "name": "narrative-beats",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\narrative-beats.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/narrative-beats.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.461Z"
         },
@@ -221,7 +221,7 @@
           "stageId": "interaction-mapping",
           "name": "interaction-map",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\interaction-map.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/interaction-map.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.462Z"
         },
@@ -231,7 +231,7 @@
           "stageId": "shot-generation",
           "name": "shot-list",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\shot-list.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/shot-list.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.471Z"
         },
@@ -241,7 +241,7 @@
           "stageId": "camera-language",
           "name": "camera-language",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\camera-language.md",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/camera-language.md",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.472Z"
         },
@@ -251,7 +251,7 @@
           "stageId": "sequence-assembly",
           "name": "sequence",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\sequence.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/sequence.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.473Z"
         },
@@ -261,7 +261,7 @@
           "stageId": "timing-design",
           "name": "timing-sheet",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\timing-sheet.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/timing-sheet.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.473Z"
         },
@@ -271,7 +271,7 @@
           "stageId": "continuity-critique",
           "name": "continuity-scorecard",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\continuity-scorecard.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/continuity-scorecard.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.474Z"
         },
@@ -281,7 +281,7 @@
           "stageId": "reduced-motion",
           "name": "reduced-motion-storyboard",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\reduced-motion-storyboard.json",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/reduced-motion-storyboard.json",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.474Z"
         },
@@ -291,7 +291,7 @@
           "stageId": "storyboard-approval",
           "name": "storyboard-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\storyboard\\storyboard-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/storyboard/storyboard-lock.md",
           "version": 2,
           "createdAt": "2026-07-20T22:59:31.475Z"
         }
@@ -308,7 +308,7 @@
           "stageId": "interface-inventory",
           "name": "interface-inventory",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\interface-inventory.json",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/interface-inventory.json",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.381Z"
         },
@@ -318,7 +318,7 @@
           "stageId": "information-architecture",
           "name": "information-architecture",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\information-architecture.json",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/information-architecture.json",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.382Z"
         },
@@ -328,7 +328,7 @@
           "stageId": "token-generation",
           "name": "tokens",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\tokens.json",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/tokens.json",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.384Z"
         },
@@ -338,7 +338,7 @@
           "stageId": "component-architecture",
           "name": "components",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\components.json",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/components.json",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.384Z"
         },
@@ -348,7 +348,7 @@
           "stageId": "state-design",
           "name": "component-states",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\component-states.json",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/component-states.json",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.385Z"
         },
@@ -358,7 +358,7 @@
           "stageId": "2d-3d-integration",
           "name": "2d-3d-integration",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\2d-3d-integration.md",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/2d-3d-integration.md",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.386Z"
         },
@@ -368,7 +368,7 @@
           "stageId": "accessibility-review",
           "name": "accessibility-spec",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\accessibility-spec.md",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/accessibility-spec.md",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.386Z"
         },
@@ -378,7 +378,7 @@
           "stageId": "design-approval",
           "name": "design-system-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\design-system\\design-system-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/design-system/design-system-lock.md",
           "version": 2,
           "createdAt": "2026-07-21T07:01:02.387Z"
         }
@@ -395,7 +395,7 @@
           "stageId": "asset-breakdown",
           "name": "asset-registry",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\asset-registry.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/asset-registry.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.937Z"
         },
@@ -405,7 +405,7 @@
           "stageId": "asset-classification",
           "name": "asset-classification",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\asset-classification.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/asset-classification.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.938Z"
         },
@@ -415,7 +415,7 @@
           "stageId": "technical-specification",
           "name": "asset-specifications",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\asset-specifications.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/asset-specifications.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.939Z"
         },
@@ -425,7 +425,7 @@
           "stageId": "generation-plan",
           "name": "generation-plan",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\generation-plan.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/generation-plan.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.939Z"
         },
@@ -435,7 +435,7 @@
           "stageId": "geometry-cleanup",
           "name": "geometry-cleanup",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\geometry-cleanup.md",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/geometry-cleanup.md",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.940Z"
         },
@@ -445,7 +445,7 @@
           "stageId": "material-preparation",
           "name": "material-manifest",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\material-manifest.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/material-manifest.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.940Z"
         },
@@ -455,7 +455,7 @@
           "stageId": "scene-assembly",
           "name": "scene-assembly",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\scene-assembly.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/scene-assembly.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.941Z"
         },
@@ -465,7 +465,7 @@
           "stageId": "optimization",
           "name": "optimization-report",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\optimization-report.json",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/optimization-report.json",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.941Z"
         },
@@ -475,7 +475,7 @@
           "stageId": "asset-approval",
           "name": "3d-assets-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\modeling-3d\\3d-assets-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/modeling-3d/3d-assets-lock.md",
           "version": 2,
           "createdAt": "2026-07-21T19:18:13.942Z"
         }
@@ -492,7 +492,7 @@
           "stageId": "motion-principles",
           "name": "motion-language",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\motion-language.md",
+          "path": "projects/traderframe-evidence-gate/approved/animation/motion-language.md",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.076Z"
         },
@@ -502,7 +502,7 @@
           "stageId": "motion-vocabulary",
           "name": "motion-vocabulary",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\motion-vocabulary.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/motion-vocabulary.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.077Z"
         },
@@ -512,7 +512,7 @@
           "stageId": "timeline-planning",
           "name": "animation-registry",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\animation-registry.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/animation-registry.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.088Z"
         },
@@ -522,7 +522,7 @@
           "stageId": "camera-choreography",
           "name": "camera-paths",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\camera-paths.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/camera-paths.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.091Z"
         },
@@ -532,7 +532,7 @@
           "stageId": "object-animation",
           "name": "object-animation",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\object-animation.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/object-animation.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.092Z"
         },
@@ -542,7 +542,7 @@
           "stageId": "interaction-animation",
           "name": "interaction-transitions",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\interaction-transitions.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/interaction-transitions.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.093Z"
         },
@@ -552,7 +552,7 @@
           "stageId": "motion-critique",
           "name": "motion-scorecard",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\motion-scorecard.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/motion-scorecard.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.094Z"
         },
@@ -562,7 +562,7 @@
           "stageId": "reduced-motion",
           "name": "reduced-motion-spec",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\reduced-motion-spec.json",
+          "path": "projects/traderframe-evidence-gate/approved/animation/reduced-motion-spec.json",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.094Z"
         },
@@ -572,7 +572,7 @@
           "stageId": "animation-approval",
           "name": "animation-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\animation\\animation-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/animation/animation-lock.md",
           "version": 2,
           "createdAt": "2026-07-21T20:36:43.095Z"
         }
@@ -589,7 +589,7 @@
           "stageId": "effect-inventory",
           "name": "effect-inventory",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\effect-inventory.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/effect-inventory.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.372Z"
         },
@@ -599,7 +599,7 @@
           "stageId": "shader-specification",
           "name": "shader-registry",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\shader-registry.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/shader-registry.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.373Z"
         },
@@ -609,7 +609,7 @@
           "stageId": "material-integration",
           "name": "materials",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\materials.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/materials.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.382Z"
         },
@@ -619,7 +619,7 @@
           "stageId": "particle-systems",
           "name": "particle-systems",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\particle-systems.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/particle-systems.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.383Z"
         },
@@ -629,7 +629,7 @@
           "stageId": "post-processing",
           "name": "post-processing-config",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\post-processing-config.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/post-processing-config.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.383Z"
         },
@@ -639,7 +639,7 @@
           "stageId": "performance-review",
           "name": "shader-performance-report",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\shader-performance-report.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/shader-performance-report.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.384Z"
         },
@@ -649,7 +649,7 @@
           "stageId": "mobile-fallbacks",
           "name": "mobile-fallbacks",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\mobile-fallbacks.json",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/mobile-fallbacks.json",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.384Z"
         },
@@ -659,7 +659,7 @@
           "stageId": "vfx-approval",
           "name": "vfx-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\shader-vfx\\vfx-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/shader-vfx/vfx-lock.md",
           "version": 2,
           "createdAt": "2026-07-21T21:54:52.385Z"
         }
@@ -676,7 +676,7 @@
           "stageId": "architecture",
           "name": "technical-architecture",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\technical-architecture.md",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/technical-architecture.md",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.766Z"
         },
@@ -686,7 +686,7 @@
           "stageId": "scaffold",
           "name": "repository-scaffold",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\repository-scaffold.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/repository-scaffold.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.767Z"
         },
@@ -696,7 +696,7 @@
           "stageId": "scene-implementation",
           "name": "scene-plan",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\scene-plan.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/scene-plan.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.777Z"
         },
@@ -706,7 +706,7 @@
           "stageId": "interaction",
           "name": "interaction-implementation",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\interaction-implementation.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/interaction-implementation.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.777Z"
         },
@@ -716,7 +716,7 @@
           "stageId": "ui-integration",
           "name": "ui-integration",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\ui-integration.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/ui-integration.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.778Z"
         },
@@ -726,7 +726,7 @@
           "stageId": "asset-integration",
           "name": "asset-loading",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\asset-loading.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/asset-loading.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.778Z"
         },
@@ -736,7 +736,7 @@
           "stageId": "performance",
           "name": "performance-plan",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\performance-plan.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/performance-plan.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.779Z"
         },
@@ -746,7 +746,7 @@
           "stageId": "accessibility",
           "name": "accessibility-implementation",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\accessibility-implementation.md",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/accessibility-implementation.md",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.780Z"
         },
@@ -756,7 +756,7 @@
           "stageId": "code-review",
           "name": "code-review",
           "kind": "scorecard",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\code-review.json",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/code-review.json",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.780Z"
         },
@@ -766,7 +766,7 @@
           "stageId": "implementation-approval",
           "name": "implementation-lock",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\implementation\\implementation-lock.md",
+          "path": "projects/traderframe-evidence-gate/approved/implementation/implementation-lock.md",
           "version": 2,
           "createdAt": "2026-07-21T22:01:53.781Z"
         }
@@ -783,7 +783,7 @@
           "stageId": "acceptance-criteria",
           "name": "acceptance-tests",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\acceptance-tests.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/acceptance-tests.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.080Z"
         },
@@ -793,7 +793,7 @@
           "stageId": "functional-testing",
           "name": "functional-test-plan",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\functional-test-plan.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/functional-test-plan.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.081Z"
         },
@@ -803,7 +803,7 @@
           "stageId": "visual-regression",
           "name": "visual-regression-report",
           "kind": "report",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\visual-regression-report.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/visual-regression-report.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.082Z"
         },
@@ -813,7 +813,7 @@
           "stageId": "cross-device",
           "name": "device-matrix",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\device-matrix.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/device-matrix.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.083Z"
         },
@@ -823,7 +823,7 @@
           "stageId": "performance-testing",
           "name": "performance-report",
           "kind": "report",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\performance-report.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/performance-report.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.083Z"
         },
@@ -833,7 +833,7 @@
           "stageId": "accessibility-audit",
           "name": "accessibility-report",
           "kind": "report",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\accessibility-report.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/accessibility-report.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.084Z"
         },
@@ -843,7 +843,7 @@
           "stageId": "failure-recovery",
           "name": "failure-recovery-plan",
           "kind": "json",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\failure-recovery-plan.json",
+          "path": "projects/traderframe-evidence-gate/approved/qa/failure-recovery-plan.json",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.084Z"
         },
@@ -853,7 +853,7 @@
           "stageId": "defect-prioritization",
           "name": "defect-policy",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\defect-policy.md",
+          "path": "projects/traderframe-evidence-gate/approved/qa/defect-policy.md",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.085Z"
         },
@@ -863,7 +863,7 @@
           "stageId": "release-approval",
           "name": "release-checklist",
           "kind": "markdown",
-          "path": "C:\\Users\\Murad\\Documents\\gatezero\\tools\\evidence-gate-agent-pipelines\\projects\\traderframe-evidence-gate\\approved\\qa\\release-checklist.md",
+          "path": "projects/traderframe-evidence-gate/approved/qa/release-checklist.md",
           "version": 2,
           "createdAt": "2026-07-21T22:07:11.085Z"
         }

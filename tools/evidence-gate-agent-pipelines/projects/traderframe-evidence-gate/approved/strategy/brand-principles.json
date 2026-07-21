@@ -1,0 +1,45 @@
+{
+  "product_truth": "TraderFrame is a premium decision-intelligence platform that transforms fragmented, unstructured market evidence into clear, explainable, and risk-aware trading decisions. It empowers independent traders, portfolio managers, and research-led market participants to make informed, transparent, and defensible trading decisions through a rigorous process of evidence filtering, challenge, approval, and recording.",
+  "audience": {
+    "primary": [
+      "Independent traders seeking control and clarity in volatile markets",
+      "Portfolio managers prioritizing risk-aware, evidence-based decision-making",
+      "Research-led market participants who rely on structured, transparent analysis"
+    ],
+    "secondary": [
+      "Financial analysts looking for intuitive tools to validate market insights",
+      "Investment professionals seeking to improve decision transparency and accountability"
+    ]
+  },
+  "message_hierarchy": {
+    "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+    "supporting_messages": [
+      "Evidence first: Every decision is built on verifiable, structured data.",
+      "Transparent reasoning: Every step of the decision process is visible and explainable.",
+      "User control: You decide what evidence matters and how it’s used.",
+      "Risk awareness: Every decision is evaluated for risk and impact.",
+      "Calm precision: Clarity and control in even the most volatile markets."
+    ],
+    "call_to_action": "Experience TraderFrame — where evidence leads to confident, risk-aware trading."
+  },
+  "narrative_strategy": {
+    "tone": "Authoritative yet approachable, precise yet intuitive, confident yet grounded in evidence.",
+    "story_arc": {
+      "setup": "In a world of fragmented, unstructured market data, traders and investors struggle to make informed decisions.",
+      "conflict": "Traditional methods lack transparency, accountability, and risk awareness — leading to poor outcomes and missed opportunities.",
+      "resolution": "TraderFrame offers a new paradigm: a decision-intelligence platform that transforms evidence into credible, risk-aware decisions through a structured, transparent process."
+    },
+    "brand_positioning": {
+      "value_proposition": "TraderFrame is the first platform to turn fragmented market evidence into explainable, risk-aware trading decisions — with transparency, control, and precision.",
+      "differentiator": "Unlike traditional tools, TraderFrame doesn’t just provide data — it builds a decision process that is verifiable, challengeable, and recordable."
+    }
+  },
+  "brand_principles": [
+    "Evidence first: Every decision is rooted in verifiable, structured data.",
+    "Transparent reasoning: Every step of the decision process is visible and explainable.",
+    "User control: You decide what evidence matters and how it’s used.",
+    "Risk awareness: Every decision is evaluated for risk and impact.",
+    "Calm precision: Clarity and control in even the most volatile markets."
+  ],
+  "implementation_ready": true
+}

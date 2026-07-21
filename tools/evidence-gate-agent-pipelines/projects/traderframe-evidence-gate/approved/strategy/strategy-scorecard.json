@@ -1,0 +1,67 @@
+{
+  "strategy": {
+    "product_truth": {
+      "core_value": "TraderFrame is a decision-intelligence platform that transforms fragmented market evidence into explainable, risk-aware trading decisions. It is designed for independent traders, portfolio managers, and research-led market participants who seek to make informed, transparent, and credible trading decisions.",
+      "differentiation": "TraderFrame differentiates itself by prioritizing evidence-first reasoning, transparent decision-making, and user control over the entire evidence evaluation process. It is not a predictive tool, but a framework for building credible market conviction through structured evidence analysis.",
+      "credibility": "Credibility is built through the transparency of the evidence evaluation process, the ability to challenge and approve evidence, and the recording of decisions in a clear, auditable format. This aligns with the brand principles of evidence first, transparent reasoning, user control, risk awareness, and calm precision.",
+      "narrative_potential": "The 3D interactive narrative has strong potential to visually represent the evidence evaluation process, the building of market conviction, and the recording of decisions. It can guide the user through a structured, risk-aware journey that mirrors real-world trading scenarios."
+    },
+    "audience": {
+      "primary": {
+        "role": "Independent traders",
+        "needs": "A structured way to evaluate and justify trading decisions, with a focus on transparency and risk awareness.",
+        "pain_points": "Fragmented market data, lack of clear decision justification, and difficulty in tracking risk exposure."
+      },
+      "secondary": {
+        "role": "Portfolio managers",
+        "needs": "A tool to assess the credibility of trading decisions, with a focus on risk-awareness and auditability.",
+        "pain_points": "Inability to trace decision-making processes, lack of transparency in evidence evaluation, and difficulty in managing risk across portfolios."
+      },
+      "tertiary": {
+        "role": "Research-led market participants",
+        "needs": "A platform that supports evidence-based analysis and structured reasoning in market research.",
+        "pain_points": "Fragmented data sources, lack of structured evidence evaluation, and difficulty in building a credible narrative around market insights."
+      }
+    },
+    "message_hierarchy": {
+      "primary_message": "Market conviction becomes credible when evidence is filtered, challenged, approved, and recorded transparently.",
+      "supporting_messages": [
+        "Evidence is the foundation of every decision.",
+        "Transparency ensures trust in the decision-making process.",
+        "User control empowers informed risk management.",
+        "Calm precision is the result of a structured, evidence-based approach."
+      ],
+      "call_to_action": "Experience the evidence-first decision process in a premium interactive 3D narrative."
+    },
+    "narrative_strategy": {
+      "structure": {
+        "act_1": "Introduce the fragmented nature of market evidence and the need for structured evaluation.",
+        "act_2": "Demonstrate the process of filtering, challenging, and approving evidence through a 3D interactive journey.",
+        "act_3": "Show the recording and transparency of decisions, emphasizing risk awareness and user control.",
+        "act_4": "Conclude with the credibility of the decision process and the value of evidence-first reasoning."
+      },
+      "tone": {
+        "voice": "Calm, precise, and authoritative.",
+        "language": "Clear, structured, and evidence-based."
+      },
+      "emotional_arc": {
+        "start": "Uncertainty and fragmentation",
+        "middle": "Clarity and control through structured evidence evaluation",
+        "end": "Credibility and confidence in decision-making"
+      },
+      "visual_language": {
+        "symbolism": "Use of visual filters, challenge markers, approval seals, and risk indicators to represent the evidence process.",
+        "interactivity": "Allow users to engage with evidence, challenge it, and see the impact on decision credibility.",
+        "aesthetic": "Clean, minimal, and precise — reflecting the brand principles of calm precision and transparency."
+      }
+    },
+    "implementation_notes": {
+      "approved_upstream_decisions": {
+        "brand_principles": "Evidence first, Transparent reasoning, User control, Risk awareness, Calm precision",
+        "core_message": "Market conviction becomes credible when evidence is filtered, challenged, approved and recorded transparently.",
+        "business_goal": "Demonstrate TraderFrame's evidence-first decision process through a premium interactive 3D narrative."
+      },
+      "unsupported_facts": "None. All product facts are aligned with approved upstream decisions and brand principles."
+    }
+  }
+}

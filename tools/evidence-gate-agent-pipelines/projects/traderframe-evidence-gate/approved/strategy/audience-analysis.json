@@ -1,0 +1,84 @@
+{
+  "audience_analysis": {
+    "target_audience": {
+      "independent_traders": {
+        "needs": [
+          "Real-time, actionable insights from fragmented market data",
+          "Clear, explainable decision rationale",
+          "Risk-aware tools for position sizing and stop-loss management"
+        ],
+        "objections": [
+          "Overwhelmed by noise and conflicting signals",
+          "Lack of trust in opaque decision-making processes",
+          "Difficulty in quantifying risk exposure"
+        ],
+        "knowledge_level": "Intermediate to advanced",
+        "decision_criteria": [
+          "Speed of insight delivery",
+          "Transparency of reasoning",
+          "Ease of integration with existing workflows"
+        ]
+      },
+      "portfolio_managers": {
+        "needs": [
+          "Strategic, evidence-based decision-making frameworks",
+          "Audit-ready documentation of trading rationale",
+          "Risk-aware portfolio optimization tools"
+        ],
+        "objections": [
+          "Need for compliance and audit trails",
+          "Pressure to justify high-stakes decisions",
+          "Complexity of managing multiple strategies"
+        ],
+        "knowledge_level": "Advanced",
+        "decision_criteria": [
+          "Evidence-based decision-making",
+          "Auditability and transparency",
+          "Scalability across multiple strategies"
+        ]
+      },
+      "research-led_market_participants": {
+        "needs": [
+          "Access to high-quality, structured market evidence",
+          "Tools for hypothesis testing and validation",
+          "Integration with analytical and predictive models"
+        ],
+        "objections": [
+          "Limited access to structured market data",
+          "Time-intensive manual analysis",
+          "Lack of tools for validating assumptions"
+        ],
+        "knowledge_level": "Advanced",
+        "decision_criteria": [
+          "Data quality and structure",
+          "Validation and testing capabilities",
+          "Integration with analytical workflows"
+        ]
+      }
+    },
+    "shared_objectives": [
+      "Transform fragmented market data into coherent, explainable insights",
+      "Build trust through transparent, evidence-based decision-making",
+      "Support risk-aware, user-controlled trading strategies"
+    ],
+    "key_message_hypothesis": "Market conviction becomes credible when evidence is filtered, challenged, approved, and recorded transparently.",
+    "narrative_strategy": {
+      "tone": "Calm, precise, and authoritative",
+      "structure": {
+        "introduction": "Present the problem: fragmented, opaque, and high-risk trading environments",
+        "challenge": "Introduce TraderFrame as a solution that transforms evidence into actionable, explainable decisions",
+        "evidence": "Showcase the platform’s ability to filter, challenge, and record market evidence",
+        "transparency": "Highlight the audit-ready, user-controlled documentation of reasoning",
+        "risk_awareness": "Demonstrate how risk is integrated into the decision-making process",
+        "call_to_action": "Invite users to experience the platform’s evidence-first approach in a premium interactive 3D narrative"
+      },
+      "brand_alignment": {
+        "evidence_first": "All decisions are grounded in structured, validated market evidence",
+        "transparent_reasoning": "Every step of the decision process is visible and explainable",
+        "user_control": "Users retain full control over how evidence is interpreted and applied",
+        "risk_awareness": "Risk is embedded in the decision-making process, not an afterthought",
+        "calm_precision": "The platform operates with clarity, focus, and precision in high-pressure environments"
+      }
+    }
+  }
+}
