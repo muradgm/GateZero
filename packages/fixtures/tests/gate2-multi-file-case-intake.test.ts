@@ -21,8 +21,8 @@ describe("Gate 2 multi-file local case intake", () => {
 
   it("accepts valid files while isolating an invalid file", () => {
     const { catalog, diagnostics } = buildCheckedInLocalCaseIntake();
-    expect(catalog.items).toHaveLength(2);
-    expect(diagnostics).toMatchObject({ accepted_count: 2, rejected_count: 1 });
+    expect(catalog.items).toHaveLength(3);
+    expect(diagnostics).toMatchObject({ accepted_count: 3, rejected_count: 1 });
   });
 
   it("keeps the stale case blocked", () => {
@@ -48,7 +48,7 @@ describe("Gate 2 multi-file local case intake", () => {
     const diagnostics = buildCheckedInLocalCaseIntake().diagnostics;
     expect(Gate2LocalCaseIntakeDiagnosticsSchema.parse(diagnostics)).toEqual(diagnostics);
     expect(() =>
-      Gate2LocalCaseIntakeDiagnosticsSchema.parse({ ...diagnostics, accepted_count: 3 })
+      Gate2LocalCaseIntakeDiagnosticsSchema.parse({ ...diagnostics, accepted_count: 4 })
     ).toThrow();
   });
 
@@ -67,15 +67,16 @@ describe("Gate 2 multi-file local case intake", () => {
   it("exposes bounded diagnostics through the CLI", () => {
     const result = runInspectLocalCasesCli(["--diagnostics"]);
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('"accepted_count": 2');
+    expect(result.stdout).toContain('"accepted_count": 3');
     expect(result.stdout).toContain('"rejected_count": 1');
     expect(result.stdout).not.toMatch(/stack|execute|broker/i);
   });
 
-  it("lists both accepted local cases", () => {
+  it("lists all accepted local cases", () => {
     const result = runInspectLocalCasesCli([]);
     expect(result.stdout).toContain("gate2-research-case-fixture-003");
     expect(result.stdout).toContain("gate2-research-case-fixture-004");
+    expect(result.stdout).toContain("operator-workflow-case-001");
     expect(result.stdout).not.toContain("gate2-research-case-fixture-005");
   });
 

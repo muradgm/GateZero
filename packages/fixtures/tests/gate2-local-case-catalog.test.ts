@@ -14,7 +14,13 @@ describe("Gate 2 checked-in local case catalog", () => {
       action_route_created: false,
       items: [
         { case_id: "gate2-research-case-fixture-003", status: "review_required" },
-        { case_id: "gate2-research-case-fixture-004", status: "blocked" }
+        { case_id: "gate2-research-case-fixture-004", status: "blocked" },
+        {
+          case_id: "operator-workflow-case-001",
+          status: "blocked",
+          revision_id: "operator-workflow-case-001-r1",
+          revision_pending_review: true
+        }
       ]
     });
   });

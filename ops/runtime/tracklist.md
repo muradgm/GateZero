@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-23                                                     |
-| Latest accepted packet     | `TRD-726`                                                      |
-| Latest accepted validation | 88 test files, 635 tests passed                                |
+| Latest accepted packet     | `TRD-736`                                                      |
+| Latest accepted validation | 89 test files, 644 tests passed                                |
 
 ## Boundary
 
@@ -1181,6 +1181,16 @@ Latest accepted result:
 | `TRD-724` | accepted | Catalog visibility | Exposed revision lineage beside blocked state.             |
 | `TRD-725` | accepted | Revision QA        | Covered integrity, unsafe input, and write races.          |
 | `TRD-726` | accepted | Checkpoint         | Deferred editor UI pending real operator evidence.         |
+| `TRD-727` | accepted | Authoring dry run  | Created one checked-in operational evidence case.          |
+| `TRD-728` | accepted | Friction findings  | Recorded hidden lineage and ambiguous copy.                |
+| `TRD-729` | accepted | Revision dry run   | Created one immutable checked-in revision.                 |
+| `TRD-730` | accepted | Lineage inspection | Added read-only revision-chain inspection.                 |
+| `TRD-731` | accepted | Catalog check      | Confirmed blocked revision visibility.                     |
+| `TRD-732` | accepted | Workspace check    | Kept revision, sources, and limitations adjacent.          |
+| `TRD-733` | accepted | Comprehension      | Identified ambiguous review-required language.             |
+| `TRD-734` | accepted | Copy correction    | Clarified blocked-pending-review state.                    |
+| `TRD-735` | accepted | Workflow QA        | Covered the checked-in workflow end to end.                |
+| `TRD-736` | accepted | Checkpoint         | Selected read-only revision timeline as next surface.      |
 
 ## Current Operator Commands
 
@@ -1196,6 +1206,7 @@ Latest accepted result:
 | `pnpm snapshot:case-catalog`                                                                      | Generate the checked-in local case catalog.             | Browser catalog matches validated local intake records.          |
 | `pnpm inspect:local-cases`                                                                        | List checked-in local research cases.                   | Neutral read-only JSON summaries.                                |
 | `pnpm inspect:local-cases -- --case <id>`                                                         | Inspect one checked-in local research case.             | Local evidence, source, risk, and limitation detail.             |
+| `pnpm inspect:local-cases -- --revisions <id>`                                                    | Inspect immutable local revision lineage.               | Read-only chain metadata with blocked review state.              |
 | `pnpm inspect:local-cases -- --diagnostics`                                                       | Inspect local intake file outcomes.                     | Bounded accepted/rejected diagnostics without payload leakage.   |
 | `pnpm scaffold:local-case -- --case-id <id> --title <title>`                                      | Create one checked-in local research-case draft.        | New validated file only; existing files are never overwritten.   |
 | `pnpm revise:local-case -- --case-id <id> --reason <reason> --title <title>`                      | Create one immutable local research-case revision.      | New blocked revision; original remains unchanged.                |
@@ -1220,25 +1231,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 88 files and 635 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 89 files and 644 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                | Acceptance focus                                        |
-| ---- | --------- | ------ | ----------------------------------- | ------------------------------------------------------- |
-| 1    | `TRD-727` | queued | Real-case authoring dry run.        | Exercise one checked-in operator workflow.              |
-| 2    | `TRD-728` | queued | Authoring friction findings.        | Record observed correction friction without claims.     |
-| 3    | `TRD-729` | queued | Revision dry run.                   | Exercise one immutable revision chain.                  |
-| 4    | `TRD-730` | queued | Revision inspection output.         | Inspect lineage without mutation or approval.           |
-| 5    | `TRD-731` | queued | Catalog visibility check.           | Confirm blocked revision state remains legible.         |
-| 6    | `TRD-732` | queued | Workspace display check.            | Keep revision, evidence, and limitations adjacent.      |
-| 7    | `TRD-733` | queued | Blocked-state comprehension review. | Detect ambiguous readiness or freshness language.       |
-| 8    | `TRD-734` | queued | Bounded copy corrections.           | Correct only evidenced operator misunderstanding.       |
-| 9    | `TRD-735` | queued | Operator workflow QA.               | Verify original, revision, catalog, and workspace.      |
-| 10   | `TRD-736` | queued | Operator workflow checkpoint.       | Decide the next product surface from observed evidence. |
+| Rank | Packet    | Status | Goal                          | Acceptance focus                                      |
+| ---- | --------- | ------ | ----------------------------- | ----------------------------------------------------- |
+| 1    | `TRD-737` | queued | Revision timeline gap intake. | Confirm full lineage is absent from the workspace.    |
+| 2    | `TRD-738` | queued | Timeline data contract.       | Define read-only bounded revision summaries.          |
+| 3    | `TRD-739` | queued | Timeline projection.          | Project validated revision chains for display.        |
+| 4    | `TRD-740` | queued | Workspace data integration.   | Add lineage summaries to generated local data.        |
+| 5    | `TRD-741` | queued | Timeline rendering.           | Render revision history without editing controls.     |
+| 6    | `TRD-742` | queued | Evidence adjacency.           | Keep changed fields, reason, and limitations visible. |
+| 7    | `TRD-743` | queued | Empty and broken states.      | Fail closed on absent or invalid lineage.             |
+| 8    | `TRD-744` | queued | Timeline accessibility.       | Verify semantics, focus, and neutral copy.            |
+| 9    | `TRD-745` | queued | Timeline workflow QA.         | Cover data, rendering, and blocked-scope behavior.    |
+| 10   | `TRD-746` | queued | Timeline checkpoint.          | Decide whether more lineage depth is useful.          |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

@@ -1,0 +1,36 @@
+{
+  "revision_id": "operator-workflow-case-001-r1",
+  "case_id": "operator-workflow-case-001",
+  "revision_number": 1,
+  "parent_revision_id": null,
+  "base_content_hash": "ae97b898d8341b82b87b5000e11b8216ed17869321e9bba0fddc5349d3933d46",
+  "revised_content_hash": "1fc10fa64972913f03dd3262d84001983c51d0b49a56c3b135c6e68eaa5a7d16",
+  "changed_fields": ["evidence_refs", "limitation_notes", "provenance_refs"],
+  "revision_reason": "Replace template placeholders with checked-in workflow evidence and explicit limitations.",
+  "created_at": "2026-07-23T21:18:38.974Z",
+  "revised_draft": {
+    "case_id": "operator-workflow-case-001",
+    "title": "Operator workflow evidence case",
+    "strategy_idea_ref": "ops/truth/PROJECT_TRUTH.md",
+    "evidence_refs": [
+      "docs/operations/LOCAL_CASE_AUTHORING_USABILITY_REVIEW.md",
+      "docs/operations/LOCAL_CASE_REVISION_CHECKPOINT.md"
+    ],
+    "risk_review_ref": "ops/truth/RISK_RULES.md",
+    "freshness_status": "unverified",
+    "provenance_refs": ["ops/runtime/tracklist.md"],
+    "limitation_notes": [
+      "Operational workflow evidence only; this case is not a strategy, market recommendation, approval, or execution route."
+    ],
+    "operator_review_required": true,
+    "local_only": true,
+    "read_only": true,
+    "action_route_created": false,
+    "created_at": "2026-07-23T21:18:38.255Z",
+    "verified_at": null
+  },
+  "operator_review_required": true,
+  "local_only": true,
+  "read_only": true,
+  "action_route_created": false
+}

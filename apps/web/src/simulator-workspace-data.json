@@ -169,7 +169,7 @@
   ],
   "caseCatalog": {
     "catalog_id": "gate2-local-case-catalog-001",
-    "generated_at": "2026-07-20T00:00:00.000Z",
+    "generated_at": "2026-07-23T21:18:38.255Z",
     "items": [
       {
         "case_id": "gate2-research-case-fixture-003",
@@ -215,6 +215,31 @@
         "revision_id": null,
         "revision_number": 0,
         "revision_pending_review": false
+      },
+      {
+        "case_id": "operator-workflow-case-001",
+        "title": "Operator workflow evidence case",
+        "status": "blocked",
+        "freshness_status": "unverified",
+        "evidence_count": 2,
+        "source_refs": [
+          "docs/operations/LOCAL_CASE_AUTHORING_USABILITY_REVIEW.md",
+          "docs/operations/LOCAL_CASE_REVISION_CHECKPOINT.md",
+          "ops/runtime/tracklist.md",
+          "ops/truth/PROJECT_TRUTH.md"
+        ],
+        "risk_review_ref": "ops/truth/RISK_RULES.md",
+        "limitation_notes": [
+          "Operational workflow evidence only; this case is not a strategy, market recommendation, approval, or execution route."
+        ],
+        "operator_review_required": true,
+        "local_only": true,
+        "read_only": true,
+        "action_route_created": false,
+        "verified_at": null,
+        "revision_id": "operator-workflow-case-001-r1",
+        "revision_number": 1,
+        "revision_pending_review": true
       }
     ],
     "local_only": true,
@@ -245,9 +270,16 @@
         "case_id": null,
         "error_code": "missing_risk_review",
         "message": "Rejected by the bounded local intake contract."
+      },
+      {
+        "source_file": "packages/fixtures/data/research-cases/operator-workflow-case-001.json",
+        "status": "accepted",
+        "case_id": "operator-workflow-case-001",
+        "error_code": null,
+        "message": "Accepted as blocked unverified evidence."
       }
     ],
-    "accepted_count": 2,
+    "accepted_count": 3,
     "rejected_count": 1,
     "local_only": true,
     "read_only": true,

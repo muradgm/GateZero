@@ -57,7 +57,7 @@ root.innerHTML = `
        <section class="catalog-band" aria-labelledby="catalog-title">
          <header>
            <div><p class="eyebrow">Checked-in intake</p><h2 id="catalog-title">Local case catalog</h2></div>
-           <span>${data.caseCatalog.items.length} record</span>
+           <span>${data.caseCatalog.items.length} ${data.caseCatalog.items.length === 1 ? "record" : "records"}</span>
          </header>
          ${data.caseCatalog.items
            .map(
@@ -67,7 +67,8 @@ root.innerHTML = `
                  <div><dt>Status</dt><dd>${statusLabel(item.status)}</dd></div>
                  <div><dt>Freshness</dt><dd>${statusLabel(item.freshness_status)}</dd></div>
                  <div><dt>Evidence</dt><dd>${item.evidence_count}</dd></div>
-                 <div><dt>Revision</dt><dd>${item.revision_id ? `${item.revision_id} · review required` : "Original"}</dd></div>
+                 <div><dt>Revision</dt><dd>${item.revision_id ? `${item.revision_id} · blocked pending review` : "Original"}</dd></div>
+                 <div><dt>Operator review</dt><dd>${item.operator_review_required ? "Required" : "Not required"}</dd></div>
                </dl>
                <details><summary>Checked-in sources</summary><ul>${item.source_refs.map((source) => `<li><code>${source}</code></li>`).join("")}</ul><p>${item.limitation_notes.join(" ")}</p></details>
              </article>`

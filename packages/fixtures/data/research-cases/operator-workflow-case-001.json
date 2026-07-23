@@ -1,0 +1,16 @@
+{
+  "case_id": "operator-workflow-case-001",
+  "title": "Operator workflow evidence case",
+  "strategy_idea_ref": "ops/truth/PROJECT_TRUTH.md",
+  "evidence_refs": ["ops/truth/PRODUCT_WEDGE.md"],
+  "risk_review_ref": "ops/truth/RISK_RULES.md",
+  "freshness_status": "unverified",
+  "provenance_refs": ["ops/truth/PROJECT_TRUTH.md"],
+  "limitation_notes": ["Local operator draft; evidence and risk references require manual review."],
+  "operator_review_required": true,
+  "local_only": true,
+  "read_only": true,
+  "action_route_created": false,
+  "created_at": "2026-07-23T21:18:38.255Z",
+  "verified_at": null
+}
