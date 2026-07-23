@@ -1,5 +1,6 @@
 import {
   calculateGate2DeterministicFill,
+  buildLocalCaseRevisionTimelines,
   evaluateGate2PaperRiskLimits,
   evaluateGate2SimulationCandidateIntegrity,
   reduceGate2PaperAccountState,
@@ -18,13 +19,20 @@ import {
   gate2ResearchCaseInventoryFixtures,
   gate2StrategySimulatorHandoffFixture
 } from "../packages/fixtures/src/index.js";
-import { buildCheckedInLocalCaseIntake } from "./build-local-case-catalog.js";
+import {
+  buildCheckedInLocalCaseIntake,
+  readCheckedInLocalCaseRevisions
+} from "./build-local-case-catalog.js";
 
 type ScenarioKey = "recorded" | "risk_blocked" | "candidate_blocked" | "state_mismatch";
 
 export function buildSimulatorWorkspaceData() {
   const caseIntake = buildCheckedInLocalCaseIntake();
   const caseCatalog = caseIntake.catalog;
+  const revisionTimelines = buildLocalCaseRevisionTimelines(
+    caseCatalog,
+    readCheckedInLocalCaseRevisions()
+  );
   const baseInput = buildBaseReducerInput();
   const scenarios = [
     buildScenario("recorded", "Recorded", "A fully reconciled local evidence record.", baseInput),
@@ -163,6 +171,7 @@ export function buildSimulatorWorkspaceData() {
     researchCase: defaultResearchCase,
     researchCases,
     caseCatalog,
+    revisionTimelines,
     caseIntakeDiagnostics: caseIntake.diagnostics,
     riskComparison: scenarios
       .filter((scenario) => scenario.key === "recorded" || scenario.key === "risk_blocked")

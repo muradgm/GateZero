@@ -60,8 +60,11 @@ root.innerHTML = `
            <span>${data.caseCatalog.items.length} ${data.caseCatalog.items.length === 1 ? "record" : "records"}</span>
          </header>
          ${data.caseCatalog.items
-           .map(
-             (item) => `<article>
+           .map((item) => {
+             const timeline = data.revisionTimelines.find(
+               (candidate) => candidate.case_id === item.case_id
+             );
+             return `<article>
                <div><strong>${item.title}</strong><code>${item.case_id}</code></div>
                <dl>
                  <div><dt>Status</dt><dd>${statusLabel(item.status)}</dd></div>
@@ -71,8 +74,9 @@ root.innerHTML = `
                  <div><dt>Operator review</dt><dd>${item.operator_review_required ? "Required" : "Not required"}</dd></div>
                </dl>
                <details><summary>Checked-in sources</summary><ul>${item.source_refs.map((source) => `<li><code>${source}</code></li>`).join("")}</ul><p>${item.limitation_notes.join(" ")}</p></details>
-             </article>`
-           )
+               ${renderRevisionTimeline(item.case_id, timeline)}
+             </article>`;
+           })
            .join("")}
        </section>
        <section class="intake-diagnostics" aria-labelledby="intake-diagnostics-title">
@@ -225,6 +229,50 @@ function renderResearchCase(inventoryId) {
   `;
 
   return researchCase;
+}
+
+function renderRevisionTimeline(caseId, timeline) {
+  const headingId = `revision-timeline-${caseId}`;
+  if (!timeline) {
+    return `<section class="revision-timeline blocked" aria-labelledby="${headingId}">
+      <h3 id="${headingId}">Revision timeline unavailable</h3>
+      <p>Lineage data is missing. This case remains blocked pending local validation.</p>
+    </section>`;
+  }
+  if (timeline.entries.length === 0) {
+    return `<section class="revision-timeline empty" aria-labelledby="${headingId}">
+      <h3 id="${headingId}">Revision timeline</h3>
+      <p>No immutable revisions are recorded. Operator review remains required.</p>
+    </section>`;
+  }
+  return `<section class="revision-timeline" aria-labelledby="${headingId}">
+    <h3 id="${headingId}">Revision timeline</h3>
+    <p>${timeline.revision_count} immutable ${timeline.revision_count === 1 ? "revision" : "revisions"} · blocked pending review</p>
+    <ol>
+      ${timeline.entries
+        .map(
+          (entry) => `<li>
+            <header>
+              <strong>Revision ${entry.revision_number}</strong>
+              <code>${entry.revision_id}</code>
+              <time datetime="${entry.created_at}">${entry.created_at}</time>
+            </header>
+            <p><strong>Reason:</strong> ${entry.revision_reason}</p>
+            <p><strong>Changed fields:</strong> ${entry.changed_fields.map(statusLabel).join(", ")}</p>
+            <p><strong>Status:</strong> blocked · unverified · operator review required</p>
+            <details>
+              <summary>Revision evidence and limitations</summary>
+              <p><strong>Evidence</strong></p>
+              <ul>${entry.evidence_refs.map((source) => `<li><code>${source}</code></li>`).join("")}</ul>
+              <p><strong>Risk review</strong> <code>${entry.risk_review_ref}</code></p>
+              <p>${entry.limitation_notes.join(" ")}</p>
+              <p class="hash-pair"><span>Base <code>${entry.base_content_hash}</code></span><span>Revised <code>${entry.revised_content_hash}</code></span></p>
+            </details>
+          </li>`
+        )
+        .join("")}
+    </ol>
+  </section>`;
 }
 
 function linkedOutcomeAndLearning(researchCase) {

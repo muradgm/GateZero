@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-736",
-  localVerification: "89 files / 644 tests",
+  latestPacket: "TRD-746",
+  localVerification: "90 files / 655 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 89 files, 644 tests.",
+      detail: "Latest suite: 90 files, 655 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "736 / 736",
+      value: "746 / 746",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "89 files / 644 tests"
+      reference: "90 files / 655 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "736 accepted records"
+      reference: "746 accepted records"
     },
     {
       area: "Dependency audit",
@@ -230,7 +230,7 @@ export const commandCenterData = {
       area: "Integrated evidence workflow",
       signal: "Research case to simulator handoff",
       state: "Visible",
-      reference: "TRD-657 through TRD-736"
+      reference: "TRD-657 through TRD-746"
     }
   ],
   simulationEvidenceDetail: {
@@ -332,8 +332,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-736 closes the checked-in operator workflow.",
-      "TRD-737 must confirm the read-only revision timeline gap before workspace expansion."
+      "TRD-746 closes the read-only revision timeline.",
+      "TRD-747 begins the bounded Senior Market Intelligence foundation gap review."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -352,8 +352,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-736 closes the checked-in operator workflow.",
-    "TRD-737 is a revision timeline gap intake.",
+    "TRD-746 closes the read-only revision timeline.",
+    "TRD-747 is an intelligence asset gap review.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -471,7 +471,7 @@ export const commandCenterData = {
     "TRD-663 Outcome-log evidence linkage",
     "TRD-664 Learning-event evidence linkage",
     "TRD-665 Integrated operator workflow QA",
-    "TRD-736 Operator workflow checkpoint"
+    "TRD-746 Revision timeline checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

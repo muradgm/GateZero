@@ -160,6 +160,7 @@ h1 {
 .catalog-band > header,
 .catalog-band article {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
@@ -196,6 +197,60 @@ h1 {
 
 .catalog-band article details {
   max-width: 42ch;
+}
+
+.revision-timeline {
+  width: 100%;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.revision-timeline h3,
+.revision-timeline > p,
+.revision-timeline ol,
+.revision-timeline li p {
+  margin: 0;
+}
+
+.revision-timeline > p,
+.revision-timeline li p,
+.revision-timeline time {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.revision-timeline ol {
+  margin-top: 12px;
+  padding-left: 20px;
+}
+
+.revision-timeline ol > li {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.revision-timeline ol > li:first-child {
+  border-top: 0;
+}
+
+.revision-timeline li header,
+.revision-timeline .hash-pair {
+  display: grid;
+  gap: 4px;
+}
+
+.revision-timeline li details {
+  max-width: none;
+  margin-top: 8px;
+}
+
+.revision-timeline .hash-pair {
+  margin-top: 8px;
+}
+
+.revision-timeline .hash-pair code {
+  overflow-wrap: anywhere;
 }
 
 .intake-diagnostics {

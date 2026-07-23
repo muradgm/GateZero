@@ -12,6 +12,14 @@ const LocalSourcePathSchema = NonEmptyStringSchema.refine(
 );
 
 export const Gate2CaseIntakeFreshnessSchema = z.enum(["unverified", "fresh", "stale"]);
+export const Gate2LocalCaseRevisionFieldSchema = z.enum([
+  "title",
+  "strategy_idea_ref",
+  "evidence_refs",
+  "risk_review_ref",
+  "provenance_refs",
+  "limitation_notes"
+]);
 export const Gate2CaseIntakeErrorCodeSchema = z.enum([
   "invalid_json",
   "invalid_contract",
@@ -72,18 +80,7 @@ export const Gate2LocalCaseRevisionSchema = z
     parent_revision_id: IdentifierSchema.nullable(),
     base_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
     revised_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
-    changed_fields: z
-      .array(
-        z.enum([
-          "title",
-          "strategy_idea_ref",
-          "evidence_refs",
-          "risk_review_ref",
-          "provenance_refs",
-          "limitation_notes"
-        ])
-      )
-      .min(1),
+    changed_fields: z.array(Gate2LocalCaseRevisionFieldSchema).min(1),
     revision_reason: NonEmptyStringSchema,
     created_at: IsoDateTimeSchema,
     revised_draft: Gate2LocalResearchCaseDraftSchema,
@@ -108,6 +105,74 @@ export const Gate2LocalCaseRevisionSchema = z
         message: "A revised draft must return to unverified evidence."
       });
     }
+  });
+
+export const Gate2LocalCaseRevisionTimelineEntrySchema = z
+  .object({
+    revision_id: IdentifierSchema,
+    revision_number: z.number().int().positive(),
+    parent_revision_id: IdentifierSchema.nullable(),
+    changed_fields: z.array(Gate2LocalCaseRevisionFieldSchema).min(1),
+    revision_reason: NonEmptyStringSchema,
+    created_at: IsoDateTimeSchema,
+    base_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+    revised_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+    evidence_refs: z.array(LocalSourcePathSchema).min(1),
+    provenance_refs: z.array(LocalSourcePathSchema).min(1),
+    risk_review_ref: LocalSourcePathSchema,
+    limitation_notes: z.array(NonEmptyStringSchema).min(1),
+    freshness_status: z.literal("unverified"),
+    status: z.literal("blocked"),
+    operator_review_required: z.literal(true),
+    local_only: z.literal(true),
+    read_only: z.literal(true),
+    action_route_created: z.literal(false)
+  })
+  .strict();
+
+export const Gate2LocalCaseRevisionTimelineSchema = z
+  .object({
+    case_id: IdentifierSchema,
+    status: z.enum(["no_revisions", "blocked_pending_review"]),
+    revision_count: z.number().int().nonnegative(),
+    entries: z.array(Gate2LocalCaseRevisionTimelineEntrySchema),
+    operator_review_required: z.literal(true),
+    local_only: z.literal(true),
+    read_only: z.literal(true),
+    action_route_created: z.literal(false)
+  })
+  .strict()
+  .superRefine((value, context) => {
+    if (value.revision_count !== value.entries.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["revision_count"],
+        message: "Timeline revision count must match its entries."
+      });
+    }
+    if (
+      (value.entries.length === 0 && value.status !== "no_revisions") ||
+      (value.entries.length > 0 && value.status !== "blocked_pending_review")
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["status"],
+        message: "Timeline status must match revision presence."
+      });
+    }
+    value.entries.forEach((entry, index) => {
+      const previous = value.entries[index - 1];
+      if (
+        entry.revision_number !== index + 1 ||
+        entry.parent_revision_id !== (previous?.revision_id ?? null)
+      ) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["entries", index],
+          message: "Timeline revision chain must be contiguous."
+        });
+      }
+    });
   });
 
 export const Gate2LocalCaseCatalogItemSchema = z
@@ -204,6 +269,10 @@ export const Gate2LocalCaseIntakeDiagnosticsSchema = z
 
 export type Gate2LocalResearchCaseDraft = z.infer<typeof Gate2LocalResearchCaseDraftSchema>;
 export type Gate2LocalCaseRevision = z.infer<typeof Gate2LocalCaseRevisionSchema>;
+export type Gate2LocalCaseRevisionTimelineEntry = z.infer<
+  typeof Gate2LocalCaseRevisionTimelineEntrySchema
+>;
+export type Gate2LocalCaseRevisionTimeline = z.infer<typeof Gate2LocalCaseRevisionTimelineSchema>;
 export type Gate2LocalCaseCatalogItem = z.infer<typeof Gate2LocalCaseCatalogItemSchema>;
 export type Gate2LocalCaseCatalog = z.infer<typeof Gate2LocalCaseCatalogSchema>;
 export type Gate2CaseIntakeErrorCode = z.infer<typeof Gate2CaseIntakeErrorCodeSchema>;

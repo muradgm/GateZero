@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   Gate2LocalCaseCatalogSchema,
   Gate2LocalCaseRevisionSchema,
+  Gate2LocalCaseRevisionTimelineSchema,
   Gate2LocalResearchCaseDraftSchema
 } from "../src/index.js";
 
@@ -89,6 +90,57 @@ describe("Gate 2 local case intake contracts", () => {
         action_route_created: false
       }).revision_id
     ).toBe("case-001-r1");
+  });
+
+  it("accepts a bounded blocked revision timeline", () => {
+    const entry = {
+      revision_id: "case-001-r1",
+      revision_number: 1,
+      parent_revision_id: null,
+      changed_fields: ["title"],
+      revision_reason: "Clarify the operator case title.",
+      created_at: "2026-07-23T00:00:00.000Z",
+      base_content_hash: "a".repeat(64),
+      revised_content_hash: "b".repeat(64),
+      evidence_refs: ["docs/engineering/TESTING_STRATEGY.md"],
+      provenance_refs: ["ops/truth/PROJECT_TRUTH.md"],
+      risk_review_ref: "ops/truth/RISK_RULES.md",
+      limitation_notes: ["Local evidence only."],
+      freshness_status: "unverified",
+      status: "blocked",
+      operator_review_required: true,
+      local_only: true,
+      read_only: true,
+      action_route_created: false
+    } as const;
+    expect(
+      Gate2LocalCaseRevisionTimelineSchema.parse({
+        case_id: "case-001",
+        status: "blocked_pending_review",
+        revision_count: 1,
+        entries: [entry],
+        operator_review_required: true,
+        local_only: true,
+        read_only: true,
+        action_route_created: false
+      }).entries[0]
+    ).toEqual(entry);
+  });
+
+  it("rejects inconsistent timeline counts and parent chains", () => {
+    const empty = {
+      case_id: "case-001",
+      status: "no_revisions",
+      revision_count: 0,
+      entries: [],
+      operator_review_required: true,
+      local_only: true,
+      read_only: true,
+      action_route_created: false
+    } as const;
+    expect(() =>
+      Gate2LocalCaseRevisionTimelineSchema.parse({ ...empty, revision_count: 1 })
+    ).toThrow();
   });
 
   it("rejects duplicate catalog ids", () => {

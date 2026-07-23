@@ -2,11 +2,13 @@ import { createHash } from "node:crypto";
 import {
   Gate2LocalCaseCatalogSchema,
   Gate2LocalCaseRevisionSchema,
+  Gate2LocalCaseRevisionTimelineSchema,
   Gate2LocalResearchCaseDraftSchema,
   type Gate2CaseIntakeErrorCode,
   type Gate2LocalCaseCatalog,
   type Gate2LocalCaseCatalogItem,
   type Gate2LocalCaseRevision,
+  type Gate2LocalCaseRevisionTimeline,
   type Gate2LocalResearchCaseDraft
 } from "../../contracts/src/index.js";
 
@@ -125,6 +127,48 @@ export function buildLocalCaseCatalog(
     read_only: true,
     operator_review_required: true,
     action_route_created: false
+  });
+}
+
+export function buildLocalCaseRevisionTimelines(
+  catalog: Gate2LocalCaseCatalog,
+  revisions: readonly Gate2LocalCaseRevision[]
+): Gate2LocalCaseRevisionTimeline[] {
+  return catalog.items.map((item) => {
+    const entries = revisions
+      .filter((revision) => revision.case_id === item.case_id)
+      .sort((left, right) => left.revision_number - right.revision_number)
+      .map((revision) => ({
+        revision_id: revision.revision_id,
+        revision_number: revision.revision_number,
+        parent_revision_id: revision.parent_revision_id,
+        changed_fields: revision.changed_fields,
+        revision_reason: revision.revision_reason,
+        created_at: revision.created_at,
+        base_content_hash: revision.base_content_hash,
+        revised_content_hash: revision.revised_content_hash,
+        evidence_refs: revision.revised_draft.evidence_refs,
+        provenance_refs: revision.revised_draft.provenance_refs,
+        risk_review_ref: revision.revised_draft.risk_review_ref,
+        limitation_notes: revision.revised_draft.limitation_notes,
+        freshness_status: "unverified" as const,
+        status: "blocked" as const,
+        operator_review_required: true as const,
+        local_only: true as const,
+        read_only: true as const,
+        action_route_created: false as const
+      }));
+
+    return Gate2LocalCaseRevisionTimelineSchema.parse({
+      case_id: item.case_id,
+      status: entries.length === 0 ? "no_revisions" : "blocked_pending_review",
+      revision_count: entries.length,
+      entries,
+      operator_review_required: true,
+      local_only: true,
+      read_only: true,
+      action_route_created: false
+    });
   });
 }
 

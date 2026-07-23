@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-23                                                     |
-| Latest accepted packet     | `TRD-736`                                                      |
-| Latest accepted validation | 89 test files, 644 tests passed                                |
+| Latest accepted packet     | `TRD-746`                                                      |
+| Latest accepted validation | 90 test files, 655 tests passed                                |
 
 ## Boundary
 
@@ -1191,6 +1191,16 @@ Latest accepted result:
 | `TRD-734` | accepted | Copy correction    | Clarified blocked-pending-review state.                    |
 | `TRD-735` | accepted | Workflow QA        | Covered the checked-in workflow end to end.                |
 | `TRD-736` | accepted | Checkpoint         | Selected read-only revision timeline as next surface.      |
+| `TRD-737` | accepted | Timeline gap       | Confirmed full lineage was absent from the workspace.      |
+| `TRD-738` | accepted | Timeline contract  | Defined bounded timeline and entry records.                |
+| `TRD-739` | accepted | Projection         | Built deterministic per-case revision timelines.           |
+| `TRD-740` | accepted | Data integration   | Added timelines to generated workspace data.               |
+| `TRD-741` | accepted | Rendering          | Rendered semantic read-only revision history.              |
+| `TRD-742` | accepted | Evidence adjacency | Kept reason, sources, risk, limitations, and hashes close. |
+| `TRD-743` | accepted | Safe states        | Added empty and fail-closed unavailable states.            |
+| `TRD-744` | accepted | Accessibility      | Added responsive semantic timeline presentation.           |
+| `TRD-745` | accepted | Timeline QA        | Covered contracts, data, rendering, states, and scope.     |
+| `TRD-746` | accepted | Checkpoint         | Closed lineage depth and selected intelligence foundation. |
 
 ## Current Operator Commands
 
@@ -1231,25 +1241,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 89 files and 644 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 90 files and 655 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                          | Acceptance focus                                      |
-| ---- | --------- | ------ | ----------------------------- | ----------------------------------------------------- |
-| 1    | `TRD-737` | queued | Revision timeline gap intake. | Confirm full lineage is absent from the workspace.    |
-| 2    | `TRD-738` | queued | Timeline data contract.       | Define read-only bounded revision summaries.          |
-| 3    | `TRD-739` | queued | Timeline projection.          | Project validated revision chains for display.        |
-| 4    | `TRD-740` | queued | Workspace data integration.   | Add lineage summaries to generated local data.        |
-| 5    | `TRD-741` | queued | Timeline rendering.           | Render revision history without editing controls.     |
-| 6    | `TRD-742` | queued | Evidence adjacency.           | Keep changed fields, reason, and limitations visible. |
-| 7    | `TRD-743` | queued | Empty and broken states.      | Fail closed on absent or invalid lineage.             |
-| 8    | `TRD-744` | queued | Timeline accessibility.       | Verify semantics, focus, and neutral copy.            |
-| 9    | `TRD-745` | queued | Timeline workflow QA.         | Cover data, rendering, and blocked-scope behavior.    |
-| 10   | `TRD-746` | queued | Timeline checkpoint.          | Decide whether more lineage depth is useful.          |
+| Rank | Packet    | Status | Goal                                | Acceptance focus                                       |
+| ---- | --------- | ------ | ----------------------------------- | ------------------------------------------------------ |
+| 1    | `TRD-747` | queued | Intelligence asset gap review.      | Reuse existing truth, contracts, fixtures, and UI.     |
+| 2    | `TRD-748` | queued | Analyst role and authority skill.   | Read-only sourced scenarios; no trading instructions.  |
+| 3    | `TRD-749` | queued | Source adapter boundary.            | Local replay inputs before any network source.         |
+| 4    | `TRD-750` | queued | Multi-timeframe assembly.           | Separate hourly, daily, and monthly evidence.          |
+| 5    | `TRD-751` | queued | Evidence quality gate.              | Block stale, missing, conflicting, or weak provenance. |
+| 6    | `TRD-752` | queued | Scenario synthesis.                 | Bullish, bearish, and neutral conditional scenarios.   |
+| 7    | `TRD-753` | queued | Adversarial risk review.            | Challenge assumptions before operator consideration.   |
+| 8    | `TRD-754` | queued | Historical replay benchmark.        | Evaluate calibration without performance claims.       |
+| 9    | `TRD-755` | queued | Read-only brief workflow plan.      | Define review queue; no scheduled automation yet.      |
+| 10   | `TRD-756` | queued | Intelligence foundation checkpoint. | Decide whether sourced read-only briefs are warranted. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

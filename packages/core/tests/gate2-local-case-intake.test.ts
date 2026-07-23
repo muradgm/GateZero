@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   assembleLocalCaseCatalogItem,
   buildLocalCaseCatalog,
+  buildLocalCaseRevisionTimelines,
   createLocalCaseRevision,
   findLocalCase,
   Gate2CaseIntakeError,
@@ -100,6 +101,35 @@ describe("Gate 2 local case intake", () => {
       verified_at: null
     });
     expect(parseLocalCaseRevision(JSON.stringify(revision))).toEqual(revision);
+  });
+
+  it("projects revision timelines and explicit empty states", () => {
+    const first = parseLocalResearchCaseDraft(JSON.stringify(valid));
+    const second = parseLocalResearchCaseDraft(JSON.stringify({ ...valid, case_id: "case-002" }));
+    const revision = createLocalCaseRevision({
+      baseDraft: first,
+      revisionNumber: 1,
+      parentRevisionId: null,
+      reason: "Clarify evidence limitations.",
+      timestamp: "2026-07-23T00:00:00.000Z",
+      changes: { limitation_notes: ["Revised local limitation."] }
+    });
+    expect(
+      buildLocalCaseRevisionTimelines(buildLocalCaseCatalog([first, second]), [revision])
+    ).toMatchObject([
+      {
+        case_id: "case-001",
+        status: "blocked_pending_review",
+        revision_count: 1,
+        entries: [{ revision_id: "case-001-r1", status: "blocked" }]
+      },
+      {
+        case_id: "case-002",
+        status: "no_revisions",
+        revision_count: 0,
+        entries: []
+      }
+    ]);
   });
 
   it("rejects duplicate ids", () => {

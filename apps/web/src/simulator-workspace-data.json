@@ -247,6 +247,64 @@
     "operator_review_required": true,
     "action_route_created": false
   },
+  "revisionTimelines": [
+    {
+      "case_id": "gate2-research-case-fixture-003",
+      "status": "no_revisions",
+      "revision_count": 0,
+      "entries": [],
+      "operator_review_required": true,
+      "local_only": true,
+      "read_only": true,
+      "action_route_created": false
+    },
+    {
+      "case_id": "gate2-research-case-fixture-004",
+      "status": "no_revisions",
+      "revision_count": 0,
+      "entries": [],
+      "operator_review_required": true,
+      "local_only": true,
+      "read_only": true,
+      "action_route_created": false
+    },
+    {
+      "case_id": "operator-workflow-case-001",
+      "status": "blocked_pending_review",
+      "revision_count": 1,
+      "entries": [
+        {
+          "revision_id": "operator-workflow-case-001-r1",
+          "revision_number": 1,
+          "parent_revision_id": null,
+          "changed_fields": ["evidence_refs", "limitation_notes", "provenance_refs"],
+          "revision_reason": "Replace template placeholders with checked-in workflow evidence and explicit limitations.",
+          "created_at": "2026-07-23T21:18:38.974Z",
+          "base_content_hash": "ae97b898d8341b82b87b5000e11b8216ed17869321e9bba0fddc5349d3933d46",
+          "revised_content_hash": "1fc10fa64972913f03dd3262d84001983c51d0b49a56c3b135c6e68eaa5a7d16",
+          "evidence_refs": [
+            "docs/operations/LOCAL_CASE_AUTHORING_USABILITY_REVIEW.md",
+            "docs/operations/LOCAL_CASE_REVISION_CHECKPOINT.md"
+          ],
+          "provenance_refs": ["ops/runtime/tracklist.md"],
+          "risk_review_ref": "ops/truth/RISK_RULES.md",
+          "limitation_notes": [
+            "Operational workflow evidence only; this case is not a strategy, market recommendation, approval, or execution route."
+          ],
+          "freshness_status": "unverified",
+          "status": "blocked",
+          "operator_review_required": true,
+          "local_only": true,
+          "read_only": true,
+          "action_route_created": false
+        }
+      ],
+      "operator_review_required": true,
+      "local_only": true,
+      "read_only": true,
+      "action_route_created": false
+    }
+  ],
   "caseIntakeDiagnostics": {
     "intake_directory": "packages/fixtures/data/research-cases",
     "files": [
