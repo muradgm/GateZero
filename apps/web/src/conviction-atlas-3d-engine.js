@@ -18,35 +18,26 @@ export function mountConvictionAtlas3D({ canvas, root, onScenarioChange }) {
   if (!(canvas instanceof HTMLCanvasElement)) throw new Error("Missing Conviction Atlas canvas.");
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.55));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.setClearColor(0x02060b, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.72;
+  renderer.toneMappingExposure = 0.58;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x02060b, 0.095);
+  scene.fog = new THREE.FogExp2(0x02060b, 0.11);
 
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 90);
-  camera.position.set(-0.45, 5.7, 8.8);
-  camera.lookAt(0.4, -0.5, 0.1);
+  const camera = new THREE.PerspectiveCamera(39, 1, 0.1, 90);
+  camera.position.set(-0.55, 5.85, 9.15);
+  camera.lookAt(0.45, -0.62, 0.1);
 
   const world = new THREE.Group();
-  world.rotation.x = -0.16;
-  world.scale.set(1.13, 1.13, 1.13);
-  world.position.set(0, -0.44, 0.2);
+  world.rotation.x = -0.17;
+  world.scale.set(1.12, 1.12, 1.12);
+  world.position.set(0, -0.48, 0.2);
   scene.add(world);
 
-  scene.add(new THREE.HemisphereLight(0x284a63, 0x010204, 0.16));
-  const cyanKey = new THREE.DirectionalLight(0x51d7ff, 0.72);
-  cyanKey.position.set(-5, 8, 5);
-  scene.add(cyanKey);
-  const violetRim = new THREE.PointLight(0xb56cff, 9, 22, 2);
-  violetRim.position.set(3.2, 3.5, -1.8);
-  scene.add(violetRim);
-  const orangeFill = new THREE.PointLight(0xff8b35, 6.5, 18, 2);
-  orangeFill.position.set(2.0, 2.4, 1.4);
-  scene.add(orangeFill);
+  scene.add(new THREE.HemisphereLight(0x20394c, 0x010204, 0.08));
 
   const state = {
     activeScenario: "rec",
@@ -85,10 +76,8 @@ export function mountConvictionAtlas3D({ canvas, root, onScenarioChange }) {
 
   const resize = () => {
     const bounds = canvas.getBoundingClientRect();
-    const width = Math.max(1, Math.floor(bounds.width));
-    const height = Math.max(1, Math.floor(bounds.height));
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
+    renderer.setSize(Math.max(1, Math.floor(bounds.width)), Math.max(1, Math.floor(bounds.height)), false);
+    camera.aspect = Math.max(bounds.width, 1) / Math.max(bounds.height, 1);
     camera.updateProjectionMatrix();
   };
 
@@ -116,19 +105,18 @@ export function mountConvictionAtlas3D({ canvas, root, onScenarioChange }) {
   }
 
   function render() {
-    const targetX = state.pointerX * 0.15;
-    const targetY = state.pointerY * 0.045;
+    const targetX = state.pointerX * 0.14;
+    const targetY = state.pointerY * 0.04;
     world.rotation.y += (targetX - world.rotation.y) * 0.035;
-    world.rotation.x += (-0.16 + targetY - world.rotation.x) * 0.035;
+    world.rotation.x += (-0.17 + targetY - world.rotation.x) * 0.035;
 
     terrain.surface.material.uniforms.uTime.value = state.time;
-    terrain.meshLines.material.opacity = 0.022 + Math.sin(state.time * 0.22) * 0.003;
+    terrain.meshLines.material.opacity = 0.012 + Math.sin(state.time * 0.2) * 0.002;
     convergence.update(state.time);
     routes.forEach((route, id) => route.update(state.time, id === state.activeScenario));
     beacons.forEach((beacon, id) => beacon.update(state.time, id === state.activeScenario));
     riskZones.forEach((zone, index) => zone.update(state.time + index * 1.4));
     updateEvidenceStreams(streams, state.time);
-
     renderer.render(scene, camera);
   }
 
@@ -174,26 +162,41 @@ function gaussian(x, z, cx, cz, sx, sz, amplitude) {
 }
 
 function warpedRidge(x, z, angle, frequency, amplitude, warp) {
-  const wx = x + Math.sin(z * 1.3) * warp;
-  const wz = z + Math.cos(x * 1.1) * warp;
+  const wx = x + Math.sin(z * 1.4 + x * 0.22) * warp;
+  const wz = z + Math.cos(x * 1.2 - z * 0.18) * warp;
   const direction = wx * Math.cos(angle) + wz * Math.sin(angle);
-  return Math.pow(Math.max(0, Math.sin(direction * frequency)), 4.2) * amplitude;
+  return Math.pow(Math.max(0, Math.sin(direction * frequency)), 5.0) * amplitude;
 }
 
 function terrainHeight(x, z) {
-  const base = Math.sin(x * 0.46 + z * 0.31) * 0.045 + Math.cos(z * 0.92 - x * 0.18) * 0.038;
-  const broad = gaussian(x,z,-2.0,0.65,1.9,1.45,.74) + gaussian(x,z,0.15,0.8,1.7,1.35,.62) + gaussian(x,z,2.55,-0.5,1.8,1.55,.7);
-  const peaks = gaussian(x,z,-2.52,1.48,.5,.34,.58) + gaussian(x,z,-.35,1.28,.58,.38,.46) + gaussian(x,z,2.08,1.42,.48,.34,.62) + gaussian(x,z,3.72,-1.18,.7,.42,.5);
-  const shoulders = gaussian(x,z,-1.75,1.12,.95,.32,.24) + gaussian(x,z,.7,.95,.9,.28,.2) + gaussian(x,z,2.75,.9,.9,.3,.2);
-  const secondary = gaussian(x,z,-1.3,0.15,.54,.34,.25) + gaussian(x,z,.9,-.05,.58,.36,.22) + gaussian(x,z,2.7,.2,.52,.32,.2);
-  const channels = -gaussian(x,z,-.9,-.28,2.7,.2,.38) - gaussian(x,z,1.5,-.62,2.4,.24,.32) - gaussian(x,z,-2.8,-.45,1.3,.18,.18);
-  const risks = -gaussian(x,z,-2.15,-1.8,.48,.4,1.1) - gaussian(x,z,2.15,-1.85,.52,.44,1.14);
-  const ridges = warpedRidge(x+.2,z-.1,.35,1.55,.08,.16) + warpedRidge(x-.25,z+.2,-.62,1.35,.065,.18);
-  return base + broad + peaks + shoulders + secondary + channels + risks + ridges;
+  const base = Math.sin(x * 0.46 + z * 0.31) * 0.032 + Math.cos(z * 0.92 - x * 0.18) * 0.028;
+  const landforms =
+    gaussian(x,z,-2.35,0.72,1.35,0.72,.42) +
+    gaussian(x,z,-0.15,0.75,1.05,0.62,.34) +
+    gaussian(x,z,2.05,0.62,1.2,0.68,.38) +
+    gaussian(x,z,3.25,-.75,.9,.58,.3);
+  const peaks =
+    gaussian(x,z,-2.55,1.5,.42,.27,.48) +
+    gaussian(x,z,-.3,1.3,.46,.3,.4) +
+    gaussian(x,z,2.05,1.48,.44,.28,.5) +
+    gaussian(x,z,3.72,-1.18,.58,.34,.4);
+  const ridges =
+    warpedRidge(x+.18,z-.12,.34,1.75,.085,.2) +
+    warpedRidge(x-.32,z+.16,-.58,1.5,.07,.22) +
+    warpedRidge(x+.5,z+.28,.92,1.28,.05,.18);
+  const channels =
+    -gaussian(x,z,-1.0,-.18,2.2,.16,.34) -
+    gaussian(x,z,1.35,-.52,1.9,.18,.3) -
+    gaussian(x,z,-2.9,-.45,1.1,.14,.18) -
+    gaussian(x,z,.45,.2,.7,.16,.16);
+  const risks =
+    -gaussian(x,z,-2.15,-1.8,.46,.34,1.22) -
+    gaussian(x,z,2.15,-1.85,.5,.38,1.28);
+  return base + landforms + peaks + ridges + channels + risks;
 }
 
 function createTerrain() {
-  const geometry = new THREE.PlaneGeometry(15.8, 8.8, 180, 112);
+  const geometry = new THREE.PlaneGeometry(15.8, 8.8, 184, 116);
   geometry.rotateX(-Math.PI / 2);
   const position = geometry.attributes.position;
   for (let i = 0; i < position.count; i += 1) {
@@ -214,54 +217,64 @@ function createTerrain() {
       float influence(vec2 p, vec2 c, float r){return exp(-dot(p-c,p-c)/(r*r));}
       void main(){
         vec2 p=vP.xz;
-        float bull=influence(p,vec2(-2.45,1.55),1.55);
-        float side=influence(p,vec2(-0.2,1.35),1.5);
-        float bear=influence(p,vec2(2.0,1.55),1.6);
-        float rec=influence(p,vec2(3.0,-0.95),2.15);
-        float risk=max(influence(p,vec2(-2.15,-1.8),.72),influence(p,vec2(2.15,-1.85),.76));
-        float rawMinor=abs(fract((vH+2.4)*20.0)-.5);
-        float rawMajor=abs(fract((vH+2.4)*6.0)-.5);
-        float contourMinor=1.0-smoothstep(.472,.5,rawMinor);
-        float contourMajor=1.0-smoothstep(.44,.5,rawMajor);
+        float bull=influence(p,vec2(-2.45,1.55),1.1);
+        float side=influence(p,vec2(-.2,1.35),1.0);
+        float bear=influence(p,vec2(2.0,1.55),1.1);
+        float rec=influence(p,vec2(3.15,-.95),1.45);
+        float riskA=influence(p,vec2(-2.15,-1.8),.64);
+        float riskB=influence(p,vec2(2.15,-1.85),.68);
+        float risk=max(riskA,riskB);
+
+        float rawMinor=abs(fract((vH+2.6)*26.0)-.5);
+        float rawMajor=abs(fract((vH+2.6)*8.0)-.5);
+        float minor=1.0-smoothstep(.485,.5,rawMinor);
+        float major=1.0-smoothstep(.458,.5,rawMajor);
+
         float a0=1.0-step(.5,abs(uActiveRegion-0.0));
         float a1=1.0-step(.5,abs(uActiveRegion-1.0));
         float a2=1.0-step(.5,abs(uActiveRegion-2.0));
         float a3=1.0-step(.5,abs(uActiveRegion-3.0));
-        vec3 base=vec3(.0025,.007,.014);
-        base+=vec3(.002,.012,.02)*clamp((vH+.9)/2.2,0.0,1.0);
+
+        vec3 base=vec3(.0015,.004,.009);
+        base+=vec3(.001,.004,.007)*clamp((vH+.8)/1.8,0.0,1.0);
+
+        vec3 topo=vec3(.006,.045,.065)*minor + vec3(.02,.14,.19)*major;
+        topo+=vec3(.0,.48,.53)*bull*major*(.28+a0*.72);
+        topo+=vec3(.02,.18,.75)*side*major*(.24+a1*.76);
+        topo+=vec3(.9,.22,.015)*bear*major*(.24+a2*.76);
+        topo+=vec3(.55,.13,.92)*rec*major*(.28+a3*.72);
+
         vec3 regional=vec3(0.0);
-        regional+=vec3(.0,.15,.18)*bull*(.42+a0*.58);
-        regional+=vec3(.0,.055,.22)*side*(.42+a1*.58);
-        regional+=vec3(.24,.055,.003)*bear*(.42+a2*.58);
-        regional+=vec3(.13,.035,.24)*rec*(.42+a3*.58);
-        vec3 contour=vec3(.015,.16,.22)*contourMinor + vec3(.05,.38,.5)*contourMajor;
-        contour+=vec3(.0,.27,.31)*bull*contourMajor;
-        contour+=vec3(.02,.13,.5)*side*contourMajor;
-        contour+=vec3(.65,.14,.01)*bear*contourMajor;
-        contour+=vec3(.38,.1,.64)*rec*contourMajor;
-        vec3 color=base+regional+contour;
-        color=mix(color,vec3(.09,.001,.001),risk*.9);
-        color+=vec3(.75,.005,.002)*risk*contourMajor*(.65+.25*sin(uTime*2.8));
-        float edge=smoothstep(8.2,5.3,length(p));
-        float alpha=(.18+contourMinor*.46+contourMajor*.34+regional.r*.16+regional.g*.12)*edge;
+        regional+=vec3(.0,.028,.032)*bull*(.2+a0*.35);
+        regional+=vec3(.0,.012,.05)*side*(.18+a1*.32);
+        regional+=vec3(.055,.012,.001)*bear*(.18+a2*.34);
+        regional+=vec3(.028,.008,.05)*rec*(.2+a3*.34);
+
+        vec3 color=base+regional+topo;
+        color=mix(color,vec3(.002,.0,.0),risk*.94);
+        color+=vec3(1.0,.008,.002)*risk*major*(.72+.22*sin(uTime*3.0));
+
+        float edge=smoothstep(8.15,5.1,length(p));
+        float depthFade=smoothstep(-3.9,2.9,vP.z);
+        float alpha=(.06+minor*.24+major*.5+risk*major*.2)*edge*(.62+.38*depthFade);
         gl_FragColor=vec4(color,alpha);
       }
     `
   });
 
   const surface = new THREE.Mesh(geometry, material);
-  surface.position.y = -0.82;
+  surface.position.y = -0.84;
 
   const meshLines = new THREE.LineSegments(
     new THREE.WireframeGeometry(geometry),
-    new THREE.LineBasicMaterial({ color: 0x082a3a, transparent: true, opacity: 0.022 })
+    new THREE.LineBasicMaterial({ color: 0x04151f, transparent: true, opacity: 0.012 })
   );
   meshLines.position.copy(surface.position);
   return { surface, meshLines };
 }
 
 function pointOnTerrain(x, z, offset = 0.035) {
-  return new THREE.Vector3(x, terrainHeight(x, z) - 0.82 + offset, z);
+  return new THREE.Vector3(x, terrainHeight(x, z) - 0.84 + offset, z);
 }
 
 function createRoute(id) {
@@ -269,14 +282,14 @@ function createRoute(id) {
   const points = ROUTES[id].map(([x,z]) => pointOnTerrain(x,z,id === "rec" ? 0.055 : 0.04));
   const curve = new THREE.CatmullRomCurve3(points, false, "centripetal", 0.52);
   const group = new THREE.Group();
-  const core = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.026 : 0.022, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.9 : 0.38 }));
-  const halo = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.07 : 0.052, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.11 : 0.035, depthWrite: false, blending: THREE.AdditiveBlending }));
-  const ground = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.12 : 0.085, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.032 : 0.01, depthWrite: false, blending: THREE.AdditiveBlending }));
+  const core = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.025 : 0.021, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.94 : 0.38 }));
+  const halo = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.066 : 0.05, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.13 : 0.035, depthWrite: false, blending: THREE.AdditiveBlending }));
+  const ground = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, id === "rec" ? 0.11 : 0.08, 8, false), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, opacity: id === "rec" ? 0.038 : 0.01, depthWrite: false, blending: THREE.AdditiveBlending }));
   group.add(ground, halo, core);
 
-  const markers = Array.from({ length: id === "rec" ? 16 : 10 }, (_, index) => {
-    const marker = new THREE.Mesh(new THREE.SphereGeometry(id === "rec" ? 0.045 : 0.038, 10, 10), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, blending: THREE.AdditiveBlending }));
-    marker.userData.offset = index / (id === "rec" ? 16 : 10);
+  const markers = Array.from({ length: id === "rec" ? 18 : 10 }, (_, index) => {
+    const marker = new THREE.Mesh(new THREE.SphereGeometry(id === "rec" ? 0.043 : 0.036, 10, 10), new THREE.MeshBasicMaterial({ color: scenario.color, transparent: true, blending: THREE.AdditiveBlending }));
+    marker.userData.offset = index / (id === "rec" ? 18 : 10);
     group.add(marker);
     return marker;
   });
@@ -284,16 +297,16 @@ function createRoute(id) {
   return {
     group,
     setEmphasis(active, recommended) {
-      core.material.opacity = active ? 1 : recommended ? 0.42 : 0.12;
-      halo.material.opacity = active ? 0.16 : recommended ? 0.075 : 0.012;
-      ground.material.opacity = active ? 0.052 : recommended ? 0.026 : 0.006;
+      core.material.opacity = active ? 1 : recommended ? 0.5 : 0.1;
+      halo.material.opacity = active ? 0.17 : recommended ? 0.085 : 0.01;
+      ground.material.opacity = active ? 0.052 : recommended ? 0.03 : 0.004;
     },
     update(time, active) {
       markers.forEach((marker) => {
-        const p = (marker.userData.offset + time * (active ? 0.095 : 0.034)) % 1;
+        const p = (marker.userData.offset + time * (active ? 0.095 : 0.032)) % 1;
         marker.position.copy(curve.getPointAt(p));
-        marker.material.opacity = active ? 0.98 : id === "rec" ? 0.4 : 0.08;
-        marker.visible = active || id === "rec" || marker.userData.offset < 0.18;
+        marker.material.opacity = active ? 0.98 : id === "rec" ? 0.46 : 0.06;
+        marker.visible = active || id === "rec" || marker.userData.offset < 0.14;
       });
     }
   };
@@ -301,21 +314,20 @@ function createRoute(id) {
 
 function createConvergenceCore() {
   const group = new THREE.Group();
-  group.position.copy(pointOnTerrain(-4.15,-0.18,0.11));
-  const core = new THREE.Mesh(new THREE.SphereGeometry(0.18,20,20), new THREE.MeshBasicMaterial({ color: 0xf1fdff, blending: THREE.AdditiveBlending }));
-  group.add(core);
-  const halo = new THREE.Mesh(new THREE.SphereGeometry(0.42,20,20), new THREE.MeshBasicMaterial({ color: 0x67e4ff, transparent: true, opacity: 0.15, depthWrite: false, blending: THREE.AdditiveBlending }));
-  group.add(halo);
+  group.position.copy(pointOnTerrain(-4.15,-0.18,0.14));
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.22,20,20), new THREE.MeshBasicMaterial({ color: 0xffffff, blending: THREE.AdditiveBlending }));
+  const halo = new THREE.Mesh(new THREE.SphereGeometry(0.52,20,20), new THREE.MeshBasicMaterial({ color: 0x67e4ff, transparent: true, opacity: 0.2, depthWrite: false, blending: THREE.AdditiveBlending }));
+  group.add(core, halo);
   const rings = [];
-  for (let i=0;i<5;i+=1) {
-    const ring = new THREE.Mesh(new THREE.RingGeometry(0.2+i*.15,0.215+i*.15,72),new THREE.MeshBasicMaterial({color:0x78ebff,transparent:true,opacity:.46-i*.055,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
-    ring.rotation.x=-Math.PI/2; ring.userData.phase=i*.18; group.add(ring); rings.push(ring);
+  for (let i=0;i<6;i+=1) {
+    const ring = new THREE.Mesh(new THREE.RingGeometry(0.22+i*.15,0.235+i*.15,72),new THREE.MeshBasicMaterial({color:0x78ebff,transparent:true,opacity:.5-i*.055,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+    ring.rotation.x=-Math.PI/2; ring.userData.phase=i*.16; group.add(ring); rings.push(ring);
   }
-  const bridgeCurve = new THREE.CatmullRomCurve3([pointOnTerrain(-4.1,-.18,.08),pointOnTerrain(-3.55,-.02,.06),pointOnTerrain(-3.05,.1,.05)],false,"centripetal",.5);
-  const bridge = new THREE.Mesh(new THREE.TubeGeometry(bridgeCurve,60,.028,8,false),new THREE.MeshBasicMaterial({color:0xdffaff,transparent:true,opacity:.74,blending:THREE.AdditiveBlending}));
+  const bridgeCurve = new THREE.CatmullRomCurve3([pointOnTerrain(-4.1,-.18,.1),pointOnTerrain(-3.52,-.02,.07),pointOnTerrain(-3.0,.1,.06)],false,"centripetal",.5);
+  const bridge = new THREE.Mesh(new THREE.TubeGeometry(bridgeCurve,64,.03,8,false),new THREE.MeshBasicMaterial({color:0xf0ffff,transparent:true,opacity:.9,blending:THREE.AdditiveBlending}));
   group.add(bridge);
   bridge.position.sub(group.position);
-  return { group, update(time){ core.scale.setScalar(1+Math.sin(time*3.6)*.18);halo.scale.setScalar(1+Math.sin(time*2.4)*.1);rings.forEach((ring)=>{const p=(time*.28+ring.userData.phase)%1;ring.scale.setScalar(.82+p*.92);ring.material.opacity=(1-p)*.46;}); } };
+  return { group, update(time){ core.scale.setScalar(1+Math.sin(time*3.8)*.2); halo.scale.setScalar(1+Math.sin(time*2.5)*.12); rings.forEach((ring)=>{const p=(time*.3+ring.userData.phase)%1;ring.scale.setScalar(.82+p*.98);ring.material.opacity=(1-p)*.52;}); } };
 }
 
 function createBeacon(id) {
@@ -323,25 +335,26 @@ function createBeacon(id) {
   const [x,z] = scenario.endpoint;
   const group = new THREE.Group();
   group.position.copy(pointOnTerrain(x,z,0.025));
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.48,72),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.1,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(0.5,72),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.12,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));
   disc.rotation.x=-Math.PI/2; group.add(disc);
-  const stem = new THREE.Mesh(new THREE.CylinderGeometry(.009,.009,1.15,8),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.58}));
-  stem.position.y=.62; group.add(stem);
-  const top = new THREE.Mesh(new THREE.SphereGeometry(.052,14,14),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.8,blending:THREE.AdditiveBlending}));
-  top.position.y=1.22; group.add(top);
-  const core = new THREE.Mesh(new THREE.SphereGeometry(.085,18,18),new THREE.MeshBasicMaterial({color:scenario.color,blending:THREE.AdditiveBlending}));
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,1.02,8),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.58}));
+  stem.position.y=.55; group.add(stem);
+  const top = new THREE.Mesh(new THREE.SphereGeometry(.05,14,14),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.8,blending:THREE.AdditiveBlending}));
+  top.position.y=1.08; group.add(top);
+  const core = new THREE.Mesh(new THREE.SphereGeometry(.09,18,18),new THREE.MeshBasicMaterial({color:scenario.color,blending:THREE.AdditiveBlending}));
   core.position.y=.035; group.add(core);
   const rings=[];
-  for(let i=0;i<4;i+=1){const ring=new THREE.Mesh(new THREE.RingGeometry(.14+i*.1,.155+i*.1,64),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.4-i*.055,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));ring.rotation.x=-Math.PI/2;ring.userData.phase=i*.2;group.add(ring);rings.push(ring);}
-  return { group, setActive(active){group.scale.setScalar(active?1.1:.95);}, update(time,active){core.scale.setScalar(1+Math.sin(time*3.2)*(active?.2:.07));disc.material.opacity=active?.17:.07;stem.material.opacity=active?.78:.38;top.material.opacity=active?.95:.55;rings.forEach((ring)=>{const p=(time*.24+ring.userData.phase)%1;ring.scale.setScalar(.88+p*.82);ring.material.opacity=(active?.48:.18)*(1-p);});} };
+  for(let i=0;i<5;i+=1){const ring=new THREE.Mesh(new THREE.RingGeometry(.14+i*.1,.155+i*.1,64),new THREE.MeshBasicMaterial({color:scenario.color,transparent:true,opacity:.46-i*.05,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));ring.rotation.x=-Math.PI/2;ring.userData.phase=i*.18;group.add(ring);rings.push(ring);}
+  return { group, setActive(active){group.scale.setScalar(active?1.08:.96);}, update(time,active){core.scale.setScalar(1+Math.sin(time*3.2)*(active?.2:.07));disc.material.opacity=active?.2:.1;stem.material.opacity=active?.78:.42;top.material.opacity=active?.95:.62;rings.forEach((ring)=>{const p=(time*.24+ring.userData.phase)%1;ring.scale.setScalar(.88+p*.86);ring.material.opacity=(active?.52:.24)*(1-p);});} };
 }
 
 function createRiskZone(x,z) {
   const group = new THREE.Group(); group.position.copy(pointOnTerrain(x,z,0.035));
-  const core = new THREE.Mesh(new THREE.SphereGeometry(.13,16,16),new THREE.MeshBasicMaterial({color:0xff1712,transparent:true,opacity:1,blending:THREE.AdditiveBlending})); group.add(core);
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(.62,72),new THREE.MeshBasicMaterial({color:0x240000,transparent:true,opacity:.5,side:THREE.DoubleSide,depthWrite:false}));disc.rotation.x=-Math.PI/2;group.add(disc);
-  const rings=[]; for(let i=0;i<6;i+=1){const ring=new THREE.Mesh(new THREE.RingGeometry(.16+i*.13,.176+i*.13,64),new THREE.MeshBasicMaterial({color:0xff332b,transparent:true,opacity:.5-i*.055,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));ring.rotation.x=-Math.PI/2;ring.userData.phase=i*.14;group.add(ring);rings.push(ring);}
-  return {group,update(time){core.scale.setScalar(1+Math.sin(time*4.3)*.24);disc.material.opacity=.46+Math.sin(time*2.6)*.06;rings.forEach((ring)=>{const p=(time*.32+ring.userData.phase)%1;ring.scale.setScalar(.82+p*1.02);ring.material.opacity=(1-p)*.5;});}};
+  const core = new THREE.Mesh(new THREE.SphereGeometry(.14,16,16),new THREE.MeshBasicMaterial({color:0xff1712,transparent:true,opacity:1,blending:THREE.AdditiveBlending})); group.add(core);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(.72,72),new THREE.MeshBasicMaterial({color:0x080000,transparent:true,opacity:.78,side:THREE.DoubleSide,depthWrite:false})); disc.rotation.x=-Math.PI/2; group.add(disc);
+  const rings=[];
+  for(let i=0;i<7;i+=1){const ring=new THREE.Mesh(new THREE.RingGeometry(.16+i*.13,.178+i*.13,64),new THREE.MeshBasicMaterial({color:0xff332b,transparent:true,opacity:.54-i*.05,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));ring.rotation.x=-Math.PI/2;ring.userData.phase=i*.13;group.add(ring);rings.push(ring);}
+  return {group,update(time){core.scale.setScalar(1+Math.sin(time*4.3)*.26);disc.material.opacity=.72+Math.sin(time*2.6)*.06;rings.forEach((ring)=>{const p=(time*.34+ring.userData.phase)%1;ring.scale.setScalar(.82+p*1.06);ring.material.opacity=(1-p)*.54;});}};
 }
 
 function createEvidenceStreams() {
@@ -349,13 +362,13 @@ function createEvidenceStreams() {
   const particles=[]; const positions=[]; const particleColors=[]; const lines=new THREE.Group();
   colors.forEach((color,lane)=>{
     const startZ=2.4-lane*.55;
-    const end=pointOnTerrain(-4.15,-.18,.11);
+    const end=pointOnTerrain(-4.15,-.18,.14);
     const curve=new THREE.CubicBezierCurve3(new THREE.Vector3(-7.1,.22,startZ),new THREE.Vector3(-5.95,.26+lane*.022,startZ*.74),new THREE.Vector3(-4.85,.42,-.22+lane*.02),end);
-    const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(82)),new THREE.LineBasicMaterial({color,transparent:true,opacity:.48})); lines.add(line);
-    for(let i=0;i<14;i+=1){const progress=(i/14+lane*.057)%1;const p=curve.getPointAt(progress);positions.push(p.x,p.y,p.z);const c=new THREE.Color(color);particleColors.push(c.r,c.g,c.b);particles.push({curve,progress,speed:.002+lane*.000045});}
+    const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(86)),new THREE.LineBasicMaterial({color,transparent:true,opacity:.58})); lines.add(line);
+    for(let i=0;i<18;i+=1){const progress=(i/18+lane*.057)%1;const p=curve.getPointAt(progress);positions.push(p.x,p.y,p.z);const c=new THREE.Color(color);particleColors.push(c.r,c.g,c.b);particles.push({curve,progress,speed:.0021+lane*.000045});}
   });
   const geometry=new THREE.BufferGeometry();geometry.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute("color",new THREE.Float32BufferAttribute(particleColors,3));
-  const points=new THREE.Points(geometry,new THREE.PointsMaterial({size:.078,vertexColors:true,transparent:true,opacity:1,blending:THREE.AdditiveBlending,depthWrite:false}));
+  const points=new THREE.Points(geometry,new THREE.PointsMaterial({size:.082,vertexColors:true,transparent:true,opacity:1,blending:THREE.AdditiveBlending,depthWrite:false}));
   return {lines,points,particles};
 }
 
