@@ -37,6 +37,7 @@
     "snapshot:simulator-workspace": "tsx scripts/generate-simulator-workspace-data.ts",
     "snapshot:case-catalog": "tsx scripts/generate-local-case-catalog.ts",
     "scaffold:local-case": "tsx scripts/scaffold-local-case.ts",
+    "revise:local-case": "tsx scripts/revise-local-case.ts",
     "test": "vitest run",
     "test:ci": "vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",

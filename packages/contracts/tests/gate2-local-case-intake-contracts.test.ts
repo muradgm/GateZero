@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { Gate2LocalCaseCatalogSchema, Gate2LocalResearchCaseDraftSchema } from "../src/index.js";
+import {
+  Gate2LocalCaseCatalogSchema,
+  Gate2LocalCaseRevisionSchema,
+  Gate2LocalResearchCaseDraftSchema
+} from "../src/index.js";
 
 const draft = {
   case_id: "case-001",
@@ -44,6 +48,49 @@ describe("Gate 2 local case intake contracts", () => {
     ).toThrow();
   });
 
+  it("requires verification semantics to match freshness", () => {
+    expect(() =>
+      Gate2LocalResearchCaseDraftSchema.parse({
+        ...draft,
+        freshness_status: "unverified",
+        verified_at: draft.verified_at
+      })
+    ).toThrow();
+    expect(() =>
+      Gate2LocalResearchCaseDraftSchema.parse({
+        ...draft,
+        verified_at: null
+      })
+    ).toThrow();
+  });
+
+  it("accepts an immutable revision envelope", () => {
+    const revisedDraft = {
+      ...draft,
+      title: "Revised local case",
+      freshness_status: "unverified",
+      verified_at: null
+    } as const;
+    expect(
+      Gate2LocalCaseRevisionSchema.parse({
+        revision_id: "case-001-r1",
+        case_id: "case-001",
+        revision_number: 1,
+        parent_revision_id: null,
+        base_content_hash: "a".repeat(64),
+        revised_content_hash: "b".repeat(64),
+        changed_fields: ["title"],
+        revision_reason: "Clarify the operator case title.",
+        created_at: "2026-07-23T00:00:00.000Z",
+        revised_draft: revisedDraft,
+        operator_review_required: true,
+        local_only: true,
+        read_only: true,
+        action_route_created: false
+      }).revision_id
+    ).toBe("case-001-r1");
+  });
+
   it("rejects duplicate catalog ids", () => {
     const item = {
       case_id: "case-001",
@@ -58,7 +105,10 @@ describe("Gate 2 local case intake contracts", () => {
       local_only: true,
       read_only: true,
       action_route_created: false,
-      verified_at: "2026-07-20T00:00:00.000Z"
+      verified_at: "2026-07-20T00:00:00.000Z",
+      revision_id: null,
+      revision_number: 0,
+      revision_pending_review: false
     };
     expect(() =>
       Gate2LocalCaseCatalogSchema.parse({

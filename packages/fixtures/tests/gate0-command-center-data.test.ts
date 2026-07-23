@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain('latestPacket: "TRD-716"');
+    expect(data).toContain('latestPacket: "TRD-726"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -480,8 +480,10 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain("TRD-716 closes bounded local CLI authoring.");
-    expect(data).toContain("TRD-717 must measure CLI friction before interface expansion.");
+    expect(data).toContain("TRD-726 closes immutable local case revision.");
+    expect(data).toContain(
+      "TRD-727 must exercise a real checked-in workflow before interface expansion."
+    );
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -505,7 +507,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-716 closes bounded local CLI authoring.");
+    expect(data).toContain("TRD-726 closes immutable local case revision.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });

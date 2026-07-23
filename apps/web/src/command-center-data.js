@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-716",
-  localVerification: "87 files / 621 tests",
+  latestPacket: "TRD-726",
+  localVerification: "88 files / 635 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 87 files, 621 tests.",
+      detail: "Latest suite: 88 files, 635 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "716 / 716",
+      value: "726 / 726",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "87 files / 621 tests"
+      reference: "88 files / 635 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "716 accepted records"
+      reference: "726 accepted records"
     },
     {
       area: "Dependency audit",
@@ -230,7 +230,7 @@ export const commandCenterData = {
       area: "Integrated evidence workflow",
       signal: "Research case to simulator handoff",
       state: "Visible",
-      reference: "TRD-657 through TRD-716"
+      reference: "TRD-657 through TRD-726"
     }
   ],
   simulationEvidenceDetail: {
@@ -332,8 +332,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-716 closes bounded local CLI authoring.",
-      "TRD-717 must measure CLI friction before interface expansion."
+      "TRD-726 closes immutable local case revision.",
+      "TRD-727 must exercise a real checked-in workflow before interface expansion."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -352,8 +352,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-716 closes bounded local CLI authoring.",
-    "TRD-717 is a local authoring usability review.",
+    "TRD-726 closes immutable local case revision.",
+    "TRD-727 is a real-case authoring dry run.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -471,7 +471,7 @@ export const commandCenterData = {
     "TRD-663 Outcome-log evidence linkage",
     "TRD-664 Learning-event evidence linkage",
     "TRD-665 Integrated operator workflow QA",
-    "TRD-716 Local authoring checkpoint"
+    "TRD-726 Immutable revision checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

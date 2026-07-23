@@ -189,7 +189,10 @@
         "local_only": true,
         "read_only": true,
         "action_route_created": false,
-        "verified_at": "2026-07-20T00:00:00.000Z"
+        "verified_at": "2026-07-20T00:00:00.000Z",
+        "revision_id": null,
+        "revision_number": 0,
+        "revision_pending_review": false
       },
       {
         "case_id": "gate2-research-case-fixture-004",
@@ -208,7 +211,10 @@
         "local_only": true,
         "read_only": true,
         "action_route_created": false,
-        "verified_at": "2026-07-20T00:00:00.000Z"
+        "verified_at": "2026-07-20T00:00:00.000Z",
+        "revision_id": null,
+        "revision_number": 0,
+        "revision_pending_review": false
       }
     ],
     "local_only": true,

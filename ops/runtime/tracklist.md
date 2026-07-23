@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-07-22                                                     |
-| Latest accepted packet     | `TRD-716`                                                      |
-| Latest accepted validation | 87 test files, 621 tests passed                                |
+| Last updated               | 2026-07-23                                                     |
+| Latest accepted packet     | `TRD-726`                                                      |
+| Latest accepted validation | 88 test files, 635 tests passed                                |
 
 ## Boundary
 
@@ -1171,6 +1171,16 @@ Latest accepted result:
 | `TRD-714` | accepted | Catalog workflow   | Verified scaffold-to-catalog compatibility.                |
 | `TRD-715` | accepted | Authoring QA       | Covered paths, overwrite, determinism, and copy.           |
 | `TRD-716` | accepted | Checkpoint         | Closed CLI authoring without adding a UI form.             |
+| `TRD-717` | accepted | Usability review   | Confirmed bounded local correction friction.               |
+| `TRD-718` | accepted | Lifecycle contract | Separated unverified evidence from review state.           |
+| `TRD-719` | accepted | Revision boundary  | Preserved originals through immutable revisions.           |
+| `TRD-720` | accepted | Revision CLI       | Added allowlisted reason-required revision creation.       |
+| `TRD-721` | accepted | Audit record       | Added parent linkage and before/after hashes.              |
+| `TRD-722` | accepted | Change guard       | Reset revisions to unverified and blocked.                 |
+| `TRD-723` | accepted | Validation UX      | Returned bounded field-specific correction guidance.       |
+| `TRD-724` | accepted | Catalog visibility | Exposed revision lineage beside blocked state.             |
+| `TRD-725` | accepted | Revision QA        | Covered integrity, unsafe input, and write races.          |
+| `TRD-726` | accepted | Checkpoint         | Deferred editor UI pending real operator evidence.         |
 
 ## Current Operator Commands
 
@@ -1188,6 +1198,7 @@ Latest accepted result:
 | `pnpm inspect:local-cases -- --case <id>`                                                         | Inspect one checked-in local research case.             | Local evidence, source, risk, and limitation detail.             |
 | `pnpm inspect:local-cases -- --diagnostics`                                                       | Inspect local intake file outcomes.                     | Bounded accepted/rejected diagnostics without payload leakage.   |
 | `pnpm scaffold:local-case -- --case-id <id> --title <title>`                                      | Create one checked-in local research-case draft.        | New validated file only; existing files are never overwritten.   |
+| `pnpm revise:local-case -- --case-id <id> --reason <reason> --title <title>`                      | Create one immutable local research-case revision.      | New blocked revision; original remains unchanged.                |
 | `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
 | `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
 | `pnpm check:gate0-name`                                                                           | Check TraderFrame product-name consistency.             | Local project-name check passes.                                 |
@@ -1209,25 +1220,25 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 87 files and 621 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 88 files and 635 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                          | Acceptance focus                                    |
-| ---- | --------- | ------ | ----------------------------- | --------------------------------------------------- |
-| 1    | `TRD-717` | queued | Authoring usability review.   | Measure CLI friction before adding interface scope. |
-| 2    | `TRD-718` | queued | Draft lifecycle contract.     | Define review-required and blocked states.          |
-| 3    | `TRD-719` | queued | Draft amendment boundary.     | Permit safe edits without hidden promotion.         |
-| 4    | `TRD-720` | queued | Explicit revision command.    | Amend one draft with operator evidence.             |
-| 5    | `TRD-721` | queued | Revision audit record.        | Preserve before/after provenance locally.           |
-| 6    | `TRD-722` | queued | Stale-on-change guard.        | Require re-review after material amendment.         |
-| 7    | `TRD-723` | queued | Revision validation feedback. | Keep correction guidance bounded and specific.      |
-| 8    | `TRD-724` | queued | Catalog revision visibility.  | Show amended drafts as review-required.             |
-| 9    | `TRD-725` | queued | Revision workflow QA.         | Verify auditability and no implicit promotion.      |
-| 10   | `TRD-726` | queued | Revision checkpoint.          | Decide whether UI-assisted editing is warranted.    |
+| Rank | Packet    | Status | Goal                                | Acceptance focus                                        |
+| ---- | --------- | ------ | ----------------------------------- | ------------------------------------------------------- |
+| 1    | `TRD-727` | queued | Real-case authoring dry run.        | Exercise one checked-in operator workflow.              |
+| 2    | `TRD-728` | queued | Authoring friction findings.        | Record observed correction friction without claims.     |
+| 3    | `TRD-729` | queued | Revision dry run.                   | Exercise one immutable revision chain.                  |
+| 4    | `TRD-730` | queued | Revision inspection output.         | Inspect lineage without mutation or approval.           |
+| 5    | `TRD-731` | queued | Catalog visibility check.           | Confirm blocked revision state remains legible.         |
+| 6    | `TRD-732` | queued | Workspace display check.            | Keep revision, evidence, and limitations adjacent.      |
+| 7    | `TRD-733` | queued | Blocked-state comprehension review. | Detect ambiguous readiness or freshness language.       |
+| 8    | `TRD-734` | queued | Bounded copy corrections.           | Correct only evidenced operator misunderstanding.       |
+| 9    | `TRD-735` | queued | Operator workflow QA.               | Verify original, revision, catalog, and workspace.      |
+| 10   | `TRD-736` | queued | Operator workflow checkpoint.       | Decide the next product surface from observed evidence. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

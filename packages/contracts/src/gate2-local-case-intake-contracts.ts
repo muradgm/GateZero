@@ -11,7 +11,7 @@ const LocalSourcePathSchema = NonEmptyStringSchema.refine(
   "Source references must be checked-in local paths."
 );
 
-export const Gate2CaseIntakeFreshnessSchema = z.enum(["fresh", "stale"]);
+export const Gate2CaseIntakeFreshnessSchema = z.enum(["unverified", "fresh", "stale"]);
 export const Gate2CaseIntakeErrorCodeSchema = z.enum([
   "invalid_json",
   "invalid_contract",
@@ -37,15 +37,75 @@ export const Gate2LocalResearchCaseDraftSchema = z
     read_only: z.literal(true),
     action_route_created: z.literal(false),
     created_at: IsoDateTimeSchema,
-    verified_at: IsoDateTimeSchema
+    verified_at: IsoDateTimeSchema.nullable()
   })
   .strict()
   .superRefine((value, context) => {
-    if (value.verified_at < value.created_at) {
+    if (value.verified_at !== null && value.verified_at < value.created_at) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         path: ["verified_at"],
         message: "Verification cannot predate creation."
+      });
+    }
+    if (value.freshness_status === "unverified" && value.verified_at !== null) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["verified_at"],
+        message: "Unverified evidence cannot carry a verification timestamp."
+      });
+    }
+    if (value.freshness_status === "fresh" && value.verified_at === null) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["verified_at"],
+        message: "Fresh evidence requires a verification timestamp."
+      });
+    }
+  });
+
+export const Gate2LocalCaseRevisionSchema = z
+  .object({
+    revision_id: IdentifierSchema,
+    case_id: IdentifierSchema,
+    revision_number: z.number().int().positive(),
+    parent_revision_id: IdentifierSchema.nullable(),
+    base_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+    revised_content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+    changed_fields: z
+      .array(
+        z.enum([
+          "title",
+          "strategy_idea_ref",
+          "evidence_refs",
+          "risk_review_ref",
+          "provenance_refs",
+          "limitation_notes"
+        ])
+      )
+      .min(1),
+    revision_reason: NonEmptyStringSchema,
+    created_at: IsoDateTimeSchema,
+    revised_draft: Gate2LocalResearchCaseDraftSchema,
+    operator_review_required: z.literal(true),
+    local_only: z.literal(true),
+    read_only: z.literal(true),
+    action_route_created: z.literal(false)
+  })
+  .strict()
+  .superRefine((value, context) => {
+    if (value.revised_draft.case_id !== value.case_id) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["revised_draft", "case_id"],
+        message: "Revision and draft case ids must match."
+      });
+    }
+    if (value.revised_draft.freshness_status !== "unverified") {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["revised_draft", "freshness_status"],
+        message: "A revised draft must return to unverified evidence."
       });
     }
   });
@@ -64,7 +124,10 @@ export const Gate2LocalCaseCatalogItemSchema = z
     local_only: z.literal(true),
     read_only: z.literal(true),
     action_route_created: z.literal(false),
-    verified_at: IsoDateTimeSchema
+    verified_at: IsoDateTimeSchema.nullable(),
+    revision_id: IdentifierSchema.nullable(),
+    revision_number: z.number().int().nonnegative(),
+    revision_pending_review: z.boolean()
   })
   .strict();
 
@@ -140,6 +203,7 @@ export const Gate2LocalCaseIntakeDiagnosticsSchema = z
   });
 
 export type Gate2LocalResearchCaseDraft = z.infer<typeof Gate2LocalResearchCaseDraftSchema>;
+export type Gate2LocalCaseRevision = z.infer<typeof Gate2LocalCaseRevisionSchema>;
 export type Gate2LocalCaseCatalogItem = z.infer<typeof Gate2LocalCaseCatalogItemSchema>;
 export type Gate2LocalCaseCatalog = z.infer<typeof Gate2LocalCaseCatalogSchema>;
 export type Gate2CaseIntakeErrorCode = z.infer<typeof Gate2CaseIntakeErrorCodeSchema>;

@@ -67,6 +67,7 @@ root.innerHTML = `
                  <div><dt>Status</dt><dd>${statusLabel(item.status)}</dd></div>
                  <div><dt>Freshness</dt><dd>${statusLabel(item.freshness_status)}</dd></div>
                  <div><dt>Evidence</dt><dd>${item.evidence_count}</dd></div>
+                 <div><dt>Revision</dt><dd>${item.revision_id ? `${item.revision_id} · review required` : "Original"}</dd></div>
                </dl>
                <details><summary>Checked-in sources</summary><ul>${item.source_refs.map((source) => `<li><code>${source}</code></li>`).join("")}</ul><p>${item.limitation_notes.join(" ")}</p></details>
              </article>`

@@ -27,6 +27,8 @@ describe("Gate 2 local case draft scaffold", () => {
     expect(draft).toMatchObject({
       case_id: "operator-case-001",
       risk_review_ref: "ops/truth/RISK_RULES.md",
+      freshness_status: "unverified",
+      verified_at: null,
       operator_review_required: true,
       local_only: true,
       read_only: true,
@@ -113,7 +115,7 @@ describe("Gate 2 local case draft scaffold", () => {
     const draft = parseLocalResearchCaseDraft(await readDraft(rootDir, "operator-case-007"));
     expect(buildLocalCaseCatalog([draft]).items[0]).toMatchObject({
       case_id: "operator-case-007",
-      status: "review_required"
+      status: "blocked"
     });
   });
 

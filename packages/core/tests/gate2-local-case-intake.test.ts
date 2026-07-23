@@ -2,8 +2,11 @@ import { describe, expect, it } from "vitest";
 import {
   assembleLocalCaseCatalogItem,
   buildLocalCaseCatalog,
+  createLocalCaseRevision,
   findLocalCase,
   Gate2CaseIntakeError,
+  hashLocalResearchCaseDraft,
+  parseLocalCaseRevision,
   parseLocalResearchCaseDraft
 } from "../src/index.js";
 
@@ -64,6 +67,39 @@ describe("Gate 2 local case intake", () => {
       JSON.stringify({ ...valid, freshness_status: "stale" })
     );
     expect(assembleLocalCaseCatalogItem(draft).status).toBe("blocked");
+  });
+
+  it("keeps unverified evidence blocked without a verification timestamp", () => {
+    const draft = parseLocalResearchCaseDraft(
+      JSON.stringify({ ...valid, freshness_status: "unverified", verified_at: null })
+    );
+    expect(assembleLocalCaseCatalogItem(draft)).toMatchObject({
+      status: "blocked",
+      verified_at: null
+    });
+  });
+
+  it("creates a hash-linked immutable revision and resets verification", () => {
+    const baseDraft = parseLocalResearchCaseDraft(JSON.stringify(valid));
+    const revision = createLocalCaseRevision({
+      baseDraft,
+      revisionNumber: 1,
+      parentRevisionId: null,
+      reason: "Clarify evidence limitations.",
+      timestamp: "2026-07-23T00:00:00.000Z",
+      changes: { limitation_notes: ["Revised local limitation."] }
+    });
+    expect(revision).toMatchObject({
+      revision_id: "case-001-r1",
+      base_content_hash: hashLocalResearchCaseDraft(baseDraft),
+      changed_fields: ["limitation_notes"],
+      operator_review_required: true
+    });
+    expect(revision.revised_draft).toMatchObject({
+      freshness_status: "unverified",
+      verified_at: null
+    });
+    expect(parseLocalCaseRevision(JSON.stringify(revision))).toEqual(revision);
   });
 
   it("rejects duplicate ids", () => {
