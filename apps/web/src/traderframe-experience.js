@@ -1,6 +1,6 @@
-import { mountConvictionAtlasEngine } from "./conviction-atlas-engine.js";
+import { mountConvictionAtlasRenderer } from "./conviction-atlas-renderer.js";
 
-/* global document, matchMedia */
+/* global document, matchMedia, window */
 
 const app = document.querySelector("#traderframe-app");
 if (!app) throw new Error("Missing TraderFrame mount node.");
@@ -47,12 +47,12 @@ app.innerHTML = `
         </div>
       </aside>
 
-      <section class="landscape is-live" data-active-scenario="rec" aria-labelledby="landscape-title">
+      <section class="landscape is-live" data-active-scenario="rec" data-renderer="loading" aria-labelledby="landscape-title">
         <div class="landscape-heading"><h1 id="landscape-title">The market landscape</h1><p>Multiple paths. Many possibilities.<br />We map the probabilities and reveal the best route.</p></div>
         <div class="input-stack" aria-label="Evidence streams">
           ${inputs.map(([label, color], index) => `<span style="--stream:${color};--row:${index}">${label}<i></i></span>`).join("")}
         </div>
-        <canvas class="atlas-canvas" aria-label="Animated market contour field and scenario routes"></canvas>
+        <canvas class="atlas-canvas" aria-label="Interactive three-dimensional market terrain, evidence streams and scenario routes"></canvas>
         <svg class="terrain" viewBox="0 0 1000 600" role="img" aria-label="Static fallback market terrain with scenario routes">
           <defs>
             <linearGradient id="terrainFade" x1="0" x2="1"><stop stop-color="#0b78ff"/><stop offset=".48" stop-color="#7b4cff"/><stop offset="1" stop-color="#ff8b34"/></linearGradient>
@@ -76,7 +76,7 @@ app.innerHTML = `
         <button class="scenario-label bear" type="button" data-scenario="bear" aria-pressed="false"><b>Bear case</b><span>22%</span></button>
         <button class="scenario-label rec" type="button" data-scenario="rec" aria-pressed="true"><b>Recommended path</b><span>62%</span></button>
         <div class="risk-label risk-a">△ High risk zone</div><div class="risk-label risk-b">△ High risk zone</div>
-        <div class="atlas-live-state" aria-live="polite"><i></i><span>Live contour engine · Recommended path selected</span></div>
+        <div class="atlas-live-state" aria-live="polite"><i></i><span>Loading 3D Conviction Atlas · Recommended path selected</span></div>
         <div class="atlas-controls"><button class="atlas-control" type="button" data-action="pause" aria-pressed="false">Pause motion</button></div>
       </section>
 
@@ -113,11 +113,7 @@ const liveState = document.querySelector(".atlas-live-state span");
 const pauseButton = document.querySelector("[data-action=pause]");
 const scenarioButtons = [...document.querySelectorAll("[data-scenario]")];
 
-const engine = mountConvictionAtlasEngine({
-  canvas,
-  root: landscape,
-  onScenarioChange: updateScenarioState
-});
+const engine = mountConvictionAtlasRenderer({ canvas, root: landscape, onScenarioChange: updateScenarioState });
 
 scenarioButtons.forEach((button) => {
   button.addEventListener("click", () => engine.setScenario(button.dataset.scenario));
@@ -130,6 +126,12 @@ pauseButton?.addEventListener("click", () => {
   engine.setPaused(paused);
 });
 
+window.addEventListener("conviction-atlas-renderer", (event) => {
+  const mode = event.detail?.mode;
+  if (!liveState || !mode) return;
+  liveState.textContent = mode === "3d" ? "WebGL terrain engine · Recommended path selected" : "Safe 2D fallback · Recommended path selected";
+});
+
 function updateScenarioState(scenario) {
   scenarioButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.scenario === scenario.id)));
   if (thesis) thesis.textContent = scenario.bias;
@@ -137,7 +139,10 @@ function updateScenarioState(scenario) {
   if (risk) risk.textContent = String(scenario.risk);
   if (riskLabel) riskLabel.textContent = scenario.risk >= 60 ? "High Risk" : scenario.risk >= 35 ? "Moderate Risk" : "Controlled Risk";
   if (recommendation) recommendation.textContent = scenario.id === "bear" ? "Stand aside" : scenario.id === "side" ? "Wait for confirmation" : scenario.id === "bull" ? "Selective long" : "Conditional long";
-  if (liveState) liveState.textContent = `Live contour engine · ${scenario.label} selected`;
+  if (liveState) {
+    const rendererLabel = landscape?.dataset.renderer === "3d" ? "WebGL terrain engine" : landscape?.dataset.renderer === "2d" ? "Safe 2D fallback" : "Loading renderer";
+    liveState.textContent = `${rendererLabel} · ${scenario.label} selected`;
+  }
   thesisCard?.setAttribute("data-scenario-tone", scenario.id);
 }
 
