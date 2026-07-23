@@ -107,6 +107,40 @@ export function findLocalCase(
   return item;
 }
 
+export interface LocalResearchCaseDraftTemplateInput {
+  readonly caseId: string;
+  readonly title: string;
+  readonly timestamp: string;
+}
+
+export function createLocalResearchCaseDraftTemplate(
+  input: LocalResearchCaseDraftTemplateInput
+): Gate2LocalResearchCaseDraft {
+  if (!/^[a-z0-9][a-z0-9-]{2,63}$/.test(input.caseId)) {
+    throw new Gate2CaseIntakeError(
+      "invalid_contract",
+      "Case id must match lowercase letters, numbers, and hyphens only."
+    );
+  }
+
+  return Gate2LocalResearchCaseDraftSchema.parse({
+    case_id: input.caseId,
+    title: input.title,
+    strategy_idea_ref: "ops/truth/PROJECT_TRUTH.md",
+    evidence_refs: ["ops/truth/PRODUCT_WEDGE.md"],
+    risk_review_ref: "ops/truth/RISK_RULES.md",
+    freshness_status: "fresh",
+    provenance_refs: ["ops/truth/PROJECT_TRUTH.md"],
+    limitation_notes: ["Local operator draft; evidence and risk references require manual review."],
+    operator_review_required: true,
+    local_only: true,
+    read_only: true,
+    action_route_created: false,
+    created_at: input.timestamp,
+    verified_at: input.timestamp
+  });
+}
+
 function containsUnsafeContent(value: unknown): boolean {
   const serialized = JSON.stringify(value).toLowerCase();
   return (

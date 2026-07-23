@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-22                                                     |
-| Latest accepted packet     | `TRD-706`                                                      |
-| Latest accepted validation | 86 test files, 611 tests passed                                |
+| Latest accepted packet     | `TRD-716`                                                      |
+| Latest accepted validation | 87 test files, 621 tests passed                                |
 
 ## Boundary
 
@@ -1161,6 +1161,16 @@ Latest accepted result:
 | `TRD-704` | accepted | Diagnostics UI     | Displayed neutral local validation outcomes.               |
 | `TRD-705` | accepted | Intake QA          | Verified ordering, isolation, blocking, and layout.        |
 | `TRD-706` | accepted | Checkpoint         | Closed bounded multi-file intake inspection.               |
+| `TRD-707` | accepted | Gap intake         | Confirmed local JSON authoring friction.                   |
+| `TRD-708` | accepted | Draft template     | Added a complete contract-valid template.                  |
+| `TRD-709` | accepted | Output boundary    | Restricted filename and directory scope.                   |
+| `TRD-710` | accepted | Scaffold CLI       | Added bounded local draft creation.                        |
+| `TRD-711` | accepted | Overwrite guard    | Protected files with atomic create-only writes.            |
+| `TRD-712` | accepted | Validation UX      | Returned bounded correction guidance.                      |
+| `TRD-713` | accepted | Evidence prompts   | Kept evidence, provenance, risk, and limitations explicit. |
+| `TRD-714` | accepted | Catalog workflow   | Verified scaffold-to-catalog compatibility.                |
+| `TRD-715` | accepted | Authoring QA       | Covered paths, overwrite, determinism, and copy.           |
+| `TRD-716` | accepted | Checkpoint         | Closed CLI authoring without adding a UI form.             |
 
 ## Current Operator Commands
 
@@ -1177,6 +1187,7 @@ Latest accepted result:
 | `pnpm inspect:local-cases`                                                                        | List checked-in local research cases.                   | Neutral read-only JSON summaries.                                |
 | `pnpm inspect:local-cases -- --case <id>`                                                         | Inspect one checked-in local research case.             | Local evidence, source, risk, and limitation detail.             |
 | `pnpm inspect:local-cases -- --diagnostics`                                                       | Inspect local intake file outcomes.                     | Bounded accepted/rejected diagnostics without payload leakage.   |
+| `pnpm scaffold:local-case -- --case-id <id> --title <title>`                                      | Create one checked-in local research-case draft.        | New validated file only; existing files are never overwritten.   |
 | `pnpm check:gate0-evidence-index`                                                                 | Check evidence-index drift.                             | Local evidence-index drift check passes.                         |
 | `pnpm check:gate1-contracts`                                                                      | Check Gate 1 contract control records.                  | Local Gate 1 contract guard passes.                              |
 | `pnpm check:gate0-name`                                                                           | Check TraderFrame product-name consistency.             | Local project-name check passes.                                 |
@@ -1198,7 +1209,7 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 86 files and 611 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 87 files and 621 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
@@ -1207,16 +1218,16 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                          | Acceptance focus                                    |
 | ---- | --------- | ------ | ----------------------------- | --------------------------------------------------- |
-| 1    | `TRD-707` | queued | Local authoring gap intake.   | Confirm operator need before adding file creation.  |
-| 2    | `TRD-708` | queued | Draft template contract.      | Define a safe complete local-case template.         |
-| 3    | `TRD-709` | queued | Scaffold output boundary.     | Restrict output to the checked-in intake directory. |
-| 4    | `TRD-710` | queued | Local draft scaffold command. | Create a neutral draft without workflow action.     |
-| 5    | `TRD-711` | queued | No-overwrite guard.           | Protect existing case files and identities.         |
-| 6    | `TRD-712` | queued | Draft validation feedback.    | Return bounded field-level correction guidance.     |
-| 7    | `TRD-713` | queued | Required evidence prompts.    | Keep provenance and risk references explicit.       |
-| 8    | `TRD-714` | queued | Draft-to-catalog workflow.    | Verify a scaffolded draft enters local inspection.  |
-| 9    | `TRD-715` | queued | Local authoring QA.           | Test paths, overwrite safety, and neutral copy.     |
-| 10   | `TRD-716` | queued | Local authoring checkpoint.   | Decide whether UI-assisted drafting is warranted.   |
+| 1    | `TRD-717` | queued | Authoring usability review.   | Measure CLI friction before adding interface scope. |
+| 2    | `TRD-718` | queued | Draft lifecycle contract.     | Define review-required and blocked states.          |
+| 3    | `TRD-719` | queued | Draft amendment boundary.     | Permit safe edits without hidden promotion.         |
+| 4    | `TRD-720` | queued | Explicit revision command.    | Amend one draft with operator evidence.             |
+| 5    | `TRD-721` | queued | Revision audit record.        | Preserve before/after provenance locally.           |
+| 6    | `TRD-722` | queued | Stale-on-change guard.        | Require re-review after material amendment.         |
+| 7    | `TRD-723` | queued | Revision validation feedback. | Keep correction guidance bounded and specific.      |
+| 8    | `TRD-724` | queued | Catalog revision visibility.  | Show amended drafts as review-required.             |
+| 9    | `TRD-725` | queued | Revision workflow QA.         | Verify auditability and no implicit promotion.      |
+| 10   | `TRD-726` | queued | Revision checkpoint.          | Decide whether UI-assisted editing is warranted.    |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
