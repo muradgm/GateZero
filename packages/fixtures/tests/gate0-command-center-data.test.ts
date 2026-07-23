@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain('latestPacket: "TRD-746"');
+    expect(data).toContain('latestPacket: "TRD-747"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -480,10 +480,8 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain("TRD-746 closes the read-only revision timeline.");
-    expect(data).toContain(
-      "TRD-747 begins the bounded Senior Market Intelligence foundation gap review."
-    );
+    expect(data).toContain("TRD-747 closes the Senior Market Intelligence foundation gap review.");
+    expect(data).toContain("TRD-748 begins the bounded analyst role and authority skill.");
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -507,7 +505,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-746 closes the read-only revision timeline.");
+    expect(data).toContain("TRD-747 closes the intelligence asset gap review.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });

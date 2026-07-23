@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-07-23                                                     |
-| Latest accepted packet     | `TRD-746`                                                      |
-| Latest accepted validation | 90 test files, 655 tests passed                                |
+| Last updated               | 2026-07-24                                                     |
+| Latest accepted packet     | `TRD-747`                                                      |
+| Latest accepted validation | 91 test files, 660 tests passed                                |
 
 ## Boundary
 
@@ -1201,6 +1201,7 @@ Latest accepted result:
 | `TRD-744` | accepted | Accessibility      | Added responsive semantic timeline presentation.           |
 | `TRD-745` | accepted | Timeline QA        | Covered contracts, data, rendering, states, and scope.     |
 | `TRD-746` | accepted | Checkpoint         | Closed lineage depth and selected intelligence foundation. |
+| `TRD-747` | accepted | Intelligence gap   | Reused existing assets and bounded the missing foundation. |
 
 ## Current Operator Commands
 
@@ -1241,7 +1242,7 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 90 files and 655 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 91 files and 660 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
@@ -1250,16 +1251,15 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                                | Acceptance focus                                       |
 | ---- | --------- | ------ | ----------------------------------- | ------------------------------------------------------ |
-| 1    | `TRD-747` | queued | Intelligence asset gap review.      | Reuse existing truth, contracts, fixtures, and UI.     |
-| 2    | `TRD-748` | queued | Analyst role and authority skill.   | Read-only sourced scenarios; no trading instructions.  |
-| 3    | `TRD-749` | queued | Source adapter boundary.            | Local replay inputs before any network source.         |
-| 4    | `TRD-750` | queued | Multi-timeframe assembly.           | Separate hourly, daily, and monthly evidence.          |
-| 5    | `TRD-751` | queued | Evidence quality gate.              | Block stale, missing, conflicting, or weak provenance. |
-| 6    | `TRD-752` | queued | Scenario synthesis.                 | Bullish, bearish, and neutral conditional scenarios.   |
-| 7    | `TRD-753` | queued | Adversarial risk review.            | Challenge assumptions before operator consideration.   |
-| 8    | `TRD-754` | queued | Historical replay benchmark.        | Evaluate calibration without performance claims.       |
-| 9    | `TRD-755` | queued | Read-only brief workflow plan.      | Define review queue; no scheduled automation yet.      |
-| 10   | `TRD-756` | queued | Intelligence foundation checkpoint. | Decide whether sourced read-only briefs are warranted. |
+| 1    | `TRD-748` | queued | Analyst role and authority skill.   | Read-only sourced scenarios; no trading instructions.  |
+| 2    | `TRD-749` | queued | Source adapter boundary.            | Local replay inputs before any network source.         |
+| 3    | `TRD-750` | queued | Multi-timeframe assembly.           | Separate hourly, daily, and monthly evidence.          |
+| 4    | `TRD-751` | queued | Evidence quality gate.              | Block stale, missing, conflicting, or weak provenance. |
+| 5    | `TRD-752` | queued | Scenario synthesis.                 | Bullish, bearish, and neutral conditional scenarios.   |
+| 6    | `TRD-753` | queued | Adversarial risk review.            | Challenge assumptions before operator consideration.   |
+| 7    | `TRD-754` | queued | Historical replay benchmark.        | Evaluate calibration without performance claims.       |
+| 8    | `TRD-755` | queued | Read-only brief workflow plan.      | Define review queue; no scheduled automation yet.      |
+| 9    | `TRD-756` | queued | Intelligence foundation checkpoint. | Decide whether sourced read-only briefs are warranted. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
@@ -2184,3 +2184,8 @@ Do not mark a packet accepted until:
 - Docs coverage drift guard script: `scripts/check-gate0-docs-coverage.ts`
 - Project-name guard: `scripts/check-gate0-project-name.ts`
 - Gate scanner: `scripts/validate-gate0.ts`
+
+## Source Of Truth Links Continued 4
+
+- Market intelligence foundation gap review:
+  `docs/operations/MARKET_INTELLIGENCE_FOUNDATION_GAP_REVIEW.md`
