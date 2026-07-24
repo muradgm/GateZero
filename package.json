@@ -2,7 +2,7 @@
   "name": "traderframe",
   "version": "0.0.0",
   "private": true,
-  "description": "GateZero-controlled research foundation for TraderFrame.",
+  "description": "Evidence-gated research and paper-simulation decision system for TraderFrame.",
   "type": "module",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
@@ -30,7 +30,11 @@
     "check:gate0-snapshot": "tsx scripts/check-gate0-progress-snapshot-freshness.ts",
     "check:gate0-tracklist": "tsx scripts/check-gate0-tracklist-consistency.ts",
     "check:gate0-reviews": "tsx scripts/check-gate0-review-coverage.ts",
-    "check:gate0": "pnpm snapshot:gate0-progress && pnpm snapshot:case-catalog && pnpm snapshot:simulator-workspace && pnpm snapshot:backtest-evidence && pnpm snapshot:intelligence-brief && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:market-intelligence-sources && pnpm check:backtest-evidence && pnpm check:intelligence-brief && pnpm check:case-catalog && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "check:runtime-status": "tsx scripts/build-command-center-runtime-data.ts > NUL",
+    "check:repository": "pnpm check:runtime-status && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:market-intelligence-sources && pnpm check:backtest-evidence && pnpm check:intelligence-brief && pnpm check:case-catalog && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "check:gate0": "pnpm check:repository",
+    "generate:artifacts": "pnpm snapshot:gate0-progress && pnpm snapshot:case-catalog && pnpm snapshot:simulator-workspace && pnpm snapshot:backtest-evidence && pnpm snapshot:intelligence-brief",
+    "inspect:runtime-status": "tsx scripts/build-command-center-runtime-data.ts",
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "inspect:local-cases": "tsx scripts/inspect-local-cases.ts",
     "lint": "eslint .",
@@ -47,7 +51,8 @@
     "test:ci": "vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "validate:gate0": "tsx scripts/validate-gate0.ts",
-    "verify:gate0": "pnpm check:gate0 && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci"
+    "verify": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
+    "verify:gate0": "pnpm verify"
   },
   "dependencies": {
     "zod": "^3.24.1"
