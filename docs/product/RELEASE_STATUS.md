@@ -2,16 +2,16 @@
 
 ## Status
 
-| Field | Current value |
-| --- | --- |
-| Product | TraderFrame |
-| Internal control plane | GateZero |
-| Operating gate | `G2_PAPER_TRADING` |
-| Operating scope | `paper_simulation_planning_only` |
-| Product mode | Local research and read-only decision support |
-| Execution authority | None |
-| Current initiative | Trading Intelligence Command Center |
-| Current milestone | Evidence-Gated Setup Review MVP |
+| Field                  | Current value                                 |
+| ---------------------- | --------------------------------------------- |
+| Product                | TraderFrame                                   |
+| Internal control plane | GateZero                                      |
+| Operating gate         | `G2_PAPER_TRADING`                            |
+| Operating scope        | `paper_simulation_planning_only`              |
+| Product mode           | Local research and read-only decision support |
+| Execution authority    | None                                          |
+| Current initiative     | Trading Intelligence Command Center           |
+| Current milestone      | Evidence-Gated Setup Review MVP               |
 
 ## What exists today
 
@@ -78,5 +78,5 @@ The following remain blocked:
 ## Next release target
 
 The next release target is not a broader dashboard. It is one complete Evidence-Gated Setup Review
-vertical slice that produces a traceable `REJECT`, `WATCH`, or `PAPER_SIMULATE` operator decision and
-connects it to a later immutable outcome and learning event.
+vertical slice that produces a traceable `REJECT`, `WATCH`, or `PAPER_SIMULATE` operator decision
+and connects it to a later immutable outcome and learning event.

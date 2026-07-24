@@ -149,7 +149,8 @@ Exit criteria:
 
 ### M6 — Outcome learning
 
-Outcome: TraderFrame compares the original thesis with the observed result without rewriting history.
+Outcome: TraderFrame compares the original thesis with the observed result without rewriting
+history.
 
 - Freeze the decision-time evidence bundle.
 - Record outcome separately.

@@ -114,8 +114,6 @@ describe("createSetupReviewService", () => {
 
     await createSetupReview(baseCommand);
 
-    await expect(createSetupReview(baseCommand)).rejects.toThrow(
-      "setup review already exists"
-    );
+    await expect(createSetupReview(baseCommand)).rejects.toThrow("setup review already exists");
   });
 });

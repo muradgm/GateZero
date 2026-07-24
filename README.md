@@ -80,5 +80,5 @@ pnpm test:ci
 pnpm verify:gate0
 ```
 
-`verify:gate0` is the current compatibility command. A gate-neutral verification command will replace
-it during the command and source-of-truth consolidation milestone.
+`verify:gate0` is the current compatibility command. A gate-neutral verification command will
+replace it during the command and source-of-truth consolidation milestone.

@@ -25,7 +25,10 @@ export function createSetupReviewService(dependencies: CreateSetupReviewDependen
       );
     }
 
-    if (command.requestedDecision === "PAPER_SIMULATE" && command.evidence.supporting.length === 0) {
+    if (
+      command.requestedDecision === "PAPER_SIMULATE" &&
+      command.evidence.supporting.length === 0
+    ) {
       throw new ContractValidationError("paper simulation requires supporting evidence");
     }
 

@@ -2,7 +2,8 @@
 
 ## Outcome
 
-TraderFrame compares the original decision-time thesis with observed results without rewriting historical evidence.
+TraderFrame compares the original decision-time thesis with observed results without rewriting
+historical evidence.
 
 ## Records
 

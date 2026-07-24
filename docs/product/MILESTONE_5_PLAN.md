@@ -2,7 +2,8 @@
 
 ## Outcome
 
-The command center leads with market decisions and evidence, while repository health moves to a secondary operational surface.
+The command center leads with market decisions and evidence, while repository health moves to a
+secondary operational surface.
 
 ## Primary information architecture
 

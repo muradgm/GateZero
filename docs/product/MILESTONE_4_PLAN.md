@@ -2,7 +2,8 @@
 
 ## Outcome
 
-Historical strategy evidence is correct, explicit, and conservative enough to support Setup Review decisions.
+Historical strategy evidence is correct, explicit, and conservative enough to support Setup Review
+decisions.
 
 ## Required corrections
 
@@ -41,7 +42,8 @@ Add explicit fields for:
 
 ### Strategy plugin boundary
 
-Create a deterministic strategy interface with versioned logic identity. Do not authorize parameter optimization, provider loading, arbitrary code execution, or external data access.
+Create a deterministic strategy interface with versioned logic identity. Do not authorize parameter
+optimization, provider loading, arbitrary code execution, or external data access.
 
 ## Exit criteria
 

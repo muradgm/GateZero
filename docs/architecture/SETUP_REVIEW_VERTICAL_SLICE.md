@@ -13,8 +13,8 @@ evidence.
 
 ## Product question
 
-For one market candidate, can the operator determine whether there is enough relevant evidence and an
-acceptable risk plan to reject it, watch it, or move it into local paper simulation?
+For one market candidate, can the operator determine whether there is enough relevant evidence and
+an acceptable risk plan to reject it, watch it, or move it into local paper simulation?
 
 ## Bounded outcomes
 
@@ -22,7 +22,8 @@ acceptable risk plan to reject it, watch it, or move it into local paper simulat
 export type SetupReviewDecision = "REJECT" | "WATCH" | "PAPER_SIMULATE";
 ```
 
-`PAPER_SIMULATE` is not approval to trade. It authorizes only a local deterministic simulation record.
+`PAPER_SIMULATE` is not approval to trade. It authorizes only a local deterministic simulation
+record.
 
 ## Aggregate
 

@@ -29,6 +29,6 @@ all execution boundaries.
 
 ## Delivery strategy
 
-Use six working milestones defined in `CURRENT_ROADMAP.md`. Prefer cohesive product increments over a
-large number of small governance packets. Open and maintain a draft pull request until the complete
-vertical slice and validation suite are ready for review.
+Use six working milestones defined in `CURRENT_ROADMAP.md`. Prefer cohesive product increments over
+a large number of small governance packets. Open and maintain a draft pull request until the
+complete vertical slice and validation suite are ready for review.

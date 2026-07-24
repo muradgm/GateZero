@@ -24,4 +24,5 @@ pnpm test:ci
 pnpm verify:gate0
 ```
 
-Additional gate-neutral commands will be added during Milestone 1 and will become authoritative after compatibility validation.
+Additional gate-neutral commands will be added during Milestone 1 and will become authoritative
+after compatibility validation.

@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Move protected-loop assembly out of UI code and scripts into explicit application services with validated inputs, durable ports, and auditable outputs.
+Move protected-loop assembly out of UI code and scripts into explicit application services with
+validated inputs, durable ports, and auditable outputs.
 
 ## Implemented first slice
 
@@ -23,7 +24,9 @@ It owns:
 
 `@traderframe/contracts` owns runtime-validated domain contracts.
 
-`@traderframe/application` depends on the contracts package and exposes use cases and persistence ports. UI and script layers should depend on application services rather than assembling protected-loop records themselves.
+`@traderframe/application` depends on the contracts package and exposes use cases and persistence
+ports. UI and script layers should depend on application services rather than assembling
+protected-loop records themselves.
 
 ## Current ports
 
@@ -33,7 +36,8 @@ SetupReviewRepository
   findById(setupReviewId)
 ```
 
-An in-memory adapter is provided for deterministic tests and local composition. A file-backed adapter should be added before the frontend writes Setup Reviews.
+An in-memory adapter is provided for deterministic tests and local composition. A file-backed
+adapter should be added before the frontend writes Setup Reviews.
 
 ## Remaining Epic 2 work
 
@@ -46,4 +50,5 @@ An in-memory adapter is provided for deterministic tests and local composition. 
 
 ## Boundary
 
-This application layer creates evidence records only. It must not create broker connections, dispatch orders, authorize live activity, or infer approval from successful validation.
+This application layer creates evidence records only. It must not create broker connections,
+dispatch orders, authorize live activity, or infer approval from successful validation.

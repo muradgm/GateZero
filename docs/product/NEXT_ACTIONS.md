@@ -13,4 +13,5 @@ The next code changes on this branch should be implemented in this order:
 9. Produce one validated read-only Setup Review projection.
 10. Rework the command center around that projection.
 
-Do not add broker, provider, live feed, autonomous execution, or generic AI scoring work before the first complete Setup Review reaches an immutable learning event.
+Do not add broker, provider, live feed, autonomous execution, or generic AI scoring work before the
+first complete Setup Review reaches an immutable learning event.
