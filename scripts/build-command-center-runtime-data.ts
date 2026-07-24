@@ -7,6 +7,7 @@ import {
 } from "../packages/contracts/src/index.js";
 
 const acceptanceSuffix = "_ORCHESTRATOR_ACCEPTANCE.md";
+const runtimeSource = "local repository evidence";
 
 export async function buildCommandCenterRuntimeData(
   rootDir = process.cwd()
@@ -20,12 +21,28 @@ export async function buildCommandCenterRuntimeData(
     countAcceptedRecords(path.join(rootDir, "ops", "runtime", "reviews"))
   ]);
   const latestEvidence = readLatestEvidenceRecord(evidenceIndex);
+  const validation = readValidationSummary(
+    readTracklistValue(tracklist, "Latest accepted validation")
+  );
 
   return CommandCenterRuntimeDataSchema.parse({
+    project: "TraderFrame",
+    gate: "G2_PAPER_TRADING",
+    scope: "paper_simulation_planning_only",
+    source: runtimeSource,
+    localOnly: true,
+    evidenceOnly: true,
+    operatorRequired: true,
+    riskReviewRequired: true,
+    externalAccess: false,
+    executionPath: false,
+    automatedAction: false,
+    approvalClaim: false,
+    performanceClaim: false,
     latestPacket: readTracklistValue(tracklist, "Latest accepted packet"),
-    localVerification: normalizeValidationSummary(
-      readTracklistValue(tracklist, "Latest accepted validation")
-    ),
+    localVerification: `${validation.testFileCount} files / ${validation.testCount} tests`,
+    testFileCount: validation.testFileCount,
+    testCount: validation.testCount,
     ciRun: latestEvidence.runId,
     ciState: "success",
     lastVerifiedCommit: latestEvidence.commit,
@@ -74,14 +91,20 @@ function readTracklistValue(tracklist: string, field: string): string {
   return value.replaceAll("`", "");
 }
 
-function normalizeValidationSummary(value: string): string {
+function readValidationSummary(value: string): {
+  readonly testFileCount: number;
+  readonly testCount: number;
+} {
   const match = value.match(/(\d+) test files,\s+(\d+) tests passed/);
 
   if (!match) {
     throw new Error(`Invalid tracklist validation summary: ${value}`);
   }
 
-  return `${match[1]!} files / ${match[2]!} tests`;
+  return {
+    testFileCount: Number(match[1]),
+    testCount: Number(match[2])
+  };
 }
 
 async function main(): Promise<void> {
