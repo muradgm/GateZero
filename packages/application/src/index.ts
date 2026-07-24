@@ -1,3 +1,4 @@
+export * from "./build-trading-intelligence-report.js";
 export * from "./create-setup-review.js";
 export * from "./evaluate-setup-review.js";
 export * from "./file-setup-review-repository.js";
