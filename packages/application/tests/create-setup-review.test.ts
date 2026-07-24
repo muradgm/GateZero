@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ContractValidationError } from "../../contracts/src/index.js";
+import { ContractValidationError } from "@traderframe/contracts";
 import {
   InMemorySetupReviewRepository,
   createSetupReviewService,
