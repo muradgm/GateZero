@@ -1,3 +1,5 @@
+/* global document, fetch, window */
+
 import { commandCenterData } from "./command-center-data.js";
 
 const mount = document.querySelector("#intelligence-command-center");
@@ -294,7 +296,7 @@ function bindNavigation() {
       link.classList.toggle("active", link.dataset.nav === current);
     }
   };
-  window.addEventListener("hashchange", update, { once: true });
+  window.addEventListener("hashchange", update);
   update();
 }
 
