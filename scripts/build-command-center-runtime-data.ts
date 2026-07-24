@@ -9,33 +9,7 @@ import {
 const acceptanceSuffix = "_ORCHESTRATOR_ACCEPTANCE.md";
 const runtimeSource = "local repository evidence";
 
-export interface LegacyCommandCenterRuntimeData {
-  readonly latestPacket: string;
-  readonly localVerification: string;
-  readonly ciRun: string;
-  readonly ciState: "success";
-  readonly lastVerifiedCommit: string;
-  readonly acceptedRecords: number;
-  readonly evidenceRecords: number;
-}
-
 export async function buildCommandCenterRuntimeData(
-  rootDir = process.cwd()
-): Promise<LegacyCommandCenterRuntimeData> {
-  const status = await buildTraderFrameRuntimeStatus(rootDir);
-
-  return {
-    latestPacket: status.latestPacket,
-    localVerification: status.localVerification,
-    ciRun: status.ciRun,
-    ciState: status.ciState,
-    lastVerifiedCommit: status.lastVerifiedCommit,
-    acceptedRecords: status.acceptedRecords,
-    evidenceRecords: status.evidenceRecords
-  };
-}
-
-export async function buildTraderFrameRuntimeStatus(
   rootDir = process.cwd()
 ): Promise<CommandCenterRuntimeData> {
   const [tracklist, evidenceIndex, acceptedRecords] = await Promise.all([
@@ -76,6 +50,8 @@ export async function buildTraderFrameRuntimeStatus(
     evidenceRecords: countEvidenceRecords(evidenceIndex)
   });
 }
+
+export const buildTraderFrameRuntimeStatus = buildCommandCenterRuntimeData;
 
 async function countAcceptedRecords(reviewDir: string): Promise<number> {
   const entries = await readdir(reviewDir);
@@ -134,7 +110,7 @@ function readValidationSummary(value: string): {
 }
 
 async function main(): Promise<void> {
-  console.log(JSON.stringify(await buildTraderFrameRuntimeStatus(), null, 2));
+  console.log(JSON.stringify(await buildCommandCenterRuntimeData(), null, 2));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
