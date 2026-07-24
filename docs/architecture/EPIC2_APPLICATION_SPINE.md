@@ -5,20 +5,40 @@
 Move protected-loop assembly out of UI code and scripts into explicit application services with
 validated inputs, durable ports, and auditable outputs.
 
-## Implemented first slice
+## Implemented services
 
-The first application service is `createSetupReviewService` in `packages/application`.
+`packages/application` now owns the first complete Setup Review workflow:
 
-It owns:
+```text
+createSetupReviewService
+  -> requestRiskReviewService
+  -> recordOperatorDecisionService
+  -> querySetupReviewsService
+```
+
+The legal state flow is:
+
+```text
+draft -> ready_for_risk_review -> reviewed
+```
+
+Creation cannot select `PAPER_SIMULATE`. That outcome is only available after a separate risk-review
+reference and explicit operator decision.
+
+## Enforced behavior
+
+The application layer owns:
 
 - duplicate setup-review prevention;
 - maximum-loss calculation from entry, stop, quantity, fees, and slippage;
 - account-risk enforcement;
 - supporting-evidence enforcement;
+- explicit state-transition validation;
 - risk-review enforcement before `PAPER_SIMULATE`;
 - canonical Gate 2 boundary fields;
 - schema validation;
-- repository persistence.
+- repository persistence;
+- decision-oriented query summaries for browser surfaces.
 
 ## Package boundaries
 
@@ -28,25 +48,36 @@ It owns:
 ports. UI and script layers should depend on application services rather than assembling
 protected-loop records themselves.
 
-## Current ports
+## Persistence ports
 
 ```text
 SetupReviewRepository
   save(review)
   findById(setupReviewId)
+  list()
 ```
 
-An in-memory adapter is provided for deterministic tests and local composition. A file-backed
-adapter should be added before the frontend writes Setup Reviews.
+Two adapters are available:
 
-## Remaining Epic 2 work
+- `InMemorySetupReviewRepository` for deterministic tests and local composition;
+- `FileSetupReviewRepository` for append-only local revisions.
 
-1. Add a file-backed immutable Setup Review repository.
-2. Add `requestRiskReview` and `recordOperatorDecision` services.
-3. Separate draft creation from final reviewed decision state.
-4. Add explicit transition errors for illegal state movement.
-5. Route command-center write paths through the application package.
-6. Add an application-level query for the decision-first frontend.
+The file adapter writes content-hashed revision files and never overwrites a previous revision.
+
+## Epic 2 completion criteria
+
+- [x] Application package and workspace dependency boundaries.
+- [x] Draft creation service.
+- [x] Risk-review request transition.
+- [x] Operator-decision transition.
+- [x] Illegal transition errors.
+- [x] Append-only file-backed persistence.
+- [x] Decision-oriented query service.
+- [x] Workflow tests covering draft through reviewed state.
+- [ ] Route the browser runtime endpoint through the query service.
+
+The final unchecked item is intentionally the bridge into Epic 5's decision-first command center.
+The domain and application spine are now ready for that integration.
 
 ## Boundary
 
