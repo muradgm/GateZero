@@ -2,7 +2,7 @@
   "name": "traderframe",
   "version": "0.0.0",
   "private": true,
-  "description": "Evidence-gated research and paper-simulation decision system for TraderFrame.",
+  "description": "GateZero-controlled, evidence-gated research and paper-simulation decision system for TraderFrame.",
   "type": "module",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
@@ -67,10 +67,5 @@
     "typescript-eslint": "^8.18.1",
     "vite": "^8.1.0",
     "vitest": "^4.1.9"
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild": "^0.28.1"
-    }
   }
 }
