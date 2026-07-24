@@ -2,7 +2,7 @@ import {
   ContractValidationError,
   SetupReviewSchema,
   type SetupReview
-} from "../../contracts/src/index.js";
+} from "@traderframe/contracts";
 import type { CreateSetupReviewCommand, SetupReviewRepository } from "./setup-review-ports.js";
 
 export interface CreateSetupReviewDependencies {
