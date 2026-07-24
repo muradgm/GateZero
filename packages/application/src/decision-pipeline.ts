@@ -35,7 +35,8 @@ export function createDecisionPipeline(command: CreateDecisionPipelineCommand): 
     currentStage: "market_context",
     stages: orderedStages.map((stage) => ({
       stage,
-      status: stage === "research_case" ? "completed" : stage === "market_context" ? "ready" : "pending",
+      status:
+        stage === "research_case" ? "completed" : stage === "market_context" ? "ready" : "pending",
       recordId: stage === "research_case" ? command.researchCaseRecordId : undefined,
       completedAt: stage === "research_case" ? command.now : undefined,
       blockers: [],
@@ -61,13 +62,20 @@ export function completeDecisionPipelineStage(
     );
   }
 
-  const index = orderedStages.indexOf(command.stage);
-  const nextStage = orderedStages[index + 1];
-  const terminalRecommendation = command.stage === "operator_decision" ? command.recommendation : pipeline.recommendation;
-
   if (command.stage === "operator_decision" && !command.recommendation) {
     throw new ContractValidationError("operator decision stage requires a bounded recommendation");
   }
+
+  const index = orderedStages.indexOf(command.stage);
+  const nextStage = orderedStages[index + 1];
+  if (!nextStage) {
+    throw new ContractValidationError("learning is the terminal pipeline stage");
+  }
+
+  const recommendation =
+    command.stage === "operator_decision" ? command.recommendation : pipeline.recommendation;
+  const skipsSimulation = recommendation !== "PAPER_SIMULATE" && nextStage === "paper_simulation";
+  const currentStage = skipsSimulation ? "outcome" : nextStage;
 
   const stages = pipeline.stages.map((stage) => {
     if (stage.stage === command.stage) {
@@ -80,32 +88,20 @@ export function completeDecisionPipelineStage(
         blockers: []
       };
     }
-    if (nextStage && stage.stage === nextStage) {
-      const notApplicable = terminalRecommendation !== "PAPER_SIMULATE" && nextStage === "paper_simulation";
-      return {
-        ...stage,
-        status: notApplicable ? ("not_applicable" as const) : ("ready" as const)
-      };
+    if (skipsSimulation && stage.stage === "paper_simulation") {
+      return { ...stage, status: "not_applicable" as const };
+    }
+    if (stage.stage === currentStage) {
+      return { ...stage, status: "ready" as const };
     }
     return stage;
   });
-
-  let currentStage = nextStage;
-  if (terminalRecommendation !== "PAPER_SIMULATE" && nextStage === "paper_simulation") {
-    currentStage = "outcome";
-    const outcome = stages.find((stage) => stage.stage === "outcome");
-    if (outcome) outcome.status = "ready";
-  }
-
-  if (!currentStage) {
-    throw new ContractValidationError("learning is the terminal pipeline stage");
-  }
 
   return DecisionPipelineSchema.parse({
     ...pipeline,
     currentStage,
     stages,
-    recommendation: terminalRecommendation,
+    recommendation,
     updatedAt: command.completedAt
   });
 }
