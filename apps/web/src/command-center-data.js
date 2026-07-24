@@ -7,8 +7,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-758",
-  localVerification: "103 files / 769 tests",
+  latestPacket: "TRD-768",
+  localVerification: "106 files / 788 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -23,7 +23,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 103 files, 769 tests.",
+      detail: "Latest suite: 106 files, 788 tests.",
       tone: "good"
     },
     {
@@ -34,7 +34,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "758 / 758",
+      value: "768 / 768",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -125,7 +125,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "103 files / 769 tests"
+      reference: "106 files / 788 tests"
     },
     {
       area: "Verified commit",
@@ -155,7 +155,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "758 accepted records"
+      reference: "768 accepted records"
     },
     {
       area: "Dependency audit",
@@ -335,8 +335,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-758 renders one balanced local read-only Intelligence Brief.",
-      "TRD-759 is authorized for operator-visible blocked and unavailable brief states."
+      "TRD-768 verifies the local intelligence brief review chain.",
+      "TRD-769 is authorized for manual local review authoring."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -355,8 +355,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-758 adds one deterministic local read-only Intelligence Brief.",
-    "TRD-759 renders fail-closed blocked and unavailable brief states.",
+    "TRD-768 closes the local intelligence brief workflow checkpoint.",
+    "TRD-769 adds bounded manual local review authoring.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -486,7 +486,17 @@ export const commandCenterData = {
     "TRD-755 Read-only brief workflow plan",
     "TRD-756 Intelligence foundation checkpoint",
     "TRD-757 Deterministic historical backtest runner MVP",
-    "TRD-758 Read-only Intelligence Brief MVP"
+    "TRD-758 Read-only Intelligence Brief MVP",
+    "TRD-759 Intelligence Brief blocked-state UX",
+    "TRD-760 Brief blocked-state contracts and fixtures",
+    "TRD-761 Research case brief selection",
+    "TRD-762 Brief-to-backtest evidence linkage",
+    "TRD-763 Source provenance drilldown",
+    "TRD-764 Cross-timeframe conflict panel",
+    "TRD-765 Scenario invalidation evaluation",
+    "TRD-766 Manual risk review record",
+    "TRD-767 Operator decision record",
+    "TRD-768 Intelligence Brief workflow checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

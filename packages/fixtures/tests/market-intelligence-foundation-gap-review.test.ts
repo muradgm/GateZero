@@ -23,22 +23,23 @@ describe("market intelligence foundation gap review", () => {
   it("preserves the original TRD-748 authorization and records its accepted progression", () => {
     const review = readNormalized(reviewPath);
     const assignment = readFileSync(assignmentPath, "utf8");
-    const tracklist = readFileSync(tracklistPath, "utf8");
+    const tracklist = readNormalized(tracklistPath);
 
     expect(review).toContain("TRD-748 may proceed only if it:");
     expect(assignment).toContain("TRD-748 is the only next authorized implementation packet.");
     expect(tracklist).toContain(
-      "| `TRD-748` | accepted | Analyst authority  | Added governed read-only scenario analyst skill."
+      "| `TRD-748` | accepted | Analyst authority | Added governed read-only scenario analyst skill."
     );
     expect(tracklist).toContain(
-      "| `TRD-757` | accepted | Backtest runtime   | Executed one deterministic historical reference run."
+      "| `TRD-757` | accepted | Backtest runtime | Executed one deterministic historical reference run."
     );
     expect(tracklist).toContain(
       "| `TRD-758` | accepted | Intelligence brief | Rendered one balanced local source-linked scenario brief."
     );
     expect(tracklist).toContain(
-      "| 1    | `TRD-759` | queued | Intelligence Brief blocked-state UX."
+      "| `TRD-768` | accepted | Workflow checkpoint | Verified the aligned research-only intelligence chain."
     );
+    expect(tracklist).toContain("| 1 | `TRD-769` | queued | Manual local review authoring.");
   });
 
   it("keeps TRD-749 deterministic, canonical, and local", () => {

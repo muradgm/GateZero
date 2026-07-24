@@ -656,6 +656,64 @@ h3 {
   padding: 14px;
 }
 
+.brief-case-selector {
+  display: grid;
+  gap: 8px;
+}
+
+.brief-case-selector label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.brief-case-selector select {
+  background: #fff;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 42px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+.brief-availability {
+  align-items: start;
+  background: #f1f6f4;
+  border: 1px solid var(--subtle);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 12px;
+}
+
+.brief-availability.blocked,
+.brief-availability.unavailable {
+  background: #fff7f3;
+  border-left-color: #b4593f;
+}
+
+.brief-availability strong {
+  color: var(--accent-strong);
+  text-transform: uppercase;
+}
+
+.brief-availability span {
+  color: var(--muted);
+}
+
+.brief-availability code {
+  grid-column: 1 / -1;
+}
+
+[data-brief-detail][hidden] {
+  display: none;
+}
+
 .brief-identity div,
 .brief-review-strip div {
   display: grid;

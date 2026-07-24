@@ -5,6 +5,7 @@ import { commandCenterData } from "./command-center-data.js";
 const app = document.querySelector("#app");
 const runtimeDataUrl = "/runtime/command-center-data.json";
 const runtimeRefreshMs = 15_000;
+let selectedIntelligenceCaseId = "";
 
 if (!app) {
   throw new Error("Missing command center mount node.");
@@ -311,7 +312,19 @@ function renderCommandCenter(data) {
               </div>
               <span class="state-pill">${marketIntelligenceWorkspace.intelligenceBrief.status}</span>
             </div>
-            <div class="brief-identity" aria-label="Intelligence brief identity">
+            <div class="brief-case-selector">
+              <label for="intelligence-brief-case">Local research case</label>
+              <select id="intelligence-brief-case">
+                ${marketIntelligenceWorkspace.intelligenceBrief.caseSelection.options
+                  .map(
+                    (option) =>
+                      `<option value="${option.caseId}">${option.title} — ${option.status}</option>`
+                  )
+                  .join("")}
+              </select>
+              <div class="brief-availability" id="intelligence-brief-availability" role="status" aria-live="polite"></div>
+            </div>
+            <div class="brief-identity" data-brief-detail aria-label="Intelligence brief identity">
               <div>
                 <span>Brief</span>
                 <strong>${marketIntelligenceWorkspace.intelligenceBrief.briefId}</strong>
@@ -325,7 +338,7 @@ function renderCommandCenter(data) {
                 <strong>${marketIntelligenceWorkspace.intelligenceBrief.generatedAt}</strong>
               </div>
             </div>
-            <div class="brief-grid" aria-label="Local source inventory">
+            <div class="brief-grid" data-brief-detail aria-label="Local source inventory">
               ${marketIntelligenceWorkspace.intelligenceBrief.sources
                 .map(
                   (source) => `
@@ -348,7 +361,7 @@ function renderCommandCenter(data) {
                 )
                 .join("")}
             </div>
-            <div class="brief-grid" aria-label="Separate timeframe evidence">
+            <div class="brief-grid" data-brief-detail aria-label="Separate timeframe evidence">
               ${marketIntelligenceWorkspace.intelligenceBrief.timeframes
                 .map(
                   (timeframe) => `
@@ -370,17 +383,17 @@ function renderCommandCenter(data) {
                 )
                 .join("")}
             </div>
-            <div class="brief-scenario-grid" aria-label="Balanced conditional scenarios">
+            <div class="brief-scenario-grid" data-brief-detail aria-label="Balanced conditional scenarios">
               ${marketIntelligenceWorkspace.intelligenceBrief.scenarios
                 .map((scenario) => renderBriefScenarioCard(scenario))
                 .join("")}
             </div>
-            <div class="workspace-adjacency" aria-label="Brief review requirements and limitations">
+            <div class="workspace-adjacency" data-brief-detail aria-label="Brief review requirements and limitations">
               ${renderListCard("Cross-Timeframe Conflicts", marketIntelligenceWorkspace.intelligenceBrief.crossTimeframeConflicts)}
               ${renderListCard("Brief Limitations", marketIntelligenceWorkspace.intelligenceBrief.limitations)}
               ${renderListCard("Blocked Scope", marketIntelligenceWorkspace.intelligenceBrief.blockedScopeReminder)}
             </div>
-            <div class="brief-review-strip">
+            <div class="brief-review-strip" data-brief-detail>
               <div>
                 <span>Evidence quality</span>
                 <strong>${marketIntelligenceWorkspace.intelligenceBrief.qualityStatus}</strong>
@@ -402,7 +415,126 @@ function renderCommandCenter(data) {
                 <strong>${marketIntelligenceWorkspace.intelligenceBrief.operatorDecisionStatus}</strong>
               </div>
             </div>
-            <div class="brief-hash">
+            <div class="brief-grid" data-brief-detail aria-label="Brief evidence links and provenance">
+              ${renderRecordCard(
+                "Historical Backtest Link",
+                marketIntelligenceWorkspace.intelligenceBrief.backtestLink.id,
+                [
+                  ["Run", marketIntelligenceWorkspace.intelligenceBrief.backtestLink.runId],
+                  [
+                    "Relationship",
+                    marketIntelligenceWorkspace.intelligenceBrief.backtestLink.relationship
+                  ],
+                  [
+                    "Evidence permission",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.backtestLink.evidencePermission
+                    )
+                  ]
+                ]
+              )}
+              ${renderListCard(
+                "Source Provenance",
+                marketIntelligenceWorkspace.intelligenceBrief.provenance.map(
+                  (source) => `${source.sourceId}: ${source.status} — ${source.payloadHash}`
+                )
+              )}
+              ${renderRecordCard(
+                "Conflict Review",
+                marketIntelligenceWorkspace.intelligenceBrief.conflictPanel.status,
+                [
+                  ["Status", marketIntelligenceWorkspace.intelligenceBrief.conflictPanel.status],
+                  [
+                    "Conflicts",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.conflictPanel.conflicts.length
+                    )
+                  ],
+                  [
+                    "Operator message",
+                    marketIntelligenceWorkspace.intelligenceBrief.conflictPanel.operatorMessage
+                  ]
+                ]
+              )}
+            </div>
+            <div class="brief-grid" data-brief-detail aria-label="Invalidation and manual review records">
+              ${renderRecordCard(
+                "Explicit Invalidation Evaluation",
+                marketIntelligenceWorkspace.intelligenceBrief.invalidationEvaluation.id,
+                [
+                  [
+                    "Invocation",
+                    marketIntelligenceWorkspace.intelligenceBrief.invalidationEvaluation.invocation
+                  ],
+                  [
+                    "Disposition",
+                    marketIntelligenceWorkspace.intelligenceBrief.invalidationEvaluation.disposition
+                  ],
+                  [
+                    "Checks",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.invalidationEvaluation.checks
+                        .length
+                    )
+                  ]
+                ]
+              )}
+              ${renderRecordCard(
+                "Manual Risk Review",
+                marketIntelligenceWorkspace.intelligenceBrief.manualRiskReview.id,
+                [
+                  [
+                    "Disposition",
+                    marketIntelligenceWorkspace.intelligenceBrief.manualRiskReview.disposition
+                  ],
+                  [
+                    "Findings",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.manualRiskReview.findings.length
+                    )
+                  ],
+                  [
+                    "Approval granted",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.manualRiskReview.approvalGranted
+                    )
+                  ]
+                ]
+              )}
+              ${renderRecordCard(
+                "Operator Decision Record",
+                marketIntelligenceWorkspace.intelligenceBrief.operatorDecision.id,
+                [
+                  [
+                    "Decision",
+                    marketIntelligenceWorkspace.intelligenceBrief.operatorDecision.decision
+                  ],
+                  ["Reason", marketIntelligenceWorkspace.intelligenceBrief.operatorDecision.reason],
+                  [
+                    "Simulation authorized",
+                    String(
+                      marketIntelligenceWorkspace.intelligenceBrief.operatorDecision
+                        .simulationAuthorized
+                    )
+                  ]
+                ]
+              )}
+            </div>
+            <div class="brief-review-strip" data-brief-detail aria-label="Workflow checkpoint">
+              <div>
+                <span>Workflow checkpoint</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.workflowCheckpoint.id}</strong>
+              </div>
+              <div>
+                <span>Workflow status</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.workflowCheckpoint.status}</strong>
+              </div>
+              <div>
+                <span>Next material gap</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.workflowCheckpoint.nextGap}</strong>
+              </div>
+            </div>
+            <div class="brief-hash" data-brief-detail>
               <span>Frozen brief hash</span>
               <code>${marketIntelligenceWorkspace.intelligenceBrief.contentHash}</code>
             </div>
@@ -645,6 +777,7 @@ function renderCommandCenter(data) {
 `;
 
   updateActiveNavigation();
+  bindIntelligenceBriefCaseSelector(marketIntelligenceWorkspace.intelligenceBrief);
 }
 
 async function refreshRuntimeData() {
@@ -948,8 +1081,109 @@ function normalizeIntelligenceBrief(brief = {}) {
     limitations: asList(brief.limitations),
     riskReviewStatus: brief.riskReviewStatus || "required",
     operatorDecisionStatus: brief.operatorDecisionStatus || "required",
-    blockedScopeReminder: asList(brief.blockedScopeReminder)
+    blockedScopeReminder: asList(brief.blockedScopeReminder),
+    caseSelection: {
+      selectedCaseId: brief.caseSelection?.selectedCaseId || "",
+      options: Array.isArray(brief.caseSelection?.options)
+        ? brief.caseSelection.options
+            .filter((option) => option && typeof option === "object")
+            .map((option) => ({
+              caseId: option.caseId || "",
+              title: option.title || "Local research case",
+              status: option.status || "unavailable",
+              reason: option.reason || "no_linked_brief",
+              message: option.message || "No local intelligence brief is available."
+            }))
+        : []
+    },
+    backtestLink: {
+      id: brief.backtestLink?.id || "",
+      runId: brief.backtestLink?.runId || "",
+      relationship: brief.backtestLink?.relationship || "",
+      inputHash: brief.backtestLink?.inputHash || "",
+      outputHash: brief.backtestLink?.outputHash || "",
+      evidencePermission: brief.backtestLink?.evidencePermission === true
+    },
+    provenance: Array.isArray(brief.provenance)
+      ? brief.provenance
+          .filter((source) => source && typeof source === "object")
+          .map((source) => ({
+            sourceId: source.sourceId || "",
+            payloadHash: source.payloadHash || "",
+            status: source.status || "unverified",
+            notes: asList(source.notes)
+          }))
+      : [],
+    conflictPanel: {
+      status: brief.conflictPanel?.status || "revision_required",
+      conflicts: asList(brief.conflictPanel?.conflicts),
+      operatorMessage: brief.conflictPanel?.operatorMessage || "Conflict evidence is unavailable."
+    },
+    invalidationEvaluation: {
+      id: brief.invalidationEvaluation?.id || "",
+      invocation: brief.invalidationEvaluation?.invocation || "explicit_operator_request",
+      disposition: brief.invalidationEvaluation?.disposition || "blocked",
+      checks: Array.isArray(brief.invalidationEvaluation?.checks)
+        ? brief.invalidationEvaluation.checks
+        : []
+    },
+    manualRiskReview: {
+      id: brief.manualRiskReview?.id || "",
+      disposition: brief.manualRiskReview?.disposition || "blocked",
+      findings: asList(brief.manualRiskReview?.findings),
+      limitations: asList(brief.manualRiskReview?.limitations),
+      approvalGranted: brief.manualRiskReview?.approvalGranted === true
+    },
+    operatorDecision: {
+      id: brief.operatorDecision?.id || "",
+      decision: brief.operatorDecision?.decision || "revise",
+      reason: brief.operatorDecision?.reason || "No manual operator decision recorded.",
+      simulationAuthorized: brief.operatorDecision?.simulationAuthorized === true
+    },
+    workflowCheckpoint: {
+      id: brief.workflowCheckpoint?.id || "",
+      status: brief.workflowCheckpoint?.status || "not_recorded",
+      nextGap: brief.workflowCheckpoint?.nextGap || "not_recorded"
+    }
   };
+}
+
+function bindIntelligenceBriefCaseSelector(brief) {
+  const selector = document.querySelector("#intelligence-brief-case");
+  const availability = document.querySelector("#intelligence-brief-availability");
+  const detailNodes = [...document.querySelectorAll("[data-brief-detail]")];
+
+  if (!selector || !availability) {
+    return;
+  }
+
+  const availableIds = new Set(brief.caseSelection.options.map((option) => option.caseId));
+  const preferredId = availableIds.has(selectedIntelligenceCaseId)
+    ? selectedIntelligenceCaseId
+    : brief.caseSelection.selectedCaseId;
+  selector.value = preferredId;
+
+  const update = () => {
+    selectedIntelligenceCaseId = selector.value;
+    const selected = brief.caseSelection.options.find(
+      (option) => option.caseId === selectedIntelligenceCaseId
+    );
+    const isAvailable = selected?.status === "available";
+
+    availability.className = `brief-availability ${selected?.status || "unavailable"}`;
+    availability.innerHTML = `
+      <strong>${selected?.status || "unavailable"}</strong>
+      <span>${selected?.message || "No local intelligence brief is available."}</span>
+      <code>${selected?.reason || "no_linked_brief"}</code>
+    `;
+
+    for (const node of detailNodes) {
+      node.hidden = !isAvailable;
+    }
+  };
+
+  selector.addEventListener("change", update);
+  update();
 }
 
 function renderBriefScenarioCard(scenario) {

@@ -21,4 +21,19 @@ describe("Gate 2 intelligence brief browser evidence", () => {
     expect(main).toContain("Operator decision required");
     expect(main).not.toContain("brief-action");
   });
+
+  it("includes selectable fail-closed cases and linked workflow records", () => {
+    const view = buildIntelligenceBriefEvidence();
+    expect(view.caseSelection.options.map((option) => option.status)).toEqual([
+      "available",
+      "blocked",
+      "unavailable"
+    ]);
+    expect(view.backtestLink.evidencePermission).toBe(false);
+    expect(view.invalidationEvaluation.invocation).toBe("explicit_operator_request");
+    expect(view.manualRiskReview.approvalGranted).toBe(false);
+    expect(view.operatorDecision.decision).toBe("keep_research_only");
+    expect(view.operatorDecision.simulationAuthorized).toBe(false);
+    expect(view.workflowCheckpoint.status).toBe("research_only_recorded");
+  });
 });

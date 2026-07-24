@@ -7,3 +7,4 @@ export * from "./gate2-paper-simulation-fixtures.js";
 export * from "./gate2-local-paper-simulator-fixtures.js";
 export * from "./gate2-market-intelligence-foundation-fixtures.js";
 export * from "./gate2-read-only-intelligence-brief-fixtures.js";
+export * from "./gate2-intelligence-brief-workflow-fixtures.js";
