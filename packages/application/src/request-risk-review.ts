@@ -1,4 +1,8 @@
-import { ContractValidationError, SetupReviewSchema, type SetupReview } from "@traderframe/contracts";
+import {
+  ContractValidationError,
+  SetupReviewSchema,
+  type SetupReview
+} from "@traderframe/contracts";
 import type { SetupReviewRepository } from "./setup-review-ports.js";
 
 export interface RequestRiskReviewCommand {
