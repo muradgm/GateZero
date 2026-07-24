@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import type { EvidenceContribution } from "@traderframe/contracts";
 import {
   buildTradingIntelligenceReport,
   rankTradingIntelligenceReports
@@ -31,7 +32,11 @@ const common = {
   invalidationSummary: "Reject the setup below the one-hour structure low."
 } as const;
 
-function contribution(id: string, points: number, direction: "supporting" | "contradicting") {
+function contribution(
+  id: string,
+  points: number,
+  direction: "supporting" | "contradicting"
+): EvidenceContribution {
   return {
     contributionId: id,
     dimension: direction === "supporting" ? "trend" : "event_risk",
@@ -41,14 +46,17 @@ function contribution(id: string, points: number, direction: "supporting" | "con
     points,
     rationale: "Traceable evidence contribution.",
     limitation: "The contribution is bounded and local-only."
-  } as const;
+  };
 }
 
 describe("buildTradingIntelligenceReport", () => {
   it("builds an explainable high-confidence paper-simulation candidate", () => {
     const report = buildTradingIntelligenceReport({
       ...common,
-      contributions: [contribution("trend", 20, "supporting"), contribution("structure", 15, "supporting")],
+      contributions: [
+        contribution("trend", 20, "supporting"),
+        contribution("structure", 15, "supporting")
+      ],
       downgradeReasons: []
     });
 
@@ -61,7 +69,10 @@ describe("buildTradingIntelligenceReport", () => {
   it("downgrades a strong score when unresolved risks remain", () => {
     const report = buildTradingIntelligenceReport({
       ...common,
-      contributions: [contribution("trend", 20, "supporting"), contribution("structure", 15, "supporting")],
+      contributions: [
+        contribution("trend", 20, "supporting"),
+        contribution("structure", 15, "supporting")
+      ],
       downgradeReasons: ["High-impact macro event remains unresolved."]
     });
 
@@ -72,7 +83,10 @@ describe("buildTradingIntelligenceReport", () => {
   it("ranks bounded recommendations before raw score", () => {
     const paper = buildTradingIntelligenceReport({
       ...common,
-      contributions: [contribution("trend", 20, "supporting"), contribution("structure", 15, "supporting")],
+      contributions: [
+        contribution("trend", 20, "supporting"),
+        contribution("structure", 15, "supporting")
+      ],
       downgradeReasons: []
     });
     const watch = buildTradingIntelligenceReport({
@@ -80,7 +94,10 @@ describe("buildTradingIntelligenceReport", () => {
       reportId: "intelligence-gbpusd-001",
       setupReviewId: "setup-review-gbpusd-001",
       instrument: "GBP/USD",
-      contributions: [contribution("trend", 20, "supporting"), contribution("structure", 20, "supporting")],
+      contributions: [
+        contribution("trend", 20, "supporting"),
+        contribution("structure", 20, "supporting")
+      ],
       downgradeReasons: ["Correlation concentration remains unresolved."]
     });
 
