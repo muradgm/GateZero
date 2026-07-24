@@ -1,4 +1,4 @@
-import type { SetupReview } from "../../contracts/src/setup-review.js";
+import type { SetupReview } from "@traderframe/contracts/setup-review";
 import type { SetupReviewRepository } from "./setup-review-ports.js";
 
 export class InMemorySetupReviewRepository implements SetupReviewRepository {
