@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain('latestPacket: "TRD-768"');
+    expect(data).toContain('latestPacket: "TRD-778"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -138,7 +138,7 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("source-review-card");
     expect(styles).toContain(".source-review-grid");
     expect(styles).toContain("max-height: 330px");
-    expect(main).not.toContain("<button");
+    expect(main.match(/<button/g)).toHaveLength(1);
     expect(main).not.toContain("download");
   });
 
@@ -192,9 +192,9 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("Boundary Checks");
     expect(main).toContain("Local Source Artifacts");
     expect(main).toContain("Reproducibility Notes");
-    expect(main).not.toContain("<button");
-    expect(main).not.toContain("<form");
-    expect(styles).not.toContain("cursor: pointer");
+    expect(main.match(/<button/g)).toHaveLength(1);
+    expect(main.match(/<form/g)).toHaveLength(1);
+    expect(styles.match(/cursor: pointer/g)).toHaveLength(1);
   });
 
   it("keeps runtime refresh from dropping simulation evidence detail", () => {
@@ -375,8 +375,8 @@ describe("Gate 0 command center surface", () => {
 
     expect(main).toContain("Evidence Controls");
     expect(main).toContain("detail-control-plane");
-    expect(main).not.toContain("<button");
-    expect(main).not.toContain("<form");
+    expect(main.match(/<button/g)).toHaveLength(1);
+    expect(main.match(/<form/g)).toHaveLength(1);
     expect(main).not.toContain("target=");
   });
 
@@ -480,8 +480,8 @@ describe("Gate 0 command center surface", () => {
     const data = readFileSync(dataPath, "utf8");
 
     expect(data).toContain("controlLaneCheckpoint");
-    expect(data).toContain("TRD-768 verifies the local intelligence brief review chain.");
-    expect(data).toContain("TRD-769 is authorized for manual local review authoring.");
+    expect(data).toContain("TRD-778 closes the bounded manual local review authoring lane.");
+    expect(data).toContain("TRD-779 is queued for local review history inspection.");
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -505,7 +505,7 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Market intelligence truth");
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
-    expect(data).toContain("TRD-768 closes the local intelligence brief workflow checkpoint.");
+    expect(data).toContain("TRD-778 closes bounded manual local review authoring.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });
@@ -618,8 +618,8 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("workspace-adjacency");
     expect(styles).toContain(".workspace-evidence-grid");
     expect(styles).toContain(".workspace-adjacency");
-    expect(main).not.toContain("<button");
-    expect(main).not.toContain("<form");
+    expect(main.match(/<button/g)).toHaveLength(1);
+    expect(main.match(/<form/g)).toHaveLength(1);
   });
 
   it("keeps market intelligence display evidence-only and non-final", () => {
@@ -663,8 +663,8 @@ describe("Gate 0 command center surface", () => {
     expect(main).toContain("Risk-Gated Review");
     expect(main).toContain("Local Simulation Candidate");
     expect(styles).toContain(".market-workspace");
-    expect(main).not.toContain("<button");
-    expect(main).not.toContain("<form");
+    expect(main.match(/<button/g)).toHaveLength(1);
+    expect(main.match(/<form/g)).toHaveLength(1);
   });
 
   it("keeps recommendation candidate simulation local and external-dispatch-free", () => {

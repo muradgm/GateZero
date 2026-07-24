@@ -7,8 +7,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-768",
-  localVerification: "106 files / 788 tests",
+  latestPacket: "TRD-778",
+  localVerification: "110 files / 802 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -23,7 +23,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 106 files, 788 tests.",
+      detail: "Latest suite: 110 files, 802 tests.",
       tone: "good"
     },
     {
@@ -34,7 +34,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "768 / 768",
+      value: "778 / 778",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -125,7 +125,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "106 files / 788 tests"
+      reference: "110 files / 802 tests"
     },
     {
       area: "Verified commit",
@@ -155,7 +155,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "768 accepted records"
+      reference: "778 accepted records"
     },
     {
       area: "Dependency audit",
@@ -335,8 +335,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-768 verifies the local intelligence brief review chain.",
-      "TRD-769 is authorized for manual local review authoring."
+      "TRD-778 closes the bounded manual local review authoring lane.",
+      "TRD-779 is queued for local review history inspection."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -355,8 +355,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-768 closes the local intelligence brief workflow checkpoint.",
-    "TRD-769 adds bounded manual local review authoring.",
+    "TRD-778 closes bounded manual local review authoring.",
+    "TRD-779 inspects validated local review history without action authority.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -496,7 +496,17 @@ export const commandCenterData = {
     "TRD-765 Scenario invalidation evaluation",
     "TRD-766 Manual risk review record",
     "TRD-767 Operator decision record",
-    "TRD-768 Intelligence Brief workflow checkpoint"
+    "TRD-768 Intelligence Brief workflow checkpoint",
+    "TRD-769 Manual local review authoring",
+    "TRD-770 Review draft contracts",
+    "TRD-771 Local review persistence",
+    "TRD-772 Risk review authoring UI",
+    "TRD-773 Operator decision authoring UI",
+    "TRD-774 Draft validation and fail-closed UX",
+    "TRD-775 Review provenance and audit trail",
+    "TRD-776 Authoring recovery and conflict handling",
+    "TRD-777 Authoring accessibility and responsive QA",
+    "TRD-778 Manual review authoring checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

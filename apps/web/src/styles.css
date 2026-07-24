@@ -714,6 +714,100 @@ h3 {
   display: none;
 }
 
+.manual-review-form {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 16px;
+  padding-top: 18px;
+}
+
+.manual-review-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.manual-review-grid label {
+  color: var(--muted);
+  display: grid;
+  font-size: 12px;
+  font-weight: 750;
+  gap: 7px;
+  text-transform: uppercase;
+}
+
+.manual-review-grid select,
+.manual-review-grid textarea {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  font: inherit;
+  letter-spacing: 0;
+  min-width: 0;
+  padding: 10px 11px;
+  resize: vertical;
+  text-transform: none;
+}
+
+.manual-review-wide {
+  grid-column: 1 / -1;
+}
+
+.manual-review-boundary {
+  border-left: 3px solid var(--amber);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 9px 12px;
+}
+
+.manual-review-actions {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+}
+
+.manual-review-actions button {
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 750;
+  padding: 10px 14px;
+}
+
+.manual-review-actions span {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+}
+
+.manual-review-actions span[data-state="blocked"] {
+  color: var(--blocked);
+}
+
+@media (max-width: 640px) {
+  .manual-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manual-review-wide {
+    grid-column: auto;
+  }
+
+  .manual-review-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .manual-review-actions span {
+    text-align: left;
+  }
+}
+
 .brief-identity div,
 .brief-review-strip div {
   display: grid;

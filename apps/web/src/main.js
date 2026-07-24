@@ -520,6 +520,52 @@ function renderCommandCenter(data) {
                 ]
               )}
             </div>
+            <form class="manual-review-form" id="manual-review-form" data-brief-detail novalidate>
+              <div class="detail-heading">
+                <div>
+                  <h3>Manual Local Review</h3>
+                  <p>Record research-only risk and operator notes for this frozen brief.</p>
+                </div>
+                <span class="state-pill">local only</span>
+              </div>
+              <div class="manual-review-grid">
+                <label>
+                  Risk disposition
+                  <select name="riskDisposition" required>
+                    <option value="recorded_for_review">Recorded for review</option>
+                    <option value="needs_revision">Needs revision</option>
+                    <option value="blocked">Blocked</option>
+                  </select>
+                </label>
+                <label>
+                  Operator decision
+                  <select name="operatorDecision" required>
+                    <option value="keep_research_only">Keep research-only</option>
+                    <option value="revise">Revise</option>
+                    <option value="reject">Reject</option>
+                  </select>
+                </label>
+                <label>
+                  Risk findings
+                  <textarea name="findings" rows="3" placeholder="One finding per line"></textarea>
+                </label>
+                <label>
+                  Limitation notes
+                  <textarea name="limitations" rows="3" required placeholder="One limitation per line"></textarea>
+                </label>
+                <label class="manual-review-wide">
+                  Decision reason
+                  <textarea name="decisionReason" rows="3" required></textarea>
+                </label>
+              </div>
+              <div class="manual-review-boundary">
+                Saving records local evidence only. It grants no approval, simulation, execution, or external-dispatch authority.
+              </div>
+              <div class="manual-review-actions">
+                <button type="submit">Save local review</button>
+                <span id="manual-review-status" role="status" aria-live="polite">No authored record loaded.</span>
+              </div>
+            </form>
             <div class="brief-review-strip" data-brief-detail aria-label="Workflow checkpoint">
               <div>
                 <span>Workflow checkpoint</span>
@@ -778,6 +824,7 @@ function renderCommandCenter(data) {
 
   updateActiveNavigation();
   bindIntelligenceBriefCaseSelector(marketIntelligenceWorkspace.intelligenceBrief);
+  bindManualReviewAuthoring(marketIntelligenceWorkspace.intelligenceBrief);
 }
 
 async function refreshRuntimeData() {
@@ -1184,6 +1231,151 @@ function bindIntelligenceBriefCaseSelector(brief) {
 
   selector.addEventListener("change", update);
   update();
+}
+
+function bindManualReviewAuthoring(brief) {
+  const form = document.querySelector("#manual-review-form");
+  const status = document.querySelector("#manual-review-status");
+  if (!form || !status) return;
+
+  const storageKey = `traderframe.manual-review.v1.${brief.briefId}`;
+  const lines = (value) =>
+    value
+      .split("\n")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  const setStatus = (message, state = "neutral") => {
+    status.textContent = message;
+    status.dataset.state = state;
+  };
+  const populate = (record) => {
+    form.elements.riskDisposition.value = record.risk_review.disposition;
+    form.elements.operatorDecision.value = record.operator_decision.decision;
+    form.elements.findings.value = record.risk_review.findings.join("\n");
+    form.elements.limitations.value = record.risk_review.limitation_notes.join("\n");
+    form.elements.decisionReason.value = record.operator_decision.reason;
+  };
+
+  try {
+    const raw = window.localStorage.getItem(storageKey);
+    if (raw) {
+      const record = JSON.parse(raw);
+      if (
+        record.schema_version !== 1 ||
+        record.brief_id !== brief.briefId ||
+        record.brief_content_sha256 !== brief.contentHash ||
+        record.execution_authorized !== false ||
+        record.external_dispatch !== false ||
+        record.risk_review?.approval_granted !== false ||
+        record.operator_decision?.simulation_authorized !== false
+      ) {
+        throw new Error("Stored record does not match the frozen local brief.");
+      }
+      populate(record);
+      setStatus(`Recovered validated local revision ${record.revision}.`, "recovered");
+    }
+  } catch {
+    setStatus("Stored review is blocked and was not loaded. Re-enter the review.", "blocked");
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const findings = lines(form.elements.findings.value);
+    const limitations = lines(form.elements.limitations.value);
+    const decisionReason = form.elements.decisionReason.value.trim();
+    const riskDisposition = form.elements.riskDisposition.value;
+
+    if (
+      limitations.length === 0 ||
+      decisionReason.length === 0 ||
+      (riskDisposition !== "recorded_for_review" && findings.length === 0)
+    ) {
+      setStatus(
+        "Review not saved. Add limitations, a decision reason, and findings for blocked or revision states.",
+        "blocked"
+      );
+      return;
+    }
+
+    let revision = 1;
+    let createdAt = new Date().toISOString();
+    try {
+      const existing = JSON.parse(window.localStorage.getItem(storageKey) || "null");
+      if (existing?.brief_content_sha256 === brief.contentHash) {
+        revision = Number(existing.revision || 0) + 1;
+        createdAt = existing.created_at || createdAt;
+      }
+    } catch {
+      revision = 1;
+    }
+
+    const updatedAt = new Date().toISOString();
+    const boundary = {
+      financial_gate: "G2_PAPER_TRADING",
+      scope: "paper_simulation_planning_only",
+      local_only: true,
+      read_only: true,
+      evidence_only: true,
+      operator_required: true,
+      risk_review_required: true,
+      external_access: false,
+      execution_path: false,
+      action_route_created: false,
+      recommendation_final: false,
+      approval_claim: false,
+      performance_claim: false
+    };
+    const riskReviewId = `manual-risk-review-${revision}`;
+    const riskReview = {
+      ...boundary,
+      risk_review_id: riskReviewId,
+      brief_id: brief.briefId,
+      brief_content_sha256: brief.contentHash,
+      reviewer_role: "operator_risk_reviewer",
+      review_mode: "manual_local",
+      disposition: riskDisposition,
+      findings,
+      limitation_notes: limitations,
+      approval_granted: false,
+      reviewed_at: updatedAt
+    };
+    const operatorDecision = {
+      ...boundary,
+      operator_decision_id: `manual-operator-decision-${revision}`,
+      brief_id: brief.briefId,
+      risk_review_id: riskReviewId,
+      decision: form.elements.operatorDecision.value,
+      reason: decisionReason,
+      evidence_refs: [brief.briefId, riskReviewId],
+      decision_mode: "manual_local",
+      simulation_authorized: false,
+      decided_at: updatedAt
+    };
+    const record = {
+      ...boundary,
+      authoring_record_id: `manual-review-authoring-${revision}`,
+      schema_version: 1,
+      linked_research_case_id: brief.researchCaseId,
+      brief_id: brief.briefId,
+      brief_content_sha256: brief.contentHash,
+      authoring_mode: "manual_local",
+      record_status: "validated_local_record",
+      revision,
+      risk_review: riskReview,
+      operator_decision: operatorDecision,
+      created_at: createdAt,
+      updated_at: updatedAt,
+      execution_authorized: false,
+      external_dispatch: false
+    };
+
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(record));
+      setStatus(`Saved validated local revision ${revision}. No authority was granted.`, "saved");
+    } catch {
+      setStatus("Local storage failed. The review was not saved.", "blocked");
+    }
+  });
 }
 
 function renderBriefScenarioCard(scenario) {
