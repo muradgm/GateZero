@@ -43,4 +43,5 @@ export interface CreateSetupReviewCommand {
 export interface SetupReviewRepository {
   save(review: SetupReview): Promise<void>;
   findById(setupReviewId: string): Promise<SetupReview | undefined>;
+  list(): Promise<readonly SetupReview[]>;
 }
