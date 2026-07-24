@@ -19,6 +19,7 @@ export * from "./outcome-log.js";
 export * from "./research-loop-evidence-index.js";
 export * from "./risk-review.js";
 export * from "./schemas.js";
+export * from "./setup-review.js";
 export * from "./strategy-idea.js";
 export * from "./strategy-maturity.js";
 export * from "./strategy-decision-trace.js";
