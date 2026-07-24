@@ -25,15 +25,10 @@ export function createSetupReviewService(dependencies: CreateSetupReviewDependen
       );
     }
 
-    if (
-      command.requestedDecision === "PAPER_SIMULATE" &&
-      command.evidence.supporting.length === 0
-    ) {
-      throw new ContractValidationError("paper simulation requires supporting evidence");
-    }
-
-    if (command.requestedDecision === "PAPER_SIMULATE" && !command.risk.riskReviewId) {
-      throw new ContractValidationError("paper simulation requires a completed risk review");
+    if (command.requestedDecision === "PAPER_SIMULATE") {
+      throw new ContractValidationError(
+        "paper simulation cannot be selected while creating a draft; complete risk review first"
+      );
     }
 
     const review = SetupReviewSchema.parse({
@@ -44,7 +39,7 @@ export function createSetupReviewService(dependencies: CreateSetupReviewDependen
       strategyFamily: command.strategyFamily,
       gate: "G2_PAPER_TRADING",
       scope: "paper_simulation_planning_only",
-      status: command.risk.riskReviewId ? "reviewed" : "ready_for_risk_review",
+      status: "draft",
       thesis: command.thesis,
       supportingEvidence: command.evidence.supporting,
       contradictingEvidence: command.evidence.contradicting,
@@ -72,7 +67,6 @@ export function createSetupReviewService(dependencies: CreateSetupReviewDependen
       limitations: [...command.limitations],
       operatorRequired: true,
       riskReviewRequired: true,
-      riskReviewId: command.risk.riskReviewId,
       externalAccess: false,
       executionPath: false,
       automatedAction: false,
