@@ -1,0 +1,9 @@
+interface:
+  display_name: "Senior Market Intelligence and Scenario Analyst"
+  short_description: "Source-linked conditional market scenario analysis"
+  default_prompt:
+    "Use $senior-market-intelligence-scenario-analyst to produce a read-only, source-linked
+    conditional market analysis with explicit uncertainty, counter-evidence, risk review, and
+    operator authority."
+policy:
+  allow_implicit_invocation: false

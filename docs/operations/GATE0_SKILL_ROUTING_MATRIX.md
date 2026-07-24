@@ -28,21 +28,22 @@ loosening.
 
 ## Routing Matrix
 
-| Decision type                             | Primary skill                             | Supporting skill                       |
-| ----------------------------------------- | ----------------------------------------- | -------------------------------------- |
-| Assignment sequencing and handoff         | `gatezero-orchestrator-reviewer`          | `gatezero-docs-control-plane-reviewer` |
-| Risk gate and autonomy boundary review    | `gatezero-risk-governance-reviewer`       | `gatezero-orchestrator-reviewer`       |
-| Validation and blocked-scope review       | `gatezero-qa-security-reviewer`           | `gatezero-risk-governance-reviewer`    |
-| Documentation and tracker consistency     | `gatezero-docs-control-plane-reviewer`    | `gatezero-orchestrator-reviewer`       |
-| Product scope and wedge review            | `gatezero-product-strategy-reviewer`      | `trader-product-reviewer`              |
-| Static command-center UI review           | `gatezero-ui-command-center-reviewer`     | `trader-product-reviewer`              |
-| Backtest contract and metric review       | `gatezero-quant-backtest-reviewer`        | `trading-forex-domain-expert`          |
-| Trader workflow and trust review          | `trader-product-reviewer`                 | `gatezero-risk-governance-reviewer`    |
-| Forex mechanics and domain review         | `trading-forex-domain-expert`             | `gatezero-quant-backtest-reviewer`     |
-| Frontend marketing and positioning review | `traderframe-marketing-strategy-reviewer` | `gatezero-product-strategy-reviewer`   |
-| Frontend copy and claim-safety review     | `traderframe-copy-reviewer`               | `gatezero-risk-governance-reviewer`    |
-| Frontend engineering architecture review  | `traderframe-frontend-engineer`           | `gatezero-qa-security-reviewer`        |
-| Frontend visual product design review     | `traderframe-visual-product-designer`     | `gatezero-ui-command-center-reviewer`  |
+| Decision type                             | Primary skill                                 | Supporting skill                       |
+| ----------------------------------------- | --------------------------------------------- | -------------------------------------- |
+| Assignment sequencing and handoff         | `gatezero-orchestrator-reviewer`              | `gatezero-docs-control-plane-reviewer` |
+| Risk gate and autonomy boundary review    | `gatezero-risk-governance-reviewer`           | `gatezero-orchestrator-reviewer`       |
+| Validation and blocked-scope review       | `gatezero-qa-security-reviewer`               | `gatezero-risk-governance-reviewer`    |
+| Documentation and tracker consistency     | `gatezero-docs-control-plane-reviewer`        | `gatezero-orchestrator-reviewer`       |
+| Product scope and wedge review            | `gatezero-product-strategy-reviewer`          | `trader-product-reviewer`              |
+| Static command-center UI review           | `gatezero-ui-command-center-reviewer`         | `trader-product-reviewer`              |
+| Backtest contract and metric review       | `gatezero-quant-backtest-reviewer`            | `trading-forex-domain-expert`          |
+| Trader workflow and trust review          | `trader-product-reviewer`                     | `gatezero-risk-governance-reviewer`    |
+| Forex mechanics and domain review         | `trading-forex-domain-expert`                 | `gatezero-quant-backtest-reviewer`     |
+| Frontend marketing and positioning review | `traderframe-marketing-strategy-reviewer`     | `gatezero-product-strategy-reviewer`   |
+| Frontend copy and claim-safety review     | `traderframe-copy-reviewer`                   | `gatezero-risk-governance-reviewer`    |
+| Frontend engineering architecture review  | `traderframe-frontend-engineer`               | `gatezero-qa-security-reviewer`        |
+| Frontend visual product design review     | `traderframe-visual-product-designer`         | `gatezero-ui-command-center-reviewer`  |
+| Market intelligence and scenario analysis | `senior-market-intelligence-scenario-analyst` | `gatezero-risk-governance-reviewer`    |
 
 ## Selection Rules
 
@@ -68,6 +69,8 @@ loosening.
   component boundaries are central.
 - Use `traderframe-visual-product-designer` when visual hierarchy, dashboard density, or operator
   scanning behavior is central.
+- Use `senior-market-intelligence-scenario-analyst` for source-linked, conditional market scenarios.
+  Keep it read-only, risk-reviewed, and operator-decided at Gate 2.
 
 ## Maintenance Rule
 

@@ -20,14 +20,17 @@ const readNormalized = (filePath: string): string =>
   readFileSync(filePath, "utf8").replace(/\s+/g, " ");
 
 describe("market intelligence foundation gap review", () => {
-  it("authorizes TRD-748 as the only next packet", () => {
+  it("preserves the original TRD-748 authorization and records its accepted progression", () => {
     const review = readNormalized(reviewPath);
     const assignment = readFileSync(assignmentPath, "utf8");
     const tracklist = readFileSync(tracklistPath, "utf8");
 
     expect(review).toContain("TRD-748 may proceed only if it:");
     expect(assignment).toContain("TRD-748 is the only next authorized implementation packet.");
-    expect(tracklist).toContain("| 1    | `TRD-748` | queued | Analyst role and authority skill.");
+    expect(tracklist).toContain(
+      "| `TRD-748` | accepted | Analyst authority  | Added governed read-only scenario analyst skill."
+    );
+    expect(tracklist).toContain("| 1    | `TRD-757` | queued | Read-only Intelligence Brief MVP.");
   });
 
   it("keeps TRD-749 deterministic, canonical, and local", () => {

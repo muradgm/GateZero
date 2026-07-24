@@ -344,6 +344,32 @@ const completeInput: Gate0SkillGovernanceInput = {
       })
     },
     {
+      relativePath: "skills/senior-market-intelligence-scenario-analyst/SKILL.md",
+      content: [
+        "---",
+        "name: senior-market-intelligence-scenario-analyst",
+        "description: Gate 2 market intelligence scenario analysis.",
+        "---",
+        "# Senior Market Intelligence Scenario Analyst",
+        "G2_PAPER_TRADING",
+        "paper_simulation_planning_only",
+        "repository-local source references",
+        "bullish, bearish, and neutral",
+        "Risk review",
+        "operator decision",
+        "## Refusal Rules"
+      ].join("\n")
+    },
+    {
+      relativePath: "skills/senior-market-intelligence-scenario-analyst/agents/openai.yaml",
+      content: [
+        "interface:",
+        '  default_prompt: "Use $senior-market-intelligence-scenario-analyst."',
+        "policy:",
+        "  allow_implicit_invocation: false"
+      ].join("\n")
+    },
+    {
       relativePath: "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md",
       content: [
         "# Gate 1 Skill Library Intake",
@@ -367,7 +393,7 @@ describe("Gate 0 skill governance check", () => {
     expect(result).toEqual({
       ok: true,
       findings: [],
-      checkedSkillCount: 13,
+      checkedSkillCount: 14,
       checkedPolicyCount: 1
     });
     expect(renderGate0SkillGovernanceResult(result)).toContain(

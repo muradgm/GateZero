@@ -4,8 +4,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-747",
-  localVerification: "91 files / 660 tests",
+  latestPacket: "TRD-756",
+  localVerification: "95 files / 725 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +20,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 91 files, 660 tests.",
+      detail: "Latest suite: 95 files, 725 tests.",
       tone: "good"
     },
     {
@@ -31,7 +31,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "747 / 747",
+      value: "756 / 756",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +122,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "91 files / 660 tests"
+      reference: "95 files / 725 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +152,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "747 accepted records"
+      reference: "756 accepted records"
     },
     {
       area: "Dependency audit",
@@ -332,8 +332,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-747 closes the Senior Market Intelligence foundation gap review.",
-      "TRD-748 begins the bounded analyst role and authority skill."
+      "TRD-756 accepts the bounded market-intelligence foundation.",
+      "TRD-757 is authorized for one local read-only Intelligence Brief MVP."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -352,8 +352,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-747 closes the intelligence asset gap review.",
-    "TRD-748 creates the governed analyst role and authority skill.",
+    "TRD-756 closes the intelligence foundation checkpoint.",
+    "TRD-757 builds one local read-only Intelligence Brief MVP.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -472,7 +472,16 @@ export const commandCenterData = {
     "TRD-664 Learning-event evidence linkage",
     "TRD-665 Integrated operator workflow QA",
     "TRD-746 Revision timeline checkpoint",
-    "TRD-747 Intelligence asset gap review"
+    "TRD-747 Intelligence asset gap review",
+    "TRD-748 Analyst role and authority skill",
+    "TRD-749 Local source adapter boundary",
+    "TRD-750 Multi-timeframe evidence assembly",
+    "TRD-751 Evidence and semantic quality gate",
+    "TRD-752 Conditional scenario synthesis",
+    "TRD-753 Adversarial scenario risk review",
+    "TRD-754 Historical replay benchmark",
+    "TRD-755 Read-only brief workflow plan",
+    "TRD-756 Intelligence foundation checkpoint"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

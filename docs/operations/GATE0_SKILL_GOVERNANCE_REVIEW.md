@@ -11,6 +11,7 @@ This review records the controlled adoption of local GateZero project skills:
 - `skills/gatezero-quant-backtest-reviewer/`
 - `skills/gatezero-risk-governance-reviewer/`
 - `skills/gatezero-ui-command-center-reviewer/`
+- `skills/senior-market-intelligence-scenario-analyst/`
 - `skills/trader-product-reviewer/`
 - `skills/trading-forex-domain-expert/`
 
@@ -54,6 +55,10 @@ They must not be used to justify:
   blockers.
 - Each skill includes `agents/openai.yaml` with `allow_implicit_invocation: false`.
 - The project skill governance guard checks these controls with:
+
+The Senior Market Intelligence and Scenario Analyst is the first skill governed directly against the
+current `G2_PAPER_TRADING` and `paper_simulation_planning_only` boundary. It remains explicitly
+invoked and advisory only.
 
 ```powershell
 pnpm check:gate0-skills

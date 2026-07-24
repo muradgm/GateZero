@@ -4,3 +4,4 @@ export * from "./gate0-research-loop-evidence-index.js";
 export * from "./gate1-historical-backtest-fixtures.js";
 export * from "./gate2-paper-simulation-fixtures.js";
 export * from "./gate2-local-paper-simulator-fixtures.js";
+export * from "./gate2-market-intelligence-foundation-fixtures.js";

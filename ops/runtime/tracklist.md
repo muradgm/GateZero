@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-24                                                     |
-| Latest accepted packet     | `TRD-747`                                                      |
-| Latest accepted validation | 91 test files, 660 tests passed                                |
+| Latest accepted packet     | `TRD-756`                                                      |
+| Latest accepted validation | 95 test files, 725 tests passed                                |
 
 ## Boundary
 
@@ -1202,6 +1202,15 @@ Latest accepted result:
 | `TRD-745` | accepted | Timeline QA        | Covered contracts, data, rendering, states, and scope.     |
 | `TRD-746` | accepted | Checkpoint         | Closed lineage depth and selected intelligence foundation. |
 | `TRD-747` | accepted | Intelligence gap   | Reused existing assets and bounded the missing foundation. |
+| `TRD-748` | accepted | Analyst authority  | Added governed read-only scenario analyst skill.           |
+| `TRD-749` | accepted | Source integrity   | Verified local paths, tracking, real files, and hashes.    |
+| `TRD-750` | accepted | Timeframe evidence | Preserved separate hourly, daily, and monthly evidence.    |
+| `TRD-751` | accepted | Quality gate       | Failed closed on source, freshness, and semantic defects.  |
+| `TRD-752` | accepted | Scenario synthesis | Emitted balanced conditional scenarios or none.            |
+| `TRD-753` | accepted | Adversarial review | Blocked unlinked, placeholder, or untestable evidence.     |
+| `TRD-754` | accepted | Replay benchmark   | Derived control rates from linked frozen records.          |
+| `TRD-755` | accepted | Brief workflow     | Bounded the manual read-only intelligence brief path.      |
+| `TRD-756` | accepted | Checkpoint         | Accepted the foundation and authorized a local brief MVP.  |
 
 ## Current Operator Commands
 
@@ -1242,24 +1251,16 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 91 files and 660 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 95 files and 725 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                                | Acceptance focus                                       |
-| ---- | --------- | ------ | ----------------------------------- | ------------------------------------------------------ |
-| 1    | `TRD-748` | queued | Analyst role and authority skill.   | Read-only sourced scenarios; no trading instructions.  |
-| 2    | `TRD-749` | queued | Source adapter boundary.            | Local replay inputs before any network source.         |
-| 3    | `TRD-750` | queued | Multi-timeframe assembly.           | Separate hourly, daily, and monthly evidence.          |
-| 4    | `TRD-751` | queued | Evidence quality gate.              | Block stale, missing, conflicting, or weak provenance. |
-| 5    | `TRD-752` | queued | Scenario synthesis.                 | Bullish, bearish, and neutral conditional scenarios.   |
-| 6    | `TRD-753` | queued | Adversarial risk review.            | Challenge assumptions before operator consideration.   |
-| 7    | `TRD-754` | queued | Historical replay benchmark.        | Evaluate calibration without performance claims.       |
-| 8    | `TRD-755` | queued | Read-only brief workflow plan.      | Define review queue; no scheduled automation yet.      |
-| 9    | `TRD-756` | queued | Intelligence foundation checkpoint. | Decide whether sourced read-only briefs are warranted. |
+| Rank | Packet    | Status | Goal                              | Acceptance focus                                       |
+| ---- | --------- | ------ | --------------------------------- | ------------------------------------------------------ |
+| 1    | `TRD-757` | queued | Read-only Intelligence Brief MVP. | Render one local sourced brief with no action channel. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
@@ -2189,3 +2190,17 @@ Do not mark a packet accepted until:
 
 - Market intelligence foundation gap review:
   `docs/operations/MARKET_INTELLIGENCE_FOUNDATION_GAP_REVIEW.md`
+- Market intelligence foundation implementation:
+  `docs/operations/MARKET_INTELLIGENCE_FOUNDATION_IMPLEMENTATION.md`
+- Market intelligence foundation checkpoint:
+  `docs/operations/MARKET_INTELLIGENCE_FOUNDATION_CHECKPOINT.md`
+- Read-only intelligence brief workflow plan:
+  `docs/operations/READ_ONLY_INTELLIGENCE_BRIEF_WORKFLOW_PLAN.md`
+- Market intelligence foundation contracts:
+  `packages/contracts/src/gate2-market-intelligence-foundation-contracts.ts`
+- Market intelligence foundation core: `packages/core/src/gate2-market-intelligence-foundation.ts`
+- Market intelligence foundation fixtures:
+  `packages/fixtures/src/gate2-market-intelligence-foundation-fixtures.ts`
+- Market intelligence local-source guard: `scripts/check-market-intelligence-local-sources.ts`
+- Senior Market Intelligence and Scenario Analyst skill:
+  `skills/senior-market-intelligence-scenario-analyst/SKILL.md`

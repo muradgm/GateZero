@@ -26,6 +26,7 @@ const expectedSkills = [
   "gatezero-quant-backtest-reviewer",
   "gatezero-risk-governance-reviewer",
   "gatezero-ui-command-center-reviewer",
+  "senior-market-intelligence-scenario-analyst",
   "trader-product-reviewer",
   "traderframe-copy-reviewer",
   "traderframe-frontend-engineer",
@@ -40,6 +41,15 @@ const requiredSkillSnippets = [
   "At Gate 1",
   "future-phase",
   "blockers"
+] as const;
+const requiredGate2AnalystSkillSnippets = [
+  "G2_PAPER_TRADING",
+  "paper_simulation_planning_only",
+  "repository-local source references",
+  "bullish, bearish, and neutral",
+  "Risk review",
+  "operator decision",
+  "Refusal Rules"
 ] as const;
 const requiredPolicyPath = "docs/operations/GATE0_SKILL_LIBRARY_INTAKE.md";
 const requiredPolicySnippets = [
@@ -125,7 +135,12 @@ export function checkGate0SkillGovernance(
       findings.push(`Skill name mismatch: ${skillFilePath}`);
     }
 
-    for (const snippet of requiredSkillSnippets) {
+    const boundarySnippets =
+      skillName === "senior-market-intelligence-scenario-analyst"
+        ? requiredGate2AnalystSkillSnippets
+        : requiredSkillSnippets;
+
+    for (const snippet of boundarySnippets) {
       if (!skillFile.content.includes(snippet)) {
         findings.push(`Missing Gate 1 skill boundary snippet: ${skillFilePath} -> ${snippet}`);
       }

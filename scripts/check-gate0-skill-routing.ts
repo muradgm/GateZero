@@ -21,6 +21,7 @@ const requiredSkills = [
   "gatezero-quant-backtest-reviewer",
   "gatezero-risk-governance-reviewer",
   "gatezero-ui-command-center-reviewer",
+  "senior-market-intelligence-scenario-analyst",
   "trader-product-reviewer",
   "traderframe-copy-reviewer",
   "traderframe-frontend-engineer",
@@ -42,7 +43,8 @@ const requiredDecisionTypes = [
   "Frontend marketing and positioning review",
   "Frontend copy and claim-safety review",
   "Frontend engineering architecture review",
-  "Frontend visual product design review"
+  "Frontend visual product design review",
+  "Market intelligence and scenario analysis"
 ] as const;
 
 const requiredSnippets = [
