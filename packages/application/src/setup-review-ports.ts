@@ -1,4 +1,4 @@
-import type { EvidenceReference, SetupReview } from "../../contracts/src/setup-review.js";
+import type { EvidenceReference, SetupReview } from "@traderframe/contracts/setup-review";
 
 export interface SetupReviewEvidenceInput {
   readonly supporting: readonly EvidenceReference[];
