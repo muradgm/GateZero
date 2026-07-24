@@ -6,5 +6,8 @@
   "description": "Application services for TraderFrame evidence-gated setup reviews.",
   "exports": {
     ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@traderframe/contracts": "workspace:*"
   }
 }
