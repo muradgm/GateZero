@@ -3,7 +3,7 @@ import { stat } from "node:fs/promises";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { buildCommandCenterRuntimeData } from "./build-command-center-runtime-data.js";
+import { buildTraderFrameRuntimeStatus } from "./build-command-center-runtime-data.js";
 
 export const previewHost = "127.0.0.1";
 export const defaultPreviewPort = 4173;
@@ -14,7 +14,8 @@ const contentTypes: Readonly<Record<string, string>> = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".json": "application/json; charset=utf-8",
-  ".js": "text/javascript; charset=utf-8"
+  ".js": "text/javascript; charset=utf-8",
+  ".svg": "image/svg+xml; charset=utf-8"
 };
 
 export function createPreviewServer(rootDir = webRoot): Server {
@@ -66,7 +67,7 @@ export async function servePreviewRequest(
 
 async function serveRuntimeCommandCenterData(response: ServerResponse): Promise<void> {
   try {
-    const runtimeData = await buildCommandCenterRuntimeData();
+    const runtimeData = await buildTraderFrameRuntimeStatus();
 
     response.writeHead(200, {
       "Cache-Control": "no-store",
@@ -129,7 +130,10 @@ function main(): void {
   const server = createPreviewServer();
 
   server.listen(port, previewHost, () => {
-    console.log(`GateZero command center preview: http://${previewHost}:${port}/`);
+    console.log(`TraderFrame command center preview: http://${previewHost}:${port}/`);
+    console.log(
+      `Trading Intelligence Command Center: http://${previewHost}:${port}/intelligence-command-center.html`
+    );
   });
 }
 
