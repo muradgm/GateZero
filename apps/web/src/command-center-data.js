@@ -1,11 +1,13 @@
+import { backtestRunEvidence } from "./backtest-run-evidence.js";
+
 export const commandCenterData = {
   project: "TraderFrame",
   title: "TraderFrame Command Center",
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-756",
-  localVerification: "95 files / 725 tests",
+  latestPacket: "TRD-757",
+  localVerification: "99 files / 752 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -20,7 +22,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 95 files, 725 tests.",
+      detail: "Latest suite: 99 files, 752 tests.",
       tone: "good"
     },
     {
@@ -31,7 +33,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "756 / 756",
+      value: "757 / 757",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -122,7 +124,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "95 files / 725 tests"
+      reference: "99 files / 752 tests"
     },
     {
       area: "Verified commit",
@@ -152,7 +154,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "756 accepted records"
+      reference: "757 accepted records"
     },
     {
       area: "Dependency audit",
@@ -332,8 +334,8 @@ export const commandCenterData = {
       "The Command Center remains a local inspection surface."
     ],
     controlLaneCheckpoint: [
-      "TRD-756 accepts the bounded market-intelligence foundation.",
-      "TRD-757 is authorized for one local read-only Intelligence Brief MVP."
+      "TRD-757 closes the executable historical-backtest evidence gap.",
+      "TRD-758 is authorized for one local read-only Intelligence Brief MVP."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -352,8 +354,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-756 closes the intelligence foundation checkpoint.",
-    "TRD-757 builds one local read-only Intelligence Brief MVP.",
+    "TRD-757 adds one deterministic historical backtest reference run.",
+    "TRD-758 builds one local read-only Intelligence Brief MVP.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -481,7 +483,8 @@ export const commandCenterData = {
     "TRD-753 Adversarial scenario risk review",
     "TRD-754 Historical replay benchmark",
     "TRD-755 Read-only brief workflow plan",
-    "TRD-756 Intelligence foundation checkpoint"
+    "TRD-756 Intelligence foundation checkpoint",
+    "TRD-757 Deterministic historical backtest runner MVP"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",
@@ -489,7 +492,7 @@ export const commandCenterData = {
     summary: "Local, sourced scenario evidence for review; no action authority.",
     recommendation: {
       id: "gate2-scenario-recommendation-fixture-001",
-      action: "paper_simulate",
+      candidateDisposition: "paper simulation review candidate",
       status: "risk_review_required",
       confidence: "low",
       candidate: "gate2-signal-candidate-fixture-001",
@@ -605,6 +608,7 @@ export const commandCenterData = {
     status: "Read-only MVP",
     researchCaseId: "gate2-research-case-fixture-001",
     coreQuestion: "Can the operator inspect the full evidence chain for one research case?",
+    backtestRunEvidence,
     evidenceChain: [
       {
         label: "Strategy Idea",

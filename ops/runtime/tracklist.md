@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-24                                                     |
-| Latest accepted packet     | `TRD-756`                                                      |
-| Latest accepted validation | 95 test files, 725 tests passed                                |
+| Latest accepted packet     | `TRD-757`                                                      |
+| Latest accepted validation | 99 test files, 752 tests passed                                |
 
 ## Boundary
 
@@ -1211,6 +1211,7 @@ Latest accepted result:
 | `TRD-754` | accepted | Replay benchmark   | Derived control rates from linked frozen records.          |
 | `TRD-755` | accepted | Brief workflow     | Bounded the manual read-only intelligence brief path.      |
 | `TRD-756` | accepted | Checkpoint         | Accepted the foundation and authorized a local brief MVP.  |
+| `TRD-757` | accepted | Backtest runtime   | Executed one deterministic historical reference run.       |
 
 ## Current Operator Commands
 
@@ -1245,13 +1246,14 @@ Latest accepted result:
 | `pnpm check:gate0-command-center`                                                                 | Check command center evidence freshness.                | Local command center freshness guard passes.                     |
 | `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
 | `pnpm check:market-workspace`                                                                     | Check scenario and evidence reference consistency.      | Local market workspace consistency guard passes.                 |
+| `pnpm check:backtest-evidence`                                                                    | Check generated historical backtest evidence freshness. | Local backtest evidence freshness guard passes.                  |
 | `pnpm check:simulator-workspace`                                                                  | Check generated simulator workspace freshness.          | Local simulator workspace freshness guard passes.                |
 | `pnpm check:case-catalog`                                                                         | Check generated local case catalog freshness.           | Local case catalog freshness guard passes.                       |
 | `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 95 files and 725 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 99 files and 752 tests pass deterministically.                   |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
@@ -1260,7 +1262,7 @@ Latest accepted result:
 
 | Rank | Packet    | Status | Goal                              | Acceptance focus                                       |
 | ---- | --------- | ------ | --------------------------------- | ------------------------------------------------------ |
-| 1    | `TRD-757` | queued | Read-only Intelligence Brief MVP. | Render one local sourced brief with no action channel. |
+| 1    | `TRD-758` | queued | Read-only Intelligence Brief MVP. | Render one local sourced brief with no action channel. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
@@ -2204,3 +2206,13 @@ Do not mark a packet accepted until:
 - Market intelligence local-source guard: `scripts/check-market-intelligence-local-sources.ts`
 - Senior Market Intelligence and Scenario Analyst skill:
   `skills/senior-market-intelligence-scenario-analyst/SKILL.md`
+- Deterministic historical backtest runner:
+  `packages/core/src/gate1-deterministic-backtest-runner.ts`
+- Deterministic runner contracts:
+  `packages/contracts/src/gate1-deterministic-backtest-runner-contracts.ts`
+- Deterministic runner fixtures:
+  `packages/fixtures/src/gate1-deterministic-backtest-runner-fixtures.ts`
+- Generated historical backtest evidence: `apps/web/src/backtest-run-evidence.js`
+- Historical backtest evidence generator: `scripts/generate-backtest-run-evidence.ts`
+- Deterministic runner operating record:
+  `docs/operations/GATE1_DETERMINISTIC_BACKTEST_RUNNER_MVP.md`

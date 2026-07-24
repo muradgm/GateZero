@@ -30,7 +30,10 @@ describe("market intelligence foundation gap review", () => {
     expect(tracklist).toContain(
       "| `TRD-748` | accepted | Analyst authority  | Added governed read-only scenario analyst skill."
     );
-    expect(tracklist).toContain("| 1    | `TRD-757` | queued | Read-only Intelligence Brief MVP.");
+    expect(tracklist).toContain(
+      "| `TRD-757` | accepted | Backtest runtime   | Executed one deterministic historical reference run."
+    );
+    expect(tracklist).toContain("| 1    | `TRD-758` | queued | Read-only Intelligence Brief MVP.");
   });
 
   it("keeps TRD-749 deterministic, canonical, and local", () => {

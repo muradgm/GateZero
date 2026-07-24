@@ -263,6 +263,46 @@ function renderCommandCenter(data) {
             ${renderListCard("Market Intelligence", strategyReviewWorkspace.marketIntelligence)}
             ${renderListCard("Blocked Scope Reminder", strategyReviewWorkspace.blockedScopeReminder)}
           </div>
+          <section class="market-workspace" aria-labelledby="generated-backtest-title">
+            <div class="detail-heading">
+              <div>
+                <h3 id="generated-backtest-title">${strategyReviewWorkspace.backtestRunEvidence.title}</h3>
+                <p>Generated locally from checked-in candles and a frozen reference strategy.</p>
+              </div>
+              <span class="state-pill">${strategyReviewWorkspace.backtestRunEvidence.status}</span>
+            </div>
+            <div class="market-grid">
+              ${renderRecordCard(
+                "Backtest Run",
+                strategyReviewWorkspace.backtestRunEvidence.runId,
+                [
+                  ["Run", strategyReviewWorkspace.backtestRunEvidence.runId],
+                  ["Engine", strategyReviewWorkspace.backtestRunEvidence.engineVersion],
+                  ["Instrument", strategyReviewWorkspace.backtestRunEvidence.instrument],
+                  [
+                    "Observations",
+                    String(strategyReviewWorkspace.backtestRunEvidence.observationCount)
+                  ],
+                  [
+                    "Closed trades",
+                    String(strategyReviewWorkspace.backtestRunEvidence.closedTradeCount)
+                  ],
+                  [
+                    "Reproducibility",
+                    strategyReviewWorkspace.backtestRunEvidence.reproducibilityStatus
+                  ]
+                ]
+              )}
+              ${renderListCard(
+                "Backtest Limitations",
+                strategyReviewWorkspace.backtestRunEvidence.limitations
+              )}
+              ${renderListCard("Frozen Hashes", [
+                `Input: ${strategyReviewWorkspace.backtestRunEvidence.inputHash}`,
+                `Output: ${strategyReviewWorkspace.backtestRunEvidence.outputHash}`
+              ])}
+            </div>
+          </section>
           <section class="market-workspace" aria-labelledby="market-workspace-title">
             <div class="detail-heading">
               <div>
@@ -274,7 +314,10 @@ function renderCommandCenter(data) {
             <div class="market-grid">
               ${renderRecordCard("Scenario Draft", marketIntelligenceWorkspace.recommendation.id, [
                 ["Record", marketIntelligenceWorkspace.recommendation.id],
-                ["Action", marketIntelligenceWorkspace.recommendation.action],
+                [
+                  "Candidate disposition",
+                  marketIntelligenceWorkspace.recommendation.candidateDisposition
+                ],
                 ["Status", marketIntelligenceWorkspace.recommendation.status],
                 ["Confidence", marketIntelligenceWorkspace.recommendation.confidence],
                 ["Candidate", marketIntelligenceWorkspace.recommendation.candidate],
@@ -686,6 +729,7 @@ function normalizeStrategyReviewWorkspace(workspace = {}) {
     coreQuestion:
       workspace.coreQuestion ||
       "Can the operator inspect the full evidence chain for one research case?",
+    backtestRunEvidence: normalizeBacktestRunEvidence(workspace.backtestRunEvidence),
     evidenceChain: Array.isArray(workspace.evidenceChain)
       ? workspace.evidenceChain
           .filter((item) => item && typeof item === "object")
@@ -746,7 +790,7 @@ function normalizeMarketIntelligenceWorkspace(workspace = {}) {
 function normalizeScenarioRecommendation(recommendation = {}) {
   return {
     id: recommendation.id || "",
-    action: recommendation.action || "",
+    candidateDisposition: recommendation.candidateDisposition || "",
     status: recommendation.status || "",
     confidence: recommendation.confidence || "",
     candidate: recommendation.candidate || "",
@@ -754,6 +798,24 @@ function normalizeScenarioRecommendation(recommendation = {}) {
     evidenceRefs: asList(recommendation.evidenceRefs),
     sourceRefs: asList(recommendation.sourceRefs),
     limitationNotes: asList(recommendation.limitationNotes)
+  };
+}
+
+function normalizeBacktestRunEvidence(evidence = {}) {
+  return {
+    title: evidence.title || "Generated Historical Backtest Evidence",
+    runId: evidence.runId || "",
+    resultId: evidence.resultId || "",
+    status: evidence.status || "Unavailable",
+    engineVersion: evidence.engineVersion || "",
+    instrument: evidence.instrument || "",
+    observationCount: Number.isFinite(evidence.observationCount) ? evidence.observationCount : 0,
+    closedTradeCount: Number.isFinite(evidence.closedTradeCount) ? evidence.closedTradeCount : 0,
+    declaredCostsApplied: evidence.declaredCostsApplied === true,
+    reproducibilityStatus: evidence.reproducibilityStatus || "not_checked",
+    inputHash: evidence.inputHash || "",
+    outputHash: evidence.outputHash || "",
+    limitations: asList(evidence.limitations)
   };
 }
 
