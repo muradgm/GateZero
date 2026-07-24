@@ -22,9 +22,15 @@ export function evaluateSetupReview(command: EvaluateSetupReviewCommand): SetupR
   const evaluatedAtMs = Date.parse(command.evaluatedAt);
   const downgradeReasons: string[] = [];
 
-  const qualityById = new Map(command.evidenceQuality.map((quality) => [quality.evidenceId, quality]));
-  const supportingQuality = review.supportingEvidence.map((evidence) => qualityById.get(evidence.id));
-  const contradictingQuality = review.contradictingEvidence.map((evidence) => qualityById.get(evidence.id));
+  const qualityById = new Map(
+    command.evidenceQuality.map((quality) => [quality.evidenceId, quality])
+  );
+  const supportingQuality = review.supportingEvidence.map((evidence) =>
+    qualityById.get(evidence.id)
+  );
+  const contradictingQuality = review.contradictingEvidence.map((evidence) =>
+    qualityById.get(evidence.id)
+  );
 
   if (supportingQuality.some((quality) => !quality)) {
     downgradeReasons.push("One or more supporting evidence records lack a quality assessment.");
@@ -110,18 +116,23 @@ export function evaluateSetupReview(command: EvaluateSetupReviewCommand): SetupR
 
 function weightedAverage(qualities: readonly EvidenceQuality[]): number {
   if (qualities.length === 0) return 0;
-  return clamp(Math.round(qualities.reduce((sum, quality) => sum + quality.qualityScore, 0) / qualities.length));
+  return clamp(
+    Math.round(qualities.reduce((sum, quality) => sum + quality.qualityScore, 0) / qualities.length)
+  );
 }
 
 function calculateRiskScore(review: SetupReview, context: MarketContext): number {
   let score = 100;
-  const riskUsage = review.riskPlan.maximumRiskAmount / ((review.riskPlan.accountEquity * review.riskPlan.maximumRiskPct) / 100);
+  const riskUsage =
+    review.riskPlan.maximumRiskAmount /
+    ((review.riskPlan.accountEquity * review.riskPlan.maximumRiskPct) / 100);
 
   if (riskUsage > 0.9) score -= 15;
   if (review.riskPlan.portfolioExposurePctAfterEntry > 30) score -= 20;
   if (review.riskPlan.correlationWarning || context.correlationRisk === "high") score -= 25;
   if (context.macroEventRisk === "high" || context.volatilityRegime === "event_risk") score -= 25;
-  if (context.liquidityCondition === "thin" || context.liquidityCondition === "uncertain") score -= 15;
+  if (context.liquidityCondition === "thin" || context.liquidityCondition === "uncertain")
+    score -= 15;
 
   return clamp(score);
 }
@@ -133,8 +144,14 @@ function decideRecommendation(input: {
   readonly contradictingScore: number;
   readonly riskScore: number;
 }): SetupReviewAssessment["recommendation"] {
-  if (input.supportingCount === 0 || input.compositeScore < 45 || input.riskScore < 45) return "REJECT";
-  if (input.downgradeReasons.length > 0 || input.compositeScore < 80 || input.contradictingScore > 45) return "WATCH";
+  if (input.supportingCount === 0 || input.compositeScore < 45 || input.riskScore < 45)
+    return "REJECT";
+  if (
+    input.downgradeReasons.length > 0 ||
+    input.compositeScore < 80 ||
+    input.contradictingScore > 45
+  )
+    return "WATCH";
   return "PAPER_SIMULATE";
 }
 

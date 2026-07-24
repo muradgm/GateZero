@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Turn Setup Review from a valid record into a decision-quality aggregate that can explain why a market candidate is rejected, watched, or eligible for local paper simulation.
+Turn Setup Review from a valid record into a decision-quality aggregate that can explain why a
+market candidate is rejected, watched, or eligible for local paper simulation.
 
 ## Implemented domain records
 
@@ -19,7 +20,8 @@ Market context records:
 - observation and expiry times;
 - explicit limitations.
 
-A market context record is invalid when its validity window does not extend beyond its observation time.
+A market context record is invalid when its validity window does not extend beyond its observation
+time.
 
 ### EvidenceQuality
 
@@ -35,7 +37,8 @@ Each material evidence record can now be evaluated for:
 
 ### SetupReviewAssessment
 
-The assessment connects a reviewed Setup Review with current market context and evidence-quality records.
+The assessment connects a reviewed Setup Review with current market context and evidence-quality
+records.
 
 It exposes:
 
@@ -96,7 +99,8 @@ Epic 3 is complete when:
 
 ## Next integration
 
-Epic 4 should harden historical evidence correctness and then supply real quality inputs to this evaluator:
+Epic 4 should harden historical evidence correctness and then supply real quality inputs to this
+evaluator:
 
 - explicit signal-timing tests;
 - fill-adjusted exposure checks;

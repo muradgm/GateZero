@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  MarketContextSchema,
-  SetupReviewAssessmentSchema
-} from "../src/index.js";
+import { MarketContextSchema, SetupReviewAssessmentSchema } from "../src/index.js";
 
 const marketContext = {
   marketContextId: "market-context-eurusd-001",
