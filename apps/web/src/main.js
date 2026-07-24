@@ -303,6 +303,110 @@ function renderCommandCenter(data) {
               ])}
             </div>
           </section>
+          <section class="market-workspace intelligence-brief" aria-labelledby="intelligence-brief-title">
+            <div class="detail-heading">
+              <div>
+                <h3 id="intelligence-brief-title">Read-Only Intelligence Brief</h3>
+                <p>One balanced, source-linked local scenario brief. Evidence for review, never an instruction.</p>
+              </div>
+              <span class="state-pill">${marketIntelligenceWorkspace.intelligenceBrief.status}</span>
+            </div>
+            <div class="brief-identity" aria-label="Intelligence brief identity">
+              <div>
+                <span>Brief</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.briefId}</strong>
+              </div>
+              <div>
+                <span>Research case</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.researchCaseId}</strong>
+              </div>
+              <div>
+                <span>Generated</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.generatedAt}</strong>
+              </div>
+            </div>
+            <div class="brief-grid" aria-label="Local source inventory">
+              ${marketIntelligenceWorkspace.intelligenceBrief.sources
+                .map(
+                  (source) => `
+                    <section class="brief-card">
+                      <div class="brief-card-heading">
+                        <div>
+                          <span>Local source</span>
+                          <h4>${source.title}</h4>
+                        </div>
+                        <span class="state-pill">${source.freshness}</span>
+                      </div>
+                      <code>${source.repositoryRef}</code>
+                      <dl class="compact-definition-list">
+                        <dt>As of</dt>
+                        <dd>${source.asOf}</dd>
+                      </dl>
+                      <p>${source.limitation}</p>
+                    </section>
+                  `
+                )
+                .join("")}
+            </div>
+            <div class="brief-grid" aria-label="Separate timeframe evidence">
+              ${marketIntelligenceWorkspace.intelligenceBrief.timeframes
+                .map(
+                  (timeframe) => `
+                    <section class="brief-card">
+                      <div class="brief-card-heading">
+                        <div>
+                          <span>${timeframe.timeframe} evidence</span>
+                          <h4>${timeframe.summary}</h4>
+                        </div>
+                        <span class="state-pill">${timeframe.confidence} confidence</span>
+                      </div>
+                      ${renderListBlock("Supporting evidence", timeframe.supportingEvidence)}
+                      ${renderListBlock("Counter-evidence", timeframe.counterEvidence)}
+                      ${renderListBlock("Red flags", timeframe.redFlags)}
+                      ${renderListBlock("Invalidation", timeframe.invalidationConditions)}
+                      ${renderListBlock("Limitations", timeframe.limitations)}
+                    </section>
+                  `
+                )
+                .join("")}
+            </div>
+            <div class="brief-scenario-grid" aria-label="Balanced conditional scenarios">
+              ${marketIntelligenceWorkspace.intelligenceBrief.scenarios
+                .map((scenario) => renderBriefScenarioCard(scenario))
+                .join("")}
+            </div>
+            <div class="workspace-adjacency" aria-label="Brief review requirements and limitations">
+              ${renderListCard("Cross-Timeframe Conflicts", marketIntelligenceWorkspace.intelligenceBrief.crossTimeframeConflicts)}
+              ${renderListCard("Brief Limitations", marketIntelligenceWorkspace.intelligenceBrief.limitations)}
+              ${renderListCard("Blocked Scope", marketIntelligenceWorkspace.intelligenceBrief.blockedScopeReminder)}
+            </div>
+            <div class="brief-review-strip">
+              <div>
+                <span>Evidence quality</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.qualityStatus}</strong>
+              </div>
+              <div>
+                <span>Semantic safety</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.semanticSafetyStatus}</strong>
+              </div>
+              <div>
+                <span>Adversarial review</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.adversarialStatus}</strong>
+              </div>
+              <div>
+                <span>Risk review required</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.riskReviewStatus}</strong>
+              </div>
+              <div>
+                <span>Operator decision required</span>
+                <strong>${marketIntelligenceWorkspace.intelligenceBrief.operatorDecisionStatus}</strong>
+              </div>
+            </div>
+            <div class="brief-hash">
+              <span>Frozen brief hash</span>
+              <code>${marketIntelligenceWorkspace.intelligenceBrief.contentHash}</code>
+            </div>
+          </section>
           <section class="market-workspace" aria-labelledby="market-workspace-title">
             <div class="detail-heading">
               <div>
@@ -755,6 +859,7 @@ function normalizeMarketIntelligenceWorkspace(workspace = {}) {
     summary:
       workspace.summary ||
       "Sourced local market context is shown as scenario evidence, not action authority.",
+    intelligenceBrief: normalizeIntelligenceBrief(workspace.intelligenceBrief),
     recommendation: normalizeScenarioRecommendation(workspace.recommendation),
     riskReview: normalizeRecommendationRiskReview(workspace.riskReview),
     simulationCandidate: normalizeSimulationCandidate(workspace.simulationCandidate),
@@ -785,6 +890,101 @@ function normalizeMarketIntelligenceWorkspace(workspace = {}) {
           }))
       : []
   };
+}
+
+function normalizeIntelligenceBrief(brief = {}) {
+  const normalizeEvidenceItem = (item = {}) => ({
+    timeframe: item.timeframe || "Not recorded",
+    summary: item.summary || "No local evidence summary recorded.",
+    confidence: item.confidence || "not_recorded",
+    supportingEvidence: asList(item.supportingEvidence),
+    counterEvidence: asList(item.counterEvidence),
+    redFlags: asList(item.redFlags),
+    invalidationConditions: asList(item.invalidationConditions),
+    limitations: asList(item.limitations)
+  });
+
+  return {
+    briefId: brief.briefId || "",
+    researchCaseId: brief.researchCaseId || "",
+    status: brief.status || "unavailable",
+    generatedAt: brief.generatedAt || "",
+    contentHash: brief.contentHash || "",
+    sources: Array.isArray(brief.sources)
+      ? brief.sources
+          .filter((source) => source && typeof source === "object")
+          .map((source) => ({
+            title: source.title || "Local source",
+            repositoryRef: source.repositoryRef || "Not recorded",
+            freshness: source.freshness || "unknown",
+            asOf: source.asOf || "Not recorded",
+            limitation: source.limitation || "No local limitation recorded."
+          }))
+      : [],
+    timeframes: Array.isArray(brief.timeframes)
+      ? brief.timeframes
+          .filter((item) => item && typeof item === "object")
+          .map(normalizeEvidenceItem)
+      : [],
+    scenarios: Array.isArray(brief.scenarios)
+      ? brief.scenarios
+          .filter((scenario) => scenario && typeof scenario === "object")
+          .map((scenario) => ({
+            direction: scenario.direction || "conditional",
+            title: scenario.title || "Conditional scenario",
+            conditions: asList(scenario.conditions),
+            supportingEvidence: asList(scenario.supportingEvidence),
+            counterEvidence: asList(scenario.counterEvidence),
+            redFlags: asList(scenario.redFlags),
+            invalidationConditions: asList(scenario.invalidationConditions),
+            limitations: asList(scenario.limitations),
+            confidence: scenario.confidence || "not_recorded"
+          }))
+      : [],
+    qualityStatus: brief.qualityStatus || "not_recorded",
+    semanticSafetyStatus: brief.semanticSafetyStatus || "not_recorded",
+    adversarialStatus: brief.adversarialStatus || "not_recorded",
+    crossTimeframeConflicts: asList(brief.crossTimeframeConflicts),
+    limitations: asList(brief.limitations),
+    riskReviewStatus: brief.riskReviewStatus || "required",
+    operatorDecisionStatus: brief.operatorDecisionStatus || "required",
+    blockedScopeReminder: asList(brief.blockedScopeReminder)
+  };
+}
+
+function renderBriefScenarioCard(scenario) {
+  return `
+    <section class="brief-card brief-scenario">
+      <div class="brief-card-heading">
+        <div>
+          <span>${scenario.direction} conditional scenario</span>
+          <h4>${scenario.title}</h4>
+        </div>
+        <span class="state-pill">${scenario.confidence} confidence</span>
+      </div>
+      ${renderListBlock("Conditions", scenario.conditions)}
+      <div class="brief-evidence-pair">
+        ${renderListBlock("Supporting evidence", scenario.supportingEvidence)}
+        ${renderListBlock("Counter-evidence", scenario.counterEvidence)}
+      </div>
+      ${renderListBlock("Red flags", scenario.redFlags)}
+      ${renderListBlock("Invalidation", scenario.invalidationConditions)}
+      ${renderListBlock("Limitations", scenario.limitations)}
+    </section>
+  `;
+}
+
+function renderListBlock(label, items) {
+  return `
+    <div class="brief-list-block">
+      <h5>${label}</h5>
+      ${
+        items.length > 0
+          ? `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`
+          : '<p class="empty-detail">None recorded.</p>'
+      }
+    </div>
+  `;
 }
 
 function normalizeScenarioRecommendation(recommendation = {}) {

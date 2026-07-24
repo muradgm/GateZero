@@ -8,6 +8,7 @@ export * from "./gate2-local-simulation-engine.js";
 export * from "./gate1-deterministic-backtest-runner.js";
 export * from "./gate2-local-case-intake.js";
 export * from "./gate2-market-intelligence-foundation.js";
+export * from "./gate2-read-only-intelligence-brief.js";
 export * from "./gate2-local-paper-simulator-controls.js";
 export * from "./gate2-local-paper-account-reducer.js";
 export * from "./local-audit-log.js";

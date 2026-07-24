@@ -2,14 +2,14 @@
 
 ## Summary
 
-| Field                      | Value                           |
-| -------------------------- | ------------------------------- |
-| Generated at               | 2026-07-24                      |
-| Latest accepted packet     | `TRD-757`                       |
-| Latest accepted validation | 99 test files, 752 tests passed |
-| Assignment count           | 757                             |
-| Accepted count             | 757                             |
-| Open count                 | 0                               |
+| Field                      | Value                            |
+| -------------------------- | -------------------------------- |
+| Generated at               | 2026-07-24                       |
+| Latest accepted packet     | `TRD-758`                        |
+| Latest accepted validation | 103 test files, 769 tests passed |
+| Assignment count           | 758                              |
+| Accepted count             | 758                              |
+| Open count                 | 0                                |
 
 ## Boundary
 
@@ -780,6 +780,7 @@
 | `TRD-755` | `accepted` |
 | `TRD-756` | `accepted` |
 | `TRD-757` | `accepted` |
+| `TRD-758` | `accepted` |
 
 ## Notes
 

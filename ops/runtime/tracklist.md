@@ -10,8 +10,8 @@
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
 | Last updated               | 2026-07-24                                                     |
-| Latest accepted packet     | `TRD-757`                                                      |
-| Latest accepted validation | 99 test files, 752 tests passed                                |
+| Latest accepted packet     | `TRD-758`                                                      |
+| Latest accepted validation | 103 test files, 769 tests passed                               |
 
 ## Boundary
 
@@ -1212,6 +1212,7 @@ Latest accepted result:
 | `TRD-755` | accepted | Brief workflow     | Bounded the manual read-only intelligence brief path.      |
 | `TRD-756` | accepted | Checkpoint         | Accepted the foundation and authorized a local brief MVP.  |
 | `TRD-757` | accepted | Backtest runtime   | Executed one deterministic historical reference run.       |
+| `TRD-758` | accepted | Intelligence brief | Rendered one balanced local source-linked scenario brief.  |
 
 ## Current Operator Commands
 
@@ -1247,22 +1248,23 @@ Latest accepted result:
 | `pnpm check:gate0-command-center-render`                                                          | Check command center static render contract.            | Local command center render contract passes.                     |
 | `pnpm check:market-workspace`                                                                     | Check scenario and evidence reference consistency.      | Local market workspace consistency guard passes.                 |
 | `pnpm check:backtest-evidence`                                                                    | Check generated historical backtest evidence freshness. | Local backtest evidence freshness guard passes.                  |
+| `pnpm check:intelligence-brief`                                                                   | Check generated intelligence brief evidence freshness.  | Local intelligence brief freshness guard passes.                 |
 | `pnpm check:simulator-workspace`                                                                  | Check generated simulator workspace freshness.          | Local simulator workspace freshness guard passes.                |
 | `pnpm check:case-catalog`                                                                         | Check generated local case catalog freshness.           | Local case catalog freshness guard passes.                       |
 | `pnpm check:gate0-skills`                                                                         | Check project skill governance and intake.              | Local skill governance guard passes.                             |
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 99 files and 752 tests pass deterministically.                   |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 103 files and 769 tests pass deterministically.                  |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                              | Acceptance focus                                       |
-| ---- | --------- | ------ | --------------------------------- | ------------------------------------------------------ |
-| 1    | `TRD-758` | queued | Read-only Intelligence Brief MVP. | Render one local sourced brief with no action channel. |
+| Rank | Packet    | Status | Goal                                 | Acceptance focus                                   |
+| ---- | --------- | ------ | ------------------------------------ | -------------------------------------------------- |
+| 1    | `TRD-759` | queued | Intelligence Brief blocked-state UX. | Render fail-closed unavailable and blocked states. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 
@@ -2216,3 +2218,10 @@ Do not mark a packet accepted until:
 - Historical backtest evidence generator: `scripts/generate-backtest-run-evidence.ts`
 - Deterministic runner operating record:
   `docs/operations/GATE1_DETERMINISTIC_BACKTEST_RUNNER_MVP.md`
+- Read-only intelligence brief contracts:
+  `packages/contracts/src/gate2-read-only-intelligence-brief-contracts.ts`
+- Read-only intelligence brief assembler: `packages/core/src/gate2-read-only-intelligence-brief.ts`
+- Read-only intelligence brief fixture:
+  `packages/fixtures/src/gate2-read-only-intelligence-brief-fixtures.ts`
+- Generated intelligence brief evidence: `apps/web/src/intelligence-brief-evidence.js`
+- Intelligence brief operating record: `docs/operations/READ_ONLY_INTELLIGENCE_BRIEF_MVP.md`

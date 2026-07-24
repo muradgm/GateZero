@@ -641,6 +641,116 @@ h3 {
   padding-top: 18px;
 }
 
+.intelligence-brief {
+  gap: 18px;
+}
+
+.brief-identity,
+.brief-review-strip {
+  background: #f1f6f4;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 14px;
+}
+
+.brief-identity div,
+.brief-review-strip div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.brief-identity span,
+.brief-review-strip span,
+.brief-hash span,
+.brief-card-heading > div > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.brief-identity strong,
+.brief-review-strip strong {
+  color: var(--accent-strong);
+  overflow-wrap: anywhere;
+}
+
+.brief-grid,
+.brief-scenario-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brief-card {
+  background: #f7faf9;
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.brief-card-heading {
+  align-items: start;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.brief-card h4 {
+  color: var(--accent-strong);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.brief-card p,
+.brief-list-block li {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.brief-list-block {
+  border-top: 1px solid var(--subtle);
+  display: grid;
+  gap: 6px;
+  padding-top: 10px;
+}
+
+.brief-list-block h5 {
+  color: var(--ink);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.brief-list-block ul {
+  display: grid;
+  gap: 5px;
+  list-style-position: inside;
+}
+
+.brief-evidence-pair {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brief-review-strip {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.brief-hash {
+  display: grid;
+  gap: 6px;
+}
+
 .market-grid {
   display: grid;
   gap: 12px;
@@ -875,6 +985,11 @@ code {
   .market-grid,
   .market-grid-wide,
   .market-source-groups,
+  .brief-grid,
+  .brief-scenario-grid,
+  .brief-identity,
+  .brief-review-strip,
+  .brief-evidence-pair,
   .workspace-evidence-grid,
   .workspace-adjacency,
   .source-review-grid,
