@@ -51,24 +51,23 @@ const baseCommand: CreateSetupReviewCommand = {
     estimatedFees: 2,
     estimatedSlippage: 3,
     portfolioExposurePctAfterEntry: 12,
-    correlationWarning: false,
-    riskReviewId: "risk-review-eurusd-001"
+    correlationWarning: false
   },
-  requestedDecision: "PAPER_SIMULATE",
-  decisionReasons: ["Evidence is directionally aligned and declared risk remains bounded."],
+  requestedDecision: "WATCH",
+  decisionReasons: ["Evidence requires formal risk review before any paper simulation decision."],
   limitations: ["One historical strategy family and one local market snapshot are represented."],
   now: "2026-07-24T18:30:00.000Z"
 };
 
 describe("createSetupReviewService", () => {
-  it("assembles and persists a reviewed evidence-gated setup", async () => {
+  it("assembles and persists an evidence-gated draft", async () => {
     const repository = new InMemorySetupReviewRepository();
     const createSetupReview = createSetupReviewService({ repository });
 
     const review = await createSetupReview(baseCommand);
 
-    expect(review.status).toBe("reviewed");
-    expect(review.decision).toBe("PAPER_SIMULATE");
+    expect(review.status).toBe("draft");
+    expect(review.decision).toBe("WATCH");
     expect(review.riskPlan.maximumRiskAmount).toBe(55);
     expect(review.executionPath).toBe(false);
     expect((await repository.findById(review.setupReviewId))?.setupReviewId).toBe(
@@ -92,7 +91,7 @@ describe("createSetupReviewService", () => {
     ).rejects.toBeInstanceOf(ContractValidationError);
   });
 
-  it("blocks paper simulation without a risk review", async () => {
+  it("blocks selecting paper simulation while creating a draft", async () => {
     const createSetupReview = createSetupReviewService({
       repository: new InMemorySetupReviewRepository()
     });
@@ -100,12 +99,9 @@ describe("createSetupReviewService", () => {
     await expect(
       createSetupReview({
         ...baseCommand,
-        risk: {
-          ...baseCommand.risk,
-          riskReviewId: undefined
-        }
+        requestedDecision: "PAPER_SIMULATE"
       })
-    ).rejects.toThrow("paper simulation requires a completed risk review");
+    ).rejects.toThrow("complete risk review first");
   });
 
   it("prevents duplicate setup review identifiers", async () => {
