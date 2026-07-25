@@ -10,6 +10,7 @@ import "./ai-council.css";
 import "./glossary.css";
 import "./decision-replay.css";
 import "./confidence-heatmap.css";
+import "./confidence-change.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
