@@ -1,4 +1,5 @@
 export * from "./aggregate-market-candles.js";
+export * from "./build-canonical-decision-assessment.js";
 export * from "./build-trading-intelligence-report.js";
 export * from "./create-setup-review.js";
 export * from "./decision-pipeline.js";
