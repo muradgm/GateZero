@@ -1,3 +1,4 @@
+import type { RawMarketCandle } from "@traderframe/contracts";
 import { describe, expect, it } from "vitest";
 import { validateAndNormalizeMarketCandles } from "../src/index.js";
 
@@ -9,7 +10,7 @@ const base = {
   normalizationVersion: "market-normalization-v1"
 };
 
-function candle(timestamp: string, overrides = {}) {
+function candle(timestamp: string, overrides: Partial<RawMarketCandle> = {}): RawMarketCandle {
   return {
     sourceId: base.sourceId,
     instrument: "EURUSD",
