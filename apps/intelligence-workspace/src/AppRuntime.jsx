@@ -88,6 +88,8 @@ export function AppRuntime() {
   const report = selected.report;
   const pipeline = selected.pipeline;
   const currentStageIndex = pipelineStages.indexOf(pipeline.currentStage);
+  const exposure = buildExposure(selected);
+  const council = buildCouncil(selected);
 
   function selectCandidate(id) {
     setSelectedId(id);
@@ -119,10 +121,10 @@ export function AppRuntime() {
             aside={<Badge>{workspace.candidates.length}</Badge>}
           />
           <div className="candidate-list candidate-list--cards">
-            {workspace.candidates.map((candidate) => (
+            {workspace.candidates.map((candidate, index) => (
               <WatchlistCard
                 key={candidate.id}
-                candidate={candidate}
+                candidate={{ ...candidate, rank: index + 1 }}
                 active={candidate.id === selected.id}
                 onSelect={() => selectCandidate(candidate.id)}
               />
@@ -205,7 +207,7 @@ export function AppRuntime() {
 
             <Panel className="timeline-panel">
               <PanelHeading eyebrow="Reasoning replay" title="Timeline" />
-              <div className="timeline-list">
+              <div className="timeline-list timeline-list--readable">
                 {report.timeline.map((event) => (
                   <button
                     type="button"
@@ -215,12 +217,20 @@ export function AppRuntime() {
                     title="Focus nearest candle"
                   >
                     <time>{new Date(event.occurredAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</time>
-                    <span />
-                    <div><strong>{event.title}</strong><small>{event.summary}</small></div>
+                    <span className="timeline-event__marker" />
+                    <div className="timeline-event__copy">
+                      <strong>{event.title}</strong>
+                      <small>{event.summary}</small>
+                    </div>
                   </button>
                 ))}
               </div>
             </Panel>
+          </section>
+
+          <section className="intelligence-dock">
+            <PortfolioExposure exposure={exposure} selected={selected} />
+            <DecisionCouncil council={council} report={report} />
           </section>
         </section>
 
@@ -251,6 +261,78 @@ export function AppRuntime() {
       </main>
     </div>
   );
+}
+
+function PortfolioExposure({ exposure, selected }) {
+  return (
+    <Panel className="portfolio-panel">
+      <PanelHeading
+        eyebrow="Portfolio intelligence"
+        title="Exposure concentration"
+        aside={<Badge tone={exposure.warning ? "warning" : "success"}>{exposure.warning ? "Review" : "Within limit"}</Badge>}
+      />
+      <div className="exposure-list">
+        {exposure.items.map((item) => (
+          <div className="exposure-row" key={item.label}>
+            <div><span>{item.label}</span><strong>{item.value}%</strong></div>
+            <div className="exposure-track"><span style={{ width: `${item.value}%` }} /></div>
+          </div>
+        ))}
+      </div>
+      <div className={`exposure-impact ${exposure.warning ? "exposure-impact--warning" : ""}`}>
+        <span>Selected setup impact</span>
+        <strong>{selected.instrument} raises {exposure.primary} concentration to {exposure.after}%.</strong>
+      </div>
+    </Panel>
+  );
+}
+
+function DecisionCouncil({ council, report }) {
+  return (
+    <Panel className="council-panel">
+      <PanelHeading
+        eyebrow="Structured challenge"
+        title="Decision council"
+        aside={<RecommendationBadge value={report.recommendation} />}
+      />
+      <div className="council-list">
+        {council.map((member) => (
+          <div className="council-row" key={member.role}>
+            <div><span>{member.role}</span><small>{member.reason}</small></div>
+            <Badge tone={member.tone}>{member.verdict}</Badge>
+          </div>
+        ))}
+      </div>
+      <div className="council-summary">
+        <span>Consolidated view</span>
+        <strong>{report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence</strong>
+      </div>
+    </Panel>
+  );
+}
+
+function buildExposure(selected) {
+  const base = selected.id === "eurusd"
+    ? [{ label: "USD", value: 82 }, { label: "EUR", value: 68 }, { label: "Metals", value: 18 }, { label: "Crypto", value: 12 }]
+    : selected.id === "btcusd"
+      ? [{ label: "USD", value: 74 }, { label: "Crypto", value: 61 }, { label: "EUR", value: 36 }, { label: "Metals", value: 18 }]
+      : [{ label: "USD", value: 79 }, { label: "Metals", value: 47 }, { label: "EUR", value: 31 }, { label: "Crypto", value: 12 }];
+  const primary = base[0].label;
+  const after = Math.min(100, base[0].value + Number.parseInt(selected.risk.exposure, 10));
+  return { items: base, primary, after, warning: after >= 90 };
+}
+
+function buildCouncil(selected) {
+  const report = selected.report;
+  const hasMacroBlock = report.contributions.some((item) => item.dimension === "macro" && item.points < 0);
+  const hasRiskBlock = report.contributions.some((item) => item.dimension === "risk" && item.points < 0);
+  return [
+    { role: "Market analyst", verdict: selected.context.trend, tone: "success", reason: selected.context.structure },
+    { role: "Macro analyst", verdict: hasMacroBlock ? "Caution" : "Neutral", tone: hasMacroBlock ? "warning" : "neutral", reason: hasMacroBlock ? "Macro contribution is negative." : "No major macro blocker recorded." },
+    { role: "Risk officer", verdict: hasRiskBlock ? "Reject" : "Within limit", tone: hasRiskBlock ? "danger" : "success", reason: selected.risk.amount + " planned loss." },
+    { role: "Portfolio manager", verdict: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "Concentrated" : "Acceptable", tone: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "warning" : "neutral", reason: selected.risk.exposure + " post-setup exposure." },
+    { role: "Devil's advocate", verdict: report.downgradeReasons.length ? "Challenge" : "Clear", tone: report.downgradeReasons.length ? "warning" : "success", reason: report.downgradeReasons[0] ?? report.bearCase.summary }
+  ];
 }
 
 function CaseBlock({ title, className, summary, limitations }) {
