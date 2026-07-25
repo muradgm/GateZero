@@ -2,16 +2,16 @@ import React, { useMemo, useState } from "react";
 import { Badge, Panel, PanelHeading, RecommendationBadge } from "@traderframe/ui";
 
 const positions = {
-  context: { x: 8, y: 41 },
+  context: { x: 9, y: 41 },
   trend: { x: 29, y: 10 },
   structure: { x: 29, y: 25 },
   momentum: { x: 29, y: 40 },
   liquidity: { x: 29, y: 55 },
   macro: { x: 29, y: 70 },
-  evidence: { x: 55, y: 41 },
-  risk: { x: 76, y: 23 },
-  council: { x: 76, y: 58 },
-  decision: { x: 94, y: 41 }
+  evidence: { x: 54, y: 41 },
+  risk: { x: 74, y: 23 },
+  council: { x: 74, y: 58 },
+  decision: { x: 89, y: 41 }
 };
 
 const edges = [
@@ -88,6 +88,7 @@ export function EvidenceGraph({ candidate }) {
                 style={{ left: `${position.x}%`, top: `${position.y}%` }}
                 onClick={() => setActiveId(node.id)}
                 aria-pressed={isActive}
+                title={node.shortSummary}
               >
                 <span>{node.kind}</span>
                 <strong>{node.label}</strong>
