@@ -12,6 +12,7 @@ import "./decision-replay.css";
 import "./confidence-heatmap.css";
 import "./confidence-change.css";
 import "./decision-memory.css";
+import "./evidence-graph.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
