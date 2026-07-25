@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { PriceChart } from "./PriceChart.jsx";
 
 const pipelineStages = [
   "research_case",
@@ -164,16 +165,8 @@ export function AppRuntime() {
               <Metric label="Momentum" value={selected.context.momentum} />
               <Metric label="Volatility" value={selected.context.volatility} />
             </div>
-            <div className="chart-surface" aria-label="Decision context visualization">
-              <svg viewBox="0 0 900 280" preserveAspectRatio="none" role="img" aria-label="Abstract market structure line">
-                <defs><linearGradient id="area-runtime" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#7C5CFF" stopOpacity="0.32" /><stop offset="1" stopColor="#7C5CFF" stopOpacity="0" /></linearGradient></defs>
-                <path d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82 L900 280 L0 280 Z" fill="url(#area-runtime)" />
-                <path d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82" fill="none" stroke="#9B87FF" strokeWidth="3" />
-                <line x1="0" x2="900" y1="178" y2="178" stroke="#00C6A7" strokeDasharray="8 8" opacity="0.7" />
-                <line x1="0" x2="900" y1="232" y2="232" stroke="#FF8A00" strokeDasharray="8 8" opacity="0.7" />
-              </svg>
-              <div className="chart-label chart-label--trigger">Review zone</div>
-              <div className="chart-label chart-label--invalid">Invalidation</div>
+            <div className="chart-surface">
+              <PriceChart chart={selected.chart} />
             </div>
           </section>
 
