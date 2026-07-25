@@ -167,6 +167,7 @@ export const StrategyCandidateAssessmentSchema = z
     }
   });
 
+export type StrategyRuleResult = z.infer<typeof StrategyRuleResultSchema>;
 export type EurUsdOverlapPullbackStrategy = z.infer<typeof EurUsdOverlapPullbackStrategySchema>;
 export type EurUsdOverlapPullbackObservation = z.infer<typeof EurUsdOverlapPullbackObservationSchema>;
 export type StrategyCandidateAssessment = z.infer<typeof StrategyCandidateAssessmentSchema>;
