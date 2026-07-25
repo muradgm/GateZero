@@ -5,6 +5,7 @@ import { ConfidenceChange } from "./ConfidenceChange.jsx";
 import { ConfidenceHeatmap } from "./ConfidenceHeatmap.jsx";
 import { DecisionMemory } from "./DecisionMemory.jsx";
 import { DecisionReplay } from "./DecisionReplay.jsx";
+import { EvidenceGraph } from "./EvidenceGraph.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
 import { SimilarSetups } from "./SimilarSetups.jsx";
 
@@ -50,6 +51,9 @@ export function WorkspaceRoot() {
       <AppRuntime />
       {selected ? (
         <>
+          <div className="workspace-evidence-graph-dock">
+            <EvidenceGraph candidate={selected} />
+          </div>
           <div className="workspace-confidence-change-dock">
             <ConfidenceChange candidate={selected} />
           </div>
