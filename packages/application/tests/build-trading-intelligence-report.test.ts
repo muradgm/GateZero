@@ -2,10 +2,14 @@ import { describe, expect, it } from "vitest";
 import type { EvidenceContribution } from "@traderframe/contracts";
 import {
   buildTradingIntelligenceReport,
-  rankTradingIntelligenceReports
+  rankTradingIntelligenceReports,
+  type BuildTradingIntelligenceReportCommand
 } from "../src/index.js";
 
-const common = {
+const common: Omit<
+  BuildTradingIntelligenceReportCommand,
+  "contributions" | "downgradeReasons"
+> = {
   reportId: "intelligence-eurusd-001",
   setupReviewId: "setup-review-eurusd-001",
   instrument: "EUR/USD",
@@ -30,7 +34,7 @@ const common = {
   },
   timeline: [],
   invalidationSummary: "Reject the setup below the one-hour structure low."
-} as const;
+};
 
 function contribution(
   id: string,
