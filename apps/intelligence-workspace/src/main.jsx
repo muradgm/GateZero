@@ -8,6 +8,7 @@ import "./workspace-v2.css";
 import "./similar-setups.css";
 import "./ai-council.css";
 import "./glossary.css";
+import "./decision-replay.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
