@@ -1,3 +1,14 @@
+.candidate-workflow-stack {
+  display: grid;
+  gap: 12px;
+  padding: 0 18px 16px;
+}
+
+/* The explicit lifecycle rail replaces the previous numbered-dot pipeline panel. */
+.pipeline {
+  display: none;
+}
+
 .lifecycle-rail {
   display: grid;
   gap: 14px;
@@ -173,6 +184,10 @@
 }
 
 @media (max-width: 720px) {
+  .candidate-workflow-stack {
+    padding-inline: 12px;
+  }
+
   .lifecycle-rail__header,
   .lifecycle-rail__next {
     align-items: flex-start;
