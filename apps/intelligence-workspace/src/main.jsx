@@ -16,6 +16,7 @@ import "./evidence-graph.css";
 import "./intelligence-tools.css";
 import "./operator-journal.css";
 import "./command-palette.css";
+import "./candidate-action-bar.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
