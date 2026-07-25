@@ -1,4 +1,5 @@
 export * from "./backtest-result.js";
+export * from "./canonical-decision-assessment.js";
 export * from "./command-center-runtime-data.js";
 export * from "./data-snapshot.js";
 export * from "./decision-pipeline.js";
