@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AIEvidenceCouncil } from "./AIEvidenceCouncil.jsx";
 import { AppRuntime } from "./AppRuntime.jsx";
+import { ConfidenceChange } from "./ConfidenceChange.jsx";
 import { ConfidenceHeatmap } from "./ConfidenceHeatmap.jsx";
 import { DecisionReplay } from "./DecisionReplay.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
@@ -48,6 +49,9 @@ export function WorkspaceRoot() {
       <AppRuntime />
       {selected ? (
         <>
+          <div className="workspace-confidence-change-dock">
+            <ConfidenceChange candidate={selected} />
+          </div>
           <div className="workspace-confidence-dock">
             <ConfidenceHeatmap candidate={selected} />
           </div>
