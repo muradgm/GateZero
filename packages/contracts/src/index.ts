@@ -29,6 +29,7 @@ export * from "./strategy-maturity.js";
 export * from "./strategy-decision-trace.js";
 export * from "./strategy-review-bundle.js";
 export * from "./strategy-review-decision-event.js";
+export * from "./timeframe-aggregation.js";
 export * from "./trace-validity-failures.js";
 export * from "./trading-intelligence.js";
 export * from "./validated-decision-trace.js";
