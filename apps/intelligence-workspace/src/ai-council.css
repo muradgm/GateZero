@@ -1,0 +1,166 @@
+.workspace-council-dock {
+  width: min(1560px, calc(100% - 32px));
+  margin: 16px auto 0;
+}
+
+.ai-council-panel {
+  overflow: hidden;
+}
+
+.ai-council-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--tf-color-line);
+}
+
+.ai-council-summary > div {
+  display: grid;
+  gap: 5px;
+  padding: 14px 16px;
+  border-right: 1px solid var(--tf-color-line);
+}
+
+.ai-council-summary > div:last-child {
+  border-right: 0;
+}
+
+.ai-council-summary span,
+.ai-council-verdict span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ai-council-summary strong {
+  color: var(--tf-color-text);
+  font-size: 20px;
+}
+
+.ai-council-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+}
+
+.ai-council-member {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-sm);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.ai-council-member--success {
+  border-color: rgba(0, 198, 167, 0.24);
+}
+
+.ai-council-member--warning {
+  border-color: rgba(255, 138, 0, 0.25);
+}
+
+.ai-council-member--danger {
+  border-color: rgba(255, 95, 112, 0.3);
+}
+
+.ai-council-member header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ai-council-member header > div {
+  display: grid;
+  gap: 5px;
+}
+
+.ai-council-member header span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ai-council-member header strong {
+  color: var(--tf-color-text);
+  font-size: 13px;
+}
+
+.ai-council-member p {
+  min-height: 34px;
+  margin: 12px 0 7px;
+  color: var(--tf-color-text);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.ai-council-member small {
+  display: block;
+  min-height: 30px;
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.ai-council-member code {
+  display: block;
+  margin-top: 10px;
+  overflow: hidden;
+  color: #756e80;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ai-council-verdict {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.35fr) 1fr;
+  gap: 18px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--tf-color-line);
+  background: rgba(124, 92, 255, 0.045);
+}
+
+.ai-council-verdict > div {
+  display: grid;
+  gap: 6px;
+}
+
+.ai-council-verdict strong {
+  color: #c9c0ff;
+  font-size: 14px;
+}
+
+.ai-council-verdict p {
+  margin: 0;
+  color: var(--tf-color-muted);
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1050px) {
+  .ai-council-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .workspace-council-dock {
+    width: min(100% - 20px, 1560px);
+  }
+
+  .ai-council-grid,
+  .ai-council-summary,
+  .ai-council-verdict {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-council-summary > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--tf-color-line);
+  }
+}
