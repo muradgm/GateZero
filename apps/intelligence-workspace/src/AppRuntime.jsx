@@ -64,6 +64,7 @@ export function AppRuntime() {
   const [workspace, setWorkspace] = useState(null);
   const [error, setError] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [focusedTime, setFocusedTime] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -80,7 +81,6 @@ export function AppRuntime() {
       .catch(() => {
         if (active) setError(true);
       });
-
     return () => {
       active = false;
     };
@@ -96,6 +96,11 @@ export function AppRuntime() {
   const report = selected.report;
   const pipeline = selected.pipeline;
   const currentStageIndex = pipelineStages.indexOf(pipeline.currentStage);
+
+  function selectCandidate(id) {
+    setSelectedId(id);
+    setFocusedTime(null);
+  }
 
   return (
     <div className="workspace-shell">
@@ -126,7 +131,7 @@ export function AppRuntime() {
                 key={candidate.id}
                 type="button"
                 className={`candidate ${candidate.id === selected.id ? "candidate--active" : ""}`}
-                onClick={() => setSelectedId(candidate.id)}
+                onClick={() => selectCandidate(candidate.id)}
               >
                 <span className="candidate-rank">{String(candidate.rank).padStart(2, "0")}</span>
                 <span className="candidate-main">
@@ -166,7 +171,7 @@ export function AppRuntime() {
               <Metric label="Volatility" value={selected.context.volatility} />
             </div>
             <div className="chart-surface">
-              <PriceChart chart={selected.chart} />
+              <PriceChart chart={selected.chart} focusedTime={focusedTime} />
             </div>
           </section>
 
@@ -200,11 +205,17 @@ export function AppRuntime() {
               <div className="panel-heading"><div><span className="eyebrow">Reasoning replay</span><h2>Timeline</h2></div></div>
               <div className="timeline-list">
                 {report.timeline.map((event) => (
-                  <div className={`timeline-event timeline-event--${event.severity}`} key={event.eventId}>
+                  <button
+                    type="button"
+                    className={`timeline-event timeline-event--${event.severity} ${focusedTime === event.occurredAt ? "timeline-event--active" : ""}`}
+                    key={event.eventId}
+                    onClick={() => setFocusedTime(event.occurredAt)}
+                    title="Focus nearest candle"
+                  >
                     <time>{new Date(event.occurredAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</time>
                     <span />
                     <div><strong>{event.title}</strong><small>{event.summary}</small></div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </section>
