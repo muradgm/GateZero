@@ -35,6 +35,7 @@ export const EurUsdOverlapPullbackStrategySchema = z
     directionMode: z.enum(["LONG_ONLY", "SHORT_ONLY", "BOTH"]),
     sourceTimeframe: z.literal("15m"),
     contextTimeframes: z.tuple([z.literal("1H"), z.literal("4H")]),
+    observationEngineVersion: NonEmptyStringSchema,
     session: z
       .object({
         timezone: z.literal("UTC"),
@@ -51,6 +52,7 @@ export const EurUsdOverlapPullbackStrategySchema = z
       .strict(),
     pullback: z
       .object({
+        atrPeriod: z.number().int().positive(),
         minimumRetracementAtr: z.number().positive(),
         maximumRetracementAtr: z.number().positive(),
         maximumAgeCandles: z.number().int().positive()
