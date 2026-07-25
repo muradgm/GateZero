@@ -3,6 +3,7 @@ export * from "./command-center-runtime-data.js";
 export * from "./data-snapshot.js";
 export * from "./decision-pipeline.js";
 export * from "./errors.js";
+export * from "./eurusd-overlap-pullback-strategy.js";
 export * from "./gate.js";
 export * from "./gate1-historical-backtest-contracts.js";
 export * from "./gate1-deterministic-backtest-runner-contracts.js";
