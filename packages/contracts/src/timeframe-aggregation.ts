@@ -1,17 +1,49 @@
 import { z } from "zod";
-import { MarketTimeframeSchema, NormalizedMarketCandleSchema } from "./market-data-candle.js";
+import { MarketTimeframeSchema } from "./market-data-candle.js";
 import { NonEmptyStringSchema } from "./schemas.js";
 
 export const HigherMarketTimeframeSchema = z.enum(["1H", "4H"]);
 
-export const TimeBoundMarketCandleSchema = NormalizedMarketCandleSchema.extend({
-  availableAt: z.string().datetime(),
-  derivedFromCandleIds: z.array(NonEmptyStringSchema).min(1),
-  derivedFromHashes: z.array(NonEmptyStringSchema).min(1),
-  aggregationVersion: NonEmptyStringSchema
-})
+export const TimeBoundMarketCandleSchema = z
+  .object({
+    candleId: NonEmptyStringSchema,
+    sourceId: NonEmptyStringSchema,
+    instrument: z.literal("EURUSD"),
+    timeframe: HigherMarketTimeframeSchema,
+    openedAt: z.string().datetime(),
+    closedAt: z.string().datetime(),
+    availableAt: z.string().datetime(),
+    timezone: z.literal("UTC"),
+    open: z.number().finite().positive(),
+    high: z.number().finite().positive(),
+    low: z.number().finite().positive(),
+    close: z.number().finite().positive(),
+    volume: z.number().finite().nonnegative().optional(),
+    finalized: z.literal(true),
+    sourceHash: NonEmptyStringSchema,
+    normalizationVersion: NonEmptyStringSchema,
+    derivedFromCandleIds: z.array(NonEmptyStringSchema).min(1),
+    derivedFromHashes: z.array(NonEmptyStringSchema).min(1),
+    aggregationVersion: NonEmptyStringSchema
+  })
   .strict()
   .superRefine((value, context) => {
+    if (value.high < Math.max(value.open, value.close) || value.low > Math.min(value.open, value.close) || value.high < value.low) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "aggregated candle violates OHLC invariants",
+        path: ["high"]
+      });
+    }
+
+    if (Date.parse(value.closedAt) <= Date.parse(value.openedAt)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "closedAt must be later than openedAt",
+        path: ["closedAt"]
+      });
+    }
+
     if (Date.parse(value.availableAt) !== Date.parse(value.closedAt)) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
