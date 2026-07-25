@@ -1,0 +1,102 @@
+.similar-setups-panel {
+  min-width: 0;
+}
+
+.similar-setups-list {
+  display: grid;
+}
+
+.similar-setup {
+  border-bottom: 1px solid var(--tf-color-line);
+}
+
+.similar-setup:last-child {
+  border-bottom: 0;
+}
+
+.similar-setup summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.similar-setup summary::-webkit-details-marker {
+  display: none;
+}
+
+.similar-setup summary > div:first-child {
+  display: grid;
+  gap: 5px;
+}
+
+.similar-setup summary span,
+.similar-setup__body span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.similar-setup summary strong {
+  font-size: 12px;
+}
+
+.similar-setup__score {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+}
+
+.similar-setup__score strong {
+  color: var(--tf-color-purple);
+  font-size: 17px;
+}
+
+.similar-setup__score small {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+}
+
+.similar-setup__body {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 16px;
+}
+
+.similar-setup__body section {
+  display: grid;
+  gap: 5px;
+}
+
+.similar-setup__body p {
+  margin: 0;
+  color: var(--tf-color-text);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.similar-setup__lesson {
+  padding: 10px;
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  border-radius: var(--tf-radius-sm);
+  background: rgba(124, 92, 255, 0.06);
+}
+
+.similar-setup__body code {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+}
+
+.similar-setups-note {
+  margin: 0;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--tf-color-line);
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
