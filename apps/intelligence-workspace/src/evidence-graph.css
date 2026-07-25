@@ -5,21 +5,21 @@
 
 .evidence-graph-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 0.65fr);
-  gap: 14px;
-  padding: 14px;
+  grid-template-columns: minmax(0, 2.08fr) minmax(250px, 0.56fr);
+  gap: 12px;
+  padding: 12px;
 }
 
 .evidence-graph-canvas {
   position: relative;
-  min-height: 500px;
+  min-height: 470px;
   overflow: hidden;
   border: 1px solid var(--tf-color-line);
   border-radius: var(--tf-radius-md);
   background:
-    radial-gradient(circle at 55% 42%, rgba(124, 92, 255, 0.11), transparent 34%),
-    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    radial-gradient(circle at 54% 42%, rgba(124, 92, 255, 0.1), transparent 34%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: auto, 28px 28px, 28px 28px;
 }
 
@@ -37,8 +37,8 @@
 
 .evidence-graph-flow-label--input { left: 4%; }
 .evidence-graph-flow-label--evidence { left: 26%; }
-.evidence-graph-flow-label--review { left: 70%; }
-.evidence-graph-flow-label--decision { right: 2%; }
+.evidence-graph-flow-label--review { left: 69%; }
+.evidence-graph-flow-label--decision { right: 3%; }
 
 .evidence-graph-edges {
   position: absolute;
@@ -54,22 +54,22 @@
 
 .evidence-edge {
   fill: none;
-  stroke: rgba(142, 151, 177, 0.28);
-  stroke-width: 0.46;
+  stroke: rgba(142, 151, 177, 0.25);
+  stroke-width: 0.42;
   vector-effect: non-scaling-stroke;
   transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
 }
 
 .evidence-edge--active {
-  stroke: rgba(124, 92, 255, 0.92);
-  stroke-width: 0.9;
+  stroke: rgba(124, 92, 255, 0.88);
+  stroke-width: 0.82;
   stroke-dasharray: 4 5;
-  animation: evidence-flow 2.6s linear infinite;
-  filter: drop-shadow(0 0 2px rgba(124, 92, 255, 0.7));
+  animation: evidence-flow 2.8s linear infinite;
+  filter: drop-shadow(0 0 2px rgba(124, 92, 255, 0.62));
 }
 
 .evidence-edge--muted {
-  opacity: 0.16;
+  opacity: 0.13;
 }
 
 @keyframes evidence-flow {
@@ -78,8 +78,8 @@
 
 .evidence-node {
   position: absolute;
-  width: 132px;
-  min-height: 80px;
+  width: 138px;
+  min-height: 82px;
   transform: translate(-50%, -50%);
   display: grid;
   align-content: center;
@@ -95,21 +95,21 @@
 }
 
 .evidence-node--primary {
-  width: 148px;
-  min-height: 94px;
+  width: 152px;
+  min-height: 96px;
   border-color: rgba(124, 92, 255, 0.3);
   background: linear-gradient(145deg, rgba(28, 22, 48, 0.98), rgba(13, 10, 22, 0.98));
 }
 
 .evidence-node--tertiary {
-  width: 122px;
-  min-height: 70px;
+  width: 126px;
+  min-height: 72px;
 }
 
 .evidence-node:hover,
 .evidence-node:focus-visible,
 .evidence-node--active {
-  transform: translate(-50%, -50%) scale(1.045);
+  transform: translate(-50%, -50%) scale(1.038);
   border-color: rgba(124, 92, 255, 0.84);
   box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.2), 0 16px 36px rgba(0, 0, 0, 0.4);
   outline: none;
@@ -132,7 +132,7 @@
 }
 
 .evidence-node--muted {
-  opacity: 0.26;
+  opacity: 0.24;
   filter: saturate(0.45);
 }
 
@@ -157,14 +157,15 @@
 }
 
 .evidence-node p {
+  display: -webkit-box;
   max-width: 100%;
   margin: 1px 0 0;
   overflow: hidden;
   color: var(--tf-color-muted);
   font-size: 8px;
   line-height: 1.35;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .evidence-node--success small { color: var(--tf-color-teal); }
@@ -174,7 +175,7 @@
 
 .evidence-node-inspector {
   min-width: 0;
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--tf-color-line);
   border-radius: var(--tf-radius-md);
   background: linear-gradient(165deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
@@ -184,13 +185,13 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .evidence-node-inspector h3 {
   margin: 4px 0 0;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .evidence-node-inspector > p,
@@ -199,16 +200,16 @@
 .evidence-node-inspector__path strong {
   margin: 0;
   color: var(--tf-color-text);
-  font-size: 11px;
-  line-height: 1.65;
+  font-size: 10px;
+  line-height: 1.6;
 }
 
 .evidence-node-inspector__path,
 .evidence-node-inspector__meta {
   display: grid;
   gap: 6px;
-  margin-top: 16px;
-  padding-top: 14px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid var(--tf-color-line);
 }
 
@@ -224,7 +225,7 @@
 
 .evidence-graph-note {
   margin: 0;
-  padding: 0 14px 14px;
+  padding: 0 12px 12px;
   color: var(--tf-color-muted);
   font-size: 9px;
   line-height: 1.5;
