@@ -32,9 +32,20 @@ export function PriceChart({ chart: chartSet, focusedTime }) {
   function handlePointerMove(event) {
     const bounds = event.currentTarget.getBoundingClientRect();
     const relativeX = ((event.clientX - bounds.left) / bounds.width) * WIDTH;
+    const plotStart = PADDING.left;
+    const plotEnd = WIDTH - PADDING.right;
+
+    if (relativeX < plotStart || relativeX > plotEnd) {
+      setHoveredIndex(null);
+      return;
+    }
+
     const index = Math.max(
       0,
-      Math.min(chart.candles.length - 1, Math.floor((relativeX - PADDING.left) / geometry.step))
+      Math.min(
+        chart.candles.length - 1,
+        Math.round((relativeX - plotStart - geometry.step / 2) / geometry.step)
+      )
     );
     setHoveredIndex(index);
   }
@@ -89,6 +100,16 @@ export function PriceChart({ chart: chartSet, focusedTime }) {
           ))}
         </g>
 
+        {activeCandle ? (
+          <rect
+            className="candle-focus-band"
+            x={activeCandle.x - geometry.step / 2}
+            y={PADDING.top}
+            width={geometry.step}
+            height={HEIGHT - PADDING.top - PADDING.bottom}
+          />
+        ) : null}
+
         {geometry.candles.map((candle, index) => (
           <g
             key={candle.time}
@@ -104,6 +125,16 @@ export function PriceChart({ chart: chartSet, focusedTime }) {
               height={Math.max(candle.bodyHeight, 1.5)}
               rx="1"
             />
+            {index === activeIndex ? (
+              <rect
+                className="candle-inner-light"
+                x={candle.x - Math.max(1, candle.bodyWidth * 0.22)}
+                y={candle.bodyY + 1}
+                width={Math.max(2, candle.bodyWidth * 0.44)}
+                height={Math.max(candle.bodyHeight - 2, 1)}
+                rx="1"
+              />
+            ) : null}
           </g>
         ))}
 
@@ -120,8 +151,6 @@ export function PriceChart({ chart: chartSet, focusedTime }) {
         {activeCandle ? (
           <g className="chart-crosshair">
             <line x1={activeCandle.x} x2={activeCandle.x} y1={PADDING.top} y2={HEIGHT - PADDING.bottom} />
-            <line x1={PADDING.left} x2={WIDTH - PADDING.right} y1={activeCandle.closeY} y2={activeCandle.closeY} />
-            <circle cx={activeCandle.x} cy={activeCandle.closeY} r="4" />
           </g>
         ) : null}
 
