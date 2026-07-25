@@ -3,6 +3,7 @@ import { AIEvidenceCouncil } from "./AIEvidenceCouncil.jsx";
 import { AppRuntime } from "./AppRuntime.jsx";
 import { ConfidenceChange } from "./ConfidenceChange.jsx";
 import { ConfidenceHeatmap } from "./ConfidenceHeatmap.jsx";
+import { DecisionMemory } from "./DecisionMemory.jsx";
 import { DecisionReplay } from "./DecisionReplay.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
 import { SimilarSetups } from "./SimilarSetups.jsx";
@@ -60,6 +61,9 @@ export function WorkspaceRoot() {
           </div>
           <div className="workspace-council-dock">
             <AIEvidenceCouncil candidate={selected} />
+          </div>
+          <div className="workspace-memory-dock">
+            <DecisionMemory candidate={selected} />
           </div>
           <div className="workspace-history-dock">
             <SimilarSetups matches={selected.similarSetups ?? []} />
