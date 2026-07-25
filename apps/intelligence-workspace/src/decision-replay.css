@@ -1,0 +1,236 @@
+.workspace-replay-dock {
+  width: min(1480px, calc(100% - 32px));
+  margin: 16px auto 0;
+}
+
+.decision-replay-panel {
+  min-width: 0;
+}
+
+.replay-controls {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+.replay-controls button {
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-sm);
+  padding: 7px 11px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--tf-color-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.replay-controls button:hover:not(:disabled),
+.replay-controls button:focus-visible {
+  border-color: rgba(124, 92, 255, 0.45);
+  color: var(--tf-color-text);
+}
+
+.replay-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.replay-controls__primary {
+  border-color: rgba(124, 92, 255, 0.45) !important;
+  background: rgba(124, 92, 255, 0.14) !important;
+  color: #d6d0ff !important;
+}
+
+.replay-progress {
+  height: 3px;
+  margin: 0 16px 14px;
+  overflow: hidden;
+  border-radius: var(--tf-radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.replay-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--tf-color-purple), var(--tf-color-teal));
+  transition: width var(--tf-motion-fast);
+}
+
+.replay-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(86px, 1fr);
+  gap: 7px;
+  overflow-x: auto;
+  padding: 0 16px 16px;
+}
+
+.replay-step {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 86px;
+  border: 0;
+  background: transparent;
+  color: var(--tf-color-muted);
+  cursor: pointer;
+}
+
+.replay-step > span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border: 1px solid var(--tf-color-line);
+  border-radius: 50%;
+  background: var(--tf-color-surface-2);
+  font-size: 9px;
+  font-weight: 800;
+  transition: all var(--tf-motion-fast);
+}
+
+.replay-step small {
+  max-width: 88px;
+  overflow: hidden;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.replay-step--complete > span {
+  border-color: rgba(0, 198, 167, 0.42);
+  background: rgba(0, 198, 167, 0.1);
+  color: var(--tf-color-teal);
+}
+
+.replay-step--active > span {
+  border-color: var(--tf-color-purple);
+  background: rgba(124, 92, 255, 0.18);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.08);
+  color: #ded8ff;
+}
+
+.replay-step--active small {
+  color: var(--tf-color-text);
+}
+
+.replay-inspector {
+  display: grid;
+  gap: 12px;
+  margin: 0 16px 16px;
+  padding: 16px;
+  border: 1px solid var(--tf-color-line);
+  border-left-width: 3px;
+  border-radius: var(--tf-radius-md);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.replay-inspector--info {
+  border-left-color: var(--tf-color-purple);
+}
+
+.replay-inspector--attention {
+  border-left-color: var(--tf-color-orange);
+}
+
+.replay-inspector--blocking {
+  border-left-color: var(--tf-color-danger);
+}
+
+.replay-inspector__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.replay-inspector__header > div {
+  display: grid;
+  gap: 5px;
+}
+
+.replay-inspector__header span,
+.replay-evidence span,
+.replay-blockers span,
+.replay-decision span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.replay-inspector__header h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.replay-inspector__header time {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.replay-inspector > p,
+.replay-blockers p {
+  margin: 0;
+  color: var(--tf-color-text);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.replay-evidence,
+.replay-blockers {
+  display: grid;
+  gap: 7px;
+}
+
+.replay-evidence code {
+  overflow-wrap: anywhere;
+  color: var(--tf-color-muted);
+  font-size: 9px;
+}
+
+.replay-blockers {
+  padding: 10px;
+  border: 1px solid rgba(255, 95, 112, 0.2);
+  border-radius: var(--tf-radius-sm);
+  background: rgba(255, 95, 112, 0.05);
+}
+
+.replay-decision {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--tf-color-line);
+}
+
+.replay-decision > div {
+  display: grid;
+  gap: 5px;
+}
+
+.replay-decision strong {
+  font-size: 11px;
+}
+
+@media (max-width: 760px) {
+  .workspace-replay-dock {
+    width: min(100% - 20px, 1480px);
+  }
+
+  .replay-inspector__header,
+  .replay-decision {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
