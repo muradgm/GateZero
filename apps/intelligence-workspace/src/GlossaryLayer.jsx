@@ -83,7 +83,7 @@ export function GlossaryLayer() {
   useEffect(() => {
     function resolveEntry(target) {
       const element = target.closest?.(eligibleSelector);
-      if (!element) return null;
+      if (!element || element.closest?.(".glossary-dialog")) return null;
 
       const explicit = element.dataset?.glossary;
       const text = (explicit || element.textContent || "").trim().replaceAll("_", " ").toLowerCase();
@@ -94,35 +94,36 @@ export function GlossaryLayer() {
       );
     }
 
-    function show(event) {
+    function handlePointerMove(event) {
       const entry = resolveEntry(event.target);
-      if (!entry) {
-        setActive(null);
-        return;
-      }
-      setActive({ entry, x: event.clientX, y: event.clientY });
+      setActive(entry ? { entry, x: event.clientX, y: event.clientY } : null);
     }
 
-    function move(event) {
-      setActive((current) => (current ? { ...current, x: event.clientX, y: event.clientY } : current));
-    }
-
-    function hide() {
+    function handlePointerLeave() {
       setActive(null);
     }
 
-    document.addEventListener("mouseover", show);
-    document.addEventListener("mousemove", move);
-    document.addEventListener("mouseout", hide);
-    document.addEventListener("focusin", show);
-    document.addEventListener("focusout", hide);
+    function handleFocusIn(event) {
+      const entry = resolveEntry(event.target);
+      if (!entry) return;
+      const bounds = event.target.getBoundingClientRect();
+      setActive({ entry, x: bounds.left + bounds.width / 2, y: bounds.bottom });
+    }
+
+    function handleFocusOut() {
+      setActive(null);
+    }
+
+    document.addEventListener("pointermove", handlePointerMove);
+    document.addEventListener("pointerleave", handlePointerLeave);
+    document.addEventListener("focusin", handleFocusIn);
+    document.addEventListener("focusout", handleFocusOut);
 
     return () => {
-      document.removeEventListener("mouseover", show);
-      document.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseout", hide);
-      document.removeEventListener("focusin", show);
-      document.removeEventListener("focusout", hide);
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerleave", handlePointerLeave);
+      document.removeEventListener("focusin", handleFocusIn);
+      document.removeEventListener("focusout", handleFocusOut);
     };
   }, []);
 
