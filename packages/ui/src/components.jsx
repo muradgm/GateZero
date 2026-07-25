@@ -39,11 +39,20 @@ export function Metric({ label, value, emphasis = false }) {
 }
 
 export function WatchlistCard({ candidate, active, onSelect }) {
+  function handleSelect() {
+    window.dispatchEvent(
+      new CustomEvent("traderframe:candidate-selected", {
+        detail: { id: candidate.id }
+      })
+    );
+    onSelect?.();
+  }
+
   return (
     <button
       type="button"
       className={`tf-watchlist-card ${active ? "tf-watchlist-card--active" : ""}`.trim()}
-      onClick={onSelect}
+      onClick={handleSelect}
     >
       <div className="tf-watchlist-card__topline">
         <span className="tf-rank">#{candidate.rank}</span>
