@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 const WIDTH = 900;
 const HEIGHT = 280;
@@ -8,11 +8,20 @@ function formatPrice(value, precision) {
   return Number(value).toFixed(precision);
 }
 
-export function PriceChart({ chart, focusedTime }) {
+export function PriceChart({ chart: chartSet, focusedTime }) {
+  const availableTimeframes = Object.keys(chartSet?.timeframes ?? {});
+  const [timeframe, setTimeframe] = useState(chartSet?.defaultTimeframe ?? availableTimeframes[0] ?? null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const geometry = useMemo(() => buildGeometry(chart), [chart]);
 
-  if (!chart?.candles?.length) {
+  useEffect(() => {
+    setTimeframe(chartSet?.defaultTimeframe ?? Object.keys(chartSet?.timeframes ?? {})[0] ?? null);
+    setHoveredIndex(null);
+  }, [chartSet]);
+
+  const chart = timeframe ? chartSet?.timeframes?.[timeframe] : null;
+  const geometry = useMemo(() => (chart ? buildGeometry(chart) : null), [chart]);
+
+  if (!chart?.candles?.length || !geometry) {
     return <div className="chart-empty">No local price series is available.</div>;
   }
 
@@ -30,13 +39,26 @@ export function PriceChart({ chart, focusedTime }) {
     setHoveredIndex(index);
   }
 
+  function selectTimeframe(nextTimeframe) {
+    setTimeframe(nextTimeframe);
+    setHoveredIndex(null);
+  }
+
   return (
     <div className="price-chart" aria-label={`${chart.timeframe} local candlestick chart`}>
       <div className="chart-toolbar">
-        <div className="timeframe-control" aria-label="Available chart timeframe">
-          <button type="button" className="timeframe-button timeframe-button--active">
-            {chart.timeframe}
-          </button>
+        <div className="timeframe-control" aria-label="Available chart timeframes">
+          {availableTimeframes.map((value) => (
+            <button
+              type="button"
+              className={`timeframe-button ${value === timeframe ? "timeframe-button--active" : ""}`}
+              key={value}
+              onClick={() => selectTimeframe(value)}
+              aria-pressed={value === timeframe}
+            >
+              {value}
+            </button>
+          ))}
         </div>
         {activeCandle ? (
           <div className="ohlc-strip" aria-live="polite">
@@ -177,23 +199,11 @@ function buildGeometry(chart) {
   });
 
   const levels = [
-    {
-      kind: "trigger",
-      label: `Trigger ${formatPrice(chart.levels.trigger, chart.precision)}`,
-      value: chart.levels.trigger
-    },
-    {
-      kind: "invalidation",
-      label: `Invalid ${formatPrice(chart.levels.invalidation, chart.precision)}`,
-      value: chart.levels.invalidation
-    }
+    { kind: "trigger", label: `Trigger ${formatPrice(chart.levels.trigger, chart.precision)}`, value: chart.levels.trigger },
+    { kind: "invalidation", label: `Invalid ${formatPrice(chart.levels.invalidation, chart.precision)}`, value: chart.levels.invalidation }
   ];
   if (chart.levels.target !== null) {
-    levels.push({
-      kind: "target",
-      label: `Target ${formatPrice(chart.levels.target, chart.precision)}`,
-      value: chart.levels.target
-    });
+    levels.push({ kind: "target", label: `Target ${formatPrice(chart.levels.target, chart.precision)}`, value: chart.levels.target });
   }
 
   return {
