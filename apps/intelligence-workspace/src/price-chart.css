@@ -63,8 +63,13 @@
   stroke-width: 1;
 }
 
+.candle-focus-band {
+  fill: rgba(124, 92, 255, 0.035);
+  pointer-events: none;
+}
+
 .candle {
-  transition: opacity 0.12s ease;
+  transition: opacity 0.12s ease, filter 0.12s ease;
 }
 
 .candle line {
@@ -87,10 +92,21 @@
   fill: rgba(255, 95, 112, 0.62);
 }
 
+.candle--active {
+  filter: drop-shadow(0 0 6px rgba(234, 239, 245, 0.28));
+}
+
 .candle--active line,
-.candle--active rect {
-  stroke-width: 2.4;
-  filter: drop-shadow(0 0 5px currentColor);
+.candle--active > rect:not(.candle-inner-light) {
+  stroke-width: 2.2;
+  filter: brightness(1.28) saturate(1.15);
+}
+
+.candle-inner-light {
+  fill: rgba(255, 255, 255, 0.68) !important;
+  stroke: none !important;
+  opacity: 0.72;
+  pointer-events: none;
 }
 
 .price-level line {
@@ -143,16 +159,9 @@
 }
 
 .chart-crosshair line {
-  stroke: rgba(234, 239, 245, 0.34);
+  stroke: rgba(234, 239, 245, 0.24);
   stroke-width: 1;
   stroke-dasharray: 3 4;
-  pointer-events: none;
-}
-
-.chart-crosshair circle {
-  fill: var(--purple);
-  stroke: #ded8ff;
-  stroke-width: 1.5;
   pointer-events: none;
 }
 
