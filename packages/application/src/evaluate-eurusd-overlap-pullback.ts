@@ -12,6 +12,7 @@ export const EURUSD_OVERLAP_PULLBACK_V1: EurUsdOverlapPullbackStrategy = {
   directionMode: "BOTH",
   sourceTimeframe: "15m",
   contextTimeframes: ["1H", "4H"],
+  observationEngineVersion: "eurusd-overlap-observation-v1",
   session: {
     timezone: "UTC",
     startMinuteUtc: 720,
@@ -23,6 +24,7 @@ export const EURUSD_OVERLAP_PULLBACK_V1: EurUsdOverlapPullbackStrategy = {
     requireClosedHigherTimeframes: true
   },
   pullback: {
+    atrPeriod: 14,
     minimumRetracementAtr: 0.25,
     maximumRetracementAtr: 1.25,
     maximumAgeCandles: 12
@@ -220,7 +222,9 @@ function calculateExpiry(decisionTimestamp: string, candles: number): string {
 }
 
 function formatMinute(value: number): string {
-  const hours = Math.floor(value / 60).toString().padStart(2, "0");
+  const hours = Math.floor(value / 60)
+    .toString()
+    .padStart(2, "0");
   const minutes = (value % 60).toString().padStart(2, "0");
   return `${hours}:${minutes}`;
 }
