@@ -40,6 +40,9 @@ export default tseslint.config(
         document: "readonly",
         window: "readonly"
       }
+    },
+    rules: {
+      "no-unused-vars": ["error", { "varsIgnorePattern": "^React$" }]
     }
   }
 );
