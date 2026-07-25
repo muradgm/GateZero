@@ -124,8 +124,8 @@ describe("deriveEurUsdOverlapObservation", () => {
     expect(result.observation.displacementAtr).toBeGreaterThanOrEqual(0.5);
     expect(result.observation.triggerConfirmed).toBe(true);
     expect(result.observation.invalidationPrice).toBeLessThan(1.0993);
-    expect(result.diagnostics.sweepCandleId).toContain("10:45:00.000Z");
-    expect(result.diagnostics.triggerCandleId).toContain("11:00:00.000Z");
+    expect(result.diagnostics.sweepCandleId).toContain("11:45:00.000Z");
+    expect(result.diagnostics.triggerCandleId).toContain("12:00:00.000Z");
   });
 
   it("produces a gate assessment without manually authored evidence booleans", () => {
