@@ -24,5 +24,22 @@ export default tseslint.config(
         }
       ]
     }
+  },
+  {
+    files: ["apps/intelligence-workspace/**/*.{js,jsx}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        console: "readonly",
+        document: "readonly",
+        window: "readonly"
+      }
+    }
   }
 );
