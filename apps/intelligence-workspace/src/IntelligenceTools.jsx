@@ -19,9 +19,23 @@ const tools = [
   { id: "graph", label: "Evidence graph" }
 ];
 
+const validToolIds = new Set(tools.map((tool) => tool.id));
+
 export function IntelligenceTools({ candidate }) {
   const [open, setOpen] = useState(false);
   const [activeTool, setActiveTool] = useState("council");
+
+  useEffect(() => {
+    function handleOpenTool(event) {
+      const requestedTool = event.detail?.tool;
+      if (!validToolIds.has(requestedTool)) return;
+      setActiveTool(requestedTool);
+      setOpen(true);
+    }
+
+    window.addEventListener("traderframe:open-intelligence-tool", handleOpenTool);
+    return () => window.removeEventListener("traderframe:open-intelligence-tool", handleOpenTool);
+  }, []);
 
   useEffect(() => {
     if (!open) return undefined;
