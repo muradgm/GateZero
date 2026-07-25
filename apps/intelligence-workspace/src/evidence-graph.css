@@ -1,0 +1,174 @@
+.workspace-evidence-graph-dock {
+  width: min(1240px, calc(100% - 32px));
+  margin: 14px auto 0;
+}
+
+.evidence-graph-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.7fr);
+  gap: 14px;
+  padding: 14px;
+}
+
+.evidence-graph-canvas {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-md);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(124, 92, 255, 0.08), transparent 46%),
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: auto, 28px 28px, 28px 28px;
+}
+
+.evidence-graph-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.evidence-edge {
+  stroke: rgba(150, 158, 180, 0.26);
+  stroke-width: 0.38;
+  stroke-dasharray: 1.2 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+.evidence-edge--active {
+  stroke: rgba(124, 92, 255, 0.9);
+  stroke-width: 0.75;
+}
+
+.evidence-node {
+  position: absolute;
+  width: 126px;
+  min-height: 72px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-sm);
+  background: rgba(15, 12, 25, 0.94);
+  color: var(--tf-color-text);
+  text-align: left;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.evidence-node:hover,
+.evidence-node:focus-visible,
+.evidence-node--active {
+  transform: translate(-50%, -50%) scale(1.035);
+  border-color: rgba(124, 92, 255, 0.76);
+  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.18), 0 14px 32px rgba(0, 0, 0, 0.34);
+  outline: none;
+}
+
+.evidence-node span,
+.evidence-node small,
+.evidence-node-inspector span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evidence-node strong {
+  font-size: 12px;
+}
+
+.evidence-node--success small { color: var(--tf-color-teal); }
+.evidence-node--warning small { color: var(--tf-color-orange); }
+.evidence-node--danger small { color: var(--tf-color-danger); }
+.evidence-node--neutral small { color: var(--tf-color-purple); }
+
+.evidence-node-inspector {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-md);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.evidence-node-inspector__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.evidence-node-inspector h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+}
+
+.evidence-node-inspector > p,
+.evidence-node-inspector__meta p,
+.evidence-node-inspector__meta code {
+  margin: 0;
+  color: var(--tf-color-text);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.evidence-node-inspector__meta {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--tf-color-line);
+}
+
+.evidence-node-inspector__meta code {
+  color: var(--tf-color-purple);
+  overflow-wrap: anywhere;
+}
+
+.evidence-graph-note {
+  margin: 0;
+  padding: 0 14px 14px;
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .evidence-graph-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-graph-canvas {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 680px) {
+  .workspace-evidence-graph-dock {
+    width: calc(100% - 16px);
+  }
+
+  .evidence-graph-canvas {
+    min-height: 560px;
+  }
+
+  .evidence-node {
+    width: 112px;
+  }
+
+  .evidence-node:nth-of-type(2) { left: 18% !important; top: 15% !important; }
+  .evidence-node:nth-of-type(3) { left: 50% !important; top: 15% !important; }
+  .evidence-node:nth-of-type(4) { left: 82% !important; top: 15% !important; }
+  .evidence-node:nth-of-type(5) { left: 18% !important; top: 38% !important; }
+  .evidence-node:nth-of-type(6) { left: 50% !important; top: 38% !important; }
+  .evidence-node:nth-of-type(7) { left: 82% !important; top: 38% !important; }
+  .evidence-node:nth-of-type(8) { left: 32% !important; top: 68% !important; }
+  .evidence-node:nth-of-type(9) { left: 68% !important; top: 68% !important; }
+}
