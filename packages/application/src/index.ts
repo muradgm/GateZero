@@ -2,6 +2,7 @@ export * from "./build-trading-intelligence-report.js";
 export * from "./create-setup-review.js";
 export * from "./decision-pipeline.js";
 export * from "./evaluate-setup-review.js";
+export * from "./evaluate-trace-quality.js";
 export * from "./file-setup-review-repository.js";
 export * from "./in-memory-setup-review-repository.js";
 export * from "./query-setup-reviews.js";
