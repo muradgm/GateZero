@@ -5,6 +5,7 @@ import { ConfidenceHeatmap } from "./ConfidenceHeatmap.jsx";
 import { DecisionMemory } from "./DecisionMemory.jsx";
 import { DecisionReplay } from "./DecisionReplay.jsx";
 import { EvidenceGraph } from "./EvidenceGraph.jsx";
+import { OperatorJournal } from "./OperatorJournal.jsx";
 import { SimilarSetups } from "./SimilarSetups.jsx";
 
 const tools = [
@@ -13,6 +14,7 @@ const tools = [
   { id: "confidence", label: "Confidence" },
   { id: "changes", label: "Score changes" },
   { id: "memory", label: "Decision memory" },
+  { id: "journal", label: "Outcome journal" },
   { id: "similar", label: "Similar setups" },
   { id: "graph", label: "Evidence graph" }
 ];
@@ -52,6 +54,8 @@ export function IntelligenceTools({ candidate }) {
         return <ConfidenceChange candidate={candidate} />;
       case "memory":
         return <DecisionMemory candidate={candidate} />;
+      case "journal":
+        return <OperatorJournal candidate={candidate} />;
       case "similar":
         return <SimilarSetups matches={candidate.similarSetups ?? []} />;
       case "graph":
@@ -73,7 +77,7 @@ export function IntelligenceTools({ candidate }) {
       >
         <span>Analysis workspace</span>
         <strong>Intelligence Tools</strong>
-        <small>7 views</small>
+        <small>8 views</small>
       </button>
 
       {open ? (
@@ -110,7 +114,11 @@ export function IntelligenceTools({ candidate }) {
                 <button
                   type="button"
                   key={tool.id}
-                  className={tool.id === activeTool ? "intelligence-tool-tab intelligence-tool-tab--active" : "intelligence-tool-tab"}
+                  className={
+                    tool.id === activeTool
+                      ? "intelligence-tool-tab intelligence-tool-tab--active"
+                      : "intelligence-tool-tab"
+                  }
                   onClick={() => setActiveTool(tool.id)}
                   aria-pressed={tool.id === activeTool}
                 >
