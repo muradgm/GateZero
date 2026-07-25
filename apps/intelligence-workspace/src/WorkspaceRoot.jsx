@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AIEvidenceCouncil } from "./AIEvidenceCouncil.jsx";
 import { AppRuntime } from "./AppRuntime.jsx";
+import { DecisionReplay } from "./DecisionReplay.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
 import { SimilarSetups } from "./SimilarSetups.jsx";
 
@@ -46,6 +47,9 @@ export function WorkspaceRoot() {
       <AppRuntime />
       {selected ? (
         <>
+          <div className="workspace-replay-dock">
+            <DecisionReplay candidate={selected} />
+          </div>
           <div className="workspace-council-dock">
             <AIEvidenceCouncil candidate={selected} />
           </div>
