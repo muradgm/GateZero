@@ -8,6 +8,7 @@ import {
   RecommendationBadge,
   WatchlistCard
 } from "@traderframe/ui";
+import { CandidateActionBar } from "./CandidateActionBar.jsx";
 import { PriceChart } from "./PriceChart.jsx";
 
 const pipelineStages = [
@@ -94,6 +95,7 @@ export function AppRuntime() {
   function selectCandidate(id) {
     setSelectedId(id);
     setFocusedTime(null);
+    window.dispatchEvent(new CustomEvent("traderframe:candidate-selected", { detail: { id } }));
   }
 
   return (
@@ -112,6 +114,8 @@ export function AppRuntime() {
           <small>{workspace.source}</small>
         </div>
       </header>
+
+      <CandidateActionBar candidate={selected} generatedAt={workspace.generatedAt} />
 
       <main className="workspace-grid">
         <Panel as="aside" className="watchlist">
