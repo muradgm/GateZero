@@ -1,4 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
+import {
+  Badge,
+  EvidenceRow,
+  Metric,
+  Panel,
+  PanelHeading,
+  RecommendationBadge,
+  WatchlistCard
+} from "@traderframe/ui";
 import { PriceChart } from "./PriceChart.jsx";
 
 const pipelineStages = [
@@ -25,29 +34,12 @@ function BrandMark() {
   );
 }
 
-function Recommendation({ value }) {
-  return (
-    <span className={`recommendation recommendation--${value.toLowerCase()}`}>
-      {value.replaceAll("_", " ")}
-    </span>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="metric">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
-  );
-}
-
 function LoadingState({ error }) {
   return (
     <div className="workspace-shell workspace-state">
-      <div className="panel workspace-state-card">
+      <Panel className="workspace-state-card">
         <BrandMark />
-        <span className="eyebrow">Decision intelligence workspace</span>
+        <span className="tf-eyebrow">Decision intelligence workspace</span>
         <h1>{error ? "Workspace data unavailable" : "Loading repository evidence"}</h1>
         <p>
           {error
@@ -55,7 +47,7 @@ function LoadingState({ error }) {
             : "Loading ranked candidates, evidence contributions, risk context, and pipeline state."}
         </p>
         {error ? <code>pnpm generate:workspace-data</code> : null}
-      </div>
+      </Panel>
     </div>
   );
 }
@@ -120,48 +112,43 @@ export function AppRuntime() {
       </header>
 
       <main className="workspace-grid">
-        <aside className="watchlist panel">
-          <div className="panel-heading">
-            <div><span className="eyebrow">Ranked queue</span><h2>Watchlist</h2></div>
-            <span className="count">{workspace.candidates.length}</span>
-          </div>
-          <div className="candidate-list">
+        <Panel as="aside" className="watchlist">
+          <PanelHeading
+            eyebrow="Ranked queue"
+            title="Watchlist"
+            aside={<Badge>{workspace.candidates.length}</Badge>}
+          />
+          <div className="candidate-list candidate-list--cards">
             {workspace.candidates.map((candidate) => (
-              <button
+              <WatchlistCard
                 key={candidate.id}
-                type="button"
-                className={`candidate ${candidate.id === selected.id ? "candidate--active" : ""}`}
-                onClick={() => selectCandidate(candidate.id)}
-              >
-                <span className="candidate-rank">{String(candidate.rank).padStart(2, "0")}</span>
-                <span className="candidate-main">
-                  <strong>{candidate.instrument}</strong>
-                  <small>{candidate.market} · {candidate.context.trend}</small>
-                </span>
-                <span className="candidate-score">{candidate.report.evidenceScore}</span>
-                <Recommendation value={candidate.report.recommendation} />
-              </button>
+                candidate={candidate}
+                active={candidate.id === selected.id}
+                onSelect={() => selectCandidate(candidate.id)}
+              />
             ))}
           </div>
           <div className="boundary-note">
             <strong>Evidence only</strong>
             <p>No broker connection, live order routing, or automated action.</p>
           </div>
-        </aside>
+        </Panel>
 
         <section className="market-column">
-          <section className="market-hero panel">
-            <div className="market-title-row">
+          <Panel className="market-hero">
+            <div className="market-title-row market-title-row--v2">
               <div>
-                <span className="eyebrow">Selected candidate</span>
+                <span className="tf-eyebrow">Selected candidate</span>
                 <h1>{selected.instrument}</h1>
                 <p>{selected.context.session}</p>
               </div>
-              <div className="score-lockup">
-                <div className="score-ring" style={{ "--score": report.evidenceScore }}>
-                  <strong>{report.evidenceScore}</strong><span>Evidence</span>
+              <div className="decision-summary">
+                <Metric label="Evidence" value={report.evidenceScore} emphasis />
+                <Metric label="Confidence" value={report.confidence} emphasis />
+                <div className="decision-summary__recommendation">
+                  <span>Decision</span>
+                  <RecommendationBadge value={report.recommendation} />
                 </div>
-                <Recommendation value={report.recommendation} />
               </div>
             </div>
             <div className="market-metrics">
@@ -170,39 +157,54 @@ export function AppRuntime() {
               <Metric label="Momentum" value={selected.context.momentum} />
               <Metric label="Volatility" value={selected.context.volatility} />
             </div>
-            <div className="chart-surface">
+            <div className="chart-surface chart-surface--dominant">
               <PriceChart chart={selected.chart} focusedTime={focusedTime} />
             </div>
-          </section>
+          </Panel>
 
-          <section className="pipeline panel">
-            <div className="panel-heading">
-              <div><span className="eyebrow">Protected loop</span><h2>Decision pipeline</h2></div>
-              <span className="stage-name">{pipeline.currentStage.replaceAll("_", " ")}</span>
-            </div>
+          <Panel className="pipeline">
+            <PanelHeading
+              eyebrow="Protected loop"
+              title="Decision pipeline"
+              aside={<Badge>{pipeline.currentStage.replaceAll("_", " ")}</Badge>}
+            />
             <div className="pipeline-track">
               {pipelineStages.map((stage, index) => {
                 const record = pipeline.stages.find((item) => item.stage === stage);
-                const status = record?.status === "not_applicable" ? "skipped" : index < currentStageIndex ? "complete" : index === currentStageIndex ? "current" : "pending";
-                return <div key={stage} className={`pipeline-step pipeline-step--${status}`} title={`${stage.replaceAll("_", " ")} · ${record?.status ?? "pending"}`}><span>{index + 1}</span></div>;
+                const status = record?.status === "not_applicable"
+                  ? "skipped"
+                  : index < currentStageIndex
+                    ? "complete"
+                    : index === currentStageIndex
+                      ? "current"
+                      : "pending";
+                return (
+                  <div
+                    key={stage}
+                    className={`pipeline-step pipeline-step--${status}`}
+                    title={`${stage.replaceAll("_", " ")} · ${record?.status ?? "pending"}`}
+                  >
+                    <span>{index + 1}</span>
+                  </div>
+                );
               })}
             </div>
-          </section>
+          </Panel>
 
           <section className="bottom-grid">
-            <section className="risk-panel panel">
-              <div className="panel-heading"><div><span className="eyebrow">Risk frame</span><h2>Capital impact</h2></div></div>
+            <Panel className="risk-panel">
+              <PanelHeading eyebrow="Risk frame" title="Capital impact" />
               <div className="risk-grid">
-                <Metric label="Planned loss" value={selected.risk.amount} />
-                <Metric label="Risk ceiling" value={selected.risk.ceiling} />
-                <Metric label="Exposure after" value={selected.risk.exposure} />
-                <Metric label="Reward / risk" value={selected.risk.rewardRisk} />
+                <Metric label="Planned loss" value={selected.risk.amount} emphasis />
+                <Metric label="Risk ceiling" value={selected.risk.ceiling} emphasis />
+                <Metric label="Exposure after" value={selected.risk.exposure} emphasis />
+                <Metric label="Reward / risk" value={selected.risk.rewardRisk} emphasis />
               </div>
               <div className="invalidation"><span>Mandatory invalidation</span><p>{selected.invalidation}</p></div>
-            </section>
+            </Panel>
 
-            <section className="timeline-panel panel">
-              <div className="panel-heading"><div><span className="eyebrow">Reasoning replay</span><h2>Timeline</h2></div></div>
+            <Panel className="timeline-panel">
+              <PanelHeading eyebrow="Reasoning replay" title="Timeline" />
               <div className="timeline-list">
                 {report.timeline.map((event) => (
                   <button
@@ -218,37 +220,33 @@ export function AppRuntime() {
                   </button>
                 ))}
               </div>
-            </section>
+            </Panel>
           </section>
         </section>
 
         <aside className="intelligence-column">
-          <section className="intelligence-summary panel">
-            <div className="panel-heading">
-              <div><span className="eyebrow">Explainable reasoning</span><h2>Intelligence</h2></div>
-              <span className="confidence">{report.confidence}</span>
-            </div>
+          <Panel className="intelligence-summary">
+            <PanelHeading
+              eyebrow="Explainable reasoning"
+              title="Intelligence"
+              aside={<Badge tone="neutral">{report.confidence}</Badge>}
+            />
             <CaseBlock title="Bull case" className="case--bull" summary={report.bullCase.summary} limitations={report.bullCase.limitations} />
             <CaseBlock title="Bear case" className="case--bear" summary={report.bearCase.summary} limitations={report.bearCase.limitations} />
             <CaseBlock title="Neutral" className="case--neutral" summary={report.neutralCase.summary} limitations={report.neutralCase.limitations} />
-          </section>
+          </Panel>
 
-          <section className="evidence-panel panel">
-            <div className="panel-heading"><div><span className="eyebrow">Contribution ledger</span><h2>Evidence tree</h2></div><strong>{report.evidenceScore}</strong></div>
-            <div className="contribution-list">
+          <Panel className="evidence-panel">
+            <PanelHeading eyebrow="Contribution ledger" title="Evidence tree" aside={<strong>{report.evidenceScore}</strong>} />
+            <div className="contribution-list contribution-list--shared">
               {report.contributions.map((contribution) => (
-                <details key={contribution.contributionId} className={`contribution contribution--${contribution.points >= 0 ? "positive" : "negative"}`}>
-                  <summary><span>{contribution.label}</span><strong>{contribution.points > 0 ? "+" : ""}{contribution.points}</strong></summary>
-                  <p>{contribution.rationale}</p>
-                  <small>{contribution.limitation}</small>
-                  <code>{contribution.evidenceIds.join(" · ")}</code>
-                </details>
+                <EvidenceRow key={contribution.contributionId} contribution={contribution} />
               ))}
             </div>
             {report.downgradeReasons.length > 0 ? (
               <div className="downgrade-reasons"><strong>Downgrade reasons</strong>{report.downgradeReasons.map((reason) => <p key={reason}>{reason}</p>)}</div>
             ) : null}
-          </section>
+          </Panel>
         </aside>
       </main>
     </div>
