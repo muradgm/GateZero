@@ -2,6 +2,7 @@ export * from "./aggregate-market-candles.js";
 export * from "./build-trading-intelligence-report.js";
 export * from "./create-setup-review.js";
 export * from "./decision-pipeline.js";
+export * from "./derive-eurusd-overlap-observation.js";
 export * from "./evaluate-eurusd-overlap-pullback.js";
 export * from "./evaluate-setup-review.js";
 export * from "./evaluate-trace-quality.js";
