@@ -139,7 +139,7 @@ const cases = [
 ];
 
 const ranked = rankTradingIntelligenceReports(cases.map((candidate) => candidate.report));
-const rankByReport = new Map(ranked.map((candidate) => [candidate.reportId, candidate.rank]));
+const rankByReport = new Map(ranked.map((candidate, index) => [candidate.reportId, index + 1]));
 
 const output = {
   schemaVersion: 1,
