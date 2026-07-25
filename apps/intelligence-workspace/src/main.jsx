@@ -6,6 +6,7 @@ import "../../../packages/ui/src/components.css";
 import "./styles.css";
 import "./price-chart.css";
 import "./interaction.css";
+import "./workspace-v2.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
