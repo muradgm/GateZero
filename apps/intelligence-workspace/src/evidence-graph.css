@@ -3,6 +3,84 @@
   margin: 14px auto 0;
 }
 
+.evidence-graph-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: grid;
+  gap: 2px;
+  min-width: 152px;
+  padding: 10px 14px;
+  border: 1px solid rgba(124, 92, 255, 0.5);
+  border-radius: 10px;
+  background: rgba(18, 14, 30, 0.96);
+  color: var(--tf-color-text);
+  text-align: left;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(124, 92, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.evidence-graph-launcher:hover,
+.evidence-graph-launcher:focus-visible {
+  border-color: rgba(124, 92, 255, 0.9);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.evidence-graph-launcher span {
+  color: var(--tf-color-muted);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.evidence-graph-launcher strong {
+  font-size: 12px;
+}
+
+.evidence-graph-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.evidence-graph-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(3, 2, 8, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.evidence-graph-modal__surface {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+}
+
+.evidence-graph-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  border: 1px solid var(--tf-color-line);
+  border-radius: 7px;
+  padding: 7px 10px;
+  background: rgba(16, 13, 25, 0.96);
+  color: var(--tf-color-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .evidence-graph-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.7fr);
@@ -153,6 +231,21 @@
 @media (max-width: 680px) {
   .workspace-evidence-graph-dock {
     width: calc(100% - 16px);
+  }
+
+  .evidence-graph-launcher {
+    right: 10px;
+    bottom: 10px;
+    min-width: 134px;
+  }
+
+  .evidence-graph-modal {
+    padding: 8px;
+  }
+
+  .evidence-graph-modal__surface {
+    width: 100%;
+    max-height: 96vh;
   }
 
   .evidence-graph-canvas {
