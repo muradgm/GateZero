@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Turn TraderFrame from an evidence display surface into an explainable decision-support engine while preserving operator control and the Gate 2 non-execution boundary.
+Turn TraderFrame from an evidence display surface into an explainable decision-support engine while
+preserving operator control and the Gate 2 non-execution boundary.
 
 ## Implemented first slice
 
@@ -18,7 +19,8 @@ Turn TraderFrame from an evidence display surface into an explainable decision-s
 
 ## Evidence-tree model
 
-The score begins at a neutral baseline of 50. Each contribution adds or subtracts no more than 25 points and must identify:
+The score begins at a neutral baseline of 50. Each contribution adds or subtracts no more than 25
+points and must identify:
 
 - its intelligence dimension;
 - the evidence records supporting it;
@@ -37,7 +39,8 @@ The final score is constrained to `0..100`. It is a review aid, not a probabilit
 - high derived confidence;
 - no unresolved downgrade reasons.
 
-The report never creates broker access, order routing, autonomous action, performance claims, or live-trading authority.
+The report never creates broker access, order routing, autonomous action, performance claims, or
+live-trading authority.
 
 ## Next slices
 

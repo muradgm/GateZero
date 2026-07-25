@@ -24,7 +24,11 @@ const candidates = [
       ["Macro", -5, "US data risk remains inside the review window."],
       ["Correlation", -2, "Existing USD exposure limits additional conviction."]
     ],
-    bull: ["Daily and 4H direction agree", "Pullback remains structurally valid", "Risk remains below account ceiling"],
+    bull: [
+      "Daily and 4H direction agree",
+      "Pullback remains structurally valid",
+      "Risk remains below account ceiling"
+    ],
     bear: ["Macro event can invalidate the timing", "Momentum is not yet strengthening"],
     neutral: ["Wait for the defined 1H trigger", "Do not infer approval from the score"],
     timeline: [
@@ -124,21 +128,32 @@ function BrandMark() {
 }
 
 function Recommendation({ value }) {
-  return <span className={`recommendation recommendation--${value.toLowerCase()}`}>{value.replace("_", " ")}</span>;
+  return (
+    <span className={`recommendation recommendation--${value.toLowerCase()}`}>
+      {value.replace("_", " ")}
+    </span>
+  );
 }
 
 export function App() {
   const [selectedId, setSelectedId] = useState(candidates[0].id);
-  const selected = useMemo(() => candidates.find((candidate) => candidate.id === selectedId) ?? candidates[0], [selectedId]);
+  const selected = useMemo(
+    () => candidates.find((candidate) => candidate.id === selectedId) ?? candidates[0],
+    [selectedId]
+  );
   const currentStageIndex = pipelineStages.indexOf(selected.pipeline);
 
   return (
     <div className="workspace-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <div className="brand-symbol"><BrandMark /></div>
+          <div className="brand-symbol">
+            <BrandMark />
+          </div>
           <div>
-            <div className="brand-name">TRADER<span>FRAME</span></div>
+            <div className="brand-name">
+              TRADER<span>FRAME</span>
+            </div>
             <div className="brand-tagline">Decision intelligence workspace</div>
           </div>
         </div>
@@ -152,7 +167,10 @@ export function App() {
       <main className="workspace-grid">
         <aside className="watchlist panel">
           <div className="panel-heading">
-            <div><span className="eyebrow">Ranked queue</span><h2>Watchlist</h2></div>
+            <div>
+              <span className="eyebrow">Ranked queue</span>
+              <h2>Watchlist</h2>
+            </div>
             <span className="count">{candidates.length}</span>
           </div>
           <div className="candidate-list">
@@ -166,7 +184,9 @@ export function App() {
                 <span className="candidate-rank">0{index + 1}</span>
                 <span className="candidate-main">
                   <strong>{candidate.instrument}</strong>
-                  <small>{candidate.market} · {candidate.trend}</small>
+                  <small>
+                    {candidate.market} · {candidate.trend}
+                  </small>
                 </span>
                 <span className="candidate-score">{candidate.score}</span>
                 <Recommendation value={candidate.recommendation} />
@@ -188,7 +208,10 @@ export function App() {
                 <p>{selected.session}</p>
               </div>
               <div className="score-lockup">
-                <div className="score-ring" style={{ "--score": selected.score }}><strong>{selected.score}</strong><span>Evidence</span></div>
+                <div className="score-ring" style={{ "--score": selected.score }}>
+                  <strong>{selected.score}</strong>
+                  <span>Evidence</span>
+                </div>
                 <Recommendation value={selected.recommendation} />
               </div>
             </div>
@@ -199,14 +222,46 @@ export function App() {
               <Metric label="Volatility" value={selected.volatility} />
             </div>
             <div className="chart-surface" aria-label="Placeholder market structure visualization">
-              <svg viewBox="0 0 900 280" preserveAspectRatio="none" role="img" aria-label="Abstract market structure line">
+              <svg
+                viewBox="0 0 900 280"
+                preserveAspectRatio="none"
+                role="img"
+                aria-label="Abstract market structure line"
+              >
                 <defs>
-                  <linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#7C5CFF" stopOpacity="0.32"/><stop offset="1" stopColor="#7C5CFF" stopOpacity="0"/></linearGradient>
+                  <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stopColor="#7C5CFF" stopOpacity="0.32" />
+                    <stop offset="1" stopColor="#7C5CFF" stopOpacity="0" />
+                  </linearGradient>
                 </defs>
-                <path d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82 L900 280 L0 280 Z" fill="url(#area)" />
-                <path d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82" fill="none" stroke="#9B87FF" strokeWidth="3" />
-                <line x1="0" x2="900" y1="178" y2="178" stroke="#00C6A7" strokeDasharray="8 8" opacity="0.7" />
-                <line x1="0" x2="900" y1="232" y2="232" stroke="#FF8A00" strokeDasharray="8 8" opacity="0.7" />
+                <path
+                  d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82 L900 280 L0 280 Z"
+                  fill="url(#area)"
+                />
+                <path
+                  d="M0 220 C80 205 90 155 160 174 S260 212 315 146 S420 102 470 133 S565 170 620 108 S745 66 900 82"
+                  fill="none"
+                  stroke="#9B87FF"
+                  strokeWidth="3"
+                />
+                <line
+                  x1="0"
+                  x2="900"
+                  y1="178"
+                  y2="178"
+                  stroke="#00C6A7"
+                  strokeDasharray="8 8"
+                  opacity="0.7"
+                />
+                <line
+                  x1="0"
+                  x2="900"
+                  y1="232"
+                  y2="232"
+                  stroke="#FF8A00"
+                  strokeDasharray="8 8"
+                  opacity="0.7"
+                />
               </svg>
               <div className="chart-label chart-label--trigger">Trigger zone</div>
               <div className="chart-label chart-label--invalid">Invalidation</div>
@@ -214,32 +269,73 @@ export function App() {
           </section>
 
           <section className="pipeline panel">
-            <div className="panel-heading"><div><span className="eyebrow">Protected loop</span><h2>Decision pipeline</h2></div><span className="stage-name">{selected.pipeline.replaceAll("_", " ")}</span></div>
+            <div className="panel-heading">
+              <div>
+                <span className="eyebrow">Protected loop</span>
+                <h2>Decision pipeline</h2>
+              </div>
+              <span className="stage-name">{selected.pipeline.replaceAll("_", " ")}</span>
+            </div>
             <div className="pipeline-track">
               {pipelineStages.map((stage, index) => {
-                const status = index < currentStageIndex ? "complete" : index === currentStageIndex ? "current" : selected.recommendation !== "PAPER_SIMULATE" && stage === "paper_simulation" ? "skipped" : "pending";
-                return <div key={stage} className={`pipeline-step pipeline-step--${status}`} title={stage.replaceAll("_", " ")}><span>{index + 1}</span></div>;
+                const status =
+                  index < currentStageIndex
+                    ? "complete"
+                    : index === currentStageIndex
+                      ? "current"
+                      : selected.recommendation !== "PAPER_SIMULATE" && stage === "paper_simulation"
+                        ? "skipped"
+                        : "pending";
+                return (
+                  <div
+                    key={stage}
+                    className={`pipeline-step pipeline-step--${status}`}
+                    title={stage.replaceAll("_", " ")}
+                  >
+                    <span>{index + 1}</span>
+                  </div>
+                );
               })}
             </div>
           </section>
 
           <section className="bottom-grid">
             <section className="risk-panel panel">
-              <div className="panel-heading"><div><span className="eyebrow">Risk frame</span><h2>Capital impact</h2></div></div>
+              <div className="panel-heading">
+                <div>
+                  <span className="eyebrow">Risk frame</span>
+                  <h2>Capital impact</h2>
+                </div>
+              </div>
               <div className="risk-grid">
                 <Metric label="Planned loss" value={selected.risk.amount} />
                 <Metric label="Risk ceiling" value={selected.risk.ceiling} />
                 <Metric label="Exposure after" value={selected.risk.exposure} />
                 <Metric label="Reward / risk" value={selected.risk.rewardRisk} />
               </div>
-              <div className="invalidation"><span>Mandatory invalidation</span><p>{selected.invalidation}</p></div>
+              <div className="invalidation">
+                <span>Mandatory invalidation</span>
+                <p>{selected.invalidation}</p>
+              </div>
             </section>
 
             <section className="timeline-panel panel">
-              <div className="panel-heading"><div><span className="eyebrow">Reasoning replay</span><h2>Timeline</h2></div></div>
+              <div className="panel-heading">
+                <div>
+                  <span className="eyebrow">Reasoning replay</span>
+                  <h2>Timeline</h2>
+                </div>
+              </div>
               <div className="timeline-list">
                 {selected.timeline.map(([time, label, severity]) => (
-                  <div className={`timeline-event timeline-event--${severity}`} key={`${time}-${label}`}><time>{time}</time><span /><p>{label}</p></div>
+                  <div
+                    className={`timeline-event timeline-event--${severity}`}
+                    key={`${time}-${label}`}
+                  >
+                    <time>{time}</time>
+                    <span />
+                    <p>{label}</p>
+                  </div>
                 ))}
               </div>
             </section>
@@ -248,18 +344,36 @@ export function App() {
 
         <aside className="intelligence-column">
           <section className="cases panel">
-            <div className="panel-heading"><div><span className="eyebrow">Decision challenge</span><h2>Intelligence cases</h2></div><span className="confidence">{selected.confidence}</span></div>
+            <div className="panel-heading">
+              <div>
+                <span className="eyebrow">Decision challenge</span>
+                <h2>Intelligence cases</h2>
+              </div>
+              <span className="confidence">{selected.confidence}</span>
+            </div>
             <Case title="Bull" items={selected.bull} tone="positive" />
             <Case title="Bear" items={selected.bear} tone="negative" />
             <Case title="Neutral" items={selected.neutral} tone="neutral" />
           </section>
 
           <section className="evidence-tree panel">
-            <div className="panel-heading"><div><span className="eyebrow">Explainability</span><h2>Evidence tree</h2></div><strong className="tree-total">{selected.score}</strong></div>
+            <div className="panel-heading">
+              <div>
+                <span className="eyebrow">Explainability</span>
+                <h2>Evidence tree</h2>
+              </div>
+              <strong className="tree-total">{selected.score}</strong>
+            </div>
             <div className="contributions">
               {selected.contributions.map(([label, points, rationale]) => (
                 <details key={label} className="contribution">
-                  <summary><span>{label}</span><strong className={points >= 0 ? "positive" : "negative"}>{points >= 0 ? "+" : ""}{points}</strong></summary>
+                  <summary>
+                    <span>{label}</span>
+                    <strong className={points >= 0 ? "positive" : "negative"}>
+                      {points >= 0 ? "+" : ""}
+                      {points}
+                    </strong>
+                  </summary>
                   <p>{rationale}</p>
                 </details>
               ))}
@@ -272,9 +386,23 @@ export function App() {
 }
 
 function Metric({ label, value }) {
-  return <div className="metric"><span>{label}</span><strong>{value}</strong></div>;
+  return (
+    <div className="metric">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
 }
 
 function Case({ title, items, tone }) {
-  return <section className={`case case--${tone}`}><h3>{title}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></section>;
+  return (
+    <section className={`case case--${tone}`}>
+      <h3>{title}</h3>
+      <ul>
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </section>
+  );
 }

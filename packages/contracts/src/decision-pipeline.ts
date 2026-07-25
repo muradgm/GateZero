@@ -64,7 +64,10 @@ export const DecisionPipelineSchema = z
   .superRefine((data, context) => {
     const stageNames = data.stages.map((stage) => stage.stage);
     const expected = DecisionPipelineStageSchema.options;
-    if (new Set(stageNames).size !== expected.length || expected.some((stage) => !stageNames.includes(stage))) {
+    if (
+      new Set(stageNames).size !== expected.length ||
+      expected.some((stage) => !stageNames.includes(stage))
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "pipeline must contain each decision stage exactly once",

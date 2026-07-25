@@ -42,7 +42,7 @@ export default tseslint.config(
       }
     },
     rules: {
-      "no-unused-vars": ["error", { "varsIgnorePattern": "^React$" }]
+      "no-unused-vars": ["error", { varsIgnorePattern: "^React$" }]
     }
   }
 );

@@ -106,7 +106,10 @@ export const TradingIntelligenceReportSchema = z
   .superRefine((data, context) => {
     const calculatedScore = Math.max(
       0,
-      Math.min(100, 50 + data.contributions.reduce((sum, contribution) => sum + contribution.points, 0))
+      Math.min(
+        100,
+        50 + data.contributions.reduce((sum, contribution) => sum + contribution.points, 0)
+      )
     );
     if (data.evidenceScore !== calculatedScore) {
       context.addIssue({

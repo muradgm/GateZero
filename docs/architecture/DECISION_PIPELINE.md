@@ -2,7 +2,8 @@
 
 ## Purpose
 
-The Decision Pipeline is the single protected orchestration path for turning a research case into a bounded operator outcome and learning record.
+The Decision Pipeline is the single protected orchestration path for turning a research case into a
+bounded operator outcome and learning record.
 
 ```text
 Research Case
@@ -24,8 +25,10 @@ Research Case
 - Completed stages require a record identifier and completion time.
 - Blocked stages require explicit blockers.
 - `REJECT` and `WATCH` skip paper simulation and advance to outcome.
-- `PAPER_SIMULATE` does not imply execution authority; it only preserves the local simulation-planning path.
-- The pipeline never creates external access, automated action, broker connectivity, or execution authority.
+- `PAPER_SIMULATE` does not imply execution authority; it only preserves the local
+  simulation-planning path.
+- The pipeline never creates external access, automated action, broker connectivity, or execution
+  authority.
 
 ## Browser role
 
