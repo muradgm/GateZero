@@ -1,0 +1,92 @@
+.candidate-list--cards {
+  gap: 8px;
+}
+
+.market-title-row--v2 {
+  align-items: stretch;
+}
+
+.decision-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(94px, auto));
+  border: 1px solid var(--tf-color-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.decision-summary .tf-metric {
+  border-right: 1px solid var(--tf-color-line);
+  min-width: 94px;
+}
+
+.decision-summary__recommendation {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+}
+
+.decision-summary__recommendation > span {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.chart-surface--dominant {
+  height: 360px;
+}
+
+.risk-grid .tf-metric {
+  border-right: 1px solid var(--tf-color-line);
+}
+
+.risk-grid .tf-metric:last-child {
+  border-right: 0;
+}
+
+.contribution-list--shared {
+  padding: 0;
+}
+
+.watchlist.tf-panel,
+.market-hero.tf-panel,
+.pipeline.tf-panel,
+.risk-panel.tf-panel,
+.timeline-panel.tf-panel,
+.intelligence-summary.tf-panel,
+.evidence-panel.tf-panel {
+  border-color: var(--tf-color-line);
+}
+
+@media (max-width: 1180px) {
+  .decision-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-summary .tf-metric {
+    border-right: 0;
+    border-bottom: 1px solid var(--tf-color-line);
+  }
+}
+
+@media (max-width: 760px) {
+  .market-title-row--v2 {
+    display: grid;
+    gap: 18px;
+  }
+
+  .decision-summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .decision-summary .tf-metric {
+    border-right: 1px solid var(--tf-color-line);
+    border-bottom: 0;
+  }
+
+  .chart-surface--dominant {
+    height: 310px;
+  }
+}
