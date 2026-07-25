@@ -9,20 +9,8 @@ import {
   WatchlistCard
 } from "@traderframe/ui";
 import { CandidateActionBar } from "./CandidateActionBar.jsx";
+import { deriveCandidateWorkflow } from "./candidate-workflow.js";
 import { PriceChart } from "./PriceChart.jsx";
-
-const pipelineStages = [
-  "research_case",
-  "market_context",
-  "evidence_assessment",
-  "setup_review",
-  "intelligence_report",
-  "risk_review",
-  "operator_decision",
-  "paper_simulation",
-  "outcome",
-  "learning"
-];
 
 function BrandMark() {
   return (
@@ -87,15 +75,12 @@ export function AppRuntime() {
   if (!workspace || !selected) return <LoadingState error={error} />;
 
   const report = selected.report;
-  const pipeline = selected.pipeline;
-  const currentStageIndex = pipelineStages.indexOf(pipeline.currentStage);
   const exposure = buildExposure(selected);
   const council = buildCouncil(selected);
 
   function selectCandidate(id) {
     setSelectedId(id);
     setFocusedTime(null);
-    window.dispatchEvent(new CustomEvent("traderframe:candidate-selected", { detail: { id } }));
   }
 
   return (
@@ -118,10 +103,10 @@ export function AppRuntime() {
       <CandidateActionBar candidate={selected} generatedAt={workspace.generatedAt} />
 
       <main className="workspace-grid">
-        <Panel as="aside" className="watchlist">
+        <Panel as="aside" className="watchlist candidate-queue">
           <PanelHeading
-            eyebrow="Ranked queue"
-            title="Watchlist"
+            eyebrow="Operational triage"
+            title="Candidate Queue"
             aside={<Badge>{workspace.candidates.length}</Badge>}
           />
           <div className="candidate-list candidate-list--cards">
@@ -129,6 +114,7 @@ export function AppRuntime() {
               <WatchlistCard
                 key={candidate.id}
                 candidate={{ ...candidate, rank: index + 1 }}
+                workflow={deriveCandidateWorkflow(candidate, workspace.generatedAt)}
                 active={candidate.id === selected.id}
                 onSelect={() => selectCandidate(candidate.id)}
               />
@@ -165,35 +151,6 @@ export function AppRuntime() {
             </div>
             <div className="chart-surface chart-surface--dominant">
               <PriceChart chart={selected.chart} focusedTime={focusedTime} />
-            </div>
-          </Panel>
-
-          <Panel className="pipeline">
-            <PanelHeading
-              eyebrow="Protected loop"
-              title="Decision pipeline"
-              aside={<Badge>{pipeline.currentStage.replaceAll("_", " ")}</Badge>}
-            />
-            <div className="pipeline-track">
-              {pipelineStages.map((stage, index) => {
-                const record = pipeline.stages.find((item) => item.stage === stage);
-                const status = record?.status === "not_applicable"
-                  ? "skipped"
-                  : index < currentStageIndex
-                    ? "complete"
-                    : index === currentStageIndex
-                      ? "current"
-                      : "pending";
-                return (
-                  <div
-                    key={stage}
-                    className={`pipeline-step pipeline-step--${status}`}
-                    title={`${stage.replaceAll("_", " ")} · ${record?.status ?? "pending"}`}
-                  >
-                    <span>{index + 1}</span>
-                  </div>
-                );
-              })}
             </div>
           </Panel>
 
