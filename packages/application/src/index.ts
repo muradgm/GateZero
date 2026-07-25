@@ -10,3 +10,4 @@ export * from "./rank-similar-setups.js";
 export * from "./record-operator-decision.js";
 export * from "./request-risk-review.js";
 export * from "./setup-review-ports.js";
+export * from "./validate-market-candles.js";
