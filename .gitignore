@@ -31,3 +31,6 @@ Thumbs.db
 .cache/
 .eslintcache
 *.tsbuildinfo
+
+# Generated intelligence workspace data
+apps/intelligence-workspace/public/runtime/
