@@ -14,6 +14,7 @@ import "./confidence-change.css";
 import "./decision-memory.css";
 import "./evidence-graph.css";
 import "./intelligence-tools.css";
+import "./operator-journal.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
