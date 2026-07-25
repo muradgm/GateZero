@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AppRuntime } from "./AppRuntime.jsx";
+import { CommandPalette } from "./CommandPalette.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
 import { IntelligenceTools } from "./IntelligenceTools.jsx";
 
@@ -44,6 +45,7 @@ export function WorkspaceRoot() {
     <>
       <AppRuntime />
       {selected ? <IntelligenceTools candidate={selected} /> : null}
+      <CommandPalette workspace={workspace} selectedId={selected?.id ?? null} />
       <GlossaryLayer />
     </>
   );
