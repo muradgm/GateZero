@@ -9,6 +9,7 @@ import "./similar-setups.css";
 import "./ai-council.css";
 import "./glossary.css";
 import "./decision-replay.css";
+import "./confidence-heatmap.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
