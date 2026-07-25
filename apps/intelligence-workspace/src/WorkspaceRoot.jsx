@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { AIEvidenceCouncil } from "./AIEvidenceCouncil.jsx";
 import { AppRuntime } from "./AppRuntime.jsx";
+import { GlossaryLayer } from "./GlossaryLayer.jsx";
 import { SimilarSetups } from "./SimilarSetups.jsx";
 
 export function WorkspaceRoot() {
@@ -43,10 +45,16 @@ export function WorkspaceRoot() {
     <>
       <AppRuntime />
       {selected ? (
-        <div className="workspace-history-dock">
-          <SimilarSetups matches={selected.similarSetups ?? []} />
-        </div>
+        <>
+          <div className="workspace-council-dock">
+            <AIEvidenceCouncil candidate={selected} />
+          </div>
+          <div className="workspace-history-dock">
+            <SimilarSetups matches={selected.similarSetups ?? []} />
+          </div>
+        </>
       ) : null}
+      <GlossaryLayer />
     </>
   );
 }
