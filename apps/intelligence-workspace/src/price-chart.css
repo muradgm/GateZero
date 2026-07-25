@@ -1,16 +1,70 @@
 .price-chart {
   height: 100%;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.chart-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 32px;
+  padding: 0 4px 8px;
+}
+
+.timeframe-control {
+  display: flex;
+  gap: 4px;
+}
+
+.timeframe-button {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.timeframe-button--active {
+  border-color: rgba(124, 92, 255, 0.42);
+  background: rgba(124, 92, 255, 0.12);
+  color: #c7bdff;
+}
+
+.ohlc-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--text);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ohlc-strip span:first-child {
+  color: var(--muted);
+}
+
+.ohlc-strip--muted {
+  color: var(--muted);
 }
 
 .price-chart svg {
   min-height: 230px;
+  cursor: crosshair;
 }
 
 .chart-grid line {
   stroke: rgba(234, 239, 245, 0.06);
   stroke-width: 1;
+}
+
+.candle {
+  transition: opacity 0.12s ease;
 }
 
 .candle line {
@@ -31,6 +85,12 @@
 .candle--down rect {
   stroke: var(--danger);
   fill: rgba(255, 95, 112, 0.62);
+}
+
+.candle--active line,
+.candle--active rect {
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 5px currentColor);
 }
 
 .price-level line {
@@ -82,6 +142,20 @@
   fill: var(--muted);
 }
 
+.chart-crosshair line {
+  stroke: rgba(234, 239, 245, 0.34);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  pointer-events: none;
+}
+
+.chart-crosshair circle {
+  fill: var(--purple);
+  stroke: #ded8ff;
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
 .chart-meta {
   display: flex;
   gap: 8px;
@@ -107,4 +181,15 @@
   place-items: center;
   color: var(--muted);
   font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .chart-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ohlc-strip {
+    justify-content: flex-start;
+  }
 }
