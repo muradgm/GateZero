@@ -1,13 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AIEvidenceCouncil } from "./AIEvidenceCouncil.jsx";
 import { AppRuntime } from "./AppRuntime.jsx";
-import { ConfidenceChange } from "./ConfidenceChange.jsx";
-import { ConfidenceHeatmap } from "./ConfidenceHeatmap.jsx";
-import { DecisionMemory } from "./DecisionMemory.jsx";
-import { DecisionReplay } from "./DecisionReplay.jsx";
-import { EvidenceGraphLauncher } from "./EvidenceGraphLauncher.jsx";
 import { GlossaryLayer } from "./GlossaryLayer.jsx";
-import { SimilarSetups } from "./SimilarSetups.jsx";
+import { IntelligenceTools } from "./IntelligenceTools.jsx";
 
 export function WorkspaceRoot() {
   const [workspace, setWorkspace] = useState(null);
@@ -49,29 +43,7 @@ export function WorkspaceRoot() {
   return (
     <>
       <AppRuntime />
-      {selected ? (
-        <>
-          <EvidenceGraphLauncher candidate={selected} />
-          <div className="workspace-confidence-change-dock">
-            <ConfidenceChange candidate={selected} />
-          </div>
-          <div className="workspace-confidence-dock">
-            <ConfidenceHeatmap candidate={selected} />
-          </div>
-          <div className="workspace-replay-dock">
-            <DecisionReplay candidate={selected} />
-          </div>
-          <div className="workspace-council-dock">
-            <AIEvidenceCouncil candidate={selected} />
-          </div>
-          <div className="workspace-memory-dock">
-            <DecisionMemory candidate={selected} />
-          </div>
-          <div className="workspace-history-dock">
-            <SimilarSetups matches={selected.similarSetups ?? []} />
-          </div>
-        </>
-      ) : null}
+      {selected ? <IntelligenceTools candidate={selected} /> : null}
       <GlossaryLayer />
     </>
   );
