@@ -22,6 +22,13 @@ export function freezeDecisionBundle(input: {
   readonly riskReview?: CanonicalRiskReview;
   readonly frozenAt: string;
 }): Readonly<FrozenDecisionRecord> {
+  if (
+    input.bundle.strategyId !== input.assessment.strategyId ||
+    input.bundle.strategyVersion !== input.assessment.strategyVersion
+  ) {
+    throw new Error("frozen bundle strategy identity must match the canonical assessment");
+  }
+
   if (input.bundle.recommendation === "PAPER_SIMULATE") {
     if (!input.riskReview) {
       throw new Error("paper simulation requires a validated risk review before freezing");

@@ -178,6 +178,20 @@ reproducibility fixtures.
 
 **Entry gate:** One strategy has completed the full learning loop.
 
+**Branch implementation status:** Complete as a bounded local capability proof. Two explicit,
+versioned EUR/USD strategies now complete the same protected loop with strategy-scoped candidate
+identity, immutable definition hashes, deterministic replay, and no execution or optimization
+authority. This does not establish comparative edge, strategy ranking, readiness, or permission to
+add markets.
+
+**Exit evidence**
+
+- The London range-breakout observation uses only closed candles available at decision time.
+- Frozen decisions, risk reviews, outcomes, and learning records retain strategy identity.
+- Two strategies complete evidence, risk, simulation, outcome, and learning controls.
+- Duplicate, missing, tampered, and cross-strategy inputs fail closed without fallback.
+- Workspace output keeps identity, limitations, and Gate 2 boundaries adjacent.
+
 ## Epoch 6: AI Review Council
 
 **Outcome:** Language models challenge deterministic evidence; they do not own recommendations.

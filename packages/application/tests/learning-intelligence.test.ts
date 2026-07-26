@@ -6,6 +6,7 @@ import {
   type LearningInvalidationCode,
   type LearningRegime,
   type OperatorProcessError,
+  type SupportedStrategyId,
   type ValidatedSimulationOutcome
 } from "@traderframe/contracts";
 import {
@@ -19,7 +20,8 @@ import {
 function sourceChain(
   id: string,
   disposition: ValidatedSimulationOutcome["disposition"],
-  strategyVersion = "eurusd-overlap-pullback-1.0.0"
+  strategyVersion = "eurusd-overlap-pullback-1.0.0",
+  strategyId: SupportedStrategyId = "EURUSD_LN_NY_PULLBACK"
 ) {
   const bundle = {
     schemaVersion: 1 as const,
@@ -31,6 +33,7 @@ function sourceChain(
     sourceId: "historical-adapter",
     rawDataHash: `sha256:raw-${id}`,
     normalizedDataHash: `sha256:normalized-${id}`,
+    strategyId,
     strategyVersion,
     strategyParametersHash: `sha256:strategy-${id}`,
     featureEngineVersion: "feature-engine-1.0.0",
@@ -104,8 +107,9 @@ function learningCase(input: {
   failureModes?: readonly LearningFailureMode[];
   operatorProcessErrors?: readonly OperatorProcessError[];
   strategyVersion?: string;
+  strategyId?: SupportedStrategyId;
 }) {
-  const source = sourceChain(input.id, input.disposition, input.strategyVersion);
+  const source = sourceChain(input.id, input.disposition, input.strategyVersion, input.strategyId);
   return createLearningIntelligenceCase({
     caseRecordId: `learning-case-${input.id}`,
     ...source,
@@ -261,6 +265,38 @@ describe("learning intelligence", () => {
     expect(result.performanceClaim).toBe(false);
     expect(result.updatesRules).toBe(false);
     expect(result.updatesRiskLimits).toBe(false);
+  });
+
+  it("never merges comparable clusters across strategy identities with the same version", () => {
+    const shared = {
+      disposition: "STOP" as const,
+      regime: "RANGE" as const,
+      invalidationCode: "STRUCTURE_BREAK" as const,
+      evidenceCombination: ["structure", "risk"],
+      strategyVersion: "1.0.0"
+    };
+    const cases = [
+      learningCase({ id: "1", ...shared }),
+      learningCase({ id: "2", ...shared }),
+      learningCase({
+        id: "3",
+        ...shared,
+        strategyId: "EURUSD_LONDON_RANGE_BREAKOUT"
+      })
+    ];
+    const result = buildLearningIntelligenceReport({
+      reportId: "cross-strategy-isolation",
+      cases,
+      generatedAt: "2026-07-24T18:00:00.000Z",
+      limitations: ["Local identity-isolation fixture only."]
+    });
+
+    expect(result.comparableCaseClusters).toHaveLength(1);
+    expect(result.comparableCaseClusters[0]).toMatchObject({
+      strategyId: "EURUSD_LN_NY_PULLBACK",
+      caseRecordIds: ["learning-case-1", "learning-case-2"]
+    });
+    expect(result.driftInspection.strategyChanged).toBe(true);
   });
 
   it("is deterministic regardless of source-case input order", () => {

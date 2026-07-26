@@ -19,6 +19,7 @@ import "./command-palette.css";
 import "./candidate-action-bar.css";
 import "./lifecycle-rail.css";
 import "./learning-intelligence.css";
+import "./multi-strategy.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

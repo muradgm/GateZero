@@ -63,6 +63,7 @@ const bundle = {
   sourceId: "historical-adapter-001",
   rawDataHash: "sha256:raw",
   normalizedDataHash: "sha256:normalized",
+  strategyId: assessment.strategyId,
   strategyVersion: assessment.strategyVersion,
   strategyParametersHash: "sha256:strategy-parameters",
   featureEngineVersion: assessment.observationEngineVersion,
@@ -164,6 +165,20 @@ describe("freezeDecisionBundle", () => {
         frozenAt: "2026-07-24T13:10:00.000Z"
       })
     ).toThrow(/validated risk review/);
+  });
+
+  it("refuses to freeze a bundle under another strategy identity", () => {
+    expect(() =>
+      freezeDecisionBundle({
+        bundle: {
+          ...bundle,
+          strategyId: "EURUSD_LONDON_RANGE_BREAKOUT"
+        },
+        assessment,
+        riskReview,
+        frozenAt: "2026-07-24T13:10:00.000Z"
+      })
+    ).toThrow(/strategy identity/);
   });
 
   it("produces the same bundle hash for identical inputs", () => {

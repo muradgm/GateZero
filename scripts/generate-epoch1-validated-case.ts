@@ -64,6 +64,7 @@ const frozenRecord = freezeDecisionBundle({
     sourceId: "historical-adapter",
     rawDataHash: "sha256:epoch1-raw",
     normalizedDataHash: "sha256:epoch1-normalized",
+    strategyId: assessment.strategyId,
     strategyVersion: assessment.strategyVersion,
     strategyParametersHash: "sha256:epoch1-strategy",
     featureEngineVersion: assessment.observationEngineVersion,

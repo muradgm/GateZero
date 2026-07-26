@@ -35,6 +35,8 @@ export function createCanonicalRiskReview(
     riskReviewId: command.riskReviewId,
     assessmentId: assessment.assessmentId,
     canonicalAssessmentHash: hashCanonicalValue(assessment),
+    strategyId: assessment.strategyId,
+    strategyVersion: assessment.strategyVersion,
     instrument: assessment.instrument,
     riskEngineVersion: command.riskEngineVersion,
     reviewStatus: command.reviewStatus,
@@ -80,7 +82,9 @@ export function assertLocalSimulationRiskEligibility(input: {
   }
   if (
     review.assessmentId !== assessment.assessmentId ||
-    review.canonicalAssessmentHash !== expectedAssessmentHash
+    review.canonicalAssessmentHash !== expectedAssessmentHash ||
+    review.strategyId !== assessment.strategyId ||
+    review.strategyVersion !== assessment.strategyVersion
   ) {
     throw new ContractValidationError("risk review does not match the canonical assessment");
   }

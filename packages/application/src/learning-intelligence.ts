@@ -46,6 +46,7 @@ export function createLearningIntelligenceCase(input: {
     learningEventId: learning.learningEventId,
     learningHash: learning.learningHash,
     learningCategory: learning.category,
+    strategyId: record.bundle.strategyId,
     strategyVersion: record.bundle.strategyVersion,
     regime: input.regime,
     invalidationCode: input.invalidationCode,
@@ -129,10 +130,11 @@ export function buildLearningIntelligenceReport(input: {
   const comparableCaseClusters = recurringGroups(
     cases,
     (record) =>
-      `${record.strategyVersion}::${record.regime}::${record.evidenceCombination.join("|")}`
+      `${record.strategyId}::${record.strategyVersion}::${record.regime}::${record.evidenceCombination.join("|")}`
   ).map(([clusterKey, group]) => ({
     clusterId: `cluster:${hashCanonicalValue(clusterKey).slice("sha256:".length, 21)}`,
     clusterKey,
+    strategyId: group[0]!.strategyId,
     strategyVersion: group[0]!.strategyVersion,
     regime: group[0]!.regime,
     evidenceCombination: [...group[0]!.evidenceCombination],
@@ -144,14 +146,23 @@ export function buildLearningIntelligenceReport(input: {
     ]
   }));
 
-  const strategyVersions = sortedUnique(cases.map((record) => record.strategyVersion));
+  const strategyIds = sortedUnique(cases.map((record) => record.strategyId));
+  const strategyVersions = sortedUnique(
+    cases.map((record) => `${record.strategyId}@${record.strategyVersion}`)
+  );
   const regimeSequence = cases.map((record) => record.regime);
   const regimeChangeCount = regimeSequence.reduce(
     (count, regime, index) => count + (index > 0 && regime !== regimeSequence[index - 1] ? 1 : 0),
     0
   );
-  const strategyVersionChanged = strategyVersions.length > 1;
+  const strategyChanged = strategyIds.length > 1;
+  const strategyVersionChanged =
+    new Set(cases.map((record) => `${record.strategyId}@${record.strategyVersion}`)).size >
+    strategyIds.length;
   const driftReasons: string[] = [];
+  if (strategyChanged) {
+    driftReasons.push("Multiple strategy identities are present and remain isolated in review.");
+  }
   if (strategyVersionChanged) {
     driftReasons.push("Multiple strategy versions are present and require version-aware review.");
   }
@@ -159,6 +170,8 @@ export function buildLearningIntelligenceReport(input: {
     driftReasons.push("The chronological fixture crosses multiple declared market regimes.");
   }
   const driftInspection = {
+    strategyIds,
+    strategyChanged,
     strategyVersions,
     strategyVersionChanged,
     regimeSequence,

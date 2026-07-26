@@ -11,6 +11,7 @@ export function WorkspaceRoot() {
   const [epoch2Proof, setEpoch2Proof] = useState(null);
   const [epoch3Proof, setEpoch3Proof] = useState(null);
   const [epoch4Proof, setEpoch4Proof] = useState(null);
+  const [epoch5Proof, setEpoch5Proof] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export function WorkspaceRoot() {
       fetch("/runtime/epoch1-validated-case.json", { cache: "no-store" }),
       fetch("/runtime/epoch2-evidence-case.json", { cache: "no-store" }),
       fetch("/runtime/epoch3-risk-case.json", { cache: "no-store" }),
-      fetch("/runtime/epoch4-learning-case.json", { cache: "no-store" })
+      fetch("/runtime/epoch4-learning-case.json", { cache: "no-store" }),
+      fetch("/runtime/epoch5-multi-strategy-case.json", { cache: "no-store" })
     ])
       .then(
         async ([
@@ -29,14 +31,16 @@ export function WorkspaceRoot() {
           proofResponse,
           evidenceResponse,
           riskResponse,
-          learningResponse
+          learningResponse,
+          strategyResponse
         ]) => {
           if (
             !workspaceResponse.ok ||
             !proofResponse.ok ||
             !evidenceResponse.ok ||
             !riskResponse.ok ||
-            !learningResponse.ok
+            !learningResponse.ok ||
+            !strategyResponse.ok
           )
             throw new Error("workspace data unavailable");
           return [
@@ -44,22 +48,25 @@ export function WorkspaceRoot() {
             await proofResponse.json(),
             await evidenceResponse.json(),
             await riskResponse.json(),
-            await learningResponse.json()
+            await learningResponse.json(),
+            await strategyResponse.json()
           ];
         }
       )
-      .then(([data, proof, evidence, risk, learning]) => {
+      .then(([data, proof, evidence, risk, learning, strategies]) => {
         if (!active) return;
         validateWorkspaceSnapshot(data);
         validateEpoch1Proof(proof);
         validateEpoch2Proof(evidence);
         validateEpoch3Proof(risk);
         validateEpoch4Proof(learning);
+        validateEpoch5Proof(strategies);
         setWorkspace(data);
         setEpoch1Proof(proof);
         setEpoch2Proof(evidence);
         setEpoch3Proof(risk);
         setEpoch4Proof(learning);
+        setEpoch5Proof(strategies);
         setSelectedId(data.candidates?.[0]?.id ?? null);
       })
       .catch(() => {
@@ -99,6 +106,7 @@ export function WorkspaceRoot() {
         epoch2Proof={epoch2Proof}
         epoch3Proof={epoch3Proof}
         epoch4Proof={epoch4Proof}
+        epoch5Proof={epoch5Proof}
         onSelect={setSelectedId}
       />
       {selected ? <IntelligenceTools candidate={selected} /> : null}
@@ -106,6 +114,26 @@ export function WorkspaceRoot() {
       <GlossaryLayer />
     </>
   );
+}
+
+function validateEpoch5Proof(proof) {
+  if (
+    !proof ||
+    proof.dataMode !== "LOCAL_MULTI_STRATEGY_FIXTURE" ||
+    proof.registrations?.length < 2 ||
+    proof.lifecycles?.length !== proof.registrations.length ||
+    proof.checkpoint?.status !== "PASS" ||
+    proof.checkpoint?.deterministic !== true ||
+    proof.checkpoint?.identityIsolated !== true ||
+    proof.checkpoint?.protectedLoopShared !== true ||
+    proof.checkpoint?.completeLifecycleCount !== proof.registrations.length ||
+    proof.checkpoint?.localResearchOnly !== true ||
+    proof.checkpoint?.optimizationAuthority !== false ||
+    proof.checkpoint?.executionPath !== false ||
+    proof.checkpoint?.automatedAction !== false
+  ) {
+    throw new Error("Epoch 5 proof failed its local boundary contract");
+  }
 }
 
 function validateEpoch4Proof(proof) {

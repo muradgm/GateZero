@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
+import { SupportedStrategyIdSchema } from "./eurusd-overlap-pullback-strategy.js";
 
 export const LearningRegimeSchema = z.enum([
   "TREND_PULLBACK",
@@ -51,6 +52,7 @@ export const LearningIntelligenceCaseSchema = z
       "ENTRY_NOT_REACHED",
       "SIMULATION_INVALID"
     ]),
+    strategyId: SupportedStrategyIdSchema,
     strategyVersion: NonEmptyStringSchema,
     regime: LearningRegimeSchema,
     invalidationCode: LearningInvalidationCodeSchema,
@@ -99,6 +101,7 @@ const ComparableCaseClusterSchema = z
   .object({
     clusterId: NonEmptyStringSchema,
     clusterKey: NonEmptyStringSchema,
+    strategyId: SupportedStrategyIdSchema,
     strategyVersion: NonEmptyStringSchema,
     regime: LearningRegimeSchema,
     evidenceCombination: z.array(NonEmptyStringSchema).min(1),
@@ -111,6 +114,8 @@ const ComparableCaseClusterSchema = z
 
 const LearningDriftInspectionSchema = z
   .object({
+    strategyIds: z.array(SupportedStrategyIdSchema).min(1),
+    strategyChanged: z.boolean(),
     strategyVersions: z.array(NonEmptyStringSchema).min(1),
     strategyVersionChanged: z.boolean(),
     regimeSequence: z.array(LearningRegimeSchema).min(1),
