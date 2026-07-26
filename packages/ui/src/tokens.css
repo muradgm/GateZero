@@ -1,0 +1,24 @@
+:root {
+  --tf-color-bg: #09040f;
+  --tf-color-surface: #12091c;
+  --tf-color-surface-2: #181023;
+  --tf-color-surface-3: #21152f;
+  --tf-color-line: rgba(234, 239, 245, 0.1);
+  --tf-color-line-strong: rgba(234, 239, 245, 0.18);
+  --tf-color-text: #eaeff5;
+  --tf-color-muted: #918aa0;
+  --tf-color-purple: #7c5cff;
+  --tf-color-teal: #00c6a7;
+  --tf-color-orange: #ff8a00;
+  --tf-color-danger: #ff5f70;
+  --tf-radius-sm: 8px;
+  --tf-radius-md: 12px;
+  --tf-radius-pill: 999px;
+  --tf-space-1: 4px;
+  --tf-space-2: 8px;
+  --tf-space-3: 12px;
+  --tf-space-4: 16px;
+  --tf-space-5: 20px;
+  --tf-space-6: 24px;
+  --tf-motion-fast: 160ms ease;
+}

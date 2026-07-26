@@ -1,0 +1,14 @@
+{
+  "name": "@traderframe/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Runtime-validated domain contracts for TraderFrame.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./setup-review": "./src/setup-review.ts"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  }
+}

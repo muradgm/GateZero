@@ -2,13 +2,28 @@ import { describe, expect, it } from "vitest";
 import { CommandCenterRuntimeDataSchema } from "../../../packages/contracts/src/index.js";
 import { buildCommandCenterRuntimeData } from "../../../scripts/build-command-center-runtime-data.js";
 
-describe("Gate 0 command center runtime data", () => {
-  it("builds a local runtime snapshot from accepted operating records", async () => {
+describe("TraderFrame command center runtime data", () => {
+  it("builds a canonical local Gate 2 runtime snapshot", async () => {
     const result = await buildCommandCenterRuntimeData();
 
     expect(result).toEqual({
+      project: "TraderFrame",
+      gate: "G2_PAPER_TRADING",
+      scope: "paper_simulation_planning_only",
+      source: "local repository evidence",
+      localOnly: true,
+      evidenceOnly: true,
+      operatorRequired: true,
+      riskReviewRequired: true,
+      externalAccess: false,
+      executionPath: false,
+      automatedAction: false,
+      approvalClaim: false,
+      performanceClaim: false,
       latestPacket: "TRD-778",
       localVerification: "110 files / 802 tests",
+      testFileCount: 110,
+      testCount: 802,
       ciRun: "27787807220",
       ciState: "success",
       lastVerifiedCommit: "6e6f513",

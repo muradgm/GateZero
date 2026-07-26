@@ -24,5 +24,27 @@ export default tseslint.config(
         }
       ]
     }
+  },
+  {
+    files: ["apps/intelligence-workspace/**/*.{js,jsx}"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        console: "readonly",
+        CustomEvent: "readonly",
+        document: "readonly",
+        fetch: "readonly",
+        window: "readonly"
+      }
+    },
+    rules: {
+      "no-unused-vars": ["error", { varsIgnorePattern: "^React$" }]
+    }
   }
 );

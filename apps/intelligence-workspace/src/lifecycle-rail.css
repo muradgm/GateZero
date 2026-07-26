@@ -1,0 +1,210 @@
+.candidate-workflow-stack {
+  display: grid;
+  gap: 12px;
+  padding: 0 18px 16px;
+}
+
+/* The explicit lifecycle rail replaces the previous numbered-dot pipeline panel. */
+.pipeline {
+  display: none;
+}
+
+.lifecycle-rail {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid rgba(124, 92, 255, 0.18);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(18, 20, 31, 0.98), rgba(11, 13, 22, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.lifecycle-rail__header,
+.lifecycle-stage__title-row,
+.lifecycle-rail__summary,
+.lifecycle-rail__next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lifecycle-rail__header strong,
+.lifecycle-rail__next strong {
+  display: block;
+  margin-top: 4px;
+  color: #f4f6ff;
+}
+
+.lifecycle-rail__eyebrow,
+.lifecycle-rail__next span {
+  color: #8f96ad;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lifecycle-rail__summary {
+  color: #8f96ad;
+  font-size: 0.72rem;
+}
+
+.lifecycle-rail__summary span:first-child {
+  color: #45d6b7;
+}
+
+.lifecycle-rail__stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lifecycle-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 9px;
+  min-height: 72px;
+  padding: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    opacity 160ms ease;
+}
+
+.lifecycle-stage__marker {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #858ca3;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.lifecycle-stage__copy {
+  min-width: 0;
+}
+
+.lifecycle-stage__title-row strong {
+  color: #e9ecf8;
+  font-size: 0.79rem;
+}
+
+.lifecycle-stage__title-row span {
+  color: #7f879d;
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lifecycle-stage small {
+  display: -webkit-box;
+  margin-top: 6px;
+  overflow: hidden;
+  color: #858ca3;
+  font-size: 0.68rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.lifecycle-stage--complete {
+  border-color: rgba(0, 198, 167, 0.22);
+  background: rgba(0, 198, 167, 0.055);
+}
+
+.lifecycle-stage--complete .lifecycle-stage__marker {
+  border-color: rgba(0, 198, 167, 0.35);
+  color: #45d6b7;
+  background: rgba(0, 198, 167, 0.09);
+}
+
+.lifecycle-stage--current {
+  border-color: rgba(124, 92, 255, 0.5);
+  background: rgba(124, 92, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(124, 92, 255, 0.06),
+    0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.lifecycle-stage--current .lifecycle-stage__marker {
+  border-color: rgba(124, 92, 255, 0.6);
+  color: #c8bcff;
+  background: rgba(124, 92, 255, 0.14);
+}
+
+.lifecycle-stage--blocked {
+  border-color: rgba(255, 179, 71, 0.42);
+  background: rgba(255, 179, 71, 0.08);
+}
+
+.lifecycle-stage--blocked .lifecycle-stage__marker {
+  border-color: rgba(255, 179, 71, 0.55);
+  color: #ffc16b;
+  background: rgba(255, 179, 71, 0.12);
+}
+
+.lifecycle-stage--locked {
+  opacity: 0.48;
+}
+
+.lifecycle-stage--skipped {
+  opacity: 0.58;
+  border-style: dashed;
+}
+
+.lifecycle-rail__next {
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(124, 92, 255, 0.08);
+}
+
+.lifecycle-rail__next strong {
+  margin: 0;
+  max-width: 72%;
+  text-align: right;
+  font-size: 0.82rem;
+}
+
+.lifecycle-rail__next--blocked {
+  background: rgba(255, 179, 71, 0.08);
+}
+
+@media (max-width: 1180px) {
+  .lifecycle-rail__stages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .candidate-workflow-stack {
+    padding-inline: 12px;
+  }
+
+  .lifecycle-rail__header,
+  .lifecycle-rail__next {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .lifecycle-rail__stages {
+    grid-template-columns: 1fr;
+  }
+
+  .lifecycle-rail__next strong {
+    max-width: none;
+    text-align: left;
+  }
+}

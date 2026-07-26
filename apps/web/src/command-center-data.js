@@ -159,9 +159,9 @@ export const commandCenterData = {
     },
     {
       area: "Dependency audit",
-      signal: "Vite 8.1.0 / esbuild 0.28.1",
+      signal: "Vite 8.1.5 / esbuild 0.28.1",
       state: "Passing",
-      reference: "pnpm audit --audit-level low"
+      reference: "pnpm audit --audit-level high"
     },
     {
       area: "Market intelligence truth",

@@ -490,11 +490,11 @@ describe("Gate 0 command center surface", () => {
     const lockfile = readFileSync(path.join(rootDir, "pnpm-lock.yaml"), "utf8");
 
     expect(data).toContain("Dependency audit");
-    expect(data).toContain("Vite 8.1.0 / esbuild 0.28.1");
-    expect(data).toContain("pnpm audit --audit-level low");
-    expect(packageJson).toContain('"vite": "^8.1.0"');
+    expect(data).toContain("Vite 8.1.5 / esbuild 0.28.1");
+    expect(data).toContain("pnpm audit --audit-level high");
+    expect(packageJson).toContain('"vite": "^8.1.5"');
     expect(packageJson).toContain('"esbuild": "^0.28.1"');
-    expect(lockfile).toContain("vite@8.1.0");
+    expect(lockfile).toContain("vite@8.1.5");
     expect(lockfile).toContain("esbuild@0.28.1");
     expect(data).not.toContain("dependency approval");
   });

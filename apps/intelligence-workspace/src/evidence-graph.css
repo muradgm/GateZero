@@ -1,0 +1,309 @@
+.workspace-evidence-graph-dock {
+  width: min(1240px, calc(100% - 32px));
+  margin: 14px auto 0;
+}
+
+.evidence-graph-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.08fr) minmax(250px, 0.56fr);
+  gap: 12px;
+  padding: 12px;
+}
+
+.evidence-graph-canvas {
+  position: relative;
+  min-height: 470px;
+  overflow: hidden;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-md);
+  background:
+    radial-gradient(circle at 54% 42%, rgba(124, 92, 255, 0.1), transparent 34%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size:
+    auto,
+    28px 28px,
+    28px 28px;
+}
+
+.evidence-graph-flow-label {
+  position: absolute;
+  top: 12px;
+  z-index: 2;
+  color: rgba(161, 169, 190, 0.62);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.evidence-graph-flow-label--input {
+  left: 4%;
+}
+.evidence-graph-flow-label--evidence {
+  left: 26%;
+}
+.evidence-graph-flow-label--review {
+  left: 69%;
+}
+.evidence-graph-flow-label--decision {
+  right: 3%;
+}
+
+.evidence-graph-edges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.evidence-graph-edges marker path {
+  fill: rgba(124, 92, 255, 0.78);
+}
+
+.evidence-edge {
+  fill: none;
+  stroke: rgba(142, 151, 177, 0.25);
+  stroke-width: 0.42;
+  vector-effect: non-scaling-stroke;
+  transition:
+    opacity 180ms ease,
+    stroke 180ms ease,
+    stroke-width 180ms ease;
+}
+
+.evidence-edge--active {
+  stroke: rgba(124, 92, 255, 0.88);
+  stroke-width: 0.82;
+  stroke-dasharray: 4 5;
+  animation: evidence-flow 2.8s linear infinite;
+  filter: drop-shadow(0 0 2px rgba(124, 92, 255, 0.62));
+}
+
+.evidence-edge--muted {
+  opacity: 0.13;
+}
+
+@keyframes evidence-flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+.evidence-node {
+  position: absolute;
+  width: 138px;
+  min-height: 82px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 10px 11px;
+  border: 1px solid var(--tf-color-line);
+  border-radius: 9px;
+  background: rgba(15, 12, 25, 0.96);
+  color: var(--tf-color-text);
+  text-align: left;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    opacity 170ms ease;
+}
+
+.evidence-node--primary {
+  width: 152px;
+  min-height: 96px;
+  border-color: rgba(124, 92, 255, 0.3);
+  background: linear-gradient(145deg, rgba(28, 22, 48, 0.98), rgba(13, 10, 22, 0.98));
+}
+
+.evidence-node--tertiary {
+  width: 126px;
+  min-height: 72px;
+}
+
+.evidence-node:hover,
+.evidence-node:focus-visible,
+.evidence-node--active {
+  transform: translate(-50%, -50%) scale(1.038);
+  border-color: rgba(124, 92, 255, 0.84);
+  box-shadow:
+    0 0 0 1px rgba(124, 92, 255, 0.2),
+    0 16px 36px rgba(0, 0, 0, 0.4);
+  outline: none;
+  z-index: 4;
+}
+
+.evidence-node--active::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(124, 92, 255, 0.34);
+  border-radius: 12px;
+  animation: evidence-node-pulse 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes evidence-node-pulse {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.025);
+  }
+}
+
+.evidence-node--muted {
+  opacity: 0.24;
+  filter: saturate(0.45);
+}
+
+.evidence-node span,
+.evidence-node small,
+.evidence-node-inspector span,
+.evidence-node-inspector__path span {
+  color: var(--tf-color-muted);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.evidence-node strong {
+  font-size: 12px;
+  line-height: 1.15;
+}
+
+.evidence-node--primary strong {
+  font-size: 13px;
+}
+
+.evidence-node p {
+  display: -webkit-box;
+  max-width: 100%;
+  margin: 1px 0 0;
+  overflow: hidden;
+  color: var(--tf-color-muted);
+  font-size: 8px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.evidence-node--success small {
+  color: var(--tf-color-teal);
+}
+.evidence-node--warning small {
+  color: var(--tf-color-orange);
+}
+.evidence-node--danger small {
+  color: var(--tf-color-danger);
+}
+.evidence-node--neutral small {
+  color: var(--tf-color-purple);
+}
+
+.evidence-node-inspector {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--tf-color-line);
+  border-radius: var(--tf-radius-md);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
+}
+
+.evidence-node-inspector__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.evidence-node-inspector h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+}
+
+.evidence-node-inspector > p,
+.evidence-node-inspector__meta p,
+.evidence-node-inspector__meta code,
+.evidence-node-inspector__path strong {
+  margin: 0;
+  color: var(--tf-color-text);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.evidence-node-inspector__path,
+.evidence-node-inspector__meta {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--tf-color-line);
+}
+
+.evidence-node-inspector__path strong {
+  color: #c9c1ff;
+  font-weight: 650;
+}
+
+.evidence-node-inspector__meta code {
+  color: var(--tf-color-purple);
+  overflow-wrap: anywhere;
+}
+
+.evidence-graph-note {
+  margin: 0;
+  padding: 0 12px 12px;
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-edge--active,
+  .evidence-node--active::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 1080px) {
+  .evidence-graph-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-graph-canvas {
+    min-height: 470px;
+  }
+}
+
+@media (max-width: 680px) {
+  .workspace-evidence-graph-dock {
+    width: calc(100% - 16px);
+  }
+
+  .evidence-graph-canvas {
+    min-height: 720px;
+    overflow-x: auto;
+  }
+
+  .evidence-node {
+    width: 112px;
+  }
+
+  .evidence-node--primary {
+    width: 124px;
+  }
+
+  .evidence-graph-flow-label {
+    display: none;
+  }
+}

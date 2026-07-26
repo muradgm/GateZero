@@ -2,11 +2,12 @@
   "name": "traderframe",
   "version": "0.0.0",
   "private": true,
-  "description": "GateZero-controlled research foundation for TraderFrame.",
+  "description": "GateZero-controlled, evidence-gated research and paper-simulation decision system for TraderFrame.",
   "type": "module",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
+    "format": "prettier --write README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,jsx,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
+    "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,jsx,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
     "check:gate0-evidence-index": "tsx scripts/check-gate0-evidence-index-drift.ts",
     "check:gate0-ci-evidence": "tsx scripts/check-gate0-ci-evidence-freshness.ts",
     "check:gate0-command-center": "tsx scripts/check-gate0-command-center-freshness.ts",
@@ -30,11 +31,19 @@
     "check:gate0-snapshot": "tsx scripts/check-gate0-progress-snapshot-freshness.ts",
     "check:gate0-tracklist": "tsx scripts/check-gate0-tracklist-consistency.ts",
     "check:gate0-reviews": "tsx scripts/check-gate0-review-coverage.ts",
-    "check:gate0": "pnpm snapshot:gate0-progress && pnpm snapshot:case-catalog && pnpm snapshot:simulator-workspace && pnpm snapshot:backtest-evidence && pnpm snapshot:intelligence-brief && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:market-intelligence-sources && pnpm check:backtest-evidence && pnpm check:intelligence-brief && pnpm check:case-catalog && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "check:runtime-status": "tsx scripts/build-command-center-runtime-data.ts",
+    "check:repository": "pnpm check:runtime-status && pnpm check:gate0-docs-coverage && pnpm check:gate0-tracklist && pnpm check:gate0-snapshot && pnpm check:gate0-name && pnpm check:gate0-evidence-index && pnpm check:gate0-command-center && pnpm check:gate0-command-center-render && pnpm check:market-workspace && pnpm check:market-intelligence-sources && pnpm check:backtest-evidence && pnpm check:intelligence-brief && pnpm check:case-catalog && pnpm check:simulator-workspace && pnpm check:gate0-skills && pnpm check:gate0-skill-routing && pnpm check:gate0-agents && pnpm check:gate0-actions-runtime && pnpm check:gate0-source-links && pnpm check:gate0-tracklist-sections && pnpm check:repo-hygiene && pnpm check:gate1-contracts && pnpm check:gate0-reviews && pnpm validate:gate0",
+    "check:gate0": "pnpm check:repository",
+    "generate:artifacts": "pnpm snapshot:gate0-progress && pnpm snapshot:case-catalog && pnpm snapshot:simulator-workspace && pnpm snapshot:backtest-evidence && pnpm snapshot:intelligence-brief && pnpm generate:workspace-data",
+    "generate:workspace-data": "tsx scripts/generate-intelligence-workspace-data.ts && tsx scripts/attach-intelligence-workspace-chart-data.ts && tsx scripts/attach-intelligence-workspace-similarity-data.ts && tsx scripts/generate-epoch1-validated-case.ts && tsx scripts/generate-epoch2-evidence-case.ts && tsx scripts/generate-epoch3-risk-case.ts && tsx scripts/generate-epoch4-learning-case.ts",
+    "inspect:runtime-status": "tsx scripts/build-command-center-runtime-data.ts",
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "inspect:local-cases": "tsx scripts/inspect-local-cases.ts",
     "lint": "eslint .",
     "preview:web": "tsx scripts/preview-web.ts",
+    "dev:workspace": "pnpm generate:workspace-data && pnpm --filter @traderframe/intelligence-workspace dev",
+    "build:workspace": "pnpm generate:workspace-data && pnpm --filter @traderframe/intelligence-workspace build",
+    "preview:workspace": "pnpm --filter @traderframe/intelligence-workspace preview",
     "refresh:gate0-ci-evidence": "tsx scripts/refresh-gate0-ci-evidence.ts",
     "snapshot:gate0-progress": "tsx scripts/generate-gate0-progress-snapshot.ts",
     "snapshot:simulator-workspace": "tsx scripts/generate-simulator-workspace-data.ts",
@@ -43,29 +52,29 @@
     "snapshot:intelligence-brief": "tsx scripts/generate-intelligence-brief-evidence.ts",
     "scaffold:local-case": "tsx scripts/scaffold-local-case.ts",
     "revise:local-case": "tsx scripts/revise-local-case.ts",
+    "repair:strict-null": "tsx scripts/apply-strict-nullability-fixes.ts && pnpm format",
     "test": "vitest run",
-    "test:ci": "vitest run --no-file-parallelism --maxWorkers=1",
+    "test:ci": "pnpm generate:workspace-data && vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "validate:gate0": "tsx scripts/validate-gate0.ts",
-    "verify:gate0": "pnpm check:gate0 && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci"
+    "verify": "tsx scripts/verify-progress.ts",
+    "verify:fix": "pnpm format && pnpm verify",
+    "verify:verbose": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
+    "verify:gate0": "pnpm verify"
   },
   "dependencies": {
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^22.10.2",
-    "eslint": "^9.17.0",
-    "prettier": "^3.4.2",
-    "tsx": "^4.19.2",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.8.0",
+    "prettier": "3.8.3",
+    "tsx": "^4.23.1",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.1",
-    "vite": "^8.1.0",
-    "vitest": "^4.1.9"
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild": "^0.28.1"
-    }
+    "typescript-eslint": "^8.65.0",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
   }
 }
