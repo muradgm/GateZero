@@ -33,6 +33,7 @@ function sourceChain(
     sourceId: "historical-adapter",
     rawDataHash: `sha256:epoch4-raw-${id}`,
     normalizedDataHash: `sha256:epoch4-normalized-${id}`,
+    strategyId: "EURUSD_LN_NY_PULLBACK" as const,
     strategyVersion,
     strategyParametersHash: `sha256:epoch4-strategy-${id}`,
     featureEngineVersion: "feature-engine-1.0.0",

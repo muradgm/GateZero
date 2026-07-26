@@ -2,6 +2,10 @@ import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
 
 export const StrategyRuleStatusSchema = z.enum(["PASS", "FAIL", "BLOCKED", "NOT_EVALUATED"]);
+export const SupportedStrategyIdSchema = z.enum([
+  "EURUSD_LN_NY_PULLBACK",
+  "EURUSD_LONDON_RANGE_BREAKOUT"
+]);
 export const StrategyGateSchema = z.enum([
   "DATA_READY",
   "SESSION_ELIGIBLE",
@@ -9,6 +13,8 @@ export const StrategyGateSchema = z.enum([
   "PULLBACK_QUALIFIED",
   "LIQUIDITY_EVENT_QUALIFIED",
   "TRIGGER_CONFIRMED",
+  "RANGE_ESTABLISHED",
+  "BREAKOUT_CONFIRMED",
   "EVENT_RISK_CLEAR",
   "INVALIDATION_DEFINED",
   "NOT_EXPIRED"
@@ -148,7 +154,7 @@ export const EurUsdOverlapPullbackObservationSchema = z
 
 export const StrategyCandidateAssessmentSchema = z
   .object({
-    strategyId: z.literal("EURUSD_LN_NY_PULLBACK"),
+    strategyId: SupportedStrategyIdSchema,
     strategyVersion: z.literal("1.0.0"),
     candidateId: NonEmptyStringSchema,
     decisionTimestamp: z.string().datetime(),
@@ -157,7 +163,7 @@ export const StrategyCandidateAssessmentSchema = z
     blockers: z.array(NonEmptyStringSchema),
     nextAction: NonEmptyStringSchema,
     expiresAt: z.string().datetime().optional(),
-    ruleResults: z.array(StrategyRuleResultSchema).length(9)
+    ruleResults: z.array(StrategyRuleResultSchema).min(1)
   })
   .strict()
   .superRefine((value, context) => {
@@ -174,6 +180,7 @@ export const StrategyCandidateAssessmentSchema = z
   });
 
 export type StrategyRuleResult = z.infer<typeof StrategyRuleResultSchema>;
+export type SupportedStrategyId = z.infer<typeof SupportedStrategyIdSchema>;
 export type EurUsdOverlapPullbackStrategy = z.infer<typeof EurUsdOverlapPullbackStrategySchema>;
 export type EurUsdOverlapPullbackObservation = z.infer<
   typeof EurUsdOverlapPullbackObservationSchema

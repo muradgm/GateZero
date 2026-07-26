@@ -1,0 +1,122 @@
+.multi-strategy-panel {
+  overflow: hidden;
+}
+
+.multi-strategy-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--tf-color-line);
+}
+
+.multi-strategy-summary > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border-right: 1px solid var(--tf-color-line);
+}
+
+.multi-strategy-summary > div:last-child {
+  border-right: 0;
+}
+
+.multi-strategy-summary span,
+.multi-strategy-row span {
+  display: block;
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.multi-strategy-summary strong {
+  display: block;
+  margin-top: 7px;
+  font-size: 13px;
+}
+
+.multi-strategy-list {
+  display: grid;
+}
+
+.multi-strategy-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--tf-color-line);
+}
+
+.multi-strategy-row strong,
+.multi-strategy-row small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.multi-strategy-row strong {
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.multi-strategy-row small,
+.multi-strategy-status small,
+.multi-strategy-boundary p {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.multi-strategy-row > div > small {
+  margin-top: 5px;
+}
+
+.multi-strategy-status {
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+  text-align: right;
+}
+
+.multi-strategy-boundary {
+  padding: 15px 16px 17px;
+  background: rgba(0, 198, 167, 0.035);
+}
+
+.multi-strategy-boundary strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--tf-color-teal);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.multi-strategy-boundary p {
+  margin: 0;
+}
+
+.multi-strategy-boundary p + p {
+  margin-top: 5px;
+}
+
+@media (max-width: 760px) {
+  .multi-strategy-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .multi-strategy-summary > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .multi-strategy-summary > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--tf-color-line);
+  }
+
+  .multi-strategy-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .multi-strategy-status {
+    justify-items: start;
+    text-align: left;
+  }
+}

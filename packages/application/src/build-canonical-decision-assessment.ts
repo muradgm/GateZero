@@ -4,6 +4,7 @@ import type {
   CanonicalDecisionAssessment,
   EurUsdOverlapPullbackObservation,
   EurUsdOverlapPullbackStrategy,
+  StrategyCandidateAssessment,
   StrategyRuleResult
 } from "@traderframe/contracts";
 import { CanonicalDecisionAssessmentSchema } from "@traderframe/contracts";
@@ -24,9 +25,32 @@ export function buildCanonicalDecisionAssessment(
   strategy: EurUsdOverlapPullbackStrategy = EURUSD_OVERLAP_PULLBACK_V1
 ): CanonicalDecisionAssessment {
   const evaluated = evaluateEurUsdOverlapPullback(observation, strategy);
+  return buildCanonicalAssessmentFromEvaluation({
+    candidateId: observation.candidateId,
+    instrument: "EURUSD",
+    strategyId: strategy.strategyId,
+    strategyVersion: strategy.version,
+    observationEngineVersion: strategy.observationEngineVersion,
+    decisionTimestamp: observation.decisionTimestamp,
+    availableAt: observation.availableAt,
+    evaluated
+  });
+}
+
+export function buildCanonicalAssessmentFromEvaluation(input: {
+  readonly candidateId: string;
+  readonly instrument: "EURUSD";
+  readonly strategyId: CanonicalDecisionAssessment["strategyId"];
+  readonly strategyVersion: "1.0.0";
+  readonly observationEngineVersion: string;
+  readonly decisionTimestamp: string;
+  readonly availableAt: string;
+  readonly evaluated: StrategyCandidateAssessment;
+}): CanonicalDecisionAssessment {
+  const evaluated = input.evaluated;
   const failedRules = evaluated.ruleResults.filter((rule) => rule.status !== "PASS");
   const blockers: CanonicalBlocker[] = failedRules.map((rule) => ({
-    blockerId: `${observation.candidateId}:${rule.ruleId}`,
+    blockerId: `${input.candidateId}:${rule.ruleId}`,
     gate: rule.gate,
     severity: HARD_GATES.has(rule.gate) || rule.status === "BLOCKED" ? "HARD" : "CONDITIONAL",
     reason: rule.reason,
@@ -43,12 +67,12 @@ export function buildCanonicalDecisionAssessment(
         : "AWAITING_CONDITIONS";
 
   const canonicalPayload = {
-    candidateId: observation.candidateId,
-    strategyId: strategy.strategyId,
-    strategyVersion: strategy.version,
-    observationEngineVersion: strategy.observationEngineVersion,
-    decisionTimestamp: observation.decisionTimestamp,
-    availableAt: observation.availableAt,
+    candidateId: input.candidateId,
+    strategyId: input.strategyId,
+    strategyVersion: input.strategyVersion,
+    observationEngineVersion: input.observationEngineVersion,
+    decisionTimestamp: input.decisionTimestamp,
+    availableAt: input.availableAt,
     recommendation: evaluated.recommendation,
     ruleResults: evaluated.ruleResults.map((rule) => ({
       ruleId: rule.ruleId,
@@ -65,13 +89,13 @@ export function buildCanonicalDecisionAssessment(
   return CanonicalDecisionAssessmentSchema.parse({
     schemaVersion: 1,
     assessmentId: `assessment-${createHash("sha256").update(JSON.stringify(canonicalPayload)).digest("hex").slice(0, 24)}`,
-    candidateId: observation.candidateId,
-    instrument: "EURUSD",
-    strategyId: strategy.strategyId,
-    strategyVersion: strategy.version,
-    observationEngineVersion: strategy.observationEngineVersion,
-    decisionTimestamp: observation.decisionTimestamp,
-    availableAt: observation.availableAt,
+    candidateId: input.candidateId,
+    instrument: input.instrument,
+    strategyId: input.strategyId,
+    strategyVersion: input.strategyVersion,
+    observationEngineVersion: input.observationEngineVersion,
+    decisionTimestamp: input.decisionTimestamp,
+    availableAt: input.availableAt,
     lifecycleState,
     eligible: evaluated.eligible,
     recommendation: evaluated.recommendation,

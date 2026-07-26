@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
 import {
+  SupportedStrategyIdSchema,
   StrategyGateSchema,
   StrategyRuleResultSchema
 } from "./eurusd-overlap-pullback-strategy.js";
@@ -23,7 +24,7 @@ export const CanonicalDecisionAssessmentSchema = z
     assessmentId: NonEmptyStringSchema,
     candidateId: NonEmptyStringSchema,
     instrument: z.literal("EURUSD"),
-    strategyId: z.literal("EURUSD_LN_NY_PULLBACK"),
+    strategyId: SupportedStrategyIdSchema,
     strategyVersion: z.literal("1.0.0"),
     observationEngineVersion: NonEmptyStringSchema,
     decisionTimestamp: z.string().datetime(),
@@ -36,7 +37,7 @@ export const CanonicalDecisionAssessmentSchema = z
     failedGates: z.array(StrategyGateSchema),
     nextAction: NonEmptyStringSchema,
     expiresAt: z.string().datetime().optional(),
-    ruleResults: z.array(StrategyRuleResultSchema).length(9)
+    ruleResults: z.array(StrategyRuleResultSchema).min(1)
   })
   .strict()
   .superRefine((value, context) => {
