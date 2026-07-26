@@ -52,6 +52,7 @@
     "snapshot:intelligence-brief": "tsx scripts/generate-intelligence-brief-evidence.ts",
     "scaffold:local-case": "tsx scripts/scaffold-local-case.ts",
     "revise:local-case": "tsx scripts/revise-local-case.ts",
+    "repair:strict-null": "tsx scripts/apply-strict-nullability-fixes.ts && pnpm format",
     "test": "vitest run",
     "test:ci": "vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
