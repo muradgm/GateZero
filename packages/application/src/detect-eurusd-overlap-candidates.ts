@@ -33,7 +33,12 @@ export function detectEurUsdOverlapCandidates(
   const strategy = input.strategy ?? EURUSD_OVERLAP_PULLBACK_V1;
   const deriveObservation = input.observationFactory ?? deriveEurUsdOverlapObservation;
   const candles15m = [...input.candles15m].sort(byClosedAt);
-  if (candles15m.length === 0) throw new Error("candidate scan requires at least one validated 15m candle");
+  const firstCandle = candles15m.at(0);
+  const lastCandle = candles15m.at(-1);
+
+  if (!firstCandle || !lastCandle) {
+    throw new Error("candidate scan requires at least one validated 15m candle");
+  }
 
   const detections: CandidateDetection[] = [];
   const seenTriggers = new Set<string>();
@@ -121,8 +126,8 @@ export function detectEurUsdOverlapCandidates(
     strategyVersion: strategy.version,
     observationEngineVersion: strategy.observationEngineVersion,
     instrument: "EURUSD",
-    scannedFrom: candles15m[0].openedAt,
-    scannedThrough: candles15m.at(-1)!.closedAt,
+    scannedFrom: firstCandle.openedAt,
+    scannedThrough: lastCandle.closedAt,
     sourceCandleCount: candles15m.length,
     evaluatedDecisionPoints,
     detections,
