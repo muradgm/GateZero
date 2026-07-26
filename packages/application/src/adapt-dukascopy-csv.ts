@@ -49,7 +49,18 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
   }
 
   const lines = normalizedText.split("\n");
-  const header = splitCsvLine(lines[0]).map((value) => value.trim().toLowerCase());
+  const firstLine = lines[0];
+  if (firstLine === undefined) {
+    return {
+      snapshot,
+      candles: [],
+      failures: [{ code: "EMPTY_SOURCE", message: "The source CSV is empty." }],
+      rawRowCount: 0,
+      acceptedRowCount: 0
+    };
+  }
+
+  const header = splitCsvLine(firstLine).map((value) => value.trim().toLowerCase());
   if (header.length !== EXPECTED_HEADER.length || header.some((value, index) => value !== EXPECTED_HEADER[index])) {
     return {
       snapshot,
@@ -59,7 +70,7 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
           rowNumber: 1,
           code: "INVALID_HEADER",
           message: `Expected header: ${EXPECTED_HEADER.join(",")}.`,
-          rawRow: lines[0]
+          rawRow: firstLine
         }
       ],
       rawRowCount: Math.max(0, lines.length - 1),
@@ -72,7 +83,10 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
   let previousTimestamp = Number.NEGATIVE_INFINITY;
 
   for (let index = 1; index < lines.length; index += 1) {
-    const rawRow = lines[index].trim();
+    const line = lines[index];
+    if (line === undefined) continue;
+
+    const rawRow = line.trim();
     if (!rawRow) continue;
     const rowNumber = index + 1;
     const values = splitCsvLine(rawRow).map((value) => value.trim());
@@ -81,7 +95,13 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
       continue;
     }
 
-    const timestampMs = parseUtcTimestamp(values[0]);
+    const timestamp = values[0];
+    if (timestamp === undefined) {
+      failures.push({ rowNumber, code: "INVALID_ROW", message: "Timestamp column is missing.", rawRow });
+      continue;
+    }
+
+    const timestampMs = parseUtcTimestamp(timestamp);
     if (!Number.isFinite(timestampMs)) {
       failures.push({ rowNumber, code: "INVALID_TIMESTAMP", message: "Timestamp must be an ISO UTC datetime.", rawRow });
       continue;
