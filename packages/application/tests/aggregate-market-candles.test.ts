@@ -46,7 +46,7 @@ describe("aggregateValidatedMarketCandles", () => {
     expect(result.failures).toEqual([]);
     expect(result.expectedSourceCandlesPerTarget).toBe(4);
     expect(result.aggregatedRecordCount).toBe(1);
-    expect(result.candles[0]).toMatchObject({
+    expect(result.candles.at(0)!).toMatchObject({
       timeframe: "1H",
       openedAt: "2026-07-24T08:00:00.000Z",
       closedAt: "2026-07-24T09:00:00.000Z",
@@ -56,7 +56,7 @@ describe("aggregateValidatedMarketCandles", () => {
       volume: 406,
       derivedFromCandleIds: Array.from({ length: 4 }, (_, index) => sourceCandle(index).candleId)
     });
-    expect(result.candles[0].sourceHash).toMatch(/^fnv1a-/);
+    expect(result.candles.at(0)!.sourceHash).toMatch(/^fnv1a-/);
   });
 
   it("excludes an unclosed 4H candle at the as-of boundary", () => {
@@ -96,9 +96,18 @@ describe("selectCandlesAvailableAtDecision", () => {
       base.checkedAt
     );
 
-    expect(result.eligibleCandles.map((candle) => candle.candleId)).toEqual([candles[0].candleId]);
-    expect(result.excludedCandleIds).toEqual([candles[1].candleId]);
-    expect(result.failures[0].code).toBe("FUTURE_EVIDENCE");
+    const firstSourceCandle = candles.at(0);
+    const secondSourceCandle = candles.at(1);
+
+    expect(firstSourceCandle).toBeDefined();
+    expect(secondSourceCandle).toBeDefined();
+
+    expect(result.eligibleCandles.map((candle) => candle.candleId)).toEqual([
+      firstSourceCandle!.candleId
+    ]);
+
+    expect(result.excludedCandleIds).toEqual([secondSourceCandle!.candleId]);
+    expect(result.failures.at(0)!.code).toBe("FUTURE_EVIDENCE");
   });
 
   it("rejects a higher-timeframe candle until its explicit availableAt boundary", () => {
@@ -116,7 +125,11 @@ describe("selectCandlesAvailableAtDecision", () => {
     );
 
     expect(result.eligibleCandles).toEqual([]);
-    expect(result.excludedCandleIds).toEqual([aggregation.candles[0].candleId]);
-    expect(result.failures[0].code).toBe("UNCLOSED_HIGHER_TIMEFRAME_INPUT");
+    const firstAggregatedCandle = aggregation.candles.at(0);
+
+    expect(firstAggregatedCandle).toBeDefined();
+
+    expect(result.excludedCandleIds).toEqual([firstAggregatedCandle!.candleId]);
+    expect(result.failures.at(0)!.code).toBe("UNCLOSED_HIGHER_TIMEFRAME_INPUT");
   });
 });

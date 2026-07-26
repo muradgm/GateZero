@@ -115,6 +115,9 @@ export function aggregateValidatedMarketCandles(
     const closedAt = new Date(bucketClose).toISOString();
     const first = group[0];
     const last = group[group.length - 1];
+    if (!first || !last) {
+      throw new Error("complete aggregation window must contain first and last candles");
+    }
     const high = Math.max(...group.map((candle) => candle.high));
     const low = Math.min(...group.map((candle) => candle.low));
     const volumes = group.map((candle) => candle.volume);

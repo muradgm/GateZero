@@ -91,8 +91,11 @@ export function evaluateTraceQuality(input: TraceQualityEvaluationInput): TraceQ
   let completenessScore = Math.round((completedWeight / totalWeight) * 100);
 
   const appliedCaps = applicable
-    .filter((item) => item.status !== "COMPLETE" && hardCaps[item.requirementId])
-    .map((item) => ({ requirementId: item.requirementId, ...hardCaps[item.requirementId] }))
+    .flatMap((item) => {
+      if (item.status === "COMPLETE") return [];
+      const cap = hardCaps[item.requirementId];
+      return cap ? [{ requirementId: item.requirementId, ...cap }] : [];
+    })
     .sort((left, right) => left.maximumScore - right.maximumScore);
 
   for (const cap of appliedCaps) {

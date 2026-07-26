@@ -36,13 +36,13 @@ describe("validateAndNormalizeMarketCandles", () => {
 
     expect(result.failures).toEqual([]);
     expect(result.normalizedRecordCount).toBe(2);
-    expect(result.normalizedCandles[0]).toMatchObject({
+    expect(result.normalizedCandles.at(0)!).toMatchObject({
       openedAt: "2026-07-24T08:00:00.000Z",
       closedAt: "2026-07-24T08:15:00.000Z",
       timezone: "UTC",
       finalized: true
     });
-    expect(result.normalizedCandles[0].sourceHash).toMatch(/^fnv1a-/);
+    expect(result.normalizedCandles.at(0)!.sourceHash).toMatch(/^fnv1a-/);
   });
 
   it("rejects duplicate timestamps", () => {
@@ -86,7 +86,7 @@ describe("validateAndNormalizeMarketCandles", () => {
     });
 
     expect(result.failures).toEqual([]);
-    expect(result.normalizedCandles[0].openedAt).toBe("2026-07-24T08:00:00.000Z");
+    expect(result.normalizedCandles.at(0)!.openedAt).toBe("2026-07-24T08:00:00.000Z");
   });
 
   it("blocks instrument and timeframe mismatches", () => {

@@ -185,6 +185,7 @@ export function validateAndNormalizeMarketCandles(
   for (let index = 1; index < normalized.length; index += 1) {
     const previous = normalized[index - 1];
     const current = normalized[index];
+    if (!previous || !current) continue;
     const actualGap = Date.parse(current.openedAt) - Date.parse(previous.openedAt);
     if (
       actualGap > expectedIntervalMs &&

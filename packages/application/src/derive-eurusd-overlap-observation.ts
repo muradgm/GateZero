@@ -205,6 +205,8 @@ function derivePullback(
   for (let index = 1; index < window.length; index += 1) {
     const candidate = window[index];
     const current = window[extremeIndex];
+    if (!candidate || !current) continue;
+    if (!candidate || !current) continue;
     if (
       (direction === "LONG" && candidate.high > current.high) ||
       (direction === "SHORT" && candidate.low < current.low)
@@ -213,6 +215,7 @@ function derivePullback(
     }
   }
   const extreme = window[extremeIndex];
+  if (!extreme) throw new Error("pullback window must contain an extreme candle");
   const distance =
     direction === "LONG"
       ? Math.max(0, extreme.high - latest.close)
@@ -248,6 +251,7 @@ function deriveSweep(
         ? Math.min(...prior.map((candle) => candle.low))
         : Math.max(...prior.map((candle) => candle.high));
     const sweepCandle = candles[sweepIndex];
+    if (!sweepCandle) continue;
     const penetration =
       direction === "LONG" ? swingLevel - sweepCandle.low : sweepCandle.high - swingLevel;
     const penetrationPips = penetration / PIP_SIZE;
@@ -259,10 +263,10 @@ function deriveSweep(
     );
     let reclaimIndex = -1;
     for (let index = sweepIndex; index <= lastReclaimIndex; index += 1) {
+      const candle = candles[index];
+      if (!candle) continue;
       const reclaimed =
-        direction === "LONG"
-          ? candles[index].close > swingLevel
-          : candles[index].close < swingLevel;
+        direction === "LONG" ? candle.close > swingLevel : candle.close < swingLevel;
       if (reclaimed) {
         reclaimIndex = index;
         break;
@@ -281,11 +285,14 @@ function deriveSweep(
     const displacementAtr = Math.max(0, favorableMove) / atr;
     if (displacementAtr < strategy.liquiditySweep.minimumDisplacementAtr) continue;
 
+    const reclaimCandle = candles[reclaimIndex];
+    if (!reclaimCandle) continue;
+
     selected = {
       sweepIndex,
       reclaimIndex,
       sweepCandle,
-      reclaimCandle: candles[reclaimIndex],
+      reclaimCandle,
       penetrationPips: roundMetric(penetrationPips),
       reclaimWithinCandles: reclaimIndex - sweepIndex,
       displacementAtr: roundMetric(displacementAtr)
@@ -301,13 +308,13 @@ function deriveTrigger(
 ) {
   const triggerLevel = direction === "LONG" ? sweep.sweepCandle.high : sweep.sweepCandle.low;
   for (let index = sweep.reclaimIndex; index < candles.length; index += 1) {
+    const candle = candles[index];
+    if (!candle) continue;
     const confirmed =
-      direction === "LONG"
-        ? candles[index].close > triggerLevel
-        : candles[index].close < triggerLevel;
+      direction === "LONG" ? candle.close > triggerLevel : candle.close < triggerLevel;
     if (confirmed) {
       return {
-        candle: candles[index],
+        candle,
         index,
         ageCandles: candles.length - 1 - index
       };
@@ -321,7 +328,11 @@ function averageTrueRange(candles: Candle[], period: number): number | null {
   const values: number[] = [];
   for (let index = candles.length - period; index < candles.length; index += 1) {
     const candle = candles[index];
-    const previousClose = candles[index - 1].close;
+    const previous = candles[index - 1];
+    if (!candle || !previous) {
+      throw new Error("ATR window must contain current and previous candles");
+    }
+    const previousClose = previous.close;
     values.push(
       Math.max(
         candle.high - candle.low,
