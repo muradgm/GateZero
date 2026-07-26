@@ -366,4 +366,42 @@ describe("runDeterministicSimulation", () => {
     expect(incomplete.trace.lifecycleStatus).toBe("INCOMPLETE");
     expect(incomplete.trace.gates.some((gate) => gate.status === "FAIL")).toBe(true);
   });
+
+  it("fails the checkpoint when aligned source objects retain stale content hashes", () => {
+    const first = runDeterministicSimulation({ frozenRecord: record, policy, candles: [] });
+    const outcome = recordSimulationOutcome({
+      frozenRecord: record,
+      simulation: first,
+      operatorNote: "Integrity-negative fixture.",
+      attributedAt: "2026-07-24T14:00:00.000Z"
+    });
+    const learningEvent = createDeterministicLearningEvent(outcome);
+    const tamperedSimulation = { ...first, barsHeld: 7 };
+    const tamperedOutcome = {
+      ...outcome,
+      operatorNote: "Changed after the outcome hash was created."
+    };
+    const tamperedLearning = {
+      ...learningEvent,
+      summary: "Changed after the learning hash was created."
+    };
+
+    const incomplete = completeValidatedDecisionTrace({
+      frozenRecord: record,
+      firstSimulation: tamperedSimulation,
+      secondSimulation: tamperedSimulation,
+      outcome: tamperedOutcome,
+      learningEvent: tamperedLearning,
+      checkedAt: "2026-07-24T14:05:00.000Z"
+    });
+
+    expect(incomplete.checkpoint.status).toBe("FAIL");
+    expect(incomplete.checkpoint.mismatchReasons).toEqual(
+      expect.arrayContaining([
+        "simulation output hash mismatch",
+        "outcome or learning content hash mismatch"
+      ])
+    );
+    expect(incomplete.trace.lifecycleStatus).toBe("INCOMPLETE");
+  });
 });

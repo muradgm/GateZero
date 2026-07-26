@@ -229,11 +229,22 @@ export function createLearningIntelligenceCheckpoint(input: {
   let sourceChainsValid = true;
   try {
     cases.forEach(assertLearningCaseHash);
+    assertLearningReportHash(first);
+    assertLearningReportHash(second);
+    const expectedSourceHashes = cases.map((record) => record.caseHash).sort();
+    if (
+      JSON.stringify(first.sourceCaseHashes) !== JSON.stringify(expectedSourceHashes) ||
+      JSON.stringify(second.sourceCaseHashes) !== JSON.stringify(expectedSourceHashes)
+    ) {
+      throw new Error("learning report source cases do not match checkpoint cases");
+    }
   } catch {
     sourceChainsValid = false;
   }
   const deterministic =
-    first.reportHash === second.reportHash && JSON.stringify(first) === JSON.stringify(second);
+    sourceChainsValid &&
+    first.reportHash === second.reportHash &&
+    JSON.stringify(first) === JSON.stringify(second);
   const requiredPatternsExercised =
     first.recurringInvalidations.length > 0 &&
     first.evidenceFailurePatterns.length > 0 &&
@@ -241,7 +252,7 @@ export function createLearningIntelligenceCheckpoint(input: {
     first.comparableCaseClusters.length > 0 &&
     first.driftInspection.status === "REVIEW_REQUIRED";
   const reasons: string[] = [];
-  if (!sourceChainsValid) reasons.push("One or more learning case hashes are invalid.");
+  if (!sourceChainsValid) reasons.push("One or more learning source or report hashes are invalid.");
   if (!deterministic) reasons.push("Repeated learning intelligence reports differ.");
   if (!requiredPatternsExercised) {
     reasons.push("The fixture does not exercise every required Epoch 4 pattern family.");
@@ -304,6 +315,13 @@ function assertLearningCaseHash(record: LearningIntelligenceCase): void {
   const { caseHash, ...payload } = record;
   if (caseHash !== hashCanonicalValue(payload)) {
     throw new Error(`learning case hash mismatch: ${record.caseRecordId}`);
+  }
+}
+
+function assertLearningReportHash(report: LearningIntelligenceReport): void {
+  const { reportHash, ...payload } = report;
+  if (reportHash !== hashCanonicalValue(payload)) {
+    throw new Error(`learning report hash mismatch: ${report.reportId}`);
   }
 }
 

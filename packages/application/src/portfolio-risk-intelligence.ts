@@ -187,8 +187,12 @@ export function createPortfolioRiskCheckpoint(input: {
   const first = PortfolioRiskAssessmentSchema.parse(input.firstReviewAssessment);
   const second = PortfolioRiskAssessmentSchema.parse(input.secondReviewAssessment);
   const blocked = PortfolioRiskAssessmentSchema.parse(input.blockedAssessment);
-  const deterministic = first.assessmentHash === second.assessmentHash;
+  const sourceHashesValid = [first, second, blocked].every((assessment) =>
+    hasCanonicalHash(assessment, "assessmentHash")
+  );
+  const deterministic = sourceHashesValid && first.assessmentHash === second.assessmentHash;
   const portfolioBlockersExercised =
+    sourceHashesValid &&
     blocked.status === "BLOCKED" &&
     blocked.findings.some(
       (finding) =>
@@ -196,6 +200,7 @@ export function createPortfolioRiskCheckpoint(input: {
         ["CORRELATION_EXPOSURE", "EVENT_EXPOSURE"].includes(finding.code)
     );
   const reasons: string[] = [];
+  if (!sourceHashesValid) reasons.push("One or more portfolio assessment hashes are invalid.");
   if (!deterministic) reasons.push("Repeated portfolio risk evaluation produced different hashes.");
   if (!portfolioBlockersExercised) {
     reasons.push("Portfolio-level correlation and event blockers were not exercised.");
@@ -391,4 +396,14 @@ function sum(values: readonly number[]): number {
 
 function round(value: number): number {
   return Math.round((value + Number.EPSILON) * 10_000) / 10_000;
+}
+
+function hasCanonicalHash<T extends Record<string, unknown>, K extends keyof T>(
+  value: T,
+  hashKey: K
+): boolean {
+  const payload = Object.fromEntries(
+    Object.entries(value).filter(([key]) => key !== String(hashKey))
+  );
+  return value[hashKey] === hashCanonicalValue(payload);
 }

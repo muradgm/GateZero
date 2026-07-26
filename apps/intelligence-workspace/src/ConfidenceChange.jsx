@@ -9,8 +9,8 @@ export function ConfidenceChange({ candidate }) {
   return (
     <Panel className="confidence-change-panel">
       <PanelHeading
-        eyebrow="Score explanation"
-        title="Why confidence changed"
+        eyebrow="Evidence index explanation"
+        title="Why the evidence index changed"
         aside={
           <Badge tone={model.net >= 0 ? "success" : "warning"}>{formatDelta(model.net)} pts</Badge>
         }

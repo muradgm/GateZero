@@ -11,8 +11,8 @@ import { SimilarSetups } from "./SimilarSetups.jsx";
 const tools = [
   { id: "council", label: "Council" },
   { id: "replay", label: "Replay" },
-  { id: "confidence", label: "Confidence" },
-  { id: "changes", label: "Score changes" },
+  { id: "confidence", label: "Evidence map" },
+  { id: "changes", label: "Evidence changes" },
   { id: "memory", label: "Decision memory" },
   { id: "journal", label: "Outcome journal" },
   { id: "similar", label: "Similar setups" },

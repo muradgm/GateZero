@@ -336,4 +336,48 @@ describe("evidence intelligence", () => {
     expect(checkpoint.recommendationFinal).toBe(false);
     expect(checkpoint.reasons[0]).toContain("conflict review");
   });
+
+  it("fails the checkpoint when linked evidence artifacts retain stale hashes", () => {
+    const source = record("source-v1");
+    const graph = buildEvidenceDependencyGraph({
+      graphId: "tampered-checkpoint-graph",
+      records: [source],
+      generatedAt: "2026-07-24T16:00:00.000Z"
+    });
+    const view = buildDecisionTimeEvidenceView({
+      viewId: "tampered-checkpoint-view",
+      graph,
+      records: [source],
+      decisionTimestamp: "2026-07-24T13:00:00.000Z"
+    });
+    const inspection = inspectEvidenceQuality({
+      inspectionId: "tampered-checkpoint-inspection",
+      graph,
+      view,
+      records: [source],
+      inspectedAt: "2026-07-24T16:05:00.000Z"
+    });
+    const checkpoint = createEvidenceIntelligenceCheckpoint({
+      checkpointId: "tampered-epoch2-checkpoint",
+      graph: { ...graph, generatedAt: "2026-07-24T16:00:01.000Z" },
+      view,
+      inspection: {
+        ...inspection,
+        findings: inspection.findings.map((finding) => ({
+          ...finding,
+          detail: `${finding.detail} Altered.`
+        }))
+      },
+      revisionHistories: [],
+      checkedAt: "2026-07-24T16:10:00.000Z"
+    });
+
+    expect(checkpoint.status).toBe("FAIL");
+    expect(checkpoint.reasons).toEqual(
+      expect.arrayContaining([
+        "evidence graph content hash mismatch",
+        "evidence inspection content hash mismatch"
+      ])
+    );
+  });
 });

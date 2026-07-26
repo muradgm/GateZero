@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -51,6 +51,21 @@ const learningPanelPath = path.join(
   "src",
   "LearningIntelligencePanel.jsx"
 );
+const legacyPrototypePath = path.join(root, "apps", "intelligence-workspace", "src", "App.jsx");
+const decisionReplayPath = path.join(
+  root,
+  "apps",
+  "intelligence-workspace",
+  "src",
+  "DecisionReplay.jsx"
+);
+const evidenceGraphPath = path.join(
+  root,
+  "apps",
+  "intelligence-workspace",
+  "src",
+  "EvidenceGraph.jsx"
+);
 
 describe("intelligence workspace authority boundary", () => {
   it("keeps synthetic workspace assessments explicitly non-canonical", () => {
@@ -80,6 +95,17 @@ describe("intelligence workspace authority boundary", () => {
     expect(loader).toContain(
       'data.boundary.recommendationOwner !== "CANONICAL_DECISION_ASSESSMENT_ONLY"'
     );
+  });
+
+  it("removes the legacy score prototype and labels synthetic outputs as demo assessments", () => {
+    const replay = readFileSync(decisionReplayPath, "utf8");
+    const graph = readFileSync(evidenceGraphPath, "utf8");
+
+    expect(existsSync(legacyPrototypePath)).toBe(false);
+    expect(replay).toContain("Current demo assessment");
+    expect(replay).not.toContain("Current bounded recommendation");
+    expect(graph).toContain('label: "Demo assessment"');
+    expect(graph).not.toContain('label: "Bounded decision"');
   });
 
   it("renders only a complete, passing, non-executing Epoch 1 proof", () => {

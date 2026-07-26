@@ -173,16 +173,16 @@ function findRelatedNodes(activeId) {
 
 function describePath(activeId) {
   const paths = {
-    context: "Market context → evidence dimensions → aggregate score → review → decision",
-    trend: "Trend → evidence score → risk and council → bounded decision",
-    structure: "Structure → evidence score → risk and council → bounded decision",
-    momentum: "Momentum → evidence score → risk and council → bounded decision",
-    liquidity: "Liquidity → evidence score → risk and council → bounded decision",
-    macro: "Macro → evidence score → risk and council → bounded decision",
-    evidence: "Evidence dimensions → aggregate score → risk and council → bounded decision",
-    risk: "Evidence score → risk review → bounded decision",
-    council: "Evidence score → council challenge → bounded decision",
-    decision: "All reviewed inputs → bounded decision"
+    context: "Market context → evidence dimensions → aggregate index → review → demo assessment",
+    trend: "Trend → evidence index → risk and council → demo assessment",
+    structure: "Structure → evidence index → risk and council → demo assessment",
+    momentum: "Momentum → evidence index → risk and council → demo assessment",
+    liquidity: "Liquidity → evidence index → risk and council → demo assessment",
+    macro: "Macro → evidence index → risk and council → demo assessment",
+    evidence: "Evidence dimensions → aggregate index → risk and council → demo assessment",
+    risk: "Evidence index → risk review → demo assessment",
+    council: "Evidence index → council challenge → demo assessment",
+    decision: "All reviewed inputs → demo assessment"
   };
   return paths[activeId] ?? "Reviewed dependency path";
 }
@@ -298,7 +298,7 @@ function buildGraph(candidate) {
       {
         id: "decision",
         kind: "Output",
-        label: "Bounded decision",
+        label: "Demo assessment",
         value: report.recommendation.replaceAll("_", " "),
         tone:
           report.recommendation === "PAPER_SIMULATE"
@@ -310,7 +310,8 @@ function buildGraph(candidate) {
         shortSummary: "Operator-controlled",
         summary: report.neutralCase.summary,
         evidence: report.contributions.flatMap((item) => item.evidenceIds),
-        limitation: "The recommendation is not execution authority and remains operator-controlled."
+        limitation:
+          "This synthetic assessment is not canonical, is not execution authority, and remains operator-controlled."
       }
     ]
   };

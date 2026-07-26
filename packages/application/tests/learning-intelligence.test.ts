@@ -301,4 +301,27 @@ describe("learning intelligence", () => {
       executionPath: false
     });
   });
+
+  it("fails the epoch checkpoint when identical reports retain stale hashes", () => {
+    const cases = fixtureCases();
+    const original = report(cases);
+    const tampered = {
+      ...original,
+      limitations: [...original.limitations, "Added after report hashing."]
+    };
+    const checkpoint = createLearningIntelligenceCheckpoint({
+      checkpointId: "epoch4-tampered-checkpoint",
+      cases,
+      firstReport: tampered,
+      secondReport: tampered,
+      checkedAt: "2026-07-24T18:05:00.000Z"
+    });
+
+    expect(checkpoint.status).toBe("FAIL");
+    expect(checkpoint.sourceChainsValid).toBe(false);
+    expect(checkpoint.deterministic).toBe(false);
+    expect(checkpoint.reasons).toContain(
+      "One or more learning source or report hashes are invalid."
+    );
+  });
 });

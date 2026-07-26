@@ -55,6 +55,14 @@ export function createEvidenceIntelligenceCheckpoint(input: {
     EvidenceRevisionHistorySchema.parse(history)
   );
   const reasons: string[] = [];
+  if (!hasCanonicalHash(graph, "graphHash")) reasons.push("evidence graph content hash mismatch");
+  if (!hasCanonicalHash(view, "viewHash")) reasons.push("decision view content hash mismatch");
+  if (!hasCanonicalHash(inspection, "inspectionHash")) {
+    reasons.push("evidence inspection content hash mismatch");
+  }
+  if (histories.some((history) => !hasCanonicalHash(history, "historyHash"))) {
+    reasons.push("evidence revision history content hash mismatch");
+  }
   if (view.graphHash !== graph.graphHash) reasons.push("decision view graph hash mismatch");
   if (inspection.graphHash !== graph.graphHash) reasons.push("inspection graph hash mismatch");
   if (inspection.decisionViewHash !== view.viewHash) {
@@ -187,6 +195,10 @@ export function inspectEvidenceQuality(input: {
   const graph = EvidenceDependencyGraphSchema.parse(input.graph);
   const view = DecisionTimeEvidenceViewSchema.parse(input.view);
   const records = input.records.map((record) => EvidenceIntelligenceRecordSchema.parse(record));
+  assertGraphAndRecords(graph, records);
+  if (!hasCanonicalHash(view, "viewHash")) {
+    throw new Error("evidence quality view content hash mismatch");
+  }
   if (view.graphHash !== graph.graphHash) {
     throw new Error("evidence quality view does not match the dependency graph");
   }
@@ -255,6 +267,7 @@ export function buildDecisionTimeEvidenceView(input: {
 }): DecisionTimeEvidenceView {
   const graph = EvidenceDependencyGraphSchema.parse(input.graph);
   const records = input.records.map((record) => EvidenceIntelligenceRecordSchema.parse(record));
+  assertGraphAndRecords(graph, records);
   const byId = new Map(records.map((record) => [record.evidenceVersionId, record]));
   const blocked = new Map<string, string[]>();
   const decisionMs = Date.parse(input.decisionTimestamp);
@@ -374,4 +387,29 @@ function topologicalOrder(records: readonly EvidenceIntelligenceRecord[]): strin
 
   for (const id of [...byId.keys()].sort()) visit(id);
   return order;
+}
+
+function assertGraphAndRecords(
+  graph: EvidenceDependencyGraph,
+  records: readonly EvidenceIntelligenceRecord[]
+): void {
+  if (!hasCanonicalHash(graph, "graphHash")) {
+    throw new Error("evidence graph content hash mismatch");
+  }
+  records.forEach(assertEvidenceRecordHash);
+  const graphIds = [...graph.evidenceVersionIds].sort();
+  const recordIds = records.map((record) => record.evidenceVersionId).sort();
+  if (JSON.stringify(graphIds) !== JSON.stringify(recordIds)) {
+    throw new Error("evidence graph records do not match its declared evidence versions");
+  }
+}
+
+function hasCanonicalHash<T extends Record<string, unknown>, K extends keyof T>(
+  value: T,
+  hashKey: K
+): boolean {
+  const payload = Object.fromEntries(
+    Object.entries(value).filter(([key]) => key !== String(hashKey))
+  );
+  return value[hashKey] === hashCanonicalValue(payload);
 }

@@ -184,4 +184,30 @@ describe("portfolio risk intelligence", () => {
     expect(checkpoint.portfolioBlockersExercised).toBe(true);
     expect(checkpoint.riskApproval).toBe(false);
   });
+
+  it("fails the checkpoint when assessment content changes without a new hash", () => {
+    const first = assess();
+    const blocked = assess(
+      {
+        notionalAmount: 1_800,
+        plannedRiskAmount: 40
+      },
+      "epoch3-blocked-assessment"
+    );
+    const tampered = {
+      ...first,
+      limitations: [...first.limitations, "Added after assessment hashing."]
+    };
+    const checkpoint = createPortfolioRiskCheckpoint({
+      checkpointId: "epoch3-tampered-checkpoint",
+      firstReviewAssessment: tampered,
+      secondReviewAssessment: tampered,
+      blockedAssessment: blocked,
+      checkedAt: "2026-07-24T16:35:00.000Z"
+    });
+
+    expect(checkpoint.status).toBe("FAIL");
+    expect(checkpoint.deterministic).toBe(false);
+    expect(checkpoint.reasons).toContain("One or more portfolio assessment hashes are invalid.");
+  });
 });

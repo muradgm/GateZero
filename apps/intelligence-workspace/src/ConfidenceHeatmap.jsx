@@ -21,7 +21,7 @@ export function ConfidenceHeatmap({ candidate }) {
   return (
     <Panel className="confidence-heatmap-panel">
       <PanelHeading
-        eyebrow="Confidence anatomy"
+        eyebrow="Evidence contribution anatomy"
         title="Evidence pressure heatmap"
         aside={
           <Badge tone={totals.net >= 0 ? "success" : "warning"}>
@@ -66,7 +66,7 @@ export function ConfidenceHeatmap({ candidate }) {
             </summary>
             <div
               className="confidence-track"
-              aria-label={`${dimension.label} confidence ${dimension.strength}%`}
+              aria-label={`${dimension.label} relative contribution strength ${dimension.strength}%`}
             >
               <span style={{ width: `${dimension.strength}%` }} />
             </div>
@@ -83,8 +83,8 @@ export function ConfidenceHeatmap({ candidate }) {
       </div>
 
       <p className="confidence-heatmap-note">
-        Confidence summarizes evidence quality and agreement. It is not a probability of profit and
-        does not override risk review.
+        Evidence strength is an uncalibrated summary of contribution magnitude. It is not a
+        probability of profit and does not override risk review.
       </p>
     </Panel>
   );

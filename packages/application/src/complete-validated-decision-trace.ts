@@ -36,14 +36,29 @@ export function completeValidatedDecisionTrace(input: {
   if (record.bundleHash !== hashCanonicalValue(record.bundle)) {
     mismatches.push("frozen bundle hash mismatch");
   }
+  if (!hasCanonicalHash(first, "outputHash") || !hasCanonicalHash(second, "outputHash")) {
+    mismatches.push("simulation output hash mismatch");
+  }
   if (first.outputHash !== second.outputHash || JSON.stringify(first) !== JSON.stringify(second)) {
     mismatches.push("simulation replay outputs differ");
   }
   if (
     first.frozenBundleHash !== record.bundleHash ||
+    second.frozenBundleHash !== record.bundleHash ||
     outcome.frozenBundleHash !== record.bundleHash
   ) {
     mismatches.push("simulation or outcome references a different frozen bundle");
+  }
+  if (
+    first.simulationId !== second.simulationId ||
+    outcome.traceId !== record.bundle.traceId ||
+    outcome.simulationId !== first.simulationId ||
+    learning.sourceOutcomeId !== outcome.outcomeId
+  ) {
+    mismatches.push("trace, simulation, outcome, or learning IDs do not align");
+  }
+  if (!hasCanonicalHash(outcome, "outcomeHash") || !hasCanonicalHash(learning, "learningHash")) {
+    mismatches.push("outcome or learning content hash mismatch");
   }
   if (
     outcome.simulationOutputHash !== first.outputHash ||
@@ -171,6 +186,16 @@ export function completeValidatedDecisionTrace(input: {
   });
 
   return { checkpoint, trace };
+}
+
+function hasCanonicalHash<T extends Record<string, unknown>, K extends keyof T>(
+  value: T,
+  hashKey: K
+): boolean {
+  const payload = Object.fromEntries(
+    Object.entries(value).filter(([key]) => key !== String(hashKey))
+  );
+  return value[hashKey] === hashCanonicalValue(payload);
 }
 
 function requirement(requirementId: string, evidenceIds: string[]) {
