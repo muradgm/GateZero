@@ -1,3 +1,4 @@
+export * from "./adapt-dukascopy-csv.js";
 export * from "./aggregate-market-candles.js";
 export * from "./build-canonical-decision-assessment.js";
 export * from "./build-trading-intelligence-report.js";
