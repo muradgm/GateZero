@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type {
+  CandidateDetection,
   EurUsdOverlapPullbackObservation,
   NormalizedMarketCandle
 } from "@traderframe/contracts";
@@ -72,6 +73,12 @@ function observationFactory(triggerAtIndex: number, triggerCandleId = "trigger-1
   };
 }
 
+function requireSingleDetection(detections: CandidateDetection[]): CandidateDetection {
+  const detection = detections.at(0);
+  if (!detection) throw new Error("expected one candidate detection");
+  return detection;
+}
+
 describe("detectEurUsdOverlapCandidates", () => {
   it("scans decision points chronologically without exposing future 15m candles", () => {
     const candles = [candle(0), candle(1), candle(2), candle(3)];
@@ -89,11 +96,14 @@ describe("detectEurUsdOverlapCandidates", () => {
       candles4H: [],
       observationFactory: factory
     });
+    const detection = requireSingleDetection(result.detections);
+    const triggerCandle = candles.at(2);
+    if (!triggerCandle) throw new Error("expected trigger candle fixture");
 
     expect(observedWindowSizes).toEqual([1, 2, 3, 4]);
     expect(result.evaluatedDecisionPoints).toBe(4);
     expect(result.detections).toHaveLength(1);
-    expect(result.detections[0].detectedAt).toBe(candles[2].closedAt);
+    expect(detection.detectedAt).toBe(triggerCandle.closedAt);
   });
 
   it("deduplicates repeated observations of the same directional trigger", () => {
@@ -103,10 +113,11 @@ describe("detectEurUsdOverlapCandidates", () => {
       candles4H: [],
       observationFactory: observationFactory(1, "shared-trigger")
     });
+    const detection = requireSingleDetection(result.detections);
 
     expect(result.detections).toHaveLength(1);
     expect(result.excludedDuplicateTriggerCount).toBe(3);
-    expect(result.detections[0].triggerCandleId).toBe("shared-trigger");
+    expect(detection.triggerCandleId).toBe("shared-trigger");
   });
 
   it("produces deterministic candidate and source-window hashes for identical inputs", () => {
@@ -119,10 +130,11 @@ describe("detectEurUsdOverlapCandidates", () => {
 
     const first = detectEurUsdOverlapCandidates(input);
     const second = detectEurUsdOverlapCandidates(input);
+    const detection = requireSingleDetection(first.detections);
 
     expect(second).toEqual(first);
-    expect(first.detections[0].candidateId).toHaveLength(64);
-    expect(first.detections[0].sourceWindowHash).toHaveLength(64);
+    expect(detection.candidateId).toHaveLength(64);
+    expect(detection.sourceWindowHash).toHaveLength(64);
   });
 
   it("does not duplicate recommendation or confidence ownership", () => {
@@ -132,9 +144,10 @@ describe("detectEurUsdOverlapCandidates", () => {
       candles4H: [],
       observationFactory: observationFactory(2)
     });
+    const detection = requireSingleDetection(result.detections);
 
-    expect(result.detections[0]).not.toHaveProperty("recommendation");
-    expect(result.detections[0]).not.toHaveProperty("confidence");
-    expect(result.detections[0]).not.toHaveProperty("score");
+    expect(detection).not.toHaveProperty("recommendation");
+    expect(detection).not.toHaveProperty("confidence");
+    expect(detection).not.toHaveProperty("score");
   });
 });
