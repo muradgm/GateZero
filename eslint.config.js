@@ -37,7 +37,9 @@ export default tseslint.config(
       },
       globals: {
         console: "readonly",
+        CustomEvent: "readonly",
         document: "readonly",
+        fetch: "readonly",
         window: "readonly"
       }
     },
