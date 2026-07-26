@@ -26,7 +26,6 @@ export function LifecycleRail({ pipeline, workflow }) {
     if (record?.status === "not_applicable") status = "skipped";
     else if (index < currentStageIndex) status = "complete";
     else if (index === currentStageIndex) status = blocker ? "blocked" : "current";
-    else if (pipeline.currentStage === "learning" && index === currentStageIndex) status = "current";
 
     return { ...stage, status, recordStatus: record?.status ?? "pending" };
   });
