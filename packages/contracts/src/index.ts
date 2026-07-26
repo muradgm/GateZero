@@ -16,6 +16,7 @@ export * from "./gate2-market-intelligence-foundation-contracts.js";
 export * from "./gate2-read-only-intelligence-brief-contracts.js";
 export * from "./gate2-intelligence-brief-workflow-contracts.js";
 export * from "./gate2-manual-review-authoring-contracts.js";
+export * from "./historical-market-adapter.js";
 export * from "./learning-event.js";
 export * from "./market-data-candle.js";
 export * from "./metric-report.js";
