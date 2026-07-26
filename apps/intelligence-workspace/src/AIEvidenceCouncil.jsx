@@ -63,7 +63,6 @@ export function AIEvidenceCouncil({ candidate }) {
 
 function buildCouncil(candidate) {
   const report = candidate.report;
-  const positive = report.contributions.filter((item) => item.points > 0);
   const negative = report.contributions.filter((item) => item.points < 0);
   const find = (dimension) => report.contributions.find((item) => item.dimension === dimension);
   const macro = find("macro") ?? find("event_risk");
