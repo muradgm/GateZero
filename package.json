@@ -55,7 +55,8 @@
     "test:ci": "vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "validate:gate0": "tsx scripts/validate-gate0.ts",
-    "verify": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
+    "verify": "tsx scripts/verify-progress.ts",
+    "verify:verbose": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
     "verify:gate0": "pnpm verify"
   },
   "dependencies": {
