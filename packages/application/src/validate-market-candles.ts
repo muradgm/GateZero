@@ -32,7 +32,9 @@ export type MarketCandleValidationResult = {
   failures: TraceValidityFailure[];
 };
 
-export function validateAndNormalizeMarketCandles(input: MarketCandleValidationInput): MarketCandleValidationResult {
+export function validateAndNormalizeMarketCandles(
+  input: MarketCandleValidationInput
+): MarketCandleValidationResult {
   const expectedIntervalMs = INTERVALS[input.timeframe];
   const failures: TraceValidityFailure[] = [];
   const normalized: NormalizedMarketCandle[] = [];
@@ -47,54 +49,119 @@ export function validateAndNormalizeMarketCandles(input: MarketCandleValidationI
     const evidenceId = `${input.sourceId}:${index}`;
 
     if (!Number.isFinite(openedAtMs)) {
-      failures.push(failure(input, "TIMEZONE_MISMATCH", "timestamp_integrity", "BLOCKER", `Candle ${index} has an invalid timestamp.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "TIMEZONE_MISMATCH",
+          "timestamp_integrity",
+          "BLOCKER",
+          `Candle ${index} has an invalid timestamp.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     if (candle.instrument !== input.instrument) {
-      failures.push(failure(input, "INSTRUMENT_MISMATCH", "data_integrity", "BLOCKER", `Expected ${input.instrument} but received ${candle.instrument}.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "INSTRUMENT_MISMATCH",
+          "data_integrity",
+          "BLOCKER",
+          `Expected ${input.instrument} but received ${candle.instrument}.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     if (candle.timeframe !== input.timeframe) {
-      failures.push(failure(input, "TIMEFRAME_MISMATCH", "data_integrity", "BLOCKER", `Expected ${input.timeframe} but received ${candle.timeframe}.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "TIMEFRAME_MISMATCH",
+          "data_integrity",
+          "BLOCKER",
+          `Expected ${input.timeframe} but received ${candle.timeframe}.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     if (candle.timezone !== "UTC" && !hasExplicitOffset(candle.timestamp)) {
-      failures.push(failure(input, "TIMEZONE_MISMATCH", "timestamp_integrity", "BLOCKER", "Non-UTC source timestamps require an explicit numeric offset.", [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "TIMEZONE_MISMATCH",
+          "timestamp_integrity",
+          "BLOCKER",
+          "Non-UTC source timestamps require an explicit numeric offset.",
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     if (seen.has(openedAtMs)) {
-      failures.push(failure(input, "DUPLICATE_TIMESTAMP", "data_integrity", "BLOCKER", `Duplicate candle timestamp ${new Date(openedAtMs).toISOString()}.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "DUPLICATE_TIMESTAMP",
+          "data_integrity",
+          "BLOCKER",
+          `Duplicate candle timestamp ${new Date(openedAtMs).toISOString()}.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
     seen.add(openedAtMs);
 
     if (!candle.finalized) {
-      failures.push(failure(input, "INCOMPLETE_CANDLE", "data_integrity", "BLOCKER", `Candle ${new Date(openedAtMs).toISOString()} is not finalized.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "INCOMPLETE_CANDLE",
+          "data_integrity",
+          "BLOCKER",
+          `Candle ${new Date(openedAtMs).toISOString()} is not finalized.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     if (!validOhlc(candle)) {
-      failures.push(failure(input, "INVALID_OHLC", "data_integrity", "BLOCKER", `Candle ${new Date(openedAtMs).toISOString()} violates OHLC invariants.`, [evidenceId]));
+      failures.push(
+        failure(
+          input,
+          "INVALID_OHLC",
+          "data_integrity",
+          "BLOCKER",
+          `Candle ${new Date(openedAtMs).toISOString()} violates OHLC invariants.`,
+          [evidenceId]
+        )
+      );
       continue;
     }
 
     const openedAt = new Date(openedAtMs).toISOString();
     const closedAt = new Date(openedAtMs + expectedIntervalMs).toISOString();
-    const sourceHash = stableHash([
-      input.sourceId,
-      input.instrument,
-      input.timeframe,
-      openedAt,
-      candle.open,
-      candle.high,
-      candle.low,
-      candle.close,
-      candle.volume ?? ""
-    ].join("|"));
+    const sourceHash = stableHash(
+      [
+        input.sourceId,
+        input.instrument,
+        input.timeframe,
+        openedAt,
+        candle.open,
+        candle.high,
+        candle.low,
+        candle.close,
+        candle.volume ?? ""
+      ].join("|")
+    );
 
     normalized.push({
       candleId: `${input.instrument}-${input.timeframe}-${openedAt}`,
@@ -119,15 +186,20 @@ export function validateAndNormalizeMarketCandles(input: MarketCandleValidationI
     const previous = normalized[index - 1];
     const current = normalized[index];
     const actualGap = Date.parse(current.openedAt) - Date.parse(previous.openedAt);
-    if (actualGap > expectedIntervalMs && !isExpectedWeekendClosure(previous.openedAt, current.openedAt)) {
-      failures.push(failure(
-        input,
-        "DATA_GAP_UNCLASSIFIED",
-        "data_integrity",
-        "BLOCKER",
-        `Unclassified gap of ${actualGap / 60000} minutes between ${previous.openedAt} and ${current.openedAt}.`,
-        [previous.candleId, current.candleId]
-      ));
+    if (
+      actualGap > expectedIntervalMs &&
+      !isExpectedWeekendClosure(previous.openedAt, current.openedAt)
+    ) {
+      failures.push(
+        failure(
+          input,
+          "DATA_GAP_UNCLASSIFIED",
+          "data_integrity",
+          "BLOCKER",
+          `Unclassified gap of ${actualGap / 60000} minutes between ${previous.openedAt} and ${current.openedAt}.`,
+          [previous.candleId, current.candleId]
+        )
+      );
     }
   }
 
@@ -145,7 +217,13 @@ export function validateAndNormalizeMarketCandles(input: MarketCandleValidationI
 }
 
 function validOhlc(candle: RawMarketCandle): boolean {
-  return candle.high >= candle.low && candle.high >= candle.open && candle.high >= candle.close && candle.low <= candle.open && candle.low <= candle.close;
+  return (
+    candle.high >= candle.low &&
+    candle.high >= candle.open &&
+    candle.high >= candle.close &&
+    candle.low <= candle.open &&
+    candle.low <= candle.close
+  );
 }
 
 function hasExplicitOffset(timestamp: string): boolean {
@@ -183,7 +261,8 @@ function failure(
 
 function remediationFor(code: TraceValidityFailure["code"]): string {
   const messages: Partial<Record<TraceValidityFailure["code"], string>> = {
-    DATA_GAP_UNCLASSIFIED: "Classify the market closure or repair the source series before evaluation.",
+    DATA_GAP_UNCLASSIFIED:
+      "Classify the market closure or repair the source series before evaluation.",
     DUPLICATE_TIMESTAMP: "Remove the duplicate source record and regenerate normalized candles.",
     INVALID_OHLC: "Correct or reject the malformed source record.",
     INCOMPLETE_CANDLE: "Wait for candle finalization or exclude the incomplete record.",

@@ -29,7 +29,12 @@ export function EvidenceGraphLauncher({ candidate }) {
       </button>
 
       {open ? (
-        <div className="evidence-graph-modal" role="dialog" aria-modal="true" aria-label="Interactive evidence graph">
+        <div
+          className="evidence-graph-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Interactive evidence graph"
+        >
           <button
             type="button"
             className="evidence-graph-modal__backdrop"
@@ -37,7 +42,11 @@ export function EvidenceGraphLauncher({ candidate }) {
             onClick={() => setOpen(false)}
           />
           <div className="evidence-graph-modal__surface">
-            <button type="button" className="evidence-graph-modal__close" onClick={() => setOpen(false)}>
+            <button
+              type="button"
+              className="evidence-graph-modal__close"
+              onClick={() => setOpen(false)}
+            >
               Close
             </button>
             <EvidenceGraph candidate={candidate} />

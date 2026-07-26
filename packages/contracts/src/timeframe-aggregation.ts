@@ -28,7 +28,11 @@ export const TimeBoundMarketCandleSchema = z
   })
   .strict()
   .superRefine((value, context) => {
-    if (value.high < Math.max(value.open, value.close) || value.low > Math.min(value.open, value.close) || value.high < value.low) {
+    if (
+      value.high < Math.max(value.open, value.close) ||
+      value.low > Math.min(value.open, value.close) ||
+      value.high < value.low
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "aggregated candle violates OHLC invariants",

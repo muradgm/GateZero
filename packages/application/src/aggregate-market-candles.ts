@@ -45,7 +45,9 @@ export type DecisionTimeSelection = {
   failures: TraceValidityFailure[];
 };
 
-export function aggregateValidatedMarketCandles(input: TimeframeAggregationInput): TimeframeAggregationOutput {
+export function aggregateValidatedMarketCandles(
+  input: TimeframeAggregationInput
+): TimeframeAggregationOutput {
   const targetIntervalMs = TARGET_INTERVALS[input.targetTimeframe];
   const expectedSourceCandlesPerTarget = targetIntervalMs / SOURCE_INTERVAL_MS;
   const asOfMs = Date.parse(input.asOf);
@@ -53,7 +55,9 @@ export function aggregateValidatedMarketCandles(input: TimeframeAggregationInput
   const groups = new Map<number, NormalizedMarketCandle[]>();
 
   const source = [...input.candles]
-    .filter((candle) => candle.instrument === "EURUSD" && candle.timeframe === "15m" && candle.finalized)
+    .filter(
+      (candle) => candle.instrument === "EURUSD" && candle.timeframe === "15m" && candle.finalized
+    )
     .sort((left, right) => Date.parse(left.openedAt) - Date.parse(right.openedAt));
 
   for (const candle of source) {
@@ -66,13 +70,18 @@ export function aggregateValidatedMarketCandles(input: TimeframeAggregationInput
 
   const candles: TimeBoundMarketCandle[] = [];
 
-  for (const [bucketStart, unsortedGroup] of [...groups.entries()].sort(([left], [right]) => left - right)) {
-    const group = [...unsortedGroup].sort((left, right) => Date.parse(left.openedAt) - Date.parse(right.openedAt));
+  for (const [bucketStart, unsortedGroup] of [...groups.entries()].sort(
+    ([left], [right]) => left - right
+  )) {
+    const group = [...unsortedGroup].sort(
+      (left, right) => Date.parse(left.openedAt) - Date.parse(right.openedAt)
+    );
     const bucketClose = bucketStart + targetIntervalMs;
     const complete = hasCompleteSourceWindow(group, bucketStart, expectedSourceCandlesPerTarget);
 
     if (!complete) {
-      const code = bucketClose > asOfMs ? "UNCLOSED_HIGHER_TIMEFRAME_INPUT" : "DATA_GAP_UNCLASSIFIED";
+      const code =
+        bucketClose > asOfMs ? "UNCLOSED_HIGHER_TIMEFRAME_INPUT" : "DATA_GAP_UNCLASSIFIED";
       failures.push(
         createFailure(
           input,
@@ -111,7 +120,12 @@ export function aggregateValidatedMarketCandles(input: TimeframeAggregationInput
     const volumes = group.map((candle) => candle.volume);
     const hasCompleteVolume = volumes.every((volume) => volume !== undefined);
     const sourceHash = stableHash(
-      [input.sourceId, input.targetTimeframe, openedAt, ...group.map((candle) => candle.sourceHash)].join("|")
+      [
+        input.sourceId,
+        input.targetTimeframe,
+        openedAt,
+        ...group.map((candle) => candle.sourceHash)
+      ].join("|")
     );
 
     candles.push({
@@ -127,7 +141,9 @@ export function aggregateValidatedMarketCandles(input: TimeframeAggregationInput
       high,
       low,
       close: last.close,
-      ...(hasCompleteVolume ? { volume: volumes.reduce<number>((sum, volume) => sum + (volume ?? 0), 0) } : {}),
+      ...(hasCompleteVolume
+        ? { volume: volumes.reduce<number>((sum, volume) => sum + (volume ?? 0), 0) }
+        : {}),
       finalized: true,
       sourceHash,
       normalizationVersion: first.normalizationVersion,
@@ -179,7 +195,8 @@ export function selectCandlesAvailableAtDecision(
       evidenceIds: [candle.candleId],
       detectedAt: checkedAt,
       ruleVersion: "decision-time-candle-boundary-v1",
-      remediation: "Exclude the candle or move the decision timestamp to a time when the candle was finalized."
+      remediation:
+        "Exclude the candle or move the decision timestamp to a time when the candle was finalized."
     });
   }
 
@@ -192,7 +209,9 @@ function hasCompleteSourceWindow(
   expectedCount: number
 ): boolean {
   if (group.length !== expectedCount) return false;
-  return group.every((candle, index) => Date.parse(candle.openedAt) === bucketStart + index * SOURCE_INTERVAL_MS);
+  return group.every(
+    (candle, index) => Date.parse(candle.openedAt) === bucketStart + index * SOURCE_INTERVAL_MS
+  );
 }
 
 function createFailure(

@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  EURUSD_OVERLAP_PULLBACK_V1,
-  evaluateEurUsdOverlapPullback
-} from "../src/index.js";
+import { EURUSD_OVERLAP_PULLBACK_V1, evaluateEurUsdOverlapPullback } from "../src/index.js";
 
 const base = {
   candidateId: "eurusd-case-001",
@@ -77,7 +74,9 @@ describe("EURUSD London-New York overlap pullback v1", () => {
     });
 
     expect(result.recommendation).toBe("REJECT");
-    expect(result.ruleResults.find((item) => item.gate === "INVALIDATION_DEFINED")?.status).toBe("BLOCKED");
+    expect(result.ruleResults.find((item) => item.gate === "INVALIDATION_DEFINED")?.status).toBe(
+      "BLOCKED"
+    );
   });
 
   it("blocks observations that were not available at decision time", () => {

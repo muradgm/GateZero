@@ -27,7 +27,9 @@ export function CandidateActionBar({ candidate, generatedAt }) {
         <div className="candidate-action-bar__identity">
           <span className="candidate-action-bar__eyebrow">Current workflow</span>
           <strong>{workflow.currentStageLabel}</strong>
-          <small>{candidate.instrument} · {workflow.statusLabel}</small>
+          <small>
+            {candidate.instrument} · {workflow.statusLabel}
+          </small>
         </div>
 
         <div className="candidate-action-bar__item candidate-action-bar__item--blocker">

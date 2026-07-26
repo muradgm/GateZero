@@ -160,7 +160,10 @@ export const StrategyCandidateAssessmentSchema = z
   })
   .strict()
   .superRefine((value, context) => {
-    if (value.recommendation === "PAPER_SIMULATE" && (!value.eligible || value.blockers.length > 0)) {
+    if (
+      value.recommendation === "PAPER_SIMULATE" &&
+      (!value.eligible || value.blockers.length > 0)
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "paper simulation requires an eligible candidate without blockers",
@@ -171,5 +174,7 @@ export const StrategyCandidateAssessmentSchema = z
 
 export type StrategyRuleResult = z.infer<typeof StrategyRuleResultSchema>;
 export type EurUsdOverlapPullbackStrategy = z.infer<typeof EurUsdOverlapPullbackStrategySchema>;
-export type EurUsdOverlapPullbackObservation = z.infer<typeof EurUsdOverlapPullbackObservationSchema>;
+export type EurUsdOverlapPullbackObservation = z.infer<
+  typeof EurUsdOverlapPullbackObservationSchema
+>;
 export type StrategyCandidateAssessment = z.infer<typeof StrategyCandidateAssessmentSchema>;

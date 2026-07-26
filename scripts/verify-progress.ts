@@ -53,7 +53,12 @@ function runPnpmScript(command: string): Promise<{ output: string; duration: num
         return;
       }
 
-      reject(Object.assign(new Error(`pnpm ${command} failed with exit code ${code ?? "unknown"}`), result));
+      reject(
+        Object.assign(
+          new Error(`pnpm ${command} failed with exit code ${code ?? "unknown"}`),
+          result
+        )
+      );
     });
   });
 }
@@ -63,7 +68,9 @@ console.log(progressBar(0, stages.length));
 console.log();
 
 for (const [index, stage] of stages.entries()) {
-  process.stdout.write(`${String(index + 1).padStart(2)}/${stages.length}  ${stage.label.padEnd(22)} `);
+  process.stdout.write(
+    `${String(index + 1).padStart(2)}/${stages.length}  ${stage.label.padEnd(22)} `
+  );
 
   try {
     const result = await runPnpmScript(stage.command);

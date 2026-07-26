@@ -14,23 +14,37 @@ export function SimilarSetups({ matches = [] }) {
           <details className="similar-setup" key={match.caseId}>
             <summary>
               <div>
-                <span>{new Date(match.observedAt).toLocaleDateString([], { year: "numeric", month: "short", day: "2-digit" })}</span>
+                <span>
+                  {new Date(match.observedAt).toLocaleDateString([], {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit"
+                  })}
+                </span>
                 <strong>{match.outcome}</strong>
               </div>
               <div className="similar-setup__score">
                 <strong>{match.similarityScore}%</strong>
-                <small>{match.resultR === null ? "No simulation" : `${match.resultR > 0 ? "+" : ""}${match.resultR}R`}</small>
+                <small>
+                  {match.resultR === null
+                    ? "No simulation"
+                    : `${match.resultR > 0 ? "+" : ""}${match.resultR}R`}
+                </small>
               </div>
             </summary>
             <div className="similar-setup__body">
               <section>
                 <span>Matched</span>
-                {match.matchedFeatures.map((feature) => <p key={feature}>{feature}</p>)}
+                {match.matchedFeatures.map((feature) => (
+                  <p key={feature}>{feature}</p>
+                ))}
               </section>
               {match.differingFeatures.length > 0 ? (
                 <section>
                   <span>Different</span>
-                  {match.differingFeatures.map((feature) => <p key={feature}>{feature}</p>)}
+                  {match.differingFeatures.map((feature) => (
+                    <p key={feature}>{feature}</p>
+                  ))}
                 </section>
               ) : null}
               <section className="similar-setup__lesson">
@@ -43,7 +57,8 @@ export function SimilarSetups({ matches = [] }) {
         ))}
       </div>
       <p className="similar-setups-note">
-        Similarity is feature overlap, not a performance forecast. Historical outcomes do not approve the current setup.
+        Similarity is feature overlap, not a performance forecast. Historical outcomes do not
+        approve the current setup.
       </p>
     </Panel>
   );

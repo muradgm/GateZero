@@ -10,7 +10,9 @@ function formatPrice(value, precision) {
 
 export function PriceChart({ chart: chartSet, focusedTime }) {
   const availableTimeframes = Object.keys(chartSet?.timeframes ?? {});
-  const [timeframe, setTimeframe] = useState(chartSet?.defaultTimeframe ?? availableTimeframes[0] ?? null);
+  const [timeframe, setTimeframe] = useState(
+    chartSet?.defaultTimeframe ?? availableTimeframes[0] ?? null
+  );
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
@@ -150,7 +152,12 @@ export function PriceChart({ chart: chartSet, focusedTime }) {
 
         {activeCandle ? (
           <g className="chart-crosshair">
-            <line x1={activeCandle.x} x2={activeCandle.x} y1={PADDING.top} y2={HEIGHT - PADDING.bottom} />
+            <line
+              x1={activeCandle.x}
+              x2={activeCandle.x}
+              y1={PADDING.top}
+              y2={HEIGHT - PADDING.bottom}
+            />
           </g>
         ) : null}
 
@@ -209,7 +216,8 @@ function buildGeometry(chart) {
   const plotHeight = HEIGHT - PADDING.top - PADDING.bottom;
   const step = plotWidth / chart.candles.length;
   const bodyWidth = Math.max(3, Math.min(12, step * 0.58));
-  const scaleY = (value) => PADDING.top + ((domainMax - value) / (domainMax - domainMin)) * plotHeight;
+  const scaleY = (value) =>
+    PADDING.top + ((domainMax - value) / (domainMax - domainMin)) * plotHeight;
 
   const candles = chart.candles.map((candle, index) => {
     const openY = scaleY(candle.open);
@@ -228,11 +236,23 @@ function buildGeometry(chart) {
   });
 
   const levels = [
-    { kind: "trigger", label: `Trigger ${formatPrice(chart.levels.trigger, chart.precision)}`, value: chart.levels.trigger },
-    { kind: "invalidation", label: `Invalid ${formatPrice(chart.levels.invalidation, chart.precision)}`, value: chart.levels.invalidation }
+    {
+      kind: "trigger",
+      label: `Trigger ${formatPrice(chart.levels.trigger, chart.precision)}`,
+      value: chart.levels.trigger
+    },
+    {
+      kind: "invalidation",
+      label: `Invalid ${formatPrice(chart.levels.invalidation, chart.precision)}`,
+      value: chart.levels.invalidation
+    }
   ];
   if (chart.levels.target !== null) {
-    levels.push({ kind: "target", label: `Target ${formatPrice(chart.levels.target, chart.precision)}`, value: chart.levels.target });
+    levels.push({
+      kind: "target",
+      label: `Target ${formatPrice(chart.levels.target, chart.precision)}`,
+      value: chart.levels.target
+    });
   }
 
   return {

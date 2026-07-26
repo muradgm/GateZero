@@ -2,9 +2,12 @@
 
 ## Purpose
 
-Prove that TraderFrame can produce one complete, valid, and reproducible trading-decision lifecycle from real historical EUR/USD market data without manually authored intelligence.
+Prove that TraderFrame can produce one complete, valid, and reproducible trading-decision lifecycle
+from real historical EUR/USD market data without manually authored intelligence.
 
-This milestone is not a profitability claim. It validates data integrity, temporal integrity, deterministic reasoning, instrument-aware risk, explicit paper-simulation assumptions, immutable decision-time evidence, and reproducible outcomes.
+This milestone is not a profitability claim. It validates data integrity, temporal integrity,
+deterministic reasoning, instrument-aware risk, explicit paper-simulation assumptions, immutable
+decision-time evidence, and reproducible outcomes.
 
 ## Scope
 
@@ -86,7 +89,8 @@ Required validity areas:
 
 Evaluates whether the decision was reasonable using only information available at decision time.
 
-Profitability remains separate. A winning outcome does not prove good process, and a losing outcome does not disprove it.
+Profitability remains separate. A winning outcome does not prove good process, and a losing outcome
+does not disprove it.
 
 ## Temporal invariant
 
@@ -98,7 +102,8 @@ The canonical assessment must reject evidence where:
 evidence.availableAt > decisionTimestamp
 ```
 
-The same rule applies to incomplete higher-timeframe candles, future-confirmed swing points, revised values, centered calculations, and end-of-session metrics used before they existed.
+The same rule applies to incomplete higher-timeframe candles, future-confirmed swing points, revised
+values, centered calculations, and end-of-session metrics used before they existed.
 
 ## Data-validation minimum
 
@@ -158,7 +163,8 @@ The immutable decision-time bundle must contain:
 - decision timestamp
 - operator identity
 
-Outcome records and learning events are stored separately and must never rewrite the decision-time bundle.
+Outcome records and learning events are stored separately and must never rewrite the decision-time
+bundle.
 
 ## Release gates
 
@@ -168,15 +174,18 @@ All mandatory lifecycle records exist and required hard caps pass.
 
 ### Gate B — Validity
 
-Data, timestamps, transformations, calculations, risk, and simulation assumptions pass independent validation.
+Data, timestamps, transformations, calculations, risk, and simulation assumptions pass independent
+validation.
 
 ### Gate C — Reproducibility
 
-A run from an empty generated-state directory and frozen inputs produces byte-equivalent canonical outputs, excluding explicitly volatile operational metadata.
+A run from an empty generated-state directory and frozen inputs produces byte-equivalent canonical
+outputs, excluding explicitly volatile operational metadata.
 
 ### Gate D — Workflow
 
-A browser end-to-end test allows an operator to inspect the case, view provenance and blockers, record a decision, inspect the simulation outcome, and review the learning event.
+A browser end-to-end test allows an operator to inspect the case, view provenance and blockers,
+record a decision, inspect the simulation outcome, and review the learning event.
 
 The milestone fails if any gate fails.
 
@@ -199,7 +208,8 @@ The milestone fails if any gate fails.
 
 ## UI freeze
 
-No new analytical panels, markets, agents, broker integrations, or layout systems are allowed during this milestone.
+No new analytical panels, markets, agents, broker integrations, or layout systems are allowed during
+this milestone.
 
 UI changes are allowed only to expose truth-related information:
 
@@ -214,4 +224,5 @@ UI changes are allowed only to expose truth-related information:
 
 ## Product position
 
-> TraderFrame creates reproducible, evidence-gated trading decision records and measures whether the decision process improves over time.
+> TraderFrame creates reproducible, evidence-gated trading decision records and measures whether the
+> decision process improves over time.

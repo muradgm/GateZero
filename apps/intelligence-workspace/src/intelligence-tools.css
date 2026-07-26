@@ -24,7 +24,9 @@ body.intelligence-tools-open {
 .intelligence-tools-launcher:focus-visible {
   border-color: rgba(124, 92, 255, 0.9);
   outline: none;
-  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.2), 0 20px 48px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(124, 92, 255, 0.2),
+    0 20px 48px rgba(0, 0, 0, 0.5);
 }
 
 .intelligence-tools-launcher span,

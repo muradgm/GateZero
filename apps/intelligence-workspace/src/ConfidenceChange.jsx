@@ -11,7 +11,9 @@ export function ConfidenceChange({ candidate }) {
       <PanelHeading
         eyebrow="Score explanation"
         title="Why confidence changed"
-        aside={<Badge tone={model.net >= 0 ? "success" : "warning"}>{formatDelta(model.net)} pts</Badge>}
+        aside={
+          <Badge tone={model.net >= 0 ? "success" : "warning"}>{formatDelta(model.net)} pts</Badge>
+        }
       />
 
       <div className="confidence-change-summary">
@@ -36,7 +38,10 @@ export function ConfidenceChange({ candidate }) {
       <div className="confidence-change-body">
         <div className="confidence-change-list">
           {model.steps.map((step) => (
-            <details className={`confidence-change-step confidence-change-step--${step.delta >= 0 ? "up" : "down"}`} key={step.id}>
+            <details
+              className={`confidence-change-step confidence-change-step--${step.delta >= 0 ? "up" : "down"}`}
+              key={step.id}
+            >
               <summary>
                 <span className="confidence-change-step__delta">{formatDelta(step.delta)}</span>
                 <div>
@@ -51,7 +56,10 @@ export function ConfidenceChange({ candidate }) {
           ))}
         </div>
 
-        <div className="confidence-change-chart" aria-label="Cumulative evidence score construction">
+        <div
+          className="confidence-change-chart"
+          aria-label="Cumulative evidence score construction"
+        >
           <svg viewBox="0 0 420 190" role="img">
             <title>Cumulative evidence score from neutral baseline to current score</title>
             <g className="confidence-change-grid">
@@ -60,7 +68,9 @@ export function ConfidenceChange({ candidate }) {
                 return (
                   <g key={value}>
                     <line x1="28" x2="402" y1={y} y2={y} />
-                    <text x="4" y={y + 3}>{value}</text>
+                    <text x="4" y={y + 3}>
+                      {value}
+                    </text>
                   </g>
                 );
               })}
@@ -69,7 +79,11 @@ export function ConfidenceChange({ candidate }) {
             <path className="confidence-change-line" d={linePath(model.points)} />
             {model.points.map((point, index) => (
               <circle
-                className={index === model.points.length - 1 ? "confidence-change-point confidence-change-point--current" : "confidence-change-point"}
+                className={
+                  index === model.points.length - 1
+                    ? "confidence-change-point confidence-change-point--current"
+                    : "confidence-change-point"
+                }
                 key={`${point.x}-${point.value}`}
                 cx={point.x}
                 cy={point.y}
@@ -78,7 +92,8 @@ export function ConfidenceChange({ candidate }) {
             ))}
           </svg>
           <p>
-            This reconstructs score formation from the current evidence ledger. It is not a historical market snapshot series or a probability forecast.
+            This reconstructs score formation from the current evidence ledger. It is not a
+            historical market snapshot series or a probability forecast.
           </p>
         </div>
       </div>

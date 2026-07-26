@@ -20,7 +20,10 @@
     radial-gradient(circle at 54% 42%, rgba(124, 92, 255, 0.1), transparent 34%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: auto, 28px 28px, 28px 28px;
+  background-size:
+    auto,
+    28px 28px,
+    28px 28px;
 }
 
 .evidence-graph-flow-label {
@@ -35,10 +38,18 @@
   pointer-events: none;
 }
 
-.evidence-graph-flow-label--input { left: 4%; }
-.evidence-graph-flow-label--evidence { left: 26%; }
-.evidence-graph-flow-label--review { left: 69%; }
-.evidence-graph-flow-label--decision { right: 3%; }
+.evidence-graph-flow-label--input {
+  left: 4%;
+}
+.evidence-graph-flow-label--evidence {
+  left: 26%;
+}
+.evidence-graph-flow-label--review {
+  left: 69%;
+}
+.evidence-graph-flow-label--decision {
+  right: 3%;
+}
 
 .evidence-graph-edges {
   position: absolute;
@@ -57,7 +68,10 @@
   stroke: rgba(142, 151, 177, 0.25);
   stroke-width: 0.42;
   vector-effect: non-scaling-stroke;
-  transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
+  transition:
+    opacity 180ms ease,
+    stroke 180ms ease,
+    stroke-width 180ms ease;
 }
 
 .evidence-edge--active {
@@ -73,7 +87,9 @@
 }
 
 @keyframes evidence-flow {
-  to { stroke-dashoffset: -18; }
+  to {
+    stroke-dashoffset: -18;
+  }
 }
 
 .evidence-node {
@@ -91,7 +107,11 @@
   color: var(--tf-color-text);
   text-align: left;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
-  transition: transform 170ms ease, border-color 170ms ease, box-shadow 170ms ease, opacity 170ms ease;
+  transition:
+    transform 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    opacity 170ms ease;
 }
 
 .evidence-node--primary {
@@ -111,7 +131,9 @@
 .evidence-node--active {
   transform: translate(-50%, -50%) scale(1.038);
   border-color: rgba(124, 92, 255, 0.84);
-  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.2), 0 16px 36px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(124, 92, 255, 0.2),
+    0 16px 36px rgba(0, 0, 0, 0.4);
   outline: none;
   z-index: 4;
 }
@@ -127,8 +149,15 @@
 }
 
 @keyframes evidence-node-pulse {
-  0%, 100% { opacity: 0.34; transform: scale(0.99); }
-  50% { opacity: 0.8; transform: scale(1.025); }
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.025);
+  }
 }
 
 .evidence-node--muted {
@@ -168,10 +197,18 @@
   -webkit-line-clamp: 2;
 }
 
-.evidence-node--success small { color: var(--tf-color-teal); }
-.evidence-node--warning small { color: var(--tf-color-orange); }
-.evidence-node--danger small { color: var(--tf-color-danger); }
-.evidence-node--neutral small { color: var(--tf-color-purple); }
+.evidence-node--success small {
+  color: var(--tf-color-teal);
+}
+.evidence-node--warning small {
+  color: var(--tf-color-orange);
+}
+.evidence-node--danger small {
+  color: var(--tf-color-danger);
+}
+.evidence-node--neutral small {
+  color: var(--tf-color-purple);
+}
 
 .evidence-node-inspector {
   min-width: 0;

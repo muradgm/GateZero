@@ -38,7 +38,11 @@ export function WorkspaceRoot() {
 
   const selected = useMemo(() => {
     if (!workspace) return null;
-    return workspace.candidates.find((candidate) => candidate.id === selectedId) ?? workspace.candidates[0] ?? null;
+    return (
+      workspace.candidates.find((candidate) => candidate.id === selectedId) ??
+      workspace.candidates[0] ??
+      null
+    );
   }, [workspace, selectedId]);
 
   return (

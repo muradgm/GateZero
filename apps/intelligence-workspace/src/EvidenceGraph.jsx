@@ -48,13 +48,30 @@ export function EvidenceGraph({ candidate }) {
       <div className="evidence-graph-layout">
         <div className="evidence-graph-canvas" role="group" aria-label="Evidence dependency graph">
           <div className="evidence-graph-flow-label evidence-graph-flow-label--input">Context</div>
-          <div className="evidence-graph-flow-label evidence-graph-flow-label--evidence">Evidence</div>
+          <div className="evidence-graph-flow-label evidence-graph-flow-label--evidence">
+            Evidence
+          </div>
           <div className="evidence-graph-flow-label evidence-graph-flow-label--review">Review</div>
-          <div className="evidence-graph-flow-label evidence-graph-flow-label--decision">Decision</div>
+          <div className="evidence-graph-flow-label evidence-graph-flow-label--decision">
+            Decision
+          </div>
 
-          <svg className="evidence-graph-edges" viewBox="0 0 100 82" preserveAspectRatio="none" aria-hidden="true">
+          <svg
+            className="evidence-graph-edges"
+            viewBox="0 0 100 82"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
             <defs>
-              <marker id="evidence-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+              <marker
+                id="evidence-arrow"
+                viewBox="0 0 8 8"
+                refX="7"
+                refY="4"
+                markerWidth="5"
+                markerHeight="5"
+                orient="auto"
+              >
                 <path d="M 0 0 L 8 4 L 0 8 z" />
               </marker>
             </defs>
@@ -124,7 +141,8 @@ export function EvidenceGraph({ candidate }) {
       </div>
 
       <p className="evidence-graph-note">
-        Select any node to isolate its upstream and downstream dependencies. The graph explains relationships; it does not create execution authority.
+        Select any node to isolate its upstream and downstream dependencies. The graph explains
+        relationships; it does not create execution authority.
       </p>
     </Panel>
   );
@@ -174,7 +192,8 @@ function buildGraph(candidate) {
   const byDimension = new Map(report.contributions.map((item) => [item.dimension, item]));
   const contribution = (dimension) => byDimension.get(dimension);
   const toneFor = (points = 0) => (points > 0 ? "success" : points < 0 ? "danger" : "neutral");
-  const valueFor = (item, fallback) => (item ? `${item.points > 0 ? "+" : ""}${item.points}` : fallback);
+  const valueFor = (item, fallback) =>
+    item ? `${item.points > 0 ? "+" : ""}${item.points}` : fallback;
   const evidenceFor = (item) => item?.evidenceIds ?? [];
   const nodeFor = (id, label, fallback, shortFallback) => {
     const item = contribution(id);
@@ -188,7 +207,8 @@ function buildGraph(candidate) {
       shortSummary: item?.rationale ?? shortFallback,
       summary: item?.rationale ?? shortFallback,
       evidence: evidenceFor(item),
-      limitation: item?.limitation ?? `No independent ${label.toLowerCase()} contribution was recorded.`
+      limitation:
+        item?.limitation ?? `No independent ${label.toLowerCase()} contribution was recorded.`
     };
   };
 
@@ -206,19 +226,40 @@ function buildGraph(candidate) {
         shortSummary: `${candidate.context.trend} · ${candidate.context.volatility}`,
         summary: `${candidate.context.trend} trend, ${candidate.context.structure} structure, ${candidate.context.volatility} volatility.`,
         evidence: [],
-        limitation: "Context is based on the generated local snapshot rather than a live market feed."
+        limitation:
+          "Context is based on the generated local snapshot rather than a live market feed."
       },
       nodeFor("trend", "Trend", candidate.context.trend, `Trend is ${candidate.context.trend}.`),
-      nodeFor("structure", "Structure", candidate.context.structure, `Structure is ${candidate.context.structure}.`),
-      nodeFor("momentum", "Momentum", candidate.context.momentum ?? "Neutral", "No independent momentum contribution is present."),
-      nodeFor("liquidity", "Liquidity", "Neutral", "No independent liquidity contribution is present."),
+      nodeFor(
+        "structure",
+        "Structure",
+        candidate.context.structure,
+        `Structure is ${candidate.context.structure}.`
+      ),
+      nodeFor(
+        "momentum",
+        "Momentum",
+        candidate.context.momentum ?? "Neutral",
+        "No independent momentum contribution is present."
+      ),
+      nodeFor(
+        "liquidity",
+        "Liquidity",
+        "Neutral",
+        "No independent liquidity contribution is present."
+      ),
       nodeFor("macro", "Macro", "Neutral", "No direct macro contribution is present."),
       {
         id: "evidence",
         kind: "Aggregate",
         label: "Evidence score",
         value: String(report.evidenceScore),
-        tone: report.evidenceScore >= 70 ? "success" : report.evidenceScore >= 45 ? "warning" : "danger",
+        tone:
+          report.evidenceScore >= 70
+            ? "success"
+            : report.evidenceScore >= 45
+              ? "warning"
+              : "danger",
         tier: "primary",
         shortSummary: `${report.contributions.length} traceable inputs`,
         summary: `${report.contributions.length} traceable contributions produce the current bounded score.`,
@@ -241,20 +282,30 @@ function buildGraph(candidate) {
         id: "council",
         kind: "Challenge",
         label: "Evidence council",
-        value: report.downgradeReasons.length ? `${report.downgradeReasons.length} challenge` : "Aligned",
+        value: report.downgradeReasons.length
+          ? `${report.downgradeReasons.length} challenge`
+          : "Aligned",
         tone: report.downgradeReasons.length ? "warning" : "success",
         tier: "primary",
-        shortSummary: report.downgradeReasons.length ? "Disagreement remains" : "Specialists aligned",
+        shortSummary: report.downgradeReasons.length
+          ? "Disagreement remains"
+          : "Specialists aligned",
         summary: report.downgradeReasons[0] ?? report.bearCase.summary,
         evidence: report.contributions.flatMap((item) => item.evidenceIds).slice(0, 4),
-        limitation: "Specialist perspectives are deterministic and derived from the same local evidence set."
+        limitation:
+          "Specialist perspectives are deterministic and derived from the same local evidence set."
       },
       {
         id: "decision",
         kind: "Output",
         label: "Bounded decision",
         value: report.recommendation.replaceAll("_", " "),
-        tone: report.recommendation === "PAPER_SIMULATE" ? "success" : report.recommendation === "WATCH" ? "warning" : "danger",
+        tone:
+          report.recommendation === "PAPER_SIMULATE"
+            ? "success"
+            : report.recommendation === "WATCH"
+              ? "warning"
+              : "danger",
         tier: "primary",
         shortSummary: "Operator-controlled",
         summary: report.neutralCase.summary,

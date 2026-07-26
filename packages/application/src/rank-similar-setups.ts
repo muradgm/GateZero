@@ -43,7 +43,9 @@ export function rankSimilarSetups(
 ): SimilarSetupMatch[] {
   return historicalCases
     .map((historical) => compareSetupProfiles(current, historical))
-    .sort((a, b) => b.similarityScore - a.similarityScore || b.observedAt.localeCompare(a.observedAt))
+    .sort(
+      (a, b) => b.similarityScore - a.similarityScore || b.observedAt.localeCompare(a.observedAt)
+    )
     .slice(0, Math.max(0, limit));
 }
 
@@ -55,15 +57,52 @@ function compareSetupProfiles(
   const matchedFeatures: string[] = [];
   const differingFeatures: string[] = [];
 
-  score += compareScalar("Market", current.market, historical.market, FEATURE_WEIGHTS.market, matchedFeatures, differingFeatures);
-  score += compareScalar("Trend", current.trend, historical.trend, FEATURE_WEIGHTS.trend, matchedFeatures, differingFeatures);
-  score += compareScalar("Structure", current.structure, historical.structure, FEATURE_WEIGHTS.structure, matchedFeatures, differingFeatures);
-  score += compareScalar("Momentum", current.momentum, historical.momentum, FEATURE_WEIGHTS.momentum, matchedFeatures, differingFeatures);
-  score += compareScalar("Volatility", current.volatility, historical.volatility, FEATURE_WEIGHTS.volatility, matchedFeatures, differingFeatures);
+  score += compareScalar(
+    "Market",
+    current.market,
+    historical.market,
+    FEATURE_WEIGHTS.market,
+    matchedFeatures,
+    differingFeatures
+  );
+  score += compareScalar(
+    "Trend",
+    current.trend,
+    historical.trend,
+    FEATURE_WEIGHTS.trend,
+    matchedFeatures,
+    differingFeatures
+  );
+  score += compareScalar(
+    "Structure",
+    current.structure,
+    historical.structure,
+    FEATURE_WEIGHTS.structure,
+    matchedFeatures,
+    differingFeatures
+  );
+  score += compareScalar(
+    "Momentum",
+    current.momentum,
+    historical.momentum,
+    FEATURE_WEIGHTS.momentum,
+    matchedFeatures,
+    differingFeatures
+  );
+  score += compareScalar(
+    "Volatility",
+    current.volatility,
+    historical.volatility,
+    FEATURE_WEIGHTS.volatility,
+    matchedFeatures,
+    differingFeatures
+  );
 
   const currentDimensions = new Set(current.evidenceDimensions);
   const historicalDimensions = new Set(historical.evidenceDimensions);
-  const intersection = [...currentDimensions].filter((dimension) => historicalDimensions.has(dimension));
+  const intersection = [...currentDimensions].filter((dimension) =>
+    historicalDimensions.has(dimension)
+  );
   const union = new Set([...currentDimensions, ...historicalDimensions]);
   const overlap = union.size === 0 ? 1 : intersection.length / union.size;
   score += overlap * FEATURE_WEIGHTS.evidenceDimensions;

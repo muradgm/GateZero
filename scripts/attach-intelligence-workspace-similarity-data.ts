@@ -30,7 +30,9 @@ for (const candidate of snapshot.candidates) {
       structure: candidate.context.structure,
       momentum: candidate.context.momentum,
       volatility: candidate.context.volatility,
-      evidenceDimensions: candidate.report.contributions.map((contribution) => contribution.dimension)
+      evidenceDimensions: candidate.report.contributions.map(
+        (contribution) => contribution.dimension
+      )
     },
     workspaceHistoricalCases,
     3
@@ -38,4 +40,6 @@ for (const candidate of snapshot.candidates) {
 }
 
 await writeFile(target, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
-console.log(`Attached historical similarity matches to ${snapshot.candidates.length} workspace candidates.`);
+console.log(
+  `Attached historical similarity matches to ${snapshot.candidates.length} workspace candidates.`
+);

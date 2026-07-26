@@ -70,10 +70,16 @@ export function evaluateEurUsdOverlapPullback(
     observation.sweepPenetrationPips >= strategy.liquiditySweep.minimumPenetrationPips &&
     observation.sweepReclaimedWithinCandles <= strategy.liquiditySweep.reclaimWithinCandles &&
     observation.displacementAtr >= strategy.liquiditySweep.minimumDisplacementAtr;
-  const triggerQualified = observation.triggerConfirmed && observation.triggerAgeCandles <= strategy.trigger.maximumTriggerAgeCandles;
+  const triggerQualified =
+    observation.triggerConfirmed &&
+    observation.triggerAgeCandles <= strategy.trigger.maximumTriggerAgeCandles;
   const eventClear = eventRestrictionPassed(observation.minutesToNearestHighImpactEvent, strategy);
-  const invalidationDefined = observation.invalidationPrice !== undefined && observation.invalidationPrice !== observation.currentPrice;
-  const expired = observation.sessionEnded || observation.candlesSinceTrigger > strategy.expiry.maximumCandlesAfterTrigger;
+  const invalidationDefined =
+    observation.invalidationPrice !== undefined &&
+    observation.invalidationPrice !== observation.currentPrice;
+  const expired =
+    observation.sessionEnded ||
+    observation.candlesSinceTrigger > strategy.expiry.maximumCandlesAfterTrigger;
 
   const rules: StrategyRuleResult[] = [
     rule(
@@ -82,7 +88,9 @@ export function evaluateEurUsdOverlapPullback(
       observation.dataReady && temporalIntegrity ? "PASS" : "BLOCKED",
       `dataReady=${observation.dataReady}; availableAt=${observation.availableAt}`,
       "Validated data must be available no later than the decision timestamp.",
-      temporalIntegrity ? "Validated market inputs are available at decision time." : "Observation includes information unavailable at decision time.",
+      temporalIntegrity
+        ? "Validated market inputs are available at decision time."
+        : "Observation includes information unavailable at decision time.",
       observation
     ),
     rule(
@@ -91,7 +99,9 @@ export function evaluateEurUsdOverlapPullback(
       observation.sessionEligible ? "PASS" : "FAIL",
       `sessionEligible=${observation.sessionEligible}`,
       `Decision time must fall inside ${formatMinute(strategy.session.startMinuteUtc)}–${formatMinute(strategy.session.endMinuteUtc)} UTC.`,
-      observation.sessionEligible ? "Candidate is inside the eligible overlap window." : "Candidate is outside the eligible overlap window.",
+      observation.sessionEligible
+        ? "Candidate is inside the eligible overlap window."
+        : "Candidate is outside the eligible overlap window.",
       observation
     ),
     rule(
@@ -100,7 +110,9 @@ export function evaluateEurUsdOverlapPullback(
       observation.higherTimeframeAligned ? "PASS" : "FAIL",
       `aligned=${observation.higherTimeframeAligned}`,
       "Closed 1H and 4H context must align with the proposed direction.",
-      observation.higherTimeframeAligned ? "Closed higher-timeframe context is aligned." : "Higher-timeframe context is not aligned.",
+      observation.higherTimeframeAligned
+        ? "Closed higher-timeframe context is aligned."
+        : "Higher-timeframe context is not aligned.",
       observation
     ),
     rule(
@@ -109,7 +121,9 @@ export function evaluateEurUsdOverlapPullback(
       pullbackQualified ? "PASS" : "FAIL",
       `${observation.pullbackRetracementAtr.toFixed(2)} ATR; age=${observation.pullbackAgeCandles}`,
       `Retracement must be ${strategy.pullback.minimumRetracementAtr}–${strategy.pullback.maximumRetracementAtr} ATR and no older than ${strategy.pullback.maximumAgeCandles} candles.`,
-      pullbackQualified ? "Pullback depth and age are within the strategy boundary." : "Pullback depth or age is outside the strategy boundary.",
+      pullbackQualified
+        ? "Pullback depth and age are within the strategy boundary."
+        : "Pullback depth or age is outside the strategy boundary.",
       observation
     ),
     rule(
@@ -118,7 +132,9 @@ export function evaluateEurUsdOverlapPullback(
       sweepQualified ? "PASS" : "FAIL",
       `${observation.sweepPenetrationPips} pips; reclaim=${observation.sweepReclaimedWithinCandles}; displacement=${observation.displacementAtr.toFixed(2)} ATR`,
       `Sweep must penetrate by at least ${strategy.liquiditySweep.minimumPenetrationPips} pip, reclaim within ${strategy.liquiditySweep.reclaimWithinCandles} candles, and displace at least ${strategy.liquiditySweep.minimumDisplacementAtr} ATR.`,
-      sweepQualified ? "Liquidity event satisfies the deterministic sweep rule." : "Liquidity event does not satisfy all sweep conditions.",
+      sweepQualified
+        ? "Liquidity event satisfies the deterministic sweep rule."
+        : "Liquidity event does not satisfy all sweep conditions.",
       observation
     ),
     rule(
@@ -127,7 +143,9 @@ export function evaluateEurUsdOverlapPullback(
       triggerQualified ? "PASS" : "FAIL",
       `confirmed=${observation.triggerConfirmed}; age=${observation.triggerAgeCandles}`,
       `A close-confirmed trigger must be no older than ${strategy.trigger.maximumTriggerAgeCandles} candles.`,
-      triggerQualified ? "Entry trigger is confirmed and current." : "Entry trigger is absent or stale.",
+      triggerQualified
+        ? "Entry trigger is confirmed and current."
+        : "Entry trigger is absent or stale.",
       observation
     ),
     rule(
@@ -136,16 +154,22 @@ export function evaluateEurUsdOverlapPullback(
       eventClear ? "PASS" : "FAIL",
       `nearestEventMinutes=${observation.minutesToNearestHighImpactEvent}`,
       `No EUR or USD high-impact event may occur within ${strategy.eventRestriction.minimumMinutesBeforeHighImpactEvent} minutes before or ${strategy.eventRestriction.minimumMinutesAfterHighImpactEvent} minutes after the decision.`,
-      eventClear ? "High-impact event restriction is clear." : "High-impact EUR or USD event restriction blocks progression.",
+      eventClear
+        ? "High-impact event restriction is clear."
+        : "High-impact EUR or USD event restriction blocks progression.",
       observation
     ),
     rule(
       "invalidation-defined",
       "INVALIDATION_DEFINED",
       invalidationDefined ? "PASS" : "BLOCKED",
-      observation.invalidationPrice === undefined ? "missing" : String(observation.invalidationPrice),
+      observation.invalidationPrice === undefined
+        ? "missing"
+        : String(observation.invalidationPrice),
       "A numeric invalidation beyond the sweep extreme must be defined and differ from current price.",
-      invalidationDefined ? "Invalidation is explicit and observable." : "Invalidation is missing or unusable.",
+      invalidationDefined
+        ? "Invalidation is explicit and observable."
+        : "Invalidation is missing or unusable.",
       observation
     ),
     rule(
@@ -165,8 +189,9 @@ export function evaluateEurUsdOverlapPullback(
   const allPassed = rules.every((item) => item.status === "PASS");
   const hardReject = rules.some(
     (item) =>
-      ["DATA_READY", "SESSION_ELIGIBLE", "INVALIDATION_DEFINED", "NOT_EXPIRED"].includes(item.gate) &&
-      item.status !== "PASS"
+      ["DATA_READY", "SESSION_ELIGIBLE", "INVALIDATION_DEFINED", "NOT_EXPIRED"].includes(
+        item.gate
+      ) && item.status !== "PASS"
   );
   const recommendation = allPassed ? "PAPER_SIMULATE" : hardReject ? "REJECT" : "WATCH";
 
@@ -179,7 +204,14 @@ export function evaluateEurUsdOverlapPullback(
     recommendation,
     blockers,
     nextAction: nextActionFor(recommendation, rules),
-    ...(expired ? {} : { expiresAt: calculateExpiry(observation.decisionTimestamp, strategy.expiry.maximumCandlesAfterTrigger) }),
+    ...(expired
+      ? {}
+      : {
+          expiresAt: calculateExpiry(
+            observation.decisionTimestamp,
+            strategy.expiry.maximumCandlesAfterTrigger
+          )
+        }),
     ruleResults: rules
   };
 }
@@ -210,11 +242,18 @@ function rule(
   };
 }
 
-function nextActionFor(recommendation: StrategyCandidateAssessment["recommendation"], rules: StrategyRuleResult[]): string {
-  if (recommendation === "PAPER_SIMULATE") return "Submit the eligible setup to instrument-aware risk review.";
-  if (recommendation === "REJECT") return "Close the candidate and preserve the failed gate reasons in the decision trace.";
+function nextActionFor(
+  recommendation: StrategyCandidateAssessment["recommendation"],
+  rules: StrategyRuleResult[]
+): string {
+  if (recommendation === "PAPER_SIMULATE")
+    return "Submit the eligible setup to instrument-aware risk review.";
+  if (recommendation === "REJECT")
+    return "Close the candidate and preserve the failed gate reasons in the decision trace.";
   const first = rules.find((item) => item.status !== "PASS");
-  return first ? `Wait for or resolve ${first.gate}: ${first.expectedCondition}` : "Continue evidence review.";
+  return first
+    ? `Wait for or resolve ${first.gate}: ${first.expectedCondition}`
+    : "Continue evidence review.";
 }
 
 function calculateExpiry(decisionTimestamp: string, candles: number): string {

@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  aggregateValidatedMarketCandles,
-  selectCandlesAvailableAtDecision
-} from "../src/index.js";
+import { aggregateValidatedMarketCandles, selectCandlesAvailableAtDecision } from "../src/index.js";
 import type { NormalizedMarketCandle } from "@traderframe/contracts";
 
 function sourceCandle(index: number, start = "2026-07-24T08:00:00.000Z"): NormalizedMarketCandle {
@@ -71,7 +68,9 @@ describe("aggregateValidatedMarketCandles", () => {
     });
 
     expect(result.candles).toEqual([]);
-    expect(result.failures.some((failure) => failure.code === "UNCLOSED_HIGHER_TIMEFRAME_INPUT")).toBe(true);
+    expect(
+      result.failures.some((failure) => failure.code === "UNCLOSED_HIGHER_TIMEFRAME_INPUT")
+    ).toBe(true);
   });
 
   it("blocks a closed bucket with a missing source interval", () => {

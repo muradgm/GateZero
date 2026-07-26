@@ -64,7 +64,9 @@ describe("validateAndNormalizeMarketCandles", () => {
       ]
     });
 
-    expect(result.failures.map((item) => item.code)).toEqual(expect.arrayContaining(["INVALID_OHLC", "INCOMPLETE_CANDLE"]));
+    expect(result.failures.map((item) => item.code)).toEqual(
+      expect.arrayContaining(["INVALID_OHLC", "INCOMPLETE_CANDLE"])
+    );
     expect(result.normalizedRecordCount).toBe(0);
   });
 
@@ -96,6 +98,8 @@ describe("validateAndNormalizeMarketCandles", () => {
       ]
     });
 
-    expect(result.failures.map((item) => item.code)).toEqual(expect.arrayContaining(["INSTRUMENT_MISMATCH", "TIMEFRAME_MISMATCH"]));
+    expect(result.failures.map((item) => item.code)).toEqual(
+      expect.arrayContaining(["INSTRUMENT_MISMATCH", "TIMEFRAME_MISMATCH"])
+    );
   });
 });

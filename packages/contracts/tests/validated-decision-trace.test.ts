@@ -166,7 +166,9 @@ describe("Simulation policy contract", () => {
   } as const;
 
   it("accepts an explicit deterministic EURUSD paper-simulation policy", () => {
-    expect(SimulationPolicySchema.parse(policy).sameCandleConflictPolicy).toBe("LOWER_TIMEFRAME_REQUIRED");
+    expect(SimulationPolicySchema.parse(policy).sameCandleConflictPolicy).toBe(
+      "LOWER_TIMEFRAME_REQUIRED"
+    );
   });
 
   it("rejects a fixed spread policy without a pip value", () => {

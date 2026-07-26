@@ -43,15 +43,28 @@ export function deriveEurUsdOverlapObservation(
 ): DerivedEurUsdOverlapObservation {
   const strategy = input.strategy ?? EURUSD_OVERLAP_PULLBACK_V1;
   const decisionMs = Date.parse(input.decisionTimestamp);
-  if (!Number.isFinite(decisionMs)) throw new Error("decisionTimestamp must be a valid ISO datetime");
+  if (!Number.isFinite(decisionMs))
+    throw new Error("decisionTimestamp must be a valid ISO datetime");
 
-  const eligible15m = sortCandles(input.candles15m.filter((candle) => Date.parse(candle.closedAt) <= decisionMs));
-  const eligible1H = sortCandles(input.candles1H.filter((candle) => Date.parse(candle.availableAt) <= decisionMs));
-  const eligible4H = sortCandles(input.candles4H.filter((candle) => Date.parse(candle.availableAt) <= decisionMs));
+  const eligible15m = sortCandles(
+    input.candles15m.filter((candle) => Date.parse(candle.closedAt) <= decisionMs)
+  );
+  const eligible1H = sortCandles(
+    input.candles1H.filter((candle) => Date.parse(candle.availableAt) <= decisionMs)
+  );
+  const eligible4H = sortCandles(
+    input.candles4H.filter((candle) => Date.parse(candle.availableAt) <= decisionMs)
+  );
   const excludedFutureCandleIds = [
-    ...input.candles15m.filter((candle) => Date.parse(candle.closedAt) > decisionMs).map((candle) => candle.candleId),
-    ...input.candles1H.filter((candle) => Date.parse(candle.availableAt) > decisionMs).map((candle) => candle.candleId),
-    ...input.candles4H.filter((candle) => Date.parse(candle.availableAt) > decisionMs).map((candle) => candle.candleId)
+    ...input.candles15m
+      .filter((candle) => Date.parse(candle.closedAt) > decisionMs)
+      .map((candle) => candle.candleId),
+    ...input.candles1H
+      .filter((candle) => Date.parse(candle.availableAt) > decisionMs)
+      .map((candle) => candle.candleId),
+    ...input.candles4H
+      .filter((candle) => Date.parse(candle.availableAt) > decisionMs)
+      .map((candle) => candle.candleId)
   ].sort();
 
   const minimumSourceCandles = Math.max(
@@ -63,8 +76,10 @@ export function deriveEurUsdOverlapObservation(
     eligible1H.length >= strategy.trend.slowEmaPeriod &&
     eligible4H.length >= strategy.trend.slowEmaPeriod;
   const reasons: string[] = [];
-  if (!dataReady) reasons.push("Insufficient closed candles for ATR, sweep, or higher-timeframe EMA derivation.");
-  if (eligible15m.length === 0) throw new Error("at least one decision-time eligible 15m candle is required");
+  if (!dataReady)
+    reasons.push("Insufficient closed candles for ATR, sweep, or higher-timeframe EMA derivation.");
+  if (eligible15m.length === 0)
+    throw new Error("at least one decision-time eligible 15m candle is required");
 
   const ema1H = emaPair(eligible1H, strategy.trend.fastEmaPeriod, strategy.trend.slowEmaPeriod);
   const ema4H = emaPair(eligible4H, strategy.trend.fastEmaPeriod, strategy.trend.slowEmaPeriod);
@@ -91,16 +106,19 @@ export function deriveEurUsdOverlapObservation(
 
   const decisionDate = new Date(decisionMs);
   const minuteUtc = decisionDate.getUTCHours() * 60 + decisionDate.getUTCMinutes();
-  const sessionEligible = minuteUtc >= strategy.session.startMinuteUtc && minuteUtc < strategy.session.endMinuteUtc;
+  const sessionEligible =
+    minuteUtc >= strategy.session.startMinuteUtc && minuteUtc < strategy.session.endMinuteUtc;
   const sessionEnded = minuteUtc >= strategy.session.endMinuteUtc;
-  const evidenceIds = unique([
-    latest.sourceHash,
-    latest.candleId,
-    eligible1H.at(-1)?.sourceHash,
-    eligible4H.at(-1)?.sourceHash,
-    sweep?.sweepCandle.sourceHash,
-    trigger?.candle.sourceHash
-  ].filter((value): value is string => Boolean(value)));
+  const evidenceIds = unique(
+    [
+      latest.sourceHash,
+      latest.candleId,
+      eligible1H.at(-1)?.sourceHash,
+      eligible4H.at(-1)?.sourceHash,
+      sweep?.sweepCandle.sourceHash,
+      trigger?.candle.sourceHash
+    ].filter((value): value is string => Boolean(value))
+  );
   const latestAvailability = latestIso([
     latest.closedAt,
     eligible1H.at(-1)?.availableAt,
@@ -110,13 +128,15 @@ export function deriveEurUsdOverlapObservation(
   ]);
 
   const observation: EurUsdOverlapPullbackObservation = {
-    candidateId: stableId([
-      strategy.strategyId,
-      strategy.version,
-      input.decisionTimestamp,
-      direction,
-      ...evidenceIds
-    ].join("|")),
+    candidateId: stableId(
+      [
+        strategy.strategyId,
+        strategy.version,
+        input.decisionTimestamp,
+        direction,
+        ...evidenceIds
+      ].join("|")
+    ),
     decisionTimestamp: input.decisionTimestamp,
     direction,
     dataReady,
@@ -126,7 +146,8 @@ export function deriveEurUsdOverlapObservation(
     pullbackAgeCandles: pullback.ageCandles,
     liquiditySweepDetected: Boolean(sweep),
     sweepPenetrationPips: sweep?.penetrationPips ?? 0,
-    sweepReclaimedWithinCandles: sweep?.reclaimWithinCandles ?? strategy.liquiditySweep.reclaimWithinCandles + 1,
+    sweepReclaimedWithinCandles:
+      sweep?.reclaimWithinCandles ?? strategy.liquiditySweep.reclaimWithinCandles + 1,
     displacementAtr: sweep?.displacementAtr ?? 0,
     triggerConfirmed: Boolean(trigger),
     triggerAgeCandles: trigger?.ageCandles ?? strategy.trigger.maximumTriggerAgeCandles + 1,
@@ -166,11 +187,17 @@ function deriveDirection(
 ): "LONG" | "SHORT" {
   if (mode === "LONG_ONLY") return "LONG";
   if (mode === "SHORT_ONLY") return "SHORT";
-  const longVotes = Number((ema1H.fast ?? 0) > (ema1H.slow ?? 0)) + Number((ema4H.fast ?? 0) > (ema4H.slow ?? 0));
+  const longVotes =
+    Number((ema1H.fast ?? 0) > (ema1H.slow ?? 0)) + Number((ema4H.fast ?? 0) > (ema4H.slow ?? 0));
   return longVotes >= 1 ? "LONG" : "SHORT";
 }
 
-function derivePullback(candles: Candle[], direction: "LONG" | "SHORT", atr: number | null, maximumAge: number) {
+function derivePullback(
+  candles: Candle[],
+  direction: "LONG" | "SHORT",
+  atr: number | null,
+  maximumAge: number
+) {
   if (!atr || atr <= 0) return { retracementAtr: 0, ageCandles: maximumAge + 1 };
   const window = candles.slice(-(maximumAge + 1));
   const latest = window.at(-1)!;
@@ -178,12 +205,18 @@ function derivePullback(candles: Candle[], direction: "LONG" | "SHORT", atr: num
   for (let index = 1; index < window.length; index += 1) {
     const candidate = window[index];
     const current = window[extremeIndex];
-    if ((direction === "LONG" && candidate.high > current.high) || (direction === "SHORT" && candidate.low < current.low)) {
+    if (
+      (direction === "LONG" && candidate.high > current.high) ||
+      (direction === "SHORT" && candidate.low < current.low)
+    ) {
       extremeIndex = index;
     }
   }
   const extreme = window[extremeIndex];
-  const distance = direction === "LONG" ? Math.max(0, extreme.high - latest.close) : Math.max(0, latest.close - extreme.low);
+  const distance =
+    direction === "LONG"
+      ? Math.max(0, extreme.high - latest.close)
+      : Math.max(0, latest.close - extreme.low);
   return {
     retracementAtr: roundMetric(distance / atr),
     ageCandles: window.length - 1 - extremeIndex
@@ -210,18 +243,26 @@ function deriveSweep(
 
   for (let sweepIndex = lookback; sweepIndex < candles.length; sweepIndex += 1) {
     const prior = candles.slice(sweepIndex - lookback, sweepIndex);
-    const swingLevel = direction === "LONG"
-      ? Math.min(...prior.map((candle) => candle.low))
-      : Math.max(...prior.map((candle) => candle.high));
+    const swingLevel =
+      direction === "LONG"
+        ? Math.min(...prior.map((candle) => candle.low))
+        : Math.max(...prior.map((candle) => candle.high));
     const sweepCandle = candles[sweepIndex];
-    const penetration = direction === "LONG" ? swingLevel - sweepCandle.low : sweepCandle.high - swingLevel;
+    const penetration =
+      direction === "LONG" ? swingLevel - sweepCandle.low : sweepCandle.high - swingLevel;
     const penetrationPips = penetration / PIP_SIZE;
     if (penetrationPips < strategy.liquiditySweep.minimumPenetrationPips) continue;
 
-    const lastReclaimIndex = Math.min(candles.length - 1, sweepIndex + strategy.liquiditySweep.reclaimWithinCandles);
+    const lastReclaimIndex = Math.min(
+      candles.length - 1,
+      sweepIndex + strategy.liquiditySweep.reclaimWithinCandles
+    );
     let reclaimIndex = -1;
     for (let index = sweepIndex; index <= lastReclaimIndex; index += 1) {
-      const reclaimed = direction === "LONG" ? candles[index].close > swingLevel : candles[index].close < swingLevel;
+      const reclaimed =
+        direction === "LONG"
+          ? candles[index].close > swingLevel
+          : candles[index].close < swingLevel;
       if (reclaimed) {
         reclaimIndex = index;
         break;
@@ -229,10 +270,14 @@ function deriveSweep(
     }
     if (reclaimIndex < 0) continue;
 
-    const postSweep = candles.slice(reclaimIndex, Math.min(candles.length, reclaimIndex + strategy.trigger.maximumTriggerAgeCandles + 1));
-    const favorableMove = direction === "LONG"
-      ? Math.max(...postSweep.map((candle) => candle.close)) - sweepCandle.close
-      : sweepCandle.close - Math.min(...postSweep.map((candle) => candle.close));
+    const postSweep = candles.slice(
+      reclaimIndex,
+      Math.min(candles.length, reclaimIndex + strategy.trigger.maximumTriggerAgeCandles + 1)
+    );
+    const favorableMove =
+      direction === "LONG"
+        ? Math.max(...postSweep.map((candle) => candle.close)) - sweepCandle.close
+        : sweepCandle.close - Math.min(...postSweep.map((candle) => candle.close));
     const displacementAtr = Math.max(0, favorableMove) / atr;
     if (displacementAtr < strategy.liquiditySweep.minimumDisplacementAtr) continue;
 
@@ -256,7 +301,10 @@ function deriveTrigger(
 ) {
   const triggerLevel = direction === "LONG" ? sweep.sweepCandle.high : sweep.sweepCandle.low;
   for (let index = sweep.reclaimIndex; index < candles.length; index += 1) {
-    const confirmed = direction === "LONG" ? candles[index].close > triggerLevel : candles[index].close < triggerLevel;
+    const confirmed =
+      direction === "LONG"
+        ? candles[index].close > triggerLevel
+        : candles[index].close < triggerLevel;
     if (confirmed) {
       return {
         candle: candles[index],
@@ -274,15 +322,27 @@ function averageTrueRange(candles: Candle[], period: number): number | null {
   for (let index = candles.length - period; index < candles.length; index += 1) {
     const candle = candles[index];
     const previousClose = candles[index - 1].close;
-    values.push(Math.max(candle.high - candle.low, Math.abs(candle.high - previousClose), Math.abs(candle.low - previousClose)));
+    values.push(
+      Math.max(
+        candle.high - candle.low,
+        Math.abs(candle.high - previousClose),
+        Math.abs(candle.low - previousClose)
+      )
+    );
   }
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
 function emaPair(candles: Candle[], fastPeriod: number, slowPeriod: number) {
   return {
-    fast: exponentialMovingAverage(candles.map((candle) => candle.close), fastPeriod),
-    slow: exponentialMovingAverage(candles.map((candle) => candle.close), slowPeriod)
+    fast: exponentialMovingAverage(
+      candles.map((candle) => candle.close),
+      fastPeriod
+    ),
+    slow: exponentialMovingAverage(
+      candles.map((candle) => candle.close),
+      slowPeriod
+    )
   };
 }
 

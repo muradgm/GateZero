@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { NormalizedMarketCandle, TimeBoundMarketCandle } from "@traderframe/contracts";
-import {
-  deriveEurUsdOverlapObservation,
-  evaluateEurUsdOverlapPullback
-} from "../src/index.js";
+import { deriveEurUsdOverlapObservation, evaluateEurUsdOverlapPullback } from "../src/index.js";
 
 const DECISION_TIME = "2026-07-24T13:00:00.000Z";
 
@@ -11,7 +8,9 @@ function sourceCandle(
   index: number,
   values: Pick<NormalizedMarketCandle, "open" | "high" | "low" | "close">
 ): NormalizedMarketCandle {
-  const openedAt = new Date(Date.parse("2026-07-24T08:45:00.000Z") + index * 15 * 60 * 1000).toISOString();
+  const openedAt = new Date(
+    Date.parse("2026-07-24T08:45:00.000Z") + index * 15 * 60 * 1000
+  ).toISOString();
   const closedAt = new Date(Date.parse(openedAt) + 15 * 60 * 1000).toISOString();
   return {
     candleId: `EURUSD-15m-${openedAt}`,
@@ -33,44 +32,56 @@ function sourceSeries(): NormalizedMarketCandle[] {
   const candles: NormalizedMarketCandle[] = [];
   for (let index = 0; index < 12; index += 1) {
     const open = 1.1 + index * 0.00025;
-    candles.push(sourceCandle(index, {
-      open,
-      high: open + 0.00055,
-      low: open - 0.0004,
-      close: open + 0.00025
-    }));
+    candles.push(
+      sourceCandle(index, {
+        open,
+        high: open + 0.00055,
+        low: open - 0.0004,
+        close: open + 0.00025
+      })
+    );
   }
 
-  candles.push(sourceCandle(12, {
-    open: 1.1012,
-    high: 1.1017,
-    low: 1.0993,
-    close: 1.10015
-  }));
-  candles.push(sourceCandle(13, {
-    open: 1.1002,
-    high: 1.1022,
-    low: 1.1001,
-    close: 1.1019
-  }));
-  candles.push(sourceCandle(14, {
-    open: 1.1019,
-    high: 1.103,
-    low: 1.1016,
-    close: 1.1027
-  }));
-  candles.push(sourceCandle(15, {
-    open: 1.1027,
-    high: 1.10285,
-    low: 1.1019,
-    close: 1.10225
-  }));
-  candles.push(sourceCandle(16, {
-    open: 1.10225,
-    high: 1.1026,
-    low: 1.1018,
-    close: 1.1022
-  }));
+  candles.push(
+    sourceCandle(12, {
+      open: 1.1012,
+      high: 1.1017,
+      low: 1.0993,
+      close: 1.10015
+    })
+  );
+  candles.push(
+    sourceCandle(13, {
+      open: 1.1002,
+      high: 1.1022,
+      low: 1.1001,
+      close: 1.1019
+    })
+  );
+  candles.push(
+    sourceCandle(14, {
+      open: 1.1019,
+      high: 1.103,
+      low: 1.1016,
+      close: 1.1027
+    })
+  );
+  candles.push(
+    sourceCandle(15, {
+      open: 1.1027,
+      high: 1.10285,
+      low: 1.1019,
+      close: 1.10225
+    })
+  );
+  candles.push(
+    sourceCandle(16, {
+      open: 1.10225,
+      high: 1.1026,
+      low: 1.1018,
+      close: 1.1022
+    })
+  );
   return candles;
 }
 
@@ -170,7 +181,9 @@ describe("deriveEurUsdOverlapObservation", () => {
     expect(result.diagnostics.excludedFutureCandleIds).toEqual(
       expect.arrayContaining([future15m.candleId, "future-1H"])
     );
-    expect(Date.parse(result.observation.availableAt)).toBeLessThanOrEqual(Date.parse(DECISION_TIME));
+    expect(Date.parse(result.observation.availableAt)).toBeLessThanOrEqual(
+      Date.parse(DECISION_TIME)
+    );
     expect(result.observation.currentPrice).toBe(sourceSeries().at(-1)!.close);
   });
 

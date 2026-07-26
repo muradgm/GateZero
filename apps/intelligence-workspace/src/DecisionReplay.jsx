@@ -62,14 +62,26 @@ export function DecisionReplay({ candidate }) {
       <PanelHeading
         eyebrow="Decision debugger"
         title="Decision replay"
-        aside={<Badge tone={playing ? "success" : "neutral"}>{activeIndex + 1} / {steps.length}</Badge>}
+        aside={
+          <Badge tone={playing ? "success" : "neutral"}>
+            {activeIndex + 1} / {steps.length}
+          </Badge>
+        }
       />
 
       <div className="replay-controls">
-        <button type="button" onClick={() => selectStep(Math.max(0, activeIndex - 1))} disabled={activeIndex === 0}>
+        <button
+          type="button"
+          onClick={() => selectStep(Math.max(0, activeIndex - 1))}
+          disabled={activeIndex === 0}
+        >
           Previous
         </button>
-        <button type="button" className="replay-controls__primary" onClick={() => setPlaying((value) => !value)}>
+        <button
+          type="button"
+          className="replay-controls__primary"
+          onClick={() => setPlaying((value) => !value)}
+        >
           {playing ? "Pause" : activeIndex === steps.length - 1 ? "Replay" : "Play"}
         </button>
         <button
@@ -81,7 +93,10 @@ export function DecisionReplay({ candidate }) {
         </button>
       </div>
 
-      <div className="replay-progress" aria-label={`Replay progress ${Math.round(progress)} percent`}>
+      <div
+        className="replay-progress"
+        aria-label={`Replay progress ${Math.round(progress)} percent`}
+      >
         <span style={{ width: `${progress}%` }} />
       </div>
 
@@ -108,7 +123,14 @@ export function DecisionReplay({ candidate }) {
             <h3>{active.title}</h3>
           </div>
           {active.occurredAt ? (
-            <time>{new Date(active.occurredAt).toLocaleString([], { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</time>
+            <time>
+              {new Date(active.occurredAt).toLocaleString([], {
+                month: "short",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit"
+              })}
+            </time>
           ) : null}
         </div>
         <p>{active.summary}</p>
@@ -121,7 +143,9 @@ export function DecisionReplay({ candidate }) {
         {active.blockers.length > 0 ? (
           <div className="replay-blockers">
             <span>Blockers</span>
-            {active.blockers.map((blocker) => <p key={blocker}>{blocker}</p>)}
+            {active.blockers.map((blocker) => (
+              <p key={blocker}>{blocker}</p>
+            ))}
           </div>
         ) : null}
       </article>
@@ -129,7 +153,9 @@ export function DecisionReplay({ candidate }) {
       <footer className="replay-decision">
         <div>
           <span>Current bounded recommendation</span>
-          <strong>{candidate.report.evidenceScore} evidence · {candidate.report.confidence} confidence</strong>
+          <strong>
+            {candidate.report.evidenceScore} evidence · {candidate.report.confidence} confidence
+          </strong>
         </div>
         <RecommendationBadge value={candidate.report.recommendation} />
       </footer>
@@ -161,7 +187,12 @@ function buildReplaySteps(candidate) {
       occurredAt: stage.completedAt ?? null,
       evidenceIds: stage.evidenceIds ?? [],
       blockers: stage.blockers ?? [],
-      severity: stage.status === "blocked" ? "blocking" : stage.status === "not_applicable" ? "attention" : "info"
+      severity:
+        stage.status === "blocked"
+          ? "blocking"
+          : stage.status === "not_applicable"
+            ? "attention"
+            : "info"
     }));
 
   return [...timeline, ...pipeline].sort((a, b) => {
@@ -173,8 +204,10 @@ function buildReplaySteps(candidate) {
 }
 
 function stageSummary(stage) {
-  if (stage.status === "blocked") return "Progression stopped because one or more blockers remain unresolved.";
-  if (stage.status === "not_applicable") return "This stage was explicitly marked not applicable for the current bounded recommendation.";
+  if (stage.status === "blocked")
+    return "Progression stopped because one or more blockers remain unresolved.";
+  if (stage.status === "not_applicable")
+    return "This stage was explicitly marked not applicable for the current bounded recommendation.";
   return stage.recordId
     ? `The stage completed with linked record ${stage.recordId}.`
     : "The stage completed with traceable local evidence.";

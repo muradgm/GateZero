@@ -65,9 +65,7 @@ describe("buildCanonicalDecisionAssessment", () => {
     expect(result.lifecycleState).toBe("REJECTED");
     expect(result.recommendation).toBe("REJECT");
     expect(result.blockers).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ gate: "NOT_EXPIRED", severity: "HARD" })
-      ])
+      expect.arrayContaining([expect.objectContaining({ gate: "NOT_EXPIRED", severity: "HARD" })])
     );
   });
 

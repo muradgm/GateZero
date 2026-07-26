@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
-import { StrategyGateSchema, StrategyRuleResultSchema } from "./eurusd-overlap-pullback-strategy.js";
+import {
+  StrategyGateSchema,
+  StrategyRuleResultSchema
+} from "./eurusd-overlap-pullback-strategy.js";
 
 export const CanonicalBlockerSchema = z
   .object({
@@ -37,7 +40,10 @@ export const CanonicalDecisionAssessmentSchema = z
   })
   .strict()
   .superRefine((value, context) => {
-    if (value.recommendation === "PAPER_SIMULATE" && (!value.eligible || value.blockers.length > 0)) {
+    if (
+      value.recommendation === "PAPER_SIMULATE" &&
+      (!value.eligible || value.blockers.length > 0)
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "paper simulation requires eligibility without blockers",

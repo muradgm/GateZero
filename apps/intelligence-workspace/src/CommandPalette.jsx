@@ -1,17 +1,68 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const toolCommands = [
-  { id: "tool-council", label: "Open Evidence Council", detail: "Specialist disagreement and consolidated view", tool: "council", shortcut: "C" },
-  { id: "tool-replay", label: "Open Decision Replay", detail: "Reconstruct the reviewed decision path", tool: "replay", shortcut: "R" },
-  { id: "tool-confidence", label: "Open Confidence Heatmap", detail: "Inspect support and contradiction by dimension", tool: "confidence", shortcut: "H" },
-  { id: "tool-changes", label: "Open Score Changes", detail: "Explain how evidence constructed the score", tool: "changes" },
-  { id: "tool-memory", label: "Open Decision Memory", detail: "Review recurring lessons and failure patterns", tool: "memory", shortcut: "M" },
-  { id: "tool-journal", label: "Open Outcome Journal", detail: "Record the paper-simulation outcome and lesson", tool: "journal", shortcut: "J" },
-  { id: "tool-similar", label: "Open Similar Setups", detail: "Compare local historical analogs", tool: "similar", shortcut: "S" },
-  { id: "tool-graph", label: "Open Evidence Graph", detail: "Explore dependencies between evidence and decision", tool: "graph", shortcut: "G" }
+  {
+    id: "tool-council",
+    label: "Open Evidence Council",
+    detail: "Specialist disagreement and consolidated view",
+    tool: "council",
+    shortcut: "C"
+  },
+  {
+    id: "tool-replay",
+    label: "Open Decision Replay",
+    detail: "Reconstruct the reviewed decision path",
+    tool: "replay",
+    shortcut: "R"
+  },
+  {
+    id: "tool-confidence",
+    label: "Open Confidence Heatmap",
+    detail: "Inspect support and contradiction by dimension",
+    tool: "confidence",
+    shortcut: "H"
+  },
+  {
+    id: "tool-changes",
+    label: "Open Score Changes",
+    detail: "Explain how evidence constructed the score",
+    tool: "changes"
+  },
+  {
+    id: "tool-memory",
+    label: "Open Decision Memory",
+    detail: "Review recurring lessons and failure patterns",
+    tool: "memory",
+    shortcut: "M"
+  },
+  {
+    id: "tool-journal",
+    label: "Open Outcome Journal",
+    detail: "Record the paper-simulation outcome and lesson",
+    tool: "journal",
+    shortcut: "J"
+  },
+  {
+    id: "tool-similar",
+    label: "Open Similar Setups",
+    detail: "Compare local historical analogs",
+    tool: "similar",
+    shortcut: "S"
+  },
+  {
+    id: "tool-graph",
+    label: "Open Evidence Graph",
+    detail: "Explore dependencies between evidence and decision",
+    tool: "graph",
+    shortcut: "G"
+  }
 ];
 
-const shortcutMap = new Map(toolCommands.filter((command) => command.shortcut).map((command) => [command.shortcut.toLowerCase(), command]));
+const shortcutMap = new Map(
+  toolCommands
+    .filter((command) => command.shortcut)
+    .map((command) => [command.shortcut.toLowerCase(), command])
+);
 
 export function CommandPalette({ workspace, selectedId }) {
   const [open, setOpen] = useState(false);
@@ -32,7 +83,9 @@ export function CommandPalette({ workspace, selectedId }) {
     const all = [...toolCommands, ...candidates];
     const normalized = query.trim().toLowerCase();
     if (!normalized) return all;
-    return all.filter((command) => `${command.label} ${command.detail}`.toLowerCase().includes(normalized));
+    return all.filter((command) =>
+      `${command.label} ${command.detail}`.toLowerCase().includes(normalized)
+    );
   }, [query, selectedId, workspace]);
 
   useEffect(() => {
@@ -90,10 +143,14 @@ export function CommandPalette({ workspace, selectedId }) {
 
   function execute(command) {
     if (command.tool) {
-      window.dispatchEvent(new CustomEvent("traderframe:open-intelligence-tool", { detail: { tool: command.tool } }));
+      window.dispatchEvent(
+        new CustomEvent("traderframe:open-intelligence-tool", { detail: { tool: command.tool } })
+      );
     }
     if (command.candidateId) {
-      window.dispatchEvent(new CustomEvent("traderframe:candidate-selected", { detail: { id: command.candidateId } }));
+      window.dispatchEvent(
+        new CustomEvent("traderframe:candidate-selected", { detail: { id: command.candidateId } })
+      );
     }
     setOpen(false);
   }
@@ -113,14 +170,29 @@ export function CommandPalette({ workspace, selectedId }) {
 
   return (
     <>
-      <button type="button" className="command-palette-launcher" onClick={() => setOpen(true)} aria-haspopup="dialog">
+      <button
+        type="button"
+        className="command-palette-launcher"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+      >
         <span>Search or run a command</span>
         <kbd>Ctrl K</kbd>
       </button>
 
       {open ? (
-        <div className="command-palette" role="dialog" aria-modal="true" aria-label="TraderFrame command palette">
-          <button type="button" className="command-palette__backdrop" aria-label="Close command palette" onClick={() => setOpen(false)} />
+        <div
+          className="command-palette"
+          role="dialog"
+          aria-modal="true"
+          aria-label="TraderFrame command palette"
+        >
+          <button
+            type="button"
+            className="command-palette__backdrop"
+            aria-label="Close command palette"
+            onClick={() => setOpen(false)}
+          />
           <section className="command-palette__surface">
             <header className="command-palette__search">
               <span aria-hidden="true">›</span>
@@ -138,36 +210,53 @@ export function CommandPalette({ workspace, selectedId }) {
               <kbd>Esc</kbd>
             </header>
 
-            <div className="command-palette__results" role="listbox" aria-label="Available commands">
-              {commands.length ? commands.map((command, index) => (
-                <button
-                  type="button"
-                  key={command.id}
-                  className={index === activeIndex ? "command-palette__item command-palette__item--active" : "command-palette__item"}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={() => execute(command)}
-                  role="option"
-                  aria-selected={index === activeIndex}
-                >
-                  <span>
-                    <strong>{command.label}</strong>
-                    <small>{command.detail}</small>
-                  </span>
-                  <span className="command-palette__meta">
-                    {command.selected ? <em>Selected</em> : null}
-                    {command.shortcut ? <kbd>{command.shortcut}</kbd> : null}
-                    {command.rank ? <kbd>#{command.rank}</kbd> : null}
-                  </span>
-                </button>
-              )) : (
+            <div
+              className="command-palette__results"
+              role="listbox"
+              aria-label="Available commands"
+            >
+              {commands.length ? (
+                commands.map((command, index) => (
+                  <button
+                    type="button"
+                    key={command.id}
+                    className={
+                      index === activeIndex
+                        ? "command-palette__item command-palette__item--active"
+                        : "command-palette__item"
+                    }
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onClick={() => execute(command)}
+                    role="option"
+                    aria-selected={index === activeIndex}
+                  >
+                    <span>
+                      <strong>{command.label}</strong>
+                      <small>{command.detail}</small>
+                    </span>
+                    <span className="command-palette__meta">
+                      {command.selected ? <em>Selected</em> : null}
+                      {command.shortcut ? <kbd>{command.shortcut}</kbd> : null}
+                      {command.rank ? <kbd>#{command.rank}</kbd> : null}
+                    </span>
+                  </button>
+                ))
+              ) : (
                 <div className="command-palette__empty">No matching command.</div>
               )}
             </div>
 
             <footer className="command-palette__footer">
-              <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
-              <span><kbd>Enter</kbd> Run</span>
-              <span><kbd>?</kbd> Open palette</span>
+              <span>
+                <kbd>↑</kbd>
+                <kbd>↓</kbd> Navigate
+              </span>
+              <span>
+                <kbd>Enter</kbd> Run
+              </span>
+              <span>
+                <kbd>?</kbd> Open palette
+              </span>
             </footer>
           </section>
         </div>

@@ -104,7 +104,9 @@ export function OperatorJournal({ candidate }) {
         </div>
         <div>
           <span>Completed average</span>
-          <strong>{averageR === null ? "—" : `${averageR >= 0 ? "+" : ""}${averageR.toFixed(2)}R`}</strong>
+          <strong>
+            {averageR === null ? "—" : `${averageR >= 0 ? "+" : ""}${averageR.toFixed(2)}R`}
+          </strong>
         </div>
         <div>
           <span>Current evidence</span>
@@ -116,7 +118,10 @@ export function OperatorJournal({ candidate }) {
         <form className="operator-journal-form" onSubmit={saveEntry}>
           <label>
             <span>Review status</span>
-            <select value={draft.status} onChange={(event) => updateDraft("status", event.target.value)}>
+            <select
+              value={draft.status}
+              onChange={(event) => updateDraft("status", event.target.value)}
+            >
               {statuses.map((status) => (
                 <option key={status.value} value={status.value}>
                   {status.label}
@@ -206,8 +211,14 @@ export function OperatorJournal({ candidate }) {
                     <Badge tone={toneForEntry(entry)}>{formatResult(entry.resultR)}</Badge>
                   </div>
                   <div className="operator-journal-entry__checks">
-                    <span>{entry.triggerObserved ? "Trigger observed" : "Trigger not observed"}</span>
-                    <span>{entry.invalidationRespected ? "Invalidation respected" : "Invalidation breached"}</span>
+                    <span>
+                      {entry.triggerObserved ? "Trigger observed" : "Trigger not observed"}
+                    </span>
+                    <span>
+                      {entry.invalidationRespected
+                        ? "Invalidation respected"
+                        : "Invalidation breached"}
+                    </span>
                     <span>{entry.riskWithinPlan ? "Risk within plan" : "Risk outside plan"}</span>
                   </div>
                   {entry.observation ? <p>{entry.observation}</p> : null}
@@ -230,7 +241,8 @@ export function OperatorJournal({ candidate }) {
       </div>
 
       <p className="operator-journal-note">
-        Reviews are stored only in this browser. They do not place orders, modify repository evidence, or authorize execution.
+        Reviews are stored only in this browser. They do not place orders, modify repository
+        evidence, or authorize execution.
       </p>
     </Panel>
   );
@@ -239,7 +251,11 @@ export function OperatorJournal({ candidate }) {
 function JournalCheck({ label, checked, onChange }) {
   return (
     <label className="operator-journal-check">
-      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)} />
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(event) => onChange(event.target.checked)}
+      />
       <span>{label}</span>
     </label>
   );

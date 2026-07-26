@@ -69,7 +69,10 @@ export function AppRuntime() {
 
   const selected = useMemo(() => {
     if (!workspace) return null;
-    return workspace.candidates.find((candidate) => candidate.id === selectedId) ?? workspace.candidates[0];
+    return (
+      workspace.candidates.find((candidate) => candidate.id === selectedId) ??
+      workspace.candidates[0]
+    );
   }, [workspace, selectedId]);
 
   if (!workspace || !selected) return <LoadingState error={error} />;
@@ -87,9 +90,13 @@ export function AppRuntime() {
     <div className="workspace-shell">
       <header className="topbar">
         <div className="brand-lockup">
-          <div className="brand-symbol"><BrandMark /></div>
+          <div className="brand-symbol">
+            <BrandMark />
+          </div>
           <div>
-            <div className="brand-name">TRADER<span>FRAME</span></div>
+            <div className="brand-name">
+              TRADER<span>FRAME</span>
+            </div>
             <div className="brand-tagline">Decision intelligence workspace</div>
           </div>
         </div>
@@ -163,7 +170,10 @@ export function AppRuntime() {
                 <Metric label="Exposure after" value={selected.risk.exposure} emphasis />
                 <Metric label="Reward / risk" value={selected.risk.rewardRisk} emphasis />
               </div>
-              <div className="invalidation"><span>Mandatory invalidation</span><p>{selected.invalidation}</p></div>
+              <div className="invalidation">
+                <span>Mandatory invalidation</span>
+                <p>{selected.invalidation}</p>
+              </div>
             </Panel>
 
             <Panel className="timeline-panel">
@@ -177,7 +187,12 @@ export function AppRuntime() {
                     onClick={() => setFocusedTime(event.occurredAt)}
                     title="Focus nearest candle"
                   >
-                    <time>{new Date(event.occurredAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</time>
+                    <time>
+                      {new Date(event.occurredAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })}
+                    </time>
                     <span className="timeline-event__marker" />
                     <div className="timeline-event__copy">
                       <strong>{event.title}</strong>
@@ -202,20 +217,44 @@ export function AppRuntime() {
               title="Intelligence"
               aside={<Badge tone="neutral">{report.confidence}</Badge>}
             />
-            <CaseBlock title="Bull case" className="case--bull" summary={report.bullCase.summary} limitations={report.bullCase.limitations} />
-            <CaseBlock title="Bear case" className="case--bear" summary={report.bearCase.summary} limitations={report.bearCase.limitations} />
-            <CaseBlock title="Neutral" className="case--neutral" summary={report.neutralCase.summary} limitations={report.neutralCase.limitations} />
+            <CaseBlock
+              title="Bull case"
+              className="case--bull"
+              summary={report.bullCase.summary}
+              limitations={report.bullCase.limitations}
+            />
+            <CaseBlock
+              title="Bear case"
+              className="case--bear"
+              summary={report.bearCase.summary}
+              limitations={report.bearCase.limitations}
+            />
+            <CaseBlock
+              title="Neutral"
+              className="case--neutral"
+              summary={report.neutralCase.summary}
+              limitations={report.neutralCase.limitations}
+            />
           </Panel>
 
           <Panel className="evidence-panel">
-            <PanelHeading eyebrow="Contribution ledger" title="Evidence tree" aside={<strong>{report.evidenceScore}</strong>} />
+            <PanelHeading
+              eyebrow="Contribution ledger"
+              title="Evidence tree"
+              aside={<strong>{report.evidenceScore}</strong>}
+            />
             <div className="contribution-list contribution-list--shared">
               {report.contributions.map((contribution) => (
                 <EvidenceRow key={contribution.contributionId} contribution={contribution} />
               ))}
             </div>
             {report.downgradeReasons.length > 0 ? (
-              <div className="downgrade-reasons"><strong>Downgrade reasons</strong>{report.downgradeReasons.map((reason) => <p key={reason}>{reason}</p>)}</div>
+              <div className="downgrade-reasons">
+                <strong>Downgrade reasons</strong>
+                {report.downgradeReasons.map((reason) => (
+                  <p key={reason}>{reason}</p>
+                ))}
+              </div>
             ) : null}
           </Panel>
         </aside>
@@ -230,19 +269,30 @@ function PortfolioExposure({ exposure, selected }) {
       <PanelHeading
         eyebrow="Portfolio intelligence"
         title="Exposure concentration"
-        aside={<Badge tone={exposure.warning ? "warning" : "success"}>{exposure.warning ? "Review" : "Within limit"}</Badge>}
+        aside={
+          <Badge tone={exposure.warning ? "warning" : "success"}>
+            {exposure.warning ? "Review" : "Within limit"}
+          </Badge>
+        }
       />
       <div className="exposure-list">
         {exposure.items.map((item) => (
           <div className="exposure-row" key={item.label}>
-            <div><span>{item.label}</span><strong>{item.value}%</strong></div>
-            <div className="exposure-track"><span style={{ width: `${item.value}%` }} /></div>
+            <div>
+              <span>{item.label}</span>
+              <strong>{item.value}%</strong>
+            </div>
+            <div className="exposure-track">
+              <span style={{ width: `${item.value}%` }} />
+            </div>
           </div>
         ))}
       </div>
       <div className={`exposure-impact ${exposure.warning ? "exposure-impact--warning" : ""}`}>
         <span>Selected setup impact</span>
-        <strong>{selected.instrument} raises {exposure.primary} concentration to {exposure.after}%.</strong>
+        <strong>
+          {selected.instrument} raises {exposure.primary} concentration to {exposure.after}%.
+        </strong>
       </div>
     </Panel>
   );
@@ -259,25 +309,46 @@ function DecisionCouncil({ council, report }) {
       <div className="council-list">
         {council.map((member) => (
           <div className="council-row" key={member.role}>
-            <div><span>{member.role}</span><small>{member.reason}</small></div>
+            <div>
+              <span>{member.role}</span>
+              <small>{member.reason}</small>
+            </div>
             <Badge tone={member.tone}>{member.verdict}</Badge>
           </div>
         ))}
       </div>
       <div className="council-summary">
         <span>Consolidated view</span>
-        <strong>{report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence</strong>
+        <strong>
+          {report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence
+        </strong>
       </div>
     </Panel>
   );
 }
 
 function buildExposure(selected) {
-  const base = selected.id === "eurusd"
-    ? [{ label: "USD", value: 82 }, { label: "EUR", value: 68 }, { label: "Metals", value: 18 }, { label: "Crypto", value: 12 }]
-    : selected.id === "btcusd"
-      ? [{ label: "USD", value: 74 }, { label: "Crypto", value: 61 }, { label: "EUR", value: 36 }, { label: "Metals", value: 18 }]
-      : [{ label: "USD", value: 79 }, { label: "Metals", value: 47 }, { label: "EUR", value: 31 }, { label: "Crypto", value: 12 }];
+  const base =
+    selected.id === "eurusd"
+      ? [
+          { label: "USD", value: 82 },
+          { label: "EUR", value: 68 },
+          { label: "Metals", value: 18 },
+          { label: "Crypto", value: 12 }
+        ]
+      : selected.id === "btcusd"
+        ? [
+            { label: "USD", value: 74 },
+            { label: "Crypto", value: 61 },
+            { label: "EUR", value: 36 },
+            { label: "Metals", value: 18 }
+          ]
+        : [
+            { label: "USD", value: 79 },
+            { label: "Metals", value: 47 },
+            { label: "EUR", value: 31 },
+            { label: "Crypto", value: 12 }
+          ];
   const primary = base[0].label;
   const after = Math.min(100, base[0].value + Number.parseInt(selected.risk.exposure, 10));
   return { items: base, primary, after, warning: after >= 90 };
@@ -285,21 +356,52 @@ function buildExposure(selected) {
 
 function buildCouncil(selected) {
   const report = selected.report;
-  const hasMacroBlock = report.contributions.some((item) => item.dimension === "macro" && item.points < 0);
-  const hasRiskBlock = report.contributions.some((item) => item.dimension === "risk" && item.points < 0);
+  const hasMacroBlock = report.contributions.some(
+    (item) => item.dimension === "macro" && item.points < 0
+  );
+  const hasRiskBlock = report.contributions.some(
+    (item) => item.dimension === "risk" && item.points < 0
+  );
   return [
-    { role: "Market analyst", verdict: selected.context.trend, tone: "success", reason: selected.context.structure },
-    { role: "Macro analyst", verdict: hasMacroBlock ? "Caution" : "Neutral", tone: hasMacroBlock ? "warning" : "neutral", reason: hasMacroBlock ? "Macro contribution is negative." : "No major macro blocker recorded." },
-    { role: "Risk officer", verdict: hasRiskBlock ? "Reject" : "Within limit", tone: hasRiskBlock ? "danger" : "success", reason: selected.risk.amount + " planned loss." },
-    { role: "Portfolio manager", verdict: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "Concentrated" : "Acceptable", tone: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "warning" : "neutral", reason: selected.risk.exposure + " post-setup exposure." },
-    { role: "Devil's advocate", verdict: report.downgradeReasons.length ? "Challenge" : "Clear", tone: report.downgradeReasons.length ? "warning" : "success", reason: report.downgradeReasons[0] ?? report.bearCase.summary }
+    {
+      role: "Market analyst",
+      verdict: selected.context.trend,
+      tone: "success",
+      reason: selected.context.structure
+    },
+    {
+      role: "Macro analyst",
+      verdict: hasMacroBlock ? "Caution" : "Neutral",
+      tone: hasMacroBlock ? "warning" : "neutral",
+      reason: hasMacroBlock ? "Macro contribution is negative." : "No major macro blocker recorded."
+    },
+    {
+      role: "Risk officer",
+      verdict: hasRiskBlock ? "Reject" : "Within limit",
+      tone: hasRiskBlock ? "danger" : "success",
+      reason: selected.risk.amount + " planned loss."
+    },
+    {
+      role: "Portfolio manager",
+      verdict: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "Concentrated" : "Acceptable",
+      tone: Number.parseInt(selected.risk.exposure, 10) >= 18 ? "warning" : "neutral",
+      reason: selected.risk.exposure + " post-setup exposure."
+    },
+    {
+      role: "Devil's advocate",
+      verdict: report.downgradeReasons.length ? "Challenge" : "Clear",
+      tone: report.downgradeReasons.length ? "warning" : "success",
+      reason: report.downgradeReasons[0] ?? report.bearCase.summary
+    }
   ];
 }
 
 function CaseBlock({ title, className, summary, limitations }) {
   return (
     <article className={`case-block ${className}`}>
-      <h3>{title}</h3><p>{summary}</p><small>{limitations.join(" ")}</small>
+      <h3>{title}</h3>
+      <p>{summary}</p>
+      <small>{limitations.join(" ")}</small>
     </article>
   );
 }

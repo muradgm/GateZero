@@ -13,10 +13,22 @@ export function DecisionMemory({ candidate }) {
       />
 
       <div className="decision-memory-summary">
-        <div><span>Positive outcomes</span><strong>{memory.positiveCount}</strong></div>
-        <div><span>Negative outcomes</span><strong>{memory.negativeCount}</strong></div>
-        <div><span>Average similarity</span><strong>{memory.averageSimilarity}%</strong></div>
-        <div><span>Recurring lessons</span><strong>{memory.lessons.length}</strong></div>
+        <div>
+          <span>Positive outcomes</span>
+          <strong>{memory.positiveCount}</strong>
+        </div>
+        <div>
+          <span>Negative outcomes</span>
+          <strong>{memory.negativeCount}</strong>
+        </div>
+        <div>
+          <span>Average similarity</span>
+          <strong>{memory.averageSimilarity}%</strong>
+        </div>
+        <div>
+          <span>Recurring lessons</span>
+          <strong>{memory.lessons.length}</strong>
+        </div>
       </div>
 
       <div className="decision-memory-grid">
@@ -38,8 +50,12 @@ export function DecisionMemory({ candidate }) {
             {memory.patterns.map((pattern) => (
               <div key={pattern.label}>
                 <span>{pattern.label}</span>
-                <div><i style={{ width: `${pattern.share}%` }} /></div>
-                <strong>{pattern.count}/{memory.caseCount}</strong>
+                <div>
+                  <i style={{ width: `${pattern.share}%` }} />
+                </div>
+                <strong>
+                  {pattern.count}/{memory.caseCount}
+                </strong>
               </div>
             ))}
           </div>
@@ -49,7 +65,8 @@ export function DecisionMemory({ candidate }) {
           <span className="decision-memory-label">Current caution</span>
           <strong>{memory.caution}</strong>
           <p>
-            Decision memory summarizes local records. It does not predict the next outcome or override current evidence, risk review, or operator judgment.
+            Decision memory summarizes local records. It does not predict the next outcome or
+            override current evidence, risk review, or operator judgment.
           </p>
         </section>
       </div>
@@ -59,8 +76,12 @@ export function DecisionMemory({ candidate }) {
 
 function buildMemory(candidate) {
   const matches = candidate.similarSetups ?? [];
-  const positiveCount = matches.filter((match) => typeof match.resultR === "number" && match.resultR > 0).length;
-  const negativeCount = matches.filter((match) => typeof match.resultR === "number" && match.resultR < 0).length;
+  const positiveCount = matches.filter(
+    (match) => typeof match.resultR === "number" && match.resultR > 0
+  ).length;
+  const negativeCount = matches.filter(
+    (match) => typeof match.resultR === "number" && match.resultR < 0
+  ).length;
   const averageSimilarity = matches.length
     ? Math.round(matches.reduce((sum, match) => sum + match.similarityScore, 0) / matches.length)
     : 0;
@@ -86,13 +107,18 @@ function buildMemory(candidate) {
   }
 
   const patterns = [...patternCounts.entries()]
-    .map(([label, count]) => ({ label, count, share: matches.length ? Math.round((count / matches.length) * 100) : 0 }))
+    .map(([label, count]) => ({
+      label,
+      count,
+      share: matches.length ? Math.round((count / matches.length) * 100) : 0
+    }))
     .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
     .slice(0, 6);
 
-  const caution = candidate.report.downgradeReasons?.[0]
-    ?? candidate.report.bearCase?.summary
-    ?? "No recurring caution was recorded.";
+  const caution =
+    candidate.report.downgradeReasons?.[0] ??
+    candidate.report.bearCase?.summary ??
+    "No recurring caution was recorded.";
 
   return {
     caseCount: matches.length,

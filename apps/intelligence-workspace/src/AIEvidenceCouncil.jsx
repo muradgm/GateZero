@@ -6,7 +6,9 @@ export function AIEvidenceCouncil({ candidate }) {
 
   const report = candidate.report;
   const members = buildCouncil(candidate);
-  const disagreementCount = members.filter((member) => member.stance === "Caution" || member.stance === "Reject").length;
+  const disagreementCount = members.filter(
+    (member) => member.stance === "Caution" || member.stance === "Reject"
+  ).length;
 
   return (
     <Panel className="ai-council-panel">
@@ -33,7 +35,10 @@ export function AIEvidenceCouncil({ candidate }) {
 
       <div className="ai-council-grid">
         {members.map((member) => (
-          <article className={`ai-council-member ai-council-member--${member.tone}`} key={member.role}>
+          <article
+            className={`ai-council-member ai-council-member--${member.tone}`}
+            key={member.role}
+          >
             <header>
               <div>
                 <span>{member.role}</span>
@@ -54,7 +59,8 @@ export function AIEvidenceCouncil({ candidate }) {
           <strong>{report.recommendation.replaceAll("_", " ")}</strong>
         </div>
         <p>
-          This panel exposes specialist disagreement and supporting evidence. It does not create execution authority or override the operator and risk-review gates.
+          This panel exposes specialist disagreement and supporting evidence. It does not create
+          execution authority or override the operator and risk-review gates.
         </p>
       </div>
     </Panel>
@@ -86,8 +92,10 @@ function buildCouncil(candidate) {
       stance: momentum?.points > 0 ? "Bullish" : momentum?.points < 0 ? "Caution" : "Neutral",
       tone: momentum?.points > 0 ? "success" : momentum?.points < 0 ? "warning" : "neutral",
       confidence: scoreConfidence(momentum?.points),
-      reason: momentum?.rationale ?? "No independent momentum or order-flow contribution was recorded.",
-      limitation: momentum?.limitation ?? "Momentum remains inferred from the local evidence snapshot.",
+      reason:
+        momentum?.rationale ?? "No independent momentum or order-flow contribution was recorded.",
+      limitation:
+        momentum?.limitation ?? "Momentum remains inferred from the local evidence snapshot.",
       evidenceIds: momentum?.evidenceIds ?? []
     },
     {
@@ -104,17 +112,28 @@ function buildCouncil(candidate) {
       stance: risk?.points < 0 ? "Reject" : risk?.points > 0 ? "Within limit" : "Review",
       tone: risk?.points < 0 ? "danger" : risk?.points > 0 ? "success" : "warning",
       confidence: scoreConfidence(risk?.points),
-      reason: risk?.rationale ?? `${candidate.risk.amount} planned loss against a ${candidate.risk.ceiling} ceiling.`,
+      reason:
+        risk?.rationale ??
+        `${candidate.risk.amount} planned loss against a ${candidate.risk.ceiling} ceiling.`,
       limitation: risk?.limitation ?? "Paper-simulation planning only.",
       evidenceIds: risk?.evidenceIds ?? []
     },
     {
       role: "Portfolio Manager",
-      stance: correlation?.points < 0 || Number.parseInt(candidate.risk.exposure, 10) >= 18 ? "Caution" : "Acceptable",
-      tone: correlation?.points < 0 || Number.parseInt(candidate.risk.exposure, 10) >= 18 ? "warning" : "success",
-      confidence: scoreConfidence(correlation?.points ?? (Number.parseInt(candidate.risk.exposure, 10) >= 18 ? -7 : 7)),
+      stance:
+        correlation?.points < 0 || Number.parseInt(candidate.risk.exposure, 10) >= 18
+          ? "Caution"
+          : "Acceptable",
+      tone:
+        correlation?.points < 0 || Number.parseInt(candidate.risk.exposure, 10) >= 18
+          ? "warning"
+          : "success",
+      confidence: scoreConfidence(
+        correlation?.points ?? (Number.parseInt(candidate.risk.exposure, 10) >= 18 ? -7 : 7)
+      ),
       reason: correlation?.rationale ?? `${candidate.risk.exposure} projected post-setup exposure.`,
-      limitation: correlation?.limitation ?? "Portfolio exposure is based on the generated local snapshot.",
+      limitation:
+        correlation?.limitation ?? "Portfolio exposure is based on the generated local snapshot.",
       evidenceIds: correlation?.evidenceIds ?? []
     },
     {

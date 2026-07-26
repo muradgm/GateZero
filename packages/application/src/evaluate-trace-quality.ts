@@ -1,7 +1,4 @@
-import type {
-  TraceRequirementStatus,
-  TraceValidityArea
-} from "@traderframe/contracts";
+import type { TraceRequirementStatus, TraceValidityArea } from "@traderframe/contracts";
 
 export type TraceRequirementInput = {
   requirementId: string;

@@ -69,7 +69,9 @@
 }
 
 .candle {
-  transition: opacity 0.12s ease, filter 0.12s ease;
+  transition:
+    opacity 0.12s ease,
+    filter 0.12s ease;
 }
 
 .candle line {

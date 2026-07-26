@@ -76,7 +76,9 @@ export function buildCanonicalDecisionAssessment(
     eligible: evaluated.eligible,
     recommendation: evaluated.recommendation,
     blockers,
-    passedGates: evaluated.ruleResults.filter((rule) => rule.status === "PASS").map((rule) => rule.gate),
+    passedGates: evaluated.ruleResults
+      .filter((rule) => rule.status === "PASS")
+      .map((rule) => rule.gate),
     failedGates: failedRules.map((rule) => rule.gate),
     nextAction: evaluated.nextAction,
     ...(evaluated.expiresAt ? { expiresAt: evaluated.expiresAt } : {}),

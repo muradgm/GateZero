@@ -176,7 +176,10 @@ export const ValidatedDecisionTraceSchema = z
       });
     }
 
-    if (value.lifecycleStatus === "COMPLETE" && value.gates.some((gate) => gate.status !== "PASS")) {
+    if (
+      value.lifecycleStatus === "COMPLETE" &&
+      value.gates.some((gate) => gate.status !== "PASS")
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "complete lifecycle requires all release gates to pass",

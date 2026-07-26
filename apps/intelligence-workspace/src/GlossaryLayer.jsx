@@ -86,7 +86,10 @@ export function GlossaryLayer() {
       if (!element || element.closest?.(".glossary-dialog")) return null;
 
       const explicit = element.dataset?.glossary;
-      const text = (explicit || element.textContent || "").trim().replaceAll("_", " ").toLowerCase();
+      const text = (explicit || element.textContent || "")
+        .trim()
+        .replaceAll("_", " ")
+        .toLowerCase();
       if (!text || text.length > 80) return null;
 
       return glossary.find((entry) =>

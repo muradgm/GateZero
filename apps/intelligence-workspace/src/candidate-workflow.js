@@ -72,7 +72,10 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
     detectedAt,
     changedAt: lastEvent,
     reviewed: false,
-    urgency: contradiction.dimension === "macro" || contradiction.dimension === "event_risk" ? "TIME_SENSITIVE" : "WAITING"
+    urgency:
+      contradiction.dimension === "macro" || contradiction.dimension === "event_risk"
+        ? "TIME_SENSITIVE"
+        : "WAITING"
   };
 }
 

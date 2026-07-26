@@ -3,7 +3,11 @@ import React from "react";
 const lifecycleStages = [
   { id: "research_case", label: "Case", description: "Candidate created" },
   { id: "market_context", label: "Context", description: "Market state reviewed" },
-  { id: "evidence_assessment", label: "Evidence", description: "Support and contradiction checked" },
+  {
+    id: "evidence_assessment",
+    label: "Evidence",
+    description: "Support and contradiction checked"
+  },
   { id: "setup_review", label: "Setup", description: "Strategy requirements reviewed" },
   { id: "intelligence_report", label: "Assessment", description: "System assessment produced" },
   { id: "risk_review", label: "Risk", description: "Capital impact reviewed" },
@@ -14,10 +18,13 @@ const lifecycleStages = [
 ];
 
 export function LifecycleRail({ pipeline, workflow }) {
-  const currentStageIndex = lifecycleStages.findIndex((stage) => stage.id === pipeline.currentStage);
-  const blocker = workflow?.blockingCondition && workflow.blockingCondition !== "None"
-    ? workflow.blockingCondition
-    : null;
+  const currentStageIndex = lifecycleStages.findIndex(
+    (stage) => stage.id === pipeline.currentStage
+  );
+  const blocker =
+    workflow?.blockingCondition && workflow.blockingCondition !== "None"
+      ? workflow.blockingCondition
+      : null;
 
   const stages = lifecycleStages.map((stage, index) => {
     const record = pipeline.stages.find((item) => item.stage === stage.id);
@@ -37,7 +44,9 @@ export function LifecycleRail({ pipeline, workflow }) {
       <div className="lifecycle-rail__header">
         <div>
           <span className="lifecycle-rail__eyebrow">Decision lifecycle</span>
-          <strong>{workflow?.currentStageLabel ?? pipeline.currentStage.replaceAll("_", " ")}</strong>
+          <strong>
+            {workflow?.currentStageLabel ?? pipeline.currentStage.replaceAll("_", " ")}
+          </strong>
         </div>
         <div className="lifecycle-rail__summary">
           <span>{completedCount} complete</span>
@@ -50,7 +59,9 @@ export function LifecycleRail({ pipeline, workflow }) {
           <li
             key={stage.id}
             className={`lifecycle-stage lifecycle-stage--${stage.status}`}
-            aria-current={stage.status === "current" || stage.status === "blocked" ? "step" : undefined}
+            aria-current={
+              stage.status === "current" || stage.status === "blocked" ? "step" : undefined
+            }
           >
             <div className="lifecycle-stage__marker" aria-hidden="true">
               {stage.status === "complete" ? "✓" : stage.status === "blocked" ? "!" : index + 1}
