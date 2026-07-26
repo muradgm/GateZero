@@ -106,6 +106,16 @@ describe("Validated decision trace contracts", () => {
     ).toThrow(/unresolved blockers/);
   });
 
+  it("rejects paper simulation without a hash-linked risk review", () => {
+    expect(() =>
+      FrozenDecisionBundleSchema.parse({
+        ...bundle,
+        recommendation: "PAPER_SIMULATE",
+        blockers: []
+      })
+    ).toThrow(/hash-linked risk review/);
+  });
+
   it("rejects complete lifecycle state without outcome and learning references", () => {
     expect(() =>
       ValidatedDecisionTraceSchema.parse({

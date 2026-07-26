@@ -116,6 +116,19 @@ export const FrozenDecisionBundleSchema = z
     configurationHash: NonEmptyStringSchema,
     evidenceBundleHash: NonEmptyStringSchema,
     canonicalAssessmentHash: NonEmptyStringSchema,
+    riskReviewId: NonEmptyStringSchema.optional(),
+    riskReviewHash: NonEmptyStringSchema.optional(),
+    simulationPlan: z
+      .object({
+        direction: z.enum(["LONG", "SHORT"]),
+        entryPrice: z.number().positive(),
+        stopPrice: z.number().positive(),
+        targetPrice: z.number().positive(),
+        positionSizeUnits: z.number().int().positive(),
+        plannedRiskAmount: z.number().positive()
+      })
+      .strict()
+      .optional(),
     recommendation: z.enum(["REJECT", "WATCH", "PAPER_SIMULATE"]),
     blockers: z.array(NonEmptyStringSchema),
     temporalEvidence: z.array(TemporalEvidenceReferenceSchema),
@@ -140,6 +153,82 @@ export const FrozenDecisionBundleSchema = z
         code: z.ZodIssueCode.custom,
         message: "paper simulation cannot retain unresolved blockers",
         path: ["blockers"]
+      });
+    }
+
+    if (
+      value.recommendation === "PAPER_SIMULATE" &&
+      (!value.riskReviewId || !value.riskReviewHash)
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "paper simulation requires a hash-linked risk review",
+        path: ["riskReviewId"]
+      });
+    }
+
+    if (value.recommendation === "PAPER_SIMULATE" && !value.simulationPlan) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "paper simulation requires a frozen simulation plan",
+        path: ["simulationPlan"]
+      });
+    }
+
+    if (value.simulationPlan) {
+      const { direction, entryPrice, stopPrice, targetPrice } = value.simulationPlan;
+      const invalidLong =
+        direction === "LONG" && !(stopPrice < entryPrice && entryPrice < targetPrice);
+      const invalidShort =
+        direction === "SHORT" && !(targetPrice < entryPrice && entryPrice < stopPrice);
+      if (invalidLong || invalidShort) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "simulation plan prices must follow the declared direction",
+          path: ["simulationPlan"]
+        });
+      }
+    }
+  });
+
+export const FrozenDecisionRecordSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    bundle: FrozenDecisionBundleSchema,
+    bundleHash: NonEmptyStringSchema,
+    frozenAt: z.string().datetime()
+  })
+  .strict();
+
+export const Epoch1ReproducibilityCheckpointSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    checkpointId: NonEmptyStringSchema,
+    traceId: NonEmptyStringSchema,
+    frozenBundleHash: NonEmptyStringSchema,
+    firstSimulationHash: NonEmptyStringSchema,
+    secondSimulationHash: NonEmptyStringSchema,
+    outcomeHash: NonEmptyStringSchema,
+    learningHash: NonEmptyStringSchema,
+    status: z.enum(["PASS", "FAIL"]),
+    mismatchReasons: z.array(NonEmptyStringSchema),
+    checkedAt: z.string().datetime(),
+    checkpointHash: NonEmptyStringSchema
+  })
+  .strict()
+  .superRefine((checkpoint, context) => {
+    if (checkpoint.status === "PASS" && checkpoint.mismatchReasons.length > 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "passing reproducibility checkpoints cannot retain mismatches",
+        path: ["mismatchReasons"]
+      });
+    }
+    if (checkpoint.status === "FAIL" && checkpoint.mismatchReasons.length === 0) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "failed reproducibility checkpoints require mismatch reasons",
+        path: ["mismatchReasons"]
       });
     }
   });
@@ -192,4 +281,6 @@ export type TraceRequirementStatus = z.infer<typeof TraceRequirementStatusSchema
 export type TraceValidityArea = z.infer<typeof TraceValidityAreaSchema>;
 export type TemporalEvidenceReference = z.infer<typeof TemporalEvidenceReferenceSchema>;
 export type FrozenDecisionBundle = z.infer<typeof FrozenDecisionBundleSchema>;
+export type FrozenDecisionRecord = z.infer<typeof FrozenDecisionRecordSchema>;
+export type Epoch1ReproducibilityCheckpoint = z.infer<typeof Epoch1ReproducibilityCheckpointSchema>;
 export type ValidatedDecisionTrace = z.infer<typeof ValidatedDecisionTraceSchema>;

@@ -198,6 +198,32 @@
   line-height: 1.45;
 }
 
+.exposure-impact small {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.epoch1-proof,
+.epoch2-proof,
+.epoch3-proof,
+.epoch4-proof {
+  display: grid;
+  gap: 4px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--tf-color-line);
+}
+
+.epoch1-proof small,
+.epoch2-proof small,
+.epoch3-proof small,
+.epoch4-proof small {
+  color: var(--tf-color-muted);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
 .council-row {
   display: flex;
   align-items: center;
@@ -231,6 +257,42 @@
 
 .contribution-list--shared {
   padding: 0;
+}
+
+.case-block-group {
+  display: grid;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+.case-block-group .case-block {
+  min-width: 0;
+}
+
+.case-block-group .case-block h3 {
+  margin-top: 0;
+}
+
+.case-block-group .case-block p:last-child {
+  margin-bottom: 0;
+}
+
+.downgrade-reasons {
+  padding: 14px 18px 18px;
+  border-top: 1px solid var(--tf-color-line);
+}
+
+.downgrade-reasons > strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.downgrade-reasons p {
+  margin: 0;
+}
+
+.downgrade-reasons p + p {
+  margin-top: 8px;
 }
 
 .watchlist.tf-panel,

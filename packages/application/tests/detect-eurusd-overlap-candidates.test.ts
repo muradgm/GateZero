@@ -49,6 +49,7 @@ function observationFactory(
       displacementAtr: detected ? 0.8 : 0,
       triggerConfirmed: detected,
       triggerAgeCandles: detected ? currentIndex - triggerAtIndex : 5,
+      eventContextStatus: "AVAILABLE",
       minutesToNearestHighImpactEvent: 90,
       invalidationPrice: 1.079,
       currentPrice: 1.0805,
@@ -153,5 +154,36 @@ describe("detectEurUsdOverlapCandidates", () => {
     expect(detection).not.toHaveProperty("recommendation");
     expect(detection).not.toHaveProperty("confidence");
     expect(detection).not.toHaveProperty("score");
+  });
+
+  it("marks missing event context unavailable instead of treating it as clear", () => {
+    const observedStatuses: string[] = [];
+    const baseFactory = observationFactory(2);
+    const factory: CandidateObservationFactory = (input) => {
+      observedStatuses.push(input.eventContextStatus);
+      expect(input.minutesToNearestHighImpactEvent).toBe(0);
+      return baseFactory(input);
+    };
+
+    detectEurUsdOverlapCandidates({
+      candles15m: [candle(0), candle(1), candle(2)],
+      candles1H: [],
+      candles4H: [],
+      observationFactory: factory
+    });
+
+    expect(observedStatuses).toEqual(["UNAVAILABLE", "UNAVAILABLE", "UNAVAILABLE"]);
+  });
+
+  it("rejects malformed event-context distances", () => {
+    expect(() =>
+      detectEurUsdOverlapCandidates({
+        candles15m: [candle(0)],
+        candles1H: [],
+        candles4H: [],
+        minutesToNearestHighImpactEvent: () => Number.POSITIVE_INFINITY,
+        observationFactory: observationFactory(0)
+      })
+    ).toThrow("finite integer");
   });
 });

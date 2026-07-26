@@ -13,8 +13,8 @@ export function AIEvidenceCouncil({ candidate }) {
   return (
     <Panel className="ai-council-panel">
       <PanelHeading
-        eyebrow="Multi-perspective review"
-        title="AI Evidence Council"
+        eyebrow="Shared-ledger review"
+        title="Evidence perspectives"
         aside={<RecommendationBadge value={report.recommendation} />}
       />
 
@@ -24,8 +24,8 @@ export function AIEvidenceCouncil({ candidate }) {
           <strong>{report.evidenceScore}</strong>
         </div>
         <div>
-          <span>Confidence</span>
-          <strong data-glossary="confidence">{report.confidence}</strong>
+          <span>Authority</span>
+          <strong>Demo only</strong>
         </div>
         <div>
           <span>Challenges</span>
@@ -44,7 +44,7 @@ export function AIEvidenceCouncil({ candidate }) {
                 <span>{member.role}</span>
                 <strong data-glossary={member.stance}>{member.stance}</strong>
               </div>
-              <Badge tone={member.tone}>{member.confidence}%</Badge>
+              <Badge tone={member.tone}>{member.stance}</Badge>
             </header>
             <p>{member.reason}</p>
             <small>{member.limitation}</small>
@@ -55,12 +55,12 @@ export function AIEvidenceCouncil({ candidate }) {
 
       <div className="ai-council-verdict">
         <div>
-          <span>Consolidated council view</span>
+          <span>Shared-ledger demo view</span>
           <strong>{report.recommendation.replaceAll("_", " ")}</strong>
         </div>
         <p>
-          This panel exposes specialist disagreement and supporting evidence. It does not create
-          execution authority or override the operator and risk-review gates.
+          These are deterministic perspectives over one synthetic contribution ledger. They are not
+          independent specialists, calibrated confidence, risk approval, or execution authority.
         </p>
       </div>
     </Panel>
@@ -82,7 +82,6 @@ function buildCouncil(candidate) {
       role: "Market Structure Analyst",
       stance: structure?.points > 0 ? "Bullish" : structure?.points < 0 ? "Bearish" : "Neutral",
       tone: structure?.points > 0 ? "success" : structure?.points < 0 ? "danger" : "neutral",
-      confidence: scoreConfidence(structure?.points),
       reason: structure?.rationale ?? report.neutralCase.summary,
       limitation: structure?.limitation ?? "No dedicated structure contribution was recorded.",
       evidenceIds: structure?.evidenceIds ?? []
@@ -91,7 +90,6 @@ function buildCouncil(candidate) {
       role: "Momentum & Flow Analyst",
       stance: momentum?.points > 0 ? "Bullish" : momentum?.points < 0 ? "Caution" : "Neutral",
       tone: momentum?.points > 0 ? "success" : momentum?.points < 0 ? "warning" : "neutral",
-      confidence: scoreConfidence(momentum?.points),
       reason:
         momentum?.rationale ?? "No independent momentum or order-flow contribution was recorded.",
       limitation:
@@ -102,7 +100,6 @@ function buildCouncil(candidate) {
       role: "Macro Analyst",
       stance: macro?.points < 0 ? "Caution" : macro?.points > 0 ? "Supportive" : "Neutral",
       tone: macro?.points < 0 ? "warning" : macro?.points > 0 ? "success" : "neutral",
-      confidence: scoreConfidence(macro?.points),
       reason: macro?.rationale ?? "No material macro contribution was recorded.",
       limitation: macro?.limitation ?? "Macro conditions can change after the local snapshot.",
       evidenceIds: macro?.evidenceIds ?? []
@@ -111,7 +108,6 @@ function buildCouncil(candidate) {
       role: "Risk Officer",
       stance: risk?.points < 0 ? "Reject" : risk?.points > 0 ? "Within limit" : "Review",
       tone: risk?.points < 0 ? "danger" : risk?.points > 0 ? "success" : "warning",
-      confidence: scoreConfidence(risk?.points),
       reason:
         risk?.rationale ??
         `${candidate.risk.amount} planned loss against a ${candidate.risk.ceiling} ceiling.`,
@@ -128,9 +124,6 @@ function buildCouncil(candidate) {
         correlation?.points < 0 || Number.parseInt(candidate.risk.exposure, 10) >= 18
           ? "warning"
           : "success",
-      confidence: scoreConfidence(
-        correlation?.points ?? (Number.parseInt(candidate.risk.exposure, 10) >= 18 ? -7 : 7)
-      ),
       reason: correlation?.rationale ?? `${candidate.risk.exposure} projected post-setup exposure.`,
       limitation:
         correlation?.limitation ?? "Portfolio exposure is based on the generated local snapshot.",
@@ -140,14 +133,9 @@ function buildCouncil(candidate) {
       role: "Devil's Advocate",
       stance: negative.length ? "Challenge" : "Clear",
       tone: negative.length ? "warning" : "success",
-      confidence: Math.min(95, 55 + negative.length * 9),
       reason: report.downgradeReasons[0] ?? report.bearCase.summary,
       limitation: report.bearCase.limitations[0] ?? "Contradicting evidence must remain visible.",
       evidenceIds: negative.flatMap((item) => item.evidenceIds).slice(0, 4)
     }
   ];
-}
-
-function scoreConfidence(points = 0) {
-  return Math.max(35, Math.min(95, 55 + Math.round(Math.abs(points) * 1.8)));
 }

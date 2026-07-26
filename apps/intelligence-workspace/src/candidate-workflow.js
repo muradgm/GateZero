@@ -41,8 +41,8 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
   if (recommendation === "PAPER_SIMULATE") {
     const ready = stage === "operator_decision";
     return {
-      status: ready ? "READY" : "PENDING",
-      statusLabel: ready ? "Ready for decision" : "Review in progress",
+      status: ready ? "REVIEW_REQUIRED" : "PENDING",
+      statusLabel: ready ? "Operator review required" : "Review in progress",
       currentStageLabel,
       blockingCondition: downgrade ?? "No unresolved assessment blocker recorded.",
       nextAction:
@@ -55,7 +55,7 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
       detectedAt,
       changedAt: lastEvent,
       reviewed: false,
-      urgency: ready ? "ACTION_REQUIRED" : "REVIEW"
+      urgency: "REVIEW"
     };
   }
 

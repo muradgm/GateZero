@@ -79,6 +79,36 @@ describe("validateAndNormalizeMarketCandles", () => {
     expect(result.failures.some((item) => item.code === "DATA_GAP_UNCLASSIFIED")).toBe(true);
   });
 
+  it.each(["2026-07-24T08:05:00.000Z", "2026-07-24T08:10:00.000Z"])(
+    "rejects a non-15-minute interval ending at %s",
+    (timestamp) => {
+      const result = validateAndNormalizeMarketCandles({
+        ...base,
+        candles: [candle("2026-07-24T08:00:00.000Z"), candle(timestamp)]
+      });
+
+      expect(result.failures.some((item) => item.code === "DATA_GAP_UNCLASSIFIED")).toBe(true);
+    }
+  );
+
+  it("accepts one bounded Friday-to-Sunday FX market closure", () => {
+    const result = validateAndNormalizeMarketCandles({
+      ...base,
+      candles: [candle("2026-07-24T21:45:00.000Z"), candle("2026-07-26T22:00:00.000Z")]
+    });
+
+    expect(result.failures).toEqual([]);
+  });
+
+  it("rejects an arbitrarily long Friday-to-Sunday gap", () => {
+    const result = validateAndNormalizeMarketCandles({
+      ...base,
+      candles: [candle("2026-07-17T21:45:00.000Z"), candle("2026-07-26T22:00:00.000Z")]
+    });
+
+    expect(result.failures.some((item) => item.code === "DATA_GAP_UNCLASSIFIED")).toBe(true);
+  });
+
   it("normalizes explicit source offsets to UTC", () => {
     const result = validateAndNormalizeMarketCandles({
       ...base,

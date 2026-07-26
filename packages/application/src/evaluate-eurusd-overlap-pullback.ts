@@ -73,7 +73,9 @@ export function evaluateEurUsdOverlapPullback(
   const triggerQualified =
     observation.triggerConfirmed &&
     observation.triggerAgeCandles <= strategy.trigger.maximumTriggerAgeCandles;
-  const eventClear = eventRestrictionPassed(observation.minutesToNearestHighImpactEvent, strategy);
+  const eventClear =
+    observation.eventContextStatus === "AVAILABLE" &&
+    eventRestrictionPassed(observation.minutesToNearestHighImpactEvent, strategy);
   const invalidationDefined =
     observation.invalidationPrice !== undefined &&
     observation.invalidationPrice !== observation.currentPrice;
@@ -151,12 +153,16 @@ export function evaluateEurUsdOverlapPullback(
     rule(
       "event-risk-clear",
       "EVENT_RISK_CLEAR",
-      eventClear ? "PASS" : "FAIL",
-      `nearestEventMinutes=${observation.minutesToNearestHighImpactEvent}`,
+      observation.eventContextStatus === "UNAVAILABLE" ? "BLOCKED" : eventClear ? "PASS" : "FAIL",
+      observation.eventContextStatus === "UNAVAILABLE"
+        ? "eventContext=unavailable"
+        : `nearestEventMinutes=${observation.minutesToNearestHighImpactEvent}`,
       `No EUR or USD high-impact event may occur within ${strategy.eventRestriction.minimumMinutesBeforeHighImpactEvent} minutes before or ${strategy.eventRestriction.minimumMinutesAfterHighImpactEvent} minutes after the decision.`,
-      eventClear
-        ? "High-impact event restriction is clear."
-        : "High-impact EUR or USD event restriction blocks progression.",
+      observation.eventContextStatus === "UNAVAILABLE"
+        ? "High-impact EUR and USD event context is unavailable."
+        : eventClear
+          ? "High-impact event restriction is clear."
+          : "High-impact EUR or USD event restriction blocks progression.",
       observation
     ),
     rule(

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
   Badge,
   EvidenceRow,
@@ -10,6 +10,7 @@ import {
 } from "@traderframe/ui";
 import { CandidateActionBar } from "./CandidateActionBar.jsx";
 import { deriveCandidateWorkflow } from "./candidate-workflow.js";
+import { LearningIntelligencePanel } from "./LearningIntelligencePanel.jsx";
 import { PriceChart } from "./PriceChart.jsx";
 
 function BrandMark() {
@@ -41,48 +42,29 @@ function LoadingState({ error }) {
   );
 }
 
-export function AppRuntime() {
-  const [workspace, setWorkspace] = useState(null);
-  const [error, setError] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
+export function AppRuntime({
+  workspace,
+  selectedId,
+  error,
+  epoch1Proof,
+  epoch2Proof,
+  epoch3Proof,
+  epoch4Proof,
+  onSelect
+}) {
   const [focusedTime, setFocusedTime] = useState(null);
-
-  useEffect(() => {
-    let active = true;
-    fetch("/runtime/workspace-data.json", { cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error("workspace data unavailable");
-        return response.json();
-      })
-      .then((data) => {
-        if (!active) return;
-        setWorkspace(data);
-        setSelectedId(data.candidates?.[0]?.id ?? null);
-      })
-      .catch(() => {
-        if (active) setError(true);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const selected = useMemo(() => {
-    if (!workspace) return null;
-    return (
-      workspace.candidates.find((candidate) => candidate.id === selectedId) ??
-      workspace.candidates[0]
-    );
-  }, [workspace, selectedId]);
+  const selected =
+    workspace?.candidates.find((candidate) => candidate.id === selectedId) ??
+    workspace?.candidates[0];
 
   if (!workspace || !selected) return <LoadingState error={error} />;
 
   const report = selected.report;
-  const exposure = buildExposure(selected);
+  const exposure = buildExposure(selected, epoch3Proof);
   const council = buildCouncil(selected);
 
   function selectCandidate(id) {
-    setSelectedId(id);
+    onSelect(id);
     setFocusedTime(null);
   }
 
@@ -103,7 +85,7 @@ export function AppRuntime() {
         <div className="topbar-status">
           <span className="status-dot" />
           <span>{workspace.boundary.gate.replaceAll("_", " ")}</span>
-          <small>{workspace.source}</small>
+          <small>{workspace.source} · non-canonical synthetic demo</small>
         </div>
       </header>
 
@@ -128,8 +110,63 @@ export function AppRuntime() {
             ))}
           </div>
           <div className="boundary-note">
-            <strong>Evidence only</strong>
-            <p>No broker connection, live order routing, or automated action.</p>
+            <strong>Non-canonical evidence demo</strong>
+            <p>
+              Only a validated canonical assessment may own a bounded recommendation. No broker
+              connection, live order routing, or automated action.
+            </p>
+            {epoch1Proof ? (
+              <div className="epoch1-proof" aria-label="Epoch 1 reproducibility proof">
+                <strong>Validated trace: {epoch1Proof.trace.lifecycleStatus}</strong>
+                <p>
+                  Replay {epoch1Proof.checkpoint.status} · {epoch1Proof.simulation.status} ·{" "}
+                  {epoch1Proof.learningEvent.category.replaceAll("_", " ")}
+                </p>
+                {epoch1Proof.limitations.map((limitation) => (
+                  <small key={limitation}>{limitation}</small>
+                ))}
+              </div>
+            ) : null}
+            {epoch2Proof ? (
+              <div className="epoch2-proof" aria-label="Epoch 2 evidence intelligence proof">
+                <strong>Evidence integrity: {epoch2Proof.checkpoint.status}</strong>
+                <p>
+                  {epoch2Proof.records.length} versions ·{" "}
+                  {epoch2Proof.graph.contradictionPairs.length} conflict · operator review required
+                </p>
+                <small>
+                  Revision {epoch2Proof.history.revisionCount}:{" "}
+                  {epoch2Proof.comparison.changedFields.join(", ")}
+                </small>
+                {epoch2Proof.limitations.map((limitation) => (
+                  <small key={limitation}>{limitation}</small>
+                ))}
+              </div>
+            ) : null}
+            {epoch3Proof ? (
+              <div className="epoch3-proof" aria-label="Epoch 3 portfolio risk proof">
+                <strong>Portfolio risk: {epoch3Proof.reviewAssessment.status}</strong>
+                <p>
+                  {epoch3Proof.reviewAssessment.findings.length} review findings ·{" "}
+                  {epoch3Proof.blockedAssessment.blockers.length} blockers exercised
+                </p>
+                <small>Deterministic checkpoint {epoch3Proof.checkpoint.status}</small>
+                {epoch3Proof.limitations.map((limitation) => (
+                  <small key={limitation}>{limitation}</small>
+                ))}
+              </div>
+            ) : null}
+            {epoch4Proof ? (
+              <div className="epoch4-proof" aria-label="Epoch 4 learning intelligence proof">
+                <strong>Learning intelligence: {epoch4Proof.checkpoint.status}</strong>
+                <p>
+                  {epoch4Proof.sourceCaseCount} cases ·{" "}
+                  {epoch4Proof.report.comparableCaseClusters.length} exact clusters · operator
+                  review required
+                </p>
+                <small>No prediction, performance claim, or automatic rule change</small>
+              </div>
+            ) : null}
           </div>
         </Panel>
 
@@ -142,10 +179,10 @@ export function AppRuntime() {
                 <p>{selected.context.session}</p>
               </div>
               <div className="decision-summary">
-                <Metric label="Evidence" value={report.evidenceScore} emphasis />
-                <Metric label="Confidence" value={report.confidence} emphasis />
+                <Metric label="Demo evidence index" value={report.evidenceScore} emphasis />
+                <Metric label="Uncalibrated status" value={report.confidence} emphasis />
                 <div className="decision-summary__recommendation">
-                  <span>Decision</span>
+                  <span>Demo assessment</span>
                   <RecommendationBadge value={report.recommendation} />
                 </div>
               </div>
@@ -208,33 +245,36 @@ export function AppRuntime() {
             <PortfolioExposure exposure={exposure} selected={selected} />
             <DecisionCouncil council={council} report={report} />
           </section>
+          {selected.id === "eurusd" ? <LearningIntelligencePanel proof={epoch4Proof} /> : null}
         </section>
 
         <aside className="intelligence-column">
           <Panel className="intelligence-summary">
             <PanelHeading
-              eyebrow="Explainable reasoning"
-              title="Intelligence"
-              aside={<Badge tone="neutral">{report.confidence}</Badge>}
+              eyebrow="Synthetic evidence perspectives"
+              title="Demo assessment"
+              aside={<Badge tone="neutral">Not canonical</Badge>}
             />
-            <CaseBlock
-              title="Bull case"
-              className="case--bull"
-              summary={report.bullCase.summary}
-              limitations={report.bullCase.limitations}
-            />
-            <CaseBlock
-              title="Bear case"
-              className="case--bear"
-              summary={report.bearCase.summary}
-              limitations={report.bearCase.limitations}
-            />
-            <CaseBlock
-              title="Neutral"
-              className="case--neutral"
-              summary={report.neutralCase.summary}
-              limitations={report.neutralCase.limitations}
-            />
+            <div className="case-block-group">
+              <CaseBlock
+                title="Bull case"
+                className="case--bull"
+                summary={report.bullCase.summary}
+                limitations={report.bullCase.limitations}
+              />
+              <CaseBlock
+                title="Bear case"
+                className="case--bear"
+                summary={report.bearCase.summary}
+                limitations={report.bearCase.limitations}
+              />
+              <CaseBlock
+                title="Neutral"
+                className="case--neutral"
+                summary={report.neutralCase.summary}
+                limitations={report.neutralCase.limitations}
+              />
+            </div>
           </Panel>
 
           <Panel className="evidence-panel">
@@ -267,12 +307,10 @@ function PortfolioExposure({ exposure, selected }) {
   return (
     <Panel className="portfolio-panel">
       <PanelHeading
-        eyebrow="Portfolio intelligence"
-        title="Exposure concentration"
+        eyebrow={exposure.canonical ? "Local Epoch 3 risk fixture" : "Synthetic portfolio fixture"}
+        title={exposure.canonical ? "Bounded portfolio risk" : "Illustrative exposure"}
         aside={
-          <Badge tone={exposure.warning ? "warning" : "success"}>
-            {exposure.warning ? "Review" : "Within limit"}
-          </Badge>
+          <Badge tone={exposure.warning ? "warning" : "success"}>{exposure.statusLabel}</Badge>
         }
       />
       <div className="exposure-list">
@@ -280,19 +318,18 @@ function PortfolioExposure({ exposure, selected }) {
           <div className="exposure-row" key={item.label}>
             <div>
               <span>{item.label}</span>
-              <strong>{item.value}%</strong>
+              <strong>{item.displayValue}</strong>
             </div>
             <div className="exposure-track">
-              <span style={{ width: `${item.value}%` }} />
+              <span style={{ width: `${Math.min(100, item.barValue)}%` }} />
             </div>
           </div>
         ))}
       </div>
       <div className={`exposure-impact ${exposure.warning ? "exposure-impact--warning" : ""}`}>
-        <span>Selected setup impact</span>
-        <strong>
-          {selected.instrument} raises {exposure.primary} concentration to {exposure.after}%.
-        </strong>
+        <span>{exposure.canonical ? "Risk interpretation" : "Selected setup impact"}</span>
+        <strong>{exposure.summary(selected)}</strong>
+        {exposure.canonical ? <small>{exposure.limitation}</small> : null}
       </div>
     </Panel>
   );
@@ -302,8 +339,8 @@ function DecisionCouncil({ council, report }) {
   return (
     <Panel className="council-panel">
       <PanelHeading
-        eyebrow="Structured challenge"
-        title="Decision council"
+        eyebrow="Shared-ledger perspectives"
+        title="Evidence perspectives"
         aside={<RecommendationBadge value={report.recommendation} />}
       />
       <div className="council-list">
@@ -318,7 +355,7 @@ function DecisionCouncil({ council, report }) {
         ))}
       </div>
       <div className="council-summary">
-        <span>Consolidated view</span>
+        <span>Demo-only view</span>
         <strong>
           {report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence
         </strong>
@@ -327,7 +364,42 @@ function DecisionCouncil({ council, report }) {
   );
 }
 
-function buildExposure(selected) {
+function buildExposure(selected, epoch3Proof) {
+  if (selected.id === "eurusd" && epoch3Proof) {
+    const assessment = epoch3Proof.reviewAssessment;
+    const currency = assessment.currencyExposures.find((metric) => metric.subject === "USD");
+    const correlation = assessment.correlationExposures.find(
+      (metric) => metric.subject === "USD_DIRECTION"
+    );
+    const event = assessment.eventExposures.find((metric) => metric.subject === "US_CPI");
+    const instrument = assessment.instrumentExposures.find((metric) => metric.subject === "EURUSD");
+    const exposureItems = [
+      metricItem("EUR/USD instrument", instrument),
+      metricItem("USD currency", currency),
+      metricItem("USD direction group", correlation),
+      metricItem("US CPI event risk", event),
+      {
+        label: "Session risk budget",
+        displayValue: `${assessment.sessionRiskBudget.afterCandidateAmount} / ${assessment.sessionRiskBudget.limitAmount} USD`,
+        barValue: assessment.sessionRiskBudget.utilizationPct
+      },
+      {
+        label: "Account drawdown",
+        displayValue: `${assessment.drawdownPct}% / ${assessment.maximumDrawdownPct}%`,
+        barValue: (assessment.drawdownPct / assessment.maximumDrawdownPct) * 100
+      }
+    ].filter(Boolean);
+    return {
+      canonical: true,
+      warning: assessment.status !== "CLEAR",
+      statusLabel: assessment.status.replaceAll("_", " "),
+      items: exposureItems,
+      summary: () =>
+        `${assessment.findings.length} portfolio findings remain visible. Risk status does not approve simulation.`,
+      limitation: assessment.limitations.at(-1)
+    };
+  }
+
   const base =
     selected.id === "eurusd"
       ? [
@@ -351,7 +423,26 @@ function buildExposure(selected) {
           ];
   const primary = base[0].label;
   const after = Math.min(100, base[0].value + Number.parseInt(selected.risk.exposure, 10));
-  return { items: base, primary, after, warning: after >= 90 };
+  return {
+    canonical: false,
+    items: base.map((item) => ({
+      label: item.label,
+      displayValue: `${item.value}%`,
+      barValue: item.value
+    })),
+    warning: after >= 90,
+    statusLabel: after >= 90 ? "Review" : "Within limit",
+    summary: (candidate) => `${candidate.instrument} raises ${primary} concentration to ${after}%.`
+  };
+}
+
+function metricItem(label, metric) {
+  if (!metric) return null;
+  return {
+    label,
+    displayValue: `${metric.afterCandidatePct}% / ${metric.limitPct}%`,
+    barValue: (metric.afterCandidatePct / metric.limitPct) * 100
+  };
 }
 
 function buildCouncil(selected) {

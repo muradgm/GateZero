@@ -122,6 +122,7 @@ describe("deriveEurUsdOverlapObservation", () => {
       candles15m: sourceSeries(),
       candles1H: higherTimeframeSeries("1H"),
       candles4H: higherTimeframeSeries("4H"),
+      eventContextStatus: "AVAILABLE",
       minutesToNearestHighImpactEvent: 120
     });
 
@@ -145,6 +146,7 @@ describe("deriveEurUsdOverlapObservation", () => {
       candles15m: sourceSeries(),
       candles1H: higherTimeframeSeries("1H"),
       candles4H: higherTimeframeSeries("4H"),
+      eventContextStatus: "AVAILABLE",
       minutesToNearestHighImpactEvent: 120
     });
     const assessment = evaluateEurUsdOverlapPullback(derived.observation);
@@ -175,6 +177,7 @@ describe("deriveEurUsdOverlapObservation", () => {
       candles15m: [...sourceSeries(), future15m],
       candles1H: [...higherTimeframeSeries("1H"), future1H],
       candles4H: higherTimeframeSeries("4H"),
+      eventContextStatus: "AVAILABLE",
       minutesToNearestHighImpactEvent: 120
     });
 
@@ -193,6 +196,7 @@ describe("deriveEurUsdOverlapObservation", () => {
       candles15m: sourceSeries(),
       candles1H: higherTimeframeSeries("1H").slice(-10),
       candles4H: higherTimeframeSeries("4H").slice(-10),
+      eventContextStatus: "AVAILABLE",
       minutesToNearestHighImpactEvent: 120
     });
 

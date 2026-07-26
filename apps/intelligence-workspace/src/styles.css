@@ -534,7 +534,11 @@ kbd {
     display: none;
   }
   .workspace-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .workspace-grid > * {
+    width: 100%;
+    min-width: 0;
   }
   .watchlist {
     min-height: auto;

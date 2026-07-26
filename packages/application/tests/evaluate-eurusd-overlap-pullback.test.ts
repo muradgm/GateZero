@@ -16,6 +16,7 @@ const base = {
   displacementAtr: 0.8,
   triggerConfirmed: true,
   triggerAgeCandles: 1,
+  eventContextStatus: "AVAILABLE" as const,
   minutesToNearestHighImpactEvent: 90,
   invalidationPrice: 1.081,
   currentPrice: 1.0835,
@@ -55,6 +56,19 @@ describe("EURUSD London-New York overlap pullback v1", () => {
     expect(result.eligible).toBe(false);
     expect(result.recommendation).toBe("WATCH");
     expect(result.blockers.some((item) => item.startsWith("EVENT_RISK_CLEAR"))).toBe(true);
+  });
+
+  it("fails closed when event context is unavailable", () => {
+    const result = evaluateEurUsdOverlapPullback({
+      ...base,
+      eventContextStatus: "UNAVAILABLE",
+      minutesToNearestHighImpactEvent: 0
+    });
+
+    expect(result.recommendation).toBe("WATCH");
+    expect(result.ruleResults.find((item) => item.gate === "EVENT_RISK_CLEAR")?.status).toBe(
+      "BLOCKED"
+    );
   });
 
   it("rejects expired candidates", () => {

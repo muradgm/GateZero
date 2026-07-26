@@ -16,6 +16,7 @@ const base = {
   displacementAtr: 0.8,
   triggerConfirmed: true,
   triggerAgeCandles: 1,
+  eventContextStatus: "AVAILABLE" as const,
   minutesToNearestHighImpactEvent: 90,
   invalidationPrice: 1.081,
   currentPrice: 1.0835,

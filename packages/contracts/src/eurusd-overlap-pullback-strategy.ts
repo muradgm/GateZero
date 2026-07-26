@@ -135,6 +135,7 @@ export const EurUsdOverlapPullbackObservationSchema = z
     displacementAtr: z.number().finite().nonnegative(),
     triggerConfirmed: z.boolean(),
     triggerAgeCandles: z.number().int().nonnegative(),
+    eventContextStatus: z.enum(["AVAILABLE", "UNAVAILABLE"]),
     minutesToNearestHighImpactEvent: z.number().int(),
     invalidationPrice: z.number().finite().positive().optional(),
     currentPrice: z.number().finite().positive(),

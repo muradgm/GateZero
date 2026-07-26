@@ -400,11 +400,14 @@ const rankByReport = new Map(ranked.map((candidate, index) => [candidate.reportI
 
 const output = {
   schemaVersion: 1,
+  dataMode: "SYNTHETIC_DEMO",
   generatedAt,
-  source: "generated local repository evidence",
+  source: "manually authored local demonstration fixtures",
   boundary: {
     gate: "G2_PAPER_TRADING",
     scope: "paper_simulation_planning_only",
+    assessmentAuthority: "NON_CANONICAL_DEMO",
+    recommendationOwner: "CANONICAL_DECISION_ASSESSMENT_ONLY",
     externalAccess: false,
     executionPath: false,
     automatedAction: false

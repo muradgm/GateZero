@@ -22,7 +22,7 @@ export type DetectEurUsdOverlapCandidatesInput = {
   candles15m: NormalizedMarketCandle[];
   candles1H: TimeBoundMarketCandle[];
   candles4H: TimeBoundMarketCandle[];
-  minutesToNearestHighImpactEvent?: (decisionTimestamp: string) => number;
+  minutesToNearestHighImpactEvent?: (decisionTimestamp: string) => number | null;
   strategy?: EurUsdOverlapPullbackStrategy;
   observationFactory?: CandidateObservationFactory;
 };
@@ -57,13 +57,21 @@ export function detectEurUsdOverlapCandidates(
       .sort(byAvailableAt);
 
     evaluatedDecisionPoints += 1;
+    const nearestEventMinutes = input.minutesToNearestHighImpactEvent?.(decisionTimestamp) ?? null;
+    if (
+      nearestEventMinutes !== null &&
+      (!Number.isFinite(nearestEventMinutes) || !Number.isInteger(nearestEventMinutes))
+    ) {
+      throw new Error("event context must return a finite integer minute distance or null");
+    }
+
     const derived = deriveObservation({
       decisionTimestamp,
       candles15m: eligible15m,
       candles1H: eligible1H,
       candles4H: eligible4H,
-      minutesToNearestHighImpactEvent:
-        input.minutesToNearestHighImpactEvent?.(decisionTimestamp) ?? Number.POSITIVE_INFINITY,
+      eventContextStatus: nearestEventMinutes === null ? "UNAVAILABLE" : "AVAILABLE",
+      minutesToNearestHighImpactEvent: nearestEventMinutes ?? 0,
       strategy
     });
 

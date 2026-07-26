@@ -12,11 +12,14 @@ Repository:
 
 `muradgm/GateZero`
 
-The base branch is currently 277 commits ahead of `main` and contains the complete Trading Intelligence Command Center, the validated-trace foundation, deterministic EUR/USD strategy logic, candidate detection, and the first historical-provider adapter boundary.
+The base branch is currently 277 commits ahead of `main` and contains the complete Trading
+Intelligence Command Center, the validated-trace foundation, deterministic EUR/USD strategy logic,
+candidate detection, and the first historical-provider adapter boundary.
 
 ## Product position
 
-TraderFrame is not currently being built as a TradingView replacement or a production execution terminal.
+TraderFrame is not currently being built as a TradingView replacement or a production execution
+terminal.
 
 The active product position is:
 
@@ -24,9 +27,12 @@ The active product position is:
 
 The governing milestone is:
 
-> Prove one complete, valid, immutable, deterministic, and reproducible EUR/USD decision lifecycle from real historical data without manually authored intelligence.
+> Prove one complete, valid, immutable, deterministic, and reproducible EUR/USD decision lifecycle
+> from real historical data without manually authored intelligence.
 
-The current milestone is not a profitability claim. It validates data integrity, temporal integrity, deterministic reasoning, instrument-aware risk, explicit simulation assumptions, immutable decision-time evidence, reproducibility, outcome capture, and learning.
+The current milestone is not a profitability claim. It validates data integrity, temporal integrity,
+deterministic reasoning, instrument-aware risk, explicit simulation assumptions, immutable
+decision-time evidence, reproducibility, outcome capture, and learning.
 
 ## Governing source documents
 
@@ -40,7 +46,8 @@ Read these before changing code:
 6. `docs/architecture/MILESTONE_B_TRADING_INTELLIGENCE_ENGINE.md`
 7. `docs/architecture/SETUP_REVIEW_VERTICAL_SLICE.md`
 
-When these documents conflict with assumptions from old branches or chat history, the validated-trace milestone is the governing source.
+When these documents conflict with assumptions from old branches or chat history, the
+validated-trace milestone is the governing source.
 
 ## Current status
 
@@ -65,7 +72,9 @@ Implemented:
 - chart interactions and local runtime-data generation
 - quiet `pnpm verify` progress runner with verbose fallback
 
-The UI is intentionally ahead of the full runtime engine. Do not add more analytical panels during this milestone unless they expose truth-related state such as provenance, validity, freshness, blockers, frozen-versus-outcome data, simulation assumptions, or reproducibility.
+The UI is intentionally ahead of the full runtime engine. Do not add more analytical panels during
+this milestone unless they expose truth-related state such as provenance, validity, freshness,
+blockers, frozen-versus-outcome data, simulation assumptions, or reproducibility.
 
 ### Domain and application architecture
 
@@ -176,7 +185,8 @@ The canonical assessment owns:
 - expiry
 - deterministic assessment identity
 
-Downstream UI, reports, councils, replay, risk, simulation, and learning must consume this object rather than recalculate recommendations.
+Downstream UI, reports, councils, replay, risk, simulation, and learning must consume this object
+rather than recalculate recommendations.
 
 ### Candidate detection
 
@@ -208,14 +218,14 @@ Current adapter boundary:
 - instrument: EUR/USD
 - timeframe: 15m
 - strict UTC timestamps ending in `Z`
-- strict header:
-  `timestamp,open,high,low,close,volume`
+- strict header: `timestamp,open,high,low,close,volume`
 - source-content SHA-256 hash
 - provider-neutral `RawMarketCandle[]`
 - explicit failure codes
 - no silent timezone or column guessing
 
-A real frozen dataset is not yet committed. The next branch must ingest one user-supplied or legally reusable historical export through this adapter.
+A real frozen dataset is not yet committed. The next branch must ingest one user-supplied or legally
+reusable historical export through this adapter.
 
 ## Developer experience changes
 
@@ -250,7 +260,8 @@ Historical baseline before the latest adapter tests:
 - 126 test files
 - 870 tests
 
-The adapter and candidate-detection additions should increase the final count after the continuation branch is synchronized and verified.
+The adapter and candidate-detection additions should increase the final count after the continuation
+branch is synchronized and verified.
 
 Do not record a new verified count until `pnpm verify` passes locally on the continuation branch.
 
@@ -289,7 +300,8 @@ Do not overwrite unrelated local work.
 
 Goal:
 
-Add one fixed historical 15m EUR/USD CSV export with explicit provenance and permitted repository usage.
+Add one fixed historical 15m EUR/USD CSV export with explicit provenance and permitted repository
+usage.
 
 Requirements:
 
@@ -299,7 +311,8 @@ Requirements:
 - license or usage note
 - no generated or manually altered candle values
 - adapter test against the frozen dataset
-- avoid committing data if its license forbids redistribution; in that case add a deterministic local-import fixture workflow and a content-hash manifest instead
+- avoid committing data if its license forbids redistribution; in that case add a deterministic
+  local-import fixture workflow and a content-hash manifest instead
 
 ### Phase 2 — End-to-end historical ingestion service
 
@@ -420,14 +433,16 @@ The outcome must not rewrite the original evidence, recommendation, or operator 
 
 ### Phase 7 — Reproduction harness
 
-From frozen inputs and an empty generated-state directory, repeated runs must produce identical canonical outputs and hashes.
+From frozen inputs and an empty generated-state directory, repeated runs must produce identical
+canonical outputs and hashes.
 
 Separate:
 
 - canonical deterministic artifacts
 - volatile operational metadata such as runtime duration and generated timestamp
 
-The milestone fails if candidate, evidence, assessment, risk, simulation, outcome, or learning hashes differ across identical runs.
+The milestone fails if candidate, evidence, assessment, risk, simulation, outcome, or learning
+hashes differ across identical runs.
 
 ### Phase 8 — Browser E2E
 
@@ -556,9 +571,11 @@ Current completed foundation includes:
 - quiet pnpm verify progress runner
 
 Immediate next objective:
-1. introduce one frozen real EUR/USD 15m dataset or a license-safe deterministic import manifest;
-2. build the end-to-end historical ingestion service;
-3. then implement the instrument-aware EUR/USD risk engine.
+1. preserve the implemented Epoch 1 deterministic lifecycle proof;
+2. preserve the implemented Epoch 2 evidence dependency and revision proof;
+3. preserve the implemented Epoch 3 bounded portfolio-risk proof;
+4. preserve the implemented Epoch 4 deterministic learning intelligence proof;
+5. begin Epoch 5 multi-strategy work only through the validated protected-loop contracts.
 
 Hard constraints:
 - no new markets or strategies
@@ -569,13 +586,16 @@ Hard constraints:
 - no manual evidence values
 - no silent look-ahead, data repair, or simulation assumptions
 - one canonical recommendation owner
+- no risk status presented as approval, readiness, or promotion
+- no learning pattern presented as prediction, performance evidence, or automatic rule authority
 
 Use contracts first, deterministic application services second, UI projections last. Add focused tests and small commits. Run pnpm verify and report failures honestly. Do not claim verification until confirmed.
 ```
 
 ## Completion definition
 
-The continuation branch is complete only when one real historical EUR/USD case can be reproduced through:
+The continuation branch is complete only when one real historical EUR/USD case can be reproduced
+through:
 
 ```text
 Historical source

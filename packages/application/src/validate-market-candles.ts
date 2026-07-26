@@ -188,8 +188,8 @@ export function validateAndNormalizeMarketCandles(
     if (!previous || !current) continue;
     const actualGap = Date.parse(current.openedAt) - Date.parse(previous.openedAt);
     if (
-      actualGap > expectedIntervalMs &&
-      !isExpectedWeekendClosure(previous.openedAt, current.openedAt)
+      actualGap !== expectedIntervalMs &&
+      !isExpectedWeekendClosure(previous.openedAt, current.openedAt, actualGap)
     ) {
       failures.push(
         failure(
@@ -231,12 +231,25 @@ function hasExplicitOffset(timestamp: string): boolean {
   return /(?:Z|[+-]\d{2}:\d{2})$/i.test(timestamp);
 }
 
-function isExpectedWeekendClosure(previousIso: string, currentIso: string): boolean {
+function isExpectedWeekendClosure(
+  previousIso: string,
+  currentIso: string,
+  actualGapMs: number
+): boolean {
   const previous = new Date(previousIso);
   const current = new Date(currentIso);
-  const previousDay = previous.getUTCDay();
-  const currentDay = current.getUTCDay();
-  return (previousDay === 5 || previousDay === 6) && (currentDay === 0 || currentDay === 1);
+  const minimumClosureMs = 45 * 60 * 60 * 1000;
+  const maximumClosureMs = 53 * 60 * 60 * 1000;
+
+  return (
+    previous.getUTCDay() === 5 &&
+    previous.getUTCHours() >= 20 &&
+    current.getUTCDay() === 0 &&
+    current.getUTCHours() >= 20 &&
+    current.getUTCHours() <= 23 &&
+    actualGapMs >= minimumClosureMs &&
+    actualGapMs <= maximumClosureMs
+  );
 }
 
 function failure(

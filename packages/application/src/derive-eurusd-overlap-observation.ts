@@ -18,6 +18,7 @@ export type DeriveEurUsdOverlapObservationInput = {
   candles15m: NormalizedMarketCandle[];
   candles1H: TimeBoundMarketCandle[];
   candles4H: TimeBoundMarketCandle[];
+  eventContextStatus: "AVAILABLE" | "UNAVAILABLE";
   minutesToNearestHighImpactEvent: number;
   strategy?: EurUsdOverlapPullbackStrategy;
 };
@@ -151,6 +152,7 @@ export function deriveEurUsdOverlapObservation(
     displacementAtr: sweep?.displacementAtr ?? 0,
     triggerConfirmed: Boolean(trigger),
     triggerAgeCandles: trigger?.ageCandles ?? strategy.trigger.maximumTriggerAgeCandles + 1,
+    eventContextStatus: input.eventContextStatus,
     minutesToNearestHighImpactEvent: input.minutesToNearestHighImpactEvent,
     ...(invalidationPrice === undefined ? {} : { invalidationPrice }),
     currentPrice: latest.close,
