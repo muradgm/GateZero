@@ -38,7 +38,9 @@ export function CommandPalette({ workspace, selectedId }) {
   useEffect(() => {
     function handleKeyDown(event) {
       const target = event.target;
-      const typing = target instanceof HTMLElement && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      const typing =
+        target instanceof window.HTMLElement &&
+        (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
 
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
@@ -75,9 +77,9 @@ export function CommandPalette({ workspace, selectedId }) {
     setQuery("");
     setActiveIndex(0);
     document.body.classList.add("command-palette-open");
-    const frame = requestAnimationFrame(() => inputRef.current?.focus());
+    const frame = window.requestAnimationFrame(() => inputRef.current?.focus());
     return () => {
-      cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(frame);
       document.body.classList.remove("command-palette-open");
     };
   }, [open]);
