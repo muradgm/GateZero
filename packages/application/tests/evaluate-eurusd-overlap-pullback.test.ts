@@ -71,8 +71,10 @@ describe("EURUSD London-New York overlap pullback v1", () => {
   });
 
   it("rejects missing invalidation", () => {
-    const { invalidationPrice: _ignored, ...withoutInvalidation } = base;
-    const result = evaluateEurUsdOverlapPullback(withoutInvalidation);
+    const result = evaluateEurUsdOverlapPullback({
+      ...base,
+      invalidationPrice: undefined
+    });
 
     expect(result.recommendation).toBe("REJECT");
     expect(result.ruleResults.find((item) => item.gate === "INVALIDATION_DEFINED")?.status).toBe("BLOCKED");
