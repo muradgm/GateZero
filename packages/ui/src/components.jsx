@@ -50,7 +50,11 @@ export function WatchlistCard({ candidate, active, onSelect, workflow }) {
 
   const queue = workflow ?? {};
   const urgencyTone = urgencyClass(queue.urgency);
-  const expiry = queue.expiresAt ? formatUtc(queue.expiresAt) : queue.status === "CLOSED" ? "Closed" : "Open";
+  const expiry = queue.expiresAt
+    ? formatUtc(queue.expiresAt)
+    : queue.status === "CLOSED"
+      ? "Closed"
+      : "Open";
 
   return (
     <button
@@ -61,19 +65,25 @@ export function WatchlistCard({ candidate, active, onSelect, workflow }) {
     >
       <div className="tf-watchlist-card__topline">
         <span className="tf-rank">#{candidate.rank}</span>
-        <span className={`tf-queue-urgency tf-queue-urgency--${urgencyTone}`}>{urgencyLabel(queue.urgency)}</span>
+        <span className={`tf-queue-urgency tf-queue-urgency--${urgencyTone}`}>
+          {urgencyLabel(queue.urgency)}
+        </span>
       </div>
 
       <div className="tf-watchlist-card__identity">
         <div>
           <strong>{candidate.instrument}</strong>
-          <small>{candidate.market} · {candidate.context.session}</small>
+          <small>
+            {candidate.market} · {candidate.context.session}
+          </small>
         </div>
         <RecommendationBadge value={candidate.report.recommendation} />
       </div>
 
       <div className="tf-queue-stage">
-        <span>{queue.currentStageLabel ?? candidate.pipeline.currentStage.replaceAll("_", " ")}</span>
+        <span>
+          {queue.currentStageLabel ?? candidate.pipeline.currentStage.replaceAll("_", " ")}
+        </span>
         <strong>{queue.statusLabel ?? "Review pending"}</strong>
       </div>
 
@@ -83,7 +93,9 @@ export function WatchlistCard({ candidate, active, onSelect, workflow }) {
       </div>
 
       <div className="tf-queue-meta">
-        <span className={`tf-queue-freshness tf-queue-freshness--${queue.freshnessState ?? "unknown"}`}>
+        <span
+          className={`tf-queue-freshness tf-queue-freshness--${queue.freshnessState ?? "unknown"}`}
+        >
           {queue.freshnessLabel ?? "Unknown freshness"}
         </span>
         <span>{queue.reviewed ? "Reviewed" : "Unreviewed"}</span>
@@ -126,9 +138,14 @@ export function EvidenceRow({ contribution }) {
     <details className={`tf-evidence-row tf-evidence-row--${positive ? "positive" : "negative"}`}>
       <summary>
         <span>{contribution.label}</span>
-        <strong>{positive ? "+" : ""}{contribution.points}</strong>
+        <strong>
+          {positive ? "+" : ""}
+          {contribution.points}
+        </strong>
       </summary>
-      <div className="tf-evidence-bar" aria-hidden="true"><span style={{ width: `${magnitude}%` }} /></div>
+      <div className="tf-evidence-bar" aria-hidden="true">
+        <span style={{ width: `${magnitude}%` }} />
+      </div>
       <p>{contribution.rationale}</p>
       <small>{contribution.limitation}</small>
       <code>{contribution.evidenceIds.join(" · ")}</code>

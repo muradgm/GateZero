@@ -4,10 +4,7 @@ import type {
   EurUsdOverlapPullbackObservation,
   NormalizedMarketCandle
 } from "@traderframe/contracts";
-import {
-  detectEurUsdOverlapCandidates,
-  type CandidateObservationFactory
-} from "../src/index.js";
+import { detectEurUsdOverlapCandidates, type CandidateObservationFactory } from "../src/index.js";
 
 function candle(index: number): NormalizedMarketCandle {
   const openedAt = new Date(Date.UTC(2026, 6, 24, 12, index * 15)).toISOString();
@@ -30,7 +27,10 @@ function candle(index: number): NormalizedMarketCandle {
   };
 }
 
-function observationFactory(triggerAtIndex: number, triggerCandleId = "trigger-1"): CandidateObservationFactory {
+function observationFactory(
+  triggerAtIndex: number,
+  triggerCandleId = "trigger-1"
+): CandidateObservationFactory {
   return (input) => {
     const currentIndex = input.candles15m.length - 1;
     const detected = currentIndex >= triggerAtIndex;
@@ -86,7 +86,11 @@ describe("detectEurUsdOverlapCandidates", () => {
     const baseFactory = observationFactory(2);
     const factory: CandidateObservationFactory = (input) => {
       observedWindowSizes.push(input.candles15m.length);
-      expect(input.candles15m.every((item) => Date.parse(item.closedAt) <= Date.parse(input.decisionTimestamp))).toBe(true);
+      expect(
+        input.candles15m.every(
+          (item) => Date.parse(item.closedAt) <= Date.parse(input.decisionTimestamp)
+        )
+      ).toBe(true);
       return baseFactory(input);
     };
 
