@@ -84,11 +84,23 @@ export function createCanonicalRiskReview(
   });
 }
 
+export function assertEurUsdRiskCalculationIntegrity(
+  value: EurUsdRiskCalculation
+): EurUsdRiskCalculation {
+  const calculation = EurUsdRiskCalculationSchema.parse(value);
+  const { calculationHash, ...payload } = calculation;
+
+  if (calculationHash !== hashCanonicalValue(payload)) {
+    throw new ContractValidationError("calculated risk content hash mismatch");
+  }
+  return calculation;
+}
+
 export function createCanonicalRiskReviewFromCalculation(
   command: CreateCanonicalRiskReviewFromCalculationCommand
 ): CanonicalRiskReview {
   const assessment = CanonicalDecisionAssessmentSchema.parse(command.assessment);
-  const calculation = EurUsdRiskCalculationSchema.parse(command.calculation);
+  const calculation = assertEurUsdRiskCalculationIntegrity(command.calculation);
   const assessmentHash = hashCanonicalValue(assessment);
 
   if (
