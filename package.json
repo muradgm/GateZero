@@ -37,6 +37,7 @@
     "generate:artifacts": "pnpm snapshot:gate0-progress && pnpm snapshot:case-catalog && pnpm snapshot:simulator-workspace && pnpm snapshot:backtest-evidence && pnpm snapshot:intelligence-brief && pnpm generate:workspace-data",
     "generate:workspace-data": "tsx scripts/generate-intelligence-workspace-data.ts && tsx scripts/attach-intelligence-workspace-chart-data.ts && tsx scripts/attach-intelligence-workspace-similarity-data.ts && tsx scripts/generate-epoch1-validated-case.ts && tsx scripts/generate-epoch2-evidence-case.ts && tsx scripts/generate-epoch3-risk-case.ts && tsx scripts/generate-epoch4-learning-case.ts",
     "import:epoch1-dataset": "tsx scripts/import-epoch1-historical-dataset.ts",
+    "run:epoch1-ingestion": "tsx scripts/run-epoch1-historical-ingestion.ts",
     "inspect:runtime-status": "tsx scripts/build-command-center-runtime-data.ts",
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "inspect:local-cases": "tsx scripts/inspect-local-cases.ts",
