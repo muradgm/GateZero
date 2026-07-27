@@ -12,7 +12,10 @@ import {
   type TemporalEvidenceReference,
   type TimeBoundMarketCandle
 } from "@traderframe/contracts";
-import { assertLocalSimulationRiskEligibility, hashCanonicalValue } from "./canonical-risk-review.js";
+import {
+  assertLocalSimulationRiskEligibility,
+  hashCanonicalValue
+} from "./canonical-risk-review.js";
 import { EURUSD_OVERLAP_PULLBACK_V1 } from "./evaluate-eurusd-overlap-pullback.js";
 import { freezeDecisionBundle } from "./freeze-decision-bundle.js";
 
@@ -34,14 +37,18 @@ export function freezeHistoricalDecisionBundle(
   const configuration = HistoricalDecisionFreezeConfigurationSchema.parse(input.configuration);
 
   if (run.status !== "COMPLETED") {
-    throw new ContractValidationError("historical decision freezing requires a completed ingestion run");
+    throw new ContractValidationError(
+      "historical decision freezing requires a completed ingestion run"
+    );
   }
   if (
     run.hashes.normalized15mHash === null ||
     run.hashes.aggregated1HHash === null ||
     run.hashes.aggregated4HHash === null
   ) {
-    throw new ContractValidationError("historical decision freezing requires complete source hashes");
+    throw new ContractValidationError(
+      "historical decision freezing requires complete source hashes"
+    );
   }
 
   const evaluation = run.candidateEvaluations.find(
@@ -56,6 +63,20 @@ export function freezeHistoricalDecisionBundle(
   assertRiskCalculationIntegrity(calculation);
   assertRiskLineage(run, calculation);
 
+  const canonicalAssessmentHash = hashCanonicalValue(evaluation.assessment);
+  if (
+    calculation.assessmentId !== evaluation.assessment.assessmentId ||
+    calculation.canonicalAssessmentHash !== canonicalAssessmentHash
+  ) {
+    throw new ContractValidationError(
+      "calculated risk does not match the canonical assessment selected for freezing"
+    );
+  }
+  if (Date.parse(calculation.decisionTimestamp) < Date.parse(evaluation.assessment.availableAt)) {
+    throw new ContractValidationError(
+      "calculated risk predates the canonical assessment availability boundary"
+    );
+  }
   if (calculation.riskGate !== "WITHIN_LIMIT" || calculation.positionSizeUnits <= 0) {
     throw new ContractValidationError("only a within-limit calculated risk plan can be frozen");
   }
@@ -63,14 +84,27 @@ export function freezeHistoricalDecisionBundle(
     review.riskCalculationId !== calculation.riskCalculationId ||
     review.riskCalculationHash !== calculation.calculationHash
   ) {
-    throw new ContractValidationError("operator risk review is not linked to the calculated risk plan");
+    throw new ContractValidationError(
+      "operator risk review is not linked to the calculated risk plan"
+    );
   }
   if (
     review.riskEngineVersion !== calculation.riskEngineVersion ||
+    review.maximumRiskPct !== calculation.maximumRiskPct ||
+    review.maximumRiskAmount !== calculation.riskBudgetAmount ||
     review.positionSizeUnits !== calculation.positionSizeUnits ||
-    review.maximumRiskAmount !== calculation.riskBudgetAmount
+    review.spreadPips !== calculation.spreadPips ||
+    review.commissionAmount !== calculation.estimatedCommissionCost ||
+    review.slippagePips !== calculation.entrySlippagePips + calculation.stopSlippagePips
   ) {
-    throw new ContractValidationError("operator risk review does not preserve calculated risk values");
+    throw new ContractValidationError(
+      "operator risk review does not preserve the complete calculated risk values"
+    );
+  }
+  if (Date.parse(review.reviewedAt) < Date.parse(evaluation.assessment.availableAt)) {
+    throw new ContractValidationError(
+      "operator risk review predates the canonical assessment availability boundary"
+    );
   }
 
   assertLocalSimulationRiskEligibility({
@@ -91,7 +125,6 @@ export function freezeHistoricalDecisionBundle(
     applicationCommit: configuration.applicationCommit,
     operatorId: configuration.operatorId
   });
-  const canonicalAssessmentHash = hashCanonicalValue(evaluation.assessment);
   const identityHash = hashCanonicalValue({
     historicalRunId: run.runId,
     candidateId: evaluation.detection.candidateId,
@@ -223,7 +256,9 @@ function assertRiskLineage(
   };
 
   if (hashCanonicalValue(calculation.sourceLineage) !== hashCanonicalValue(expected)) {
-    throw new ContractValidationError("calculated risk does not match the historical source lineage");
+    throw new ContractValidationError(
+      "calculated risk does not match the historical source lineage"
+    );
   }
 }
 
@@ -244,7 +279,9 @@ function resolveTemporalEvidence(
     .map((evidenceId) => {
       const candle = byId.get(evidenceId) ?? byHash.get(evidenceId);
       if (!candle) {
-        throw new ContractValidationError(`evidence ${evidenceId} is absent from the historical run`);
+        throw new ContractValidationError(
+          `evidence ${evidenceId} is absent from the historical run`
+        );
       }
       const availableAt = "availableAt" in candle ? candle.availableAt : candle.closedAt;
       const transformationVersion =
