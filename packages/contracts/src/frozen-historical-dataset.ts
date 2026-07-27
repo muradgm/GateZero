@@ -32,12 +32,7 @@ export const FrozenHistoricalDatasetManifestSchema = z
 
 export const FrozenHistoricalDatasetFailureSchema = z
   .object({
-    code: z.enum([
-      "HASH_MISMATCH",
-      "ROW_COUNT_MISMATCH",
-      "ADAPTER_FAILURE",
-      "MANIFEST_MISMATCH"
-    ]),
+    code: z.enum(["HASH_MISMATCH", "ROW_COUNT_MISMATCH", "ADAPTER_FAILURE", "MANIFEST_MISMATCH"]),
     message: NonEmptyStringSchema
   })
   .strict();
@@ -55,10 +50,7 @@ export const FrozenHistoricalDatasetImportResultSchema = z
   })
   .strict()
   .superRefine((value, context) => {
-    if (
-      value.ready &&
-      (value.failures.length > 0 || value.adapterFailureCount > 0)
-    ) {
+    if (value.ready && (value.failures.length > 0 || value.adapterFailureCount > 0)) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "ready imports cannot contain failures",
@@ -67,12 +59,8 @@ export const FrozenHistoricalDatasetImportResultSchema = z
     }
   });
 
-export type FrozenHistoricalDatasetManifest = z.infer<
-  typeof FrozenHistoricalDatasetManifestSchema
->;
-export type FrozenHistoricalDatasetFailure = z.infer<
-  typeof FrozenHistoricalDatasetFailureSchema
->;
+export type FrozenHistoricalDatasetManifest = z.infer<typeof FrozenHistoricalDatasetManifestSchema>;
+export type FrozenHistoricalDatasetFailure = z.infer<typeof FrozenHistoricalDatasetFailureSchema>;
 export type FrozenHistoricalDatasetImportResult = z.infer<
   typeof FrozenHistoricalDatasetImportResultSchema
 >;

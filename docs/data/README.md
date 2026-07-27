@@ -55,5 +55,5 @@ Accepted output is written beneath `.local-data/`, which is ignored by Git.
 ## Milestone rule
 
 Synthetic fixtures remain useful for unit tests, but they do not satisfy the real-data Epoch 1 exit
-criterion. The milestone may only claim a frozen historical source after this importer accepts a real
-export and the resulting hash is recorded in the validated trace.
+criterion. The milestone may only claim a frozen historical source after this importer accepts a
+real export and the resulting hash is recorded in the validated trace.
