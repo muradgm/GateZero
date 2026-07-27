@@ -100,7 +100,10 @@ export function createCanonicalRiskReviewFromCalculation(
     );
   }
 
-  if (command.reviewDecision === "APPROVE" && calculation.riskGate !== "WITHIN_LIMIT") {
+  if (
+    command.reviewDecision === "APPROVE" &&
+    calculation.riskGate !== "WITHIN_LIMIT"
+  ) {
     throw new ContractValidationError("blocked risk calculations cannot be approved");
   }
 
@@ -173,7 +176,10 @@ export function assertLocalSimulationRiskEligibility(input: {
   if (review.reviewHash !== hashCanonicalValue(reviewPayload)) {
     throw new ContractValidationError("risk review content hash mismatch");
   }
-  if (review.reviewStatus !== "APPROVED_FOR_LOCAL_SIMULATION" || review.blockers.length > 0) {
+  if (
+    review.reviewStatus !== "APPROVED_FOR_LOCAL_SIMULATION" ||
+    review.blockers.length > 0
+  ) {
     throw new ContractValidationError("risk review has not approved local simulation");
   }
   if (Date.parse(review.reviewedAt) > Date.parse(input.simulationTimestamp)) {
