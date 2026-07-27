@@ -53,7 +53,9 @@ export function calculateEurUsdRisk(input: CalculateEurUsdRiskInput): EurUsdRisk
       ? invalidationPrice < entryPrice
       : invalidationPrice > entryPrice;
   if (!directionIsValid) {
-    blockers.push("Invalidation price is on the wrong side of the entry for the candidate direction.");
+    blockers.push(
+      "Invalidation price is on the wrong side of the entry for the candidate direction."
+    );
   }
 
   const percentageRiskBudget = (policy.accountEquity * policy.maximumRiskPct) / 100;
@@ -134,7 +136,9 @@ export function calculateEurUsdRisk(input: CalculateEurUsdRiskInput): EurUsdRisk
     positionSizeUnits > 0 &&
     amounts.totalWorstCasePlannedLoss > riskBudgetAmount + 0.000001
   ) {
-    blockers.push("No position aligned to the configured unit increment fits inside the risk budget.");
+    blockers.push(
+      "No position aligned to the configured unit increment fits inside the risk budget."
+    );
     positionSizeUnits = 0;
     amounts = calculateAmounts(0, stopDistancePips, pipValuePerUnit, policy);
   }
@@ -187,7 +191,8 @@ export function calculateEurUsdRisk(input: CalculateEurUsdRiskInput): EurUsdRisk
     automatedAction: false as const
   };
   const identityHash = hashCanonicalValue(canonicalPayload);
-  const riskCalculationId = `eurusd-risk-${identityHash.slice("sha256:".length, "sha256:".length + 24)}`;
+  const hashStart = "sha256:".length;
+  const riskCalculationId = `eurusd-risk-${identityHash.slice(hashStart, hashStart + 24)}`;
   const calculationPayload = { ...canonicalPayload, riskCalculationId };
 
   return EurUsdRiskCalculationSchema.parse({
@@ -203,14 +208,18 @@ export function calculateEurUsdRiskFromHistoricalRun(
   const policy = EurUsdRiskPolicySchema.parse(input.policy);
 
   if (run.status !== "COMPLETED") {
-    throw new ContractValidationError("risk calculation requires a completed historical ingestion run");
+    throw new ContractValidationError(
+      "risk calculation requires a completed historical ingestion run"
+    );
   }
   if (
     run.hashes.normalized15mHash === null ||
     run.hashes.aggregated1HHash === null ||
     run.hashes.aggregated4HHash === null
   ) {
-    throw new ContractValidationError("completed historical ingestion is missing canonical series hashes");
+    throw new ContractValidationError(
+      "completed historical ingestion is missing canonical series hashes"
+    );
   }
 
   const evaluation = run.candidateEvaluations.find(
@@ -246,6 +255,8 @@ function resolveQuoteToAccountRate(policy: EurUsdRiskPolicy, entryPrice: number)
     case "EXPLICIT_QUOTE_TO_ACCOUNT_RATE":
       return policy.pipValuePolicy.quoteToAccountRate;
   }
+
+  throw new ContractValidationError("unsupported EURUSD pip-value policy");
 }
 
 function calculateAmounts(
