@@ -3,8 +3,8 @@
   "reviewDecision": "APPROVE",
   "portfolioExposurePctAfterEntry": 12,
   "reviewedBy": "operator-local",
-  "reviewedAt": "2026-07-24T13:05:00.000Z",
-  "validUntil": "2026-07-24T14:00:00.000Z",
+  "reviewedAt": "2026-07-24T17:05:00.000Z",
+  "validUntil": "2026-07-24T18:00:00.000Z",
   "additionalAssumptions": [
     "Portfolio exposure was reviewed from the local paper-simulation account snapshot."
   ]
