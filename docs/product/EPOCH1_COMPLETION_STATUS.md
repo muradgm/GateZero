@@ -32,13 +32,15 @@ It must not be represented as a real-market validation result.
 - worst-case planned-loss gate with deterministic hashes;
 - source-run, candidate, policy, and assessment risk lineage;
 - operator-owned canonical review linked to calculated risk;
+- immutable historical decision artifact assembly;
+- decision-time evidence resolution from frozen source candles;
+- nested bundle and outer artifact integrity hashes;
 - deterministic simulation mechanics;
-- frozen decision-bundle mechanics;
 - outcome and learning records;
 - reproducibility checkpoint mechanics;
 - workspace projections.
 
-## Historical ingestion pipeline
+## Historical decision pipeline
 
 Implemented application path:
 
@@ -46,79 +48,60 @@ Implemented application path:
 frozen manifest verification
 → Dukascopy CSV adaptation
 → 15m validation and UTC normalization
-→ deterministic 1H aggregation
-→ deterministic 4H aggregation
+→ deterministic 1H and 4H aggregation
 → chronological candidate detection
 → canonical decision assessment
+→ instrument-aware EUR/USD risk
+→ operator-owned risk review
+→ immutable historical decision artifact
 ```
 
-The run records source, configuration, normalized-series, higher-timeframe, candidate, and
-assessment identities. It fails closed before candidate evaluation when import, validation, or
-aggregation fails.
+The historical artifact contains the source manifest and provider snapshot, all canonical source
+hashes, detection and assessment records, calculated risk, operator review, resolved temporal
+evidence, simulation plan, application commit, configuration hashes, and immutable integrity hashes.
 
-## Instrument-aware risk pipeline
-
-Implemented application path:
-
-```text
-completed historical ingestion run
-→ canonical candidate evaluation
-→ EUR/USD pip-value policy
-→ stop distance and adverse execution prices
-→ position size rounded down to permitted units
-→ spread, slippage, and commission costs
-→ total worst-case planned loss
-→ WITHIN_LIMIT or BLOCKED risk gate
-→ operator-owned hash-linked canonical risk review
-```
-
-Risk calculation cannot proceed from a rejected ingestion run or a canonical assessment that is not
-eligible for `PAPER_SIMULATE`. A blocked risk calculation produces a zero position and cannot be
-operator-approved for local simulation.
+The freeze service rejects progression when calculated risk is altered, source lineage differs,
+review values do not preserve the calculation, review validity has expired, or evidence cannot be
+resolved from the historical run.
 
 ## Remaining proof requirements
 
 1. Supply one real EUR/USD 15-minute historical export with permitted local use.
-2. Execute the frozen manifest and ingestion workflow against that source.
-3. Record the accepted raw, normalized, 1H, and 4H hashes.
-4. Confirm candidates are detected from real candles without injected or manually authored
-   observations.
-5. Execute instrument-aware risk from the same candidate and source lineage.
-6. Create the operator-owned canonical risk review from that calculation.
-7. Freeze the real-source decision bundle with the risk calculation and review lineage.
-8. Run simulation, outcome, learning, and reproduction from that same frozen bundle.
+2. Execute ingestion against that source and record the accepted raw, normalized, 1H, and 4H hashes.
+3. Confirm candidates are detected from real candles without injected observations.
+4. Execute instrument-aware risk and an operator review from the same lineage.
+5. Freeze the real-source historical decision artifact.
+6. Run deterministic simulation directly from that frozen artifact and the post-decision candles.
+7. Produce outcome and learning records from the same artifact and simulation output.
+8. Prove exact replay from the frozen source, policies, and configuration.
 9. Replace or supplement the synthetic browser proof with the real-source trace.
 10. Pass `pnpm verify` and browser E2E.
 
 ## Current active phase
 
-**Bind the calculated risk artifact into the real-source frozen decision bundle.**
+**Deterministic paper simulation from the frozen historical decision artifact.**
 
-The real-source workflow is:
+The complete local workflow through freezing is documented in `docs/data/README.md`:
 
-```bash
-pnpm run:epoch1-ingestion -- \
-  --csv /path/to/EURUSD_15m.csv \
-  --manifest /path/to/EURUSD_15m.manifest.json
+```text
+run:epoch1-ingestion
+→ run:epoch1-risk
+→ run:epoch1-risk-review
+→ freeze:epoch1-decision
 ```
 
-Then calculate risk for an explicit detected candidate:
-
-```bash
-pnpm exec tsx scripts/run-epoch1-risk-calculation.ts -- \
-  --ingestion .local-data/epoch1/historical-ingestion-run.json \
-  --policy /path/to/EURUSD_risk_policy.json \
-  --candidate <candidate-id>
-```
-
-See `docs/data/README.md`.
+The next slice must consume `frozen-historical-decision.json`, verify both integrity hashes, select
+only post-decision 15-minute candles from the same historical source, enforce the versioned
+simulation policy, and emit a deterministic simulation result without silently resolving unknown
+intrabar order.
 
 ## Claim boundary
 
 Until the real-source path passes, the branch may claim:
 
-> Deterministic validated-trace mechanics, fail-closed historical ingestion, and instrument-aware
-> EUR/USD risk calculation are implemented and covered by synthetic tests.
+> Deterministic validated-trace mechanics, fail-closed historical ingestion, instrument-aware risk,
+> operator review, and immutable historical decision freezing are implemented and covered by
+> synthetic tests.
 
 It may not claim:
 
