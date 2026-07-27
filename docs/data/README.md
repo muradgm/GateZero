@@ -1,6 +1,7 @@
 # Epoch 1 Historical Dataset Import
 
-The validated decision trace must use one real EUR/USD 15-minute historical export. The repository does not commit provider data unless redistribution is explicitly permitted.
+The validated decision trace must use one real EUR/USD 15-minute historical export. The repository
+does not commit provider data unless redistribution is explicitly permitted.
 
 ## Required CSV format
 
@@ -53,4 +54,6 @@ Accepted output is written beneath `.local-data/`, which is ignored by Git.
 
 ## Milestone rule
 
-Synthetic fixtures remain useful for unit tests, but they do not satisfy the real-data Epoch 1 exit criterion. The milestone may only claim a frozen historical source after this importer accepts a real export and the resulting hash is recorded in the validated trace.
+Synthetic fixtures remain useful for unit tests, but they do not satisfy the real-data Epoch 1 exit
+criterion. The milestone may only claim a frozen historical source after this importer accepts a real
+export and the resulting hash is recorded in the validated trace.
