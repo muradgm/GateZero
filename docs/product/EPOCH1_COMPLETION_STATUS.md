@@ -4,7 +4,9 @@
 
 **Not complete against the governing real-data exit criteria.**
 
-The branch contains a deterministic synthetic proof that exercises canonical assessment, risk review, frozen decision state, simulation, outcome, learning, and reproducibility. That proof is valuable integration evidence, but it does not replace the required real historical ingestion path.
+The branch contains a deterministic synthetic proof that exercises canonical assessment, risk
+review, frozen decision state, simulation, outcome, learning, and reproducibility. That proof is
+valuable integration evidence, but it does not replace the required real historical ingestion path.
 
 The generated file `epoch1-validated-case.json` currently declares:
 
