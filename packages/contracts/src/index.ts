@@ -9,6 +9,7 @@ export * from "./deterministic-simulation.js";
 export * from "./errors.js";
 export * from "./evidence-intelligence.js";
 export * from "./eurusd-overlap-pullback-strategy.js";
+export * from "./eurusd-risk-calculation.js";
 export * from "./frozen-historical-dataset.js";
 export * from "./gate.js";
 export * from "./gate1-historical-backtest-contracts.js";
