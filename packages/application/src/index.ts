@@ -14,6 +14,7 @@ export * from "./evaluate-trace-quality.js";
 export * from "./evidence-intelligence.js";
 export * from "./freeze-decision-bundle.js";
 export * from "./file-setup-review-repository.js";
+export * from "./import-frozen-historical-dataset.js";
 export * from "./in-memory-setup-review-repository.js";
 export * from "./learning-intelligence.js";
 export * from "./portfolio-risk-intelligence.js";
