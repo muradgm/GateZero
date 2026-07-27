@@ -87,11 +87,34 @@ export const FrozenHistoricalDecisionBundleSchema = z
       });
     }
 
+    if (
+      Date.parse(review.reviewedAt) < Date.parse(artifact.sourceManifest.createdAt) ||
+      Date.parse(artifact.frozenAt) < Date.parse(review.reviewedAt)
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "review and freeze timestamps must follow historical manifest creation",
+        path: ["frozenAt"]
+      });
+    }
+
     if (bundle.traceId !== artifact.traceId) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "historical artifact trace id must match the frozen decision record",
         path: ["traceId"]
+      });
+    }
+
+    if (
+      artifact.sourceSnapshot.sourceId !== artifact.sourceManifest.datasetId ||
+      artifact.sourceSnapshot.rangeStart !== artifact.sourceManifest.rangeStart ||
+      artifact.sourceSnapshot.rangeEnd !== artifact.sourceManifest.rangeEnd
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "provider snapshot identity and range must match the frozen manifest",
+        path: ["sourceSnapshot"]
       });
     }
 
