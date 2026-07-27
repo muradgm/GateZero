@@ -7,6 +7,8 @@ export const CanonicalRiskReviewSchema = z
     riskReviewId: NonEmptyStringSchema,
     assessmentId: NonEmptyStringSchema,
     canonicalAssessmentHash: NonEmptyStringSchema,
+    riskCalculationId: NonEmptyStringSchema.optional(),
+    riskCalculationHash: NonEmptyStringSchema.optional(),
     instrument: z.literal("EURUSD"),
     riskEngineVersion: NonEmptyStringSchema,
     reviewStatus: z.enum(["APPROVED_FOR_LOCAL_SIMULATION", "BLOCKED", "REVISION_REQUIRED"]),
@@ -50,6 +52,14 @@ export const CanonicalRiskReviewSchema = z
         code: z.ZodIssueCode.custom,
         message: "non-approved risk reviews require blockers",
         path: ["blockers"]
+      });
+    }
+
+    if (Boolean(review.riskCalculationId) !== Boolean(review.riskCalculationHash)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "risk calculation id and hash must be recorded together",
+        path: ["riskCalculationId"]
       });
     }
   });
