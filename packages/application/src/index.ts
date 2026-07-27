@@ -24,5 +24,6 @@ export * from "./record-operator-decision.js";
 export * from "./record-simulation-outcome.js";
 export * from "./request-risk-review.js";
 export * from "./run-deterministic-simulation.js";
+export * from "./run-epoch1-historical-ingestion.js";
 export * from "./setup-review-ports.js";
 export * from "./validate-market-candles.js";
