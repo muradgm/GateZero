@@ -11,14 +11,8 @@ import type {
 import { HistoricalIngestionRunSchema } from "@traderframe/contracts";
 import { aggregateValidatedMarketCandles } from "./aggregate-market-candles.js";
 import { buildCanonicalDecisionAssessment } from "./build-canonical-decision-assessment.js";
-import {
-  deriveEurUsdOverlapObservation,
-  type DerivedEurUsdOverlapObservation
-} from "./derive-eurusd-overlap-observation.js";
-import {
-  detectEurUsdOverlapCandidates,
-  type CandidateObservationFactory
-} from "./detect-eurusd-overlap-candidates.js";
+import { deriveEurUsdOverlapObservation } from "./derive-eurusd-overlap-observation.js";
+import { detectEurUsdOverlapCandidates } from "./detect-eurusd-overlap-candidates.js";
 import { EURUSD_OVERLAP_PULLBACK_V1 } from "./evaluate-eurusd-overlap-pullback.js";
 import { importFrozenHistoricalDataset } from "./import-frozen-historical-dataset.js";
 import { validateAndNormalizeMarketCandles } from "./validate-market-candles.js";
@@ -33,10 +27,6 @@ export type RunEpoch1HistoricalIngestionInput = {
   eventContextByDecisionTimestamp?: Record<string, number>;
 };
 
-export type RunEpoch1HistoricalIngestionDependencies = {
-  observationFactory?: CandidateObservationFactory;
-};
-
 type RunState = {
   normalized15m: NormalizedMarketCandle[];
   aggregated1H: TimeBoundMarketCandle[];
@@ -49,8 +39,7 @@ type RunState = {
 };
 
 export function runEpoch1HistoricalIngestion(
-  input: RunEpoch1HistoricalIngestionInput,
-  dependencies: RunEpoch1HistoricalIngestionDependencies = {}
+  input: RunEpoch1HistoricalIngestionInput
 ): HistoricalIngestionRun {
   const imported = importFrozenHistoricalDataset({ manifest: input.manifest, csv: input.csv });
   const manifest = imported.manifest;
@@ -149,15 +138,13 @@ export function runEpoch1HistoricalIngestion(
   }
 
   const eventContext = new Map(eventContextEntries);
-  const observationFactory = dependencies.observationFactory ?? deriveEurUsdOverlapObservation;
   const eventResolver = (decisionTimestamp: string): number | null =>
     eventContext.get(decisionTimestamp) ?? null;
   const candidateScan = detectEurUsdOverlapCandidates({
     candles15m: validation.normalizedCandles,
     candles1H: aggregation1H.candles,
     candles4H: aggregation4H.candles,
-    minutesToNearestHighImpactEvent: eventResolver,
-    observationFactory
+    minutesToNearestHighImpactEvent: eventResolver
   });
   const candidateEvaluations = candidateScan.detections.map((detection) =>
     evaluateDetection({
@@ -165,8 +152,7 @@ export function runEpoch1HistoricalIngestion(
       candles15m: validation.normalizedCandles,
       candles1H: aggregation1H.candles,
       candles4H: aggregation4H.candles,
-      eventContext,
-      observationFactory
+      eventContext
     })
   );
 
@@ -190,11 +176,10 @@ function evaluateDetection(input: {
   candles1H: TimeBoundMarketCandle[];
   candles4H: TimeBoundMarketCandle[];
   eventContext: Map<string, number>;
-  observationFactory: CandidateObservationFactory;
 }): HistoricalCandidateEvaluation {
   const decisionMs = Date.parse(input.detection.detectedAt);
   const eventMinutes = input.eventContext.get(input.detection.detectedAt) ?? null;
-  const derived: DerivedEurUsdOverlapObservation = input.observationFactory({
+  const derived = deriveEurUsdOverlapObservation({
     decisionTimestamp: input.detection.detectedAt,
     candles15m: input.candles15m.filter((candle) => Date.parse(candle.closedAt) <= decisionMs),
     candles1H: input.candles1H.filter((candle) => Date.parse(candle.availableAt) <= decisionMs),
@@ -309,20 +294,30 @@ function normalizeEventContext(
 ): Array<readonly [string, number]> {
   if (!values) return [];
 
-  return Object.entries(values)
-    .map(([timestamp, minutes]) => {
-      if (!Number.isFinite(Date.parse(timestamp))) {
-        throw new Error(`event context key ${timestamp} is not a valid ISO datetime`);
-      }
-      if (!Number.isFinite(minutes) || !Number.isInteger(minutes)) {
-        throw new Error(`event context for ${timestamp} must be a finite integer minute distance`);
-      }
-      return [new Date(timestamp).toISOString(), minutes] as const;
-    })
-    .sort(([left], [right]) => left.localeCompare(right));
+  const normalized = Object.entries(values).map(([timestamp, minutes]) => {
+    if (!Number.isFinite(Date.parse(timestamp))) {
+      throw new Error(`event context key ${timestamp} is not a valid ISO datetime`);
+    }
+    if (!Number.isFinite(minutes) || !Number.isInteger(minutes)) {
+      throw new Error(
+        `event context for ${timestamp} must be a finite integer minute distance`
+      );
+    }
+    return [new Date(timestamp).toISOString(), minutes] as const;
+  });
+  const seen = new Set<string>();
+  for (const [timestamp] of normalized) {
+    if (seen.has(timestamp)) {
+      throw new Error(`event context contains duplicate normalized timestamp ${timestamp}`);
+    }
+    seen.add(timestamp);
+  }
+  return normalized.sort(([left], [right]) => left.localeCompare(right));
 }
 
-function hashSeries(series: Array<NormalizedMarketCandle | TimeBoundMarketCandle>): string | null {
+function hashSeries(
+  series: Array<NormalizedMarketCandle | TimeBoundMarketCandle>
+): string | null {
   if (series.length === 0) return null;
   return hashCanonical(series);
 }
