@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "operatorId": "operator-local",
+  "applicationCommit": "replace-with-the-checked-out-commit-sha",
+  "simulationPolicyVersion": "simulation-policy-1.0.0",
+  "targetRewardRiskMultiple": 2,
+  "frozenAt": "2026-07-24T13:10:00.000Z"
+}
