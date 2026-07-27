@@ -2,6 +2,7 @@ export * from "./adapt-dukascopy-csv.js";
 export * from "./aggregate-market-candles.js";
 export * from "./build-canonical-decision-assessment.js";
 export * from "./build-trading-intelligence-report.js";
+export * from "./calculate-eurusd-risk.js";
 export * from "./canonical-risk-review.js";
 export * from "./complete-validated-decision-trace.js";
 export * from "./create-setup-review.js";
