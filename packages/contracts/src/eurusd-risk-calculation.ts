@@ -1,7 +1,9 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
 
-const CurrencyCodeSchema = z.string().regex(/^[A-Z]{3}$/, "currency must use a three-letter code");
+const CurrencyCodeSchema = z
+  .string()
+  .regex(/^[A-Z]{3}$/, "currency must use a three-letter code");
 const Sha256HexSchema = z.string().regex(/^[a-f0-9]{64}$/);
 const CanonicalSha256Schema = z.string().regex(/^sha256:[a-f0-9]{64}$/);
 
@@ -72,7 +74,10 @@ export const EurUsdRiskPolicySchema = z
       });
     }
 
-    if (policy.pipValuePolicy.mode === "QUOTE_CURRENCY" && policy.accountCurrency !== "USD") {
+    if (
+      policy.pipValuePolicy.mode === "QUOTE_CURRENCY" &&
+      policy.accountCurrency !== "USD"
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "EURUSD quote-currency pip valuation requires a USD account",
@@ -86,7 +91,7 @@ export const EurUsdRiskPolicySchema = z
     ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "EURUSD base-currency pip valuation requires an EUR account",
+        message: "EURUSD base-currency pip valuation requires a EUR account",
         path: ["accountCurrency"]
       });
     }
@@ -179,7 +184,10 @@ export const EurUsdRiskCalculationSchema = z
           path: ["riskGate"]
         });
       }
-      if (calculation.totalWorstCasePlannedLoss > calculation.riskBudgetAmount + 0.000001) {
+      if (
+        calculation.totalWorstCasePlannedLoss >
+        calculation.riskBudgetAmount + 0.000001
+      ) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
           message: "within-limit planned loss cannot exceed the risk budget",
