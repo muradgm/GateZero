@@ -4,7 +4,9 @@
 
 **Not complete against the governing real-data exit criteria.**
 
-The branch contains a deterministic synthetic proof that exercises canonical assessment, risk review, frozen decision state, simulation, outcome, learning, and reproducibility. That proof is valuable integration evidence, but it does not replace the required real historical source lineage.
+The branch contains a deterministic synthetic proof that exercises canonical assessment, risk
+review, frozen decision state, simulation, outcome, learning, and reproducibility. That proof is
+valuable integration evidence, but it does not replace the required real historical source lineage.
 
 The generated file `epoch1-validated-case.json` currently declares:
 
@@ -45,14 +47,17 @@ frozen manifest verification
 → canonical decision assessment
 ```
 
-The run records source, configuration, normalized-series, higher-timeframe, candidate, and assessment identities. It fails closed before candidate evaluation when import, validation, or aggregation fails.
+The run records source, configuration, normalized-series, higher-timeframe, candidate, and
+assessment identities. It fails closed before candidate evaluation when import, validation, or
+aggregation fails.
 
 ## Remaining proof requirements
 
 1. Supply one real EUR/USD 15-minute historical export with permitted local use.
 2. Execute the frozen manifest and ingestion workflow against that source.
 3. Record the accepted raw, normalized, 1H, and 4H hashes.
-4. Confirm candidates are detected from real candles without injected or manually authored observations.
+4. Confirm candidates are detected from real candles without injected or manually authored
+   observations.
 5. Run instrument-aware risk from the same candidate and source lineage.
 6. Freeze the real-source decision bundle.
 7. Run simulation, outcome, learning, and reproduction from that same frozen bundle.
@@ -86,7 +91,8 @@ See `docs/data/README.md`.
 
 Until the real-source path passes, the branch may claim:
 
-> Deterministic validated-trace mechanics and a fail-closed historical ingestion pipeline are implemented and covered by synthetic tests.
+> Deterministic validated-trace mechanics and a fail-closed historical ingestion pipeline are
+> implemented and covered by synthetic tests.
 
 It may not claim:
 
