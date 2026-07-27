@@ -1,4 +1,4 @@
-# Epoch 1 Historical Dataset, Ingestion, and Risk
+# Epoch 1 Historical Decision Workflow
 
 The validated decision trace must use one real EUR/USD 15-minute historical export. The repository
 must not commit provider data unless redistribution is explicitly permitted.
@@ -19,12 +19,10 @@ Requirements:
 - the file is not manually edited after its SHA-256 hash is recorded;
 - the manifest records source identity, licensing, range, expected row count, and hash.
 
-## Verify the frozen source only
+## 1. Verify the frozen source
 
-1. Copy `EURUSD_15M_MANIFEST.example.json` to a local path outside tracked repository content.
-2. Fill in the exact dataset metadata.
-3. Calculate the SHA-256 hash of the CSV after final export.
-4. Run:
+Copy `EURUSD_15M_MANIFEST.example.json` to an untracked local path, complete the metadata, calculate
+the final CSV SHA-256 hash, and run:
 
 ```bash
 pnpm import:epoch1-dataset -- \
@@ -32,16 +30,9 @@ pnpm import:epoch1-dataset -- \
   --manifest /path/to/EURUSD_15m.manifest.json
 ```
 
-Optional output path:
+The default output is `.local-data/epoch1/historical-import.json`.
 
-```bash
-pnpm import:epoch1-dataset -- \
-  --csv /path/to/EURUSD_15m.csv \
-  --manifest /path/to/EURUSD_15m.manifest.json \
-  --output .local-data/epoch1/historical-import.json
-```
-
-## Run the deterministic ingestion pipeline
+## 2. Run deterministic historical ingestion
 
 ```bash
 pnpm run:epoch1-ingestion -- \
@@ -61,20 +52,12 @@ frozen manifest verification
 → canonical decision assessment
 ```
 
-The default output is:
+The default output is `.local-data/epoch1/historical-ingestion-run.json`.
 
-```text
-.local-data/epoch1/historical-ingestion-run.json
-```
+### Optional event context
 
-A different output can be supplied with `--output`.
-
-## Optional event context
-
-Candidate detection remains deterministic without macro-event data, but the canonical assessment
-marks event context unavailable rather than assuming the window is clear.
-
-A local JSON object can provide an explicit integer minute distance for decision timestamps:
+Missing event context remains `UNAVAILABLE`; it is never interpreted as event-safe. A local JSON
+object may supply an explicit integer minute distance for decision timestamps:
 
 ```json
 {
@@ -83,8 +66,6 @@ A local JSON object can provide an explicit integer minute distance for decision
 }
 ```
 
-Run with:
-
 ```bash
 pnpm run:epoch1-ingestion -- \
   --csv /path/to/EURUSD_15m.csv \
@@ -92,81 +73,106 @@ pnpm run:epoch1-ingestion -- \
   --event-context /path/to/EURUSD_event_context.json
 ```
 
-Missing timestamps remain `UNAVAILABLE`; they are not interpreted as event-safe.
-
-## Calculate instrument-aware EUR/USD risk
+## 3. Calculate instrument-aware EUR/USD risk
 
 Copy `EURUSD_RISK_POLICY.example.json` to an untracked local path and set the account equity, risk
 budget, pip-value policy, execution-cost assumptions, and position-size limits.
 
-Run:
-
 ```bash
-pnpm exec tsx scripts/run-epoch1-risk-calculation.ts -- \
+pnpm run:epoch1-risk -- \
   --ingestion .local-data/epoch1/historical-ingestion-run.json \
   --policy /path/to/EURUSD_risk_policy.json \
   --candidate <candidate-id>
 ```
 
-The default output is:
-
-```text
-.local-data/epoch1/eurusd-risk-calculation.json
-```
+The default output is `.local-data/epoch1/eurusd-risk-calculation.json`.
 
 The risk engine records:
 
 - account currency and risk basis;
-- source-run and candidate lineage;
+- source-run, dataset, candidate, and assessment lineage;
 - policy and canonical-assessment hashes;
-- stop distance in pips;
-- pip value per unit;
+- stop distance and pip value;
 - adverse entry and stop execution prices;
 - position size rounded down to the declared unit increment;
-- planned gross loss;
 - spread, slippage, and commission costs;
-- total worst-case planned loss;
-- risk-budget utilization;
-- a deterministic `WITHIN_LIMIT` or `BLOCKED` gate;
-- engine version and calculation hash.
+- total worst-case planned loss and utilization;
+- a deterministic `WITHIN_LIMIT` or `BLOCKED` gate.
 
-Supported EUR/USD pip-value policies:
+Supported pip-value policies are `QUOTE_CURRENCY` for USD accounts,
+`BASE_CURRENCY_AT_ENTRY` for EUR accounts, and `EXPLICIT_QUOTE_TO_ACCOUNT_RATE` for another account
+currency with an explicit USD conversion rate.
 
-- `QUOTE_CURRENCY` for USD accounts;
-- `BASE_CURRENCY_AT_ENTRY` for EUR accounts;
-- `EXPLICIT_QUOTE_TO_ACCOUNT_RATE` for another account currency with an explicit USD conversion
-  rate.
+## 4. Record the operator-owned risk review
 
-A calculated risk result does not grant execution authority. An operator must still create a
-hash-linked canonical risk review before local paper simulation.
+Copy `EURUSD_RISK_REVIEW.example.json` to an untracked local path. The decision must be explicit:
+`APPROVE`, `BLOCK`, or `REVISE`.
+
+```bash
+pnpm run:epoch1-risk-review -- \
+  --ingestion .local-data/epoch1/historical-ingestion-run.json \
+  --risk .local-data/epoch1/eurusd-risk-calculation.json \
+  --decision /path/to/EURUSD_risk_review.json
+```
+
+The default output is `.local-data/epoch1/canonical-risk-review.json`.
+
+The command derives the approved position, risk budget, spread, slippage, commission, and engine
+version from the calculated artifact. A blocked calculation cannot be approved. The operator review
+remains a separate, hash-linked decision and does not grant live execution authority.
+
+## 5. Freeze the historical decision artifact
+
+Copy `EURUSD_DECISION_FREEZE.example.json` to an untracked local path. Record the checked-out
+application commit, simulation-policy version, operator identity, explicit reward-to-risk target, and
+freeze timestamp.
+
+```bash
+pnpm freeze:epoch1-decision -- \
+  --ingestion .local-data/epoch1/historical-ingestion-run.json \
+  --risk .local-data/epoch1/eurusd-risk-calculation.json \
+  --review .local-data/epoch1/canonical-risk-review.json \
+  --configuration /path/to/EURUSD_decision_freeze.json
+```
+
+The default output is `.local-data/epoch1/frozen-historical-decision.json`.
+
+The immutable artifact contains:
+
+- frozen source manifest, provider snapshot, range, and licensing note;
+- raw, normalized 15m, aggregated 1H, and aggregated 4H hashes;
+- ingestion and full decision configuration hashes;
+- candidate detection, derived observation, and canonical assessment;
+- calculated risk and its policy hash;
+- operator risk review and review hash;
+- decision-time temporal evidence resolved from the historical series;
+- entry, invalidation, target, position size, and planned worst-case risk;
+- nested frozen decision-bundle hash and outer artifact hash.
+
+Outcome and learning records must never mutate this decision-time artifact.
 
 ## Fail-closed boundaries
 
-The importer, ingestion pipeline, or risk engine rejects progression when:
+Progression is rejected when:
 
-- the content hash differs;
-- the row count differs;
-- provider metadata differs;
-- timestamps or numbers are invalid;
-- rows are out of order;
-- rows fall outside the declared range;
-- OHLC invariants fail;
-- data gaps are unclassified;
-- 1H or 4H windows are incomplete;
-- the adapter reports any partial-import failure;
+- source hash, row count, provider metadata, range, chronology, timestamps, or numbers differ;
+- OHLC invariants fail, gaps are unclassified, or 1H/4H windows are incomplete;
 - the canonical assessment is not eligible for `PAPER_SIMULATE`;
-- invalidation is missing or directionally invalid;
-- commission consumes the risk budget;
-- no permitted position increment fits inside the total worst-case risk budget.
+- invalidation is absent or directionally invalid;
+- no permitted position size fits inside the cost-aware risk budget;
+- calculated-risk content or source lineage is altered;
+- the operator review does not match the calculation or is not valid at freeze time;
+- decision evidence cannot be resolved from the frozen historical series;
+- nested bundle or outer artifact hashes differ.
 
-Rejected ingestion runs do not emit candidates or canonical assessments. Blocked risk calculations
-emit a zero position and explicit blockers.
+Rejected ingestion runs emit no candidates or assessments. Blocked risk calculations emit a zero
+position. Non-approved reviews cannot be frozen for local simulation.
 
 Accepted local output is written beneath `.local-data/`, which is ignored by Git.
 
 ## Milestone rule
 
 Synthetic fixtures remain useful for unit and integration tests, but they do not satisfy the
-real-data Epoch 1 exit criterion. The milestone may only claim a frozen historical source after this
-pipeline accepts a real export and its ingestion, risk, decision, simulation, outcome, and learning
-hashes are recorded in one validated trace.
+real-data Epoch 1 exit criterion. The milestone may only claim a frozen historical decision after
+this workflow accepts a real export and the same artifact continues through deterministic
+simulation, outcome, learning, and exact reproduction.
