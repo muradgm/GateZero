@@ -34,3 +34,6 @@ Thumbs.db
 
 # Generated intelligence workspace data
 apps/intelligence-workspace/public/runtime/
+
+# License-sensitive local historical datasets and generated imports
+.local-data/
