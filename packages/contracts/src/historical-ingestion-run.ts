@@ -117,6 +117,22 @@ export const HistoricalIngestionRunSchema = z
       });
     }
 
+    if (value.hashes.rawDataHash !== value.sourceSnapshot.rawContentHash) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "run raw-data hash must match the provider source snapshot",
+        path: ["hashes", "rawDataHash"]
+      });
+    }
+
+    if (value.counts.rawRows !== value.importVerification.rawRowCount) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "raw row count must match the frozen import verification",
+        path: ["counts", "rawRows"]
+      });
+    }
+
     const expectedCounts = {
       normalized15m: value.series.normalized15m.length,
       aggregated1H: value.series.aggregated1H.length,
@@ -143,16 +159,29 @@ export const HistoricalIngestionRunSchema = z
         ...value.failures.aggregation1H,
         ...value.failures.aggregation4H
       ];
-      if (!value.importVerification.ready || downstreamFailures.length > 0 || !value.candidateScan) {
+      const hashesComplete =
+        value.hashes.normalized15mHash !== null &&
+        value.hashes.aggregated1HHash !== null &&
+        value.hashes.aggregated4HHash !== null;
+      if (
+        !value.importVerification.ready ||
+        downstreamFailures.length > 0 ||
+        !value.candidateScan ||
+        !hashesComplete
+      ) {
         context.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "completed ingestion requires a verified import, no failures, and a candidate scan",
+          message:
+            "completed ingestion requires verified data, complete hashes, no failures, and a candidate scan",
           path: ["status"]
         });
       }
     }
 
-    if (value.status === "REJECTED" && (value.candidateScan || value.candidateEvaluations.length > 0)) {
+    if (
+      value.status === "REJECTED" &&
+      (value.candidateScan || value.candidateEvaluations.length > 0)
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "rejected ingestion cannot emit candidates or canonical assessments",
