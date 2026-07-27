@@ -55,7 +55,10 @@ export const FrozenHistoricalDatasetImportResultSchema = z
   })
   .strict()
   .superRefine((value, context) => {
-    if (value.ready && (value.failures.length > 0 || value.adapterFailureCount > 0)) {
+    if (
+      value.ready &&
+      (value.failures.length > 0 || value.adapterFailureCount > 0)
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "ready imports cannot contain failures",
