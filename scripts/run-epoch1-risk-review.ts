@@ -11,7 +11,8 @@ const args = parseArgs(process.argv.slice(2));
 const ingestionPath = required(args, "ingestion");
 const riskPath = required(args, "risk");
 const decisionPath = required(args, "decision");
-const outputPath = args.output ?? path.join(".local-data", "epoch1", "canonical-risk-review.json");
+const outputPath =
+  args.output ?? path.join(".local-data", "epoch1", "canonical-risk-review.json");
 
 const [ingestionText, riskText, decisionText] = await Promise.all([
   readFile(path.resolve(ingestionPath), "utf8"),
@@ -30,6 +31,9 @@ if (!evaluation) {
 }
 if (calculation.sourceLineage.historicalRunId !== run.runId) {
   throw new Error("Risk calculation does not belong to the supplied historical ingestion run.");
+}
+if (Date.parse(decision.reviewedAt) < Date.parse(run.manifest.createdAt)) {
+  throw new Error("Risk review cannot predate creation of the frozen historical manifest.");
 }
 
 const review = createCanonicalRiskReviewFromCalculation({
