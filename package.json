@@ -39,6 +39,8 @@
     "import:epoch1-dataset": "tsx scripts/import-epoch1-historical-dataset.ts",
     "run:epoch1-ingestion": "tsx scripts/run-epoch1-historical-ingestion.ts",
     "run:epoch1-risk": "tsx scripts/run-epoch1-risk-calculation.ts",
+    "run:epoch1-risk-review": "tsx scripts/run-epoch1-risk-review.ts",
+    "freeze:epoch1-decision": "tsx scripts/freeze-epoch1-historical-decision.ts",
     "inspect:runtime-status": "tsx scripts/build-command-center-runtime-data.ts",
     "inspect:gate0-dry-run": "tsx scripts/inspect-gate0-dry-run.ts",
     "inspect:local-cases": "tsx scripts/inspect-local-cases.ts",
