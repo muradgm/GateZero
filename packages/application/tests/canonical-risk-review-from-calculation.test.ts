@@ -136,4 +136,21 @@ describe("createCanonicalRiskReviewFromCalculation", () => {
       })
     ).toThrow(/cannot be approved/);
   });
+
+  it("rejects a structurally valid risk calculation after its content is altered", () => {
+    const calculation = calculateEurUsdRisk({ evaluation, sourceLineage, policy: policy() });
+
+    expect(() =>
+      createCanonicalRiskReviewFromCalculation({
+        riskReviewId: "risk-review-altered-calculation",
+        assessment,
+        calculation: { ...calculation, positionSizeUnits: 99_000 },
+        reviewDecision: "APPROVE",
+        portfolioExposurePctAfterEntry: 12,
+        reviewedBy: "operator-risk-reviewer",
+        reviewedAt: "2026-07-24T13:05:00.000Z",
+        validUntil: "2026-07-24T14:00:00.000Z"
+      })
+    ).toThrow(/calculated risk content hash mismatch/);
+  });
 });
