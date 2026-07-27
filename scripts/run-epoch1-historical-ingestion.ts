@@ -32,8 +32,12 @@ console.log(`Historical ingestion status: ${result.status}`);
 console.log(`Run: ${result.runId}`);
 console.log(`Dataset: ${result.manifest.datasetId}`);
 console.log(`Raw hash: ${result.hashes.rawDataHash}`);
-console.log(`15m / 1H / 4H: ${result.counts.normalized15m} / ${result.counts.aggregated1H} / ${result.counts.aggregated4H}`);
-console.log(`Candidates / assessments: ${result.counts.candidates} / ${result.counts.assessments}`);
+console.log(
+  `15m / 1H / 4H: ${result.counts.normalized15m} / ${result.counts.aggregated1H} / ${result.counts.aggregated4H}`
+);
+console.log(
+  `Candidates / assessments: ${result.counts.candidates} / ${result.counts.assessments}`
+);
 console.log(`Output: ${absoluteOutput}`);
 
 if (result.status === "REJECTED") {
