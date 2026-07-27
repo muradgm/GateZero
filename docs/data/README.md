@@ -1,6 +1,7 @@
 # Epoch 1 Historical Dataset and Ingestion
 
-The validated decision trace must use one real EUR/USD 15-minute historical export. The repository does not commit provider data unless redistribution is explicitly permitted.
+The validated decision trace must use one real EUR/USD 15-minute historical export. The repository
+must not commit provider data unless redistribution is explicitly permitted.
 
 ## Required CSV format
 
@@ -70,7 +71,8 @@ A different output can be supplied with `--output`.
 
 ## Optional event context
 
-Candidate detection remains deterministic without macro-event data, but the canonical assessment marks event context unavailable rather than assuming the window is clear.
+Candidate detection remains deterministic without macro-event data, but the canonical assessment
+marks event context unavailable rather than assuming the window is clear.
 
 A local JSON object can provide an explicit integer minute distance for decision timestamps:
 
@@ -113,4 +115,6 @@ Accepted output is written beneath `.local-data/`, which is ignored by Git.
 
 ## Milestone rule
 
-Synthetic fixtures remain useful for unit and integration tests, but they do not satisfy the real-data Epoch 1 exit criterion. The milestone may only claim a frozen historical source after this pipeline accepts a real export and the resulting hashes are recorded in the validated trace.
+Synthetic fixtures remain useful for unit and integration tests, but they do not satisfy the
+real-data Epoch 1 exit criterion. The milestone may only claim a frozen historical source after this
+pipeline accepts a real export and the resulting hashes are recorded in the validated trace.
