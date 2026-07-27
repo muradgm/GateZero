@@ -161,7 +161,13 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
       continue;
     }
 
-    const [open, high, low, close, volume] = numbers as [number, number, number, number, number];
+    const [open, high, low, close, volume] = numbers as [
+      number,
+      number,
+      number,
+      number,
+      number
+    ];
     candles.push({
       sourceId: input.sourceId,
       instrument: "EURUSD",
