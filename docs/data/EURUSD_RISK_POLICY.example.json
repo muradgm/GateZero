@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "policyId": "eurusd-local-risk-policy",
+  "policyVersion": "1.0.0",
+  "accountCurrency": "USD",
+  "accountEquity": 10000,
+  "maximumRiskPct": 0.5,
+  "maximumRiskAmount": 50,
+  "pipSize": 0.0001,
+  "pipValuePolicy": {
+    "mode": "QUOTE_CURRENCY"
+  },
+  "spreadPips": 0.8,
+  "entrySlippagePips": 0.2,
+  "stopSlippagePips": 0.2,
+  "commissionModel": {
+    "mode": "FIXED_ACCOUNT_CURRENCY",
+    "amount": 4
+  },
+  "unitIncrement": 1000,
+  "minimumPositionUnits": 1000,
+  "maximumPositionUnits": 100000,
+  "assumptions": [
+    "Local deterministic paper simulation only.",
+    "Costs are explicit policy inputs and are not broker quotes."
+  ]
+}
