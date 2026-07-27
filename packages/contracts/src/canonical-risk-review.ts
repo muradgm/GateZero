@@ -11,7 +11,11 @@ export const CanonicalRiskReviewSchema = z
     riskCalculationHash: NonEmptyStringSchema.optional(),
     instrument: z.literal("EURUSD"),
     riskEngineVersion: NonEmptyStringSchema,
-    reviewStatus: z.enum(["APPROVED_FOR_LOCAL_SIMULATION", "BLOCKED", "REVISION_REQUIRED"]),
+    reviewStatus: z.enum([
+      "APPROVED_FOR_LOCAL_SIMULATION",
+      "BLOCKED",
+      "REVISION_REQUIRED"
+    ]),
     maximumRiskPct: z.number().positive().max(100),
     maximumRiskAmount: z.number().nonnegative(),
     positionSizeUnits: z.number().int().nonnegative(),
@@ -39,7 +43,10 @@ export const CanonicalRiskReviewSchema = z
       });
     }
 
-    if (review.reviewStatus === "APPROVED_FOR_LOCAL_SIMULATION" && review.blockers.length > 0) {
+    if (
+      review.reviewStatus === "APPROVED_FOR_LOCAL_SIMULATION" &&
+      review.blockers.length > 0
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "approved risk reviews cannot retain blockers",
@@ -47,7 +54,10 @@ export const CanonicalRiskReviewSchema = z
       });
     }
 
-    if (review.reviewStatus !== "APPROVED_FOR_LOCAL_SIMULATION" && review.blockers.length === 0) {
+    if (
+      review.reviewStatus !== "APPROVED_FOR_LOCAL_SIMULATION" &&
+      review.blockers.length === 0
+    ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
         message: "non-approved risk reviews require blockers",
