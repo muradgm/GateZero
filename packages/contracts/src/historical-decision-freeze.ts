@@ -107,6 +107,8 @@ export const FrozenHistoricalDecisionBundleSchema = z
     }
 
     if (
+      artifact.sourceSnapshot.rawContentHash !== artifact.sourceHashes.rawDataHash ||
+      artifact.sourceManifest.expectedSha256 !== artifact.sourceHashes.rawDataHash ||
       artifact.sourceHashes.rawDataHash !== calculation.sourceLineage.rawDataHash ||
       artifact.sourceHashes.normalized15mHash !== calculation.sourceLineage.normalized15mHash ||
       artifact.sourceHashes.aggregated1HHash !== calculation.sourceLineage.aggregated1HHash ||
@@ -151,8 +153,7 @@ export const FrozenHistoricalDecisionBundleSchema = z
       bundle.rawDataHash !== artifact.sourceHashes.rawDataHash ||
       bundle.normalizedDataHash !== artifact.sourceHashes.normalized15mHash ||
       bundle.configurationHash !== artifact.sourceHashes.decisionConfigurationHash ||
-      bundle.simulationPolicyVersion !== artifact.riskReview.riskEngineVersion &&
-        bundle.riskEngineVersion !== artifact.riskReview.riskEngineVersion
+      bundle.riskEngineVersion !== review.riskEngineVersion
     ) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
