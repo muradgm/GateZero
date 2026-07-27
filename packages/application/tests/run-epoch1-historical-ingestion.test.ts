@@ -1,28 +1,57 @@
 import { createHash } from "node:crypto";
+import type { FrozenHistoricalDatasetManifest } from "@traderframe/contracts";
 import { describe, expect, it } from "vitest";
-import type {
-  EurUsdOverlapPullbackObservation,
-  FrozenHistoricalDatasetManifest
-} from "@traderframe/contracts";
-import {
-  runEpoch1HistoricalIngestion,
-  type CandidateObservationFactory
-} from "../src/index.js";
+import { runEpoch1HistoricalIngestion } from "../src/index.js";
 
-const RANGE_START = "2026-07-24T12:00:00.000Z";
+const RANGE_START = "2026-07-16T04:00:00.000Z";
 const RANGE_END = "2026-07-24T16:00:00.000Z";
+const SOURCE_CANDLE_COUNT = 816;
+const PATTERN_START_INDEX = 787;
+const PATTERN = [
+  [1.1, 1.10055, 1.0996, 1.10025],
+  [1.10025, 1.1008, 1.09985, 1.1005],
+  [1.1005, 1.10105, 1.1001, 1.10075],
+  [1.10075, 1.1013, 1.10035, 1.101],
+  [1.101, 1.10155, 1.1006, 1.10125],
+  [1.10125, 1.1018, 1.10085, 1.1015],
+  [1.1015, 1.10205, 1.1011, 1.10175],
+  [1.10175, 1.1023, 1.10135, 1.102],
+  [1.102, 1.10255, 1.1016, 1.10225],
+  [1.10225, 1.1028, 1.10185, 1.1025],
+  [1.1025, 1.10305, 1.1021, 1.10275],
+  [1.10275, 1.1033, 1.10235, 1.103],
+  [1.1012, 1.1017, 1.0993, 1.10015],
+  [1.1002, 1.1022, 1.1001, 1.1019],
+  [1.1019, 1.103, 1.1016, 1.1027],
+  [1.1027, 1.10285, 1.1019, 1.10225],
+  [1.10225, 1.1026, 1.1018, 1.1022]
+] as const;
 
 function buildCsv(invalidOhlcAt?: number): string {
   const rows = ["timestamp,open,high,low,close,volume"];
-  for (let index = 0; index < 16; index += 1) {
+  for (let index = 0; index < SOURCE_CANDLE_COUNT; index += 1) {
     const timestamp = new Date(Date.parse(RANGE_START) + index * 15 * 60 * 1000).toISOString();
-    const open = 1.08 + index * 0.00001;
-    const close = open + 0.00002;
-    const high = invalidOhlcAt === index ? open - 0.00001 : close + 0.00003;
-    const low = open - 0.00003;
-    rows.push(`${timestamp},${open},${high},${low},${close},${100 + index}`);
+    const [open, originalHigh, low, close] = valuesFor(index);
+    const high = invalidOhlcAt === index ? open - 0.00001 : originalHigh;
+    rows.push(
+      `${timestamp},${price(open)},${price(high)},${price(low)},${price(close)},${100 + index}`
+    );
   }
   return rows.join("\n");
+}
+
+function valuesFor(index: number): readonly [number, number, number, number] {
+  const patternIndex = index - PATTERN_START_INDEX;
+  const pattern = PATTERN[patternIndex];
+  if (pattern) return pattern;
+
+  if (index > PATTERN_START_INDEX + PATTERN.length - 1) {
+    const open = 1.1022 + (index - (PATTERN_START_INDEX + PATTERN.length)) * 0.00005;
+    return [open, open + 0.00008, open - 0.00004, open + 0.00003];
+  }
+
+  const open = 1.02 + index * 0.0001;
+  return [open, open + 0.00008, open - 0.00004, open + 0.00004];
 }
 
 function manifest(csv: string, expectedSha256 = sha256(csv)): FrozenHistoricalDatasetManifest {
@@ -37,7 +66,7 @@ function manifest(csv: string, expectedSha256 = sha256(csv)): FrozenHistoricalDa
     rangeStart: RANGE_START,
     rangeEnd: RANGE_END,
     expectedSha256,
-    expectedRowCount: 16,
+    expectedRowCount: SOURCE_CANDLE_COUNT,
     redistributionPolicy: "LOCAL_ONLY",
     licenseNote: "Test fixture generated in memory and not provider data.",
     sourceReference: "application ingestion unit test",
@@ -47,102 +76,55 @@ function manifest(csv: string, expectedSha256 = sha256(csv)): FrozenHistoricalDa
 
 function eventContext(): Record<string, number> {
   return Object.fromEntries(
-    Array.from({ length: 16 }, (_, index) => [
+    Array.from({ length: SOURCE_CANDLE_COUNT }, (_, index) => [
       new Date(Date.parse(RANGE_START) + (index + 1) * 15 * 60 * 1000).toISOString(),
-      90
+      120
     ])
   );
 }
 
-function observationFactory(triggerAtIndex = 8): CandidateObservationFactory {
-  return (input) => {
-    const currentIndex = input.candles15m.length - 1;
-    const detected = currentIndex >= triggerAtIndex;
-    const observation: EurUsdOverlapPullbackObservation = {
-      candidateId: `observation-${currentIndex}`,
-      decisionTimestamp: input.decisionTimestamp,
-      direction: "LONG",
-      dataReady: true,
-      sessionEligible: true,
-      higherTimeframeAligned: true,
-      pullbackRetracementAtr: 0.5,
-      pullbackAgeCandles: 2,
-      liquiditySweepDetected: detected,
-      sweepPenetrationPips: detected ? 2 : 0,
-      sweepReclaimedWithinCandles: detected ? 1 : 4,
-      displacementAtr: detected ? 0.8 : 0,
-      triggerConfirmed: detected,
-      triggerAgeCandles: detected ? currentIndex - triggerAtIndex : 5,
-      eventContextStatus: input.eventContextStatus,
-      minutesToNearestHighImpactEvent: input.minutesToNearestHighImpactEvent,
-      invalidationPrice: 1.079,
-      currentPrice: 1.0805,
-      candlesSinceTrigger: detected ? currentIndex - triggerAtIndex : 0,
-      sessionEnded: false,
-      evidenceIds: [`evidence-${currentIndex}`],
-      availableAt: input.decisionTimestamp
-    };
-
-    return {
-      observation,
-      diagnostics: {
-        observationEngineVersion: "eurusd-overlap-observation-v1",
-        atr: 0.001,
-        ema1H: { fast: 1.08, slow: 1.07 },
-        ema4H: { fast: 1.08, slow: 1.07 },
-        ...(detected
-          ? {
-              sweepCandleId: "sweep-1",
-              triggerCandleId: "trigger-1"
-            }
-          : {}),
-        excludedFutureCandleIds: [],
-        reasons: []
-      }
-    };
-  };
-}
-
 describe("runEpoch1HistoricalIngestion", () => {
-  it("runs import, validation, aggregation, detection, and canonical assessment deterministically", () => {
-    const csv = buildCsv();
-    const input = {
-      manifest: manifest(csv),
-      csv,
-      eventContextByDecisionTimestamp: eventContext()
-    };
-    const dependencies = { observationFactory: observationFactory() };
+  it(
+    "runs import, validation, aggregation, real detection, and assessment deterministically",
+    () => {
+      const csv = buildCsv();
+      const input = {
+        manifest: manifest(csv),
+        csv,
+        eventContextByDecisionTimestamp: eventContext()
+      };
 
-    const first = runEpoch1HistoricalIngestion(input, dependencies);
-    const second = runEpoch1HistoricalIngestion(input, dependencies);
-    const evaluation = first.candidateEvaluations.at(0);
-    if (!evaluation) throw new Error("expected one canonical candidate evaluation");
+      const first = runEpoch1HistoricalIngestion(input);
+      const second = runEpoch1HistoricalIngestion(input);
+      const evaluation = first.candidateEvaluations.at(0);
+      if (!evaluation) throw new Error("expected at least one canonical candidate evaluation");
 
-    expect(second).toEqual(first);
-    expect(first.status).toBe("COMPLETED");
-    expect(first.importVerification.ready).toBe(true);
-    expect(first.counts).toEqual({
-      rawRows: 16,
-      normalized15m: 16,
-      aggregated1H: 4,
-      aggregated4H: 1,
-      candidates: 1,
-      assessments: 1
-    });
-    expect(first.failures).toEqual({
-      import: [],
-      adapter: [],
-      validation: [],
-      aggregation1H: [],
-      aggregation4H: []
-    });
-    expect(first.hashes.normalized15mHash).toHaveLength(64);
-    expect(first.hashes.aggregated1HHash).toHaveLength(64);
-    expect(first.hashes.aggregated4HHash).toHaveLength(64);
-    expect(evaluation.detection.candidateId).toBe(evaluation.observation.candidateId);
-    expect(evaluation.assessment.candidateId).toBe(evaluation.detection.candidateId);
-    expect(evaluation.assessment.recommendation).toBe("PAPER_SIMULATE");
-  });
+      expect(second).toEqual(first);
+      expect(first.status).toBe("COMPLETED");
+      expect(first.importVerification.ready).toBe(true);
+      expect(first.counts.rawRows).toBe(SOURCE_CANDLE_COUNT);
+      expect(first.counts.normalized15m).toBe(SOURCE_CANDLE_COUNT);
+      expect(first.counts.aggregated1H).toBe(204);
+      expect(first.counts.aggregated4H).toBe(51);
+      expect(first.counts.candidates).toBeGreaterThanOrEqual(1);
+      expect(first.counts.assessments).toBe(first.counts.candidates);
+      expect(first.failures).toEqual({
+        import: [],
+        adapter: [],
+        validation: [],
+        aggregation1H: [],
+        aggregation4H: []
+      });
+      expect(first.hashes.normalized15mHash).toHaveLength(64);
+      expect(first.hashes.aggregated1HHash).toHaveLength(64);
+      expect(first.hashes.aggregated4HHash).toHaveLength(64);
+      expect(evaluation.detection.candidateId).toBe(evaluation.observation.candidateId);
+      expect(evaluation.assessment.candidateId).toBe(evaluation.detection.candidateId);
+      expect(evaluation.observation.liquiditySweepDetected).toBe(true);
+      expect(evaluation.observation.triggerConfirmed).toBe(true);
+      expect(evaluation.assessment.recommendation).toBe("PAPER_SIMULATE");
+    }
+  );
 
   it("fails closed before normalization when the frozen source hash differs", () => {
     const csv = buildCsv();
@@ -180,6 +162,10 @@ describe("runEpoch1HistoricalIngestion", () => {
     ).toThrow("finite integer");
   });
 });
+
+function price(value: number): string {
+  return value.toFixed(5);
+}
 
 function sha256(value: string): string {
   return createHash("sha256").update(value.trim()).digest("hex");
