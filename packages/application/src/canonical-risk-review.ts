@@ -3,13 +3,17 @@ import {
   CanonicalDecisionAssessmentSchema,
   CanonicalRiskReviewSchema,
   ContractValidationError,
+  EurUsdRiskCalculationSchema,
   type CanonicalDecisionAssessment,
-  type CanonicalRiskReview
+  type CanonicalRiskReview,
+  type EurUsdRiskCalculation
 } from "@traderframe/contracts";
 
 export interface CreateCanonicalRiskReviewCommand {
   readonly riskReviewId: string;
   readonly assessment: CanonicalDecisionAssessment;
+  readonly riskCalculationId?: string;
+  readonly riskCalculationHash?: string;
   readonly riskEngineVersion: string;
   readonly reviewStatus: CanonicalRiskReview["reviewStatus"];
   readonly maximumRiskPct: number;
@@ -26,6 +30,19 @@ export interface CreateCanonicalRiskReviewCommand {
   readonly validUntil: string;
 }
 
+export interface CreateCanonicalRiskReviewFromCalculationCommand {
+  readonly riskReviewId: string;
+  readonly assessment: CanonicalDecisionAssessment;
+  readonly calculation: EurUsdRiskCalculation;
+  readonly reviewDecision: "APPROVE" | "BLOCK" | "REVISE";
+  readonly portfolioExposurePctAfterEntry: number;
+  readonly reviewedBy: string;
+  readonly reviewedAt: string;
+  readonly validUntil: string;
+  readonly additionalAssumptions?: readonly string[];
+  readonly additionalBlockers?: readonly string[];
+}
+
 export function createCanonicalRiskReview(
   command: CreateCanonicalRiskReviewCommand
 ): CanonicalRiskReview {
@@ -35,6 +52,12 @@ export function createCanonicalRiskReview(
     riskReviewId: command.riskReviewId,
     assessmentId: assessment.assessmentId,
     canonicalAssessmentHash: hashCanonicalValue(assessment),
+    ...(command.riskCalculationId && command.riskCalculationHash
+      ? {
+          riskCalculationId: command.riskCalculationId,
+          riskCalculationHash: command.riskCalculationHash
+        }
+      : {}),
     instrument: assessment.instrument,
     riskEngineVersion: command.riskEngineVersion,
     reviewStatus: command.reviewStatus,
@@ -58,6 +81,69 @@ export function createCanonicalRiskReview(
   return CanonicalRiskReviewSchema.parse({
     ...payload,
     reviewHash: hashCanonicalValue(payload)
+  });
+}
+
+export function createCanonicalRiskReviewFromCalculation(
+  command: CreateCanonicalRiskReviewFromCalculationCommand
+): CanonicalRiskReview {
+  const assessment = CanonicalDecisionAssessmentSchema.parse(command.assessment);
+  const calculation = EurUsdRiskCalculationSchema.parse(command.calculation);
+  const assessmentHash = hashCanonicalValue(assessment);
+
+  if (
+    calculation.assessmentId !== assessment.assessmentId ||
+    calculation.canonicalAssessmentHash !== assessmentHash
+  ) {
+    throw new ContractValidationError(
+      "risk calculation does not match the canonical assessment under review"
+    );
+  }
+
+  if (command.reviewDecision === "APPROVE" && calculation.riskGate !== "WITHIN_LIMIT") {
+    throw new ContractValidationError("blocked risk calculations cannot be approved");
+  }
+
+  const reviewStatus: CanonicalRiskReview["reviewStatus"] =
+    command.reviewDecision === "APPROVE"
+      ? "APPROVED_FOR_LOCAL_SIMULATION"
+      : command.reviewDecision === "BLOCK"
+        ? "BLOCKED"
+        : "REVISION_REQUIRED";
+  const blockers = [
+    ...calculation.blockers,
+    ...(command.additionalBlockers ?? [])
+  ];
+
+  if (reviewStatus === "BLOCKED" && blockers.length === 0) {
+    blockers.push("Operator blocked local simulation after reviewing calculated risk.");
+  }
+  if (reviewStatus === "REVISION_REQUIRED" && blockers.length === 0) {
+    blockers.push("Operator requested revision of the calculated risk plan.");
+  }
+
+  return createCanonicalRiskReview({
+    riskReviewId: command.riskReviewId,
+    assessment,
+    riskCalculationId: calculation.riskCalculationId,
+    riskCalculationHash: calculation.calculationHash,
+    riskEngineVersion: calculation.riskEngineVersion,
+    reviewStatus,
+    maximumRiskPct: calculation.maximumRiskPct,
+    maximumRiskAmount: calculation.riskBudgetAmount,
+    positionSizeUnits: calculation.positionSizeUnits,
+    portfolioExposurePctAfterEntry: command.portfolioExposurePctAfterEntry,
+    spreadPips: calculation.spreadPips,
+    commissionAmount: calculation.estimatedCommissionCost,
+    slippagePips: calculation.entrySlippagePips + calculation.stopSlippagePips,
+    assumptions: [
+      ...calculation.assumptions,
+      ...(command.additionalAssumptions ?? [])
+    ],
+    blockers,
+    reviewedBy: command.reviewedBy,
+    reviewedAt: command.reviewedAt,
+    validUntil: command.validUntil
   });
 }
 
