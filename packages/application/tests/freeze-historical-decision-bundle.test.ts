@@ -42,7 +42,8 @@ const candle15m: NormalizedMarketCandle = {
 };
 
 function higherTimeframeCandle(timeframe: "1H" | "4H"): TimeBoundMarketCandle {
-  const openedAt = timeframe === "1H" ? "2026-07-24T12:00:00.000Z" : "2026-07-24T09:00:00.000Z";
+  const openedAt =
+    timeframe === "1H" ? "2026-07-24T12:00:00.000Z" : "2026-07-24T09:00:00.000Z";
   return {
     candleId: `EURUSD-${timeframe}-${openedAt}`,
     sourceId: "eurusd-freeze-dataset",
@@ -250,7 +251,7 @@ function freezeConfiguration(): HistoricalDecisionFreezeConfiguration {
     applicationCommit: "abc1234",
     simulationPolicyVersion: "simulation-policy-1.0.0",
     targetRewardRiskMultiple: 2,
-    frozenAt: "2026-07-24T13:10:00.000Z"
+    frozenAt: "2026-07-24T17:10:00.000Z"
   };
 }
 
@@ -269,8 +270,8 @@ function fixture() {
     reviewDecision: "APPROVE",
     portfolioExposurePctAfterEntry: 12,
     reviewedBy: "operator-risk-reviewer",
-    reviewedAt: "2026-07-24T13:05:00.000Z",
-    validUntil: "2026-07-24T14:00:00.000Z"
+    reviewedAt: "2026-07-24T17:05:00.000Z",
+    validUntil: "2026-07-24T18:00:00.000Z"
   });
 
   return { run, riskCalculation, riskReview };
@@ -297,7 +298,9 @@ describe("freezeHistoricalDecisionBundle", () => {
       aggregated4HHash: FOUR_HOUR_HASH,
       ingestionConfigurationHash: CONFIGURATION_HASH
     });
-    expect(first.riskCalculation.riskCalculationId).toBe(riskCalculation.riskCalculationId);
+    expect(first.riskCalculation.riskCalculationId).toBe(
+      riskCalculation.riskCalculationId
+    );
     expect(first.riskReview.riskCalculationHash).toBe(riskCalculation.calculationHash);
     expect(first.decisionRecord.bundle.riskReviewHash).toBe(riskReview.reviewHash);
     expect(first.decisionRecord.bundle.simulationPlan).toEqual({
@@ -335,7 +338,10 @@ describe("freezeHistoricalDecisionBundle", () => {
       freezeHistoricalDecisionBundle({
         run,
         riskCalculation,
-        riskReview: { ...riskReview, riskCalculationHash: `sha256:${"0".repeat(64)}` },
+        riskReview: {
+          ...riskReview,
+          riskCalculationHash: `sha256:${"0".repeat(64)}`
+        },
         configuration: freezeConfiguration()
       })
     ).toThrow(/not linked to the calculated risk plan/);
