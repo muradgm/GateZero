@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "datasetId": "eurusd-15m-YYYYMMDD-YYYYMMDD",
+  "provider": "DUKASCOPY_CSV_EXPORT",
+  "sourceFilename": "EURUSD_15m.csv",
+  "instrument": "EURUSD",
+  "timeframe": "15m",
+  "timezone": "UTC",
+  "rangeStart": "2025-01-01T00:00:00.000Z",
+  "rangeEnd": "2025-02-01T00:00:00.000Z",
+  "expectedSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expectedRowCount": 1,
+  "redistributionPolicy": "LOCAL_ONLY",
+  "licenseNote": "Replace with the provider terms and the permitted local-use statement for this export.",
+  "sourceReference": "Replace with the export page, account record, or provider reference.",
+  "createdAt": "2026-07-27T00:00:00.000Z"
+}
