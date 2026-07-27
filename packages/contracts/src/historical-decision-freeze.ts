@@ -78,6 +78,7 @@ export const FrozenHistoricalDecisionBundleSchema = z
     const assessment = artifact.candidateEvaluation.assessment;
     const calculation = artifact.riskCalculation;
     const review = artifact.riskReview;
+    const plan = bundle.simulationPlan;
 
     if (artifact.decisionRecord.frozenAt !== artifact.frozenAt) {
       context.addIssue({
@@ -161,6 +162,12 @@ export const FrozenHistoricalDecisionBundleSchema = z
     if (
       review.riskCalculationId !== calculation.riskCalculationId ||
       review.riskCalculationHash !== calculation.calculationHash ||
+      review.maximumRiskPct !== calculation.maximumRiskPct ||
+      review.maximumRiskAmount !== calculation.riskBudgetAmount ||
+      review.positionSizeUnits !== calculation.positionSizeUnits ||
+      review.spreadPips !== calculation.spreadPips ||
+      review.commissionAmount !== calculation.estimatedCommissionCost ||
+      review.slippagePips !== calculation.entrySlippagePips + calculation.stopSlippagePips ||
       bundle.riskReviewId !== review.riskReviewId ||
       bundle.riskReviewHash !== review.reviewHash
     ) {
@@ -168,6 +175,30 @@ export const FrozenHistoricalDecisionBundleSchema = z
         code: z.ZodIssueCode.custom,
         message: "frozen decision must preserve calculated-risk and operator-review lineage",
         path: ["riskReview"]
+      });
+    }
+
+    const riskDistance = Math.abs(calculation.entryPrice - calculation.invalidationPrice);
+    const expectedTarget = Number(
+      (
+        calculation.direction === "LONG"
+          ? calculation.entryPrice + riskDistance * artifact.targetRewardRiskMultiple
+          : calculation.entryPrice - riskDistance * artifact.targetRewardRiskMultiple
+      ).toFixed(5)
+    );
+    if (
+      !plan ||
+      plan.direction !== calculation.direction ||
+      plan.entryPrice !== calculation.entryPrice ||
+      plan.stopPrice !== calculation.invalidationPrice ||
+      plan.targetPrice !== expectedTarget ||
+      plan.positionSizeUnits !== calculation.positionSizeUnits ||
+      plan.plannedRiskAmount !== calculation.totalWorstCasePlannedLoss
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "frozen simulation plan must match the calculated risk and target policy",
+        path: ["decisionRecord", "bundle", "simulationPlan"]
       });
     }
 
