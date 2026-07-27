@@ -21,6 +21,7 @@ export * from "./gate2-market-intelligence-foundation-contracts.js";
 export * from "./gate2-read-only-intelligence-brief-contracts.js";
 export * from "./gate2-intelligence-brief-workflow-contracts.js";
 export * from "./gate2-manual-review-authoring-contracts.js";
+export * from "./historical-decision-freeze.js";
 export * from "./historical-ingestion-run.js";
 export * from "./historical-market-adapter.js";
 export * from "./learning-event.js";
