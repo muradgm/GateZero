@@ -151,6 +151,19 @@ export const HistoricalIngestionRunSchema = z
       }
     }
 
+    const detectedCandidateIds =
+      value.candidateScan?.detections.map((detection) => detection.candidateId) ?? [];
+    const evaluatedCandidateIds = value.candidateEvaluations.map(
+      (evaluation) => evaluation.detection.candidateId
+    );
+    if (JSON.stringify(detectedCandidateIds) !== JSON.stringify(evaluatedCandidateIds)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "candidate evaluations must map one-to-one to the ordered candidate scan",
+        path: ["candidateEvaluations"]
+      });
+    }
+
     if (value.status === "COMPLETED") {
       const downstreamFailures = [
         ...value.failures.import,
