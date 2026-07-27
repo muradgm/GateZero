@@ -27,7 +27,12 @@ It must not be represented as a real-market validation result.
 - deterministic 15m normalization;
 - deterministic 1H and 4H aggregation;
 - end-to-end candidate detection and canonical assessment service;
-- risk-review contract and deterministic simulation mechanics;
+- instrument-aware EUR/USD pip valuation and position sizing;
+- explicit spread, slippage, and commission cost calculation;
+- worst-case planned-loss gate with deterministic hashes;
+- source-run, candidate, policy, and assessment risk lineage;
+- operator-owned canonical review linked to calculated risk;
+- deterministic simulation mechanics;
 - frozen decision-bundle mechanics;
 - outcome and learning records;
 - reproducibility checkpoint mechanics;
@@ -51,6 +56,26 @@ The run records source, configuration, normalized-series, higher-timeframe, cand
 assessment identities. It fails closed before candidate evaluation when import, validation, or
 aggregation fails.
 
+## Instrument-aware risk pipeline
+
+Implemented application path:
+
+```text
+completed historical ingestion run
+→ canonical candidate evaluation
+→ EUR/USD pip-value policy
+→ stop distance and adverse execution prices
+→ position size rounded down to permitted units
+→ spread, slippage, and commission costs
+→ total worst-case planned loss
+→ WITHIN_LIMIT or BLOCKED risk gate
+→ operator-owned hash-linked canonical risk review
+```
+
+Risk calculation cannot proceed from a rejected ingestion run or a canonical assessment that is not
+eligible for `PAPER_SIMULATE`. A blocked risk calculation produces a zero position and cannot be
+operator-approved for local simulation.
+
 ## Remaining proof requirements
 
 1. Supply one real EUR/USD 15-minute historical export with permitted local use.
@@ -58,17 +83,18 @@ aggregation fails.
 3. Record the accepted raw, normalized, 1H, and 4H hashes.
 4. Confirm candidates are detected from real candles without injected or manually authored
    observations.
-5. Run instrument-aware risk from the same candidate and source lineage.
-6. Freeze the real-source decision bundle.
-7. Run simulation, outcome, learning, and reproduction from that same frozen bundle.
-8. Replace or supplement the synthetic browser proof with the real-source trace.
-9. Pass `pnpm verify` and browser E2E.
+5. Execute instrument-aware risk from the same candidate and source lineage.
+6. Create the operator-owned canonical risk review from that calculation.
+7. Freeze the real-source decision bundle with the risk calculation and review lineage.
+8. Run simulation, outcome, learning, and reproduction from that same frozen bundle.
+9. Replace or supplement the synthetic browser proof with the real-source trace.
+10. Pass `pnpm verify` and browser E2E.
 
 ## Current active phase
 
-**Execute the historical ingestion pipeline with a real frozen source.**
+**Bind the calculated risk artifact into the real-source frozen decision bundle.**
 
-Use:
+The real-source workflow is:
 
 ```bash
 pnpm run:epoch1-ingestion -- \
@@ -76,13 +102,13 @@ pnpm run:epoch1-ingestion -- \
   --manifest /path/to/EURUSD_15m.manifest.json
 ```
 
-Optional explicit event context:
+Then calculate risk for an explicit detected candidate:
 
 ```bash
-pnpm run:epoch1-ingestion -- \
-  --csv /path/to/EURUSD_15m.csv \
-  --manifest /path/to/EURUSD_15m.manifest.json \
-  --event-context /path/to/EURUSD_event_context.json
+pnpm exec tsx scripts/run-epoch1-risk-calculation.ts -- \
+  --ingestion .local-data/epoch1/historical-ingestion-run.json \
+  --policy /path/to/EURUSD_risk_policy.json \
+  --candidate <candidate-id>
 ```
 
 See `docs/data/README.md`.
@@ -91,8 +117,8 @@ See `docs/data/README.md`.
 
 Until the real-source path passes, the branch may claim:
 
-> Deterministic validated-trace mechanics and a fail-closed historical ingestion pipeline are
-> implemented and covered by synthetic tests.
+> Deterministic validated-trace mechanics, fail-closed historical ingestion, and instrument-aware
+> EUR/USD risk calculation are implemented and covered by synthetic tests.
 
 It may not claim:
 
