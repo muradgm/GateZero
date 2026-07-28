@@ -4,7 +4,7 @@ const toolCommands = [
   {
     id: "tool-council",
     label: "Open Evidence Council",
-    detail: "Specialist disagreement and consolidated view",
+    detail: "Specialist disagreement and consolidated evidence challenge",
     tool: "council",
     shortcut: "C"
   },
@@ -24,8 +24,8 @@ const toolCommands = [
   },
   {
     id: "tool-changes",
-    label: "Open Score Changes",
-    detail: "Explain how evidence constructed the score",
+    label: "Open Evidence Index Changes",
+    detail: "Explain how evidence constructed the evidence index",
     tool: "changes"
   },
   {
@@ -52,7 +52,7 @@ const toolCommands = [
   {
     id: "tool-graph",
     label: "Open Evidence Graph",
-    detail: "Explore dependencies between evidence and decision",
+    detail: "Explore dependencies between evidence and bounded disposition",
     tool: "graph",
     shortcut: "G"
   }
@@ -74,7 +74,7 @@ export function CommandPalette({ workspace, selectedId }) {
     const candidates = (workspace?.candidates ?? []).map((candidate, index) => ({
       id: `candidate-${candidate.id}`,
       label: `Select ${candidate.instrument}`,
-      detail: `${candidate.market} · ${candidate.report.recommendation.replaceAll("_", " ")} · evidence ${candidate.report.evidenceScore}`,
+      detail: `${candidate.market} · ${candidate.report.recommendation.replaceAll("_", " ")} · evidence index ${candidate.report.evidenceScore}`,
       candidateId: candidate.id,
       rank: index + 1,
       selected: candidate.id === selectedId
@@ -176,7 +176,7 @@ export function CommandPalette({ workspace, selectedId }) {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
       >
-        <span>Search or run a command</span>
+        <span>Search or open a review view</span>
         <kbd>Ctrl K</kbd>
       </button>
 
@@ -252,7 +252,7 @@ export function CommandPalette({ workspace, selectedId }) {
                 <kbd>↓</kbd> Navigate
               </span>
               <span>
-                <kbd>Enter</kbd> Run
+                <kbd>Enter</kbd> Open
               </span>
               <span>
                 <kbd>?</kbd> Open palette
