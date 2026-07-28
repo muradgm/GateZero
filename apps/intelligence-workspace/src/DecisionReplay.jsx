@@ -152,9 +152,9 @@ export function DecisionReplay({ candidate }) {
 
       <footer className="replay-decision">
         <div>
-          <span>Current bounded recommendation</span>
+          <span>Current bounded operator disposition</span>
           <strong>
-            {candidate.report.evidenceScore} evidence · {candidate.report.confidence} confidence
+            {candidate.report.evidenceScore} evidence index · {candidate.report.confidence} confidence
           </strong>
         </div>
         <RecommendationBadge value={candidate.report.recommendation} />
@@ -207,7 +207,7 @@ function stageSummary(stage) {
   if (stage.status === "blocked")
     return "Progression stopped because one or more blockers remain unresolved.";
   if (stage.status === "not_applicable")
-    return "This stage was explicitly marked not applicable for the current bounded recommendation.";
+    return "This stage was explicitly marked not applicable for the current bounded disposition.";
   return stage.recordId
     ? `The stage completed with linked record ${stage.recordId}.`
     : "The stage completed with traceable local evidence.";
