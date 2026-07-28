@@ -1,6 +1,6 @@
 # TRD-780 QA Security Review
 
-Status: `pending_validation`
+Status: `accepted`
 
 ## Implemented controls
 
@@ -24,8 +24,11 @@ Status: `pending_validation`
 - desktop and narrow/mobile browser inspection;
 - clean browser console.
 
-## Current disposition
+## Acceptance evidence
 
-QA/security signoff is withheld until the commands and browser visual checks pass. No network,
-credential, external account, broker, order-routing, or autonomous-action surface was added by this
-packet.
+`pnpm verify:gate0` passed on 2026-07-28 with the workspace build, repository checks, lint,
+formatting, type checking, and 129 test files / 888 tests. Desktop and 390px browser checks found no
+console errors or page-level horizontal overflow after the responsive queue correction.
+
+No network, credential, external account, broker, order-routing, or autonomous-action surface was
+added by this packet.

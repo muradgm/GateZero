@@ -28,7 +28,10 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
     throw new Error("A valid increasing UTC source range is required.");
   }
 
-  const normalizedText = input.csv.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").trim();
+  const normalizedText = input.csv
+    .replace(/^\uFEFF/, "")
+    .replace(/\r\n/g, "\n")
+    .trim();
   const snapshot: HistoricalSourceSnapshot = {
     provider: "DUKASCOPY_CSV_EXPORT",
     sourceId: input.sourceId,
@@ -158,13 +161,7 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
       continue;
     }
 
-    const [open, high, low, close, volume] = numbers as [
-      number,
-      number,
-      number,
-      number,
-      number
-    ];
+    const [open, high, low, close, volume] = numbers as [number, number, number, number, number];
     candles.push({
       sourceId: input.sourceId,
       instrument: "EURUSD",

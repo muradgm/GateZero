@@ -55,8 +55,14 @@ export const buildTraderFrameRuntimeStatus = buildCommandCenterRuntimeData;
 
 async function countAcceptedRecords(reviewDir: string): Promise<number> {
   const entries = await readdir(reviewDir);
+  const acceptanceRecords = entries.filter((entry) => entry.endsWith(acceptanceSuffix));
+  const records = await Promise.all(
+    acceptanceRecords.map((entry) => readFile(path.join(reviewDir, entry), "utf8"))
+  );
 
-  return entries.filter((entry) => entry.endsWith(acceptanceSuffix)).length;
+  // Legacy acceptance records predate explicit status metadata and are accepted by convention.
+  // Only an explicit pending state excludes a record from the accepted count.
+  return records.filter((record) => !/Status:\s*`pending_validation`/i.test(record)).length;
 }
 
 function readLatestEvidenceRecord(evidenceIndex: string): {

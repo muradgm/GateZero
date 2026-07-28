@@ -7,8 +7,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-779",
-  localVerification: "128 files / 886 tests",
+  latestPacket: "TRD-780",
+  localVerification: "129 files / 888 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -23,7 +23,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 128 files, 886 tests.",
+      detail: "Latest suite: 129 files, 888 tests.",
       tone: "good"
     },
     {
@@ -34,7 +34,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "779 / 779",
+      value: "780 / 780",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -155,7 +155,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "779 accepted records"
+      reference: "780 accepted records"
     },
     {
       area: "Dependency audit",
@@ -336,7 +336,8 @@ export const commandCenterData = {
     ],
     controlLaneCheckpoint: [
       "TRD-778 closes the bounded manual local review authoring lane.",
-      "TRD-779 adds read-only local review history inspection."
+      "TRD-779 adds read-only local review history inspection.",
+      "TRD-780 hardens command-center language, verification, and responsive visual behavior."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -355,8 +356,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-779 inspects validated local review history without action authority.",
-    "TRD-780 is queued for local review history visual QA.",
+    "TRD-780 hardens command-center language and responsive visual behavior.",
+    "TRD-781 is queued for command-center merge readiness.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -507,7 +508,8 @@ export const commandCenterData = {
     "TRD-776 Authoring recovery and conflict handling",
     "TRD-777 Authoring accessibility and responsive QA",
     "TRD-778 Manual review authoring checkpoint",
-    "TRD-779 Local review history inspection"
+    "TRD-779 Local review history inspection",
+    "TRD-780 Command-center stabilization"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

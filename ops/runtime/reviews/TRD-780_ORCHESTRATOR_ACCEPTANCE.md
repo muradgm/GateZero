@@ -1,22 +1,21 @@
 # TRD-780 Orchestrator Acceptance
 
-Status: `pending_validation`
+Status: `accepted`
 
 ## Review state
 
 The language hardening, regression guard, workspace-build verification stage, and separate CSV
 adapter formatting cleanup are implemented on the command-center branch.
 
-## Acceptance blockers
+## Acceptance evidence
 
-- full ordered validation has not yet been recorded;
-- desktop and narrow/mobile visual QA has not yet been recorded;
-- browser-console status has not yet been recorded;
-- the final passing test count is not yet known.
+- `pnpm verify:gate0` passed on 2026-07-28;
+- verification included repository checks, workspace build, lint, formatting, type checking, and 129
+  test files / 888 tests;
+- desktop and 390px visual QA passed after health-card wrapping and responsive queue corrections;
+- browser console was clear during both visual checks.
 
 ## Decision
 
-Orchestrator acceptance is withheld. The latest accepted packet remains `TRD-779`. After all
-validation and visual checks pass, update the QA and risk reviews, change this record to the accepted
-state, refresh the tracklist and progress snapshot with the final test count, and queue TRD-781 as the
-workspace merge-readiness checkpoint.
+TRD-780 is accepted. The latest accepted packet is `TRD-780`; TRD-781 is queued as the workspace
+merge-readiness checkpoint.

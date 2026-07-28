@@ -105,6 +105,10 @@ kbd {
   padding: 12px;
   min-height: calc(100vh - 76px);
 }
+
+.workspace-grid > * {
+  min-width: 0;
+}
 .panel {
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -535,13 +539,14 @@ kbd {
   }
   .workspace-grid {
     grid-template-columns: 1fr;
+    padding-bottom: 88px;
   }
   .watchlist {
     min-height: auto;
   }
   .candidate-list {
-    grid-template-columns: repeat(3, minmax(190px, 1fr));
-    overflow-x: auto;
+    grid-template-columns: 1fr;
+    overflow-x: visible;
   }
   .boundary-note {
     display: none;

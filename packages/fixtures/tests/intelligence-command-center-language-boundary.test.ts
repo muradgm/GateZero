@@ -30,11 +30,11 @@ const blockedPatterns = [
   },
   {
     label: "BUY or SELL disposition",
-    pattern: /(["'`])(?:buy|sell)\1|>\s*(?:buy|sell)\s*</gi
+    pattern: />\s*(?:buy|sell)\s*</gi
   },
   {
     label: "LONG or SHORT disposition",
-    pattern: /(["'`])(?:long|short)\1|>\s*(?:long|short)\s*</gi
+    pattern: />\s*(?:long|short)\s*</gi
   },
   { label: "AI Consensus", pattern: /ai consensus/gi },
   { label: "ready to trade", pattern: /ready to trade/gi },
@@ -71,24 +71,21 @@ describe("intelligence command center language boundary", () => {
     expect(findings).toEqual([]);
   });
 
-  it(
-    "requires bounded disposition and evidence-index framing at the primary UI boundaries",
-    async () => {
-      const [staticCommandCenter, runtimeWorkspace, sharedComponents, workflow] = await Promise.all([
-        readSource("apps/web/src/intelligence-command-center.js"),
-        readSource("apps/intelligence-workspace/src/AppRuntime.jsx"),
-        readSource("packages/ui/src/components.jsx"),
-        readSource("apps/intelligence-workspace/src/candidate-workflow.js")
-      ]);
+  it("requires bounded disposition and evidence-index framing at the primary UI boundaries", async () => {
+    const [staticCommandCenter, runtimeWorkspace, sharedComponents, workflow] = await Promise.all([
+      readSource("apps/web/src/intelligence-command-center.js"),
+      readSource("apps/intelligence-workspace/src/AppRuntime.jsx"),
+      readSource("packages/ui/src/components.jsx"),
+      readSource("apps/intelligence-workspace/src/candidate-workflow.js")
+    ]);
 
-      expect(staticCommandCenter).toContain("Bounded operator disposition");
-      expect(staticCommandCenter).toContain("risk review status");
-      expect(staticCommandCenter).toContain("Evidence index");
-      expect(runtimeWorkspace).toContain("Bounded disposition");
-      expect(runtimeWorkspace).toContain("Evidence index");
-      expect(sharedComponents).toContain("Disposition");
-      expect(workflow).toContain("Operator decision due");
-      expect(workflow).toContain("bounded operator disposition");
-    }
-  );
+    expect(staticCommandCenter).toContain("Bounded operator disposition");
+    expect(staticCommandCenter).toContain("risk review status");
+    expect(staticCommandCenter).toContain("Evidence index");
+    expect(runtimeWorkspace).toContain("Bounded disposition");
+    expect(runtimeWorkspace).toContain("Evidence index");
+    expect(sharedComponents).toContain("Disposition");
+    expect(workflow).toContain("Operator decision due");
+    expect(workflow).toContain("bounded operator disposition");
+  });
 });

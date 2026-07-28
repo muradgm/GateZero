@@ -15,7 +15,7 @@ describe("Gate 0 command center surface", () => {
 
     expect(data).toContain("G2_PAPER_TRADING");
     expect(data).toContain("paper_simulation_planning_only");
-    expect(data).toContain('latestPacket: "TRD-779"');
+    expect(data).toContain('latestPacket: "TRD-780"');
   });
 
   it("does not expose trading action language in app data", () => {
@@ -482,6 +482,9 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("controlLaneCheckpoint");
     expect(data).toContain("TRD-778 closes the bounded manual local review authoring lane.");
     expect(data).toContain("TRD-779 adds read-only local review history inspection.");
+    expect(data).toContain(
+      "TRD-780 hardens command-center language, verification, and responsive visual behavior."
+    );
   });
 
   it("records dependency audit maintenance without adding runtime capability", () => {
@@ -506,9 +509,9 @@ describe("Gate 0 command center surface", () => {
     expect(data).toContain("Scenario analysis boundary");
     expect(data).toContain("ops/truth/MARKET_INTELLIGENCE_TRUTH.md");
     expect(data).toContain(
-      "TRD-779 inspects validated local review history without action authority."
+      "TRD-780 hardens command-center language and responsive visual behavior."
     );
-    expect(data).toContain("TRD-780 is queued for local review history visual QA.");
+    expect(data).toContain("TRD-781 is queued for command-center merge readiness.");
     expect(data).not.toContain("trade caller");
     expect(data).not.toContain("prediction engine");
   });

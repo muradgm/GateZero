@@ -1,6 +1,6 @@
 # TRD-780 Command Center Language, Build, and Visual QA
 
-Status: implemented_pending_validation
+Status: accepted
 
 ## Purpose
 
@@ -104,5 +104,6 @@ order placement, or live execution authority.
 
 ## Exit condition
 
-TRD-780 remains open until command validation and browser visual QA are recorded. TRD-781 must not be
-promoted as the active merge-readiness checkpoint before this packet is accepted.
+Accepted on 2026-07-28 after `pnpm verify:gate0` passed with 129 test files and 888 tests. Desktop
+and 390px visual QA confirmed no console errors or page-level horizontal overflow in the static
+command center and React workspace. TRD-781 is now the active merge-readiness checkpoint.

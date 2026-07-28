@@ -154,7 +154,8 @@ export function DecisionReplay({ candidate }) {
         <div>
           <span>Current bounded operator disposition</span>
           <strong>
-            {candidate.report.evidenceScore} evidence index · {candidate.report.confidence} confidence
+            {candidate.report.evidenceScore} evidence index · {candidate.report.confidence}{" "}
+            confidence
           </strong>
         </div>
         <RecommendationBadge value={candidate.report.recommendation} />

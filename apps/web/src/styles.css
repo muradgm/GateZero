@@ -140,6 +140,7 @@ button:focus-visible,
 
 .rail-note strong {
   font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
 .workspace {
@@ -252,6 +253,8 @@ h3 {
 .health-card strong {
   font-size: 26px;
   letter-spacing: 0;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .health-card.good {

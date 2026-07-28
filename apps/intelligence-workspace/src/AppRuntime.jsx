@@ -241,7 +241,11 @@ export function AppRuntime() {
             <PanelHeading
               eyebrow="Contribution ledger"
               title="Evidence tree"
-              aside={<strong aria-label={`Evidence index ${report.evidenceScore}`}>{report.evidenceScore}</strong>}
+              aside={
+                <strong aria-label={`Evidence index ${report.evidenceScore}`}>
+                  {report.evidenceScore}
+                </strong>
+              }
             />
             <div className="contribution-list contribution-list--shared">
               {report.contributions.map((contribution) => (
