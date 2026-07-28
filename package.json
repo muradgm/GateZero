@@ -8,6 +8,9 @@
   "scripts": {
     "format": "prettier --write README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,jsx,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
     "format:check": "prettier --check README.md package.json pnpm-workspace.yaml tsconfig.base.json tsconfig.json eslint.config.js prettier.config.js \".github/**/*.yml\" \"apps/**/*.{md,json,ts,js,jsx,html,css}\" \"packages/**/*.{md,json,ts,js}\" \"scripts/**/*.ts\" \"docs/**/*.{md,json}\" \"ops/**/*.{md,json}\" \"skills/**/*.{md,json,yaml,yml}\"",
+    "dev:brand-lab": "pnpm --filter @traderframe/brand-lab dev",
+    "build:brand-lab": "pnpm --filter @traderframe/brand-lab build",
+    "preview:brand-lab": "pnpm --filter @traderframe/brand-lab preview",
     "check:gate0-evidence-index": "tsx scripts/check-gate0-evidence-index-drift.ts",
     "check:gate0-ci-evidence": "tsx scripts/check-gate0-ci-evidence-freshness.ts",
     "check:gate0-command-center": "tsx scripts/check-gate0-command-center-freshness.ts",
