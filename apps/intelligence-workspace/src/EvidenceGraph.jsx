@@ -53,7 +53,7 @@ export function EvidenceGraph({ candidate }) {
           </div>
           <div className="evidence-graph-flow-label evidence-graph-flow-label--review">Review</div>
           <div className="evidence-graph-flow-label evidence-graph-flow-label--decision">
-            Decision
+            Disposition
           </div>
 
           <svg
@@ -173,16 +173,18 @@ function findRelatedNodes(activeId) {
 
 function describePath(activeId) {
   const paths = {
-    context: "Market context → evidence dimensions → aggregate score → review → decision",
-    trend: "Trend → evidence score → risk and council → bounded decision",
-    structure: "Structure → evidence score → risk and council → bounded decision",
-    momentum: "Momentum → evidence score → risk and council → bounded decision",
-    liquidity: "Liquidity → evidence score → risk and council → bounded decision",
-    macro: "Macro → evidence score → risk and council → bounded decision",
-    evidence: "Evidence dimensions → aggregate score → risk and council → bounded decision",
-    risk: "Evidence score → risk review → bounded decision",
-    council: "Evidence score → council challenge → bounded decision",
-    decision: "All reviewed inputs → bounded decision"
+    context:
+      "Market context → evidence dimensions → evidence index → risk review → bounded disposition",
+    trend: "Trend → evidence index → risk review and council → bounded disposition",
+    structure: "Structure → evidence index → risk review and council → bounded disposition",
+    momentum: "Momentum → evidence index → risk review and council → bounded disposition",
+    liquidity: "Liquidity → evidence index → risk review and council → bounded disposition",
+    macro: "Macro → evidence index → risk review and council → bounded disposition",
+    evidence:
+      "Evidence dimensions → evidence index → risk review and council → bounded disposition",
+    risk: "Evidence index → risk review → bounded disposition",
+    council: "Evidence index → council challenge → bounded disposition",
+    decision: "All reviewed inputs → bounded operator disposition"
   };
   return paths[activeId] ?? "Reviewed dependency path";
 }
@@ -252,7 +254,7 @@ function buildGraph(candidate) {
       {
         id: "evidence",
         kind: "Aggregate",
-        label: "Evidence score",
+        label: "Evidence index",
         value: String(report.evidenceScore),
         tone:
           report.evidenceScore >= 70
@@ -262,9 +264,9 @@ function buildGraph(candidate) {
               : "danger",
         tier: "primary",
         shortSummary: `${report.contributions.length} traceable inputs`,
-        summary: `${report.contributions.length} traceable contributions produce the current bounded score.`,
+        summary: `${report.contributions.length} traceable contributions produce the current bounded evidence index.`,
         evidence: report.contributions.flatMap((item) => item.evidenceIds),
-        limitation: "The score is a structured assessment, not a probability of profit."
+        limitation: "The evidence index is a structured assessment, not a probability of profit."
       },
       {
         id: "risk",
@@ -298,7 +300,7 @@ function buildGraph(candidate) {
       {
         id: "decision",
         kind: "Output",
-        label: "Bounded decision",
+        label: "Bounded operator disposition",
         value: report.recommendation.replaceAll("_", " "),
         tone:
           report.recommendation === "PAPER_SIMULATE"
@@ -310,7 +312,7 @@ function buildGraph(candidate) {
         shortSummary: "Operator-controlled",
         summary: report.neutralCase.summary,
         evidence: report.contributions.flatMap((item) => item.evidenceIds),
-        limitation: "The recommendation is not execution authority and remains operator-controlled."
+        limitation: "The disposition is not execution authority and remains operator-controlled."
       }
     ]
   };
