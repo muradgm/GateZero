@@ -20,7 +20,7 @@ export function AIEvidenceCouncil({ candidate }) {
 
       <div className="ai-council-summary">
         <div>
-          <span>Evidence</span>
+          <span>Evidence index</span>
           <strong>{report.evidenceScore}</strong>
         </div>
         <div>
@@ -55,7 +55,7 @@ export function AIEvidenceCouncil({ candidate }) {
 
       <div className="ai-council-verdict">
         <div>
-          <span>Consolidated council view</span>
+          <span>Consolidated evidence challenge</span>
           <strong>{report.recommendation.replaceAll("_", " ")}</strong>
         </div>
         <p>
