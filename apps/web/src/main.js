@@ -566,6 +566,18 @@ function renderCommandCenter(data) {
                 <span id="manual-review-status" role="status" aria-live="polite">No authored record loaded.</span>
               </div>
             </form>
+            <section class="manual-review-history" id="manual-review-history" data-brief-detail aria-labelledby="manual-review-history-title">
+              <div class="detail-heading">
+                <div>
+                  <h3 id="manual-review-history-title">Local Review History</h3>
+                  <p>Validated local revisions for this frozen brief. Inspection only.</p>
+                </div>
+                <span class="state-pill">read-only</span>
+              </div>
+              <div id="manual-review-history-list" class="manual-review-history-list">
+                <p class="manual-review-history-empty">No local review revisions recorded.</p>
+              </div>
+            </section>
             <div class="brief-review-strip" data-brief-detail aria-label="Workflow checkpoint">
               <div>
                 <span>Workflow checkpoint</span>
@@ -1236,9 +1248,11 @@ function bindIntelligenceBriefCaseSelector(brief) {
 function bindManualReviewAuthoring(brief) {
   const form = document.querySelector("#manual-review-form");
   const status = document.querySelector("#manual-review-status");
-  if (!form || !status) return;
+  const historyList = document.querySelector("#manual-review-history-list");
+  if (!form || !status || !historyList) return;
 
   const storageKey = `traderframe.manual-review.v1.${brief.briefId}`;
+  const historyKey = `traderframe.manual-review-history.v1.${brief.briefId}`;
   const lines = (value) =>
     value
       .split("\n")
@@ -1255,26 +1269,82 @@ function bindManualReviewAuthoring(brief) {
     form.elements.limitations.value = record.risk_review.limitation_notes.join("\n");
     form.elements.decisionReason.value = record.operator_decision.reason;
   };
+  const isValidRecord = (record) =>
+    record &&
+    record.schema_version === 1 &&
+    record.brief_id === brief.briefId &&
+    record.brief_content_sha256 === brief.contentHash &&
+    record.execution_authorized === false &&
+    record.external_dispatch === false &&
+    record.risk_review?.approval_granted === false &&
+    record.operator_decision?.simulation_authorized === false;
+  const renderHistory = (records) => {
+    if (records.length === 0) {
+      historyList.innerHTML =
+        '<p class="manual-review-history-empty">No local review revisions recorded.</p>';
+      return;
+    }
+
+    historyList.innerHTML = records
+      .slice()
+      .sort((left, right) => Number(right.revision) - Number(left.revision))
+      .map(
+        (record) => `
+          <article class="manual-review-history-item">
+            <div>
+              <strong>Revision ${escapeText(record.revision)}</strong>
+              <span class="state-pill">${escapeText(record.risk_review.disposition)}</span>
+            </div>
+            <p>${escapeText(record.operator_decision.reason)}</p>
+            <dl>
+              <div><dt>Operator decision</dt><dd>${escapeText(record.operator_decision.decision)}</dd></div>
+              <div><dt>Updated</dt><dd>${escapeText(record.updated_at)}</dd></div>
+              <div><dt>Authority</dt><dd>None granted</dd></div>
+            </dl>
+          </article>
+        `
+      )
+      .join("");
+  };
+  const readHistory = () => {
+    const rawHistory = window.localStorage.getItem(historyKey);
+    if (rawHistory) {
+      const history = JSON.parse(rawHistory);
+      if (
+        history.schema_version !== 1 ||
+        history.brief_id !== brief.briefId ||
+        history.brief_content_sha256 !== brief.contentHash ||
+        !Array.isArray(history.records) ||
+        !history.records.every(isValidRecord)
+      ) {
+        throw new Error("Stored review history does not match the frozen local brief.");
+      }
+      return history.records;
+    }
+
+    const legacy = window.localStorage.getItem(storageKey);
+    if (!legacy) return [];
+    const record = JSON.parse(legacy);
+    if (!isValidRecord(record)) {
+      throw new Error("Stored record does not match the frozen local brief.");
+    }
+    return [record];
+  };
 
   try {
-    const raw = window.localStorage.getItem(storageKey);
-    if (raw) {
-      const record = JSON.parse(raw);
-      if (
-        record.schema_version !== 1 ||
-        record.brief_id !== brief.briefId ||
-        record.brief_content_sha256 !== brief.contentHash ||
-        record.execution_authorized !== false ||
-        record.external_dispatch !== false ||
-        record.risk_review?.approval_granted !== false ||
-        record.operator_decision?.simulation_authorized !== false
-      ) {
-        throw new Error("Stored record does not match the frozen local brief.");
-      }
-      populate(record);
-      setStatus(`Recovered validated local revision ${record.revision}.`, "recovered");
+    const records = readHistory();
+    renderHistory(records);
+    const latest = records.reduce(
+      (current, record) =>
+        !current || Number(record.revision) > Number(current.revision) ? record : current,
+      null
+    );
+    if (latest) {
+      populate(latest);
+      setStatus(`Recovered validated local revision ${latest.revision}.`, "recovered");
     }
   } catch {
+    renderHistory([]);
     setStatus("Stored review is blocked and was not loaded. Re-enter the review.", "blocked");
   }
 
@@ -1297,19 +1367,17 @@ function bindManualReviewAuthoring(brief) {
       return;
     }
 
-    let revision = 1;
-    let createdAt = new Date().toISOString();
+    let records;
     try {
-      const existing = JSON.parse(window.localStorage.getItem(storageKey) || "null");
-      if (existing?.brief_content_sha256 === brief.contentHash) {
-        revision = Number(existing.revision || 0) + 1;
-        createdAt = existing.created_at || createdAt;
-      }
+      records = readHistory();
     } catch {
-      revision = 1;
+      setStatus("Stored review history is blocked and cannot be extended.", "blocked");
+      return;
     }
 
     const updatedAt = new Date().toISOString();
+    const revision =
+      records.reduce((maximum, record) => Math.max(maximum, Number(record.revision) || 0), 0) + 1;
     const boundary = {
       financial_gate: "G2_PAPER_TRADING",
       scope: "paper_simulation_planning_only",
@@ -1363,7 +1431,7 @@ function bindManualReviewAuthoring(brief) {
       revision,
       risk_review: riskReview,
       operator_decision: operatorDecision,
-      created_at: createdAt,
+      created_at: updatedAt,
       updated_at: updatedAt,
       execution_authorized: false,
       external_dispatch: false
@@ -1371,6 +1439,16 @@ function bindManualReviewAuthoring(brief) {
 
     try {
       window.localStorage.setItem(storageKey, JSON.stringify(record));
+      window.localStorage.setItem(
+        historyKey,
+        JSON.stringify({
+          schema_version: 1,
+          brief_id: brief.briefId,
+          brief_content_sha256: brief.contentHash,
+          records: [...records, record]
+        })
+      );
+      renderHistory([...records, record]);
       setStatus(`Saved validated local revision ${revision}. No authority was granted.`, "saved");
     } catch {
       setStatus("Local storage failed. The review was not saved.", "blocked");
@@ -1541,4 +1619,13 @@ function updateEvidenceRow(data, area, reference, signal) {
   }
 
   row.reference = reference;
+}
+
+function escapeText(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
