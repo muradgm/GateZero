@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-07-24                                                     |
-| Latest accepted packet     | `TRD-778`                                                      |
-| Latest accepted validation | 110 test files, 802 tests passed                               |
+| Last updated               | 2026-07-28                                                     |
+| Latest accepted packet     | `TRD-779`                                                      |
+| Latest accepted validation | 128 test files, 886 tests passed                               |
 
 ## Boundary
 
@@ -1233,6 +1233,7 @@ Latest accepted result:
 | `TRD-776` | accepted | Recovery controls     | Blocked malformed, stale, and conflicting local records.      |
 | `TRD-777` | accepted | Authoring QA          | Verified accessible responsive authoring behavior.            |
 | `TRD-778` | accepted | Authoring checkpoint  | Closed the bounded manual review authoring lane.              |
+| `TRD-779` | accepted | Review history        | Added read-only local review revision inspection.             |
 
 ## Current Operator Commands
 
@@ -1275,16 +1276,16 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 110 files and 802 tests pass deterministically.                  |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 128 files and 886 tests pass deterministically.                  |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
 
 ## Next Queue
 
-| Rank | Packet    | Status | Goal                             | Acceptance focus                                             |
-| ---- | --------- | ------ | -------------------------------- | ------------------------------------------------------------ |
-| 1    | `TRD-779` | queued | Local review history inspection. | Inspect validated revisions without adding action authority. |
+| Rank | Packet    | Status | Goal                            | Acceptance focus                                            |
+| ---- | --------- | ------ | ------------------------------- | ----------------------------------------------------------- |
+| 1    | `TRD-780` | queued | Local review history visual QA. | Verify history remains readable, local, and non-actionable. |
 
 ## Post-TRD-592 Market Intelligence Roadmap
 

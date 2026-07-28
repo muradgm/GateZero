@@ -42,7 +42,7 @@ describe("market intelligence foundation gap review", () => {
     expect(tracklist).toContain(
       "| `TRD-778` | accepted | Authoring checkpoint | Closed the bounded manual review authoring lane."
     );
-    expect(tracklist).toContain("| 1 | `TRD-779` | queued | Local review history inspection.");
+    expect(tracklist).toContain("| 1 | `TRD-780` | queued | Local review history visual QA.");
   });
 
   it("keeps TRD-749 deterministic, canonical, and local", () => {

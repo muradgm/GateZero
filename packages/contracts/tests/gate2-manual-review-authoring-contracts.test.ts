@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { Gate2ManualReviewAuthoringRecordSchema } from "../src/index.js";
-import { gate2ManualReviewAuthoringRecordFixture } from "../../fixtures/src/index.js";
+import {
+  Gate2ManualReviewAuthoringRecordSchema,
+  Gate2ManualReviewHistorySchema
+} from "../src/index.js";
+import {
+  gate2ManualReviewAuthoringRecordFixture,
+  gate2ManualReviewAuthoringRecordRevision2Fixture,
+  gate2ManualReviewHistoryFixture
+} from "../../fixtures/src/index.js";
 
 describe("Gate 2 manual review authoring contracts", () => {
   it("accepts one aligned local record", () => {
@@ -28,5 +35,31 @@ describe("Gate 2 manual review authoring contracts", () => {
         }
       })
     ).toThrow(/one frozen brief/);
+  });
+
+  it("accepts read-only local review history", () => {
+    expect(Gate2ManualReviewHistorySchema.parse(gate2ManualReviewHistoryFixture)).toEqual(
+      gate2ManualReviewHistoryFixture
+    );
+  });
+
+  it("rejects non-contiguous local review history", () => {
+    expect(() =>
+      Gate2ManualReviewHistorySchema.parse({
+        ...gate2ManualReviewHistoryFixture,
+        records: [gate2ManualReviewAuthoringRecordRevision2Fixture],
+        latest_revision: 2,
+        record_count: 1
+      })
+    ).toThrow(/contiguous/);
+  });
+
+  it("rejects history with execution authority", () => {
+    expect(() =>
+      Gate2ManualReviewHistorySchema.parse({
+        ...gate2ManualReviewHistoryFixture,
+        execution_authorized: true
+      })
+    ).toThrow();
   });
 });

@@ -20,14 +20,14 @@ describe("TraderFrame command center runtime data", () => {
       automatedAction: false,
       approvalClaim: false,
       performanceClaim: false,
-      latestPacket: "TRD-778",
-      localVerification: "110 files / 802 tests",
-      testFileCount: 110,
-      testCount: 802,
+      latestPacket: "TRD-779",
+      localVerification: "128 files / 886 tests",
+      testFileCount: 128,
+      testCount: 886,
       ciRun: "27787807220",
       ciState: "success",
       lastVerifiedCommit: "6e6f513",
-      acceptedRecords: 778,
+      acceptedRecords: 779,
       evidenceRecords: 18
     });
     expect(CommandCenterRuntimeDataSchema.parse(result)).toEqual(result);

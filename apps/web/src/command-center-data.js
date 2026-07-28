@@ -7,8 +7,8 @@ export const commandCenterData = {
   subtitle: "Research operating health, evidence freshness, and control-plane integrity.",
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
-  latestPacket: "TRD-778",
-  localVerification: "110 files / 802 tests",
+  latestPacket: "TRD-779",
+  localVerification: "128 files / 886 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -23,7 +23,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 110 files, 802 tests.",
+      detail: "Latest suite: 128 files, 886 tests.",
       tone: "good"
     },
     {
@@ -34,7 +34,7 @@ export const commandCenterData = {
     },
     {
       label: "Review Coverage",
-      value: "778 / 778",
+      value: "779 / 779",
       detail: "Assignments, QA, risk, and acceptance align.",
       tone: "good"
     }
@@ -125,7 +125,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "110 files / 802 tests"
+      reference: "128 files / 886 tests"
     },
     {
       area: "Verified commit",
@@ -155,7 +155,7 @@ export const commandCenterData = {
       area: "Review coverage",
       signal: "Coverage guard",
       state: "Passing",
-      reference: "778 accepted records"
+      reference: "779 accepted records"
     },
     {
       area: "Dependency audit",
@@ -336,7 +336,7 @@ export const commandCenterData = {
     ],
     controlLaneCheckpoint: [
       "TRD-778 closes the bounded manual local review authoring lane.",
-      "TRD-779 is queued for local review history inspection."
+      "TRD-779 adds read-only local review history inspection."
     ],
     reproducibilityNotes: ["Synthetic local detail fixture; reproducible by contract tests only."],
     limitationNotes: [
@@ -355,8 +355,8 @@ export const commandCenterData = {
     ]
   },
   nextActions: [
-    "TRD-778 closes bounded manual local review authoring.",
     "TRD-779 inspects validated local review history without action authority.",
+    "TRD-780 is queued for local review history visual QA.",
     "Gate 2 remains paper-simulation planning only."
   ],
   artifactInventorySchemaPlan: {
@@ -506,7 +506,8 @@ export const commandCenterData = {
     "TRD-775 Review provenance and audit trail",
     "TRD-776 Authoring recovery and conflict handling",
     "TRD-777 Authoring accessibility and responsive QA",
-    "TRD-778 Manual review authoring checkpoint"
+    "TRD-778 Manual review authoring checkpoint",
+    "TRD-779 Local review history inspection"
   ],
   marketIntelligenceWorkspace: {
     title: "Market Intelligence Workspace",

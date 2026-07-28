@@ -789,6 +789,92 @@ h3 {
   color: var(--blocked);
 }
 
+.manual-review-history {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+  padding-top: 18px;
+}
+
+.manual-review-history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.manual-review-history .state-pill {
+  justify-self: start;
+}
+
+.manual-review-history-empty,
+.manual-review-history-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.manual-review-history-empty {
+  color: var(--muted);
+  display: grid;
+  gap: 5px;
+}
+
+.manual-review-history-empty strong,
+.manual-review-history-item strong {
+  color: var(--ink);
+}
+
+.manual-review-history-item {
+  display: grid;
+  gap: 10px;
+}
+
+.manual-review-history-item > div {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.manual-review-history-item span,
+.manual-review-history-item p {
+  color: var(--muted);
+}
+
+.manual-review-history-item p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.manual-review-history-item dl {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.manual-review-history-item dl div {
+  border-left: 2px solid var(--accent);
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-left: 8px;
+}
+
+.manual-review-history-item dt {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.manual-review-history-item dd {
+  color: var(--ink);
+  font-weight: 750;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 640px) {
   .manual-review-grid {
     grid-template-columns: 1fr;
@@ -805,6 +891,15 @@ h3 {
 
   .manual-review-actions span {
     text-align: left;
+  }
+
+  .manual-review-history-item > div {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .manual-review-history-item dl {
+    grid-template-columns: 1fr;
   }
 }
 

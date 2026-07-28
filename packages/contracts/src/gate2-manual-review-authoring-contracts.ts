@@ -74,7 +74,58 @@ export const Gate2ManualReviewRecoveryResultSchema = z.discriminatedUnion("statu
     .strict()
 ]);
 
+export const Gate2ManualReviewHistorySchema = Gate2MarketIntelligenceBoundarySchema.extend({
+  history_id: IdentifierSchema,
+  linked_research_case_id: IdentifierSchema,
+  brief_id: IdentifierSchema,
+  brief_content_sha256: Sha256Schema,
+  inspection_mode: z.literal("read_only_local"),
+  records: z.array(Gate2ManualReviewAuthoringRecordSchema),
+  latest_revision: z.number().int().nonnegative(),
+  record_count: z.number().int().nonnegative(),
+  inspected_at: IsoDateTimeSchema,
+  execution_authorized: z.literal(false),
+  external_dispatch: z.literal(false)
+})
+  .strict()
+  .superRefine((history, context) => {
+    if (history.record_count !== history.records.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "history record count must match records length",
+        path: ["record_count"]
+      });
+    }
+
+    const latestRevision = history.records.at(-1)?.revision ?? 0;
+    if (history.latest_revision !== latestRevision) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "history latest revision must match the newest record",
+        path: ["latest_revision"]
+      });
+    }
+
+    history.records.forEach((record, index) => {
+      if (
+        record.linked_research_case_id !== history.linked_research_case_id ||
+        record.brief_id !== history.brief_id ||
+        record.brief_content_sha256 !== history.brief_content_sha256 ||
+        record.revision !== index + 1 ||
+        record.execution_authorized !== false ||
+        record.external_dispatch !== false
+      ) {
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "history records must be aligned, contiguous, and non-authoritative",
+          path: ["records", index]
+        });
+      }
+    });
+  });
+
 export type Gate2ManualReviewAuthoringRecord = z.infer<
   typeof Gate2ManualReviewAuthoringRecordSchema
 >;
 export type Gate2ManualReviewRecoveryResult = z.infer<typeof Gate2ManualReviewRecoveryResultSchema>;
+export type Gate2ManualReviewHistory = z.infer<typeof Gate2ManualReviewHistorySchema>;

@@ -1,9 +1,11 @@
 import {
   Gate2ManualReviewAuthoringRecordSchema,
+  Gate2ManualReviewHistorySchema,
   Gate2ManualReviewRecoveryResultSchema,
   type Gate2BriefManualRiskReview,
   type Gate2BriefOperatorDecision,
   type Gate2ManualReviewAuthoringRecord,
+  type Gate2ManualReviewHistory,
   type Gate2ManualReviewRecoveryResult
 } from "../../contracts/src/index.js";
 
@@ -122,5 +124,31 @@ export function recoverGate2ManualReview(input: {
     status: "recovered",
     message: "Validated local manual review record recovered.",
     record: parsed.data
+  });
+}
+
+export function inspectGate2ManualReviewHistory(input: {
+  historyId: string;
+  linkedResearchCaseId: string;
+  briefId: string;
+  briefContentSha256: string;
+  records: readonly Gate2ManualReviewAuthoringRecord[];
+  inspectedAt: string;
+}): Gate2ManualReviewHistory {
+  const records = [...input.records].sort((left, right) => left.revision - right.revision);
+
+  return Gate2ManualReviewHistorySchema.parse({
+    ...boundary,
+    history_id: input.historyId,
+    linked_research_case_id: input.linkedResearchCaseId,
+    brief_id: input.briefId,
+    brief_content_sha256: input.briefContentSha256,
+    inspection_mode: "read_only_local",
+    records,
+    latest_revision: records.at(-1)?.revision ?? 0,
+    record_count: records.length,
+    inspected_at: input.inspectedAt,
+    execution_authorized: false,
+    external_dispatch: false
   });
 }

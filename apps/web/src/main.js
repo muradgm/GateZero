@@ -561,11 +561,21 @@ function renderCommandCenter(data) {
               <div class="manual-review-boundary">
                 Saving records local evidence only. It grants no approval, simulation, execution, or external-dispatch authority.
               </div>
-              <div class="manual-review-actions">
+            <div class="manual-review-actions">
                 <button type="submit">Save local review</button>
                 <span id="manual-review-status" role="status" aria-live="polite">No authored record loaded.</span>
               </div>
             </form>
+            <section class="manual-review-history" data-brief-detail aria-labelledby="manual-review-history-title">
+              <div class="detail-heading">
+                <div>
+                  <h3 id="manual-review-history-title">Local Review History</h3>
+                  <p>Validated local revisions for this frozen brief.</p>
+                </div>
+                <span class="state-pill">read only</span>
+              </div>
+              <div id="manual-review-history" class="manual-review-history-list" aria-live="polite"></div>
+            </section>
             <div class="brief-review-strip" data-brief-detail aria-label="Workflow checkpoint">
               <div>
                 <span>Workflow checkpoint</span>
@@ -1236,9 +1246,11 @@ function bindIntelligenceBriefCaseSelector(brief) {
 function bindManualReviewAuthoring(brief) {
   const form = document.querySelector("#manual-review-form");
   const status = document.querySelector("#manual-review-status");
+  const historyPanel = document.querySelector("#manual-review-history");
   if (!form || !status) return;
 
   const storageKey = `traderframe.manual-review.v1.${brief.briefId}`;
+  const historyKey = `traderframe.manual-review-history.v1.${brief.briefId}`;
   const lines = (value) =>
     value
       .split("\n")
@@ -1248,6 +1260,16 @@ function bindManualReviewAuthoring(brief) {
     status.textContent = message;
     status.dataset.state = state;
   };
+  const isValidLocalRecord = (record) =>
+    record &&
+    record.schema_version === 1 &&
+    record.brief_id === brief.briefId &&
+    record.brief_content_sha256 === brief.contentHash &&
+    record.linked_research_case_id === brief.researchCaseId &&
+    record.execution_authorized === false &&
+    record.external_dispatch === false &&
+    record.risk_review?.approval_granted === false &&
+    record.operator_decision?.simulation_authorized === false;
   const populate = (record) => {
     form.elements.riskDisposition.value = record.risk_review.disposition;
     form.elements.operatorDecision.value = record.operator_decision.decision;
@@ -1255,20 +1277,64 @@ function bindManualReviewAuthoring(brief) {
     form.elements.limitations.value = record.risk_review.limitation_notes.join("\n");
     form.elements.decisionReason.value = record.operator_decision.reason;
   };
+  const readHistory = () => {
+    try {
+      const raw = window.localStorage.getItem(historyKey);
+      const decoded = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(decoded)) return [];
+      return decoded
+        .filter(isValidLocalRecord)
+        .sort((left, right) => left.revision - right.revision);
+    } catch {
+      return [];
+    }
+  };
+  const writeHistory = (record) => {
+    const next = [
+      ...readHistory().filter((item) => item.revision !== record.revision),
+      record
+    ].sort((left, right) => left.revision - right.revision);
+    window.localStorage.setItem(historyKey, JSON.stringify(next));
+    return next;
+  };
+  const renderHistory = (records = readHistory()) => {
+    if (!historyPanel) return;
+
+    if (records.length === 0) {
+      historyPanel.innerHTML = `
+        <div class="manual-review-history-empty">
+          <strong>No local review history recorded.</strong>
+          <span>Validated manual revisions will appear here after local save.</span>
+        </div>
+      `;
+      return;
+    }
+
+    historyPanel.innerHTML = records
+      .map(
+        (record) => `
+          <article class="manual-review-history-item">
+            <div>
+              <strong>Revision ${record.revision}</strong>
+              <span>${new Date(record.updated_at).toLocaleString()}</span>
+            </div>
+            <dl>
+              <div><dt>Risk</dt><dd>${record.risk_review.disposition}</dd></div>
+              <div><dt>Decision</dt><dd>${record.operator_decision.decision}</dd></div>
+              <div><dt>Authority</dt><dd>none granted</dd></div>
+            </dl>
+            <p>${record.operator_decision.reason}</p>
+          </article>
+        `
+      )
+      .join("");
+  };
 
   try {
     const raw = window.localStorage.getItem(storageKey);
     if (raw) {
       const record = JSON.parse(raw);
-      if (
-        record.schema_version !== 1 ||
-        record.brief_id !== brief.briefId ||
-        record.brief_content_sha256 !== brief.contentHash ||
-        record.execution_authorized !== false ||
-        record.external_dispatch !== false ||
-        record.risk_review?.approval_granted !== false ||
-        record.operator_decision?.simulation_authorized !== false
-      ) {
+      if (!isValidLocalRecord(record)) {
         throw new Error("Stored record does not match the frozen local brief.");
       }
       populate(record);
@@ -1277,6 +1343,7 @@ function bindManualReviewAuthoring(brief) {
   } catch {
     setStatus("Stored review is blocked and was not loaded. Re-enter the review.", "blocked");
   }
+  renderHistory();
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1371,6 +1438,8 @@ function bindManualReviewAuthoring(brief) {
 
     try {
       window.localStorage.setItem(storageKey, JSON.stringify(record));
+      writeHistory(record);
+      renderHistory();
       setStatus(`Saved validated local revision ${revision}. No authority was granted.`, "saved");
     } catch {
       setStatus("Local storage failed. The review was not saved.", "blocked");
