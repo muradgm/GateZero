@@ -32,7 +32,7 @@ function LoadingState({ error }) {
         <h1>{error ? "Workspace data unavailable" : "Loading repository evidence"}</h1>
         <p>
           {error
-            ? "Generate the local workspace snapshot and reload the page. No fallback recommendation is shown."
+            ? "Generate the local workspace snapshot and reload the page. No fallback disposition is shown."
             : "Loading ranked candidates, evidence contributions, risk context, and pipeline state."}
         </p>
         {error ? <code>pnpm generate:workspace-data</code> : null}
@@ -142,10 +142,10 @@ export function AppRuntime() {
                 <p>{selected.context.session}</p>
               </div>
               <div className="decision-summary">
-                <Metric label="Evidence" value={report.evidenceScore} emphasis />
+                <Metric label="Evidence index" value={report.evidenceScore} emphasis />
                 <Metric label="Confidence" value={report.confidence} emphasis />
                 <div className="decision-summary__recommendation">
-                  <span>Decision</span>
+                  <span>Bounded disposition</span>
                   <RecommendationBadge value={report.recommendation} />
                 </div>
               </div>
@@ -167,8 +167,8 @@ export function AppRuntime() {
               <div className="risk-grid">
                 <Metric label="Planned loss" value={selected.risk.amount} emphasis />
                 <Metric label="Risk ceiling" value={selected.risk.ceiling} emphasis />
-                <Metric label="Exposure after" value={selected.risk.exposure} emphasis />
-                <Metric label="Reward / risk" value={selected.risk.rewardRisk} emphasis />
+                <Metric label="Exposure after review" value={selected.risk.exposure} emphasis />
+                <Metric label="Target distance" value={selected.risk.rewardRisk} emphasis />
               </div>
               <div className="invalidation">
                 <span>Mandatory invalidation</span>
@@ -241,7 +241,7 @@ export function AppRuntime() {
             <PanelHeading
               eyebrow="Contribution ledger"
               title="Evidence tree"
-              aside={<strong>{report.evidenceScore}</strong>}
+              aside={<strong aria-label={`Evidence index ${report.evidenceScore}`}>{report.evidenceScore}</strong>}
             />
             <div className="contribution-list contribution-list--shared">
               {report.contributions.map((contribution) => (
@@ -303,7 +303,7 @@ function DecisionCouncil({ council, report }) {
     <Panel className="council-panel">
       <PanelHeading
         eyebrow="Structured challenge"
-        title="Decision council"
+        title="Evidence challenge council"
         aside={<RecommendationBadge value={report.recommendation} />}
       />
       <div className="council-list">
@@ -318,9 +318,9 @@ function DecisionCouncil({ council, report }) {
         ))}
       </div>
       <div className="council-summary">
-        <span>Consolidated view</span>
+        <span>Bounded operator disposition</span>
         <strong>
-          {report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence
+          {report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence index
         </strong>
       </div>
     </Panel>
