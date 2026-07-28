@@ -20,7 +20,11 @@ type AdaptDukascopyCsvInput = {
 export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdapterResult {
   const rangeStartMs = Date.parse(input.rangeStart);
   const rangeEndMs = Date.parse(input.rangeEnd);
-  if (!Number.isFinite(rangeStartMs) || !Number.isFinite(rangeEndMs) || rangeEndMs <= rangeStartMs) {
+  if (
+    !Number.isFinite(rangeStartMs) ||
+    !Number.isFinite(rangeEndMs) ||
+    rangeEndMs <= rangeStartMs
+  ) {
     throw new Error("A valid increasing UTC source range is required.");
   }
 
@@ -61,7 +65,10 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
   }
 
   const header = splitCsvLine(firstLine).map((value) => value.trim().toLowerCase());
-  if (header.length !== EXPECTED_HEADER.length || header.some((value, index) => value !== EXPECTED_HEADER[index])) {
+  if (
+    header.length !== EXPECTED_HEADER.length ||
+    header.some((value, index) => value !== EXPECTED_HEADER[index])
+  ) {
     return {
       snapshot,
       candles: [],
@@ -91,37 +98,73 @@ export function adaptDukascopyCsv(input: AdaptDukascopyCsvInput): HistoricalAdap
     const rowNumber = index + 1;
     const values = splitCsvLine(rawRow).map((value) => value.trim());
     if (values.length !== EXPECTED_HEADER.length) {
-      failures.push({ rowNumber, code: "INVALID_ROW", message: "Row does not contain six columns.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "INVALID_ROW",
+        message: "Row does not contain six columns.",
+        rawRow
+      });
       continue;
     }
 
     const timestamp = values[0];
     if (timestamp === undefined) {
-      failures.push({ rowNumber, code: "INVALID_ROW", message: "Timestamp column is missing.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "INVALID_ROW",
+        message: "Timestamp column is missing.",
+        rawRow
+      });
       continue;
     }
 
     const timestampMs = parseUtcTimestamp(timestamp);
     if (!Number.isFinite(timestampMs)) {
-      failures.push({ rowNumber, code: "INVALID_TIMESTAMP", message: "Timestamp must be an ISO UTC datetime.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "INVALID_TIMESTAMP",
+        message: "Timestamp must be an ISO UTC datetime.",
+        rawRow
+      });
       continue;
     }
     if (timestampMs < previousTimestamp) {
-      failures.push({ rowNumber, code: "OUT_OF_ORDER", message: "Rows must be chronological.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "OUT_OF_ORDER",
+        message: "Rows must be chronological.",
+        rawRow
+      });
       continue;
     }
     if (timestampMs < rangeStartMs || timestampMs >= rangeEndMs) {
-      failures.push({ rowNumber, code: "OUTSIDE_DECLARED_RANGE", message: "Timestamp is outside the declared source range.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "OUTSIDE_DECLARED_RANGE",
+        message: "Timestamp is outside the declared source range.",
+        rawRow
+      });
       continue;
     }
 
     const numbers = values.slice(1).map(Number);
     if (numbers.some((value) => !Number.isFinite(value))) {
-      failures.push({ rowNumber, code: "INVALID_NUMBER", message: "OHLCV fields must be finite numbers.", rawRow });
+      failures.push({
+        rowNumber,
+        code: "INVALID_NUMBER",
+        message: "OHLCV fields must be finite numbers.",
+        rawRow
+      });
       continue;
     }
 
-    const [open, high, low, close, volume] = numbers as [number, number, number, number, number];
+    const [open, high, low, close, volume] = numbers as [
+      number,
+      number,
+      number,
+      number,
+      number
+    ];
     candles.push({
       sourceId: input.sourceId,
       instrument: "EURUSD",
