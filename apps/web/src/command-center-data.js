@@ -8,7 +8,7 @@ export const commandCenterData = {
   gate: "G2_PAPER_TRADING",
   scope: "paper_simulation_planning_only",
   latestPacket: "TRD-778",
-  localVerification: "110 files / 802 tests",
+  localVerification: "138 files / 962 tests",
   ciRun: "27787807220",
   ciState: "success",
   lastVerifiedCommit: "6e6f513",
@@ -23,7 +23,7 @@ export const commandCenterData = {
     {
       label: "Local Verification",
       value: "Green",
-      detail: "Latest suite: 110 files, 802 tests.",
+      detail: "Latest suite: 138 files, 962 tests.",
       tone: "good"
     },
     {
@@ -125,7 +125,7 @@ export const commandCenterData = {
       area: "Local verification",
       signal: "pnpm verify:gate0",
       state: "Passing",
-      reference: "110 files / 802 tests"
+      reference: "138 files / 962 tests"
     },
     {
       area: "Verified commit",
