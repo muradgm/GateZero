@@ -59,7 +59,7 @@
     "validate:gate0": "tsx scripts/validate-gate0.ts",
     "verify": "tsx scripts/verify-progress.ts",
     "verify:fix": "pnpm format && pnpm verify",
-    "verify:verbose": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
+    "verify:verbose": "pnpm check:repository && pnpm build:workspace && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
     "verify:gate0": "pnpm verify"
   },
   "dependencies": {
