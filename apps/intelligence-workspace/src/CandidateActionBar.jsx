@@ -3,7 +3,7 @@ import { deriveCandidateWorkflow } from "./candidate-workflow.js";
 import { LifecycleRail } from "./LifecycleRail.jsx";
 
 const toneByStatus = {
-  READY: "ready",
+  REVIEW_DUE: "pending",
   BLOCKED: "blocked",
   PENDING: "pending",
   CLOSED: "closed"
@@ -38,7 +38,7 @@ export function CandidateActionBar({ candidate, generatedAt }) {
         </div>
 
         <div className="candidate-action-bar__item candidate-action-bar__item--action">
-          <span>Next required action</span>
+          <span>Next required review step</span>
           <strong>{workflow.nextAction}</strong>
         </div>
 
