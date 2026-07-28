@@ -15,7 +15,7 @@ const candidates = [
     setup: "Trend continuation pullback",
     timeframe: "D1 / H4 / H1",
     bias: "Bullish",
-    score: 82,
+    evidenceIndex: 82,
     state: "PAPER_SIMULATE",
     stateClass: "paper"
   },
@@ -24,7 +24,7 @@ const candidates = [
     setup: "Range-break retest",
     timeframe: "H4 / H1",
     bias: "Neutral",
-    score: 68,
+    evidenceIndex: 68,
     state: "WATCH",
     stateClass: "watch"
   },
@@ -33,7 +33,7 @@ const candidates = [
     setup: "Momentum recovery",
     timeframe: "D1 / H4",
     bias: "Mixed",
-    score: 54,
+    evidenceIndex: 54,
     state: "REJECT",
     stateClass: "reject"
   }
@@ -92,8 +92,8 @@ function render(data) {
         <header class="command-topbar" id="overview">
           <div>
             <span class="eyebrow">Trading Intelligence Command Center</span>
-            <h1>Frame the highest-quality setup.</h1>
-            <p>Market context, contradicting evidence, deterministic research, and risk constraints are reviewed together before any paper-simulation decision.</p>
+            <h1>Frame the strongest evidence case.</h1>
+            <p>Market context, contradicting evidence, deterministic research, and risk constraints are reviewed together before any bounded paper-simulation disposition.</p>
           </div>
           <div class="status-cluster" aria-label="System status">
             <span class="status-pill">Local evidence</span>
@@ -106,7 +106,7 @@ function render(data) {
           ${metricCard("Session", "London → New York", "Overlap approaching; liquidity expected to rise.", "accent")}
           ${metricCard("Volatility", "Moderate", "Event risk remains visible in the setup review.", "warning")}
           ${metricCard("Broad bias", "Selective risk-on", "USD softness is not uniform across instruments.")}
-          ${metricCard("Top candidate", `${selected.symbol} · ${selected.score}`, "Evidence supports review, not certainty.", "accent")}
+          ${metricCard("Top evidence case", `${selected.symbol} · ${selected.evidenceIndex}`, "Evidence supports bounded review, not certainty.", "accent")}
         </section>
 
         <div class="dashboard-grid">
@@ -131,7 +131,7 @@ function render(data) {
               <div class="panel-heading">
                 <div>
                   <span class="panel-label">Candidate queue</span>
-                  <h2 id="candidate-title">Ranked by evidence quality and risk readiness</h2>
+                  <h2 id="candidate-title">Ranked by evidence completeness and risk review status</h2>
                 </div>
                 <span class="score-chip">3 setups</span>
               </div>
@@ -146,7 +146,7 @@ function render(data) {
                   <span class="panel-label">Evidence-gated setup review</span>
                   <h2 id="setup-review-title">Selected candidate</h2>
                 </div>
-                <span class="score-chip">Score ${selected.score}</span>
+                <span class="score-chip">Evidence index ${selected.evidenceIndex}</span>
               </div>
               <div class="panel-body">
                 <div class="setup-hero">
@@ -161,9 +161,9 @@ function render(data) {
                     </div>
                   </div>
                   <div class="decision-block">
-                    <span class="mini-label">Recommendation</span>
+                    <span class="mini-label">Bounded operator disposition</span>
                     <strong>${selected.state}</strong>
-                    <small>Paper evidence only</small>
+                    <small>Paper-simulation review only</small>
                   </div>
                 </div>
 
@@ -199,15 +199,15 @@ function render(data) {
               <div class="panel-heading">
                 <div>
                   <span class="panel-label">Risk & exposure</span>
-                  <h2 id="risk-title">Risk before reward</h2>
+                  <h2 id="risk-title">Risk before simulation</h2>
                 </div>
                 <span class="state-pill paper">Within limit</span>
               </div>
               <div class="panel-body risk-grid">
                 ${riskCard("Account risk", "$55", "0.55% of a $10,000 paper account")}
                 ${riskCard("Risk ceiling", "$100", "Maximum declared risk: 1.00%")}
-                ${riskCard("Exposure after entry", "12%", "No correlation warning recorded")}
-                ${riskCard("Reward / risk", "2.0R", "Target is informational, not a performance claim")}
+                ${riskCard("Exposure after review", "12%", "No correlation warning recorded")}
+                ${riskCard("Target distance", "2.0R", "Frozen planning ratio; not a performance forecast")}
               </div>
             </section>
 
@@ -250,7 +250,7 @@ function render(data) {
         </div>
 
         <footer class="command-footer">
-          <span>Research the trade. Frame the risk. Execute only when allowed.</span>
+          <span>Research the case. Frame the risk. Preserve operator control.</span>
           <span>${escapeText(data.scope ?? "paper_simulation_planning_only")}</span>
         </footer>
       </main>
@@ -282,7 +282,7 @@ function renderCandidate(candidate, index) {
       <div><span class="mini-label">${candidate.symbol}</span><strong class="candidate-name">${candidate.setup}</strong></div>
       <div><span class="mini-label">Timeframes</span><small>${candidate.timeframe}</small></div>
       <div><span class="mini-label">Bias</span><small>${candidate.bias}</small></div>
-      <span class="score-chip">${candidate.score}</span>
+      <span class="score-chip" aria-label="Evidence index ${candidate.evidenceIndex}">${candidate.evidenceIndex}</span>
       <span class="state-pill ${candidate.stateClass}">${candidate.state}</span>
     </article>
   `;
