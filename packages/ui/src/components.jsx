@@ -26,7 +26,12 @@ export function Badge({ tone = "neutral", children, className = "" }) {
 
 export function RecommendationBadge({ value }) {
   const tone = value === "PAPER_SIMULATE" ? "success" : value === "WATCH" ? "warning" : "danger";
-  return <Badge tone={tone}>{value.replaceAll("_", " ")}</Badge>;
+  return (
+    <Badge tone={tone} className="tf-disposition-badge">
+      <span className="tf-disposition-badge__label">Disposition</span>
+      <span>{value.replaceAll("_", " ")}</span>
+    </Badge>
+  );
 }
 
 export function Metric({ label, value, emphasis = false }) {
@@ -88,7 +93,7 @@ export function WatchlistCard({ candidate, active, onSelect, workflow }) {
       </div>
 
       <div className="tf-queue-action">
-        <span>Next</span>
+        <span>Next review step</span>
         <strong>{queue.nextAction ?? "Open candidate review."}</strong>
       </div>
 
@@ -113,8 +118,8 @@ function urgencyClass(value) {
 }
 
 function urgencyLabel(value) {
-  if (value === "ACTION_REQUIRED") return "Action required";
-  if (value === "TIME_SENSITIVE") return "Time sensitive";
+  if (value === "ACTION_REQUIRED") return "Review due";
+  if (value === "TIME_SENSITIVE") return "Time-sensitive review";
   if (value === "REVIEW") return "Review";
   if (value === "CLOSED") return "Closed";
   return "Waiting";
