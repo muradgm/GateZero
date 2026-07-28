@@ -103,13 +103,13 @@ export function OperatorJournal({ candidate }) {
           <strong>{entries.length}</strong>
         </div>
         <div>
-          <span>Completed average</span>
+          <span>Completed paper average</span>
           <strong>
             {averageR === null ? "—" : `${averageR >= 0 ? "+" : ""}${averageR.toFixed(2)}R`}
           </strong>
         </div>
         <div>
-          <span>Current evidence</span>
+          <span>Current evidence index</span>
           <strong>{candidate.report.evidenceScore}</strong>
         </div>
       </div>
@@ -131,7 +131,7 @@ export function OperatorJournal({ candidate }) {
           </label>
 
           <label>
-            <span>Outcome in R</span>
+            <span>Paper outcome in R</span>
             <input
               type="number"
               step="0.1"
