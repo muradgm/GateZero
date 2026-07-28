@@ -46,6 +46,16 @@
   border: 1px solid var(--tf-color-line);
 }
 
+.tf-disposition-badge {
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.tf-disposition-badge__label {
+  font-size: 7px;
+  opacity: 0.68;
+}
+
 .tf-badge--success {
   color: var(--tf-color-teal);
   background: rgba(0, 198, 167, 0.1);
