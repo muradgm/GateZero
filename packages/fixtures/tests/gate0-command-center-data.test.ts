@@ -34,6 +34,29 @@ describe("Gate 0 command center surface", () => {
     }
   });
 
+  it("keeps static command-center labels evidence- and review-oriented", () => {
+    const source = readFileSync(
+      path.join(rootDir, "apps", "web", "src", "intelligence-command-center.js"),
+      "utf8"
+    );
+
+    for (const blockedLabel of [
+      "risk readiness",
+      "Recommendation</span>",
+      "Score ${selected.score}",
+      "highest-quality setup",
+      "Risk before reward",
+      "Execute only when allowed",
+      'Confidence", "Moderate'
+    ]) {
+      expect(source).not.toContain(blockedLabel);
+    }
+
+    expect(source).toContain("Evidence index");
+    expect(source).toContain("Bounded operator disposition");
+    expect(source).toContain("risk review status");
+  });
+
   it("records the latest verified commit without promotion semantics", () => {
     const data = readFileSync(dataPath, "utf8");
 
