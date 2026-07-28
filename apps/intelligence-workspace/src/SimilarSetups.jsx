@@ -58,7 +58,7 @@ export function SimilarSetups({ matches = [] }) {
       </div>
       <p className="similar-setups-note">
         Similarity is feature overlap, not a performance forecast. Historical outcomes do not
-        approve the current setup.
+        authorize the current bounded disposition.
       </p>
     </Panel>
   );
