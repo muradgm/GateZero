@@ -14,11 +14,11 @@ export function DecisionMemory({ candidate }) {
 
       <div className="decision-memory-summary">
         <div>
-          <span>Positive outcomes</span>
+          <span>Positive paper outcomes</span>
           <strong>{memory.positiveCount}</strong>
         </div>
         <div>
-          <span>Negative outcomes</span>
+          <span>Negative paper outcomes</span>
           <strong>{memory.negativeCount}</strong>
         </div>
         <div>
@@ -65,8 +65,8 @@ export function DecisionMemory({ candidate }) {
           <span className="decision-memory-label">Current caution</span>
           <strong>{memory.caution}</strong>
           <p>
-            Decision memory summarizes local records. It does not predict the next outcome or
-            override current evidence, risk review, or operator judgment.
+            Decision memory summarizes local paper-simulation records. It does not predict the next
+            outcome or override current evidence, risk review, or operator judgment.
           </p>
         </section>
       </div>
