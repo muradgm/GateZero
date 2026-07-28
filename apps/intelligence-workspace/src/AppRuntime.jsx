@@ -11,6 +11,7 @@ import {
 import { CandidateActionBar } from "./CandidateActionBar.jsx";
 import { deriveCandidateWorkflow } from "./candidate-workflow.js";
 import { LearningIntelligencePanel } from "./LearningIntelligencePanel.jsx";
+import { MultiStrategyPanel } from "./MultiStrategyPanel.jsx";
 import { PriceChart } from "./PriceChart.jsx";
 
 function BrandMark() {
@@ -50,6 +51,7 @@ export function AppRuntime({
   epoch2Proof,
   epoch3Proof,
   epoch4Proof,
+  epoch5Proof,
   onSelect
 }) {
   const [focusedTime, setFocusedTime] = useState(null);
@@ -167,6 +169,16 @@ export function AppRuntime({
                 <small>No prediction, performance claim, or automatic rule change</small>
               </div>
             ) : null}
+            {epoch5Proof ? (
+              <div className="epoch5-proof" aria-label="Epoch 5 multi-strategy proof">
+                <strong>Strategy isolation: {epoch5Proof.checkpoint.status}</strong>
+                <p>
+                  {epoch5Proof.registrations.length} strategies ·{" "}
+                  {epoch5Proof.checkpoint.completeLifecycleCount} complete traces
+                </p>
+                <small>Static registry · shared protected loop · no execution authority</small>
+              </div>
+            ) : null}
           </div>
         </Panel>
 
@@ -246,6 +258,7 @@ export function AppRuntime({
             <DecisionCouncil council={council} report={report} />
           </section>
           {selected.id === "eurusd" ? <LearningIntelligencePanel proof={epoch4Proof} /> : null}
+          {selected.id === "eurusd" ? <MultiStrategyPanel proof={epoch5Proof} /> : null}
         </section>
 
         <aside className="intelligence-column">

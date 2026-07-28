@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
+import { SupportedStrategyIdSchema } from "./eurusd-overlap-pullback-strategy.js";
 
 export const CanonicalRiskReviewSchema = z
   .object({
@@ -7,6 +8,8 @@ export const CanonicalRiskReviewSchema = z
     riskReviewId: NonEmptyStringSchema,
     assessmentId: NonEmptyStringSchema,
     canonicalAssessmentHash: NonEmptyStringSchema,
+    strategyId: SupportedStrategyIdSchema,
+    strategyVersion: NonEmptyStringSchema,
     instrument: z.literal("EURUSD"),
     riskEngineVersion: NonEmptyStringSchema,
     reviewStatus: z.enum(["APPROVED_FOR_LOCAL_SIMULATION", "BLOCKED", "REVISION_REQUIRED"]),

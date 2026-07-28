@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { NonEmptyStringSchema } from "./schemas.js";
+import { SupportedStrategyIdSchema } from "./eurusd-overlap-pullback-strategy.js";
 
 export const TraceRequirementStatusSchema = z.enum([
   "COMPLETE",
@@ -107,6 +108,7 @@ export const FrozenDecisionBundleSchema = z
     sourceId: NonEmptyStringSchema,
     rawDataHash: NonEmptyStringSchema,
     normalizedDataHash: NonEmptyStringSchema,
+    strategyId: SupportedStrategyIdSchema,
     strategyVersion: NonEmptyStringSchema,
     strategyParametersHash: NonEmptyStringSchema,
     featureEngineVersion: NonEmptyStringSchema,

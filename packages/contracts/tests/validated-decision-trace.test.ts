@@ -25,6 +25,7 @@ const bundle = {
   sourceId: "historical-adapter-001",
   rawDataHash: "sha256:raw",
   normalizedDataHash: "sha256:normalized",
+  strategyId: "EURUSD_LN_NY_PULLBACK" as const,
   strategyVersion: "eurusd-overlap-pullback-1.0.0",
   strategyParametersHash: "sha256:strategy-parameters",
   featureEngineVersion: "feature-engine-1.0.0",
