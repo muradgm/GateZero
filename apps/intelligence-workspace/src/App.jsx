@@ -30,7 +30,7 @@ const candidates = [
       "Risk remains below account ceiling"
     ],
     bear: ["Macro event can invalidate the timing", "Momentum is not yet strengthening"],
-    neutral: ["Wait for the defined 1H trigger", "Do not infer approval from the score"],
+    neutral: ["Wait for the defined 1H trigger", "Do not infer permission from the evidence index"],
     timeline: [
       ["08:00", "London session opened", "info"],
       ["09:10", "Sell-side liquidity tested", "info"],
@@ -127,7 +127,7 @@ function BrandMark() {
   );
 }
 
-function Recommendation({ value }) {
+function DispositionBadge({ value }) {
   return (
     <span className={`recommendation recommendation--${value.toLowerCase()}`}>
       {value.replace("_", " ")}
@@ -188,8 +188,10 @@ export function App() {
                     {candidate.market} · {candidate.trend}
                   </small>
                 </span>
-                <span className="candidate-score">{candidate.score}</span>
-                <Recommendation value={candidate.recommendation} />
+                <span className="candidate-score" aria-label={`Evidence index ${candidate.score}`}>
+                  {candidate.score}
+                </span>
+                <DispositionBadge value={candidate.recommendation} />
               </button>
             ))}
           </div>
@@ -210,9 +212,9 @@ export function App() {
               <div className="score-lockup">
                 <div className="score-ring" style={{ "--score": selected.score }}>
                   <strong>{selected.score}</strong>
-                  <span>Evidence</span>
+                  <span>Evidence index</span>
                 </div>
-                <Recommendation value={selected.recommendation} />
+                <DispositionBadge value={selected.recommendation} />
               </div>
             </div>
             <div className="market-metrics">
@@ -310,8 +312,8 @@ export function App() {
               <div className="risk-grid">
                 <Metric label="Planned loss" value={selected.risk.amount} />
                 <Metric label="Risk ceiling" value={selected.risk.ceiling} />
-                <Metric label="Exposure after" value={selected.risk.exposure} />
-                <Metric label="Reward / risk" value={selected.risk.rewardRisk} />
+                <Metric label="Exposure after review" value={selected.risk.exposure} />
+                <Metric label="Target distance" value={selected.risk.rewardRisk} />
               </div>
               <div className="invalidation">
                 <span>Mandatory invalidation</span>
@@ -346,7 +348,7 @@ export function App() {
           <section className="cases panel">
             <div className="panel-heading">
               <div>
-                <span className="eyebrow">Decision challenge</span>
+                <span className="eyebrow">Evidence challenge</span>
                 <h2>Intelligence cases</h2>
               </div>
               <span className="confidence">{selected.confidence}</span>
@@ -362,7 +364,9 @@ export function App() {
                 <span className="eyebrow">Explainability</span>
                 <h2>Evidence tree</h2>
               </div>
-              <strong className="tree-total">{selected.score}</strong>
+              <strong className="tree-total" aria-label={`Evidence index ${selected.score}`}>
+                {selected.score}
+              </strong>
             </div>
             <div className="contributions">
               {selected.contributions.map(([label, points, rationale]) => (
