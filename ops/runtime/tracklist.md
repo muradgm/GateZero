@@ -9,9 +9,9 @@
 | Operating scope            | `paper_simulation_planning_only`                               |
 | Core wedge                 | No trade without evidence. No execution without risk approval. |
 | Tracklist status           | Active living tracker                                          |
-| Last updated               | 2026-07-24                                                     |
+| Last updated               | 2026-07-28                                                     |
 | Latest accepted packet     | `TRD-778`                                                      |
-| Latest accepted validation | 110 test files, 802 tests passed                               |
+| Latest accepted validation | 138 test files, 962 tests passed                               |
 
 ## Boundary
 
@@ -1275,10 +1275,20 @@ Latest accepted result:
 | `pnpm check:gate0-skill-routing`                                                                  | Check project skill routing matrix.                     | Local skill routing guard passes.                                |
 | `pnpm check:gate0`                                                                                | Refresh snapshot and run the local Gate 0 guard suite.  | Local guard suite passes.                                        |
 | `pnpm verify:gate0`                                                                               | Run Gate 0 guards and quality checks.                   | Full local verification passes.                                  |
-| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 110 files and 802 tests pass deterministically.                  |
+| `pnpm test:ci`                                                                                    | Run tests in stable single-worker CI mode.              | 138 files and 962 tests pass deterministically.                  |
 | `pnpm validate:gate0`                                                                             | Scan for blocked scope terms outside allowlisted paths. | `Gate 0 validation passed.`                                      |
 | `pnpm preview:web`                                                                                | Serve the static command center locally.                | Local host preview serves `apps/web`.                            |
 | `pnpm refresh:gate0-ci-evidence -- --run <id> --packet <TRD-id> --after <TRD-id> --record <path>` | Refresh local CI evidence from a successful run.        | Writes local evidence record, index row, and dashboard metadata. |
+
+## Merged Product Milestones
+
+These are merged product capabilities, not retroactive accepted operating packets. The accepted
+packet ledger remains the source for `Latest accepted packet`.
+
+| Milestone                            | State  | Evidence                                                                             | Boundary                                                                                |
+| ------------------------------------ | ------ | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Command-center safety reconciliation | merged | PR #6, local and remote verification passed.                                         | Evidence and bounded-disposition framing only; no execution authority.                  |
+| Epoch 5 multi-strategy platform      | merged | PR #7, two deterministic EUR/USD strategies complete isolated protected-loop traces. | Static local definitions; no ranking, optimization, external access, or execution path. |
 
 ## Next Queue
 
