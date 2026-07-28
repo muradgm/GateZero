@@ -9,8 +9,8 @@ export function ConfidenceChange({ candidate }) {
   return (
     <Panel className="confidence-change-panel">
       <PanelHeading
-        eyebrow="Score explanation"
-        title="Why confidence changed"
+        eyebrow="Evidence-index explanation"
+        title="Why the evidence index changed"
         aside={
           <Badge tone={model.net >= 0 ? "success" : "warning"}>{formatDelta(model.net)} pts</Badge>
         }
@@ -22,7 +22,7 @@ export function ConfidenceChange({ candidate }) {
           <strong>{BASELINE}</strong>
         </div>
         <div>
-          <span>Current evidence score</span>
+          <span>Current evidence index</span>
           <strong>{model.current}</strong>
         </div>
         <div>
@@ -58,10 +58,10 @@ export function ConfidenceChange({ candidate }) {
 
         <div
           className="confidence-change-chart"
-          aria-label="Cumulative evidence score construction"
+          aria-label="Cumulative evidence-index construction"
         >
           <svg viewBox="0 0 420 190" role="img">
-            <title>Cumulative evidence score from neutral baseline to current score</title>
+            <title>Cumulative evidence index from neutral baseline to current assessment</title>
             <g className="confidence-change-grid">
               {[25, 50, 75, 100].map((value) => {
                 const y = scaleY(value);
@@ -92,7 +92,7 @@ export function ConfidenceChange({ candidate }) {
             ))}
           </svg>
           <p>
-            This reconstructs score formation from the current evidence ledger. It is not a
+            This reconstructs evidence-index formation from the current evidence ledger. It is not a
             historical market snapshot series or a probability forecast.
           </p>
         </div>
