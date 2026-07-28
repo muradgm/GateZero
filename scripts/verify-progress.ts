@@ -3,6 +3,7 @@ import process from "node:process";
 
 const stages = [
   { label: "Repository checks", command: "check:repository" },
+  { label: "Workspace build", command: "build:workspace" },
   { label: "Lint", command: "lint" },
   { label: "Formatting", command: "format:check" },
   { label: "Type checking", command: "typecheck" },
