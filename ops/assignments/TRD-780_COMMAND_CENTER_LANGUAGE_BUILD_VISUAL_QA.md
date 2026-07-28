@@ -43,7 +43,13 @@ workspace build part of normal verification, and require visual QA before orches
 
 ## Automated acceptance
 
-Run in this order:
+Refresh the deterministic progress snapshot after pulling the open assignment:
+
+```powershell
+pnpm snapshot:gate0-progress
+```
+
+Then run in this order:
 
 ```powershell
 pnpm build:workspace
@@ -57,7 +63,8 @@ pnpm verify:gate0
 ```
 
 Acceptance requires all commands to pass, including the workspace build stage now included in
-`pnpm verify:gate0`.
+`pnpm verify:gate0`. The refreshed progress snapshot must remain uncommitted until its generated
+content has been reviewed for the open TRD-780 state.
 
 ## Visual QA
 
