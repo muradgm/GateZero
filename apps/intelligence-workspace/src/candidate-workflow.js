@@ -39,23 +39,23 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
   }
 
   if (recommendation === "PAPER_SIMULATE") {
-    const ready = stage === "operator_decision";
+    const decisionDue = stage === "operator_decision";
     return {
-      status: ready ? "READY" : "PENDING",
-      statusLabel: ready ? "Ready for decision" : "Review in progress",
+      status: decisionDue ? "REVIEW_DUE" : "PENDING",
+      statusLabel: decisionDue ? "Operator decision due" : "Review in progress",
       currentStageLabel,
       blockingCondition: downgrade ?? "No unresolved assessment blocker recorded.",
       nextAction:
         stage === "risk_review"
           ? "Complete risk review before recording the operator decision."
-          : "Review the evidence and record the bounded operator decision.",
+          : "Review the evidence and record the bounded operator disposition.",
       freshnessLabel: freshness.label,
       freshnessState: freshness.state,
       expiresAt: addMinutes(lastEvent, 60),
       detectedAt,
       changedAt: lastEvent,
       reviewed: false,
-      urgency: ready ? "ACTION_REQUIRED" : "REVIEW"
+      urgency: decisionDue ? "ACTION_REQUIRED" : "REVIEW"
     };
   }
 
