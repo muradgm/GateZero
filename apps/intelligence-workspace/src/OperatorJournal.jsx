@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Badge, Panel, PanelHeading, RecommendationBadge } from "@traderframe/ui";
+import { Badge, Panel, PanelHeading, ReviewStatusBadge } from "@traderframe/ui";
 
 const statuses = [
   { value: "PLANNED", label: "Planned" },
@@ -52,7 +52,7 @@ export function OperatorJournal({ candidate }) {
       id: `${candidate.id}-${Date.now()}`,
       candidateId: candidate.id,
       instrument,
-      recommendation: candidate.report.recommendation,
+      evidenceStatus: candidate.report.evidenceStatus,
       evidenceScore: candidate.report.evidenceScore,
       status: draft.status,
       resultR: draft.resultR === "" ? null : Number(draft.resultR),
@@ -90,7 +90,7 @@ export function OperatorJournal({ candidate }) {
       <PanelHeading
         eyebrow="Local review loop"
         title="Operator outcome journal"
-        aside={<RecommendationBadge value={candidate.report.recommendation} />}
+        aside={<ReviewStatusBadge value={candidate.report.evidenceStatus} />}
       />
 
       <div className="operator-journal-summary">

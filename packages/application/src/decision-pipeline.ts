@@ -65,6 +65,11 @@ export function completeDecisionPipelineStage(
   if (command.stage === "operator_decision" && !command.recommendation) {
     throw new ContractValidationError("operator decision stage requires a bounded recommendation");
   }
+  if (command.stage !== "operator_decision" && command.recommendation) {
+    throw new ContractValidationError(
+      "only the manual operator decision stage may record a bounded disposition"
+    );
+  }
 
   const index = orderedStages.indexOf(command.stage);
   const nextStage = orderedStages[index + 1];

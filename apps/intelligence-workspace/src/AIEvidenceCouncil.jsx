@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Panel, PanelHeading, RecommendationBadge } from "@traderframe/ui";
+import { Badge, Panel, PanelHeading, ReviewStatusBadge } from "@traderframe/ui";
 
 export function AIEvidenceCouncil({ candidate }) {
   if (!candidate) return null;
@@ -15,7 +15,7 @@ export function AIEvidenceCouncil({ candidate }) {
       <PanelHeading
         eyebrow="Shared-ledger review"
         title="Evidence perspectives"
-        aside={<RecommendationBadge value={report.recommendation} />}
+        aside={<ReviewStatusBadge value={report.evidenceStatus} />}
       />
 
       <div className="ai-council-summary">
@@ -56,7 +56,7 @@ export function AIEvidenceCouncil({ candidate }) {
       <div className="ai-council-verdict">
         <div>
           <span>Shared-ledger demo view</span>
-          <strong>{report.recommendation.replaceAll("_", " ")}</strong>
+          <strong>{report.evidenceStatus}</strong>
         </div>
         <p>
           These are deterministic perspectives over one synthetic contribution ledger. They are not

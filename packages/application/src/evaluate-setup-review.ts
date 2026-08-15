@@ -78,14 +78,14 @@ export function evaluateSetupReview(command: EvaluateSetupReviewCommand): SetupR
     Math.round(supportingScore * 0.55 + riskScore * 0.3 + (100 - contradictingScore) * 0.15)
   );
 
-  const recommendation = decideRecommendation({
+  const evidenceStatus = deriveEvidenceStatus({
     compositeScore,
     downgradeReasons,
     supportingCount: review.supportingEvidence.length,
     contradictingScore,
     riskScore
   });
-  const confidence = calibrateConfidence(compositeScore, downgradeReasons, recommendation);
+  const reviewUrgency = deriveReviewUrgency(downgradeReasons, compositeScore);
 
   return SetupReviewAssessmentSchema.parse({
     assessmentId: command.assessmentId,
@@ -97,15 +97,15 @@ export function evaluateSetupReview(command: EvaluateSetupReviewCommand): SetupR
     contradictingScore,
     riskScore,
     compositeScore,
-    confidence,
-    recommendation,
+    evidenceStatus,
+    reviewUrgency,
     downgradeReasons: [...new Set(downgradeReasons)],
     decisionReasons: buildDecisionReasons({
       compositeScore,
       supportingScore,
       contradictingScore,
       riskScore,
-      recommendation
+      evidenceStatus
     }),
     operatorRequired: true,
     riskReviewRequired: true,
@@ -137,33 +137,25 @@ function calculateRiskScore(review: SetupReview, context: MarketContext): number
   return clamp(score);
 }
 
-function decideRecommendation(input: {
+function deriveEvidenceStatus(input: {
   readonly compositeScore: number;
   readonly downgradeReasons: readonly string[];
   readonly supportingCount: number;
   readonly contradictingScore: number;
   readonly riskScore: number;
-}): SetupReviewAssessment["recommendation"] {
-  if (input.supportingCount === 0 || input.compositeScore < 45 || input.riskScore < 45)
-    return "REJECT";
-  if (
-    input.downgradeReasons.length > 0 ||
-    input.compositeScore < 80 ||
-    input.contradictingScore > 45
-  )
-    return "WATCH";
-  return "PAPER_SIMULATE";
+}): SetupReviewAssessment["evidenceStatus"] {
+  if (input.downgradeReasons.length > 0 || input.riskScore < 45) return "blocked";
+  if (input.supportingCount === 0 || input.compositeScore < 60 || input.contradictingScore > 45)
+    return "incomplete";
+  return "reviewable";
 }
 
-function calibrateConfidence(
-  score: number,
+function deriveReviewUrgency(
   downgradeReasons: readonly string[],
-  recommendation: SetupReviewAssessment["recommendation"]
-): SetupReviewAssessment["confidence"] {
-  if (recommendation === "REJECT") return score < 30 ? "none" : "low";
-  if (downgradeReasons.length > 0 || score < 65) return "low";
-  if (score < 80) return "moderate";
-  return "high";
+  score: number
+): SetupReviewAssessment["reviewUrgency"] {
+  if (downgradeReasons.length > 0) return "high";
+  return score < 60 ? "normal" : "low";
 }
 
 function buildDecisionReasons(input: {
@@ -171,13 +163,13 @@ function buildDecisionReasons(input: {
   readonly supportingScore: number;
   readonly contradictingScore: number;
   readonly riskScore: number;
-  readonly recommendation: SetupReviewAssessment["recommendation"];
+  readonly evidenceStatus: SetupReviewAssessment["evidenceStatus"];
 }): string[] {
   return [
     `Composite evidence score is ${input.compositeScore}/100.`,
     `Supporting evidence quality is ${input.supportingScore}/100; contradicting evidence is ${input.contradictingScore}/100.`,
     `Risk quality is ${input.riskScore}/100.`,
-    `The bounded system recommendation is ${input.recommendation}; the operator retains final authority.`
+    `Evidence status is ${input.evidenceStatus}; the operator retains all disposition authority.`
   ];
 }
 

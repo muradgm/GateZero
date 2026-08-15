@@ -5,7 +5,7 @@ import {
   Metric,
   Panel,
   PanelHeading,
-  RecommendationBadge,
+  ReviewStatusBadge,
   WatchlistCard
 } from "@traderframe/ui";
 import { CandidateActionBar } from "./CandidateActionBar.jsx";
@@ -192,10 +192,10 @@ export function AppRuntime({
               </div>
               <div className="decision-summary">
                 <Metric label="Demo evidence index" value={report.evidenceScore} emphasis />
-                <Metric label="Uncalibrated status" value={report.confidence} emphasis />
+                <Metric label="Evidence status" value={report.evidenceStatus} emphasis />
                 <div className="decision-summary__recommendation">
                   <span>Demo assessment</span>
-                  <RecommendationBadge value={report.recommendation} />
+                  <ReviewStatusBadge value={report.evidenceStatus} />
                 </div>
               </div>
             </div>
@@ -354,7 +354,7 @@ function DecisionCouncil({ council, report }) {
       <PanelHeading
         eyebrow="Shared-ledger perspectives"
         title="Evidence perspectives"
-        aside={<RecommendationBadge value={report.recommendation} />}
+        aside={<ReviewStatusBadge value={report.evidenceStatus} />}
       />
       <div className="council-list">
         {council.map((member) => (
@@ -370,7 +370,7 @@ function DecisionCouncil({ council, report }) {
       <div className="council-summary">
         <span>Demo-only view</span>
         <strong>
-          {report.recommendation.replaceAll("_", " ")} · {report.evidenceScore} evidence
+          {report.evidenceStatus} · {report.evidenceScore} evidence
         </strong>
       </div>
     </Panel>

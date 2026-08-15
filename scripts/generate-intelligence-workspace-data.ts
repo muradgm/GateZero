@@ -13,7 +13,7 @@ function buildPipeline(
   id: string,
   researchCaseId: string,
   instrument: string,
-  recommendation: "REJECT" | "WATCH" | "PAPER_SIMULATE",
+  operatorDecision: "REJECT" | "WATCH" | "PAPER_SIMULATE" | undefined,
   completedStages: readonly string[]
 ) {
   let pipeline = createDecisionPipeline({
@@ -30,7 +30,7 @@ function buildPipeline(
       recordId: `${id}-${stage}`,
       evidenceIds: [`${id}-${stage}-evidence`],
       completedAt: generatedAt,
-      recommendation: stage === "operator_decision" ? recommendation : undefined
+      recommendation: stage === "operator_decision" ? operatorDecision : undefined
     });
   }
 
@@ -158,19 +158,13 @@ const cases = [
       invalidationSummary: "Reject below the confirmed one-hour structure low.",
       downgradeReasons: []
     }),
-    pipeline: buildPipeline(
-      "pipeline-eurusd",
-      "research-case-eurusd",
-      "EUR/USD",
-      "PAPER_SIMULATE",
-      [
-        "market_context",
-        "evidence_assessment",
-        "setup_review",
-        "intelligence_report",
-        "risk_review"
-      ]
-    )
+    pipeline: buildPipeline("pipeline-eurusd", "research-case-eurusd", "EUR/USD", undefined, [
+      "market_context",
+      "evidence_assessment",
+      "setup_review",
+      "intelligence_report",
+      "risk_review"
+    ])
   },
   {
     id: "btcusd",
@@ -273,7 +267,7 @@ const cases = [
       invalidationSummary: "Reject below the four-hour expansion base.",
       downgradeReasons: ["Correlation concentration remains unresolved."]
     }),
-    pipeline: buildPipeline("pipeline-btcusd", "research-case-btcusd", "BTC/USD", "WATCH", [
+    pipeline: buildPipeline("pipeline-btcusd", "research-case-btcusd", "BTC/USD", undefined, [
       "market_context",
       "evidence_assessment",
       "setup_review",
@@ -407,7 +401,7 @@ const output = {
     gate: "G2_PAPER_TRADING",
     scope: "paper_simulation_planning_only",
     assessmentAuthority: "NON_CANONICAL_DEMO",
-    recommendationOwner: "CANONICAL_DECISION_ASSESSMENT_ONLY",
+    dispositionOwner: "MANUAL_OPERATOR_DECISION_ONLY",
     externalAccess: false,
     executionPath: false,
     automatedAction: false

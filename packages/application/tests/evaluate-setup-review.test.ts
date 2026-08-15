@@ -122,7 +122,7 @@ const evidenceQuality: EvidenceQuality[] = [
 ];
 
 describe("evaluateSetupReview", () => {
-  it("allows a high-quality reviewed setup to reach paper simulation", () => {
+  it("marks a high-quality reviewed setup as reviewable without a disposition", () => {
     const result = evaluateSetupReview({
       assessmentId: "assessment-eurusd-001",
       review,
@@ -131,8 +131,8 @@ describe("evaluateSetupReview", () => {
       evaluatedAt: "2026-07-24T19:00:00.000Z"
     });
 
-    expect(result.recommendation).toBe("PAPER_SIMULATE");
-    expect(result.confidence).toBe("high");
+    expect(result.evidenceStatus).toBe("reviewable");
+    expect(result.reviewUrgency).toBe("low");
     expect(result.compositeScore).toBeGreaterThanOrEqual(80);
     expect(result.downgradeReasons).toEqual([]);
     expect(result.executionPath).toBe(false);
@@ -147,7 +147,7 @@ describe("evaluateSetupReview", () => {
       evaluatedAt: "2026-07-25T00:00:00.000Z"
     });
 
-    expect(result.recommendation).toBe("WATCH");
+    expect(result.evidenceStatus).toBe("blocked");
     expect(result.downgradeReasons).toContain("Market context is stale.");
   });
 
@@ -168,7 +168,7 @@ describe("evaluateSetupReview", () => {
       evaluatedAt: "2026-07-24T19:00:00.000Z"
     });
 
-    expect(result.recommendation).toBe("WATCH");
+    expect(result.evidenceStatus).toBe("blocked");
     expect(result.downgradeReasons.length).toBeGreaterThan(0);
     expect(result.riskScore).toBeLessThan(100);
   });

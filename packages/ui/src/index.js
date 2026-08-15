@@ -7,6 +7,6 @@ export {
   Metric,
   Panel,
   PanelHeading,
-  RecommendationBadge,
+  ReviewStatusBadge,
   WatchlistCard
 } from "./components.jsx";

@@ -74,7 +74,7 @@ export function CommandPalette({ workspace, selectedId }) {
     const candidates = (workspace?.candidates ?? []).map((candidate, index) => ({
       id: `candidate-${candidate.id}`,
       label: `Select ${candidate.instrument}`,
-      detail: `${candidate.market} · ${candidate.report.recommendation.replaceAll("_", " ")} · evidence ${candidate.report.evidenceScore}`,
+      detail: `${candidate.market} · ${candidate.report.evidenceStatus} · evidence ${candidate.report.evidenceScore}`,
       candidateId: candidate.id,
       rank: index + 1,
       selected: candidate.id === selectedId

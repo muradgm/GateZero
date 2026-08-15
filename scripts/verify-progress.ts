@@ -3,6 +3,7 @@ import process from "node:process";
 
 const stages = [
   { label: "Repository checks", command: "check:repository" },
+  { label: "Workspace build", command: "build:workspace" },
   { label: "Lint", command: "lint" },
   { label: "Formatting", command: "format:check" },
   { label: "Type checking", command: "typecheck" },
@@ -29,12 +30,18 @@ function formatDuration(milliseconds: number): string {
 
 function runPnpmScript(command: string): Promise<{ output: string; duration: number }> {
   const stageStartedAt = Date.now();
+  const launch =
+    process.platform === "win32"
+      ? {
+          executable: process.env.ComSpec ?? "cmd.exe",
+          args: ["/d", "/s", "/c", `pnpm ${command}`]
+        }
+      : { executable: "pnpm", args: [command] };
 
   return new Promise((resolve, reject) => {
-    const child = spawn("pnpm", [command], {
+    const child = spawn(launch.executable, launch.args, {
       cwd: process.cwd(),
-      env: process.env,
-      shell: process.platform === "win32"
+      env: process.env
     });
 
     let output = "";

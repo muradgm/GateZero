@@ -88,8 +88,8 @@ export const TradingIntelligenceReportSchema = z
     generatedAt: z.string().datetime(),
     contributions: z.array(EvidenceContributionSchema).min(1),
     evidenceScore: z.number().int().min(0).max(100),
-    confidence: z.enum(["none", "low", "moderate", "high"]),
-    recommendation: z.enum(["REJECT", "WATCH", "PAPER_SIMULATE"]),
+    evidenceStatus: z.enum(["incomplete", "reviewable", "blocked"]),
+    reviewUrgency: z.enum(["low", "normal", "high"]),
     bullCase: IntelligenceCaseSchema,
     bearCase: IntelligenceCaseSchema,
     neutralCase: IntelligenceCaseSchema,
@@ -118,17 +118,10 @@ export const TradingIntelligenceReportSchema = z
         path: ["evidenceScore"]
       });
     }
-    if (data.recommendation === "PAPER_SIMULATE" && data.confidence !== "high") {
+    if (data.evidenceStatus === "reviewable" && data.downgradeReasons.length > 0) {
       context.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "paper simulation requires high confidence",
-        path: ["confidence"]
-      });
-    }
-    if (data.recommendation === "PAPER_SIMULATE" && data.downgradeReasons.length > 0) {
-      context.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "paper simulation cannot retain downgrade reasons",
+        message: "reviewable evidence cannot retain unresolved downgrade reasons",
         path: ["downgradeReasons"]
       });
     }
@@ -141,8 +134,8 @@ export const RankedIntelligenceCandidateSchema = z
     setupReviewId: NonEmptyStringSchema,
     instrument: NonEmptyStringSchema,
     evidenceScore: z.number().int().min(0).max(100),
-    confidence: z.enum(["none", "low", "moderate", "high"]),
-    recommendation: z.enum(["REJECT", "WATCH", "PAPER_SIMULATE"]),
+    evidenceStatus: z.enum(["incomplete", "reviewable", "blocked"]),
+    reviewUrgency: z.enum(["low", "normal", "high"]),
     primaryReason: NonEmptyStringSchema,
     primaryRisk: NonEmptyStringSchema
   })

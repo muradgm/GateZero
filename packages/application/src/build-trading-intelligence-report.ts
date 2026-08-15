@@ -24,12 +24,8 @@ export function buildTradingIntelligenceReport(
   const evidenceScore = boundScore(
     50 + command.contributions.reduce((sum, contribution) => sum + contribution.points, 0)
   );
-  const confidence = deriveConfidence(evidenceScore, command.downgradeReasons.length);
-  const recommendation = deriveRecommendation(
-    evidenceScore,
-    confidence,
-    command.downgradeReasons.length
-  );
+  const evidenceStatus = deriveEvidenceStatus(evidenceScore, command.downgradeReasons.length);
+  const reviewUrgency = deriveReviewUrgency(command.downgradeReasons.length, evidenceScore);
 
   return TradingIntelligenceReportSchema.parse({
     schemaVersion: 1,
@@ -39,8 +35,8 @@ export function buildTradingIntelligenceReport(
     generatedAt: command.generatedAt,
     contributions: command.contributions,
     evidenceScore,
-    confidence,
-    recommendation,
+    evidenceStatus,
+    reviewUrgency,
     bullCase: command.bullCase,
     bearCase: command.bearCase,
     neutralCase: command.neutralCase,
@@ -58,42 +54,34 @@ export function buildTradingIntelligenceReport(
 export function rankTradingIntelligenceReports(
   reports: readonly TradingIntelligenceReport[]
 ): readonly TradingIntelligenceReport[] {
-  const recommendationWeight: Record<TradingIntelligenceReport["recommendation"], number> = {
-    PAPER_SIMULATE: 3,
-    WATCH: 2,
-    REJECT: 1
+  const urgencyWeight: Record<TradingIntelligenceReport["reviewUrgency"], number> = {
+    high: 3,
+    normal: 2,
+    low: 1
   };
 
   return [...reports].sort((left, right) => {
-    const recommendationDelta =
-      recommendationWeight[right.recommendation] - recommendationWeight[left.recommendation];
-    if (recommendationDelta !== 0) return recommendationDelta;
-    if (right.evidenceScore !== left.evidenceScore) return right.evidenceScore - left.evidenceScore;
+    const urgencyDelta = urgencyWeight[right.reviewUrgency] - urgencyWeight[left.reviewUrgency];
+    if (urgencyDelta !== 0) return urgencyDelta;
+    if (left.evidenceScore !== right.evidenceScore) return left.evidenceScore - right.evidenceScore;
     return left.instrument.localeCompare(right.instrument);
   });
 }
 
-function deriveConfidence(
+function deriveEvidenceStatus(
   evidenceScore: number,
   downgradeReasonCount: number
-): TradingIntelligenceReport["confidence"] {
-  if (downgradeReasonCount > 0) return evidenceScore >= 60 ? "moderate" : "low";
-  if (evidenceScore >= 80) return "high";
-  if (evidenceScore >= 60) return "moderate";
-  if (evidenceScore >= 40) return "low";
-  return "none";
+): TradingIntelligenceReport["evidenceStatus"] {
+  if (downgradeReasonCount > 0) return "blocked";
+  return evidenceScore >= 60 ? "reviewable" : "incomplete";
 }
 
-function deriveRecommendation(
-  evidenceScore: number,
-  confidence: TradingIntelligenceReport["confidence"],
-  downgradeReasonCount: number
-): TradingIntelligenceReport["recommendation"] {
-  if (downgradeReasonCount === 0 && evidenceScore >= 80 && confidence === "high") {
-    return "PAPER_SIMULATE";
-  }
-  if (evidenceScore >= 45) return "WATCH";
-  return "REJECT";
+function deriveReviewUrgency(
+  downgradeReasonCount: number,
+  evidenceScore: number
+): TradingIntelligenceReport["reviewUrgency"] {
+  if (downgradeReasonCount > 0) return "high";
+  return evidenceScore < 60 ? "normal" : "low";
 }
 
 function boundScore(value: number): number {

@@ -46,6 +46,35 @@ Allowed operator decisions:
 - `WATCH`
 - `PAPER_SIMULATE`
 
+## Canonical Delivery Order
+
+This sequence is the current delivery order for TraderFrame. Do not revisit it or begin a later
+stage unless new evidence invalidates an earlier assumption and the change is recorded in the
+decision log.
+
+```text
+R0  Repository Health + Decision Authority Reconciliation
+ -> R1  Selective Historical Reconciliation
+ -> R2  Real EUR/USD Case Zero
+ -> R3  Strategy Research Lab / Gauntlet
+ -> R4  Read-only Prediction Market Intelligence
+ -> R5  Forward Paper Observation
+ -> R6  AI Review Artifacts
+ -> R7  Separate Execution Research Gate
+```
+
+### R0 authority invariant
+
+Evidence may inform authority. Evidence never creates authority by itself.
+
+No intelligence artifact, evidence score, confidence value, model output, or strategy result may
+independently create `PAPER_SIMULATE`. That bounded disposition requires a complete setup review,
+valid risk review, explicit invalidation, portfolio/exposure eligibility, and a manual operator
+record.
+
+R0 remains active until its acceptance criteria are recorded in
+[`CURRENT_STATE.md`](CURRENT_STATE.md).
+
 ## Milestone sequence
 
 ### M1 — Source-of-truth consolidation
@@ -99,7 +128,7 @@ Outcome: one canonical aggregate connects context, evidence, risk, decision, and
 - Define supporting and contradicting evidence references.
 - Define mandatory invalidation.
 - Define risk budget and portfolio impact.
-- Define bounded recommendation outcomes.
+- Define bounded manual operator dispositions.
 - Define decision rationale and limitations.
 
 Exit criteria:

@@ -24,8 +24,8 @@ export function Badge({ tone = "neutral", children, className = "" }) {
   return <span className={`tf-badge tf-badge--${tone} ${className}`.trim()}>{children}</span>;
 }
 
-export function RecommendationBadge({ value }) {
-  const tone = value === "PAPER_SIMULATE" ? "success" : value === "WATCH" ? "warning" : "danger";
+export function ReviewStatusBadge({ value }) {
+  const tone = value === "reviewable" ? "success" : value === "incomplete" ? "warning" : "danger";
   return <Badge tone={tone}>{value.replaceAll("_", " ")}</Badge>;
 }
 
@@ -77,7 +77,7 @@ export function WatchlistCard({ candidate, active, onSelect, workflow }) {
             {candidate.market} · {candidate.context.session}
           </small>
         </div>
-        <RecommendationBadge value={candidate.report.recommendation} />
+        <ReviewStatusBadge value={candidate.report.evidenceStatus} />
       </div>
 
       <div className="tf-queue-stage">

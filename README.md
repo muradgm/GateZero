@@ -80,5 +80,6 @@ pnpm test:ci
 pnpm verify:gate0
 ```
 
-`verify:gate0` is the current compatibility command. A gate-neutral verification command will
-replace it during the command and source-of-truth consolidation milestone.
+`verify:gate0` is the current compatibility command. It runs repository checks, the React workspace
+build, lint, formatting, type checking, and tests. `verify:verbose` enforces the same gates with
+explicit command output.

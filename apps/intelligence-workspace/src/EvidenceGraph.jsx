@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Badge, Panel, PanelHeading, RecommendationBadge } from "@traderframe/ui";
+import { Badge, Panel, PanelHeading, ReviewStatusBadge } from "@traderframe/ui";
 
 const positions = {
   context: { x: 9, y: 41 },
@@ -42,7 +42,7 @@ export function EvidenceGraph({ candidate }) {
       <PanelHeading
         eyebrow="Dependency view"
         title="Interactive evidence graph"
-        aside={<RecommendationBadge value={candidate.report.recommendation} />}
+        aside={<ReviewStatusBadge value={candidate.report.evidenceStatus} />}
       />
 
       <div className="evidence-graph-layout">
@@ -299,11 +299,11 @@ function buildGraph(candidate) {
         id: "decision",
         kind: "Output",
         label: "Demo assessment",
-        value: report.recommendation.replaceAll("_", " "),
+        value: report.evidenceStatus,
         tone:
-          report.recommendation === "PAPER_SIMULATE"
+          report.evidenceStatus === "reviewable"
             ? "success"
-            : report.recommendation === "WATCH"
+            : report.evidenceStatus === "incomplete"
               ? "warning"
               : "danger",
         tier: "primary",

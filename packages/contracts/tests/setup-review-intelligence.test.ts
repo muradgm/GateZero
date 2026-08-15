@@ -52,8 +52,8 @@ const assessment = {
   contradictingScore: 20,
   riskScore: 90,
   compositeScore: 88,
-  confidence: "high",
-  recommendation: "PAPER_SIMULATE",
+  evidenceStatus: "reviewable",
+  reviewUrgency: "low",
   downgradeReasons: [],
   decisionReasons: ["Evidence and risk remain inside bounded criteria."],
   operatorRequired: true,
@@ -76,25 +76,16 @@ describe("setup review intelligence contracts", () => {
     ).toThrow("market context validity must end after observation time");
   });
 
-  it("validates a bounded high-confidence paper-simulation assessment", () => {
-    expect(SetupReviewAssessmentSchema.parse(assessment).recommendation).toBe("PAPER_SIMULATE");
+  it("validates a reviewable assessment without a disposition", () => {
+    expect(SetupReviewAssessmentSchema.parse(assessment).evidenceStatus).toBe("reviewable");
   });
 
-  it("rejects paper simulation with unresolved downgrade reasons", () => {
+  it("rejects reviewable evidence with unresolved downgrade reasons", () => {
     expect(() =>
       SetupReviewAssessmentSchema.parse({
         ...assessment,
         downgradeReasons: ["Market context is stale."]
       })
-    ).toThrow("paper simulation cannot retain unresolved downgrade reasons");
-  });
-
-  it("rejects paper simulation without high calibrated confidence", () => {
-    expect(() =>
-      SetupReviewAssessmentSchema.parse({
-        ...assessment,
-        confidence: "moderate"
-      })
-    ).toThrow("paper simulation requires high calibrated confidence");
+    ).toThrow("reviewable evidence cannot retain unresolved downgrade reasons");
   });
 });

@@ -25,7 +25,7 @@ export function ConfidenceHeatmap({ candidate }) {
         title="Evidence pressure heatmap"
         aside={
           <Badge tone={totals.net >= 0 ? "success" : "warning"}>
-            {candidate.report.confidence}
+            {candidate.report.evidenceStatus}
           </Badge>
         }
       />

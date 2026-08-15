@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Badge, Panel, PanelHeading, RecommendationBadge } from "@traderframe/ui";
+import { Badge, Panel, PanelHeading, ReviewStatusBadge } from "@traderframe/ui";
 
 const stageLabels = {
   research_case: "Research case",
@@ -154,11 +154,11 @@ export function DecisionReplay({ candidate }) {
         <div>
           <span>Current demo assessment</span>
           <strong>
-            {candidate.report.evidenceScore} evidence · {candidate.report.confidence} uncalibrated
+            {candidate.report.evidenceScore} evidence · {candidate.report.evidenceStatus}
             status
           </strong>
         </div>
-        <RecommendationBadge value={candidate.report.recommendation} />
+        <ReviewStatusBadge value={candidate.report.evidenceStatus} />
       </footer>
     </Panel>
   );

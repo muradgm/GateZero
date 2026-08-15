@@ -51,7 +51,7 @@ function contribution(
 }
 
 describe("buildTradingIntelligenceReport", () => {
-  it("builds an explainable high-confidence paper-simulation candidate", () => {
+  it("builds a reviewable evidence report without disposition authority", () => {
     const report = buildTradingIntelligenceReport({
       ...common,
       contributions: [
@@ -62,8 +62,8 @@ describe("buildTradingIntelligenceReport", () => {
     });
 
     expect(report.evidenceScore).toBe(85);
-    expect(report.confidence).toBe("high");
-    expect(report.recommendation).toBe("PAPER_SIMULATE");
+    expect(report.evidenceStatus).toBe("reviewable");
+    expect(report.reviewUrgency).toBe("low");
     expect(report.executionPath).toBe(false);
   });
 
@@ -77,12 +77,12 @@ describe("buildTradingIntelligenceReport", () => {
       downgradeReasons: ["High-impact macro event remains unresolved."]
     });
 
-    expect(report.confidence).toBe("moderate");
-    expect(report.recommendation).toBe("WATCH");
+    expect(report.evidenceStatus).toBe("blocked");
+    expect(report.reviewUrgency).toBe("high");
   });
 
-  it("ranks bounded recommendations before raw score", () => {
-    const paper = buildTradingIntelligenceReport({
+  it("ranks review urgency before evidence completeness", () => {
+    const reviewable = buildTradingIntelligenceReport({
       ...common,
       contributions: [
         contribution("trend", 20, "supporting"),
@@ -102,6 +102,6 @@ describe("buildTradingIntelligenceReport", () => {
       downgradeReasons: ["Correlation concentration remains unresolved."]
     });
 
-    expect(rankTradingIntelligenceReports([watch, paper])[0]?.reportId).toBe(paper.reportId);
+    expect(rankTradingIntelligenceReports([reviewable, watch])[0]?.reportId).toBe(watch.reportId);
   });
 });

@@ -73,7 +73,7 @@ describe("intelligence workspace authority boundary", () => {
       dataMode: string;
       boundary: {
         assessmentAuthority: string;
-        recommendationOwner: string;
+        dispositionOwner: string;
         executionPath: boolean;
         automatedAction: boolean;
       };
@@ -82,7 +82,7 @@ describe("intelligence workspace authority boundary", () => {
     expect(runtime.dataMode).toBe("SYNTHETIC_DEMO");
     expect(runtime.boundary).toMatchObject({
       assessmentAuthority: "NON_CANONICAL_DEMO",
-      recommendationOwner: "CANONICAL_DECISION_ASSESSMENT_ONLY",
+      dispositionOwner: "MANUAL_OPERATOR_DECISION_ONLY",
       executionPath: false,
       automatedAction: false
     });
@@ -92,9 +92,7 @@ describe("intelligence workspace authority boundary", () => {
     const loader = readFileSync(loaderPath, "utf8");
 
     expect(loader).toContain('data.boundary.assessmentAuthority !== "NON_CANONICAL_DEMO"');
-    expect(loader).toContain(
-      'data.boundary.recommendationOwner !== "CANONICAL_DECISION_ASSESSMENT_ONLY"'
-    );
+    expect(loader).toContain('data.boundary.dispositionOwner !== "MANUAL_OPERATOR_DECISION_ONLY"');
   });
 
   it("removes the legacy score prototype and labels synthetic outputs as demo assessments", () => {

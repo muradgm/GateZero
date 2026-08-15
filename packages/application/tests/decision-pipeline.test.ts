@@ -85,4 +85,24 @@ describe("decision pipeline", () => {
       "blocked"
     );
   });
+
+  it("rejects a disposition supplied by an intelligence or evidence stage", () => {
+    const pipeline = createDecisionPipeline({
+      pipelineId: "pipeline-eurusd-004",
+      researchCaseId: "case-eurusd-004",
+      researchCaseRecordId: "case-record-eurusd-004",
+      instrument: "EUR/USD",
+      now
+    });
+
+    expect(() =>
+      completeDecisionPipelineStage(pipeline, {
+        stage: "market_context",
+        recordId: "context",
+        evidenceIds: ["context"],
+        recommendation: "PAPER_SIMULATE",
+        completedAt: now
+      })
+    ).toThrow("only the manual operator decision stage may record a bounded disposition");
+  });
 });

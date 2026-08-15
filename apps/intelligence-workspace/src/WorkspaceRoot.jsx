@@ -206,7 +206,7 @@ function validateWorkspaceSnapshot(data) {
     data.dataMode !== "SYNTHETIC_DEMO" ||
     !data.boundary ||
     data.boundary.assessmentAuthority !== "NON_CANONICAL_DEMO" ||
-    data.boundary.recommendationOwner !== "CANONICAL_DECISION_ASSESSMENT_ONLY" ||
+    data.boundary.dispositionOwner !== "MANUAL_OPERATOR_DECISION_ONLY" ||
     data.boundary.executionPath !== false ||
     data.boundary.automatedAction !== false ||
     !Array.isArray(data.candidates) ||

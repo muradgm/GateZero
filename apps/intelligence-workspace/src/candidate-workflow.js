@@ -14,7 +14,7 @@ const stageLabels = {
 export function deriveCandidateWorkflow(candidate, generatedAt) {
   if (candidate.workflow) return candidate.workflow;
 
-  const recommendation = candidate.report.recommendation;
+  const evidenceStatus = candidate.report.evidenceStatus;
   const stage = candidate.pipeline.currentStage;
   const downgrade = candidate.report.downgradeReasons[0];
   const currentStageLabel = stageLabels[stage] ?? stage.replaceAll("_", " ");
@@ -22,7 +22,7 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
   const detectedAt = candidate.report.timeline[0]?.occurredAt ?? generatedAt;
   const freshness = freshnessState(lastEvent, generatedAt);
 
-  if (recommendation === "REJECT") {
+  if (candidate.pipeline.recommendation === "REJECT") {
     return {
       status: "CLOSED",
       statusLabel: "Rejected",
@@ -38,7 +38,25 @@ export function deriveCandidateWorkflow(candidate, generatedAt) {
     };
   }
 
-  if (recommendation === "PAPER_SIMULATE") {
+  if (evidenceStatus === "blocked") {
+    const contradiction = firstContradiction(candidate);
+    return {
+      status: "BLOCKED",
+      statusLabel: "Review blocked",
+      currentStageLabel,
+      blockingCondition: downgrade ?? contradiction.rationale,
+      nextAction: "Resolve the blocking evidence or record a manual operator disposition.",
+      freshnessLabel: freshness.label,
+      freshnessState: freshness.state,
+      expiresAt: addMinutes(lastEvent, 60),
+      detectedAt,
+      changedAt: lastEvent,
+      reviewed: false,
+      urgency: "TIME_SENSITIVE"
+    };
+  }
+
+  if (evidenceStatus === "reviewable") {
     const ready = stage === "operator_decision";
     return {
       status: ready ? "REVIEW_REQUIRED" : "PENDING",
