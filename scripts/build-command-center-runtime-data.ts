@@ -57,6 +57,13 @@ export async function buildCommandCenterRuntimeData(
     readRuntimeRepositoryEvidence(rootDir),
     countAcceptedRecords(path.join(rootDir, "ops", "runtime", "reviews"))
   ]);
+  const validation = status.validation;
+  const ci = status.ci;
+  const latestPacket = status.latestAcceptedEvidenceId;
+
+  if (!validation || !ci || !latestPacket || !ci.latestRunId || !ci.lastVerifiedCommit) {
+    throw new Error("Canonical runtime status is missing required repository evidence.");
+  }
 
   return CommandCenterRuntimeDataSchema.parse({
     project: status.product,
@@ -67,18 +74,18 @@ export async function buildCommandCenterRuntimeData(
     evidenceOnly: true,
     operatorRequired: true,
     riskReviewRequired: true,
-    externalAccess: status.executionAuthority === "none" ? false : false,
+    externalAccess: false,
     executionPath: false,
     automatedAction: false,
     approvalClaim: false,
     performanceClaim: false,
-    latestPacket: status.latestAcceptedEvidenceId,
-    localVerification: `${status.validation?.testFileCount ?? 0} files / ${status.validation?.testCount ?? 0} tests`,
-    testFileCount: status.validation?.testFileCount ?? 0,
-    testCount: status.validation?.testCount ?? 0,
-    ciRun: status.ci?.latestRunId,
-    ciState: status.ci?.state,
-    lastVerifiedCommit: status.ci?.lastVerifiedCommit,
+    latestPacket,
+    localVerification: `${validation.testFileCount} files / ${validation.testCount} tests`,
+    testFileCount: validation.testFileCount,
+    testCount: validation.testCount,
+    ciRun: ci.latestRunId,
+    ciState: ci.state,
+    lastVerifiedCommit: ci.lastVerifiedCommit,
     acceptedRecords,
     evidenceRecords: countEvidenceRecords(evidence.evidenceIndex)
   });
