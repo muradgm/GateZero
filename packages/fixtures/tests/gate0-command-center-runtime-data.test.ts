@@ -1,35 +1,59 @@
 import { describe, expect, it } from "vitest";
-import { CommandCenterRuntimeDataSchema } from "../../../packages/contracts/src/index.js";
-import { buildCommandCenterRuntimeData } from "../../../scripts/build-command-center-runtime-data.js";
+import {
+  CommandCenterRuntimeDataSchema,
+  RuntimeStatusSchema
+} from "../../../packages/contracts/src/index.js";
+import { currentRuntimeStatus } from "../../../packages/fixtures/src/runtime-status/current-runtime-status.js";
+import {
+  buildCanonicalRuntimeStatus,
+  buildCommandCenterRuntimeData
+} from "../../../scripts/build-command-center-runtime-data.js";
+
+const generatedAt = "2026-08-19T09:00:00.000Z";
 
 describe("TraderFrame command center runtime data", () => {
-  it("builds a canonical local Gate 2 runtime snapshot", async () => {
-    const result = await buildCommandCenterRuntimeData();
+  it("builds canonical runtime status from one boundary fixture plus repository evidence", async () => {
+    const result = await buildCanonicalRuntimeStatus(process.cwd(), generatedAt);
 
-    expect(result).toEqual({
-      project: "TraderFrame",
-      gate: "G2_PAPER_TRADING",
-      scope: "paper_simulation_planning_only",
-      source: "local repository evidence",
-      localOnly: true,
-      evidenceOnly: true,
-      operatorRequired: true,
-      riskReviewRequired: true,
-      externalAccess: false,
-      executionPath: false,
-      automatedAction: false,
-      approvalClaim: false,
-      performanceClaim: false,
-      latestPacket: "TRD-779",
-      localVerification: "138 files / 963 tests",
-      testFileCount: 138,
-      testCount: 963,
-      ciRun: "27787807220",
-      ciState: "success",
-      lastVerifiedCommit: "6e6f513",
-      acceptedRecords: 779,
-      evidenceRecords: 18
+    expect(result).toMatchObject({
+      ...currentRuntimeStatus,
+      generatedAt,
+      validation: {
+        status: "passing",
+        command: "pnpm verify"
+      },
+      ci: {
+        state: "success"
+      }
     });
+    expect(result.latestAcceptedEvidenceId).toMatch(/^TRD-\d+$/);
+    expect(result.validation?.testFileCount).toBeGreaterThan(0);
+    expect(result.validation?.testCount).toBeGreaterThan(0);
+    expect(result.ci?.latestRunId).toMatch(/^\d+$/);
+    expect(result.ci?.lastVerifiedCommit).toMatch(/^[a-f0-9]{7,40}$/);
+    expect(RuntimeStatusSchema.parse(result)).toEqual(result);
+  });
+
+  it("projects canonical status into the legacy Command Center runtime contract", async () => {
+    const [status, result] = await Promise.all([
+      buildCanonicalRuntimeStatus(process.cwd(), generatedAt),
+      buildCommandCenterRuntimeData()
+    ]);
+
+    expect(result.project).toBe(status.product);
+    expect(result.gate).toBe(status.operatingGate);
+    expect(result.scope).toBe(status.operatingScope);
+    expect(result.latestPacket).toBe(status.latestAcceptedEvidenceId);
+    expect(result.testFileCount).toBe(status.validation?.testFileCount);
+    expect(result.testCount).toBe(status.validation?.testCount);
+    expect(result.ciRun).toBe(status.ci?.latestRunId);
+    expect(result.ciState).toBe(status.ci?.state);
+    expect(result.lastVerifiedCommit).toBe(status.ci?.lastVerifiedCommit);
+    expect(result.externalAccess).toBe(false);
+    expect(result.executionPath).toBe(false);
+    expect(result.automatedAction).toBe(false);
+    expect(result.approvalClaim).toBe(false);
+    expect(result.performanceClaim).toBe(false);
     expect(CommandCenterRuntimeDataSchema.parse(result)).toEqual(result);
   });
 });
