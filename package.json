@@ -53,13 +53,14 @@
     "scaffold:local-case": "tsx scripts/scaffold-local-case.ts",
     "revise:local-case": "tsx scripts/revise-local-case.ts",
     "repair:strict-null": "tsx scripts/apply-strict-nullability-fixes.ts && pnpm format",
+    "audit:high": "pnpm audit --audit-level high",
     "test": "vitest run",
     "test:ci": "pnpm generate:workspace-data && vitest run --no-file-parallelism --maxWorkers=1",
     "typecheck": "tsc -p tsconfig.base.json --noEmit",
     "validate:gate0": "tsx scripts/validate-gate0.ts",
     "verify": "tsx scripts/verify-progress.ts",
     "verify:fix": "pnpm format && pnpm verify",
-    "verify:verbose": "pnpm check:repository && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
+    "verify:verbose": "pnpm check:repository && pnpm build:workspace && pnpm lint && pnpm format:check && pnpm typecheck && pnpm test:ci",
     "verify:gate0": "pnpm verify"
   },
   "dependencies": {
