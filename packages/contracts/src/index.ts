@@ -30,6 +30,7 @@ export * from "./outcome-log.js";
 export * from "./portfolio-risk-intelligence.js";
 export * from "./research-loop-evidence-index.js";
 export * from "./risk-review.js";
+export * from "./runtime-status.js";
 export * from "./schemas.js";
 export * from "./setup-review.js";
 export * from "./setup-review-intelligence.js";
